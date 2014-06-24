@@ -9,12 +9,12 @@ CALI Author Viewer 5 and associated Drupal files
 
 Pages that touch Drupal:
 
+lessons/web/share/jq/lesson.php
+	get user name, whether they're an author, organization name and id for saving scores from Drupal
+		
 lessons/web/authorizefaculty.php
 	gets user role from Drupal to determine if Faculty access is permitted
 		(included by all lessontext.php and mapper.php files in lesson specific folders)
-		
-lessons/web/share/jq/lesson.php
-	get user name, whether they're an author, organization name and id for saving scores from Drupal
 		
 lessons/web/authorizestudent.php
 	gets user role from Drupal to determine if student access is permitted
