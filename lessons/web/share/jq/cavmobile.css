@@ -1,0 +1,67 @@
+/* CALI Viewer 5, Version: 03/21/2012 
+   Mobile Style - sheet revising layout for narrow mobile phone */
+
+body {
+	/* width: 600px; /*  Testing width. Comment out for prod.*/
+	background: #fff; 
+}
+
+#Viewer {
+}
+
+#Lesson {
+	margin: 0px;
+	padding: 0px;
+	border: none; 
+}
+.NavigationLesson {
+	/* display: inline;*/
+	display: inline;
+}
+.Navigation {
+	/* display: inline;*/
+	 display: inline;
+}
+.NavigationPage {
+	clear: both;
+	 display: inline;
+}
+
+.TextCols1{
+	width: 100%;
+	text-align: left;
+	margin:auto;
+}
+.PageBorder {
+	border: inherit;
+	-moz-border-radius: 0px;
+	width: 100%;
+	margin: 0px;
+}
+.MapBorder {
+	-moz-border-radius:inherit;
+	background-color: inherit;
+	border: inherit;
+	padding: inherit;
+}
+.ButtonGroup{
+	white-space:  normal;
+}
+
+.EssayBox {
+	font-size:larger;
+}
+input[type="checkbox"]{
+	/* make checkboxes bigger */
+	width: 30px;
+	height: 30px;
+}
+#HeaderPageCALI, #HeaderPage .LessonName, .wideonly { 
+	/* attach to elements only in wide screen layout */
+	display: none;
+}
+
+a[rel="cavmobile"] {
+	text-decoration: none;
+	display:none; 
+}

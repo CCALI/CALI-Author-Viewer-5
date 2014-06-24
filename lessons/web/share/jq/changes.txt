@@ -1,0 +1,33 @@
+Change log for CALI Author Viewer 5
+
+06/05/2012
+Added. External video embed code support
+
+04/16/2012
+Added. Survey optional
+
+03/31/2012
+Added. Survey
+Added. Image zoomer
+
+10/06/2011
+Added. Score printing
+Added. Exit button
+
+09/29/2011
+Patch. Support 7 rows (+1 more)
+
+08/19/2011
+Patch. Hotspots in IE didn't appear.
+
+08/16/2011
+Fixed. Hotspots weren't scored.
+
+8/11/2011
+Changed. Replace email icon with 'feedback' link.
+
+08/10/2011
+Fixed. IE8 - checkbox type shows error on pressing Grade button
+
+08/09/2011
+Publicly available as main lesson viewer format.

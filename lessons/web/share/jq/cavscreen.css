@@ -1,0 +1,6 @@
+/* CALI Viewer 5, Version: 03/21/2012 
+   CALI Author HTML Viewer - Style sheet revising layout for normal screens */
+a[rel="cavscreen"] {
+	text-decoration: none;
+	display:none; 
+}
