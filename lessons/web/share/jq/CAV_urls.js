@@ -1,3 +1,4 @@
+// Copyright 1999-2014 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved.
 // CALI Viewer 5, Version: 03/15/2012
 // CALI Author Viewer - Link config file 
 
@@ -26,3 +27,4 @@ function urlSurvey()
 	//return "https://www.surveymonkey.com/s/P8YBGGZ";
 	return null;
 }
+//

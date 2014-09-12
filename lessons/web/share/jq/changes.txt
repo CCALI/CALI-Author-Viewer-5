@@ -1,5 +1,11 @@
 Change log for CALI Author Viewer 5
 
+09/12/2014
+Fixed. Back button for Chrome
+
+05/13/2014
+Patch. 'Back' disabled in CA.
+
 06/05/2012
 Added. External video embed code support
 

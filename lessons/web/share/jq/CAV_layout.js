@@ -1,4 +1,5 @@
-// CALI Viewer 5, Version: 03/21/2012
+// Copyright 1999-2014 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved.
+// CALI Viewer 5, Version: 09/11/2014
 
 function clickButton(id)
 { 
@@ -42,11 +43,13 @@ function clickButton(id)
 			gotoPage(page.nextPage);
 	}
 	else
-	if (id=="goback")
+	if (id=="goback"){
 		win.history.go(-1);//if (!isLocalFF()) parent.history.back();else window.history.back();
+	}
 	else
-	if (page.type=="Multiple Choice"  && (page.style=="Choose List" || page.style=="Choose MultiButtons" || page.style=="Choose Buttons"))
+	if (page.type=="Multiple Choice"  && (page.style=="Choose List" || page.style=="Choose MultiButtons" || page.style=="Choose Buttons")){
 		MulipleChoice_grade(id);
+	}
 	return false;
 }
 var imageResize;
@@ -1389,3 +1392,4 @@ function lightbox_unzoom()
 	return false;
 }
 
+//

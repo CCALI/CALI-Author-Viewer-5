@@ -1,70 +1,5 @@
-// CALI Viewer 5, Version: 03/21/2012
-
-// Constants 
-var ViewerVersion="06/07/2012";
-var kPOPUP="Pop-up page";
-var pageCONTENTS='Contents';//The First page of the book.
-var pageABOUT="About this lesson";
-var pageTOC="Table of Contents";
-var pageLessonCompleted="Lesson Completed";
-var RIGHT="RIGHT";
-var WRONG="WRONG";
-var INFO="INFO";
-
-// Classess 
-function TPage()
-{	// This represents a single page within the lesson book.
-	this.id="";//unique id
-	this.name="";//unique but author chosen name
-	this.type="";//type of page interaction
-	this.style="";//subtype of page interaction
-	this.text="";//text of question
-	this.nextPage="";//default for next page
-	this.nextPageDisabled=false;//boolean - if true, next page button is disabled.
-	this.destPage=null;
-	this.columns=0;
-	this.details=[];
-	this.captions=[];
-	this.feedbacks=[];
-	this.feedbackShared="";
-	this.attempts=0;//number of attempts to answer this question
-	this.scores=[];//array of TScore.
-	this.xml=null;
-	this.textMatches=null;//array of TextMatch
-	this.sortName="";
-	this.alignText="";
-	this.subq=null;//
-	this.timeSpent=0;//seconds spent on this page
-	return this;
-}
-function TBook()
-{	// This is the Book representing a lesson.
-	this.description="";
-	this.pages={};// associative array of pages TPage() by page name. E.g., pages["Contents"] = TPage()
-	this.mapids=[];// array of mapids indices	
-	this.assets=[];//array of images for preloading.
-	return this;
-}
-function TScore()
-{	// Grade recording - 
-	// multiple choice:  id=1,2,3, text="A","B","C", grade="RIGHT","WRONG","MAYBE"
-	// short text: id=1,2,NOMATCH; text="hearsay","evidence","blah"
-	this.grade="";//RIGHT,WRONG,MAYBE
-	this.id=""; // 1,2,3
-	this.text=""; // "A", "Yes", "hearsay", "my essay answer"
-	//this.part=""; // Optional: for ManyMultiple choice: 1-6
-	this.page=null;//pointer to TPage.
-}
-
-var DEL="{tab}";
-function TextMatch(matchstyle,matches,feedback,grade,dest)
-{
-	this.matchstyle=matchstyle
-	this.matchlist=matches
-	this.feedback=feedback
-	this.grade=grade
-	this.dest=dest
-}
+// Copyright 1999-2014 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved.
+// CALI Viewer 5, Version: 09/11/2014
 
 // Global variables 
 var book; // =new TBook();
@@ -88,13 +23,11 @@ var ScoreDetails="";
 var doGrade=null;
 var doReveal=null;
 var globalToolbarLinks=[];// array of author defined toolbar links. form:  {text:'caption',url:'page name'}
-var pid=100;
 var inCA=false;
 var MCREVEAL=false;
 
 var StartBook="";
 var StartPage="";
-var lessonPath;//Folder where book data and media files reside. // ="TestBookXML/"+  StartBook + "_jQueryBookData.xml";
 var jqPath;//
 var bookMark;//hash tag on lesson load
 
@@ -105,21 +38,6 @@ var bookMark;//hash tag on lesson load
 // CAV1.js 8/2010 CALI Author Viewer - Function set 1
 
 var embed=1;
-function fbIndex(button,detail)
-{
-	return parseInt(button)+"_"+ parseInt(detail);
-}
-/** 
-* Ensure media has full path 
-* @param {String} media	image, video.
-* @return {String}	Returns the full path.
-*/
-function fixMediaPath(media)
-{	/// <summary>Ensure media has full path</summary>
-	/// <param name="media">image, video</param>
-	/// <returns>string</returns>
-	return media?lessonPath + media:null;
-}
 
 function getHash(url)
 {	// return hash suitable as a page name
@@ -171,6 +89,28 @@ function setHash(name)
 function sortPageBySortName(a,b)
 {
 	return icaseCompare(a.sortName,b.sortName);
+}
+function processBook()
+{
+	updatePageLists();
+	tallyScores();
+	
+	$('#Assets').empty();
+	if ( 0 )
+		// Preload all images. Need a better image cacher that doesn't slow down the browser. 
+		for (var a=0;a<book.assets.length;a++)
+		{	// preload all normal images.
+			$("<img>").attr( { src: book.assets[a]}).appendTo('#Assets');
+		}
+	
+	$("#Loader").hide();
+	$("#Viewer").show();
+	if (!inCA)
+	{	
+		if (StartPage=='') StartPage=pageABOUT;
+		gotoPage(StartPage);
+		downloadScore();
+	}
 }
 
 function updatePageLists()
@@ -262,17 +202,6 @@ function decodeHTML(html)
 {
 	return  html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
-function JSTextNoHTML(html)
-{ // make html into plain text but with blank lines for <P>
-	if (html=="") return "";
-	html  = html.replace(/<P>/g,'\n\n');//<P> becomes line breaks.
-	html  = html.replace(/^\s+/g,'');//trim leading whitespace
-	html  = html.replace(/<BR>/gi,'\n');// <BR /> becomes space
-	html = html.replace(/<.*?>/g, ' ');//replace all HTML tags with space
-	//html =$(html).text(); strips text if not already HTML markup
-	return html;
-}
-
 //#######################################################
 // CAV_lang.js
 // 02/2011 CALI Author Viewer - Language traanslation.
@@ -769,6 +698,7 @@ function initialize()
 		if (!$.browser.mozilla)
 			window.onbeforeunload=function(){return t(lang.LeaveLesson,book.title);};
 	}
+	
 		
 	if (embed && isLocalFF())
 	{	// firefox running locally can't access lesson folder (parent.location) or cookies without privileges
@@ -782,11 +712,21 @@ function initialize()
 	{	// If bookFile not specified directly, assume a default path.
 		bookFile=lessonPath + "jqBookData.xml";
 	}
-	// if hash tag (representing current page) changes, we're likely going Back.
 	bookMark=getHash(locationForHash());
-	trace(bookMark);
+	trace('bookMark',bookMark);
+	
+	
+	// if hash tag (representing current page) changes, we're likely going Back.
+	win.onpopstate = function(event)
+	{	// 09/11/2014 Back button for Chrome
+		var anchor=getHash(locationForHash());
+		//trace('History change',anchor);
+		if (page!=null && anchor!="" && anchor!=page.name)
+			gotoPage(anchor);
+	};
 	setInterval(function(){
 		var anchor=getHash(locationForHash());
+		//trace('Hash change',anchor);
 		if (page!=null && anchor!="" && anchor!=page.name)
 			gotoPage(anchor);
 	},500 );
@@ -946,6 +886,7 @@ function initialize()
 	else
 	{	// No book specified, must be running from CALI Author.
 		inCA=true;
+		$('a[href="choice://goback"]').hide(); // 05/13/2014 Hide Back in CA.
 		//$('.NavigationLesson').hide();
 		setInterval(checkForHostData,1000);
 		requestHostData("INIT");

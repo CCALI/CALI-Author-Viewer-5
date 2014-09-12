@@ -1,4 +1,4 @@
-//#######################################################
+// Copyright 1999-2014 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved.
 // CAV_mapper.js
 // 12/2010 CALI Author Viewer - Mapper view
 
@@ -141,3 +141,4 @@ function lineH(left,top,width)
 {
 	return '<div class="line" style="left:'+left+'px;top:'+top+'px;width:'+width+'px;height:1px;"></div>';
 }
+//

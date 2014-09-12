@@ -1,3 +1,4 @@
+// Copyright 1999-2014 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved.
 // CALI Viewer 5, Version: 03/21/2012
 
 var MAX_ROWS=7;//9/29/11
@@ -6,6 +7,9 @@ var STYLE_TEXT="Text"
 var STYLE_NUMBER="Number"
 var STYLE_DOLLAR="Dollar"
 var STYLE_PERCENT="Percent"
+
+var pid=100;
+var lessonPath;//Folder where book data and media files reside. // ="TestBookXML/"+  StartBook + "_jQueryBookData.xml";
 
 function parsePageXML(pageXML)
 {	// Decode page XML into TPage object.
@@ -279,6 +283,15 @@ function parseBookXML(bookXML)
 	book.lesson=bookXML.find('INFO > LESSON').text();
 	book.version=bookXML.find('INFO > VERSION').text();
 	
+	
+	book.CALIdescription = bookXML.find('INFO > CALIDESCRIPTION').xml();
+	book.subjectArea=bookXML.find('INFO > SUBJECTAREA').text();
+	book.completionTime=bookXML.find('INFO > COMPLETIONTIME').text();
+	book.copyrights=bookXML.find('INFO > COPYRIGHTS').text();
+	book.credits=bookXML.find('INFO > CREDITS').text();
+	book.notes=bookXML.find('INFO > NOTES').text();
+	
+	
 	$(".LessonName").text(book.title);
 	
 	// Add stub pages for the About and Score screens.
@@ -287,7 +300,7 @@ function parseBookXML(bookXML)
 	page.text= book.description;
 	book.pages[page.name]=page;
 	
-	page=new TPage()
+	page=new TPage();
 	page.name=pageLessonCompleted;
 	page.nextPageDisabled=true;
 	book.pages[page.name]=page;
@@ -298,31 +311,45 @@ function parseBookXML(bookXML)
 		book.mapids[page.mapid]=page;
 		page.id = pid++;
 	});
-	if (book.lastPage=="") book.lastPage=pageLessonCompleted;
+	if (typeof book.lastPage==='undefined' || book.lastPage===''){
+		book.lastPage=pageLessonCompleted;
+	}
 	if (book.lastPage!=pageLessonCompleted)
 	{
 		page=book.pages[book.lastPage];
 		page.nextPage=pageLessonCompleted;
 		page.nextPageDisabled=false;
-	}
-	
-	updatePageLists();
-	tallyScores();
-	
-	$('#Assets').empty();
-	if ( 0 )
-		// Preload all images. Need a better image cacher that doesn't slow down the browser. 
-		for (var a=0;a<book.assets.length;a++)
-		{	// preload all normal images.
-			$("<img>").attr( { src: book.assets[a]}).appendTo('#Assets');
-		}
-	
-	$("#Loader").hide();
-	$("#Viewer").show();
-	if (!inCA)
-	{	
-		if (StartPage=='') StartPage=pageABOUT;
-		gotoPage(StartPage);
-		downloadScore();
-	}
+	}	
+	processBook();
 }
+
+
+function JSTextNoHTML(html)
+{ // make html into plain text but with blank lines for <P>
+	if (html=="") return "";
+	html  = html.replace(/<P>/g,'\n\n');//<P> becomes line breaks.
+	html  = html.replace(/^\s+/g,'');//trim leading whitespace
+	html  = html.replace(/<BR>/gi,'\n');// <BR /> becomes space
+	html = html.replace(/<.*?>/g, ' ');//replace all HTML tags with space
+	//html =$(html).text(); strips text if not already HTML markup
+	return html;
+}
+
+
+function fbIndex(button,detail)
+{
+	return parseInt(button)+"_"+ parseInt(detail);
+}
+
+/** 
+* Ensure media has full path 
+* @param {String} media	image, video.
+* @return {String}	Returns the full path.
+*/
+function fixMediaPath(media)
+{	/// <summary>Ensure media has full path</summary>
+	/// <param name="media">image, video</param>
+	/// <returns>string</returns>
+	return media?lessonPath + media:null;
+}
+//
