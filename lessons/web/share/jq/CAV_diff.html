@@ -1,0 +1,536 @@
+<!DOCTYPE html PUBLIC >
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CALI Author Compare/Diff test</title>
+<script src="jQuery/jquery-1.6.1.min.js" type="text/javascript"></script>
+<script src="jQuery/jquery.xml.min.js" type="text/javascript"></script>
+<script src="CAV_types.js" type="text/javascript"></script>
+<script src="CAV_parser.js" type="text/javascript"></script>
+<script src="diff_match_patch.js" type="text/javascript"></script>
+<script >
+
+// Original mockup: 04/22/2013
+// 2014-07-02
+/*
+	02/09/2015 More field breakdowns, table layout.
+ 
+ */
+//var bookFile1='/lessons/web/cadifftest old/jqBookData.xml';
+//var bookFile2='/lessons/web/cadifftest new/jqBookData.xml';
+
+var bookFile1='DiffTests/con25 - JS revised - Martin jqBookData.xml';
+var bookFile2='DiffTests/con25 - JS revised - Burnham jqBookData.xml';
+
+
+var bookFile1="CBK Compare Old.xml";
+var bookFile2="CBK Compare New.xml";
+
+
+var bookFileXML1="";
+var bookFileXML2="";
+
+
+var inCA = false;
+
+var html='';
+var book;
+var startPage;
+var bookList=[];
+var rowGroup = 0;
+
+var dmp = new diff_match_patch();
+dmp.Diff_Timeout = 10;
+dmp.Diff_EditCost = 4;
+
+//var oldText="";
+//var newText="";
+//var difText="";
+
+function processBook()
+{	// Dummy placeholder
+}
+
+function addRowSpan(info )
+{
+	//$('#diff').append(
+	html += ('<tr>' 
+		+ '<td  colspan=3>' + info +   ' &nbsp;</td>'
+		+	'</tr>');
+}
+function addRow(info,prop,difference)
+{
+	//$('#diff').append
+	html += ('<tr class="group'+ (rowGroup%2)+'">'+
+							'<td>' + info +   ' &nbsp;</td>'
+							+'<td>' + prop + ' &nbsp;</td>'
+						//+	'<td>'+oldT+'&nbsp;</td>'
+						//+	'<td>'+newT+'&nbsp;</td>'
+						+	'<td>'+difference +' &nbsp;</td>'
+						+	'</tr>');
+}
+
+function diff(oldT,newT)
+{	// oldT and newT are HTML blocks.
+	var d = dmp.diff_main(oldT, newT);
+	dmp.diff_cleanupSemantic(d);
+	var ds = dmp.diff_prettyHtml(d);
+	
+	// Restore white space for readability
+	ds = ds.replace('&lt;P&gt;','<P>&lt;P&gt;',"gi");
+	ds = ds.replace('&lt;BR/&gt;','<P>&lt;BR/&gt;',"gi");
+	return ds;
+}
+function test(info,prop, oldT, newT)
+{
+	if (typeof oldT==='undefined' || oldT===null) {
+		oldT='';
+	}
+	if (typeof newT==='undefined' || newT===null) {
+		newT='';
+	}
+	if (oldT === newT) {
+		return false;
+	}
+	//console.log([info,prop]);//,prop,oldT,newT);
+	addRow(info,prop,diff(oldT,newT));
+	return true;
+}
+
+function compareBooks()
+{
+	// First compare meta data
+	// Pages that were added
+	// Pages that were deleted
+	// Pages that changed
+	var bOld = bookList[1];
+	var bNew = bookList[2];
+	
+	rowGroup  =0;
+	
+	var PagesList=[];
+	for (var p in bNew.pages)
+	{	// while p is now the page name, might be the ID instead, so should use page.name for certain.
+		var page=bNew.pages[p];
+		PagesList.push(page);
+	}
+
+	function sortPageBySortName(a,b)
+	{
+		return icaseCompare(a.sortName,b.sortName);
+	}
+
+	PagesList.sort(sortPageBySortName);
+	
+	
+	//console.log('Comparing books:'+bOld.title+' to '+bNew.title);
+	var pageName='';
+	var BOOKINFO='Book Info';
+	
+	function testBookProp(prop)
+	{
+		test(BOOKINFO,prop,bOld[prop],bNew[prop]);
+	}
+	
+	function testBookProps(props)
+	{
+		for (var p in props)
+		{
+			var prop = props[p];
+			testBookProp(prop);
+		}
+	}
+	
+	function flatten(xml)
+	{	// Convert page XML into a flattened thing.
+		xml = '' + xml.xml();
+		// Split the page XML by these specific elements rather than trying to compare all the page type permutations.
+		var tags=['QUESTION','TEXT','DETAIL','FEEDBACK','INITIALTEXT','RIGHT','WRONG','HINT'];
+		for (var t in tags) {
+			var tag = tags[t];
+			xml = xml.replace('<'+tag, '<BR>'+tag+'<BR><'+tag,"gi");
+		}
+		xml = jQuery.trim(xml);
+		//xml = xml.replace(' ALIGN="AUTO"','');//ignore these
+		xml = xml.replace(' </P>','</P>',"gi");//ignore these
+		 
+		//xml = JSTextNoHTML(xml);
+		return xml;
+	}
+	
+	
+	// Test Book Meta data
+	$('#title').text('Comparing versions of '+bNew.title );
+	
+	//addRowSpan( BOOKINFO);
+	
+	
+
+	testBookProps(['title','lesson','CALIdescription','subjectarea','version',
+						'completionTime','copyrights','credits',
+						'notes',	'description']);
+	rowGroup ++;
+	
+	// Test pages 
+	/** @type {TPage} */
+	var pOld;	
+	/** @type {TPage} */
+	var pNew;
+	
+	var pdiffs;
+	//var FORCE=' &nbsp;';
+	
+	function testPagePropVal(prop,pOldVal,pNewVal)
+	{
+		if (test( pageName ,prop,pOldVal,pNewVal)) {pdiffs++;}
+	}
+	
+	function testPagePropName(name,prop)
+	{
+		if (test( pageName ,name,pOld[prop],pNew[prop])) {pdiffs++;}
+	}
+	function testPagePropNameArray(name,prop)
+	{	// Gather props from both, compare props of both to each other
+		var oldArray = pOld[prop];
+		var newArray = pNew[prop];
+		//if (pageName=='Guides2') {			debugger;		}
+		var props={};
+		for (var prop in oldArray) {
+			props[prop]=1;
+		}
+		for (var prop in newArray) {
+			props[prop]=1;
+		}
+		for (var prop in props)
+		{
+			var eName= name + (parseInt(prop)+1) + ' '; // eltBase+( prop )+' ';
+			var o  = oldArray[ prop ];
+			var n  = newArray[ prop ];
+			if (typeof o === 'object')
+			{
+				for (var subprop in o)
+				{
+					testPagePropVal(eName+  subprop,o[subprop],n[subprop]  );
+				}					
+			}
+			else
+			{
+				testPagePropVal(eName  ,o,n  );
+			}
+		}
+	}
+	
+	// List changed pages
+	//for (var ni in bNew.pages)
+	for (var ni =0; ni< PagesList.length; ni++) 
+	{
+		pdiffs=0;
+		pNew = PagesList[ni]; 
+		pageName = pNew.name;
+		var pageIndex = pageName;
+		$('#diff').append(html);
+		html = ''; 
+		if (bOld.pages[ pageIndex ])
+		{
+			pOld = bOld.pages[ pageIndex ];
+			if (pOld===null) {
+				pOld=new TPage();
+			}
+			if (pNew.xml && pOld.xml)
+			{
+				if (1) 
+				{
+					//addRowSpan(pageName,'',''); 
+					try{
+						testPagePropVal('Type / Style',		pOld.type+'/'+makestr(pOld.style), pNew.type+'/'+makestr(pNew.style));
+						testPagePropName('Text Alignment',	'alignText');
+						testPagePropName('Question / Text',	'text'); 
+						testPagePropName('Next Page',			'nextPage'); 
+						testPagePropName('Next Page Disabled','nextPageDisabled');
+						
+						testPagePropNameArray('Button #','buttons');
+						testPagePropNameArray('Detail #','details');
+						testPagePropNameArray('Hotspot #','hotspots');
+		
+						testPagePropName('Feedback Right','rightFeedback');
+						testPagePropName('Feedback Wrong','wrongFeedback');
+						testPagePropName('Essay Initial','initialText');
+						testPagePropName('Essay Correct', 'correctText');
+						testPagePropName('Select Slack Words Before', 'slackWordsBefore');
+						testPagePropName('Select Slack Words After','slackWordsAfter');
+						testPagePropName('Feedback Shared', 'feedbackShared');
+				
+						testPagePropNameArray('Caption #',	'captions');
+						testPagePropNameArray('Feedback #',	'feedbacks');
+						testPagePropNameArray('Hint #',	'hints');
+						testPagePropNameArray('Category #',	'categories');
+						testPagePropNameArray('Item #',	'items');
+						
+						
+						testPagePropName('Picture Src','pictureSrc');
+						testPagePropName('Picture ADA','ada');
+						
+
+					}
+					catch (e){
+						console.log(e);
+					}
+				/* 
+					this.feedbacks=[];  
+					this.textMatches=null;//array of TextMatch
+					this.sortName="";
+					this.alignText="";
+					this.subq=null;//
+				*/
+				}
+
+				if ( 1 ) {
+					if (pNew.xml && pOld.xml){
+						// Direct XML
+						var tOld = flatten(pOld.xml);
+						var tNew = flatten(pNew.xml);
+						if ( tOld !== tNew)
+						{
+							pdiffs ++ ;
+							if (pdiffs==1)
+							{
+								addRow(pageName,'XML',diff(tOld,tNew));
+							}
+						}
+						// test('','XML' , tOld, tNew )
+					}
+				}			
+			}
+		}
+		if (pdiffs > 0) {
+			$('#diff').append(html);
+			rowGroup ++;
+		}
+		pNew.pdiffs = pdiffs;
+		html = '';
+	}
+	
+	
+	
+	if ( 1 )
+	{	// List new pages
+		addRowSpan('New pages');
+		for (var ni in bNew.pages)
+		{
+			if (!bOld.pages[ ni])
+			{
+				test(ni,'',  '', ni);
+			}			
+		}
+	}
+	if (1)
+	{	// list Removed pages
+		addRowSpan('Deleted Pages');
+		for ( var oi in bOld.pages)
+		{
+			//console.log(p , bNew.pages[p]);
+			if (!bNew.pages[ oi ])
+			{
+				test(oi,'',oi,'');
+			}
+		}
+	}
+	
+	if ( 0 )
+	{	// List identical pages
+		addRowSpan('Unmodified pages');
+		for (var ni =0; ni< PagesList.length; ni++) 
+		{
+			pNew = PagesList[ni];
+			pOld = bOld.pages[ pNew.name];
+			if (pOld && pNew && ( pNew.pdiffs === 0 ))
+			{
+				test('',pNew.name,'',pNew.name  );
+			}
+					
+		}
+	}
+	
+	
+	
+	$('#diff').append(html);
+}
+
+function makestr(str)
+{
+	if (str===null || typeof str === 'undefined') {
+		str='';
+	}
+	return str;
+}
+function icaseCompare(a,b)
+{
+	a = String(a).toUpperCase(); 
+	b = String(b).toUpperCase(); 
+	if (a > b) 
+		return 1;
+	if (a < b) 
+		return -1;
+	return 0; 
+}
+
+function loadBookFileDirect(bookData,index)
+{
+	//console.log("DATA",bookData);
+	var bookDataXML=$(bookData);
+	book = new TBook();
+	parseBookXML(bookDataXML);
+	bookList[index] = book;
+	book=null;
+	if (bookList[1]!==null && bookList[2] !==null) {
+		compareBooks();
+	}
+}
+function loadBookFile(bookFile,index)
+{	// Load both book XML's. 
+	$.ajax({
+		url: bookFile + '?rnd='+Math.random(),
+		dataType: ($.browser.msie) ? "text" : "xml", // IE will only load XML file from local disk as text, not xml.
+		timeout: 45000,
+		error: function(data,textStatus,thrownError)
+		{
+		  alert('Error occurred loading the XML from '+this.url+"\n"+textStatus);
+		},
+		success: function(data){
+			var bookDataXML;
+			if ($.browser.msie)
+			{	// convert text to XML. 
+				bookDataXML = new ActiveXObject('Microsoft.XMLDOM');
+				bookDataXML.async = false;
+				bookDataXML.loadXML(data);
+			}
+			else
+			{
+				bookDataXML = data;
+			}
+			
+			//console.log("DATA",data);
+			bookDataXML=$(bookDataXML);
+			book = new TBook();
+			parseBookXML(bookDataXML);
+			bookList[index] = book;
+			book=null;
+			//console.log('Loaded book file '+bookFile);
+			if (bookList[1]!==null && bookList[2] !==null) {
+				compareBooks();
+			}
+			
+		}
+	});
+} 
+
+function ready()
+{
+	bookList[1]=null;
+	bookList[2]=null;
+	if (bookFileXML1!=='')
+	{
+		loadBookFileDirect(bookFileXML1,1);
+		loadBookFileDirect(bookFileXML2,2);
+	}
+	else
+	{
+		loadBookFile(bookFile1,1);
+		loadBookFile(bookFile2,2);
+	}
+}
+
+$(document).ready(ready);
+
+
+</script>
+<style>
+body, html {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	overflow:auto;
+	background-color:#eee;
+}
+h1{
+	font-size:larger;
+}
+table {
+	padding: 0px;
+	border: none;
+}
+tr.group0 {
+	background-color:#ffe;
+}
+tr.group1 {
+	background-color:#eef;
+}
+td {
+	xborder: thin solid;
+	padding: 5px;
+	margin: 0px;
+	vertical-align: top;
+<!--
+	width: 20%;
+-->
+}
+td:first-child, td:nth-child(2) {
+	white-space:nowrap;
+}
+ins, del{
+	xfont-weight:  bold;
+	padding: 0px;
+	padding-left: 2px;
+	padding-right: 2px;
+	border: dotted;
+	border-width: thin;
+	
+}
+ins {
+	background-color: #8f8;
+	text-decoration: none;
+}
+del {
+	background-color: #f88;
+	text-decoration: line-through;
+}
+textarea {
+	width: 100%;
+}
+</style>
+</head>
+<body>
+	<h1>CALI Author CBK Comparer (02/09/2015)  </h1>
+	
+	<ul>
+		<li>Green is added. Red is removed.
+		<li>The comparing tool may make some odd decisions on placement of additions/removals but it's easy to guess what the editor really did.
+		<li>Comparing paragraph blocks of text from individual questions.
+		<li>Questions with no differences won't be reported.
+		<li>Questions with 'logical' differences (non-text) like branching, scoring, etc. are shown
+		<li>Raw XML comparison shows all changes although requires knowing the XML.
+	<li>Todo:
+		<ul>
+			<li>Detect page renames. If page X is in the old but not new and page Y is in the new but not old and if they have the same content then this is probably a simple rename of a page.
+			<li>Hide 'irrelevant' changes (e.g., the text/picture alignment change from blank to auto which is not visually different  )
+			<!--
+			<li>Enumerate things better (1-based instead of 0-based)
+			-->
+			<li>Ensure every change appears as a named item (any change in XML should have equivalent item for easy reference)
+		</ul>
+</ul>
+<div id=title>Comparing lessons</div>
+<table id=diff border=1 cellspacing=0 cellpadding=4><tr>
+<th>Section</th>
+<th>Element</th>
+<!--<th>Text Was</th>
+<th>Text Is</th>
+-->
+<th>Changes</th>
+</tr>
+</table>
+
+<P>
+	<P><P>
+-01/23/2015
+</body>
+</html>
