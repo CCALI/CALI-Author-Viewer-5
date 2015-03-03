@@ -114,6 +114,12 @@ a {
 }
 .PageComment{
 }
+#ScoreSaveError {
+	background:yellow;
+	padding:1em;
+	margin:1em;
+	text-align:left;
+}
 .Navigation {
 	clear: both;
 	display: table;

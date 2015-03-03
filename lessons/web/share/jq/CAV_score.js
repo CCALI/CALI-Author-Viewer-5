@@ -196,8 +196,9 @@ function uploadScore()
 				
 				win.onbeforeunload=null;if (!$.browser.mozilla)window.onbeforeunload=null;
 				
-				if (urlSurvey()==null)
+				if (urlSurvey()==null){
 					parent.location=url;
+				}
 				else
 				$( "#dialog-survey" ).dialog({
 					resizable: false,
@@ -238,15 +239,25 @@ function uploadScoreSilent()
 	   processData: false,
 	   data: xmlDocument,
 		//dataType: "xml",
-		error: function(data,textStatus,thrownError){
+		error: function(data,textStatus,thrownError)
+		{	// 03/02/2015 On failure, display prompt, slow down upload rate. 
 			uploadingScore=false;
-			//trace("upload error:"+textStatus+","+thrownError);
+			$('#ScoreSaveError').removeClass('hidestart');
+			trace("upload error:"+textStatus+","+thrownError);
 			// Silent error message?
+			clearInterval(uploadScoreSilentInterval);
+			uploadScoreSilentInterval=setInterval("uploadScoreSilent()", 30000);
+			
 		},
-	   success: function(data) {
+	   success: function(data)
+		{	// 03/02/2015 On success, reset upload rate to 5 seconds.
 			uploadingScore=false;
+			trace("upload success:");
+			$('#ScoreSaveError').addClass('hidestart');
 			lastSavedData=newScoreData;
 			// Success
+			clearInterval(uploadScoreSilentInterval);
+			uploadScoreSilentInterval=setInterval("uploadScoreSilent()", 5000);
 	  	}
 	});
 	return false;
@@ -256,7 +267,9 @@ function ScoreDirty()
 	if (runid==null) return;// do nothing if we have no runid
 	newScoreData=buildScoreSaveXML();
 	if (uploadScoreSilentInterval==null)
+	{	// 03/02/2015 Upload check every 5 seconds. 
 		uploadScoreSilentInterval=setInterval("uploadScoreSilent()", 5000);
+	}
 }
 
 function ScoreScreenUpdate()

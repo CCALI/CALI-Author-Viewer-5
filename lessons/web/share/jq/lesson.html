@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
-<!-- // CALI Viewer 5, Version: 09/12/2014
+<!-- // CALI Viewer 5, Version: 03/02/2015
 Copyright 1999-2014 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. -->
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
@@ -17,7 +17,7 @@ runid="";
 username="";
 amode=0;
 dispName="Student";
-orgName="CALI DVD 2014";
+orgName="CALI Library";
 var resumeScoreURL="";
 </script>
 <!--Mode.END-->
@@ -56,7 +56,7 @@ var resumeScoreURL="";
 		<div id="HeaderLesson">
 			<div id="HeaderLessonBook"> <a class="NavClick" href="jump://About this lesson">About this lesson</a> | <a class="NavClick NoWrap" href="jump://Table of Contents">Table of Contents</a> </div>
 			<div id="HeaderLessonCAV"> <a class="UserName" href="#" target=_blank title="View your lesson runs">user@school.edu</a> | <a href="#" class="styleswitch" rel="cavmobile">mobile</a> <a href="#" class="styleswitch" rel="cavscreen">non-mobile</a> | <a href="#" class="textchanger" id="linkSmall" style="font-size:smaller">A</a> <a href="#" class="textchanger" id="linkLarge" style="font-size:bigger">A</a>
-			| <a class="PageComment" href="#" title="We welcome your comments and feedback over email">Feedback</a> | <a class="Exit" href="#" title="Exit the lesson and resume later">Exit &amp; Resume Later</a>
+			| <a class="PageComment" href="#" title="We welcome your comments and feedback over email">Feedback</a> | <a class="Exit" target="_parent" href="#" title="Exit the lesson and resume later">Exit &amp; Resume Later</a>
 			</div>
 		</div>
 		<div id="HeaderPage">
@@ -91,6 +91,12 @@ var resumeScoreURL="";
                   
 						<div class="PageScore"><span class="ScoringButton">Score: <span class="ScoreCorrect">0</span>/ <span class="ScoreTotal">0</span> (<span class="ScorePercent">0%</span>) </span></div>
 					</div>
+					<div id="ScoreSaveError" class="hidestart">
+  
+            <li>We're unable to save your recent answers for this lesson.
+				<li>Are you still logged in? You can login again in a new <a target=_blank" href="/user/">tab or window</a> then return here to continue your lesson.
+				<li>We'll try again in 30 seconds.  
+      </div>
 					<div id="ScoreReport"  class="hidestart">
 					<div class="Icon INFO">&nbsp;</div>
 	<div class="Close"><a class="ScoringButton" href="#"></a></div>

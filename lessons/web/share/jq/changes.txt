@@ -1,5 +1,8 @@
 Change log for CALI Author Viewer 5
 
+03/02/2015
+Fixed. Auto ScoreSave login check
+
 09/12/2014
 Fixed. Back button for Chrome
 
