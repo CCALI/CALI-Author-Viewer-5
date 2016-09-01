@@ -287,6 +287,7 @@ function gotoPage(pageName, skipCA)
 		return;
 	}
 	
+	
 	// Record how long we spent on the current page before switching to the next.
 	if (page)
 		if (page.startSeconds) page.timeSpent += Math.ceil(curSeconds() - page.startSeconds);
@@ -311,6 +312,15 @@ function gotoPage(pageName, skipCA)
 
 	setHash(page.name);// Change hash to match this page. this allows browser navigation.
 	
+	
+	// 8/31/2016 SJG Record lesson page visit to Piwik
+  if (_paq) {
+	 var lid=0;
+	 var piwikURL ='/lesson/run/'+ book.lesson +'/'+lid+'/jq/page/'+escape(page.name);
+	 _paq.push(['setCustomUrl', piwikURL]);
+	 _paq.push(['setDocumentTitle',  book.lesson + ' | ' + escape(page.name)   /*+' | ' + parent.document.title*/]);
+	 _paq.push(['trackPageView']); 
+  }
 	
 	var commentEmail=("mailto:" + escape(emailContact) + "?" +
 		"cc=" + escape(emailTechSupportContact)  +

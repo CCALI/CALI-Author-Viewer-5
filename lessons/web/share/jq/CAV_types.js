@@ -1,8 +1,8 @@
 // Copyright 1999-2014 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved.
-// CALI Viewer 5, Version: 09/11/2014
+// CALI Viewer 5, Version: 08/31/2016    09/12/2014 
 
 // Constants 
-var ViewerVersion="09/12/2014";
+var ViewerVersion="08/31/2016"; 
 var kPOPUP="Pop-up page";
 var pageCONTENTS='Contents';//The First page of the book.
 var pageABOUT="About this lesson";
