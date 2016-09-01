@@ -27,4 +27,8 @@ function urlSurvey()
 	//return "https://www.surveymonkey.com/s/P8YBGGZ";
 	return null;
 }
+function LessonLiveDownload()
+{	// 08/25/2016 Download lesson scores to viewer
+	return isLocalFile() ? null  :  "/lesson/lessonlivescores";
+}
 //
