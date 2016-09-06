@@ -60,9 +60,9 @@
     var u="//analytics.cali.org/";
     _paq.push(["setTrackerUrl", u+"piwik.php"]);
     _paq.push(["setSiteId", 1]);
-    _paq.push(["setUserId", "'.$user->uid.'"]);
 	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","page"]);
 	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","page"]);
+	 _paq.push(["setCustomVariable", 4, "User ID", "'.$user->uid.'","page"]);
 	  var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
     g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
   })();
