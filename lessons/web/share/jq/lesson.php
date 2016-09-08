@@ -53,13 +53,13 @@
 <!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];
-  _paq.push(["setDomains", ["*.d7.calidev.org"]]);
+  _paq.push(["setDomains", ["*.www.cali.org"]]);
   _paq.push(["trackPageView"]);
   _paq.push(["enableLinkTracking"]);
   (function() {
     var u="//analytics.cali.org/";
     _paq.push(["setTrackerUrl", u+"piwik.php"]);
-    _paq.push(["setSiteId", 1]);
+    _paq.push(["setSiteId", 3]);
 	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","page"]);
 	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","page"]);
 	 _paq.push(["setCustomVariable", 4, "User ID", "'.$user->uid.'","page"]);
@@ -67,7 +67,7 @@
     g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<noscript><p><img src="//analytics.cali.org/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<noscript><p><img src="//analytics.cali.org/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 ';
   
