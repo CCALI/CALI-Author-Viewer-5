@@ -62,7 +62,7 @@
     _paq.push(["setSiteId", 3]);
 	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","page"]);
 	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","page"]);
-	 _paq.push(["setCustomVariable", 4, "User ID", "'.$user->uid.'","page"]);
+	 _paq.push(["setCustomVariable", 4, "Run ID", "'.$runid.'","page"]);
 	  var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
     g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
   })();
