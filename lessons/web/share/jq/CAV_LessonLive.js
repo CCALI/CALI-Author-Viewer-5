@@ -2,6 +2,7 @@
 // 8/2016 CALI Author Viewer's LessonLive - live view of lesson link data.
 //#############################################################
 
+
 $(document).ready(function()
 {	// Check if this is a LessonLive presentation.
 	// Currently place holder.

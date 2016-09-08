@@ -1,0 +1,83 @@
+/* Sample of LessonLive aggregated score save data
+
+Includes lesson meta data for review purposes, list of users and their user id/name to display to teacher,
+pages indexed by name. For each page include the subquestion (0 if none) and list of choices with array of
+users choosing that answer. 
+*/
+lldata = {
+	lesson: {
+		lessonid: 1
+	},
+	pages: {
+		'Question 1-YN': {
+			0: {
+				1: {
+					users: [203, 123]
+				},
+				2: {
+					users: [512, 399]
+				}
+			}
+		},
+		'Question 2-Choose4': {
+			0: {
+				1: {
+					users: [203]
+				},
+				2: {},
+				3: {
+					users: [123, 512, 399]
+				},
+				4: {}
+			}
+		},
+		'Question 3-Choose2in2': {
+			1: {
+				1: {
+					users: [203]
+				},
+				2: {
+					users: [123, 512, 399]
+				}
+			},
+			2: {
+				1: {
+					users: [203, 123]
+				},
+				2: {
+					users: [399]
+				}
+			}
+		},
+		'Question 4-CheckBox': {
+			0: {
+				1: {
+					users: [399]},
+				2: {
+					users: [203, 123]
+					
+				}
+			}
+		},
+		'Question 5-Short answer': {
+			0: {
+				1: {
+					users: [399],
+					resp: ["hearsay","maybe hearsay?"]
+				},
+				2: {
+					users: [203, 123],
+					resp: ["negligence","neg"]
+				}
+			}
+		}
+	},
+	users: {
+		203: {
+			user: 'sam@cali.org'
+		},
+		123: {
+			user: 'debstu@cali.org'
+		}
+	}
+}
