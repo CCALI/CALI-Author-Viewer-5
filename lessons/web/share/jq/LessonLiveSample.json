@@ -4,80 +4,1662 @@ Includes lesson meta data for review purposes, list of users and their user id/n
 pages indexed by name. For each page include the subquestion (0 if none) and list of choices with array of
 users choosing that answer. 
 */
-lldata = {
-	lesson: {
-		lessonid: 1
+lldata =
+
+{
+	"lesson": {
+		"Organization": "University of Tulsa College of Law",
+		"Semester": "Summer 2016",
+		"Course Name": "Evidence",
+		"Course ID": "4329",
+		"Lesson Name": "Hearsay From Square One: The Definition of Hearsay",
+		"Lesson ID": "532",
+		"Teacher Name": "chuck-adams@utulsa.edu",
+		"Teacher ID": "20932",
+		"Created": "2016-05-26 13:51:53"
 	},
-	pages: {
-		'Question 1-YN': {
-			0: {
-				1: {
-					users: [203, 123]
-				},
-				2: {
-					users: [512, 399]
-				}
-			}
+	"users": {
+		"1": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
 		},
-		'Question 2-Choose4': {
-			0: {
-				1: {
-					users: [203]
-				},
-				2: {},
-				3: {
-					users: [123, 512, 399]
-				},
-				4: {}
-			}
+		"2": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
 		},
-		'Question 3-Choose2in2': {
-			1: {
-				1: {
-					users: [203]
-				},
-				2: {
-					users: [123, 512, 399]
-				}
-			},
-			2: {
-				1: {
-					users: [203, 123]
-				},
-				2: {
-					users: [399]
-				}
-			}
+		"3": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
 		},
-		'Question 4-CheckBox': {
-			0: {
-				1: {
-					users: [399]},
-				2: {
-					users: [203, 123]
-					
-				}
-			}
+		"4": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
 		},
-		'Question 5-Short answer': {
-			0: {
-				1: {
-					users: [399],
-					resp: ["hearsay","maybe hearsay?"]
-				},
-				2: {
-					users: [203, 123],
-					resp: ["negligence","neg"]
-				}
-			}
+		"5": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"6": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"7": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"8": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"9": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"10": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"11": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"12": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"13": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"14": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"15": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
+		},
+		"16": {
+			"userid": "REDACTED",
+			"email": "REDACTED@REDACTED.EDU"
 		}
 	},
-	users: {
-		203: {
-			user: 'sam@cali.org'
+	"pages": {
+		"P 1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 12,
+				"total": 16,
+				"wrong": 4,
+				"1": {
+					"grade": "wrong",
+					"users": [4, 6, 7, 9],
+					"text": ["A."]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 5, 8, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["B."]
+				}
+			}
 		},
-		123: {
-			user: 'debstu@cali.org'
+		"P 2": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 12,
+				"total": 16,
+				"wrong": 4,
+				"1": {
+					"grade": "wrong",
+					"users": [3, 7, 13, 16],
+					"text": ["A."]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 4, 5, 6, 8, 9, 10, 12, 14, 15, 11],
+					"text": ["B."]
+				}
+			}
+		},
+		"P 2.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 8,
+				"total": 16,
+				"wrong": 8,
+				"2": {
+					"grade": "right",
+					"users": [1, 4, 5, 6, 12, 15, 16, 11],
+					"text": ["B."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [2, 3, 7, 9, 10, 13],
+					"text": ["C."]
+				},
+				"4": {
+					"grade": "wrong",
+					"users": [8, 14],
+					"text": ["D."]
+				}
+			}
+		},
+		"P 3": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 5,
+				"total": 16,
+				"wrong": 11,
+				"1": {
+					"grade": "wrong",
+					"users": [7, 9, 16],
+					"text": ["A."]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [2, 3, 6, 12, 13, 14, 15, 11],
+					"text": ["B."]
+				},
+				"3": {
+					"grade": "right",
+					"users": [1, 4, 5, 8, 10],
+					"text": ["C."]
+				}
+			}
+		},
+		"P 4": {
+			"total": 15,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 7,
+				"total": 15,
+				"wrong": 8,
+				"1": {
+					"grade": "wrong",
+					"users": [1, 14, 11],
+					"text": ["A."]
+				},
+				"2": {
+					"grade": "right",
+					"users": [4, 5, 6, 7, 9, 13, 15],
+					"text": ["B."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [2, 8, 10, 12, 16],
+					"text": ["C."]
+				}
+			}
+		},
+		"P 5": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 9,
+				"total": 16,
+				"wrong": 7,
+				"1": {
+					"grade": "right",
+					"users": [3, 5, 6, 8, 9, 10, 14, 15, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [1, 2, 4, 7, 12, 13, 16],
+					"text": ["No"]
+				}
+			}
+		},
+		"P 6": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 8,
+				"total": 16,
+				"wrong": 8,
+				"1": {
+					"grade": "right",
+					"users": [2, 5, 8, 10, 12, 13, 15, 16],
+					"text": ["A."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [1, 3, 4, 6, 7, 9, 14, 11],
+					"text": ["C."]
+				}
+			}
+		},
+		"P 7": {
+			"total": 15,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 10,
+				"total": 15,
+				"wrong": 5,
+				"1": {
+					"grade": "wrong",
+					"users": [1, 8, 12, 14, 16],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [2, 3, 4, 5, 6, 7, 9, 10, 13, 15],
+					"text": ["No"]
+				}
+			}
+		},
+		"P 8": {
+			"total": 15,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 10,
+				"total": 15,
+				"wrong": 5,
+				"1": {
+					"grade": "right",
+					"users": [5, 6, 7, 8, 9, 10, 12, 13, 15, 16],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [1, 2, 3, 4, 14],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 9,
+				"total": 16,
+				"wrong": 7,
+				"1": {
+					"grade": "wrong",
+					"users": [4, 8, 10, 14, 16],
+					"text": ["A."]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 5, 7, 12, 13, 15, 11],
+					"text": ["B."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [6, 9],
+					"text": ["C."]
+				}
+			}
+		},
+		"Question 1-N": {
+			"total": 11,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 9,
+				"total": 11,
+				"wrong": 2,
+				"1": {
+					"grade": "right",
+					"users": [1, 3, 5, 7, 9, 12, 13, 15, 11],
+					"text": ["A."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [2, 6],
+					"text": ["C."]
+				}
+			}
+		},
+		"Question 1-Y": {
+			"total": 6,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 6,
+				"total": 6,
+				"wrong": 0,
+				"2": {
+					"grade": "right",
+					"users": [1, 4, 8, 10, 14, 16],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 2": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 11,
+				"total": 16,
+				"wrong": 5,
+				"1": {
+					"grade": "right",
+					"users": [1, 3, 4, 5, 9, 10, 12, 13, 14, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [2, 6, 7, 8, 15],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 3": {
+			"total": 15,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 11,
+				"total": 15,
+				"wrong": 4,
+				"1": {
+					"grade": "wrong",
+					"users": [9, 14, 16],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [4],
+					"text": ["No"]
+				},
+				"3": {
+					"grade": "right",
+					"users": [1, 2, 3, 5, 6, 7, 8, 12, 13, 15, 11],
+					"text": ["I need more information."]
+				}
+			}
+		},
+		"Question 3.1": {
+			"total": 15,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 15,
+				"total": 15,
+				"wrong": 0,
+				"3": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16, 11],
+					"text": ["C."]
+				}
+			}
+		},
+		"Question 3.2": {
+			"total": 15,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 11,
+				"total": 15,
+				"wrong": 4,
+				"1": {
+					"grade": "wrong",
+					"users": [2, 3, 6, 14],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 4, 5, 7, 8, 9, 12, 13, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 4": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 13,
+				"total": 16,
+				"wrong": 3,
+				"1": {
+					"grade": "wrong",
+					"users": [1, 7, 13],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [2, 3, 4, 5, 6, 8, 9, 10, 12, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 4.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 9,
+				"total": 16,
+				"wrong": 7,
+				"1": {
+					"grade": "wrong",
+					"users": [1, 5, 8, 13, 14, 15],
+					"text": ["A."]
+				},
+				"3": {
+					"grade": "right",
+					"users": [2, 4, 6, 7, 9, 10, 12, 16, 11],
+					"text": ["C."]
+				},
+				"4": {
+					"grade": "wrong",
+					"users": [3],
+					"text": ["D."]
+				}
+			}
+		},
+		"Question 5": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 11,
+				"total": 16,
+				"wrong": 5,
+				"1": {
+					"grade": "wrong",
+					"users": [1, 2, 7, 13, 16],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [3, 4, 5, 6, 8, 9, 10, 12, 14, 15, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 5.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 16,
+				"total": 16,
+				"wrong": 0,
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["B."]
+				}
+			}
+		},
+		"Question 6": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "wrong",
+					"users": [5],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 6.1 & 7": {
+			"total": 13,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 11,
+				"total": 13,
+				"wrong": 2,
+				"1": {
+					"grade": "wrong",
+					"users": [4, 16],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 5, 6, 8, 10, 12, 14, 15, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 8": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 11,
+				"total": 16,
+				"wrong": 5,
+				"1": {
+					"grade": "wrong",
+					"users": [2, 3, 4, 7, 8],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 5, 6, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 8.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 10,
+				"total": 16,
+				"wrong": 6,
+				"1": {
+					"grade": "right",
+					"users": [2, 4, 5, 8, 9, 10, 12, 13, 15, 11],
+					"text": ["A."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [3, 7],
+					"text": ["C."]
+				},
+				"4": {
+					"grade": "wrong",
+					"users": [1, 6, 14, 16],
+					"text": ["D."]
+				}
+			}
+		},
+		"Question 9": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 10,
+				"total": 16,
+				"wrong": 6,
+				"1": {
+					"grade": "wrong",
+					"users": [8, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [1, 2, 7, 14],
+					"text": ["No"]
+				},
+				"3": {
+					"grade": "right",
+					"users": [3, 4, 5, 6, 9, 10, 12, 13, 15, 16],
+					"text": ["I need more information"]
+				}
+			}
+		},
+		"Question 10": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 14,
+				"total": 16,
+				"wrong": 2,
+				"1": {
+					"grade": "wrong",
+					"users": [3, 13],
+					"text": ["Yes"]
+				},
+				"3": {
+					"grade": "right",
+					"users": [1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 11],
+					"text": ["I need more information"]
+				}
+			}
+		},
+		"Question 11": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 14,
+				"total": 16,
+				"wrong": 2,
+				"1": {
+					"grade": "right",
+					"users": [3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [1, 2],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 12": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 10,
+				"total": 16,
+				"wrong": 6,
+				"1": {
+					"grade": "right",
+					"users": [1, 5, 6, 7, 8, 10, 12, 13, 14, 15],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [2, 3, 4, 9, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 13\/14": {
+			"total": 15,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 11,
+				"total": 15,
+				"wrong": 4,
+				"1": {
+					"grade": "right",
+					"users": [1, 3, 5, 8, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [2, 4, 6, 7],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 15": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 14,
+				"total": 16,
+				"wrong": 2,
+				"1": {
+					"grade": "wrong",
+					"users": [9, 16],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 15.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 8,
+				"total": 16,
+				"wrong": 8,
+				"1": {
+					"grade": "right",
+					"users": [1, 2, 4, 5, 12, 13, 14, 16],
+					"text": ["A."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [3, 6, 7, 8, 9, 10, 15, 11],
+					"text": ["C."]
+				}
+			}
+		},
+		"Question 16": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 14,
+				"total": 16,
+				"wrong": 2,
+				"1": {
+					"grade": "wrong",
+					"users": [5, 15],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 17": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 11,
+				"total": 16,
+				"wrong": 5,
+				"1": {
+					"grade": "wrong",
+					"users": [4, 8, 9, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 5, 6, 7, 10, 12, 13, 14, 15],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 18": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"maybe": 2,
+				"right": 7,
+				"total": 16,
+				"wrong": 7,
+				"1": {
+					"grade": "maybe",
+					"users": [3, 12],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [1, 4, 6, 7, 9, 13, 11],
+					"text": ["No"]
+				},
+				"3": {
+					"grade": "right",
+					"users": [2, 5, 8, 10, 14, 15, 16],
+					"text": ["I need more information."]
+				}
+			}
+		},
+		"Question 19": {
+			"total": 15,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 8,
+				"total": 15,
+				"wrong": 7,
+				"1": {
+					"grade": "right",
+					"users": [3, 4, 5, 8, 9, 12, 14, 15],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [1, 2, 6, 7, 10, 13, 16],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 20": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 14,
+				"total": 16,
+				"wrong": 2,
+				"1": {
+					"grade": "wrong",
+					"users": [2, 3],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 20.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 13,
+				"total": 16,
+				"wrong": 3,
+				"1": {
+					"grade": "right",
+					"users": [2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16],
+					"text": ["A."]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [1, 11],
+					"text": ["B."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [9],
+					"text": ["C."]
+				}
+			}
+		},
+		"Question 21": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "wrong",
+					"users": [16],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 22": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 14,
+				"total": 16,
+				"wrong": 2,
+				"1": {
+					"grade": "right",
+					"users": [1, 2, 3, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [4, 9],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 23": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 13,
+				"total": 16,
+				"wrong": 3,
+				"1": {
+					"grade": "wrong",
+					"users": [1, 6, 16],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [2, 3, 4, 5, 7, 8, 9, 10, 12, 13, 14, 15, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 23.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 9,
+				"total": 16,
+				"wrong": 7,
+				"1": {
+					"grade": "wrong",
+					"users": [4, 9, 13, 14],
+					"text": ["A."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [1, 6, 12],
+					"text": ["C."]
+				},
+				"4": {
+					"grade": "right",
+					"users": [2, 3, 5, 7, 8, 10, 15, 16, 11],
+					"text": ["D."]
+				}
+			}
+		},
+		"Question 24": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [16],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 24.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 9,
+				"total": 16,
+				"wrong": 7,
+				"1": {
+					"grade": "right",
+					"users": [1, 3, 4, 5, 7, 8, 12, 15, 11],
+					"text": ["A."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [2, 6, 9, 10, 13, 14, 16],
+					"text": ["C."]
+				}
+			}
+		},
+		"Question 24.1.2": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 8,
+				"total": 16,
+				"wrong": 8,
+				"1": {
+					"grade": "wrong",
+					"users": [1, 3, 7, 8, 12, 11],
+					"text": ["A."]
+				},
+				"3": {
+					"grade": "right",
+					"users": [2, 4, 5, 6, 9, 13, 15, 16],
+					"text": ["C."]
+				},
+				"4": {
+					"grade": "wrong",
+					"users": [10, 14],
+					"text": ["D."]
+				}
+			}
+		},
+		"Question 25": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"maybe": 8,
+				"right": 8,
+				"total": 16,
+				"wrong": 0,
+				"1": {
+					"grade": "maybe",
+					"users": [1, 3, 7, 8, 13, 14, 15, 16],
+					"text": ["A."]
+				},
+				"2": {
+					"grade": "right",
+					"users": [2, 4, 5, 6, 9, 10, 12, 11],
+					"text": ["B."]
+				}
+			}
+		},
+		"Question 26": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [8],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 26.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["B."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [8],
+					"text": ["C."]
+				}
+			}
+		},
+		"Question 26.1.2": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 16,
+				"total": 16,
+				"wrong": 0,
+				"1": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["A."]
+				}
+			}
+		},
+		"Question 27": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 8,
+				"total": 16,
+				"wrong": 8,
+				"1": {
+					"grade": "right",
+					"users": [3, 5, 8, 10, 12, 13, 14, 15],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [1, 2, 4, 6, 7, 9, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 28": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 12,
+				"total": 16,
+				"wrong": 4,
+				"1": {
+					"grade": "wrong",
+					"users": [6, 9, 13, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 7, 8, 10, 12, 14, 15, 16],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 28.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 16,
+				"total": 16,
+				"wrong": 0,
+				"3": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["C."]
+				}
+			}
+		},
+		"Question 28.1.2": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 7,
+				"total": 16,
+				"wrong": 9,
+				"1": {
+					"grade": "wrong",
+					"users": [4, 7, 14, 16, 11],
+					"text": ["A."]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [2, 3, 10, 15],
+					"text": ["B."]
+				},
+				"3": {
+					"grade": "right",
+					"users": [1, 5, 6, 8, 9, 12, 13],
+					"text": ["C."]
+				}
+			}
+		},
+		"Question 29": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 16,
+				"total": 16,
+				"wrong": 0,
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 30": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 10,
+				"total": 16,
+				"wrong": 6,
+				"1": {
+					"grade": "right",
+					"users": [2, 3, 5, 6, 10, 12, 14, 15, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [1, 4, 7, 8, 9, 13],
+					"text": ["No"]
+				}
+			}
+		},
+		"Question 30.1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 3,
+				"total": 16,
+				"wrong": 13,
+				"1": {
+					"grade": "wrong",
+					"users": [1],
+					"text": ["A."]
+				},
+				"3": {
+					"grade": "right",
+					"users": [3, 12, 15],
+					"text": ["C."]
+				},
+				"4": {
+					"grade": "wrong",
+					"users": [2, 4, 5, 6, 7, 8, 9, 10, 13, 14, 16, 11],
+					"text": ["D."]
+				}
+			}
+		},
+		"Question 31": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 11,
+				"total": 16,
+				"wrong": 5,
+				"1": {
+					"grade": "right",
+					"users": [1, 2, 4, 5, 6, 9, 12, 13, 15, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [3, 7, 8, 10, 14],
+					"text": ["No"]
+				}
+			}
+		},
+		"R1": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 14,
+				"total": 16,
+				"wrong": 2,
+				"1": {
+					"grade": "wrong",
+					"users": [7, 15],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R2": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 12,
+				"total": 16,
+				"wrong": 4,
+				"1": {
+					"grade": "right",
+					"users": [1, 2, 5, 6, 8, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [3, 4, 7, 9],
+					"text": ["No"]
+				}
+			}
+		},
+		"R3": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 13,
+				"total": 16,
+				"wrong": 3,
+				"2": {
+					"grade": "wrong",
+					"users": [4, 6, 14],
+					"text": ["No"]
+				},
+				"3": {
+					"grade": "right",
+					"users": [1, 2, 3, 5, 7, 8, 9, 10, 12, 13, 15, 16, 11],
+					"text": ["Need more information"]
+				}
+			}
+		},
+		"R4": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 13,
+				"total": 16,
+				"wrong": 3,
+				"1": {
+					"grade": "wrong",
+					"users": [13, 15, 16],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R5": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "wrong",
+					"users": [15],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R6": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "wrong",
+					"users": [5],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R8": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 13,
+				"total": 16,
+				"wrong": 3,
+				"1": {
+					"grade": "wrong",
+					"users": [4, 7, 8],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 5, 6, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R9": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 16,
+				"total": 16,
+				"wrong": 0,
+				"3": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["Need more information"]
+				}
+			}
+		},
+		"R10": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 14,
+				"total": 16,
+				"wrong": 2,
+				"2": {
+					"grade": "wrong",
+					"users": [12, 13],
+					"text": ["No"]
+				},
+				"3": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 15, 16, 11],
+					"text": ["Need more information"]
+				}
+			}
+		},
+		"R11": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 10,
+				"total": 16,
+				"wrong": 6,
+				"1": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 12, 13, 15, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [6, 7, 8, 9, 10, 14],
+					"text": ["No"]
+				}
+			}
+		},
+		"R13": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 12,
+				"total": 16,
+				"wrong": 4,
+				"1": {
+					"grade": "wrong",
+					"users": [2, 5, 7, 8],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 3, 4, 6, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R15": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 7,
+				"total": 16,
+				"wrong": 9,
+				"1": {
+					"grade": "wrong",
+					"users": [1, 3, 4, 6, 7, 8, 9, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [2, 5, 10, 12, 13, 14, 15],
+					"text": ["No"]
+				}
+			}
+		},
+		"R16": {
+			"total": 15,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 14,
+				"total": 15,
+				"wrong": 1,
+				"1": {
+					"grade": "wrong",
+					"users": [1],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R17": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 10,
+				"total": 16,
+				"wrong": 6,
+				"1": {
+					"grade": "wrong",
+					"users": [1, 3, 4, 7, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [2, 5, 6, 8, 9, 10, 12, 13, 14, 15],
+					"text": ["No"]
+				}
+			}
+		},
+		"R19": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 8,
+				"total": 16,
+				"wrong": 8,
+				"1": {
+					"grade": "right",
+					"users": [1, 5, 9, 10, 12, 13, 15, 16],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [2, 3, 4, 6, 7, 8, 14, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R20": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "wrong",
+					"users": [3],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R21": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "wrong",
+					"users": [15],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R22": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 10,
+				"total": 16,
+				"wrong": 6,
+				"1": {
+					"grade": "right",
+					"users": [1, 3, 5, 6, 7, 9, 10, 12, 13, 15],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [2, 4, 8, 14, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R23": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "wrong",
+					"users": [12],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R24": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 12,
+				"total": 16,
+				"wrong": 4,
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 9, 10, 12, 14, 15, 16, 11],
+					"text": ["B."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [6, 7, 8, 13],
+					"text": ["C."]
+				}
+			}
+		},
+		"R26": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose List",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "right",
+					"users": [1, 2, 3, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"text": ["A."]
+				},
+				"3": {
+					"grade": "wrong",
+					"users": [4],
+					"text": ["C."]
+				}
+			}
+		},
+		"R27": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 15,
+				"total": 16,
+				"wrong": 1,
+				"1": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [16],
+					"text": ["No"]
+				}
+			}
+		},
+		"R28": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 12,
+				"total": 16,
+				"wrong": 4,
+				"1": {
+					"grade": "wrong",
+					"users": [3, 6, 8, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 4, 5, 7, 9, 10, 12, 13, 14, 15, 16],
+					"text": ["No"]
+				}
+			}
+		},
+		"R29": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 13,
+				"total": 16,
+				"wrong": 3,
+				"1": {
+					"grade": "wrong",
+					"users": [7, 12, 13],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "right",
+					"users": [1, 2, 3, 4, 5, 6, 8, 9, 10, 14, 15, 16, 11],
+					"text": ["No"]
+				}
+			}
+		},
+		"R31": {
+			"total": 16,
+			"type": "Multiple Choice\/Choose Buttons",
+			"1": {
+				"right": 10,
+				"total": 16,
+				"wrong": 6,
+				"1": {
+					"grade": "right",
+					"users": [1, 4, 5, 7, 8, 9, 12, 15, 16, 11],
+					"text": ["Yes"]
+				},
+				"2": {
+					"grade": "wrong",
+					"users": [2, 3, 6, 10, 13, 14],
+					"text": ["No"]
+				}
+			}
 		}
 	}
 }
