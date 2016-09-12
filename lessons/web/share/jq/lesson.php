@@ -8,6 +8,7 @@
  * 8/5/2015 Fixed to work with Drupal 7.
  * 07/20/2015 SJG Add Piwik tracking
  * 07/25/2016 SJG fix Facstaff role test
+ * 09/12/2016 SJG add CALI Staff as faculty role test
 */
   $template=file_get_contents("lesson.html");
   global $user;
@@ -31,8 +32,9 @@
   $lastname_value = field_view_value('user', $account, 'field_last_name', $lastname_item[0]);
   $lastname = render($lastname_value);
   $firstname_value = field_view_value('user', $account, 'field_first_name', $firstname_item[0]);
-  $firstname = render($firstname_value); 
-  $authmode=(in_array('Facstaff', $roles)) ? 1 : 0;
+  $firstname = render($firstname_value);
+  // 09/12/2016 Show Faculty options for Facstaff or CALI Staff
+  $authmode=(in_array('Facstaff', $roles) || in_array('CALI Staff', $roles)) ? 1 : 0;
   if (isset($_SESSION['resume']) && $_SESSION['resume']==1)
 	  $resumescore="/lesson/scoreload/".dechex($runid*47);
   else
