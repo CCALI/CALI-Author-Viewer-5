@@ -113,7 +113,8 @@ function textWithMedia(pageText, page)
 	var addflowplayer=0;
 	if (page.videoEmbedCode!=null)
 	{	// Support embedding external video HTML code. Should include the IFRAME portion.
-		media+=page.videoEmbedCode 
+		// 09/13/2016 Ensure youtube embeds are https.
+		media+=(page.videoEmbedCode).substr('http://www.youtube.com','https://www.youtube.com');
 	}
 	else
 	if (page.videoSrc!=null)
