@@ -12,7 +12,13 @@ var RIGHT="RIGHT";
 var WRONG="WRONG";
 var INFO="INFO";
 
-// Classess 
+// Classess
+
+/** 
+ * @constructor
+ * @struct
+ * @this {TPage}
+ */
 function TPage()
 {	// This represents a single page within the lesson book.
 	this.id="";//unique id
