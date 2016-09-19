@@ -5,7 +5,7 @@
 var lessonLiveSummary={}; // Aggregated score save user data downloaded from server
 var lessonLiveDownloadSilentInterval; // Interval downloader of JSON
 
-function attachLessonLiveReportToPage()
+function attachLessonLiveReportToPage(options)
 {	// Attach or update the LessonLive info/progress bars for the current page.
 	// Since this can change on the fly, needs to be handled via jQuery updates to the DOM rather than during the page's initial Layout process.
 	
@@ -24,44 +24,77 @@ function attachLessonLiveReportToPage()
 	if (pageLL )
 	{	// At least 1 student has viewed this page. 
 		LessonLivePageInfo= 'Students responded: ' + pageLL.total;
+		$('.llChoice').text('').append('LESSONLIVEHERE');
+		pageLL.marks=[];
+		// Add custom percent/progress bars per question type. 
+		if (page.type=="Multiple Choice" && page.style=="Choose Buttons")
+		{	// Tally results for each button, eg., Yes, No, Maybe
+			for (var b=0;b<page.captions.length;b++) {
+				lessonLiveAttachOne(pageLL,1,b+1,'llChoice'+b+'_0');
+			}
+		}
+		else if (page.type=="Multiple Choice" && page.style=="Choose List") 
+		{	// Tally results for each choice, eg., A, B, C, D
+			for (var d=0;d<page.details.length;d++) {
+				lessonLiveAttachOne(pageLL,1,d+1,'llChoice0_'+d);
+			}
+		}
+		else if (page.type=="Multiple Choice" && page.style=="Choose MultiButtons")
+		{	// Tally results for each button and each choice, eg., A-Yes, A-No, B-Yes, B-No, etc. 
+			for (var d=0;d<page.details.length;d++) {
+				for (var b=0;b<page.captions.length;b++)
+				{
+					lessonLiveAttachOne(pageLL,d+1,b+1,'llChoice'+b+'_'+d);
+				}
+			}
+		}
+		else
+		{	// Any unhandled page type gets a generic 'LessonLive not available for this type'. 
+			LessonLivePageInfo='LessonLive data not presented for this page type.'
+		}	
+		
+		// Build list of user right/wrong/unanswered ticks - indicates how many students responded so far to this page.
+		var marks='';
+		for (var u=0;u<pageLL.marks.length;u++)
+		{
+			if (! pageLL.marks[u ]) {
+				pageLL.marks[u ]='none';
+			}
+			var grade=pageLL.marks[u ];
+			marks += '<span class="llBarChunk answer '+ grade + '"/>';
+		}
+		LessonLivePageInfo = LessonLivePageInfo + '<div class=llChoice>'+marks+'</div>';
 	}
 	else
 	{	// Page not seen by any student yet.
-		LessonLivePageInfo='No students have responded yet.';
+		LessonLivePageInfo='';
 	}
-	$('.llChoice').text('').append('LESSONLIVEHERE');
-	// Add custom percent/progress bars per question type. 
-	if (page.type=="Multiple Choice" && page.style=="Choose Buttons")
+	
+	// Build list of users and their scores.
+	html='';
+	lessonLiveSummary.users.sort( function(a,b){return icaseCompare(a.username,b.username);}); 
+	for (var u=0;u<lessonLiveSummary.users.length;u++)
 	{
-		for (var b=0;b<page.captions.length;b++) {
-			lessonLiveAttachOne(pageLL,1,b+1,'llChoice'+b+'_0');
+		var grade='';
+		if (pageLL.marks){
+			grade = pageLL.marks[u ];
 		}
-	}
-	else if (page.type=="Multiple Choice" && page.style=="Choose List") 
-	{
-		for (var d=0;d<page.details.length;d++) {
-			lessonLiveAttachOne(pageLL,1,d+1,'llChoice0_'+d);
+		if (grade!='none' && !(options && options.showScores==true)) {
+			grade='answered';// if don't show scores, flag user score simply as having answered.
 		}
+		html+='<div class="llUser '+grade+'" id=llUser'+u+'>'+'<span class="llIcon none">'+'</span> '+lessonLiveSummary.users[u].email+'</div>';
 	}
-	else if (page.type=="Multiple Choice" && page.style=="Choose MultiButtons")
-	{
-		for (var d=0;d<page.details.length;d++) {
-			for (var b=0;b<page.captions.length;b++)
-			{
-				lessonLiveAttachOne(pageLL,d+1,b+1,'llChoice'+b+'_'+d);
-			}
-		}
-	}
-	else
-	{	// Any unhandled page type gets a generic 'LessonLive not applicable for this type'. 
-		LessonLivePageInfo='LessonLive data not presented for this page type.'
-	}
-	$('.PageInteraction .llPageInfo').html(LessonLivePageInfo);
+	$('#llPanel').html(html);
+	
+	
+	$('.PageInteraction .llPageInfo').unbind('click').click(function(){attachLessonLiveReportToPage({showScores:true});}).html(LessonLivePageInfo);
+	//$('.PageInteraction .llPageInfo').unbind('click').click(function(){$('#llPanel').toggle();}).html(LessonLivePageInfo);
 }
+
 
 function lessonLiveAttachOne(pageLL, subQ, choice,domid )
 {	// Lookup subq/choice info for given a page and update the html ID with %/progress bar.
-	var numUsers=0;
+	var numUsers=0; // users giving this answer
 	if (pageLL[subQ] && pageLL[subQ][choice] && pageLL[subQ][choice]['users']) {
 		numUsers=pageLL[subQ][choice]['users'].length;
 	}
@@ -71,8 +104,10 @@ function lessonLiveAttachOne(pageLL, subQ, choice,domid )
 	if (total>0)
 	{
 		percent=Math.round(100*numUsers/total);
+		// Track each user's response for the summary list.
 		for (var i=0;i<numUsers;i++) {
 			html+='<span class="llBarChunk"/>';
+			pageLL.marks[pageLL[subQ][choice]['users'][i]]=pageLL[subQ][choice].grade;
 		}
 	}
 	else
@@ -127,7 +162,8 @@ $(document).ready(function()
 	if (1) {
 		//console.log(window);
 		// Currently place holder.
-		//$('#HeaderPage').append('INSTAPOLL');
+		$('#llHeaderPage').removeClass('hidestart'); 
+		$('#llPanel').removeClass('hidestart'); 
 		lessonLiveDownloadSilent();
 	}
 });

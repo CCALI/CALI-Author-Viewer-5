@@ -44,7 +44,7 @@ var resumeScoreURL="";
 <script src="CAV_types.js?17" id="CAVjs" type="text/javascript"></script>
 <script src="CAV.js?18" id="CAVjs" type="text/javascript"></script>
 <script src="CAV_mapper.js" id="CAVjs" type="text/javascript"></script>
-<script src="CAV_layout.js?17" id="CAVjs" type="text/javascript"></script>
+<script src="CAV_layout.js" id="CAVjs" type="text/javascript"></script>
 <script src="CAV_parser.js?16" id="CAVjs" type="text/javascript"></script>
 <script src="CAV_score.js?16" id="CAVjs" type="text/javascript"></script>
 <script src="CAV_urls.js?17" id="CAVjs" type="text/javascript"></script>
@@ -61,12 +61,13 @@ var resumeScoreURL="";
 	<div id="Lesson">
 		<div id="HeaderLesson">
 			<div id="HeaderLessonBook"> <a class="NavClick" href="jump://About this lesson">About this lesson</a> | <a class="NavClick NoWrap" href="jump://Table of Contents">Table of Contents</a> </div>
-			<div id="HeaderLessonCAV"> <a class="UserName" href="#" target=_blank title="View your lesson runs">user@school.edu</a> | <a href="#" class="styleswitch" rel="cavmobile">mobile</a> <a href="#" class="styleswitch" rel="cavscreen">non-mobile</a> | <a href="#" class="textchanger" id="linkSmall" style="font-size:smaller">A</a> <a href="#" class="textchanger" id="linkLarge" style="font-size:bigger">A</a>
+			<div id="HeaderLessonCAV"> <a class="UserName" href="#" target=_blank title="View your lesson runs">user@school.edu</a> | <a href="#" class="styleswitch" rel="cavmobile">mobile</a> <a href="#" class="styleswitch" rel="cavscreen">non-mobile</a> | <a href="#" class="textchanger" id="linkSmall" style="font-size: smaller">A</a> <a href="#" class="textchanger" id="linkLarge" style="font-size: larger">A</a>
 			| <a class="PageComment" href="#" title="We welcome your comments and feedback over email">Feedback</a> | <a class="Exit" target="_parent" href="#" title="Exit the lesson and resume later">Exit &amp; Resume Later</a>
 			</div>
 		</div>
 		<div id="HeaderPage">
 			<div id="HeaderPageCALI"><a href="http://www.cali.org" title="CALI lessons online" target="_blank"><img alt="CALI Logo" src="img/CALILessonsLogo.gif" width="192" height="55" border="0"/></a></div>
+			<div id="llHeaderPage" class="hidestart"><img alt="LessonLive" src="img/LessonLiveLogo.png" width="192" height="55" border="0"/></a></div>
 			<div class="LessonName">Lesson</div>
 		</div>
 		<div class="Navigation">
@@ -189,6 +190,7 @@ var resumeScoreURL="";
 					</div>
 				</div>
 			</div>
+			<div class="llNavigation hidestart" id="llPanel"></div>
 			<div id="dataTrace"  class="Trace" style="overflow:scroll;height:400px">
 				<table>
 					<tr>

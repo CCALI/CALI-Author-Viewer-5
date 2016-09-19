@@ -4,8 +4,6 @@ Includes lesson meta data for review purposes, list of users and their user id/n
 pages indexed by name. For each page include the subquestion (0 if none) and list of choices with array of
 users choosing that answer. 
 */
-lldata =
-
 {
 	"lesson": {
 		"Organization": "University of Tulsa College of Law",
@@ -16,74 +14,60 @@ lldata =
 		"Lesson ID": "532",
 		"Teacher Name": "chuck-adams@utulsa.edu",
 		"Teacher ID": "20932",
-		"Created": "2016-05-26 13:51:53"
+		"Created": "2016-05-26 13:51:53",
+		"LastUpdate": "2016-06-23 15:57:13",
+		"XMLBytes": 227598
 	},
-	"users": {
-		"1": {
+	"users": [{
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"2": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"3": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"4": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"5": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"6": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"7": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"8": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"9": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"10": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"11": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"12": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"13": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"14": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"15": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
-		},
-		"16": {
+		}, {
 			"userid": "REDACTED",
 			"email": "REDACTED@REDACTED.EDU"
 		}
-	},
+	],
 	"pages": {
 		"P 1": {
 			"total": 16,
@@ -94,12 +78,12 @@ lldata =
 				"wrong": 4,
 				"1": {
 					"grade": "wrong",
-					"users": [4, 6, 7, 9],
+					"users": [3, 5, 6, 8],
 					"text": ["A."]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 5, 8, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 4, 7, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["B."]
 				}
 			}
@@ -113,12 +97,12 @@ lldata =
 				"wrong": 4,
 				"1": {
 					"grade": "wrong",
-					"users": [3, 7, 13, 16],
+					"users": [2, 6, 12, 15],
 					"text": ["A."]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 4, 5, 6, 8, 9, 10, 12, 14, 15, 11],
+					"users": [0, 1, 3, 4, 5, 7, 8, 9, 11, 13, 14, 10],
 					"text": ["B."]
 				}
 			}
@@ -132,17 +116,17 @@ lldata =
 				"wrong": 8,
 				"2": {
 					"grade": "right",
-					"users": [1, 4, 5, 6, 12, 15, 16, 11],
+					"users": [0, 3, 4, 5, 11, 14, 15, 10],
 					"text": ["B."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [2, 3, 7, 9, 10, 13],
+					"users": [1, 2, 6, 8, 9, 12],
 					"text": ["C."]
 				},
 				"4": {
 					"grade": "wrong",
-					"users": [8, 14],
+					"users": [7, 13],
 					"text": ["D."]
 				}
 			}
@@ -156,17 +140,17 @@ lldata =
 				"wrong": 11,
 				"1": {
 					"grade": "wrong",
-					"users": [7, 9, 16],
+					"users": [6, 8, 15],
 					"text": ["A."]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [2, 3, 6, 12, 13, 14, 15, 11],
+					"users": [1, 2, 5, 11, 12, 13, 14, 10],
 					"text": ["B."]
 				},
 				"3": {
 					"grade": "right",
-					"users": [1, 4, 5, 8, 10],
+					"users": [0, 3, 4, 7, 9],
 					"text": ["C."]
 				}
 			}
@@ -180,17 +164,17 @@ lldata =
 				"wrong": 8,
 				"1": {
 					"grade": "wrong",
-					"users": [1, 14, 11],
+					"users": [0, 13, 10],
 					"text": ["A."]
 				},
 				"2": {
 					"grade": "right",
-					"users": [4, 5, 6, 7, 9, 13, 15],
+					"users": [3, 4, 5, 6, 8, 12, 14],
 					"text": ["B."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [2, 8, 10, 12, 16],
+					"users": [1, 7, 9, 11, 15],
 					"text": ["C."]
 				}
 			}
@@ -204,12 +188,12 @@ lldata =
 				"wrong": 7,
 				"1": {
 					"grade": "right",
-					"users": [3, 5, 6, 8, 9, 10, 14, 15, 11],
+					"users": [2, 4, 5, 7, 8, 9, 13, 14, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [1, 2, 4, 7, 12, 13, 16],
+					"users": [0, 1, 3, 6, 11, 12, 15],
 					"text": ["No"]
 				}
 			}
@@ -223,12 +207,12 @@ lldata =
 				"wrong": 8,
 				"1": {
 					"grade": "right",
-					"users": [2, 5, 8, 10, 12, 13, 15, 16],
+					"users": [1, 4, 7, 9, 11, 12, 14, 15],
 					"text": ["A."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [1, 3, 4, 6, 7, 9, 14, 11],
+					"users": [0, 2, 3, 5, 6, 8, 13, 10],
 					"text": ["C."]
 				}
 			}
@@ -242,12 +226,12 @@ lldata =
 				"wrong": 5,
 				"1": {
 					"grade": "wrong",
-					"users": [1, 8, 12, 14, 16],
+					"users": [0, 7, 11, 13, 15],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [2, 3, 4, 5, 6, 7, 9, 10, 13, 15],
+					"users": [1, 2, 3, 4, 5, 6, 8, 9, 12, 14],
 					"text": ["No"]
 				}
 			}
@@ -261,12 +245,12 @@ lldata =
 				"wrong": 5,
 				"1": {
 					"grade": "right",
-					"users": [5, 6, 7, 8, 9, 10, 12, 13, 15, 16],
+					"users": [4, 5, 6, 7, 8, 9, 11, 12, 14, 15],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [1, 2, 3, 4, 14],
+					"users": [0, 1, 2, 3, 13],
 					"text": ["No"]
 				}
 			}
@@ -280,17 +264,17 @@ lldata =
 				"wrong": 7,
 				"1": {
 					"grade": "wrong",
-					"users": [4, 8, 10, 14, 16],
+					"users": [3, 7, 9, 13, 15],
 					"text": ["A."]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 5, 7, 12, 13, 15, 11],
+					"users": [0, 1, 2, 4, 6, 11, 12, 14, 10],
 					"text": ["B."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [6, 9],
+					"users": [5, 8],
 					"text": ["C."]
 				}
 			}
@@ -304,12 +288,12 @@ lldata =
 				"wrong": 2,
 				"1": {
 					"grade": "right",
-					"users": [1, 3, 5, 7, 9, 12, 13, 15, 11],
+					"users": [0, 2, 4, 6, 8, 11, 12, 14, 10],
 					"text": ["A."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [2, 6],
+					"users": [1, 5],
 					"text": ["C."]
 				}
 			}
@@ -323,7 +307,7 @@ lldata =
 				"wrong": 0,
 				"2": {
 					"grade": "right",
-					"users": [1, 4, 8, 10, 14, 16],
+					"users": [0, 3, 7, 9, 13, 15],
 					"text": ["No"]
 				}
 			}
@@ -337,12 +321,12 @@ lldata =
 				"wrong": 5,
 				"1": {
 					"grade": "right",
-					"users": [1, 3, 4, 5, 9, 10, 12, 13, 14, 16, 11],
+					"users": [0, 2, 3, 4, 8, 9, 11, 12, 13, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [2, 6, 7, 8, 15],
+					"users": [1, 5, 6, 7, 14],
 					"text": ["No"]
 				}
 			}
@@ -356,17 +340,17 @@ lldata =
 				"wrong": 4,
 				"1": {
 					"grade": "wrong",
-					"users": [9, 14, 16],
+					"users": [8, 13, 15],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [4],
+					"users": [3],
 					"text": ["No"]
 				},
 				"3": {
 					"grade": "right",
-					"users": [1, 2, 3, 5, 6, 7, 8, 12, 13, 15, 11],
+					"users": [0, 1, 2, 4, 5, 6, 7, 11, 12, 14, 10],
 					"text": ["I need more information."]
 				}
 			}
@@ -380,7 +364,7 @@ lldata =
 				"wrong": 0,
 				"3": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 11, 12, 13, 14, 15, 10],
 					"text": ["C."]
 				}
 			}
@@ -394,12 +378,12 @@ lldata =
 				"wrong": 4,
 				"1": {
 					"grade": "wrong",
-					"users": [2, 3, 6, 14],
+					"users": [1, 2, 5, 13],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 4, 5, 7, 8, 9, 12, 13, 15, 16, 11],
+					"users": [0, 3, 4, 6, 7, 8, 11, 12, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -413,12 +397,12 @@ lldata =
 				"wrong": 3,
 				"1": {
 					"grade": "wrong",
-					"users": [1, 7, 13],
+					"users": [0, 6, 12],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [2, 3, 4, 5, 6, 8, 9, 10, 12, 14, 15, 16, 11],
+					"users": [1, 2, 3, 4, 5, 7, 8, 9, 11, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -432,17 +416,17 @@ lldata =
 				"wrong": 7,
 				"1": {
 					"grade": "wrong",
-					"users": [1, 5, 8, 13, 14, 15],
+					"users": [0, 4, 7, 12, 13, 14],
 					"text": ["A."]
 				},
 				"3": {
 					"grade": "right",
-					"users": [2, 4, 6, 7, 9, 10, 12, 16, 11],
+					"users": [1, 3, 5, 6, 8, 9, 11, 15, 10],
 					"text": ["C."]
 				},
 				"4": {
 					"grade": "wrong",
-					"users": [3],
+					"users": [2],
 					"text": ["D."]
 				}
 			}
@@ -456,12 +440,12 @@ lldata =
 				"wrong": 5,
 				"1": {
 					"grade": "wrong",
-					"users": [1, 2, 7, 13, 16],
+					"users": [0, 1, 6, 12, 15],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [3, 4, 5, 6, 8, 9, 10, 12, 14, 15, 11],
+					"users": [2, 3, 4, 5, 7, 8, 9, 11, 13, 14, 10],
 					"text": ["No"]
 				}
 			}
@@ -475,7 +459,7 @@ lldata =
 				"wrong": 0,
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["B."]
 				}
 			}
@@ -489,12 +473,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "wrong",
-					"users": [5],
+					"users": [4],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -508,12 +492,12 @@ lldata =
 				"wrong": 2,
 				"1": {
 					"grade": "wrong",
-					"users": [4, 16],
+					"users": [3, 15],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 5, 6, 8, 10, 12, 14, 15, 11],
+					"users": [0, 1, 2, 4, 5, 7, 9, 11, 13, 14, 10],
 					"text": ["No"]
 				}
 			}
@@ -527,12 +511,12 @@ lldata =
 				"wrong": 5,
 				"1": {
 					"grade": "wrong",
-					"users": [2, 3, 4, 7, 8],
+					"users": [1, 2, 3, 6, 7],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 5, 6, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 4, 5, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -546,17 +530,17 @@ lldata =
 				"wrong": 6,
 				"1": {
 					"grade": "right",
-					"users": [2, 4, 5, 8, 9, 10, 12, 13, 15, 11],
+					"users": [1, 3, 4, 7, 8, 9, 11, 12, 14, 10],
 					"text": ["A."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [3, 7],
+					"users": [2, 6],
 					"text": ["C."]
 				},
 				"4": {
 					"grade": "wrong",
-					"users": [1, 6, 14, 16],
+					"users": [0, 5, 13, 15],
 					"text": ["D."]
 				}
 			}
@@ -570,17 +554,17 @@ lldata =
 				"wrong": 6,
 				"1": {
 					"grade": "wrong",
-					"users": [8, 11],
+					"users": [7, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [1, 2, 7, 14],
+					"users": [0, 1, 6, 13],
 					"text": ["No"]
 				},
 				"3": {
 					"grade": "right",
-					"users": [3, 4, 5, 6, 9, 10, 12, 13, 15, 16],
+					"users": [2, 3, 4, 5, 8, 9, 11, 12, 14, 15],
 					"text": ["I need more information"]
 				}
 			}
@@ -594,12 +578,12 @@ lldata =
 				"wrong": 2,
 				"1": {
 					"grade": "wrong",
-					"users": [3, 13],
+					"users": [2, 12],
 					"text": ["Yes"]
 				},
 				"3": {
 					"grade": "right",
-					"users": [1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 14, 15, 16, 11],
+					"users": [0, 1, 3, 4, 5, 6, 7, 8, 9, 11, 13, 14, 15, 10],
 					"text": ["I need more information"]
 				}
 			}
@@ -613,12 +597,12 @@ lldata =
 				"wrong": 2,
 				"1": {
 					"grade": "right",
-					"users": [3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [1, 2],
+					"users": [0, 1],
 					"text": ["No"]
 				}
 			}
@@ -632,12 +616,12 @@ lldata =
 				"wrong": 6,
 				"1": {
 					"grade": "right",
-					"users": [1, 5, 6, 7, 8, 10, 12, 13, 14, 15],
+					"users": [0, 4, 5, 6, 7, 9, 11, 12, 13, 14],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [2, 3, 4, 9, 16, 11],
+					"users": [1, 2, 3, 8, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -651,12 +635,12 @@ lldata =
 				"wrong": 4,
 				"1": {
 					"grade": "right",
-					"users": [1, 3, 5, 8, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 2, 4, 7, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [2, 4, 6, 7],
+					"users": [1, 3, 5, 6],
 					"text": ["No"]
 				}
 			}
@@ -670,12 +654,12 @@ lldata =
 				"wrong": 2,
 				"1": {
 					"grade": "wrong",
-					"users": [9, 16],
+					"users": [8, 15],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 10],
 					"text": ["No"]
 				}
 			}
@@ -689,12 +673,12 @@ lldata =
 				"wrong": 8,
 				"1": {
 					"grade": "right",
-					"users": [1, 2, 4, 5, 12, 13, 14, 16],
+					"users": [0, 1, 3, 4, 11, 12, 13, 15],
 					"text": ["A."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [3, 6, 7, 8, 9, 10, 15, 11],
+					"users": [2, 5, 6, 7, 8, 9, 14, 10],
 					"text": ["C."]
 				}
 			}
@@ -708,12 +692,12 @@ lldata =
 				"wrong": 2,
 				"1": {
 					"grade": "wrong",
-					"users": [5, 15],
+					"users": [4, 14],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 16, 11],
+					"users": [0, 1, 2, 3, 5, 6, 7, 8, 9, 11, 12, 13, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -727,12 +711,12 @@ lldata =
 				"wrong": 5,
 				"1": {
 					"grade": "wrong",
-					"users": [4, 8, 9, 16, 11],
+					"users": [3, 7, 8, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 5, 6, 7, 10, 12, 13, 14, 15],
+					"users": [0, 1, 2, 4, 5, 6, 9, 11, 12, 13, 14],
 					"text": ["No"]
 				}
 			}
@@ -747,17 +731,17 @@ lldata =
 				"wrong": 7,
 				"1": {
 					"grade": "maybe",
-					"users": [3, 12],
+					"users": [2, 11],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [1, 4, 6, 7, 9, 13, 11],
+					"users": [0, 3, 5, 6, 8, 12, 10],
 					"text": ["No"]
 				},
 				"3": {
 					"grade": "right",
-					"users": [2, 5, 8, 10, 14, 15, 16],
+					"users": [1, 4, 7, 9, 13, 14, 15],
 					"text": ["I need more information."]
 				}
 			}
@@ -771,12 +755,12 @@ lldata =
 				"wrong": 7,
 				"1": {
 					"grade": "right",
-					"users": [3, 4, 5, 8, 9, 12, 14, 15],
+					"users": [2, 3, 4, 7, 8, 11, 13, 14],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [1, 2, 6, 7, 10, 13, 16],
+					"users": [0, 1, 5, 6, 9, 12, 15],
 					"text": ["No"]
 				}
 			}
@@ -790,12 +774,12 @@ lldata =
 				"wrong": 2,
 				"1": {
 					"grade": "wrong",
-					"users": [2, 3],
+					"users": [1, 2],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -809,17 +793,17 @@ lldata =
 				"wrong": 3,
 				"1": {
 					"grade": "right",
-					"users": [2, 3, 4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16],
+					"users": [1, 2, 3, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15],
 					"text": ["A."]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [1, 11],
+					"users": [0, 10],
 					"text": ["B."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [9],
+					"users": [8],
 					"text": ["C."]
 				}
 			}
@@ -833,12 +817,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "wrong",
-					"users": [16],
+					"users": [15],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 10],
 					"text": ["No"]
 				}
 			}
@@ -852,12 +836,12 @@ lldata =
 				"wrong": 2,
 				"1": {
 					"grade": "right",
-					"users": [1, 2, 3, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 4, 5, 6, 7, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [4, 9],
+					"users": [3, 8],
 					"text": ["No"]
 				}
 			}
@@ -871,12 +855,12 @@ lldata =
 				"wrong": 3,
 				"1": {
 					"grade": "wrong",
-					"users": [1, 6, 16],
+					"users": [0, 5, 15],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [2, 3, 4, 5, 7, 8, 9, 10, 12, 13, 14, 15, 11],
+					"users": [1, 2, 3, 4, 6, 7, 8, 9, 11, 12, 13, 14, 10],
 					"text": ["No"]
 				}
 			}
@@ -890,17 +874,17 @@ lldata =
 				"wrong": 7,
 				"1": {
 					"grade": "wrong",
-					"users": [4, 9, 13, 14],
+					"users": [3, 8, 12, 13],
 					"text": ["A."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [1, 6, 12],
+					"users": [0, 5, 11],
 					"text": ["C."]
 				},
 				"4": {
 					"grade": "right",
-					"users": [2, 3, 5, 7, 8, 10, 15, 16, 11],
+					"users": [1, 2, 4, 6, 7, 9, 14, 15, 10],
 					"text": ["D."]
 				}
 			}
@@ -914,12 +898,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [16],
+					"users": [15],
 					"text": ["No"]
 				}
 			}
@@ -933,12 +917,12 @@ lldata =
 				"wrong": 7,
 				"1": {
 					"grade": "right",
-					"users": [1, 3, 4, 5, 7, 8, 12, 15, 11],
+					"users": [0, 2, 3, 4, 6, 7, 11, 14, 10],
 					"text": ["A."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [2, 6, 9, 10, 13, 14, 16],
+					"users": [1, 5, 8, 9, 12, 13, 15],
 					"text": ["C."]
 				}
 			}
@@ -952,17 +936,17 @@ lldata =
 				"wrong": 8,
 				"1": {
 					"grade": "wrong",
-					"users": [1, 3, 7, 8, 12, 11],
+					"users": [0, 2, 6, 7, 11, 10],
 					"text": ["A."]
 				},
 				"3": {
 					"grade": "right",
-					"users": [2, 4, 5, 6, 9, 13, 15, 16],
+					"users": [1, 3, 4, 5, 8, 12, 14, 15],
 					"text": ["C."]
 				},
 				"4": {
 					"grade": "wrong",
-					"users": [10, 14],
+					"users": [9, 13],
 					"text": ["D."]
 				}
 			}
@@ -977,12 +961,12 @@ lldata =
 				"wrong": 0,
 				"1": {
 					"grade": "maybe",
-					"users": [1, 3, 7, 8, 13, 14, 15, 16],
+					"users": [0, 2, 6, 7, 12, 13, 14, 15],
 					"text": ["A."]
 				},
 				"2": {
 					"grade": "right",
-					"users": [2, 4, 5, 6, 9, 10, 12, 11],
+					"users": [1, 3, 4, 5, 8, 9, 11, 10],
 					"text": ["B."]
 				}
 			}
@@ -996,12 +980,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [8],
+					"users": [7],
 					"text": ["No"]
 				}
 			}
@@ -1015,12 +999,12 @@ lldata =
 				"wrong": 1,
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["B."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [8],
+					"users": [7],
 					"text": ["C."]
 				}
 			}
@@ -1034,7 +1018,7 @@ lldata =
 				"wrong": 0,
 				"1": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["A."]
 				}
 			}
@@ -1048,12 +1032,12 @@ lldata =
 				"wrong": 8,
 				"1": {
 					"grade": "right",
-					"users": [3, 5, 8, 10, 12, 13, 14, 15],
+					"users": [2, 4, 7, 9, 11, 12, 13, 14],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [1, 2, 4, 6, 7, 9, 16, 11],
+					"users": [0, 1, 3, 5, 6, 8, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1067,12 +1051,12 @@ lldata =
 				"wrong": 4,
 				"1": {
 					"grade": "wrong",
-					"users": [6, 9, 13, 11],
+					"users": [5, 8, 12, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 7, 8, 10, 12, 14, 15, 16],
+					"users": [0, 1, 2, 3, 4, 6, 7, 9, 11, 13, 14, 15],
 					"text": ["No"]
 				}
 			}
@@ -1086,7 +1070,7 @@ lldata =
 				"wrong": 0,
 				"3": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["C."]
 				}
 			}
@@ -1100,17 +1084,17 @@ lldata =
 				"wrong": 9,
 				"1": {
 					"grade": "wrong",
-					"users": [4, 7, 14, 16, 11],
+					"users": [3, 6, 13, 15, 10],
 					"text": ["A."]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [2, 3, 10, 15],
+					"users": [1, 2, 9, 14],
 					"text": ["B."]
 				},
 				"3": {
 					"grade": "right",
-					"users": [1, 5, 6, 8, 9, 12, 13],
+					"users": [0, 4, 5, 7, 8, 11, 12],
 					"text": ["C."]
 				}
 			}
@@ -1124,7 +1108,7 @@ lldata =
 				"wrong": 0,
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1138,12 +1122,12 @@ lldata =
 				"wrong": 6,
 				"1": {
 					"grade": "right",
-					"users": [2, 3, 5, 6, 10, 12, 14, 15, 16, 11],
+					"users": [1, 2, 4, 5, 9, 11, 13, 14, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [1, 4, 7, 8, 9, 13],
+					"users": [0, 3, 6, 7, 8, 12],
 					"text": ["No"]
 				}
 			}
@@ -1157,17 +1141,17 @@ lldata =
 				"wrong": 13,
 				"1": {
 					"grade": "wrong",
-					"users": [1],
+					"users": [0],
 					"text": ["A."]
 				},
 				"3": {
 					"grade": "right",
-					"users": [3, 12, 15],
+					"users": [2, 11, 14],
 					"text": ["C."]
 				},
 				"4": {
 					"grade": "wrong",
-					"users": [2, 4, 5, 6, 7, 8, 9, 10, 13, 14, 16, 11],
+					"users": [1, 3, 4, 5, 6, 7, 8, 9, 12, 13, 15, 10],
 					"text": ["D."]
 				}
 			}
@@ -1181,12 +1165,12 @@ lldata =
 				"wrong": 5,
 				"1": {
 					"grade": "right",
-					"users": [1, 2, 4, 5, 6, 9, 12, 13, 15, 16, 11],
+					"users": [0, 1, 3, 4, 5, 8, 11, 12, 14, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [3, 7, 8, 10, 14],
+					"users": [2, 6, 7, 9, 13],
 					"text": ["No"]
 				}
 			}
@@ -1200,12 +1184,12 @@ lldata =
 				"wrong": 2,
 				"1": {
 					"grade": "wrong",
-					"users": [7, 15],
+					"users": [6, 14],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 13, 14, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 7, 8, 9, 11, 12, 13, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1219,12 +1203,12 @@ lldata =
 				"wrong": 4,
 				"1": {
 					"grade": "right",
-					"users": [1, 2, 5, 6, 8, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 4, 5, 7, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [3, 4, 7, 9],
+					"users": [2, 3, 6, 8],
 					"text": ["No"]
 				}
 			}
@@ -1238,12 +1222,12 @@ lldata =
 				"wrong": 3,
 				"2": {
 					"grade": "wrong",
-					"users": [4, 6, 14],
+					"users": [3, 5, 13],
 					"text": ["No"]
 				},
 				"3": {
 					"grade": "right",
-					"users": [1, 2, 3, 5, 7, 8, 9, 10, 12, 13, 15, 16, 11],
+					"users": [0, 1, 2, 4, 6, 7, 8, 9, 11, 12, 14, 15, 10],
 					"text": ["Need more information"]
 				}
 			}
@@ -1257,12 +1241,12 @@ lldata =
 				"wrong": 3,
 				"1": {
 					"grade": "wrong",
-					"users": [13, 15, 16],
+					"users": [12, 14, 15],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 13, 10],
 					"text": ["No"]
 				}
 			}
@@ -1276,12 +1260,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "wrong",
-					"users": [15],
+					"users": [14],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1295,12 +1279,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "wrong",
-					"users": [5],
+					"users": [4],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1314,12 +1298,12 @@ lldata =
 				"wrong": 3,
 				"1": {
 					"grade": "wrong",
-					"users": [4, 7, 8],
+					"users": [3, 6, 7],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 5, 6, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 4, 5, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1333,7 +1317,7 @@ lldata =
 				"wrong": 0,
 				"3": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["Need more information"]
 				}
 			}
@@ -1347,12 +1331,12 @@ lldata =
 				"wrong": 2,
 				"2": {
 					"grade": "wrong",
-					"users": [12, 13],
+					"users": [11, 12],
 					"text": ["No"]
 				},
 				"3": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 13, 14, 15, 10],
 					"text": ["Need more information"]
 				}
 			}
@@ -1366,12 +1350,12 @@ lldata =
 				"wrong": 6,
 				"1": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 12, 13, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 11, 12, 14, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [6, 7, 8, 9, 10, 14],
+					"users": [5, 6, 7, 8, 9, 13],
 					"text": ["No"]
 				}
 			}
@@ -1385,12 +1369,12 @@ lldata =
 				"wrong": 4,
 				"1": {
 					"grade": "wrong",
-					"users": [2, 5, 7, 8],
+					"users": [1, 4, 6, 7],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 3, 4, 6, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 2, 3, 5, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1404,12 +1388,12 @@ lldata =
 				"wrong": 9,
 				"1": {
 					"grade": "wrong",
-					"users": [1, 3, 4, 6, 7, 8, 9, 16, 11],
+					"users": [0, 2, 3, 5, 6, 7, 8, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [2, 5, 10, 12, 13, 14, 15],
+					"users": [1, 4, 9, 11, 12, 13, 14],
 					"text": ["No"]
 				}
 			}
@@ -1423,12 +1407,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "wrong",
-					"users": [1],
+					"users": [0],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 11],
+					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1442,12 +1426,12 @@ lldata =
 				"wrong": 6,
 				"1": {
 					"grade": "wrong",
-					"users": [1, 3, 4, 7, 16, 11],
+					"users": [0, 2, 3, 6, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [2, 5, 6, 8, 9, 10, 12, 13, 14, 15],
+					"users": [1, 4, 5, 7, 8, 9, 11, 12, 13, 14],
 					"text": ["No"]
 				}
 			}
@@ -1461,12 +1445,12 @@ lldata =
 				"wrong": 8,
 				"1": {
 					"grade": "right",
-					"users": [1, 5, 9, 10, 12, 13, 15, 16],
+					"users": [0, 4, 8, 9, 11, 12, 14, 15],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [2, 3, 4, 6, 7, 8, 14, 11],
+					"users": [1, 2, 3, 5, 6, 7, 13, 10],
 					"text": ["No"]
 				}
 			}
@@ -1480,12 +1464,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "wrong",
-					"users": [3],
+					"users": [2],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1499,12 +1483,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "wrong",
-					"users": [15],
+					"users": [14],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1518,12 +1502,12 @@ lldata =
 				"wrong": 6,
 				"1": {
 					"grade": "right",
-					"users": [1, 3, 5, 6, 7, 9, 10, 12, 13, 15],
+					"users": [0, 2, 4, 5, 6, 8, 9, 11, 12, 14],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [2, 4, 8, 14, 16, 11],
+					"users": [1, 3, 7, 13, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1537,12 +1521,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "wrong",
-					"users": [12],
+					"users": [11],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1556,12 +1540,12 @@ lldata =
 				"wrong": 4,
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 9, 10, 12, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 8, 9, 11, 13, 14, 15, 10],
 					"text": ["B."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [6, 7, 8, 13],
+					"users": [5, 6, 7, 12],
 					"text": ["C."]
 				}
 			}
@@ -1575,12 +1559,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "right",
-					"users": [1, 2, 3, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 16, 11],
+					"users": [0, 1, 2, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
 					"text": ["A."]
 				},
 				"3": {
 					"grade": "wrong",
-					"users": [4],
+					"users": [3],
 					"text": ["C."]
 				}
 			}
@@ -1594,12 +1578,12 @@ lldata =
 				"wrong": 1,
 				"1": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13, 14, 15, 11],
+					"users": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [16],
+					"users": [15],
 					"text": ["No"]
 				}
 			}
@@ -1613,12 +1597,12 @@ lldata =
 				"wrong": 4,
 				"1": {
 					"grade": "wrong",
-					"users": [3, 6, 8, 11],
+					"users": [2, 5, 7, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 4, 5, 7, 9, 10, 12, 13, 14, 15, 16],
+					"users": [0, 1, 3, 4, 6, 8, 9, 11, 12, 13, 14, 15],
 					"text": ["No"]
 				}
 			}
@@ -1632,12 +1616,12 @@ lldata =
 				"wrong": 3,
 				"1": {
 					"grade": "wrong",
-					"users": [7, 12, 13],
+					"users": [6, 11, 12],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "right",
-					"users": [1, 2, 3, 4, 5, 6, 8, 9, 10, 14, 15, 16, 11],
+					"users": [0, 1, 2, 3, 4, 5, 7, 8, 9, 13, 14, 15, 10],
 					"text": ["No"]
 				}
 			}
@@ -1651,12 +1635,12 @@ lldata =
 				"wrong": 6,
 				"1": {
 					"grade": "right",
-					"users": [1, 4, 5, 7, 8, 9, 12, 15, 16, 11],
+					"users": [0, 3, 4, 6, 7, 8, 11, 14, 15, 10],
 					"text": ["Yes"]
 				},
 				"2": {
 					"grade": "wrong",
-					"users": [2, 3, 6, 10, 13, 14],
+					"users": [1, 2, 5, 9, 12, 13],
 					"text": ["No"]
 				}
 			}
