@@ -250,6 +250,7 @@ function renderPage()
 	doHelp=null;
 	
 	pageInteractionDIV.text('');
+	pageInteractionDIV.prepend('<div class=llPageInfo/>');
 	$(".PageSpecificGrade").empty();
 	$(".PageSpecificNav").empty();
 	pageTextDIV.hide().text('');
@@ -378,7 +379,6 @@ function renderPage()
 		$('.LinkNavBar:first:not(:has(a))').hide();
 	}
 	patchLink();
-	pageInteractionDIV.append('<div class=llPageInfo/>');	
 	attachLessonLiveReportToPage();
 }
 

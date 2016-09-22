@@ -1189,8 +1189,15 @@ div.flashcard.answer{
 	xborder-radius: 5px;
 	height: auto;
 }
+#llPanel {
+	white-space: nowrap;		
+}
 .llPageInfo {
-	text-align:center;	
+	text-align:center;
+	background-color: #c4e1ff; 
+	padding: 1em;
+	margin-right: -5px;
+	margin-left: -5px;
 }
 .llButton {
 	display: inline;
@@ -1204,7 +1211,7 @@ div.flashcard.answer{
 .llBar {
 	white-space: nowrap;
 	height: 1em;
-	width: 0.2em;
+	xwidth: 0.2em;
 }
 .llBarChunk{
 	display: inline-block;
@@ -1220,6 +1227,9 @@ div.flashcard.answer{
 .llBarChunk.answer.none {
 	background-color: #ccc;	
 }
+.llBarChunk.answer.answered {
+	background-color: #000;	
+}
 .llBarChunk.answer.right {
 	background-color: #080;	
 }
@@ -1230,7 +1240,7 @@ div.flashcard.answer{
 	background-color: #008;	
 }
 .llBarChunk.answer.maybe {
-	background-color: #880;	
+	background-color: #ff8;	
 }
 .llUser.none {
 	background-color: #fff;	
@@ -1255,10 +1265,28 @@ div.flashcard.answer{
 	background-color: #eee;
 	font-weight: normal;
 	padding: 2px;
+	white-space: nowrap;
+	overflow: hidden;
 }
 .llIcon {
+	display: inline-block;
+	line-height: 1em;
+	max-width: 1em;
+	overflow: hidden;
+	padding-right: 1em;
+	white-space: nowrap;
+	width: 1em;
 }
 
+.llDialogRevealNames {
+	border: 3px solid #C4E1FF;
+	-moz-border-radius:10px 10px 10px 10px;
+	border-radius:10px 10px 10px 10px;
+	margin: auto;
+	text-align:left;
+	padding: 5px;
+	width: 50%;
+}
 
 .hidestart { /* hide some elements initially */
 	display: none;
