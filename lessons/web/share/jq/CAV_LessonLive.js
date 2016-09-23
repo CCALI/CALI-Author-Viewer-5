@@ -30,7 +30,7 @@ function attachLessonLiveReportToPage( )
 	var pageLL = lessonLive.Summary.pages[page.name];
 	if (pageLL )
 	{	// At least 1 student has viewed this page. 
-		LessonLivePageInfo= 'Students responded: ' + pageLL.total;
+		LessonLivePageInfo= 'Students responded: <br/>';
 		$('.llChoice').text('').append('LessonLive');
 		pageLL.marks=[];// right/wrong for each user
 		pageLL.answer=[];// answer choice for each user
@@ -38,36 +38,46 @@ function attachLessonLiveReportToPage( )
 		// Add custom percent/progress bars per question type. 
 		if (page.type=="Multiple Choice" && page.style=="Choose Buttons")
 		{	// Tally results for each button, eg., Yes, No, Maybe
-			for (var b=0;b<page.captions.length;b++) {
-				lessonLiveAttachOne(pageLL,1,b+1,'llChoice'+b+'_0');
+			for (var b=0;b<page.captions.length;b++)
+			{
 				pageLL.text[b+1]=page.captions[b];
+				lessonLiveAttachOne(pageLL,1,b+1,'llChoice'+b+'_0');
 			}
 		}
 		else if (page.type=="Multiple Choice" && page.style=="Choose List") 
 		{	// Tally results for each choice, eg., A, B, C, D
-			for (var d=0;d<page.details.length;d++) {
-				lessonLiveAttachOne(pageLL,1,d+1,'llChoice0_'+d);
+			for (var d=0;d<page.details.length;d++)
+			{
 				pageLL.text[ d+1 ]= page.details[d].letter;
+				lessonLiveAttachOne(pageLL,1,d+1,'llChoice0_'+d);
 			}
 		}
 		else if (page.type=="Multiple Choice" && page.style=="Choose MultiButtons")
 		{	// Tally results for each button and each choice, eg., A-Yes, A-No, B-Yes, B-No, etc. 
 			for (var d=0;d<page.details.length;d++) {
-				pageLL.text[ d +1]= page.details[d].letter;
-				for (var b=0;b<page.captions.length;b++)
+				for (var c=0;c<page.captions.length;c++)
 				{
-					lessonLiveAttachOne(pageLL,d+1,b+1,'llChoice'+b+'_'+d);
+					pageLL.text[c+1]=page.captions[c];
+					lessonLiveAttachOne(pageLL,d+1,c+1,'llChoice'+c+'_'+d);
 				}
 			}
 		}
+		else if (page.type=="Multiple Choice"  || page.type=="Prioritize")
+		{	// Types that are merely Right or Wrong.
+			LessonLivePageInfo='LessonLive data for this page type only records a right or wrong response.'
+			// Handle te question types which are simply marked Right or Wrong.
+			pageLL.text[1]='R'; // User list caption is R)ight and W)rong.
+			pageLL.text[2]='W';
+			lessonLiveAttachOne(pageLL, 1,1,'' );// RIGHT
+			lessonLiveAttachOne(pageLL, 1,2,'' );// WRONG
+		}	
 		else
 		{	// Any unhandled page type gets a generic 'LessonLive not available for this type'. 
 			LessonLivePageInfo='LessonLive data not presented for this page type.'
 		}	
 		
-		// Build list of user right/wrong/unanswered ticks - indicates how many students responded so far to this page.
 		if (!lessonLive.revealScores)
-		{
+		{	// Build list of user right/wrong/unanswered ticks - indicates how many students responded so far to this page.
 			var marks='';
 			for (var u=0;u<pageLL.marks.length;u++)
 			{
@@ -83,7 +93,7 @@ function attachLessonLiveReportToPage( )
 					grade='answered';
 				marks += '<span class="llBarChunk answer '+ grade + '"/>';
 			}
-			LessonLivePageInfo = LessonLivePageInfo + '<div class=llChoice>'+marks+'</div>';
+			LessonLivePageInfo = LessonLivePageInfo + '<div class=llChoice>'+marks+' ' +  pageLL.total + ' / ' + lessonLive.Summary.users.length + '</div>';
 		}
 	}
 	else
@@ -94,17 +104,17 @@ function attachLessonLiveReportToPage( )
 	if (LessonLivePageInfo!='') {
 		LessonLivePageInfo += '<P></P>';
 		if (lessonLive.revealScores && pageLL.total>0)
-		{	// show the right/wrong thermometer bar for easy identifying problem questions.
+		{	// Show the right/wrong thermometer bar for easy identifying problem questions.
 			var percent=Math.round(100*pageLL[1].right/pageLL.total);
 			LessonLivePageInfo +=  '<P></P>'
 				+'<div class=llChoice> '
-				+'<div class=llBar style="width:'+(pageLL.total*8)+'">'
+				+'<div class="llBar llBarSlots">' // style="xwidth:'+(pageLL.total*3)+'px;"
 				+lessonLiveBar('right',pageLL[1].right)
 				+lessonLiveBar('wrong',pageLL[1].wrong)
 				+lessonLiveBar('maybe',pageLL[1].maybe)
 				+lessonLiveBar('info',pageLL[1].info)
 				+'</div>'
-				+ pageLL[1].right +' / ' + pageLL.total + ' ' +  percent +'%'
+				+ ' '+  percent +'% ' + pageLL[1].right +'/' + pageLL.total
 				+'</div>';
 		}
 		else
@@ -119,25 +129,30 @@ function attachLessonLiveReportToPage( )
 	if (lessonLive.revealUsers) {
 		lessonLive.Summary.users.sort( function(a,b){return icaseCompare(a.email,b.email);}); // Sort users by email
 	}
+	else{
+		lessonLive.Summary.users.sort( function(a,b){return a.userid - b.userid ;}); // Sort users by email
+	}
 	for (var u=0;u<lessonLive.Summary.users.length;u++)
-	{
+	{	// For each user, figure out their answers and grade.
 		var grade='none';
 		var text='';
-		if (pageLL && pageLL.marks){
-			grade = pageLL.marks[u ];
+		if (pageLL && pageLL.marks)
+		{
 			if (pageLL.answer[u]) {
-				text=pageLL.text[pageLL.answer[u]];
+				//text=pageLL.text[pageLL.answer[u]];// short caption of user's choice.
+				text = pageLL.answer[u];
+				grade = pageLL.marks[u ];
 			}
 		}
-		if ((!lessonLive.revealScores)) {
+		if (!lessonLive.revealScores) {
 			if (grade!='none'){
 				grade='answered';// if not showing scores, mark user only as having answered.
 			}
 			text='-';
 		}
-		html+='<div class="llUser '+grade+'" id=llUser'+u+'>'
-			+'<span class="llIcon none">'+text+'</span> '
-			+(lessonLive.revealUsers ? lessonLive.Summary.users[u].email : 'Student '+(u+1))+'</div>';
+		html+='<div class="llUser ll '+grade+'" id=llUser'+u+'>'
+			+text //+'<span class="llIcon none">'+ (text ? text : '?') +'</span> '
+			+' <span class="llUserName ll">' +(lessonLive.revealUsers ? lessonLive.Summary.users[u].email : 'Student '+(u+1))+'</span></div>';
 	} 
 	$('.llUserList').html(html);
 
@@ -151,17 +166,6 @@ function attachLessonLiveReportToPage( )
 	//$('.PageInteraction .llPageInfo').unbind('click').click(function(){$('#llPanel').toggle();}).html(LessonLivePageInfo);
 }
 
-function lessonLiveBar(grade,numSlots)
-{
-	if (!numSlots) {
-		return '';
-	}
-	var html='';
-	for (var i=0;i<numSlots;i++) {
-		html+='<span class="llBarChunk answer ' + grade  + '"/>';
-	}
-	return html;	
-}
 function lessonLiveAttachOne(pageLL, subQ, choice,domid )
 {	// Lookup subq/choice info for given a page and update the html ID with %/progress bar.
 	var numUsers=0; // users giving this answer
@@ -174,26 +178,74 @@ function lessonLiveAttachOne(pageLL, subQ, choice,domid )
 	if (total>0 && pageLL[subQ][choice])
 	{
 		var grade=pageLL[subQ][choice].grade;
+		var text = jQuery.trim( pageLL.text[choice].substr(0,1));
 		percent=Math.round(100*numUsers/total);
 		// Track each user's response for the summary list.
 		for (var i=0;i<numUsers;i++) {
-			html+='<span class="llBarChunk answer ' + (lessonLive.revealScores? grade : 'none')  + '"/>';
+			//html+='<span class="llBarChunk answer ' + (lessonLive.revealScores? grade : 'none')  + '"/>';
 			var u= pageLL[subQ][choice]['users'][i];
-			pageLL.marks[u]=grade;
-			pageLL.answer[u]=choice;
+			//pageLL.marks[u]=grade;			
+			//pageLL.answer[u] =choice;
+			
+			if (!pageLL.answer[u])
+			{
+				pageLL.answer[u]='';
+				pageLL.marks[u]='right';
+			}
+			if (grade!='right')
+			{
+				pageLL.marks[u]=grade;
+			}
+			pageLL.answer[u]+= '<span class="llIcon ll '+grade+'">'+ (text ? text : '?') +'</span>';
+			
+		}
+		if (lessonLive.revealScores) {
+			html = lessonLiveBar(  grade  ,numUsers, total);
 		}
 	}
 	else
 	{
 		percent='';
 	}
-	if (!lessonLive.revealScores) {
-		html ='<span class="llBarChunk answer none"/>';
-	}
-	html='<div class=llBar style="width:'+(total*8)+'">'+html+'</div>'
-		+(lessonLive.revealScores?numUsers:'-')+' / '+total+' '+ (lessonLive.revealScores? percent :'--') +'%';
+	//if (!lessonLive.revealScores) {
+//		html ='<span class="llBarChunk answer none"/>';
+//	}
+	html=''
+		+'<div class=llBar>'+html+'</div>'// xstyle="width:'+(total)+'px;"
+		+(lessonLive.revealScores? percent :'') +'% ' + (lessonLive.revealScores?numUsers:'-')
+		;
 	$('#'+domid).html(html); 
 }
+
+
+function lessonLiveBar(grade,numSlots,total)
+{	// Return thermometer bar either as percent or individual slots.
+	var html='';
+	if ( total ) {
+		if (!numSlots) {
+			numSlots=0;
+			grade='unanswered';
+		}
+		if (!total) {
+			total = numSlots;
+		}
+		if (total==0) total=1;
+		w= 66 * numSlots / total;
+		html='<span class="llBarChunk answer ' + grade  + '" style="width:'+w+'px;"/>';
+	}
+	else
+	{
+		if (numSlots) {
+			for (var i=0;i<numSlots;i++) {
+				html+='<span class="llBarChunk answer ' + grade  + '"/>';
+			}
+		}
+	}
+	return html;
+}
+
+
+
 
 function lessonLiveDownloadSilent()
 {	// Download score save xml summary data from website

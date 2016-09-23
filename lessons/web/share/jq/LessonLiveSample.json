@@ -1,10 +1,11 @@
-/* Sample of LessonLive aggregated score save data
-
-Includes lesson meta data for review purposes, list of users and their user id/name to display to teacher,
-pages indexed by name. For each page include the subquestion (0 if none) and list of choices with array of
-users choosing that answer. 
-*/
 {
+	"_comment": [
+			"Sample of LessonLive aggregated score save data with redacted user data",
+			"Includes lesson meta data for review purposes, list of users and their user id/name to display to teacher,",
+			"pages indexed by name. For each page include the subquestion (0 if none) and list of choices with array of",
+			"users choosing that answer. "
+	],
+
 	"lesson": {
 		"Organization": "University of Tulsa College of Law",
 		"Semester": "Summer 2016",

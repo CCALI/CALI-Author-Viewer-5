@@ -495,6 +495,7 @@ function MultiButtonList_layout()
 					fb.letter=page.captions[c];
 					detailsText += '<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
 							+iButton(fb.letter, fb.id);
+					detailsText += '<div class="llChoice" id="llChoice'+fb.id+'"></div>';
 					fbText  += '<div id="fbText'+fb.id+'"></div>';
 				}
 				subQText += '<div class="ButtonGroup" style="text-align: left;">' + detailsText+ '</div>' + fbText + "</td></tr>";

@@ -1205,19 +1205,30 @@ div.flashcard.answer{
 }
 .llChoice {
 	display: inline-block;
-	margin-left: 4px;
+	margin-left: 2px;
 	vertical-align: middle;
+	background-color: #c4e1ff;
+	padding-left: 4px;
+	padding-right: 4px; 
 }
 .llBar {
+	display: inline-block;
 	white-space: nowrap;
-	height: 1em;
-	xwidth: 0.2em;
+	height: 1.2em;
+	padding: 0;
+	margin: 0;
+	xbackground-color: #eee;
+	xwidth: 66px;
+}
+.llBarSlots {
+	background-color: inherit;
+	width: inherit;
 }
 .llBarChunk{
 	display: inline-block;
 	background-color: #008;
 	height: 1em;
-	width: 0.2em;
+	width: 2px; 
 	margin: 0 1px 0 0;
 	padding: 0;
 }
@@ -1242,22 +1253,22 @@ div.flashcard.answer{
 .llBarChunk.answer.maybe {
 	background-color: #ff8;	
 }
-.llUser.none {
+.ll.none {
 	background-color: #fff;	
 }
-.llUser.answered {
+.ll.answered {
 	background-color: #eee;	
 }
-.llUser.right {
+.ll.right {
 	background-color: #8f8;	
 }
-.llUser.wrong {
+.ll.wrong {
 	background-color: #f88;	
 }
-.llUser.info {
+.ll.info {
 	background-color: #88f;	
 }
-.llUser.maybe {
+.ll.maybe {
 	background-color: #ff8;	
 }
 .llUser {
@@ -1273,11 +1284,16 @@ div.flashcard.answer{
 	line-height: 1em;
 	max-width: 1em;
 	overflow: hidden;
-	padding-right: 1em;
 	white-space: nowrap;
 	width: 1em;
+	margin: 1px;
+	padding: 1px;
 }
-
+.llUserName {	
+	margin: 1px;
+	padding: 1px;
+	padding-left: 1em;
+}
 .llDialogRevealNames {
 	border: 3px solid #C4E1FF;
 	-moz-border-radius:10px 10px 10px 10px;
