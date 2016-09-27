@@ -339,8 +339,9 @@ class QueryMySQLSimple
 	function QueryMySQLSimple($SQL)
 	{ 
 		$result=mysql_query($SQL);
-		if (!$result)
-			abort(json_encode(array("error"=>array("SQL"=>$SQL,"message"=>mysql_error()))));
+		if (!$result){
+			//abort(json_encode(array("error"=>array("SQL"=>$SQL,"message"=>mysql_error()))));
+		}
 		$this->queryresult=$result;
 	}
 	function fetchRow()

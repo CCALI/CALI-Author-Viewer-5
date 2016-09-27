@@ -8,6 +8,8 @@
  * 8/5/2015 Fixed to work with Drupal 7.
  * 07/20/2015 SJG Add Piwik tracking
  * 07/25/2016 SJG fix Facstaff role test
+ * 09/12/2016 SJG add CALI Staff as faculty role test
+ * 09/27/2016 SJG add LessonLive link info
 */
   $template=file_get_contents("lesson.html");
   global $user;
@@ -25,14 +27,16 @@
   $org_title = get_organization_name($account); 
   $orgname = render($org_title);
   $runid=$_SESSION['runid'];
+  $llMode=$_SESSION['is_owner'];
   $username= $user->name;
   $firstname_item = field_get_items('user', $account, 'field_first_name' );
   $lastname_item = field_get_items('user', $account, 'field_last_name' );
   $lastname_value = field_view_value('user', $account, 'field_last_name', $lastname_item[0]);
   $lastname = render($lastname_value);
   $firstname_value = field_view_value('user', $account, 'field_first_name', $firstname_item[0]);
-  $firstname = render($firstname_value); 
-  $authmode=(in_array('Facstaff', $roles)) ? 1 : 0;
+  $firstname = render($firstname_value);
+  // 09/12/2016 Show Faculty options for Facstaff or CALI Staff
+  $authmode=(in_array('Facstaff', $roles) || in_array('CALI Staff', $roles)) ? 1 : 0;
   if (isset($_SESSION['resume']) && $_SESSION['resume']==1)
 	  $resumescore="/lesson/scoreload/".dechex($runid*47);
   else
@@ -44,7 +48,7 @@
 	  $orgname = '';
   }
   
-  $custom="<script>var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
+  $custom="<script> var llMode=\"$llMode\"; var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
 
   
   // 07/20/2016 SJG Add Piwik tracking including user id ($user->uid), organization name ($orgname) and user's full name ($dispname).

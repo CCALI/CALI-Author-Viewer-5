@@ -251,10 +251,10 @@ function lessonLiveBar(grade,numSlots,total)
 
 function lessonLiveDownloadSilent()
 {	// Download score save xml summary data from website
-	var scoreSaveSummaryURL=LessonLiveDownload()+ runid;// formerly "/lessons/web/share/jq/LessonLiveSample.php?";
+	var scoreSaveSummaryURL=LessonLiveDownload() + '?runid='+runid;// formerly "/lessons/web/share/jq/LessonLiveSample.php?";
 	if (lessonLive.Summary.lesson) {
 		// Request report only if data newer that the LastUpdate.
-		scoreSaveSummaryURL += '/'+lessonLive.Summary.lesson.LastUpdate;
+		scoreSaveSummaryURL += '&lastupdate='+lessonLive.Summary.lesson.LastUpdate;
 	}
 	console.log('Loading data from '+scoreSaveSummaryURL);
 	$.ajax({
