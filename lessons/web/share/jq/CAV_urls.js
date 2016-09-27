@@ -29,6 +29,6 @@ function urlSurvey()
 }
 function LessonLiveDownload()
 {	// 08/25/2016 Download lesson scores to viewer
-	return isLocalFile() ? null  :  "/lesson/lessonlivescores";
+	return isLocalFile() ? null  :  "/lesson/lessonlivesummary";
 }
 //
