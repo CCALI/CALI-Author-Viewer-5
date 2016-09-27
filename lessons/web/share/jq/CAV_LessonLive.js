@@ -3,6 +3,8 @@
 //#############################################################
 
 var lessonLive={
+	isTeacher:false,
+	isStudent:false,
 	Summary:{}, // Aggregated score save user data downloaded from server
 	revealUsers:0,// if true, show user real names, otherwise use the place holders
 	revealResponses:0, // if true, always show scores
@@ -249,10 +251,10 @@ function lessonLiveBar(grade,numSlots,total)
 
 function lessonLiveDownloadSilent()
 {	// Download score save xml summary data from website
-	var scoreSaveSummaryURL=LessonLiveDownload();// "/lessons/web/share/jq/LessonLiveSample.php?";
+	var scoreSaveSummaryURL=LessonLiveDownload()+ runid;// formerly "/lessons/web/share/jq/LessonLiveSample.php?";
 	if (lessonLive.Summary.lesson) {
 		// Request report only if data newer that the LastUpdate.
-		scoreSaveSummaryURL += '?&lastupdate='+lessonLive.Summary.lesson.LastUpdate;
+		scoreSaveSummaryURL += '/'+lessonLive.Summary.lesson.LastUpdate;
 	}
 	console.log('Loading data from '+scoreSaveSummaryURL);
 	$.ajax({
@@ -309,7 +311,9 @@ function llDialogRevealNames()
 
 $(document).ready(function()
 {	// Check if this is a LessonLive presentation.
-	if (1) {
+	if (llMode=='yes')
+	{	// Activate Teacher's LessonLive UI
+		lessonLive.isTeacher=true;
 		$('#llHeaderPage').removeClass('hidestart'); 
 		$('#llPanel').removeClass('hidestart');
 		$('#llRevealNamesCB').change(function(){
@@ -328,6 +332,12 @@ $(document).ready(function()
 			attachLessonLiveReportToPage( )
 		 });
 		lessonLiveDownloadSilent();
+	}
+	else
+	if (llMode=='no')
+	{	// Activate Student's LessonLinkLive watermark.
+		lessonLive.isStudent=true;
+		$('#llHeaderPage').removeClass('hidestart'); 
 	}
 });
 

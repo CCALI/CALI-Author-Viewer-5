@@ -250,7 +250,7 @@ function renderPage()
 	doHelp=null;
 	
 	pageInteractionDIV.text('');
-	pageInteractionDIV.prepend('<div class=llPageInfo/>');
+	pageInteractionDIV.prepend((lessonLive.isTeacher? '<div class="llPageInfo"/>':''));
 	$(".PageSpecificGrade").empty();
 	$(".PageSpecificNav").empty();
 	pageTextDIV.hide().text('');
@@ -416,7 +416,7 @@ function Buttons_layout()
 		fb.letter=page.captions[c];
 		choicesText += '<div class=llButton><img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
 			+iButton(fb.letter, fb.id)
-			+'<div class="llChoice" id="llChoice'+fb.id+'"></div></div> ';
+			+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div></div> ': '');
 		fbText += '<div id=fbText'+fb.id+'></div>';
 	}
 	pageInteractionDIV.append('<div class="ButtonGroup">' + choicesText+ '</div>' +  fbText);
@@ -436,7 +436,7 @@ function ButtonList_layout()
 					+'<span  style="float:left; margin:5px;"><img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'  
 					+iButton(page.details[d].letter, fb.id )+'</span>'
 					+'<div class="ChoiceText">'+page.details[d].text+"</div>"
-					+'<div class="llChoice" id="llChoice'+fb.id+'"></div>'
+					+(lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>' : '')
 					+'<div id=fbText'+fb.id+'></div></div>';
 		else
 			detailsText += '<tr>'
@@ -446,7 +446,7 @@ function ButtonList_layout()
 				+'<td width=100%>'
 					+ '<div class="ChoiceText">'+page.details[d].text+"</div>"
 					+ '<div id=fbText'+fb.id+'></div>' 
-				+'<td nowrap ><div class="llChoice" id="llChoice'+fb.id+'"></div></td>'
+				+(lessonLive.isTeacher ? '<td nowrap ><div class="llChoice" id="llChoice'+fb.id+'"></div></td>' : '')
 				+ '</td>'+ '</tr>';
 
 	}
@@ -474,8 +474,8 @@ function MultiButtonList_layout()
 				var fb=page.feedbacks[fbIndex(c,d)];
 				fb.letter=page.captions[c];
 				detailsText += '<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
-						+iButton(fb.letter, fb.id);
-				detailsText += '<div class="llChoice" id="llChoice'+fb.id+'"></div>';
+						+iButton(fb.letter, fb.id)
+						+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>':'');
 				fbText  += '<div id="fbText'+fb.id+'"></div>';
 			}
 			subQText += '<div class="ButtonGroup">' + detailsText+ '</div>' + fbText;
@@ -494,8 +494,8 @@ function MultiButtonList_layout()
 					var fb=page.feedbacks[fbIndex(c,d)];
 					fb.letter=page.captions[c];
 					detailsText += '<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
-							+iButton(fb.letter, fb.id);
-					detailsText += '<div class="llChoice" id="llChoice'+fb.id+'"></div>';
+							+iButton(fb.letter, fb.id)
+							+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>':'');
 					fbText  += '<div id="fbText'+fb.id+'"></div>';
 				}
 				subQText += '<div class="ButtonGroup" style="text-align: left;">' + detailsText+ '</div>' + fbText + "</td></tr>";

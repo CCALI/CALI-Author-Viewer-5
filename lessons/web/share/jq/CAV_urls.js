@@ -28,7 +28,7 @@ function urlSurvey()
 	return null;
 }
 function LessonLiveDownload()
-{	// 08/25/2016 Download lesson scores to viewer
-	return isLocalFile() ? null  :  "/lesson/lessonlivesummary";
+{	// 08/25/2016 Download lesson scores to viewer: /lessonlink/live/runid/lastupdate
+	return isLocalFile() ? null  :  "/lessonlink/live/";
 }
 //
