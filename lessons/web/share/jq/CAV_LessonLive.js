@@ -265,7 +265,7 @@ function lessonLiveDownloadSilent()
 		  //alert('Error occurred loading the XML from '+this.url+"\n"+textStatus);
 			trace('Download of LessonLive data failed: '+textStatus);
 			clearInterval(lessonLive.DownloadSilentInterval);
-			lessonLive.DownloadSilentInterval=setInterval("lessonLiveDownloadSilent()", 9000); // wait 9 seconds to try again.
+			lessonLive.DownloadSilentInterval=setTimeout ("lessonLiveDownloadSilent()", 9000); // wait 9 seconds to try again.
 		 },
 		success: function(data)
 		{
@@ -281,7 +281,7 @@ function lessonLiveDownloadSilent()
 				console.log('No new LessonLive data');
 			}
 			clearInterval(lessonLive.DownloadSilentInterval);
-			lessonLive.DownloadSilentInterval=setInterval("lessonLiveDownloadSilent()", 5000); // load data again
+			lessonLive.DownloadSilentInterval=setTimeout ("lessonLiveDownloadSilent()", 5000); // load data again
 		}
 	});
 	return false;
