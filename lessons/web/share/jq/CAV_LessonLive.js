@@ -311,7 +311,7 @@ function llDialogRevealNames()
 
 $(document).ready(function()
 {	// Check if this is a LessonLive presentation.
-	if (llMode=='yes')
+	if (llMode=='own')
 	{	// Activate Teacher's LessonLive UI
 		lessonLive.isTeacher=true;
 		$('#llHeaderPage').removeClass('hidestart'); 
@@ -334,7 +334,7 @@ $(document).ready(function()
 		lessonLiveDownloadSilent();
 	}
 	else
-	if (llMode=='no')
+	if (llMode=='stu')
 	{	// Activate Student's LessonLinkLive watermark.
 		lessonLive.isStudent=true;
 		$('#llHeaderPage').removeClass('hidestart'); 

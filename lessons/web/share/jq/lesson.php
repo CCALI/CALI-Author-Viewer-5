@@ -1,4 +1,5 @@
 <?php
+// *** DEV ONLY * THIS IS FOR DEVELOPMENT ON D7.calidev.org
 /** 
  *@file
  *
@@ -48,7 +49,20 @@
 	  $orgname = '';
   }
   
-  $custom="<script> var llMode=\"$llMode\"; var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
+  // Grab llMode from the querystring string on referrer:
+  //	/lessons/web/trt10/jq.php?own   Teacher owner of this LessonLink-show usage data
+  //	/lessons/web/trt10/jq.php?stu   Student user of this LessonLink-show watermark
+  //	/lessons/web/trt10/jq.php?go    Any user of a non-LessonLink-show no LessonLink/Live info at all.
+  $referrer=$_SERVER["HTTP_REFERER"];
+  if (strrpos($referrer,"?own")>0)
+	 $llMode="own";
+  else
+  if (strrpos($referrer,"?stu")>0)
+	 $llMode="stu";
+  else
+	 $llMode="";
+
+  $custom="<script>var llMode=\"$llMode\"; var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
 
   
   // 07/20/2016 SJG Add Piwik tracking including user id ($user->uid), organization name ($orgname) and user's full name ($dispname).
@@ -57,13 +71,13 @@
 <!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];
-  _paq.push(["setDomains", ["*.www.cali.org"]]);
+  _paq.push(["setDomains", ["*.d7.calidev.org"]]);
   _paq.push(["trackPageView"]);
   _paq.push(["enableLinkTracking"]);
   (function() {
     var u="//analytics.cali.org/";
     _paq.push(["setTrackerUrl", u+"piwik.php"]);
-    _paq.push(["setSiteId", 3]);
+    _paq.push(["setSiteId", 1]);
 	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","page"]);
 	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","page"]);
 	 _paq.push(["setCustomVariable", 4, "Run ID", "'.$runid.'","page"]);
@@ -71,7 +85,7 @@
     g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<noscript><p><img src="//analytics.cali.org/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>
+<noscript><p><img src="//analytics.cali.org/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 ';
   

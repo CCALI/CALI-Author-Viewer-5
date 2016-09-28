@@ -414,9 +414,11 @@ function Buttons_layout()
 	{
 		var fb=page.feedbacks[fbIndex(c,0)];
 		fb.letter=page.captions[c];
-		choicesText += '<div class=llButton><img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
+		choicesText += (lessonLive.isTeacher? '<div class=llButton>':'' )
+			+'<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
 			+iButton(fb.letter, fb.id)
-			+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div></div> ': '');
+			+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div> ': '')
+			+(lessonLive.isTeacher? '</div>':'' );
 		fbText += '<div id=fbText'+fb.id+'></div>';
 	}
 	pageInteractionDIV.append('<div class="ButtonGroup">' + choicesText+ '</div>' +  fbText);
