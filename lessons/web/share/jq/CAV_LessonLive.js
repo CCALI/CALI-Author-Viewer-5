@@ -73,6 +73,46 @@ function attachLessonLiveReportToPage( )
 			lessonLiveAttachOne(pageLL, 1,1,'' );// RIGHT
 			lessonLiveAttachOne(pageLL, 1,2,'' );// WRONG
 		}	
+		else if (page.type=="Text Entry" && page.style=="Text Short Answer")
+		{	// Short answer can have 1 or more matches plus the 'no match'.
+			if (lessonLive.revealScores) {
+				var matchHTML='';
+				for (var r=0;(r<page.textMatches.length);r++)
+				{
+					var match = page.textMatches[r];
+					var matchInfo='';
+					switch (match.matchstyle)
+					{
+						case "MatchContainsAny": //Answer must contain one of the matches.
+							matchInfo="matches one ";
+							break;
+						case "MatchContainsAll":  //Answer must contain each of the matches.
+							matchInfo="matches all ";
+							break;
+						case "MatchContainsAllInOrder":  //Answer must contain each of the matches in order
+							matchInfo="matches all in order";
+							break;
+						case "MatchContainsNone": // Contains None: Answer must contain NONE of these matches.
+							matchInfo="matches none";
+							break;
+						case "MatchExact":
+						case "": // Answer must match exactly one of the matches.
+							matchInfo="matches exactly";
+							break;
+						default:
+							matchInfo='';
+					}
+					var t=r+1;
+					pageLL.text[t]=match.grade; // store grade for display in user column
+					matchHTML+='<tr><td>' + lessonLiveGradeIconHTML(match.grade)+'</td><td>'+matchInfo+'</td><td>'
+						+ '<ul><li>"'+match.matchlist.split(DEL.toUpperCase()).join('"<li>"') +'</td><td>' + lessonLiveAttachOne(pageLL, 1,t,'')+'</td></tr>';
+				}
+				pageLL.text[0]='W';// no match is Wrong
+				matchHTML+='<tr><td>' +lessonLiveGradeIconHTML('WRONG') + '</td><td>Any other response</td><td>&nbsp;</td><td>' + lessonLiveAttachOne(pageLL,  1,0,'')+'</td></tr>';
+				LessonLivePageInfo+='<table class=llShortAnswerMatches>'+matchHTML+'</table>';
+					
+			}
+		}	
 		else
 		{	// Any unhandled page type gets a generic 'LessonLive not available for this type'. 
 			LessonLivePageInfo='LessonLive data not presented for this page type.'
@@ -168,6 +208,11 @@ function attachLessonLiveReportToPage( )
 	//$('.PageInteraction .llPageInfo').unbind('click').click(function(){$('#llPanel').toggle();}).html(LessonLivePageInfo);
 }
 
+function lessonLiveGradeIconHTML(grade)
+{
+	return '<img  src=' + gradeIcon(grade) +' width="20" height="21" class="GradeIcon"/>';
+}
+
 function lessonLiveAttachOne(pageLL, subQ, choice,domid )
 {	// Lookup subq/choice info for given a page and update the html ID with %/progress bar.
 	var numUsers=0; // users giving this answer
@@ -216,7 +261,10 @@ function lessonLiveAttachOne(pageLL, subQ, choice,domid )
 		+'<div class=llBar>'+html+'</div>'// xstyle="width:'+(total)+'px;"
 		+(lessonLive.revealScores? percent :'') +'% ' + (lessonLive.revealScores?numUsers:'-')
 		;
-	$('#'+domid).html(html); 
+	if (domid!='') {
+		$('#'+domid).html(html); 
+	}
+	return html;
 }
 
 

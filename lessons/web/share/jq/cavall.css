@@ -1289,6 +1289,19 @@ div.flashcard.answer{
 	margin: 1px;
 	padding: 1px;
 }
+.llShortAnswerMatches {
+	margin-left: auto;
+	margin-right: auto;
+}
+.llShortAnswerMatches * tr {
+	vertical-align: middle;
+}
+.llShortAnswerMatches * td{
+	text-align: left;
+	border: 1px solid #fff;
+	padding: 5px;
+	margin: 2px;
+}
 .llUserName {	
 	margin: 1px;
 	padding: 1px;
