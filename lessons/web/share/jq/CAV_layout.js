@@ -323,7 +323,7 @@ function renderPage()
 	}
 	
 	
-	$('.ScorePoints').text(page.scorePoints == "" ? "-" : page.scorePoints); 
+	$('.ScorePoints').text(page.scorePoints === "" ? "-" : page.scorePoints); 
 
 	
 	$(".toggler").unbind('click').click(function() {
