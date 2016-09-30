@@ -254,6 +254,7 @@ function renderPage()
 	$(".PageSpecificGrade").empty();
 	$(".PageSpecificNav").empty();
 	pageTextDIV.hide().text('');
+	
 
 	if (textBuffer!="")
 	{
@@ -322,6 +323,7 @@ function renderPage()
 	}
 	
 	
+	$('.ScorePoints').text(page.scorePoints == "" ? "-" : page.scorePoints); 
 
 	
 	$(".toggler").unbind('click').click(function() {
@@ -854,12 +856,13 @@ function FlashCards_layout()
 		$(this).find("div.answer").slideToggle('fast');
 		return false;
 	});	
-	
+	page.scorePoints="";
 }
 
 function Hangman_layout()
 {	// not implemented fully, just display for now.
 	pageInteractionDIV.append(page.topic +"<ul><li>"+ page.phrases.join("<li>")+"</ul>");
+	page.scorePoints="";
 }
 
 function RadioButtons_grade(gaveup)

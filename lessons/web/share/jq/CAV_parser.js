@@ -212,11 +212,24 @@ function parsePageXML(pageXML)
 		if (page.pictureSrc==null) page.pictureSrc="img/AudioImage.jpg";
 	}
 	page.scoring = pageXML.attr("SCORING");
-	if (page.scoring==null)page.scoring="";
+	if (page.scoring==null){
+		page.scoring="";
+	}
 	page.scoredQuestion = (page.scoring!="");
-	if ((page.type == "Book Page" && page.hotspots.length==0) || page.style=="Text Essay")
+	if ((page.type == "Book Page" && page.hotspots.length==0) || page.style=="Text Essay" || page.type=="Topics") 
 	{	//Book page with no hotspots and essays will never be scored (but will be recorded for time)
 		page.scoredQuestion=false;
+		page.scorePoints="";
+	}
+	else
+	{
+		if (page.scoredQuestion)
+		{	// Scored question, number of points is 1 unless it's MultiSet.
+			page.scorePoints = (page.style=="Choose MultiButtons") ? page.details.length : 1;
+		}
+		else{
+			page.scorePoints = 0;
+		}
 	}
 		
 		

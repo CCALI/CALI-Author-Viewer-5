@@ -125,7 +125,6 @@ function downloadScore()
 	});
 }
 
-
 function uploadScoreDone(success,msg)
 {	// Called when Score has been saved or failed. 
 	$(".UploadScore1").show();

@@ -1316,6 +1316,16 @@ div.flashcard.answer{
 	padding: 5px;
 	width: 50%;
 }
+.ScorePoints {
+	border: 1px solid #88f;
+	border-radius: 50%;
+	color: #88f;
+	display: inline-block;
+	font-weight: bold;
+	font-size: 80%;
+	width: 1em;
+   padding: 1px;
+}
 
 .hidestart { /* hide some elements initially */
 	display: none;
