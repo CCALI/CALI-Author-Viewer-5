@@ -85,7 +85,7 @@ function locationForHash()
 function setHash(name)
 {
 	if (getHash(locationForHash())!=name)
-		locationForHash().hash=name;
+		locationForHash().hash=escape(name);
 }
 
 
