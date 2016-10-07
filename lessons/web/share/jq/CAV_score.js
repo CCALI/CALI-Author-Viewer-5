@@ -251,7 +251,7 @@ function uploadScoreSilent()
 	   success: function(data)
 		{	// 03/02/2015 On success, reset upload rate to 5 seconds.
 			uploadingScore=false;
-			trace("upload success:");
+			//trace("upload success:");
 			$('#ScoreSaveError').addClass('hidestart');
 			lastSavedData=newScoreData;
 			// Success

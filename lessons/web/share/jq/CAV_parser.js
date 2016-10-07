@@ -219,7 +219,12 @@ function parsePageXML(pageXML)
 	if ((page.type == "Book Page" && page.hotspots.length==0) || page.style=="Text Essay" || page.type=="Topics") 
 	{	//Book page with no hotspots and essays will never be scored (but will be recorded for time)
 		page.scoredQuestion=false;
-		page.scorePoints="";
+		if (page.style=="Text Essay") {
+			page.scorePoints=0;
+		}
+		else{
+			page.scorePoints="";
+		}
 	}
 	else
 	{

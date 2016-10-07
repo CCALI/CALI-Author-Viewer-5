@@ -178,10 +178,9 @@ function textWithMedia(pageText, page)
 	if (page.pictureSrc!=null){
 		var src=page.pictureSrc;
 		//if ($.browser.msie) src+= "?"+Math.random(); 
-		trace('attaching image '+src);
+		//trace('attaching image '+src);
 		$('#picloader').attr('src','img/ajax-loader.gif').unbind('load');
 		$('#picloader').load(pictureLoaded).attr('src',src);
-//		trace('w='+$('#picloader')[0].width);
 	}
 }
 
@@ -189,9 +188,7 @@ function textWithMedia(pageText, page)
 function pictureLoaded()
 {	// When picture finally loads (and we have width/height), attach hotspots.
 	page.picWidth=this.width;
-	trace("pictureLoaded :" + $(this).attr('src') + ", "+this.width+"x"+this.height+" xml="+page.srcPicWidth);
-	//$('#picture').css('width','100%').attr('src',$(this).attr('src'));
-	//$('#picture').css({'max-width':this.width,'width':'100%','max-height':this.height,'height':'100%'}).attr('src',$(this).attr('src'));
+	//trace("pictureLoaded :" + $(this).attr('src') + ", "+this.width+"x"+this.height+" xml="+page.srcPicWidth);
 
 	$('#picture').css({'width':'100%' }).attr('src',$(this).attr('src'));
 	$('#picture').parent().css({'max-width':this.width,'max-height':this.height});
@@ -207,7 +204,7 @@ function updateHotSpots()
 	var SC=scaledWidth/page.picWidth;
 	if (lastSC==SC) return;
 	//trace("image size",img[0].offsetWidth,img[0].offsetHeight);
-	trace("updateHotSpots",scaledWidth,page.picWidth,lastSC,SC);
+	//trace("updateHotSpots",scaledWidth,page.picWidth,lastSC,SC);
 	//if (SC>1) $(img).removeAttr('width');
 	lastSC=SC;
 	if (SC<.95) $('.zoomin').show(); else $('.zoomin').hide();
@@ -322,9 +319,23 @@ function renderPage()
 		}
 	}
 	
-	
-	$('.ScorePoints').text(page.scorePoints === "" ? "-" : page.scorePoints); 
-
+	var unscored=(page.scorePoints == 0);
+	var pageScoreTitle="";
+	if (page.scorePoints==="")
+		pageScoreTitle='This page does not affect your score.';
+	else
+	if (page.scorePoints===0)
+		pageScoreTitle='Your answer to this question is recorded but does not affect your score.';
+	else
+	if (page.scorePoints==1)
+		pageScoreTitle='This question is worth 1 point.';
+	else
+		pageScoreTitle='These questions are worth '+page.scorePoints+' points.';
+	$('.ScorePoints').text(page.scorePoints).hide();//toggle(!unscored);
+	if (!unscored) {
+		$('.ScorePoints').delay(500).fadeIn(500);
+	}
+	$('.PageScore').toggleClass('unscored',unscored).attr('title', pageScoreTitle);
 	
 	$(".toggler").unbind('click').click(function() {
 		$(this).next().toggle('fast');

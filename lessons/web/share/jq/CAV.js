@@ -277,7 +277,7 @@ function patchLink()
 function gotoPage(pageName, skipCA)
 {	// Load page with given id. 
 	// null does nothing. blank, topic page, or missing page, always points to table of contents.
-	trace("gotoPage",pageName);
+	//trace("gotoPage",pageName);
 	if (pageName==null) return;
 	if (pageName=="null") return;
 	if (pageName=='')

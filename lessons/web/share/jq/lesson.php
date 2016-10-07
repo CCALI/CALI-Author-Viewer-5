@@ -11,6 +11,7 @@
  * 07/25/2016 SJG fix Facstaff role test
  * 09/12/2016 SJG add CALI Staff as faculty role test
  * 09/27/2016 SJG add LessonLive link info
+ * 10/07/2016 SJG add betatester role
 */
   $template=file_get_contents("lesson.html");
   global $user;
@@ -38,6 +39,7 @@
   $firstname = render($firstname_value);
   // 09/12/2016 Show Faculty options for Facstaff or CALI Staff
   $authmode=(in_array('Facstaff', $roles) || in_array('CALI Staff', $roles)) ? 1 : 0;
+  $betamode=(in_array('betatester', $roles)) ? 1 : 0;
   if (isset($_SESSION['resume']) && $_SESSION['resume']==1)
 	  $resumescore="/lesson/scoreload/".dechex($runid*47);
   else
@@ -54,14 +56,23 @@
   //	/lessons/web/trt10/jq.php?stu   Student user of this LessonLink-show watermark
   //	/lessons/web/trt10/jq.php?go    Any user of a non-LessonLink-show no LessonLink/Live info at all.
   $referrer=$_SERVER["HTTP_REFERER"];
-  if (strrpos($referrer,"?own")>0)
+  if (strrpos($referrer,"?own")>0){
 	 $llMode="own";
+  }
   else
-  if (strrpos($referrer,"?stu")>0)
+  if (strrpos($referrer,"?stu")>0){
 	 $llMode="stu";
-  else
+  }
+  else{
 	 $llMode="";
+  }
 
+	if ($betamode!=1)
+	{	// If not in beta mode, deactivate any beta features like LessonLive for Teacher.
+		if ($llMode=="own")
+			$llMode='';
+	}
+	
   $custom="<script>var llMode=\"$llMode\"; var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
 
   

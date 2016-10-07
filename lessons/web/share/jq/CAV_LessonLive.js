@@ -169,10 +169,10 @@ function attachLessonLiveReportToPage( )
 	// Build list of users and their scores.
 	html='';
 	if (lessonLive.revealUsers) {
-		lessonLive.Summary.users.sort( function(a,b){return icaseCompare(a.email,b.email);}); // Sort users by email
+		//lessonLive.Summary.users.sort( function(a,b){return icaseCompare(a.email,b.email);}); // Sort users by email
 	}
 	else{
-		lessonLive.Summary.users.sort( function(a,b){return a.userid - b.userid ;}); // Sort users by email
+		//lessonLive.Summary.users.sort( function(a,b){return a.userid - b.userid ;}); // Sort users by email
 	}
 	for (var u=0;u<lessonLive.Summary.users.length;u++)
 	{	// For each user, figure out their answers and grade.
@@ -363,6 +363,7 @@ $(document).ready(function()
 	{	// Activate Teacher's LessonLive UI
 		lessonLive.isTeacher=true;
 		$('#llHeaderPage').removeClass('hidestart'); 
+		$('#llLiveLogo').removeClass('hidestart'); 
 		$('#llPanel').removeClass('hidestart');
 		$('#llRevealNamesCB').change(function(){
 			if ($(this).is(':checked'))
@@ -386,6 +387,7 @@ $(document).ready(function()
 	{	// Activate Student's LessonLinkLive watermark.
 		lessonLive.isStudent=true;
 		$('#llHeaderPage').removeClass('hidestart'); 
+		$('#llLinkLogo').removeClass('hidestart'); 
 	}
 });
 

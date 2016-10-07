@@ -1317,14 +1317,20 @@ div.flashcard.answer{
 	width: 50%;
 }
 .ScorePoints {
-	border: 1px solid #88f;
+	border: 0px solid #88f;
 	border-radius: 50%;
 	color: #88f;
 	display: inline-block;
-	font-weight: bold;
+	font-weight: normal;
 	font-size: 80%;
 	width: 1em;
    padding: 1px;
+}
+.PageScore {
+	cursor: pointer;
+}
+.PageScore.unscored{
+	opacity: 0.5;
 }
 
 .hidestart { /* hide some elements initially */
