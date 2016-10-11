@@ -253,7 +253,7 @@ function uploadScoreSilent()
 			uploadingScore=false;
 			//trace("upload success:");
 			$('#ScoreSaveError').addClass('hidestart');
-			lastSavedData=newScoreData;
+			lastSavedData=xmlDocument;// remember data uploaded, in case newScoreData changed during upload;
 			// Success
 			clearInterval(uploadScoreSilentInterval);
 			uploadScoreSilentInterval=setInterval("uploadScoreSilent()", 5000);

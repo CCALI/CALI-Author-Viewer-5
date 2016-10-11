@@ -50,7 +50,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$lesson['Organization']=$row['orgname'];
 		$lesson['Semester']=$row['semester'];
 		$lesson['Teacher Name']=$row['name'];
-		$lesson['Teacher ID']=$row['uid'];
+		$lesson['Teacher ID']= $ownerid = $row['uid'];
 		$lesson['Course Name']=$row['coursename'];
 		$lesson['Course ID']=$row['courseid'];
 		$lesson['Course Created Date']=$row['createdate'];
@@ -64,10 +64,26 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$SQL="select count(*) as updated from LessonRun where nid=$nid and courseid=$courseid and scoredate > \"$lastupdate\" ";
 		$query=new QueryMySQLSimple($SQL);
 		$row=$query->fetchRow();
-		if ($row['updated']==0)
+		$updatedCount = $row['updated'];
+		if ($row['updated'] ==0)
 		{
-			echo '{}';
-			return;
+			
+			if (0)
+			{	// Debugging aid: list of all scoredates
+				$SQL="select scoredate from LessonRun where nid=$nid and courseid=$courseid";
+				$query=new QueryMySQLSimple($SQL);
+				$runDates=Array();
+				while($row=$query->fetchRow())
+				{
+					array_push($runDates, $row['scoredate']);
+				}
+			}
+			
+			return json_encode(array("lastUpdate" => $lastupdate,
+										  "updatedCount"=> $updatedCount,
+										  "date"=> date("Y-m-d H:i:s"),
+										  "rundates"=>$runDates
+										  ));
 		}
 	}
 
@@ -89,145 +105,152 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	while($row=$query->fetchRow())
 	{
 		$uid=intval($row['uid']);
-		$savedate=$row['scoredate'];
-		if ($savedate>$maxdate){
-			$maxdate=$savedate;
-		}
-		//echo $savedate.' ';
-		
-		$xml = $row['responses']; 
-		$bytes += strlen($xml);// just info gathering
-		
-		// Map drupal user id to simpler user id.
-		if (!isset($users[$uid]))
+		if ($uid == $ownerid)
 		{
-			$users[$uid]= ($usercount++);
+			// skip owner id. ideally use query WHERE
 		}
-		$uid = $users[$uid];
-		
-		$p = xml_parser_create();
-		xml_parse_into_struct($p, $xml, $vals);// $index);
-		
-		for($i=0;$i<count($vals);$i++)
+		else
 		{
-			switch ($vals[$i]['tag'])
-			{
-				case 'NAME':
-					$qname=$vals[$i]['value'];
-					break;
-				case 'SUBQ':
-					$qsub=intval($vals[$i]['value']);
-					break;
-				case 'TYPE':
-					$qtype=$vals[$i]['value'];
-					break;
-				case 'GRADE':
-					$qgrade=strtolower($vals[$i]['value']);
-					break;
-				case 'TIME':
-					//$qtime=intval($vals[$i]['value']);
-					break;
-				case 'TEXT':
-					$qanswer=$vals[$i]['value'];
-					break;
-				case 'ID': // question answer id: for multiple choice then 0=A, 1=B, etc.
-					$qaid=$vals[$i]['value'];
-					break;
-				case 'Q':
-					if ($vals[$i]['type']=='open')
-					{	// on opening <Q we clear values
-						$qname='?';
-						$qsub=1;
-						$qgrade='';
-						$qaid='';
-						$qtype='?';
-						$qanswer='';
-					}
-					else
-					{	// on close /Q> we tally.
-						
-						if ($qtype!='Text Entry/Text Essay')// discard essay to avoid clutter for now.
-						
-						if ($qgrade!=''){// discard unscored questions
-							
-						$qnameActual=$qname;
-						$qname = strtoupper($qname);// just incase a page name has case changed, use case-insentive name as index.
-							
-							
-						if (empty($pages[$qname]))
-						{	// add a unique lesson/page tuple
-							$pages[$qname]=array('type'=> $qtype,'pagename'=>$qnameActual);
-						}
-							
-						if (empty($pages[$qname][$qsub]))
-						{
-							$pages[$qname][$qsub] = array( 'users'=>array(), 'right'=>0, 'wrong'=>0,'total'=>0 );
-						}
-						
-						if (!isset($pages[$qname][$qsub]['users'][$uid]))
-						{	// collect only first attempt for this user/question/lesson/subquestion tuple
-							$pages[$qname][$qsub]['users'][$uid]=1;
-							
-							if ($qtype == 'Text Entry/Text Select')
-							{	// For now, discard text selections since it's rather big. 
-								$qanswer='';
-							}
-								
-							$text = trim($qanswer);// preserve textual answer like for short answer, essay.
-	
-							if ($qaid!='') // $qtype=='Multiple Choice/Choose List' || $qtype=='Multiple Choice/Choose Buttons')
-							{	// Force multiple choice types to just have answer index
-								if ($qtype =='Book Page/'){
-									$qanswer =  $qaid; //book page hotspots are 1-based (oops)
-								}
-								else
-								if  ($qtype=='Multiple Choice/Choose List' || $qtype=='Multiple Choice/Choose Buttons' || $qtype=='Multiple Choice/Choose MultiButtons')
-								{ // other answers are 0-based.
-									$qanswer = (1+$qaid);
-								}
-								elseif ( $qtype=='Text Entry/Text Short Answer')
-								{// short answer are 1-based and index 0 are 'no matches'
-									$qanswer = $qaid;
-									$text= ''; // For now, don't include the user's actual Text Short Answers
-								}
-								else
-								{	// For questions that are right/wrong like drag,checkboxes.
-									if ($qgrade=="right")
-										$qanswer=1;
-									else
-										$qanswer=2;
-									//$qanswer="IF".$qgrade;
-								}
-							}
-							else
-							{
-								$qanswer = 1;// not sure what this is, happens in non CALI lessons. 
-							}
-							
-							
-							if (!isset($pages[$qname][$qsub][$qanswer]))
-							{	// add this answer
-								$pages[$qname][$qsub][$qanswer] = array('grade'=>$qgrade,'users'=> array(),'text'=>array()); 
-							}
-							// tally user answers for this choice.
-							$pages[$qname][$qsub][$qanswer]['users'][$uid]=1;
-	
-							// store unique answers
-							$pages[$qname][$qsub][$qanswer]['text'][$text]=true;
-							
-							if ($qgrade!='') // ($qgrade=='RIGHT'||$qgrade=='WRONG')
-							{
-								$pages[$qname][$qsub]['total']++;
-								$pages[$qname][$qsub][$qgrade]++;
-								
-							} 
-						}
-						}
-					}
-					break;
+			$savedate=$row['scoredate'];
+			if ($savedate>$maxdate){
+				$maxdate=$savedate;
 			}
+			//echo $savedate.' ';
+			
+			$xml = $row['responses']; 
+			$bytes += strlen($xml);// just info gathering
+			
+			// Map drupal user id to simpler user id.
+			if (!isset($users[$uid]))
+			{
+				$users[$uid]= ($usercount++);
+			}
+			$uid = $users[$uid];
+			
+			$p = xml_parser_create();
+			xml_parse_into_struct($p, $xml, $vals);// $index);
+			
+			for($i=0;$i<count($vals);$i++)
+			{
+				switch ($vals[$i]['tag'])
+				{
+					case 'NAME':
+						$qname=$vals[$i]['value'];
+						break;
+					case 'SUBQ':
+						$qsub=intval($vals[$i]['value']);
+						break;
+					case 'TYPE':
+						$qtype=$vals[$i]['value'];
+						break;
+					case 'GRADE':
+						$qgrade=strtolower($vals[$i]['value']);
+						break;
+					case 'TIME':
+						//$qtime=intval($vals[$i]['value']);
+						break;
+					case 'TEXT':
+						$qanswer=$vals[$i]['value'];
+						break;
+					case 'ID': // question answer id: for multiple choice then 0=A, 1=B, etc.
+						$qaid=$vals[$i]['value'];
+						break;
+					case 'Q':
+						if ($vals[$i]['type']=='open')
+						{	// on opening <Q we clear values
+							$qname='?';
+							$qsub=1;
+							$qgrade='';
+							$qaid='';
+							$qtype='?';
+							$qanswer='';
+						}
+						else
+						{	// on close /Q> we tally.
+							
+							if ($qtype!='Text Entry/Text Essay')// discard essay to avoid clutter for now.
+							
+							if ($qgrade!=''){// discard unscored questions
+								
+							$qnameActual=$qname;
+							$qname = strtoupper($qname);// just incase a page name has case changed, use case-insentive name as index.
+								
+								
+							if (empty($pages[$qname]))
+							{	// add a unique lesson/page tuple
+								$pages[$qname]=array('type'=> $qtype,'pagename'=>$qnameActual);
+							}
+								
+							if (empty($pages[$qname][$qsub]))
+							{
+								$pages[$qname][$qsub] = array( 'users'=>array(), 'right'=>0, 'wrong'=>0,'total'=>0 );
+							}
+							
+							if (!isset($pages[$qname][$qsub]['users'][$uid]))
+							{	// collect only first attempt for this user/question/lesson/subquestion tuple
+								$pages[$qname][$qsub]['users'][$uid]=1;
+								
+								if ($qtype == 'Text Entry/Text Select')
+								{	// For now, discard text selections since it's rather big. 
+									$qanswer='';
+								}
+									
+								$text = trim($qanswer);// preserve textual answer like for short answer, essay.
+		
+								if ($qaid!='') // $qtype=='Multiple Choice/Choose List' || $qtype=='Multiple Choice/Choose Buttons')
+								{	// Force multiple choice types to just have answer index
+									if ($qtype =='Book Page/'){
+										$qanswer =  $qaid; //book page hotspots are 1-based (oops)
+									}
+									else
+									if  ($qtype=='Multiple Choice/Choose List' || $qtype=='Multiple Choice/Choose Buttons' || $qtype=='Multiple Choice/Choose MultiButtons')
+									{ // other answers are 0-based.
+										$qanswer = (1+$qaid);
+									}
+									elseif ( $qtype=='Text Entry/Text Short Answer')
+									{// short answer are 1-based and index 0 are 'no matches'
+										$qanswer = $qaid;
+										$text= ''; // For now, don't include the user's actual Text Short Answers
+									}
+									else
+									{	// For questions that are right/wrong like drag,checkboxes.
+										if ($qgrade=="right")
+											$qanswer=1;
+										else
+											$qanswer=2;
+										//$qanswer="IF".$qgrade;
+									}
+								}
+								else
+								{
+									$qanswer = 1;// not sure what this is, happens in non CALI lessons. 
+								}
+								
+								
+								if (!isset($pages[$qname][$qsub][$qanswer]))
+								{	// add this answer
+									$pages[$qname][$qsub][$qanswer] = array('grade'=>$qgrade,'users'=> array(),'text'=>array()); 
+								}
+								// tally user answers for this choice.
+								$pages[$qname][$qsub][$qanswer]['users'][$uid]=1;
+		
+								// store unique answers
+								$pages[$qname][$qsub][$qanswer]['text'][$text]=true;
+								
+								if ($qgrade!='') // ($qgrade=='RIGHT'||$qgrade=='WRONG')
+								{
+									$pages[$qname][$qsub]['total']++;
+									$pages[$qname][$qsub][$qgrade]++;
+									
+								} 
+							}
+							}
+						}
+						break;
+				}
+			}
+			xml_parser_free($p);
 		}
-		xml_parser_free($p);
 	}
 	
 	$lesson['LastUpdate']=$maxdate; // indicate last saved date so later queries can return NOOP if there's no new data.

@@ -222,7 +222,7 @@ function lessonLiveAttachOne(pageLL, subQ, choice,domid )
 	var html=''; // construct graduated answer count bar (likely a CSS shortcut for this)
 	var total = pageLL.total;
 	var percent;
-	if (total>0 && pageLL[subQ][choice])
+	if (total>0 && pageLL[subQ] && pageLL[subQ][choice])
 	{
 		var grade=pageLL[subQ][choice].grade;
 		var text = jQuery.trim( pageLL.text[choice].substr(0,1));
