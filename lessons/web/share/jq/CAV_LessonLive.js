@@ -6,9 +6,9 @@ var lessonLive={
 	isTeacher:false,
 	isStudent:false,
 	Summary:{}, // Aggregated score save user data downloaded from server
-	revealUsers:0,// if true, show user real names, otherwise use the place holders
-	revealResponses:0, // if true, always show scores
-	revealScores:0, // when true, show score breakdowns for page
+	revealUsers:false,// if true, show user real names, otherwise use the place holders
+	revealResponses:false, // if true, always show scores
+	revealScores:false, // when true, show score breakdowns for page
 	pagename:'', // name of current page being displayed
 	DownloadSilentInterval:0 // Interval downloader of JSON
 }
@@ -20,132 +20,147 @@ function attachLessonLiveReportToPage( )
 	if (!page) return;
 	if (!lessonLive.Summary.lesson) return; // No lesson live, do nothing. 
 	if (!lessonLive.Summary.pages) return;
-	if (page.name!=lessonLive.pagename) {
+	if (page.name!=lessonLive.pagename)
+	{
 		lessonLive.pagename=page.name;
 		lessonLive.revealScores=false;
 	}
-	if (lessonLive.revealResponses) {
+	if (lessonLive.revealUsers)
+	{
+		lessonLive.revealResponses=true;
+	}
+	if (lessonLive.revealResponses)
+	{
 		lessonLive.revealScores=true;
 	}
 	
 	var LessonLivePageInfo='';// Prompt to teacher about lesson live info for this page, such as if lesson live doesn't apply, or total students answered.
 	var pageLL = lessonLive.Summary.pages[page.name];
-	if (pageLL )
-	{	// At least 1 student has viewed this page. 
-		LessonLivePageInfo= 'Students responded: <br/>';
-		$('.llChoice').text('').append('LessonLive');
-		pageLL.marks=[];// right/wrong for each user
-		pageLL.answer=[];// answer choice for each user
-		pageLL.text=[];// text of the choices
-		// Add custom percent/progress bars per question type. 
-		if (page.type=="Multiple Choice" && page.style=="Choose Buttons")
-		{	// Tally results for each button, eg., Yes, No, Maybe
-			for (var b=0;b<page.captions.length;b++)
-			{
-				pageLL.text[b+1]=page.captions[b];
-				lessonLiveAttachOne(pageLL,1,b+1,'llChoice'+b+'_0');
-			}
-		}
-		else if (page.type=="Multiple Choice" && page.style=="Choose List") 
-		{	// Tally results for each choice, eg., A, B, C, D
-			for (var d=0;d<page.details.length;d++)
-			{
-				pageLL.text[ d+1 ]= page.details[d].letter;
-				lessonLiveAttachOne(pageLL,1,d+1,'llChoice0_'+d);
-			}
-		}
-		else if (page.type=="Multiple Choice" && page.style=="Choose MultiButtons")
-		{	// Tally results for each button and each choice, eg., A-Yes, A-No, B-Yes, B-No, etc. 
-			for (var d=0;d<page.details.length;d++) {
-				for (var c=0;c<page.captions.length;c++)
-				{
-					pageLL.text[c+1]=page.captions[c];
-					lessonLiveAttachOne(pageLL,d+1,c+1,'llChoice'+c+'_'+d);
-				}
-			}
-		}
-		else if (page.type=="Multiple Choice"  || page.type=="Prioritize")
-		{	// Types that are merely Right or Wrong.
-			LessonLivePageInfo='LessonLive data for this page type only records a right or wrong response.'
-			// Handle te question types which are simply marked Right or Wrong.
-			pageLL.text[1]='R'; // User list caption is R)ight and W)rong.
-			pageLL.text[2]='W';
-			lessonLiveAttachOne(pageLL, 1,1,'' );// RIGHT
-			lessonLiveAttachOne(pageLL, 1,2,'' );// WRONG
-		}	
-		else if (page.type=="Text Entry" && page.style=="Text Short Answer")
-		{	// Short answer can have 1 or more matches plus the 'no match'.
-			if (lessonLive.revealScores) {
-				var matchHTML='';
-				for (var r=0;(r<page.textMatches.length);r++)
-				{
-					var match = page.textMatches[r];
-					var matchInfo='';
-					switch (match.matchstyle)
-					{
-						case "MatchContainsAny": //Answer must contain one of the matches.
-							matchInfo="matches one ";
-							break;
-						case "MatchContainsAll":  //Answer must contain each of the matches.
-							matchInfo="matches all ";
-							break;
-						case "MatchContainsAllInOrder":  //Answer must contain each of the matches in order
-							matchInfo="matches all in order";
-							break;
-						case "MatchContainsNone": // Contains None: Answer must contain NONE of these matches.
-							matchInfo="matches none";
-							break;
-						case "MatchExact":
-						case "": // Answer must match exactly one of the matches.
-							matchInfo="matches exactly";
-							break;
-						default:
-							matchInfo='';
-					}
-					var t=r+1;
-					pageLL.text[t]=match.grade; // store grade for display in user column
-					matchHTML+='<tr><td>' + lessonLiveGradeIconHTML(match.grade)+'</td><td>'+matchInfo+'</td><td>'
-						+ '<ul><li>"'+match.matchlist.split(DEL.toUpperCase()).join('"<li>"') +'</td><td>' + lessonLiveAttachOne(pageLL, 1,t,'')+'</td></tr>';
-				}
-				pageLL.text[0]='W';// no match is Wrong
-				matchHTML+='<tr><td>' +lessonLiveGradeIconHTML('WRONG') + '</td><td>Any other response</td><td>&nbsp;</td><td>' + lessonLiveAttachOne(pageLL,  1,0,'')+'</td></tr>';
-				LessonLivePageInfo+='<table class=llShortAnswerMatches>'+matchHTML+'</table>';
-					
-			}
-		}	
-		else
-		{	// Any unhandled page type gets a generic 'LessonLive not available for this type'. 
-			LessonLivePageInfo='LessonLive data not presented for this page type.'
-		}	
-		
-		if (!lessonLive.revealScores)
-		{	// Build list of user right/wrong/unanswered ticks - indicates how many students responded so far to this page.
-			var marks='';
-			for (var u=0;u<pageLL.marks.length;u++)
-			{
-				var grade;
-				if (! pageLL.marks[u ]) {
-					grade='none'; // a gray placeholder for the user
-					pageLL.marks[u ]=grade;
-				}
-				else
-				if (lessonLive.revealScores)
-					grade=pageLL.marks[u ]; // right,wrong,maybe,info response
-				else
-					grade='answered';
-				marks += '<span class="llBarChunk answer '+ grade + '"/>';
-			}
-			LessonLivePageInfo = LessonLivePageInfo + '<div class=llChoice>'+marks+' ' +  pageLL.total + ' / ' + lessonLive.Summary.users.length + '</div>';
-		}
-	}
-	else
-	{	// Page not seen by any student yet.
-		LessonLivePageInfo='';
+	if (!pageLL )
+	{	// if no students viewed page yet, create placeholder.
+		pageLL = lessonLive.Summary.pages[page.name] = {total:0};
 	}
 	
-	if (LessonLivePageInfo!='') {
+	var pageTypeTracksScores=true;
+	var pageTypeTracksData = true;
+
+	LessonLivePageInfo= 'Students responded: <br/>';
+	$('.llChoice').text('').append('LessonLive');
+	pageLL.marks=[];// right/wrong for each user
+	pageLL.answer=[];// answer choice for each user
+	pageLL.text=[];// text of the choices
+	// Add custom percent/progress bars per question type. 
+	if (page.type=="Multiple Choice" && page.style=="Choose Buttons")
+	{	// Tally results for each button, eg., Yes, No, Maybe
+		for (var b=0;b<page.captions.length;b++)
+		{
+			pageLL.text[b+1]=page.captions[b];
+			lessonLiveAttachOne(pageLL,1,b+1,'llChoice'+b+'_0');
+		}
+	}
+	else if (page.type=="Multiple Choice" && page.style=="Choose List") 
+	{	// Tally results for each choice, eg., A, B, C, D
+		for (var d=0;d<page.details.length;d++)
+		{
+			pageLL.text[ d+1 ]= page.details[d].letter;
+			lessonLiveAttachOne(pageLL,1,d+1,'llChoice0_'+d);
+		}
+	}
+	else if (page.type=="Multiple Choice" && page.style=="Choose MultiButtons")
+	{	// Tally results for each button and each choice, eg., A-Yes, A-No, B-Yes, B-No, etc. 
+		for (var d=0;d<page.details.length;d++) {
+			for (var c=0;c<page.captions.length;c++)
+			{
+				pageLL.text[c+1]=page.captions[c];
+				lessonLiveAttachOne(pageLL,d+1,c+1,'llChoice'+c+'_'+d);
+			}
+		}
+	}
+	else if (page.type=="Multiple Choice"  || page.type=="Prioritize" || page.style=='Text Select')
+	{	// Types that are merely Right or Wrong.
+		LessonLivePageInfo='LessonLive data for this page type only records a right or wrong response.'
+		// Handle te question types which are simply marked Right or Wrong.
+		pageLL.text[1]='R'; // User list caption is R)ight and W)rong.
+		pageLL.text[2]='W';
+		lessonLiveAttachOne(pageLL, 1,1,'' );// RIGHT
+		lessonLiveAttachOne(pageLL, 1,2,'' );// WRONG
+	}	
+	else if (page.type=="Text Entry" && page.style=="Text Short Answer")
+	{	// Short answer can have 1 or more matches plus the 'no match'.
+		if (lessonLive.revealScores) {
+			var matchHTML='';
+			for (var r=0;(r<page.textMatches.length);r++)
+			{
+				var match = page.textMatches[r];
+				var matchInfo='';
+				switch (match.matchstyle)
+				{
+					case "MatchContainsAny": //Answer must contain one of the matches.
+						matchInfo="matches one ";
+						break;
+					case "MatchContainsAll":  //Answer must contain each of the matches.
+						matchInfo="matches all ";
+						break;
+					case "MatchContainsAllInOrder":  //Answer must contain each of the matches in order
+						matchInfo="matches all in order";
+						break;
+					case "MatchContainsNone": // Contains None: Answer must contain NONE of these matches.
+						matchInfo="matches none";
+						break;
+					case "MatchExact":
+					case "": // Answer must match exactly one of the matches.
+						matchInfo="matches exactly";
+						break;
+					default:
+						matchInfo='';
+				}
+				var t=r+1;
+				pageLL.text[t]=match.grade; // store grade for display in user column
+				matchHTML+='<tr><td>' + lessonLiveGradeIconHTML(match.grade)+'</td><td>'+matchInfo+'</td><td>'
+					+ '<ul><li>"'+match.matchlist.split(DEL.toUpperCase()).join('"<li>"') +'</td><td>' + lessonLiveAttachOne(pageLL, 1,t,'')+'</td></tr>';
+			}
+			pageLL.text[0]='W';// no match is Wrong
+			matchHTML+='<tr><td>' +lessonLiveGradeIconHTML('WRONG') + '</td><td>Any other response</td><td>&nbsp;</td><td>' + lessonLiveAttachOne(pageLL,  1,0,'')+'</td></tr>';
+			LessonLivePageInfo+='<table class=llShortAnswerMatches>'+matchHTML+'</table>';
+				
+		}
+	}	
+	else
+	{	// Any unhandled page type gets a generic 'LessonLive not available for this type'. 
+		if (page.scorePoints=='') { //name=='Contents' || page.name=='About this lesson') {
+			LessonLivePageInfo='';
+			pageTypeTracksScores=false;
+			pageTypeTracksData=false;
+		}
+		else{
+			LessonLivePageInfo='LessonLive data not presented for this page type.';
+		}
+	}	
+
+	if (pageTypeTracksData && !lessonLive.revealScores)
+	{	// Build list of user right/wrong/unanswered ticks - indicates how many students responded so far to this page. 
+		var marks='';
+		for (var u=0;u<pageLL.marks.length;u++)
+		{
+			var grade;
+			if (! pageLL.marks[u ]) {
+				grade='none'; // a gray placeholder for the user
+				pageLL.marks[u ]=grade;
+			}
+			else
+			if (lessonLive.revealScores)
+				grade=pageLL.marks[u ]; // right,wrong,maybe,info response
+			else
+				grade='answered';
+			marks += '<span class="llBarChunk answer '+ grade + '"/>';
+		}
+		LessonLivePageInfo = LessonLivePageInfo + '<div class=llChoice>'+marks+' ' +  pageLL.total + ' / ' + lessonLive.Summary.users.length + '</div>';
+	} 
+	
+	if (LessonLivePageInfo!='' )
+	{
 		LessonLivePageInfo += '<P></P>';
-		if (lessonLive.revealScores && pageLL.total>0)
+		if (pageTypeTracksScores && lessonLive.revealScores && pageLL.total>0)
 		{	// Show the right/wrong thermometer bar for easy identifying problem questions.
 			var percent=Math.round(100*pageLL[1].right/pageLL.total);
 			LessonLivePageInfo +=  '<P></P>'
@@ -161,7 +176,9 @@ function attachLessonLiveReportToPage( )
 		}
 		else
 		{
-			LessonLivePageInfo+='<P><a class="HyperButton">Reveal Student Responses</a></P>';
+			if (pageTypeTracksData && !lessonLive.revealScores) {
+				LessonLivePageInfo+='<P><a class="HyperButton">Reveal Student Responses</a></P>';
+			}
 		}
 	}
 
@@ -304,7 +321,7 @@ function lessonLiveDownloadSilent()
 		// Request report only if data newer that the LastUpdate.
 		scoreSaveSummaryURL += '&lastupdate='+lessonLive.Summary.lesson.LastUpdate;
 	}
-	console.log('Loading data from '+scoreSaveSummaryURL);
+	//trace('Loading data from '+scoreSaveSummaryURL);
 	$.ajax({
 		url: scoreSaveSummaryURL,
 		dataType: "json",
@@ -317,16 +334,16 @@ function lessonLiveDownloadSilent()
 		 },
 		success: function(data)
 		{
-			console.log('Downloaded LessonLive data'); 
+			//trace('Downloaded LessonLive data'); 
 			if (data.lesson ) {
 				// update live percent bars, user data.
 				lessonLive.Summary=data;
-				console.log('Lesson Name: '+lessonLive.Summary.lesson["Lesson Name"]);
+				//trace('Lesson Name: '+lessonLive.Summary.lesson["Lesson Name"]);
 				attachLessonLiveReportToPage();
 			}
 			else
 			{
-				console.log('No new LessonLive data');
+				//trace('No new LessonLive data');
 			}
 			clearInterval(lessonLive.DownloadSilentInterval);
 			lessonLive.DownloadSilentInterval=setTimeout ("lessonLiveDownloadSilent()", 5000); // load data again
