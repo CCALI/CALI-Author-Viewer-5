@@ -25,10 +25,6 @@ function attachLessonLiveReportToPage( )
 		lessonLive.pagename=page.name;
 		lessonLive.revealScores=false;
 	}
-	if (lessonLive.revealUsers)
-	{
-		lessonLive.revealResponses=true;
-	}
 	if (lessonLive.revealResponses)
 	{
 		lessonLive.revealScores=true;
@@ -184,13 +180,8 @@ function attachLessonLiveReportToPage( )
 
 	
 	// Build list of users and their scores.
-	html='';
-	if (lessonLive.revealUsers) {
-		//lessonLive.Summary.users.sort( function(a,b){return icaseCompare(a.email,b.email);}); // Sort users by email
-	}
-	else{
-		//lessonLive.Summary.users.sort( function(a,b){return a.userid - b.userid ;}); // Sort users by email
-	}
+	var html='';
+	var userInfo=[];
 	for (var u=0;u<lessonLive.Summary.users.length;u++)
 	{	// For each user, figure out their answers and grade.
 		var grade='none';
@@ -209,10 +200,17 @@ function attachLessonLiveReportToPage( )
 			}
 			text='-';
 		}
-		html+='<div class="llUser ll '+grade+'" id=llUser'+u+'>'
-			+text //+'<span class="llIcon none">'+ (text ? text : '?') +'</span> '
-			+' <span class="llUserName ll">' +(lessonLive.revealUsers ? lessonLive.Summary.users[u].email : 'Student '+(u+1))+'</span></div>';
-	} 
+		var user = lessonLive.Summary.users[u]; 
+		html='<div class="llUser ll '+grade+'" id=llUser'+u+'>'
+			+text //+'<span class="llIcon none">'+ (text ? text : '?') +'</span> '	
+			+' <span class="llUserName ll">' +(lessonLive.revealUsers ? user.name : 'Student '+(u+1))+'</span></div>';
+		userInfo.push({key:lessonLive.revealUsers ? String(user.name).toUpperCase()+ user.userid: u, html:html}); 
+	}
+	userInfo.sort( function(a,b){if (a.key<b.key) return -1; else if (a.key>b.key) return 1; else return 0;}); // Sort users 
+	html='';
+	for (var i=0;i<userInfo.length;i++) {
+		html+=userInfo[i].html;
+	}
 	$('.llUserList').html(html);
 
 	// Reveal scores if clicking on Reveal Answers button.
@@ -362,6 +360,7 @@ function llDialogRevealNames()
 			buttons: {
 				"Yes": function() {
 					lessonLive.revealUsers=true;
+					lessonLive.revealResponses=true;
 					attachLessonLiveReportToPage();
 					$('#llRevealNamesCB').prop('checked',true);
 					$( this ).dialog( "close" ); 
@@ -390,6 +389,7 @@ $(document).ready(function()
 			else
 			{
 				lessonLive.revealUsers=false;
+				lessonLive.revealResponses=false;
 				attachLessonLiveReportToPage( )
 			}
 		 });

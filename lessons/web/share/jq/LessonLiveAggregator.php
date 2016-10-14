@@ -97,7 +97,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	
 	$pages=array();
 	$users=array();
-	
+	$scores=array();
 	// Grab each lesson run's score save XML and parse for unique answers per user.
 	$usercount=0;
 	$bytes=0;
@@ -125,7 +125,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			{
 				$users[$uid]= ($usercount++);
 			}
-			$uid = $users[$uid];
+			$uidx = $users[$uid];
 			
 			$p = xml_parser_create();
 			xml_parse_into_struct($p, $xml, $vals);// $index);
@@ -186,9 +186,9 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 								$pages[$qname][$qsub] = array( 'users'=>array(), 'right'=>0, 'wrong'=>0,'total'=>0 );
 							}
 							
-							if (!isset($pages[$qname][$qsub]['users'][$uid]))
+							if (!isset($pages[$qname][$qsub]['users'][$uidx]))
 							{	// collect only first attempt for this user/question/lesson/subquestion tuple
-								$pages[$qname][$qsub]['users'][$uid]=1;
+								$pages[$qname][$qsub]['users'][$uidx]=1;
 								
 								if ($qtype == 'Text Entry/Text Select')
 								{	// For now, discard text selections since it's rather big. 
@@ -232,7 +232,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 									$pages[$qname][$qsub][$qanswer] = array('grade'=>$qgrade,'users'=> array(),'text'=>array()); 
 								}
 								// tally user answers for this choice.
-								$pages[$qname][$qsub][$qanswer]['users'][$uid]=1;
+								$pages[$qname][$qsub][$qanswer]['users'][$uidx]=1;
 		
 								// store unique answers
 								$pages[$qname][$qsub][$qanswer]['text'][$text]=true;
@@ -241,7 +241,8 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 								{
 									$pages[$qname][$qsub]['total']++;
 									$pages[$qname][$qsub][$qgrade]++;
-									
+									//$pages[$qname][$qsub][$qanswer]['users'][$uid]=1; 
+									$scores[$qgrade][$uidx]++; // tally this user's total scores
 								} 
 							}
 							}
@@ -258,14 +259,26 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	
 	
 	// 09/09/2016 Gather user information
-	$SQL='select mail, name, users.uid from users where   users.uid in ('.implode(",",array_keys($users)).')';
+	//$SQL='select mail, name, users.uid from users where   users.uid in ('.implode(",",array_keys($users)).')';
+	$SQL = 'select uid,field_first_name_value as firstname,field_last_name_value as lastname
+			from users,field_data_field_first_name,field_data_field_last_name 
+			where (field_data_field_first_name.entity_id = uid and field_data_field_last_name.entity_id=uid) and 
+			users.uid in ('.implode(",",array_keys($users)).')';
 	$query=new QueryMySQLSimple($SQL);
 	$shortusers=array();
+	//	var_dump($scores);
 	while($row=$query->fetchRow())
 	{
 		$shortid=$users[$row['uid']];
 		//$users[$row['uid']] = array(/*'username'=>$row['name'],*/'email'=>$row['mail']);
-		$shortusers[$shortid]= array('userid'=> REDACTED?'REDACTED':intval($row['uid']),/*'username'=>$row['name'],*/'email'=>REDACTED?'REDACTED@REDACTED.EDU':$row['mail']);
+		$shortusers[$shortid]= array(
+			'userid'=> REDACTED?'REDACTED':intval($row['uid'])
+			,'name'=>REDACTED?'REDACTED':  $row['lastname'].', '.$row['firstname'] 
+			,'right'=>$scores['right'][$shortid]
+			,'wrong'=>$scores['wrong'][$shortid]
+			
+			//,'email'=>REDACTED?'REDACTED@REDACTED.EDU':$row['mail']
+			);
 	}
 	$users = $shortusers;
 	ksort($users);

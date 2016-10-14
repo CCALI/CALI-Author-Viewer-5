@@ -153,7 +153,7 @@ var resumeScoreURL="";
 							<a onclick="printScore()" class="HyperButton">Print this score</a>
 							<a onclick="uploadScoreYN()" class="UploadScore1 HyperButton">Finalize this score</a> </div>
 						<div id="dialog-finalize" title="Finalize your score?" class="UploadScore Ask hidestart">Would you like to finalize this score? If you click yes, this score will be finalized and preserved in your CALI profile; you will exit this lesson immediately and cannot resume it. You may, however, run this lesson again from the beginning, starting with no score. </div>
-						<div id="dialog-revealnames" title="Reveal student names?" class="llDialogRevealNames Ask hidestart">Would you like to reveal student names/emails? If you click yes, names will be displayed in place of the anonymous names in the Responder panel.  </div>
+						<div id="dialog-revealnames" title="Reveal student names?" class="llDialogRevealNames Ask hidestart">Would you like to reveal student names? If you click yes, names will be displayed in place of the anonymous names in the participants panel.  </div>
 						<div class="UploadScore UploadScore2 hidestart">Saving score...<img src="img/ajax-loader.gif" width="16" height="16"></div>
 						<div  class="UploadScore UploadScore3 hidestart"><span class="message"></span></div>
 						<a href="#" class="toggler"><span class="t hidestart" ref="ScoreDetails">Details</span></a>
@@ -199,7 +199,7 @@ var resumeScoreURL="";
 			</div>
 			<div class="llNavigation hidestart" id="llPanel"><h2>Participants</h2><div class="llUserList"></div>
 				<!--<input id="llRevealResponsesCB" type=checkbox>Reveal Responses</input>-->
-				<br/><input id="llRevealNamesCB" type=checkbox>Reveal Names</input>
+				<br/><label><input id="llRevealNamesCB" type=checkbox></input>Reveal Names</label>
 			</div>
 			<div id="dataTrace"  class="Trace" style="overflow:scroll;height:400px">
 				<table>
