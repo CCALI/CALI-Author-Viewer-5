@@ -2,6 +2,8 @@
 // CALI Viewer 5, Version: 03/15/2012
 // CALI Author Viewer - Scoring
 
+var scoreSaveWarningCount=0;
+
 function printScore()
 {
 	$('#ScoreReportCert').jqprint();
@@ -247,6 +249,15 @@ function uploadScoreSilent()
 			clearInterval(uploadScoreSilentInterval);
 			uploadScoreSilentInterval=setInterval("uploadScoreSilent()", 30000);
 			
+			scoreSaveWarningCount++;
+			trace(scoreSaveWarningCount);
+			if (scoreSaveWarningCount>5)
+			{	// After 5 failed attempts to save score data, exit lesson. 
+				win.onbeforeunload=null;if (!$.browser.mozilla)window.onbeforeunload=null;
+				parent.location = 'https://www.cali.org/mylessonruns';
+			}
+			
+			
 		},
 	   success: function(data)
 		{	// 03/02/2015 On success, reset upload rate to 5 seconds.
@@ -257,6 +268,7 @@ function uploadScoreSilent()
 			// Success
 			clearInterval(uploadScoreSilentInterval);
 			uploadScoreSilentInterval=setInterval("uploadScoreSilent()", 5000);
+			scoreSaveWarningCount=0;
 	  	}
 	});
 	return false;
