@@ -98,6 +98,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	$pages=array();
 	$users=array();
 	$scores=array();
+	$rundates=array();
 	// Grab each lesson run's score save XML and parse for unique answers per user.
 	$usercount=0;
 	$bytes=0;
@@ -126,6 +127,13 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 				$users[$uid]= ($usercount++);
 			}
 			$uidx = $users[$uid];
+			
+			// 10/18/2016 Track user's run dates
+			if (!isset($rundates[$uidx]))
+			{
+				$rundates[$uidx]=array();
+			}
+			$rundates[$uidx][$savedate]=1;
 			
 			$p = xml_parser_create();
 			xml_parse_into_struct($p, $xml, $vals);// $index);
@@ -276,7 +284,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			,'name'=>REDACTED?'REDACTED':  $row['lastname'].', '.$row['firstname'] 
 			,'right'=>$scores['right'][$shortid]
 			,'wrong'=>$scores['wrong'][$shortid]
-			
+			,'rundates'=> array_keys($rundates[$shortid])
 			//,'email'=>REDACTED?'REDACTED@REDACTED.EDU':$row['mail']
 			);
 	}

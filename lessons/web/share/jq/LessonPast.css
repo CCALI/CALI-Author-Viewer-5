@@ -1,0 +1,46 @@
+/* CALI Viewer 5, Version: 03/21/2012 
+   CALI Author HTML Viewer - Full style sheet -  */
+
+BODY {
+	margin: 1em;
+	font-weight: normal;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #eee;
+}
+TABLE {
+}
+
+TR{
+	vertical-align: top;
+	padding: 1px;
+}
+#userlist tr td:first-child {
+	white-space: nowrap;
+}
+#userlist tr td:nth-child(2){
+	font-size: 0.75em;
+	white-space: nowrap;
+}
+P {
+	padding-top: 0px;
+	margin-top: 0px;
+}
+a {
+	color: #0066CC;
+}
+table.choices tr {
+	padding: 2px;
+}
+.choice.right {
+	background-color: #8f8;
+}
+.choice.wrong {
+	background-color: #f88;
+}
+.choice.maybe {
+	background-color: #ff8;
+}
+
+.hidestart { /* hide some elements initially */
+	display: none;
+}
