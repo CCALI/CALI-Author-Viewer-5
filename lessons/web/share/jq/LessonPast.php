@@ -6,6 +6,7 @@
 <script src="CAV_urls.js" type="text/javascript"></script>
 <script xsrc="CAV_LessonPast.js" type="text/javascript"></script>
 <link href="LessonPast.css" rel="stylesheet" type="text/css" />
+<link href="CALILessonFont/style.css" rel="stylesheet" type="text/css" />
 
 <title>Lesson Past</title>
 
@@ -24,62 +25,52 @@
 
 <script language="javascript">
 
-var usage={};
+var usage={}; // Populated with lesson aggregate data.
 
-function isLocalFile()
-{
-	return location.href.match(/^file:\/\//)
+var pageTypeNice={
+	"Multiple Choice/Choose List":"Choose from list",
+	"Multiple Choice/Choose Buttons":"Choose one",
+	"Multiple Choice/Choose MultiButtons":"Choose one, with subquestions",
+	"Prioritize/PDrag":"Drag and Drop"
 }
-function lessonLiveDownloadSilent()
-{	// Download score save xml summary data from website
-	var scoreSaveSummaryURL=LessonLiveDownload() + '?runid='+runid;
-	$.ajax({
-		url: scoreSaveSummaryURL,
-		dataType: "json",
-		timeout: 15000,
-		error: function(data,textStatus,thrownError){
-		  //alert('Error occurred loading the XML from '+this.url+"\n"+textStatus);
-			$('#info').html('Download of LessonLive data failed: '+textStatus);
-			//clearInterval(lessonLive.DownloadSilentInterval);
-			//lessonLive.DownloadSilentInterval=setTimeout ("lessonLiveDownloadSilent()", 9000); // wait 9 seconds to try again.
-		 },
-		success: function(data)
-		{
-			if (data.lesson )
-			{
-				usage.lesson = data.lesson;
-				usage.pages = data.pages;
-				usage.users = data.users; 
-				build(); 
-			}
+function buildUsers()
+{
+	var optIncludeAllDates=$('#optIncludeAllDates').is(':checked');
+	
+  // User information
+  // Sample record for usage.users[]
+  var sample={
+      "userid": 1,
+      "name": "Brown, Charlie",
+      "right": 57,
+      "wrong": 23,
+		"rundates": ["2016-06-19 23:18:14", "2016-06-23 12:48:45"]
+    };
+  var html='';
+  for (var ui=0;ui<usage.users.length;ui++)
+  {
+		var user=usage.users[ui];
+		var percent=0;
+		var total=user.right+user.wrong;
+		if ( total > 0) {
+			percent = Math.round( 100 * user.right / total)+'%'; 
 		}
-	});
-	return false;
+		else
+		{
+			percent='-';
+		}
+		var columns=[
+			'<span class="icon-user"></span>'+(ui+1)
+			,'<a target=_blank href="https://www.cali.org/user/'+user.userid+'">'+user.name+'</a>'
+			,RWMBar(user.right,user.wrong,0)+' '+percent,user.right,user.wrong,total
+			,(optIncludeAllDates ? user.rundates.join("<br>") : user.rundates[0]+' '+ (user.rundates.length>1 ? user.rundates.length : ''))
+			];
+		html += '<tr><td>'+columns.join('</td><td>')+'</td></tr>';
+  }
+  $('#userlist tbody').html(html);
+  
+  
 }
-
-function trace(a)
-{
-	if (console && console.log){console.log(a);}
-}
-
-function RWMBar(right,wrong,maybe)
-{
-	var total=right+wrong+maybe;
-	if (total==0) {
-		return ''
-	}
-	else{
-		var W=100;
-		right = right/total*W;
-		wrong = wrong/total*W;
-		maybe = maybe/total*W;
-		return '<span><span style="height:12px; width:'
-			+right+'px; display:inline-block; background-color:#0f0"></span><span style="height:12px; width:'
-			+wrong+'px; display:inline-block; background-color:#f00"></span><span style="height:12px; width:'
-			+maybe+'px; display:inline-block; background-color:#ff0"></span></span>';
-	}
-}
-
 function build()
 {	// 10/18/2016 Construct report tables
 	var html='';
@@ -100,36 +91,8 @@ function build()
 	}
   $('#info').html(html);
   
-  // User information
-  // Sample record for usage.users[]
-  var sample={
-      "userid": 1,
-      "name": "Brown, Charlie",
-      "right": 57,
-      "wrong": 23,
-		"rundates": ["2016-06-19 23:18:14", "2016-06-23 12:48:45"]
-    };
-  html='';
-  for (var ui=0;ui<usage.users.length;ui++)
-  {
-		var user=usage.users[ui];
-		var percent=0;
-		var total=user.right+user.wrong;
-		if ( total > 0) {
-			percent = Math.round( 100 * user.right / total)+'%'; 
-		}
-		else
-		{
-			percent='-';
-		}
-		var columns=['<a target=_blank href="https://www.cali.org/user/'+user.userid+'">'+user.name+'</a>'
-			,user.rundates.join("<br>")
-			,RWMBar(user.right,user.wrong,0)+' '+percent,user.right,user.wrong,total];
-		html += '<tr><td>'+columns.join('</td><td>')+'</td></tr>';
-  }
-  $('#userlist tbody').html(html);
-  
-
+	buildUsers();
+	
   // Page information
 	// Sample record for usage.pages[]
 	var sample={
@@ -171,19 +134,24 @@ function build()
 					percent='-';
 				}
 				var displayname=pagename;
-				if (pageinfo.type=='x') {
+				if (pageinfo.type=='Multiple Choice/Choose MultiButtons') {
 					displayname += '#' + subqi;
 				}
-				var columns=[ displayname,pageinfo.type, RWMBar(subq.right,subq.wrong,0)+' '+percent,subq.right,subq.wrong,total];
-				html += '<tr><td rowspan=2>'+columns.join('</td><td>')+'</td></tr>';
+				var columns=[subq.right,subq.wrong,total, (pageTypeNice[pageinfo.type]? pageTypeNice[pageinfo.type]: pageinfo.type )];
+				html += '<tr><td rowspan=2>'+displayname+'</td>'
+					+'<td nowrap rowspan=2>'+RWMBar(subq.right,subq.wrong,subq.maybe) +' '+percent+'</td>'
+					+'<td>'+columns.join('</td><td>')+'</td></tr>';
 				var details='';
 				for (var ci in subq) {
 					if (parseInt(ci)>0) {
 						var choice = subq[ci];
-						details += '<tr class="choice '+choice.grade+'"><td>'+String(choice.grade).toUpperCase().substr(0,1)+'</td><td>'+choice.text+'</td><td>'+choice.users+'</td></tr>';
+						details += '<tr class="choice '+choice.grade+'">'
+						+'<td>'+String(choice.grade).toUpperCase().substr(0,1)+'</td>'
+						+'<td>'+choice.text+'</td>'
+						+'<td>'+choice.users.length+'</td></tr>';
 					}
 				}
-				html += '<tr><td colspan=6>'+'<table class="choices">'+details+'</table>'+'</td></tr>';				
+				html += '<tr><td colspan=5>'+'<table class="choices">'+details+'</table>'+'</td></tr>';				
 			}
 		}
   }
@@ -196,6 +164,13 @@ $(document).ready(function()
 	if (runid>0) {
 		lessonLiveDownloadSilent();
 	}
+	$('#optIncludeAllDates').change(buildUsers);
+	$('.sortable').click(function(){
+		//if (!$(this).hasClass('sorted')) {
+			trace('sorting');
+			$($(this).parent(),'th').removeClass('sorted');
+	//	}
+	})
 });
 
 function getParameterByName(name, url)
@@ -208,6 +183,64 @@ function getParameterByName(name, url)
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
+
+function isLocalFile()
+{
+	return location.href.match(/^file:\/\//)
+}
+function lessonLiveDownloadSilent()
+{	// Download score save xml summary data from website
+	var scoreSaveSummaryURL=LessonLiveDownload() + '?runid='+runid;
+	$.ajax({
+		url: scoreSaveSummaryURL,
+		dataType: "json",
+		timeout: 15000,
+		error: function(data,textStatus,thrownError){
+		  //alert('Error occurred loading the XML from '+this.url+"\n"+textStatus);
+			$('#info').html('Download of LessonLive data failed: '+textStatus);
+			//clearInterval(lessonLive.DownloadSilentInterval);
+			//lessonLive.DownloadSilentInterval=setTimeout ("lessonLiveDownloadSilent()", 9000); // wait 9 seconds to try again.
+		 },
+		success: function(data)
+		{
+			if (data.lesson )
+			{
+				usage.lesson = data.lesson;
+				usage.pages = data.pages;
+				usage.users = data.users; 
+				build(); 
+			}
+		}
+	});
+	return false;
+}
+
+function trace(a)
+{
+	if (console && console.log){console.log(a);}
+}
+
+function RWMBar(right,wrong,maybe)
+{
+	if (!maybe) {
+		maybe=0;
+	}
+	var total=right+wrong+maybe;
+	if (total==0) {
+		return ''
+	}
+	else{
+		var W=100;
+		right = right/total*W;
+		wrong = wrong/total*W;
+		maybe = maybe/total*W;
+		return '<span><span style="height:12px; width:'
+			+right+'px; display:inline-block; background-color:#0f0"></span><span style="height:12px; width:'
+			+wrong+'px; display:inline-block; background-color:#f00"></span><span style="height:12px; width:'
+			+maybe+'px; display:inline-block; background-color:#ff0"></span></span>';
+	}
+}
+
 </script>
 </head>
 
@@ -217,29 +250,31 @@ function getParameterByName(name, url)
 <ul id=info> 
 </ul>
 <h2>Student Performance</h2>
-<p>Results for each student.  Multiple lesson runs by a single student will be merged and only the first response for each question will be counted.</p>
+<p>Results for each student.  Multiple LessonLink runs by a single student will be merged and only the first response for each question will be counted.</p>
+<p><label><input type=checkbox value=false id=optIncludeAllDates>Include all dates of student runs</label></p>
 <table id="userlist" border="1" cellpadding="5" cellspacing="0"><thead>
     <tr>
-      <th nowrap><p><strong>Name</strong></p></th>
-      <th nowrap><p>Lesson Date</p></th>
-      <th nowrap><p>Score % Correct</p></th>
+		<th nowrap  class="sortable sorted">User</th>
+      <th nowrap class="sortable" ><p><strong>Name</strong></p></th>
+      <th nowrap class="sortable" ><p>Score % Correct</p></th>
       <th  ><p>Questions Answered</p></th>
       <th  ><p>Questions Correct</p></th>
       <th  ><p>Total Questions</p></th>
+      <th nowrap><p>Run Date</p></th>
     </tr></thead>
   <tbody> 
   </tbody>
 </table>
-<h1>Page Performance</h1>
+<h2>Page Performance</h2>
 <p>Combined results for all students.</p>
-<table id="pagelist" border=1 cellpadding="5"   cellspacing=0 cols=2>
+<table id="pagelist" border=1 cellpadding="5"   cellspacing=0 >
   <thead><tr>
-    <th nowrap>Page name</th>
-    <th nowrap>Page type</th>
-    <th nowrap>Score</th> 
+    <th nowrap class="sortable sorted">Page name </th>
+    <th nowrap class="sortable"> Score  </th> 
     <th nowrap>Right</th> 
     <th nowrap>Wrong</th> 
     <th nowrap>Total</th> 
+    <th nowrap>Page type</th>
   </tr></thead>
   <tbody> 
 	 </tbody> 

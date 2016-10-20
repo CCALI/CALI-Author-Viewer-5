@@ -124,7 +124,8 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			// Map drupal user id to simpler user id.
 			if (!isset($users[$uid]))
 			{
-				$users[$uid]= ($usercount++);
+				$users[$uid]= $usercount;
+				$usercount++; 
 			}
 			$uidx = $users[$uid];
 			
@@ -282,8 +283,8 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$shortusers[$shortid]= array(
 			'userid'=> REDACTED?'REDACTED':intval($row['uid'])
 			,'name'=>REDACTED?'REDACTED':  $row['lastname'].', '.$row['firstname'] 
-			,'right'=>$scores['right'][$shortid]
-			,'wrong'=>$scores['wrong'][$shortid]
+			,'right'=>intval ($scores['right'][$shortid])
+			,'wrong'=>intval ($scores['wrong'][$shortid]) // in case of null where user didn't get any right or any wrong.
 			,'rundates'=> array_keys($rundates[$shortid])
 			//,'email'=>REDACTED?'REDACTED@REDACTED.EDU':$row['mail']
 			);

@@ -5,7 +5,7 @@ BODY {
 	margin: 1em;
 	font-weight: normal;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	background-color: #eee;
+	background-color: #f8f8f8;
 }
 TABLE {
 }
@@ -14,13 +14,19 @@ TR{
 	vertical-align: top;
 	padding: 1px;
 }
-#userlist tr td:first-child {
+#userlist tr:nth-child(even) {background: #fff}
+#userlist tr:nth-child(odd)  {background: #eee}
+#userlist tr td:nth-child(3) {
 	white-space: nowrap;
 }
-#userlist tr td:nth-child(2){
+#userlist tr td:nth-child( 7 ){
 	font-size: 0.75em;
 	white-space: nowrap;
-}
+} 
+
+#pagelist tr:nth-child(4n+1) {background: #fff}
+#choices tr {background: white;}
+
 P {
 	padding-top: 0px;
 	margin-top: 0px;
@@ -32,15 +38,25 @@ table.choices tr {
 	padding: 2px;
 }
 .choice.right {
-	background-color: #8f8;
+	background-color: #8f8 !important;
 }
 .choice.wrong {
-	background-color: #f88;
+	background-color: #f88 !important;
 }
 .choice.maybe {
-	background-color: #ff8;
+	background-color: #ff8 !important;
 }
-
+.sorted {
+	text-decoration: underline;
+}
+.sortable {
+	color: #88f;
+}
 .hidestart { /* hide some elements initially */
 	display: none;
 }
+
+
+
+
+
