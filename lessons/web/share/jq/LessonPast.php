@@ -60,7 +60,7 @@ function buildUsers()
 			percent='-';
 		}
 		var columns=[
-			'<span class="icon-user"></span>'+(ui+1)
+			'<span class="icon-user"></span>'+(ui+0)
 			,'<a target=_blank href="https://www.cali.org/user/'+user.userid+'">'+user.name+'</a>'
 			,RWMBar(user.right,user.wrong,0)+' '+percent,user.right,user.wrong,total
 			,(optIncludeAllDates ? user.rundates.join("<br>") : user.rundates[0]+' '+ (user.rundates.length>1 ? user.rundates.length : ''))
@@ -68,9 +68,94 @@ function buildUsers()
 		html += '<tr><td>'+columns.join('</td><td>')+'</td></tr>';
   }
   $('#userlist tbody').html(html);
-  
-  
 }
+function buildPages()
+{
+	var optIncludeAllUsers=$('#optIncludeAllUsers').is(':checked');
+	// Page information
+	// Sample record for usage.pages[]
+	var sample={
+   "R26": {
+      "total": 16,
+      "type": "Multiple Choice\/Choose List",
+      "1": {
+        "right": 15,
+        "total": 16,
+        "wrong": 1,
+        "1": {
+          "grade": "right",
+          "users": [0, 1, 2, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
+          "text": ["A."]
+        },
+        "3": {
+          "grade": "wrong",
+          "users": [3],
+          "text": ["C."]
+        }
+      }
+	}};
+	var  html='';
+	for (var pagename in usage.pages) 
+	{
+		var pageinfo=usage.pages[pagename];
+		for (var subqi=1;subqi<=7;subqi++)
+		{
+			if (pageinfo[subqi])
+			{
+				var subq=pageinfo[subqi];
+				var percent=0;
+				var total=subq.total; 
+				if ( total > 0) {
+					percent = Math.round( 100 * subq.right / total)+'%'; 
+				}
+				else
+				{
+					percent='-';
+				}
+				var displayname=pagename;
+				if (pageinfo.type=='Multiple Choice/Choose MultiButtons') {
+					displayname += '#' + subqi;
+				}
+				var details=[];
+				var detailsUsers=[];
+				for (var ci in subq)
+				{
+					if (parseInt(ci)>0)
+					{
+						var choice = subq[ci];
+						details.push( 
+						'<td></td>'
+						+'<td class="choice '+choice.grade+'">'+String(choice.grade).toUpperCase().substr(0,1)+'</td>'
+						+'<td class="choice '+choice.grade+'">'+choice.text+'</td>'
+						+'<td class="choice '+choice.grade+'">'+choice.users.length+'</td>');
+						if (optIncludeAllUsers) {
+							detailsUsers.push('<td colspan=2></td><td colspan=3 class="users choice '+choice.grade+'">'+choice.users.join(", "))+'</td>';
+						}
+					}
+				}
+				//details = '<table class="choices">'+details+'</table>';
+				//var columns=[subq.right,subq.wrong,total, ,details];
+				var rowspan=(optIncludeAllUsers?2:1)*(details.length)+1;
+				html += '<tr>'
+					+'<td rowspan='+rowspan+'>'+displayname+'</td>'
+					+'<td rowspan='+rowspan+' nowrap >'+RWMBar(subq.right,subq.wrong,subq.maybe) +' '+percent+'</td>'
+					+'<td rowspan='+rowspan+'>'+subq.right+'</td>'
+					+'<td rowspan='+rowspan+'>'+subq.wrong+'</td>'
+					+'<td rowspan='+rowspan+'>'+total+'</td>'
+					+'<td colspan=4>'+(pageTypeNice[pageinfo.type]? pageTypeNice[pageinfo.type]: pageinfo.type )+'</td>'
+					//+'<td></td><td></td><td></td>'
+					+'</tr>';
+				for (var d=0;d<details.length;d++){
+					html+= '<tr>'+details[d]+'</tr>';
+					if (optIncludeAllUsers) html+= '<tr>'+detailsUsers[d]+'</tr>';
+				}
+			}
+		}
+  }
+  $('#pagelist tbody').html(html);
+}
+
+
 function build()
 {	// 10/18/2016 Construct report tables
 	var html='';
@@ -93,69 +178,7 @@ function build()
   
 	buildUsers();
 	
-  // Page information
-	// Sample record for usage.pages[]
-	var sample={
-   "R26": {
-      "total": 16,
-      "type": "Multiple Choice\/Choose List",
-      "1": {
-        "right": 15,
-        "total": 16,
-        "wrong": 1,
-        "1": {
-          "grade": "right",
-          "users": [0, 1, 2, 4, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 10],
-          "text": ["A."]
-        },
-        "3": {
-          "grade": "wrong",
-          "users": [3],
-          "text": ["C."]
-        }
-      }
-	}};
-  html='';
-  for (var pagename in usage.pages) 
-  {
-		var pageinfo=usage.pages[pagename];
-		for (var subqi=1;subqi<=7;subqi++)
-		{
-			if (pageinfo[subqi])
-			{
-				var subq=pageinfo[subqi];
-				var percent=0;
-				var total=subq.total; 
-				if ( total > 0) {
-					percent = Math.round( 100 * subq.right / total)+'%'; 
-				}
-				else
-				{
-					percent='-';
-				}
-				var displayname=pagename;
-				if (pageinfo.type=='Multiple Choice/Choose MultiButtons') {
-					displayname += '#' + subqi;
-				}
-				var columns=[subq.right,subq.wrong,total, (pageTypeNice[pageinfo.type]? pageTypeNice[pageinfo.type]: pageinfo.type )];
-				html += '<tr><td rowspan=2>'+displayname+'</td>'
-					+'<td nowrap rowspan=2>'+RWMBar(subq.right,subq.wrong,subq.maybe) +' '+percent+'</td>'
-					+'<td>'+columns.join('</td><td>')+'</td></tr>';
-				var details='';
-				for (var ci in subq) {
-					if (parseInt(ci)>0) {
-						var choice = subq[ci];
-						details += '<tr class="choice '+choice.grade+'">'
-						+'<td>'+String(choice.grade).toUpperCase().substr(0,1)+'</td>'
-						+'<td>'+choice.text+'</td>'
-						+'<td>'+choice.users.length+'</td></tr>';
-					}
-				}
-				html += '<tr><td colspan=5>'+'<table class="choices">'+details+'</table>'+'</td></tr>';				
-			}
-		}
-  }
-  $('#pagelist tbody').html(html);
+	buildPages();
 }
 
 $(document).ready(function()
@@ -165,6 +188,7 @@ $(document).ready(function()
 		lessonLiveDownloadSilent();
 	}
 	$('#optIncludeAllDates').change(buildUsers);
+	$('#optIncludeAllUsers').change(buildPages);
 	$('.sortable').click(function(){
 		//if (!$(this).hasClass('sorted')) {
 			trace('sorting');
@@ -257,9 +281,9 @@ function RWMBar(right,wrong,maybe)
 		<th nowrap  class="sortable sorted">User</th>
       <th nowrap class="sortable" ><p><strong>Name</strong></p></th>
       <th nowrap class="sortable" ><p>Score % Correct</p></th>
-      <th  ><p>Questions Answered</p></th>
-      <th  ><p>Questions Correct</p></th>
-      <th  ><p>Total Questions</p></th>
+      <th  ><p>Right</p></th>
+      <th  ><p>Wrong</p></th>
+      <th  ><p>Total </p></th>
       <th nowrap><p>Run Date</p></th>
     </tr></thead>
   <tbody> 
@@ -267,6 +291,9 @@ function RWMBar(right,wrong,maybe)
 </table>
 <h2>Page Performance</h2>
 <p>Combined results for all students.</p>
+<p><label><input type=checkbox value=false id=optIncludeAllUsers>Include user breakdown</label></p>
+
+
 <table id="pagelist" border=1 cellpadding="5"   cellspacing=0 >
   <thead><tr>
     <th nowrap class="sortable sorted">Page name </th>
@@ -275,6 +302,9 @@ function RWMBar(right,wrong,maybe)
     <th nowrap>Wrong</th> 
     <th nowrap>Total</th> 
     <th nowrap>Page type</th>
+    <th nowrap>Grade</th>
+    <th nowrap>Choice</th>
+    <th nowrap>Users</th>
   </tr></thead>
   <tbody> 
 	 </tbody> 

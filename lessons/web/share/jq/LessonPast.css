@@ -23,9 +23,19 @@ TR{
 	font-size: 0.75em;
 	white-space: nowrap;
 } 
+#pagelist {
+	
+}
+#pagelist tr {background: #fff}
+#pagelist tr td:nth-child(1) {
+	white-space: nowrap;
+}
 
-#pagelist tr:nth-child(4n+1) {background: #fff}
 #choices tr {background: white;}
+
+td.users {
+	font-size: 0.75em;
+}
 
 P {
 	padding-top: 0px;
@@ -38,13 +48,13 @@ table.choices tr {
 	padding: 2px;
 }
 .choice.right {
-	background-color: #8f8 !important;
+	background-color: #cfc !important;
 }
 .choice.wrong {
-	background-color: #f88 !important;
+	background-color: #fcc !important;
 }
 .choice.maybe {
-	background-color: #ff8 !important;
+	background-color: #ffc !important;
 }
 .sorted {
 	text-decoration: underline;
