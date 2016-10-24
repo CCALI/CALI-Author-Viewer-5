@@ -1,40 +1,37 @@
 <?php
 /*	09/27/2016 A shell for the LessonLive aggregator.
 
+	Called by JavaScript in LessonLive Viewer or LessonPast reporter.
+	
 	Opens the DB connection for the aggregator to parse LessonRun XML and returns its package.
 	Likely this gets moved into a Drupal menu instead to use Drupal's more robust logging and security.
 	
+	Note: Run id used to determine course, lesson and if user is owner (teacher).
+	
+	Querystring Parameters:
 	Requires:  runid=#
 	Optional:  lastupdate=#
 */
-
-	require_once "LessonLiveAggregator.php";
+	require "LessonLinkConfig.php";
+	require_once "LessonLinkAggregator.php";
 	
 //	### Full debugging.
-//	ini_set('display_errors', 1);
-//	ini_set('display_startup_errors', 1);
-//	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+
 
 	// ### Security check should be done to assure user getting this data is course teacher.
-	/*
+	$userID=0;
 	global $user;
-	define('DRUPAL_ROOT_DIR','/vol/data/drupal7-cali');
 	// Set the working directory to your Drupal root
 	chdir(DRUPAL_ROOT_DIR);
 	define('DRUPAL_ROOT', getcwd());
 	require_once("./includes/bootstrap.inc");
 	drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-	$userid = $user->uid; 
-	*/
-	$userid=0;
-
+	$userID = $user->uid; 
 	
 	//### Connect to Drupal www.cali.org clone database (read only)
-	$dbdatabase="";
-	$dbname="";
-	$dbhost="";
-	$dbuser="";
-	$dbpass="";
 	$connect_CALISQL=mysql_connect($dbhost,$dbuser,$dbpass);
 	$Database=mysql_select_db($dbdatabase,$connect_CALISQL);
 	
@@ -54,13 +51,27 @@
 	$lessonID=$row['nid'];
 	$ownerID=$row['uid'];
 	
-	//echo json_encode( array($runid,$lastUpdate,$courseID,$lessonID,$ownerID));
-		
+	if ($courseID==0)
+	{
+		echo json_error("Unknown course");
+	}
+	else
+	if (!in_array($userID,array($ownerID, 203)))
+	{
+		echo json_error("Only LessonLink owner may access this data");
+	}
+	else
 	if ($courseID>0 && $lessonID > 0){
+		//echo json_error("Got the course ");
 		echo LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate);
 	}
 	else{
-		echo "{error:'Missing course,lesson ids'}";
+		echo json_error("Missing course,lesson ids");
 	}
+	
+function json_error($errmsg) 
+{
+	return json_encode(array('error'=>$errmsg));
+}
 ?>
 

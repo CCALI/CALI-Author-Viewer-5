@@ -5,10 +5,10 @@
 <script src="jQuery/jquery-1.6.1.min.js" type="text/javascript"></script>
 <script src="CAV_urls.js" type="text/javascript"></script>
 <script xsrc="CAV_LessonPast.js" type="text/javascript"></script>
-<link href="LessonPast.css" rel="stylesheet" type="text/css" />
+<link href="LessonLinkPast.css" rel="stylesheet" type="text/css" />
 <link href="CALILessonFont/style.css" rel="stylesheet" type="text/css" />
 
-<title>Lesson Past</title>
+<title>Lesson Link Past - CALI</title>
 
 
 <script language="javascript">
@@ -17,10 +17,9 @@
 </script>
 
 <?php
-//;	if ($_SERVER['HTTP_HOST'] == "localhost")
-//;		 "LessonPastConfig_LOCAL.php";
-//;	else
-//;		require "LessonPastConfig.php";
+// 10/24/2016 SJG Current version expects runid, handled same way as lesson live.
+// Need alternate version that accepts course/lesson id so works directly from LessonLink manager.
+// Calls the .php LessonLinkSummary rather than embedding data directly. 
 ?>
 
 <script language="javascript">
@@ -28,10 +27,12 @@
 var usage={}; // Populated with lesson aggregate data.
 
 var pageTypeNice={
+	// Transforms internal page type/style into something teacher friendly.
 	"Multiple Choice/Choose List":"Choose from list",
 	"Multiple Choice/Choose Buttons":"Choose one",
 	"Multiple Choice/Choose MultiButtons":"Choose one, with subquestions",
 	"Prioritize/PDrag":"Drag and Drop"
+	// Needs more entries here
 }
 function buildUsers()
 {
@@ -69,6 +70,8 @@ function buildUsers()
   }
   $('#userlist tbody').html(html);
 }
+
+
 function buildPages()
 {
 	var optIncludeAllUsers=$('#optIncludeAllUsers').is(':checked');
@@ -128,8 +131,15 @@ function buildPages()
 						+'<td class="choice '+choice.grade+'">'+String(choice.grade).toUpperCase().substr(0,1)+'</td>'
 						+'<td class="choice '+choice.grade+'">'+choice.text+'</td>'
 						+'<td class="choice '+choice.grade+'">'+choice.users.length+'</td>');
-						if (optIncludeAllUsers) {
-							detailsUsers.push('<td colspan=2></td><td colspan=3 class="users choice '+choice.grade+'">'+choice.users.join(", "))+'</td>';
+						if (optIncludeAllUsers)
+						{
+							var userlist='';
+							for (var ui=0;ui<choice.users.length;ui++)
+							{
+								var user=usage.users[choice.users[ui]];
+								userlist += '<li>'+user.name;
+							}
+							detailsUsers.push('<td colspan=2></td><td colspan=3 class="users choice '+choice.grade+'"><ol>'+userlist)+'</td>';
 						}
 					}
 				}
@@ -152,6 +162,7 @@ function buildPages()
 			}
 		}
   }
+  
   $('#pagelist tbody').html(html);
 }
 
@@ -220,7 +231,6 @@ function lessonLiveDownloadSilent()
 		dataType: "json",
 		timeout: 15000,
 		error: function(data,textStatus,thrownError){
-		  //alert('Error occurred loading the XML from '+this.url+"\n"+textStatus);
 			$('#info').html('Download of LessonLive data failed: '+textStatus);
 			//clearInterval(lessonLive.DownloadSilentInterval);
 			//lessonLive.DownloadSilentInterval=setTimeout ("lessonLiveDownloadSilent()", 9000); // wait 9 seconds to try again.
@@ -234,6 +244,9 @@ function lessonLiveDownloadSilent()
 				usage.users = data.users; 
 				build(); 
 			}
+			else{
+				$('#info').html(data.error);
+			}
 		}
 	});
 	return false;
@@ -245,7 +258,7 @@ function trace(a)
 }
 
 function RWMBar(right,wrong,maybe)
-{
+{	// Simple horizontal bar made of green, red and yellow (right,wrong,maybe) segments.
 	if (!maybe) {
 		maybe=0;
 	}
@@ -269,9 +282,11 @@ function RWMBar(right,wrong,maybe)
 </head>
 
 <body>
-<h1>CALI LessonPast </h1>
+<h1>Lesson Link Past - CALI</h1>
 <h2>Course Lesson Information</h2>
-<ul id=info> 
+
+<ul id=info>
+	Loading lesson score data <img src="img/ajax-loader.gif">
 </ul>
 <h2>Student Performance</h2>
 <p>Results for each student.  Multiple LessonLink runs by a single student will be merged and only the first response for each question will be counted.</p>
@@ -291,7 +306,7 @@ function RWMBar(right,wrong,maybe)
 </table>
 <h2>Page Performance</h2>
 <p>Combined results for all students.</p>
-<p><label><input type=checkbox value=false id=optIncludeAllUsers>Include user breakdown</label></p>
+<p><label><input type=checkbox value=false id=optIncludeAllUsers>Include student breakdown</label></p>
 
 
 <table id="pagelist" border=1 cellpadding="5"   cellspacing=0 >
@@ -304,13 +319,13 @@ function RWMBar(right,wrong,maybe)
     <th nowrap>Page type</th>
     <th nowrap>Grade</th>
     <th nowrap>Choice</th>
-    <th nowrap>Users</th>
+    <th nowrap>Students</th>
   </tr></thead>
   <tbody> 
 	 </tbody> 
 </table>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
-<p>10/18/2016</p>
+<!-- 10/18/2016 -->
 </body>
 </html>

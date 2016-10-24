@@ -28,7 +28,6 @@ TR{
 }
 #pagelist tr {background: #fff}
 #pagelist tr td:nth-child(1) {
-	white-space: nowrap;
 }
 
 #choices tr {background: white;}

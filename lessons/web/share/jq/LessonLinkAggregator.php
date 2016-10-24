@@ -1,6 +1,8 @@
 <?php
 /*
 	09/23/2016 Generate summary report for specific course/lesson.
+	This is a Helper .php which is called by another .php.
+	
 	Ensures for a particular course/lesson, user's first answer to a question.
 	Return JSON with lesson meta info, pages with answer breakdown and user info.
 
@@ -15,6 +17,8 @@
 	Efficieny issues: currently the JSON package contains everything needed to know.
 	Could be broken into separate queries such as student info could be separate call since it's only needed if teacher choose to reveal student names.
 	
+	10/24/2016 WARNING: any UTF-8 or Windows 1252 characters will break JSON encoding.
+	May need to run through utf8_encode
 */
 
 
@@ -51,7 +55,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$lesson['Semester']=$row['semester'];
 		$lesson['Teacher Name']=$row['name'];
 		$lesson['Teacher ID']= $ownerid = $row['uid'];
-		$lesson['Course Name']=$row['coursename'];
+		$lesson['Course Name']=utf8_encode($row['coursename']);
 		$lesson['Course ID']=$row['courseid'];
 		$lesson['Course Created Date']=$row['createdate'];
 		$lesson['Lesson Name']=$row['title'];
@@ -102,7 +106,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	// Grab each lesson run's score save XML and parse for unique answers per user.
 	$usercount=0;
 	$bytes=0;
-	$maxdate=''; // Get the most recent update - used for future filtering by client via 'lastupdate' paraemter.
+	$maxdate=''; // Get the most recent update - used for future filtering by client via 'lastupdate' parameter.
 	while($row=$query->fetchRow())
 	{
 		$uid=intval($row['uid']);
@@ -116,7 +120,6 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			if ($savedate>$maxdate){
 				$maxdate=$savedate;
 			}
-			//echo $savedate.' ';
 			
 			$xml = $row['responses']; 
 			$bytes += strlen($xml);// just info gathering
@@ -130,12 +133,14 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			$uidx = $users[$uid];
 			
 			// 10/18/2016 Track user's run dates
+			
 			if (!isset($rundates[$uidx]))
 			{
 				$rundates[$uidx]=array();
 			}
-			$rundates[$uidx][$savedate]=1;
-			
+			if (isset($savedate)){
+				$rundates[$uidx][$savedate]=1;
+			}
 			$p = xml_parser_create();
 			xml_parse_into_struct($p, $xml, $vals);// $index);
 			
@@ -319,6 +324,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		unset($page['pagename']);
 		$page['total']= $maxusers;
 		ksort($page);
+		//var_dump(array_values($page));
 		
 		foreach ($page as $qi => &$q)
 		{	// Process one subquestion (or the main page for most question types)
@@ -369,14 +375,32 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		
 		$pagesFinal[$realPageName]=$page;
 	}
-
-	return str_replace("],","],\n",
+	/*
+	//echo'<hr>$comment ';var_dump($comment);
+	echo'<hr>$lesson ';var_dump($lesson);
+	//echo'<hr>$users ';var_dump($users);
+	//echo'<hr>array_values($users) ';var_dump(array_values($users));
+	//echo'<hr>$pagesFinal ';var_dump($pagesFinal);
+	echo'<hr>';echo json_encode($comment);
+	echo'<hr>';echo json_encode($lesson);
+	echo'<hr>';echo json_encode(array_values($users));
+	echo'<hr>';echo json_encode($pagesFinal);
+	echo'<hr>';
+	*/
+	$json= //str_replace("],","],\n",
 		json_encode(array(
 			"_comment"=>$comment,
 			"lesson"=>$lesson,
 			"users"=>array_values($users),
 			"pages"=>$pagesFinal
-		)/*,JSON_PRETTY_PRINT*/));
+		) 
+		);
+	//var_dump($json);
+	if ($json===FALSE)
+	{
+		echo json_last_error() ;
+	}
+	return $json;
 }
 
 class QueryMySQLSimple

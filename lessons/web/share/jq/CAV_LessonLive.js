@@ -363,7 +363,7 @@ function llDialogRevealNames()
 					lessonLive.revealResponses=true;
 					attachLessonLiveReportToPage();
 					$('#llRevealNamesCB').prop('checked',true);
-					$('#llLessonPast').removeClass('hidestart').attr('href','LessonPast.php?runid='+runid);
+					$('#llLessonPast').removeClass('hidestart').attr('href','LessonLinkPast.php?runid='+runid);
 					$( this ).dialog( "close" ); 
 				},
 				"No": function() {
