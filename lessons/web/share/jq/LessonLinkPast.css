@@ -60,6 +60,7 @@ table.choices tr {
 }
 .sortable {
 	color: #88f;
+	cursor: pointer;
 }
 .hidestart { /* hide some elements initially */
 	display: none;

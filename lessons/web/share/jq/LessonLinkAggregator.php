@@ -60,6 +60,11 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$lesson['Course Created Date']=$row['createdate'];
 		$lesson['Lesson Name']=$row['title'];
 		$lesson['Lesson ID']=$row['nid'];
+		
+		$SQL3="select field_lesson_id_value as code from field_data_field_lesson_id where entity_id = $nid"; 
+		$q=new QueryMySQLSimple ($SQL3);
+		$row=$q->fetchRow();
+		$lesson['Lesson Code']=$row['code'];
 	}
 	
 	

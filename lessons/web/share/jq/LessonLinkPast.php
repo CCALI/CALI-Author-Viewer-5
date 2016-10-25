@@ -34,6 +34,9 @@ var pageTypeNice={
 	"Prioritize/PDrag":"Drag and Drop"
 	// Needs more entries here
 }
+var sortUsersBy="name";
+var sortPagesBy="score";
+
 function buildUsers()
 {
 	var optIncludeAllDates=$('#optIncludeAllDates').is(':checked');
@@ -47,33 +50,41 @@ function buildUsers()
       "wrong": 23,
 		"rundates": ["2016-06-19 23:18:14", "2016-06-23 12:48:45"]
     };
-  var html='';
+  var rows=[];
   for (var ui=0;ui<usage.users.length;ui++)
   {
 		var user=usage.users[ui];
 		var percent=0;
 		var total=user.right+user.wrong;
 		if ( total > 0) {
-			percent = Math.round( 100 * user.right / total)+'%'; 
+			percent=100 * user.right / total;
+			percentDisplay = Math.round( percent)+'%'; 
 		}
 		else
 		{
-			percent='-';
+			percentDisplay='-';
 		}
 		var columns=[
 			'<span class="icon-user"></span>'+(ui+0)
 			,'<a target=_blank href="https://www.cali.org/user/'+user.userid+'">'+user.name+'</a>'
-			,RWMBar(user.right,user.wrong,0)+' '+percent,user.right,user.wrong,total
+			,RWMBar(user.right,user.wrong,0)+' '+percentDisplay,user.right,user.wrong,total
 			,(optIncludeAllDates ? user.rundates.join("<br>") : user.rundates[0]+' '+ (user.rundates.length>1 ? user.rundates.length : ''))
 			];
-		html += '<tr><td>'+columns.join('</td><td>')+'</td></tr>';
+		var sorts={
+				name:user.name,
+				score: (5000-percent) + user.name,
+				right: (5000-user.right)+user.name,
+				wrong: (5000-user.wrong)+user.name};
+		rows.push( {key: sorts[sortUsersBy],data:'<tr><td>'+columns.join('</td><td>')+'</td></tr>'});
   }
-  $('#userlist tbody').html(html);
+
+  $('#userlist tbody').html(sortRows2HTML(rows));
 }
 
 
 function buildPages()
 {
+	var optIncludeChoices=$('#optIncludeChoices').is(':checked');
 	var optIncludeAllUsers=$('#optIncludeAllUsers').is(':checked');
 	// Page information
 	// Sample record for usage.pages[]
@@ -97,7 +108,8 @@ function buildPages()
         }
       }
 	}};
-	var  html='';
+	var lessonCode=usage.lesson["Lesson Code"];
+	var rows=[];
 	for (var pagename in usage.pages) 
 	{
 		var pageinfo=usage.pages[pagename];
@@ -105,74 +117,99 @@ function buildPages()
 		{
 			if (pageinfo[subqi])
 			{
+				var html='';
 				var subq=pageinfo[subqi];
 				var percent=0;
 				var total=subq.total; 
 				if ( total > 0) {
-					percent = Math.round( 100 * subq.right / total)+'%'; 
+					percent = 100 * subq.right / total;
+					percentDisplay = Math.round(  percent)+'%'; 
 				}
 				else
 				{
-					percent='-';
+					percent=0;
+					percentDisplay='-';
 				}
 				var displayname=pagename;
 				if (pageinfo.type=='Multiple Choice/Choose MultiButtons') {
-					displayname += '#' + subqi;
+					displayname += '#' + String.fromCharCode(64+subqi);
 				}
+				var key  = Math.floor(100+(percent)) +' ' + displayname.toLowerCase();
 				var details=[];
-				var detailsUsers=[];
-				for (var ci in subq)
+				if (optIncludeChoices)
 				{
-					if (parseInt(ci)>0)
+					var detailsUsers=[];
+					for (var ci in subq)
 					{
-						var choice = subq[ci];
-						details.push( 
-						'<td></td>'
-						+'<td class="choice '+choice.grade+'">'+String(choice.grade).toUpperCase().substr(0,1)+'</td>'
-						+'<td class="choice '+choice.grade+'">'+choice.text+'</td>'
-						+'<td class="choice '+choice.grade+'">'+choice.users.length+'</td>');
-						if (optIncludeAllUsers)
+						if (parseInt(ci)>0)
 						{
-							var userlist='';
-							for (var ui=0;ui<choice.users.length;ui++)
-							{
-								var user=usage.users[choice.users[ui]];
-								userlist += '<li>'+user.name;
+							var choice = subq[ci];
+							if (choice.text=='') {
+								choice.text  = 'Choice '+(ci); 
 							}
-							detailsUsers.push('<td colspan=2></td><td colspan=3 class="users choice '+choice.grade+'"><ol>'+userlist)+'</td>';
+							details.push( 
+							'<td></td>'
+							+'<td class="choice '+choice.grade+'">'+String(choice.grade).toUpperCase().substr(0,1)+'</td>'
+							+'<td class="choice '+choice.grade+'">'+choice.text+'</td>'
+							+'<td class="choice '+choice.grade+'">'+choice.users.length+'</td>');
+							if (optIncludeAllUsers)
+							{
+								var userlist='';
+								for (var ui=0;ui<choice.users.length;ui++)
+								{
+									var user=usage.users[choice.users[ui]];
+									userlist += '<li>'+user.name;
+								}
+								detailsUsers.push('<td colspan=2></td><td colspan=3 class="users choice '+choice.grade+'"><ol>'+userlist)+'</td>';
+							}
 						}
 					}
 				}
 				//details = '<table class="choices">'+details+'</table>';
 				//var columns=[subq.right,subq.wrong,total, ,details];
-				var rowspan=(optIncludeAllUsers?2:1)*(details.length)+1;
+				var rowspan=(optIncludeChoices ? ((optIncludeAllUsers?2:1)*(details.length)+1) : 1);
 				html += '<tr>'
-					+'<td rowspan='+rowspan+'>'+displayname+'</td>'
-					+'<td rowspan='+rowspan+' nowrap >'+RWMBar(subq.right,subq.wrong,subq.maybe) +' '+percent+'</td>'
+					+'<td rowspan='+rowspan+'>'+'<a target=_blank href="/lessons/web/'+lessonCode+'/lessontext.php#'+escape(pagename)+'">'+displayname+'</a></td>'
+					+'<td rowspan='+rowspan+' nowrap >'+RWMBar(subq.right,subq.wrong,subq.maybe) +' '+percentDisplay+'</td>'
 					+'<td rowspan='+rowspan+'>'+subq.right+'</td>'
 					+'<td rowspan='+rowspan+'>'+subq.wrong+'</td>'
 					+'<td rowspan='+rowspan+'>'+total+'</td>'
 					+'<td colspan=4>'+(pageTypeNice[pageinfo.type]? pageTypeNice[pageinfo.type]: pageinfo.type )+'</td>'
 					//+'<td></td><td></td><td></td>'
 					+'</tr>';
-				for (var d=0;d<details.length;d++){
+				for (var d=0;d<details.length;d++)
+				{
 					html+= '<tr>'+details[d]+'</tr>';
-					if (optIncludeAllUsers) html+= '<tr>'+detailsUsers[d]+'</tr>';
+					if (optIncludeAllUsers && optIncludeChoices) html+= '<tr>'+detailsUsers[d]+'</tr>';
 				}
+				var sorts={
+					score: (500-percent)+' '+displayname,
+					right:(5000-subq.right)+displayname,
+					wrong:(5000-subq.wrong)+displayname};
+				rows.push( {key:sorts[sortPagesBy],data:html});
 			}
 		}
   }
   
-  $('#pagelist tbody').html(html);
+  $('#pagelist tbody').html(sortRows2HTML(rows)); 
 }
 
 
+function sortRows2HTML(rows) /* array of {key,data} tuples */
+{
+	rows.sort(function(a,b){ if (a.key<b.key) return -1;else if (a.key>b.key) return 1; else return 0;});
+	var html='';
+	for (var r=0;r<rows.length;r++) {
+		html+=rows[r].data;
+	}
+	return html;
+}
 function build()
 {	// 10/18/2016 Construct report tables
 	var html='';
 	var info=['Organization','Semester',['Teacher',usage.lesson['Teacher Name']],'Course Name','Lesson Name','Lesson Runs',['Users',usage.users.length]];
 	for (var pi=0;pi<info.length;pi++) 
-	{
+	{	// Display course/lesson meta data.
 		var p = info[pi];
 		if (typeof p!=='object') {
 			label = p;
@@ -186,9 +223,7 @@ function build()
 		html += '<li>'+label +': '+ value;
 	}
   $('#info').html(html);
-  
-	buildUsers();
-	
+	buildUsers();	
 	buildPages();
 }
 
@@ -200,10 +235,21 @@ $(document).ready(function()
 	}
 	$('#optIncludeAllDates').change(buildUsers);
 	$('#optIncludeAllUsers').change(buildPages);
+	$('#optIncludeChoices').change(buildPages);
 	$('.sortable').click(function(){
-		//if (!$(this).hasClass('sorted')) {
-			trace('sorting');
-			$($(this).parent(),'th').removeClass('sorted');
+			var sort= $(this).attr('sort');
+			var table= $(this).closest('table').attr('id');
+			$(this).parent().children().removeClass('sorted');
+			$(this).addClass('sorted');
+			if (table=='userlist') {
+				sortUsersBy=sort;
+				buildUsers();	
+			}
+			else
+			if (table=='pagelist') {
+				sortPagesBy=sort;
+				buildPages();
+			}
 	//	}
 	})
 });
@@ -293,11 +339,11 @@ function RWMBar(right,wrong,maybe)
 <p><label><input type=checkbox value=false id=optIncludeAllDates>Include all dates of student runs</label></p>
 <table id="userlist" border="1" cellpadding="5" cellspacing="0"><thead>
     <tr>
-		<th nowrap  class="sortable sorted">User</th>
-      <th nowrap class="sortable" ><p><strong>Name</strong></p></th>
-      <th nowrap class="sortable" ><p>Score % Correct</p></th>
-      <th  ><p>Right</p></th>
-      <th  ><p>Wrong</p></th>
+		<th nowrap  class="sortable " sort="user">User</th>
+      <th nowrap class="sortable sorted" sort="name" ><p><strong>Name</strong></p></th>
+      <th nowrap class="sortable" sort="score"><p>Score</p></th>
+      <th  class="sortable " sort="right" ><p>Right</p></th>
+      <th class="sortable " sort="wrong"  ><p>Wrong</p></th>
       <th  ><p>Total </p></th>
       <th nowrap><p>Run Date</p></th>
     </tr></thead>
@@ -306,15 +352,18 @@ function RWMBar(right,wrong,maybe)
 </table>
 <h2>Page Performance</h2>
 <p>Combined results for all students.</p>
-<p><label><input type=checkbox value=false id=optIncludeAllUsers>Include student breakdown</label></p>
+<p>
+	<label><input type=checkbox value=false id=optIncludeChoices>Include response breakdown</label>
+		<label><input type=checkbox value=false id=optIncludeAllUsers>Include students with responses</label>
+</p>
 
 
 <table id="pagelist" border=1 cellpadding="5"   cellspacing=0 >
   <thead><tr>
-    <th nowrap class="sortable sorted">Page name </th>
-    <th nowrap class="sortable"> Score  </th> 
-    <th nowrap>Right</th> 
-    <th nowrap>Wrong</th> 
+    <th nowrap class="sortable " sort="name">Page name </th>
+    <th nowrap class="sortable sorted" sort="score"> Score  </th> 
+    <th nowrap class="sortable " sort="right">Right</th> 
+    <th nowrap class="sortable " sort="wrong">Wrong</th> 
     <th nowrap>Total</th> 
     <th nowrap>Page type</th>
     <th nowrap>Grade</th>
