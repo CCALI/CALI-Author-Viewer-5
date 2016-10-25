@@ -229,10 +229,13 @@ function build()
 
 $(document).ready(function()
 {
-	runid = getParameterByName('runid'); 
-	if (runid>0) {
+	runid =  (getParameterByName('runid')); 
+	courseid =  (getParameterByName('courseid'));
+	lessonid =  (getParameterByName('lessonid')); 
+	if (runid>0 || (courseid>0 && lessonid>0)) {
 		lessonLiveDownloadSilent();
 	}
+	trace([runid,courseid,lessonid]);
 	$('#optIncludeAllDates').change(buildUsers);
 	$('#optIncludeAllUsers').change(buildPages);
 	$('#optIncludeChoices').change(buildPages);
@@ -271,7 +274,7 @@ function isLocalFile()
 }
 function lessonLiveDownloadSilent()
 {	// Download score save xml summary data from website
-	var scoreSaveSummaryURL=LessonLiveDownload() + '?runid='+runid;
+	var scoreSaveSummaryURL=LessonLiveDownload() + '?runid='+runid+"&courseid="+courseid+"&lessonid="+lessonid;
 	$.ajax({
 		url: scoreSaveSummaryURL,
 		dataType: "json",

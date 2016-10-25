@@ -16,9 +16,9 @@
 	require_once "LessonLinkAggregator.php";
 	
 //	### Full debugging.
-	ini_set('display_errors', 1);
-	ini_set('display_startup_errors', 1);
-	error_reporting(E_ALL);
+//	ini_set('display_errors', 1);
+//	ini_set('display_startup_errors', 1);
+//	error_reporting(E_ALL);
 
 
 	// ### Security check should be done to assure user getting this data is course teacher.
@@ -38,25 +38,27 @@
 	
 	//### Gather query string parameters
 	$runid=intval($_GET['runid']);
-	//$courseID=intval($_GET['courseid']); // debugging only
-	//$lessonID=intval($_GET['lessonid']); // debugging only
+	$courseID=intval($_GET['courseid']); // debugging only
+	$lessonID=intval($_GET['lessonid']); // debugging only
 	$lastUpdate=mysql_escape_string ($_GET['lastupdate']);
 	
-	
-	//### Lookup runid to extract user, course and lesson id.
-	$SQL="select nid, uid, courseid from LessonRun where runid = $runid limit 1";
-	$q=new QueryMySQLSimple ($SQL);
-	$row=$q->fetchRow();
-	$courseID=$row['courseid'];
-	$lessonID=$row['nid'];
-	$ownerID=$row['uid'];
+	if ($runid>0)
+	{
+		//### Lookup runid to extract user, course and lesson id.
+		$SQL="select nid, uid, courseid from LessonRun where runid = $runid limit 1";
+		$q=new QueryMySQLSimple ($SQL);
+		$row=$q->fetchRow();
+		$courseID=$row['courseid'];
+		$lessonID=$row['nid'];
+		$ownerID=$row['uid'];
+	}
 	
 	if ($courseID==0)
 	{
 		echo json_error("Unknown course");
 	}
 	else
-	if (!in_array($userID,array($ownerID, 138, 140, 147, 203))) // hack CALI Staff as viable users.
+	if (($userID==0) || (!in_array($userID,array($ownerID, 138, 140, 147, 203)))) // hack CALI Staff as viable users.
 	{
 		echo json_error("Only LessonLink owner may access this data");
 	}
