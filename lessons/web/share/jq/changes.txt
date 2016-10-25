@@ -1,5 +1,10 @@
 Change log for CALI Author Viewer 5
 
+10/24/2016
+Added. LessonLive.
+Added. Score value indicator.
+Fixed. Lesson exits after user no longer logged-in
+
 03/02/2015
 Fixed. Auto ScoreSave login check
 

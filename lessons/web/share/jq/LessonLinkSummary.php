@@ -56,7 +56,7 @@
 		echo json_error("Unknown course");
 	}
 	else
-	if (!in_array($userID,array($ownerID, 203)))
+	if (!in_array($userID,array($ownerID, 138, 140, 147, 203))) // hack CALI Staff as viable users.
 	{
 		echo json_error("Only LessonLink owner may access this data");
 	}
