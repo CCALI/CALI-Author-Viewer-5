@@ -145,7 +145,13 @@ function buildPages()
 						{
 							var choice = subq[ci];
 							if (choice.text=='') {
-								choice.text  = 'Choice '+(ci); 
+								if (pageinfo.type=='Text Entry/Text Short Answer') {
+									choice.text  = 'Match '+(ci);
+								}
+								else
+								{
+									choice.text = ['','Right','Wrong'][ci];
+								}
 							}
 							details.push( 
 							'<td></td>'
