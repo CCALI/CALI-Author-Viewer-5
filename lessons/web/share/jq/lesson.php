@@ -1,5 +1,5 @@
 <?php
-// *** DEV ONLY * THIS IS FOR DEVELOPMENT ON D7.calidev.org
+// *** PRODUCTION * THIS IS FOR www.cali.org
 /** 
  *@file
  *
@@ -12,6 +12,7 @@
  * 09/12/2016 SJG add CALI Staff as faculty role test
  * 09/27/2016 SJG add LessonLive link info
  * 10/07/2016 SJG add betatester role
+ * 10/26/2016 SJG on production site
 */
   $template=file_get_contents("lesson.html");
   global $user;
@@ -29,7 +30,7 @@
   $org_title = get_organization_name($account); 
   $orgname = render($org_title);
   $runid=$_SESSION['runid'];
-  $llMode=$_SESSION['is_owner'];
+  
   $username= $user->name;
   $firstname_item = field_get_items('user', $account, 'field_first_name' );
   $lastname_item = field_get_items('user', $account, 'field_last_name' );
@@ -82,21 +83,21 @@
 <!-- Piwik -->
 <script type="text/javascript">
   var _paq = _paq || [];
-  _paq.push(["setDomains", ["*.d7.calidev.org"]]);
+  _paq.push(["setDomains", ["*.www.cali.org"]]);
   _paq.push(["trackPageView"]);
   _paq.push(["enableLinkTracking"]);
   (function() {
     var u="//analytics.cali.org/";
     _paq.push(["setTrackerUrl", u+"piwik.php"]);
-    _paq.push(["setSiteId", 1]);
-	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","page"]);
-	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","page"]);
-	 _paq.push(["setCustomVariable", 4, "Run ID", "'.$runid.'","page"]);
+    _paq.push(["setSiteId", 3]);
+	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","visit"]);
+	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","visit"]);
+	 _paq.push(["setCustomVariable", 4, "Run ID", "'.$runid.'","visit"]);
 	  var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
     g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
   })();
 </script>
-<noscript><p><img src="//analytics.cali.org/piwik.php?idsite=1" style="border:0;" alt="" /></p></noscript>
+<noscript><p><img src="//analytics.cali.org/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 ';
   
