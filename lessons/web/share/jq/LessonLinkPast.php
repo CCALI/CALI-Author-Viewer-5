@@ -5,6 +5,7 @@
 <script src="jQuery/jquery-1.6.1.min.js" type="text/javascript"></script>
 <script src="CAV_urls.js" type="text/javascript"></script>
 <script xsrc="CAV_LessonPast.js" type="text/javascript"></script>
+<link href="https://www.cali.org/sites/all/themes/cali/stylesheets/style.css?oflsu9" rel="stylesheet" type="text/css" />
 <link href="LessonLinkPast.css" rel="stylesheet" type="text/css" />
 <link href="CALILessonFont/style.css" rel="stylesheet" type="text/css" />
 
@@ -86,6 +87,9 @@ function buildPages()
 {
 	var optIncludeChoices=$('#optIncludeChoices').is(':checked');
 	var optIncludeAllUsers=$('#optIncludeAllUsers').is(':checked');
+	$('#optIncludeAllUsers').parent().toggle(optIncludeChoices);
+
+	
 	// Page information
 	// Sample record for usage.pages[]
 	var sample={
@@ -108,7 +112,7 @@ function buildPages()
         }
       }
 	}};
-	var lessonCode=usage.lesson["Lesson Code"];
+	var lessonCode=usage.lesson["Lesson Code"].toLowerCase();
 	var rows=[];
 	for (var pagename in usage.pages) 
 	{
@@ -241,10 +245,10 @@ $(document).ready(function()
 	if (runid>0 || (courseid>0 && lessonid>0)) {
 		lessonLiveDownloadSilent();
 	}
-	trace([runid,courseid,lessonid]);
+	//trace([runid,courseid,lessonid]);
 	$('#optIncludeAllDates').change(buildUsers);
-	$('#optIncludeAllUsers').change(buildPages);
 	$('#optIncludeChoices').change(buildPages);
+	$('#optIncludeAllUsers').change(buildPages);
 	$('.sortable').click(function(){
 			var sort= $(this).attr('sort');
 			var table= $(this).closest('table').attr('id');
@@ -337,6 +341,8 @@ function RWMBar(right,wrong,maybe)
 </head>
 
 <body>
+	<p class="lllogo"></p>
+	<p class="logo"></p>
 <h1>Lesson Link Past - CALI</h1>
 <h2>Course Lesson Information</h2>
 
