@@ -37,19 +37,24 @@
 	
 	
 	//### Gather query string parameters
-	$runid=intval($_GET['runid']);
+	$runID=intval($_GET['runid']);
 	$courseID=intval($_GET['courseid']); // debugging only
 	$lessonID=intval($_GET['lessonid']); // debugging only
 	$lastUpdate=mysql_escape_string ($_GET['lastupdate']);
 	
-	if ($runid>0)
-	{
-		//### Lookup runid to extract user, course and lesson id.
-		$SQL="select nid, uid, courseid from LessonRun where runid = $runid limit 1";
+	if ($runID>0)
+	{	//### If runid is specified, lookup LessonRun by runid to find course and lesson id.
+		$SQL="select nid, courseid from LessonRun where runid = $runID limit 1";
 		$q=new QueryMySQLSimple ($SQL);
 		$row=$q->fetchRow();
 		$courseID=$row['courseid'];
 		$lessonID=$row['nid'];
+	}
+	if ($courseID>0)
+	{	//### Given course id, lookup the owner so that only the Owner can actually load course data.
+		$SQL="select uid from course where courseid = $courseID limit 1";
+		$q=new QueryMySQLSimple ($SQL);
+		$row=$q->fetchRow();
 		$ownerID=$row['uid'];
 	}
 	
@@ -58,9 +63,11 @@
 		echo json_error("Unknown course");
 	}
 	else
-	if (($userID==0) || (!in_array($userID,array($ownerID, 138, 140, 147, 203)))) // hack CALI Staff as viable users.
+	if (($userID==0 /* anonymous user */) || (!in_array($userID,array($ownerID, 1, 138, 140, 147, 203)))) // hack CALI Staff as viable users.
 	{
-		echo json_error("Only LessonLink owner may access this data");
+		echo json_error(
+			"Only LessonLink owner of this course may access this data"
+			/* "Only LessonLink owner of course $courseID may access this data: $userID<>$ownerID"*/);
 	}
 	else
 	if ($courseID>0 && $lessonID > 0){
@@ -68,7 +75,7 @@
 		echo LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate);
 	}
 	else{
-		echo json_error("Missing course,lesson ids");
+		echo json_error("Unknown lesson");
 	}
 	
 function json_error($errmsg) 

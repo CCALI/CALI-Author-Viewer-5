@@ -61,6 +61,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$lesson['Lesson Name']=$row['title'];
 		$lesson['Lesson ID']=$row['nid'];
 		
+		// Extract CALI lesson code for lesson, e.g., EVD04.
 		$SQL3="select field_lesson_id_value as code from field_data_field_lesson_id where entity_id = $nid"; 
 		$q=new QueryMySQLSimple ($SQL3);
 		$row=$q->fetchRow();
