@@ -16,6 +16,10 @@ tr, td {
 	vertical-align: top;
 	xpadding: 1px;
 }
+.title {
+	font-size: 1.5em;
+	font-weight: bold;
+}
 #userlist tr:nth-child(even) {background: #fff}
 #userlist tr:nth-child(odd)  {background: #eee}
 #userlist tr td:nth-child(3) {

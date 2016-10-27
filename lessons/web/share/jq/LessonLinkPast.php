@@ -217,7 +217,10 @@ function sortRows2HTML(rows) /* array of {key,data} tuples */
 function build()
 {	// 10/18/2016 Construct report tables
 	var html='';
-	var info=['Organization','Semester',['Teacher',usage.lesson['Teacher Name']],'Course Name','Lesson Name','Lesson Runs',['Users',usage.users.length]];
+	var info=['Organization','Semester',
+				 ['Teacher',usage.lesson['Teacher Name']],'Course Name',
+				 ['Lesson Name','<a target=_blank href=/lesson/'+usage.lesson['Lesson ID']+'><span class="title">'+usage.lesson['Lesson Name']+'</span></a>'],
+				 'Lesson Code','Lesson Runs',['Users',usage.users.length]];
 	for (var pi=0;pi<info.length;pi++) 
 	{	// Display course/lesson meta data.
 		var p = info[pi];
@@ -354,7 +357,7 @@ function RWMBar(right,wrong,maybe)
 <p><label><input type=checkbox value=false id=optIncludeAllDates>Include all dates of student runs</label></p>
 <table id="userlist" border="1" cellpadding="5" cellspacing="0"><thead>
     <tr>
-		<th nowrap  class="sortable " sort="user">User</th>
+		<th nowrap  class="sortable " sort="user"><p>User</p></th>
       <th nowrap class="sortable sorted" sort="name" ><p><strong>Name</strong></p></th>
       <th nowrap class="sortable" sort="score"><p>Score</p></th>
       <th  class="sortable " sort="right" ><p>Right</p></th>
