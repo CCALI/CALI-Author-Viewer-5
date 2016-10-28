@@ -20,15 +20,6 @@ tr, td {
 	font-size: 1.5em;
 	font-weight: bold;
 }
-#userlist td:nth-child(4),
-#userlist td:nth-child(5),
-#userlist td:nth-child(6),
-#pagelist td:nth-child(3),
-#pagelist td:nth-child(4),
-#pagelist td:nth-child(5)
-{
-	text-align: right;
-}
 #userlist tr:nth-child(even) {background: #fff}
 #userlist tr:nth-child(odd)  {background: #eee}
 #userlist tr td:nth-child(3) {
@@ -44,9 +35,7 @@ tr, td {
 #pagelist tr {background: #fff}
 #pagelist tr td:nth-child(1) {
 }
-#pagelist td.choice {
-	text-align: left;
-}
+
 #choices tr {background: white;}
 
 td.users {
@@ -77,20 +66,6 @@ table.choices tr {
 }
 .choice.maybe {
 	background-color: #ffc !important;
-}
-.icon {
-	width: 20px;
-	height: 21px;
-	display: inline-block;
-}
-.icon.right {
-	background-image: url('img/grade-right.gif');
-}
-.icon.wrong {
-	background-image: url('img/grade-wrong.gif');
-}
-.icon.maybe {
-	background-image: url('img/grade-maybe.gif');
 }
 .sorted {
 	text-decoration: underline;
