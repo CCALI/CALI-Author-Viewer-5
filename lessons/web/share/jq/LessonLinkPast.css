@@ -78,7 +78,9 @@ table.choices tr {
 	display: none;
 }
 
-
-
-
+input[type="checkbox"] {
+	border-radius: 0;
+	-webkit-appearance: checkbox;
+	margin-right: 3px;
+}
 

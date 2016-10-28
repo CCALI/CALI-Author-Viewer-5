@@ -50,7 +50,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			
 		$q=new QueryMySQLSimple ($SQL3);
 		$row=$q->fetchRow();
-		
+
 		$lesson['Organization']=$row['orgname'];
 		$lesson['Semester']=$row['semester'];
 		$lesson['Teacher Name']=$row['name'];
