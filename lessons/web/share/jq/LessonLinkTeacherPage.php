@@ -41,7 +41,7 @@
 		$userID=$row['uid'];
 		$info['Course ID']=$courseID;
 		$info['Lesson ID']=$lessonID;
-		$info['Student ID']=$userID;
+		//$info['Student ID']=$userID;
 	}
 	
 	if ($courseID>0)
@@ -50,7 +50,7 @@
 		$q=new QueryMySQLSimple ($SQL);
 		$row=$q->fetchRow();
 		$ownerID=$row['uid'];
-		$info['Teacher ID']=$ownerID;
+		//$info['Teacher ID']=$ownerID;
 	}
 	
 	if ($ownerID > 0 && $courseID>0 && $lessonID > 0)
