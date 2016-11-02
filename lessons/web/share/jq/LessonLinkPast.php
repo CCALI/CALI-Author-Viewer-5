@@ -5,6 +5,7 @@
 <script src="jQuery/jquery-1.6.1.min.js" type="text/javascript"></script>
 <script src="CAV_urls.js" type="text/javascript"></script>
 <script xsrc="CAV_LessonPast.js" type="text/javascript"></script>
+<script src="jQuery/exportToCSV.js" type="text/javascript"></script>
 <link href="https://www.cali.org/sites/all/themes/cali/stylesheets/style.css" rel="stylesheet" type="text/css" />
 <link href="LessonLinkPast.css" rel="stylesheet" type="text/css" />
 <link href="CALILessonFont/style.css" rel="stylesheet" type="text/css" />
@@ -37,6 +38,8 @@ var pageTypeNice={
 }
 var sortUsersBy="name";
 var sortPagesBy="score";
+var csv={students:[],questions:[]};// csv row data for student and page reports.
+
 
 function buildUsers()
 {
@@ -67,24 +70,28 @@ function buildUsers()
 		{
 			percentDisplay='-';
 		}
+		var userURL='https://www.cali.org/user/'+user.userid;
 		var columns=[
 //			'<span class="icon-user"></span>'+(ui+0)
 			'<label><input type=checkbox class="includeuser" user='+ui+'><span class="icon-user"></span>'+(ui+1)+'</label>'
-			,'<a target=_blank href="https://www.cali.org/user/'+user.userid+'">'+user.name+'</a>'
+			,'<a target=_blank href="' + userURL + '">'+user.name+'</a>'
 			,RWMBar(user.right,user.wrong,0)+' '+percentDisplay,user.right,user.wrong,total
 			,(optIncludeAllDates ? user.rundates.join("<br>") : user.rundates[0]+' '+ (user.rundates.length>1 ? user.rundates.length : ''))
 			];
-		
+		var csvRow=[ui+1,user.name,userURL,percentDisplay,user.right,user.wrong,total,
+				optIncludeAllDates ? user.rundates : user.rundates[0]];
 		var sortName=user.name.toLowerCase();
 		var sorts={
+				user: ui,
 				name: sortName,
 				score: String(5000-percent) + sortName,
 				right: String(5000-user.right)+sortName,
 				wrong: String(5000-user.wrong)+sortName};
-		rows.push( {key: sorts[sortUsersBy],data:'<tr><td>'+columns.join('</td><td>')+'</td></tr>'});
-  }
-
-	$('#userlist tbody').html(sortRows2HTML(rows));
+		rows.push( {key: sorts[sortUsersBy],data:'<tr><td>'+columns.join('</td><td>')+'</td></tr>',csvRow:csvRow});
+	}
+	var sorted = sortRows2HTML(rows,['#','Student Name','Student Page','Percent','Right','Wrong','Total','Run dates']);
+	csv.students=sorted.csv;
+	$('#userlist tbody').html(sorted.html);
 	$('#userlist th:nth-child(1), #userlist td:nth-child(1), th.user, td.user').toggle(optIncludeSingleUsers);
 
 	$('.includeuser').change(function()
@@ -207,9 +214,11 @@ function buildPages()
 				}
 				//details = '<table class="choices">'+details+'</table>';
 				//var columns=[subq.right,subq.wrong,total, ,details];
+				var pageURL= 'https://www.cali.org/lessons/web/'+lessonCode+'/lessontext.php#'+escape(pagename);
 				var rowspan=(optIncludeChoices ? ((optIncludeAllUsers?2:1)*(details.length)+1) : 1);
+				csvRow=[displayname,pageURL,percentDisplay,subq.right,subq.wrong,total];
 				html += '<tr>'
-					+'<td rowspan='+rowspan+'>'+'<a target=_blank href="/lessons/web/'+lessonCode+'/lessontext.php#'+escape(pagename)+'">'+displayname+'</a></td>'
+					+'<td rowspan='+rowspan+'>'+'<a target=_blank href="'+pageURL+'">'+displayname+'</a></td>'
 					+'<td rowspan='+rowspan+' nowrap >'+RWMBar(subq.right,subq.wrong,subq.maybe) +' '+percentDisplay+'</td>'
 					+'<td rowspan='+rowspan+'>'+subq.right+'</td>'
 					+'<td rowspan='+rowspan+'>'+subq.wrong+'</td>'
@@ -234,12 +243,13 @@ function buildPages()
 					score: String(5000-percent)+' '+sortName,
 					right: String(5000-subq.right)+sortName,
 					wrong: String(5000-subq.wrong)+sortName};
-				rows.push( {key:sorts[sortPagesBy],data:html});
+				rows.push( {key:sorts[sortPagesBy],data:html,csvRow:csvRow});
 			}
 		}
 	}
-  
-	$('#pagelist tbody').html(sortRows2HTML(rows));
+	var sorted = sortRows2HTML(rows,['Page/Question','View','Percent','Right','Wrong','Total']);
+	csv.questions=sorted.csv;
+	$('#pagelist tbody').html(sorted.html);
 	$('#pagelist th.user').remove();
 	for (var ui=0;ui<usage.users.length;ui++)
 	{
@@ -253,15 +263,18 @@ function buildPages()
 }
 
 
-function sortRows2HTML(rows) /* array of {key,data} tuples */
+function sortRows2HTML(rows,csvHeader) /* array of {key,data,csvRow} triples */
 {
 	rows.sort(function(a,b){ if (a.key<b.key) return -1;else if (a.key>b.key) return 1; else return 0;});
 	var html='';
+	var csv=[csvHeader];
 	for (var r=0;r<rows.length;r++) {
 		html+=rows[r].data;
+		csv[csv.length]=rows[r].csvRow;
 	}
-	return html;
+	return {html:html, csv:csv};
 }
+
 function build()
 {	// 10/18/2016 Construct report tables
 	var html='';
@@ -300,6 +313,13 @@ $(document).ready(function()
 	$('#optIncludeAllDates').change(buildUsers);
 	$('#optIncludeChoices').change(buildPages);
 	$('#optIncludeAllUsers').change(buildPages);
+	$('#optCSVStudents').click(function(){
+		exportToCSV('Students - '+usage.lesson['Lesson Code']+' - '+usage.lesson['Course Name']+'.csv',csv.students);
+	});
+	$('#optCSVQuestions').click(function(){
+		exportToCSV('Questions - '+usage.lesson['Lesson Code']+' - '+usage.lesson['Course Name']+'.csv',csv.questions);
+	});
+	
 	$('#optIncludeSingleUsers').change(function(){buildUsers();buildPages()});
 	$('.sortable').click(function(){
 			var sort= $(this).attr('sort');
@@ -402,12 +422,16 @@ function RWMBar(right,wrong,maybe)
 	Loading lesson score data <img src="img/ajax-loader.gif">
 </ul>
 <h2>Student Performance</h2>
-<p>Results for each student.  Multiple LessonLink runs by a single student will be merged and only the first response for each question will be counted.</p>
+<p>Results for each student.
+Multiple LessonLink runs by a single student will be merged and only the first response for each question will be counted.</p>
 <p>
-	<label><input type=checkbox value=false id=optIncludeSingleUsers>Include specific students on Page Performance table below</label>
+	<label><input type=checkbox value=false id=optIncludeSingleUsers>Include specific students on Page/Question Performance table below</label>
 </p>
 <p>
 	<label><input type=checkbox value=false id=optIncludeAllDates>Include all dates of student runs</label>
+</p>
+<p>
+	<button  id=optCSVStudents>Download Student CSV</button>
 </p>
 
 <table id="userlist" border="1" cellpadding="5" cellspacing="0"><thead>
@@ -423,7 +447,7 @@ function RWMBar(right,wrong,maybe)
   <tbody> 
   </tbody>
 </table>
-<h2>Page Performance</h2>
+<h2>Page/Question Performance</h2>
 <p>Combined results for all students.</p>
 <p>
 	<label><input type=checkbox value=false id=optIncludeChoices>Include response breakdown</label>
@@ -431,11 +455,14 @@ function RWMBar(right,wrong,maybe)
 <p>
 	<label><input type=checkbox value=false id=optIncludeAllUsers>Lists students for each response</label>
 </p>
+<p>
+	<button  id=optCSVQuestions>Download Question CSV</button>
+</p>
 
 
 <table id="pagelist" border=1 cellpadding="5"   cellspacing=0 >
   <thead><tr>
-    <th nowrap class="sortable " sort="name">Page name </th>
+    <th nowrap class="sortable " sort="name">Page/Question Name </th>
     <th nowrap class="sortable sorted" sort="score"> Score  </th> 
     <th nowrap class="sortable " sort="right">Right</th> 
     <th nowrap class="sortable " sort="wrong">Wrong</th> 
