@@ -78,8 +78,8 @@ function buildUsers()
 			,RWMBar(user.right,user.wrong,0)+' '+percentDisplay,user.right,user.wrong,total
 			,(optIncludeAllDates ? user.rundates.join("<br>") : user.rundates[0]+' '+ (user.rundates.length>1 ? user.rundates.length : ''))
 			];
-		var csvRow=[ui+1,user.name,userURL,percentDisplay,user.right,user.wrong,total,
-				optIncludeAllDates ? user.rundates : user.rundates[0]];
+		var csvRow=[ui+1,user.name,percentDisplay,user.right,user.wrong,total,
+				String(optIncludeAllDates ? user.rundates.join("\n") : user.rundates[0]),userURL];
 		var sortName=user.name.toLowerCase();
 		var sorts={
 				user: ui,
@@ -89,7 +89,7 @@ function buildUsers()
 				wrong: String(5000-user.wrong)+sortName};
 		rows.push( {key: sorts[sortUsersBy],data:'<tr><td>'+columns.join('</td><td>')+'</td></tr>',csvRow:csvRow});
 	}
-	var sorted = sortRows2HTML(rows,['#','Student Name','Student Page','Percent','Right','Wrong','Total','Run dates']);
+	var sorted = sortRows2HTML(rows,['Student Number','Student Name','Percent Right','Answered Right','Answered Wrong','Answered Total','Run Date(s)','Student CALI Page']);
 	csv.students=sorted.csv;
 	$('#userlist tbody').html(sorted.html);
 	$('#userlist th:nth-child(1), #userlist td:nth-child(1), th.user, td.user').toggle(optIncludeSingleUsers);
@@ -216,7 +216,7 @@ function buildPages()
 				//var columns=[subq.right,subq.wrong,total, ,details];
 				var pageURL= 'https://www.cali.org/lessons/web/'+lessonCode+'/lessontext.php#'+escape(pagename);
 				var rowspan=(optIncludeChoices ? ((optIncludeAllUsers?2:1)*(details.length)+1) : 1);
-				csvRow=[displayname,pageURL,percentDisplay,subq.right,subq.wrong,total];
+				csvRow=[displayname,percentDisplay,subq.right,subq.wrong,total,pageURL];
 				html += '<tr>'
 					+'<td rowspan='+rowspan+'>'+'<a target=_blank href="'+pageURL+'">'+displayname+'</a></td>'
 					+'<td rowspan='+rowspan+' nowrap >'+RWMBar(subq.right,subq.wrong,subq.maybe) +' '+percentDisplay+'</td>'
@@ -247,7 +247,7 @@ function buildPages()
 			}
 		}
 	}
-	var sorted = sortRows2HTML(rows,['Page/Question','View','Percent','Right','Wrong','Total']);
+	var sorted = sortRows2HTML(rows,['Page/Question','Percent Right','Answered Right','Answered Wrong','Answered Total','LessonText']);
 	csv.questions=sorted.csv;
 	$('#pagelist tbody').html(sorted.html);
 	$('#pagelist th.user').remove();
@@ -314,10 +314,10 @@ $(document).ready(function()
 	$('#optIncludeChoices').change(buildPages);
 	$('#optIncludeAllUsers').change(buildPages);
 	$('#optCSVStudents').click(function(){
-		exportToCSV('Students - '+usage.lesson['Lesson Code']+' - '+usage.lesson['Course Name']+'.csv',csv.students);
+		exportToCSV(usage.lesson['Course Name'] + '-' + usage.lesson['Lesson Code'] + '-Students.csv',csv.students);
 	});
 	$('#optCSVQuestions').click(function(){
-		exportToCSV('Questions - '+usage.lesson['Lesson Code']+' - '+usage.lesson['Course Name']+'.csv',csv.questions);
+		exportToCSV(usage.lesson['Course Name'] + '-' + usage.lesson['Lesson Code'] + '-Questions.csv',csv.questions);
 	});
 	
 	$('#optIncludeSingleUsers').change(function(){buildUsers();buildPages()});
@@ -422,8 +422,8 @@ function RWMBar(right,wrong,maybe)
 	Loading lesson score data <img src="img/ajax-loader.gif">
 </ul>
 <h2>Student Performance</h2>
-<p>Results for each student.
-Multiple LessonLink runs by a single student will be merged and only the first response for each question will be counted.</p>
+<p>
+	Results for each student. Multiple LessonLink runs by a single student will be merged and only the first response for each question will be counted.</p>
 <p>
 	<label><input type=checkbox value=false id=optIncludeSingleUsers>Include specific students on Page/Question Performance table below</label>
 </p>
@@ -431,7 +431,7 @@ Multiple LessonLink runs by a single student will be merged and only the first r
 	<label><input type=checkbox value=false id=optIncludeAllDates>Include all dates of student runs</label>
 </p>
 <p>
-	<button  id=optCSVStudents>Download Student CSV</button>
+	<button  id=optCSVStudents>Download Student Performance CSV</button>
 </p>
 
 <table id="userlist" border="1" cellpadding="5" cellspacing="0"><thead>
@@ -456,7 +456,7 @@ Multiple LessonLink runs by a single student will be merged and only the first r
 	<label><input type=checkbox value=false id=optIncludeAllUsers>Lists students for each response</label>
 </p>
 <p>
-	<button  id=optCSVQuestions>Download Question CSV</button>
+	<button  id=optCSVQuestions>Download Page/Question Performance CSV</button>
 </p>
 
 
