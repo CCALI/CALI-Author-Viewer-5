@@ -405,7 +405,27 @@ $(document).ready(function()
 	{	// Activate Student's LessonLinkLive watermark.
 		lessonLive.isStudent=true;
 		$('#llHeaderPage').removeClass('hidestart'); 
-		$('#llLinkLogo').removeClass('hidestart'); 
+		$('#llLinkLogo').removeClass('hidestart').click(function()
+		{	// Jump to the teacher's page
+			$.ajax({
+				url: "LessonLinkTeacherPage.php?runid="+runid,
+				dataType: "json",
+				timeout: 15000,
+				error: function(data,textStatus,thrownError)
+				{
+				  //alert('Error occurred loading the XML from '+this.url+"\n"+textStatus); 
+				},
+				success: function(data)
+				{
+					var teacherPage = data["Current Page"];
+					if (teacherPage && teacherPage!="")
+					{
+						gotoPage(teacherPage);
+					}
+				}
+			});
+			return false;
+		});
 	}
 });
 
