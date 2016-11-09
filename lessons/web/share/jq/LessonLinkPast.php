@@ -21,10 +21,94 @@
 <?php
 // 10/24/2016 SJG Current version expects runid, handled same way as lesson live.
 // Need alternate version that accepts course/lesson id so works directly from LessonLink manager.
-// Calls the .php LessonLinkSummary rather than embedding data directly. 
+// Calls the .php LessonLinkSummary rather than embedding data directly.
+?>
+
+
+
+<?php
+	//### 11/08/2016 Piwik collection: Get user/organization information for piwik
+	// Code copied from lesson.php.
+	require "LessonLinkConfig.php";
+	global $user;
+	// Set the working directory to your Drupal root
+	chdir(DRUPAL_ROOT_DIR);
+	define('DRUPAL_ROOT', getcwd());
+	require_once("./includes/bootstrap.inc");
+	drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+	// Grab account info to get user and org info.
+	$account = user_load($user->uid); 
+	//$roles = $user->roles;
+	$org_title = get_organization_name($account); 
+	$orgname = render($org_title);	
+	//$username= $user->name;
+	$firstname_item = field_get_items('user', $account, 'field_first_name' );
+	$lastname_item = field_get_items('user', $account, 'field_last_name' );
+	$lastname_value = field_view_value('user', $account, 'field_last_name', $lastname_item[0]);
+	$lastname = render($lastname_value);
+	$firstname_value = field_view_value('user', $account, 'field_first_name', $firstname_item[0]);
+	$firstname = render($firstname_value);
+	$dispname= $firstname." ".$lastname;
+	if (!isset($orgname)) {
+		$orgname = '';
+	}
+
+  // 11/09/2016 07/20/2016 SJG Add Piwik tracking organization name ($orgname) and user's full name ($dispname).
+  // Group membership needs to be added as custom variable 1.
+  echo '
+<!-- Piwik -->
+<script type="text/javascript">
+  var _paq = _paq || [];
+  _paq.push(["setDomains", ["*.www.cali.org"]]);
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+  (function() {
+    var u="//analytics.cali.org/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", 3]);
+	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","visit"]);
+	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","visit"]);
+	  var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
+    g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+</script>
+<noscript><p><img src="//analytics.cali.org/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>
+<!-- End Piwik Code -->
+';
+
+/**
+ * get og ids that $account belongs to;
+ * then gets first with a type of "organization"
+ * uses that title for the $orgname
+ */
+function get_organization_name($account){
+  $user_orgs = og_get_groups_by_user($account);
+  if (!empty($user_orgs['node'])){
+	foreach($user_orgs['node'] as $value){
+	  $node = node_load($value);
+	  if ($node->type == "organization"){
+		$title = $node->title;
+		//echo $title;
+		return($title);
+	  }
+	}
+  }
+}
+
 ?>
 
 <script language="javascript">
+
+function piwikLog(tag)
+{	// 11/09/2016 
+  if (_paq) {
+	//var piwikURL ='/lessonlink/report/lessonpast/' + usage.lesson['Course ID'] + '/' + usage.lesson['Lesson ID'];
+	var piwikTitle='LessonLink - Report - LessonPast - ' + (usage.lesson['Course Name']) + ' - ' + usage.lesson['Lesson Code'];
+	//_paq.push(['setCustomUrl', piwikURL]);
+	_paq.push(['setDocumentTitle',piwikTitle]);
+	_paq.push(['trackPageView']); 
+  }
+}
 
 var usage={}; // Populated with lesson aggregate data.
 
@@ -275,6 +359,7 @@ function sortRows2HTML(rows,csvHeader) /* array of {key,data,csvRow} triples */
 	return {html:html, csv:csv};
 }
 
+
 function build()
 {	// 10/18/2016 Construct report tables
 	var html='';
@@ -296,9 +381,10 @@ function build()
 		}
 		html += '<li>'+label +': '+ value;
 	}
-  $('#info').html(html);
+	$('#info').html(html);
 	buildUsers();	
 	buildPages();
+	piwikLog('');
 }
 
 $(document).ready(function()
