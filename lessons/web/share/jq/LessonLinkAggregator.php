@@ -19,18 +19,26 @@
 	
 	10/24/2016 WARNING: any UTF-8 or Windows 1252 characters will break JSON encoding.
 	May need to run through utf8_encode
+	
+	11/16/2016 Added flag to load Text Essay and track all of a user's answers to a question.
+	
+	12/08/2016 Allow empty course for use with AutoPublish.
 */
 
+// 11/16/2016 Option to attach all answers given by each user for each run. Attached to question>user>rundate>text. Allows essays to be attached.
+define('INCLUDE_ALL_USER_ANSWERS', 0 );
+// Include full essays answers for each student and each run. Requires INCLUDE_ALL_USER_ANSWERS to work.
+define('INCLUDE_ESSAYS', INCLUDE_ALL_USER_ANSWERS>0);
+// If REDACTED is 1 real user info is redacted. Handy to give git repos as sample data.
+define('REDACTED', 0 );
 
 function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
-{	// courseid is course table's course id
+{	// courseid is course db table's course id (if 0, assuming an AutoPublish lesson)
 	// lessonid is lesson's node id
 	// lastupdate is optional.
 	//		if blank, returns all JSON.
 	//    if not blank, returns an empty JSON if NO new data has appeared since then.
 	
-	// If REDACTED is 1 generate sample JSON of real world data but without real user info to add to git repos as sample data.
-	define('REDACTED', 0 );
 
 	$courseid=intval($courseID); // Lesson link Course ID
 	$nid=intval($lessonID); // Which lesson in the course
@@ -40,7 +48,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	
 	if ($courseid>0)
 	{	// Grab and display course info like org name, faculty username, course name, semester.
-		$SQL3="select nodeorg.title as orgname,orgid,name,users.uid,semester,createdate,course.courseid,coursename,node.title,node.nid
+		$SQL3="select nodeorg.title as orgname,orgid,name,users.uid,semester,createdate,course.courseid,coursename,node.title,node.type,node.nid
 			from course,users , course_node, node, node as nodeorg
 			where course.courseid =  $courseid  and node.nid = $nid
 			and course.uid = users.uid 
@@ -57,8 +65,9 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$lesson['Teacher ID']= $ownerid = $row['uid'];
 		$lesson['Course Name']=utf8_encode($row['coursename']);
 		$lesson['Course ID']=$row['courseid'];
-		$lesson['Course Created Date']=$row['createdate'];
+		$lesson['Created Date']=$row['createdate'];
 		$lesson['Lesson Name']=$row['title'];
+		$lesson['Lesson Type']=$row['type'];
 		$lesson['Lesson ID']=$row['nid'];
 		
 		// Extract CALI lesson code for lesson, e.g., EVD04.
@@ -66,12 +75,34 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$q=new QueryMySQLSimple ($SQL3);
 		$row=$q->fetchRow();
 		$lesson['Lesson Code']=$row['code'];
+		$courseFilter = " and courseid=$courseid"; // If course specified, we filter on it.
+	}
+	else
+	{
+		$SQL3="select  lsn.type, lsn.title as title, lsn.uid, lsn.nid, lsn.created, u.name as name, u.mail
+			from node as lsn , users as u where  
+			lsn.nid = $nid and lsn.uid = u.uid ;";
+		$q=new QueryMySQLSimple ($SQL3);
+		$row=$q->fetchRow();
+		$lesson['Organization']='-';
+		$lesson['Semester']='-';
+		$lesson['Teacher Name']=$row['name'];
+		$lesson['Teacher ID']= $ownerid = $row['uid'];
+		$lesson['Course Name']='-';
+		$lesson['Course ID']='-';
+		$lesson['Created Date']=date("Y-m-d H:i:s",$row['created']);
+		$lesson['Lesson Name']=utf8_encode($row['title']);
+		$lesson['Lesson Type']=$row['type'];
+		$lesson['Lesson ID']=$row['nid'];
+		$lesson['Lesson Code']=$row['nid'];
+		$courseFilter="";  // assumption is with no course, must be an AutoPublish, so include all runs.
 	}
 	
 	
 	if ($lastupdate!='')
 	{	// If last update filter, see if there are new/updated records after that date. If none, return no-op or {};
-		$SQL="select count(*) as updated from LessonRun where nid=$nid and courseid=$courseid and scoredate > \"$lastupdate\" ";
+		// 12/08/2016 Include course filter if defined.
+		$SQL="select count(*) as updated from LessonRun where nid=$nid $courseFilter and scoredate > \"$lastupdate\" ";
 		$query=new QueryMySQLSimple($SQL);
 		$row=$query->fetchRow();
 		$updatedCount = $row['updated'];
@@ -98,12 +129,11 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	}
 
 	// Extract all lesson runs for this course/lesson. 
-	$SQL="select uid, nid,  scoredate, responses from LessonRun where nid=$nid and courseid=$courseid order by runid";
+	$SQL="select uid, nid,  scoredate, responses from LessonRun where nid=$nid $courseFilter order by runid limit 9999";
 	$query=new QueryMySQLSimple($SQL);
 
 	$lesson['Lesson Runs']=$query->getNumRecords();
 	array_push($comment,"1. Only a student's first answer to any question is tallied. ","2. Discarding Text Essays and Text Selects.");
-	
 	
 	$pages=array();
 	$users=array();
@@ -147,132 +177,145 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			if (isset($savedate)){
 				$rundates[$uidx][$savedate]=1;
 			}
-			$p = xml_parser_create();
-			xml_parse_into_struct($p, $xml, $vals);// $index);
-			
-			for($i=0;$i<count($vals);$i++)
-			{
-				switch ($vals[$i]['tag'])
+			if (trim(''.$xml)<>'')
+			{ 
+				$p = xml_parser_create();
+				$res=xml_parse_into_struct($p, $xml, $vals);
+				if ($res==0)
+				{	// Parse error such as weird character in the ScoreSave XML. TODO Need to solve this. 
+					//echo '<hr>PARSE ERROR for '.$uid.' '.$savedate.' ';
+				}
+				if (1)
 				{
-					case 'NAME':
-						$qname=$vals[$i]['value'];
-						break;
-					case 'SUBQ':
-						$qsub=intval($vals[$i]['value']);
-						break;
-					case 'TYPE':
-						$qtype=$vals[$i]['value'];
-						break;
-					case 'GRADE':
-						$qgrade=strtolower($vals[$i]['value']);
-						break;
-					case 'TIME':
-						//$qtime=intval($vals[$i]['value']);
-						break;
-					case 'TEXT':
-						$qanswer=$vals[$i]['value'];
-						break;
-					case 'ID': // question answer id: for multiple choice then 0=A, 1=B, etc.
-						$qaid=$vals[$i]['value'];
-						break;
-					case 'Q':
-						if ($vals[$i]['type']=='open')
-						{	// on opening <Q we clear values
-							$qname='?';
-							$qsub=1;
-							$qgrade='';
-							$qaid='';
-							$qtype='?';
-							$qanswer='';
-						}
-						else
-						{	// on close /Q> we tally.
-							
-							if ($qtype!='Text Entry/Text Essay')// discard essay to avoid clutter for now.
-							
-							if ($qgrade!=''){// discard unscored questions
-								
-							$qnameActual=$qname;
-							$qname = strtoupper($qname);// just incase a page name has case changed, use case-insentive name as index.
-								
-								
-							if (empty($pages[$qname]))
-							{	// add a unique lesson/page tuple
-								$pages[$qname]=array('type'=> $qtype,'pagename'=>$qnameActual);
-							}
-								
-							if (empty($pages[$qname][$qsub]))
-							{
-								$pages[$qname][$qsub] = array( 'users'=>array(), 'right'=>0, 'wrong'=>0,'total'=>0 );
-							}
-							
-							if (!isset($pages[$qname][$qsub]['users'][$uidx]))
-							{	// collect only first attempt for this user/question/lesson/subquestion tuple
-								$pages[$qname][$qsub]['users'][$uidx]=1;
-								
-								if ($qtype == 'Text Entry/Text Select')
-								{	// For now, discard text selections since it's rather big. 
+					for($i=0;$i<count($vals);$i++)
+					{
+						switch ($vals[$i]['tag'])
+						{
+							case 'NAME':
+								$qname=$vals[$i]['value'];
+								break;
+							case 'SUBQ':
+								$qsub=intval($vals[$i]['value']);
+								break;
+							case 'TYPE':
+								$qtype=$vals[$i]['value'];
+								break;
+							case 'GRADE':
+								$qgrade=strtolower($vals[$i]['value']);
+								break;
+							case 'TIME':
+								//$qtime=intval($vals[$i]['value']);
+								break;
+							case 'TEXT':
+								$qanswer=$vals[$i]['value'];
+								break;
+							case 'ID': // question answer id: for multiple choice then 0=A, 1=B, etc.
+								$qaid=$vals[$i]['value'];
+								break;
+							case 'Q':
+								if ($vals[$i]['type']=='open')
+								{	// on opening <Q we clear values
+									$qname='?';
+									$qsub=1;
+									$qgrade='';
+									$qaid='';
+									$qtype='?';
 									$qanswer='';
 								}
-									
-								$text = trim($qanswer);// preserve textual answer like for short answer, essay.
-		
-								if ($qaid!='') // $qtype=='Multiple Choice/Choose List' || $qtype=='Multiple Choice/Choose Buttons')
-								{	// Force multiple choice types to just have answer index
-									if ($qtype =='Book Page/'){
-										$qanswer =  $qaid; //book page hotspots are 1-based (oops)
-									}
-									else
-									if  ($qtype=='Multiple Choice/Choose List' || $qtype=='Multiple Choice/Choose Buttons' || $qtype=='Multiple Choice/Choose MultiButtons')
-									{ // other answers are 0-based.
-										$qanswer = (1+$qaid);
-									}
-									elseif ( $qtype=='Text Entry/Text Short Answer')
-									{// short answer are 1-based and index 0 are 'no matches'
-										$qanswer = $qaid;
-										$text= ''; // For now, don't include the user's actual Text Short Answers
-									}
-									else
-									{	// For questions that are right/wrong like drag,checkboxes.
-										if ($qgrade=="right")
-											$qanswer=1;
-										else
-											$qanswer=2;
-										//$qanswer="IF".$qgrade;
-									}
-								}
 								else
-								{
-									$qanswer = 1;// not sure what this is, happens in non CALI lessons. 
+								{	// on close /Q> we tally. 
+									if ((INCLUDE_ESSAYS) || ( (!INCLUDE_ESSAYS) && ($qtype!='Text Entry/Text Essay')))// discard essay to avoid clutter for now.
+									
+									if ($qgrade!='')// discard unscored questions 
+								
+									{	
+									$qnameActual=$qname;
+									$qname = strtoupper($qname);// just incase a page name has case changed, use case-insentive name as index. 
+										
+									if (empty($pages[$qname]))
+									{	// add a unique lesson/page tuple
+										$pages[$qname]=array('type'=> $qtype,'pagename'=>$qnameActual);
+										//echo ('<hr>'.$qname);
+									}
+										
+									if (empty($pages[$qname][$qsub]))
+									{
+										$pages[$qname][$qsub] = array( 'users'=>array(), 'right'=>0, 'wrong'=>0,'total'=>0 );
+									}
+									
+									if (!isset($pages[$qname][$qsub]['users'][$uidx]))
+									{	// collect only first attempt for this user/question/lesson/subquestion tuple
+										$pages[$qname][$qsub]['users'][$uidx]=1;
+										
+										if ($qtype == 'Text Entry/Text Select')
+										{	// For now, discard text selections since it's rather big. 
+											$qanswer='';
+										}
+											
+										$text = trim($qanswer);// preserve textual answer like for short answer, essay.
+				
+										if ($qaid!='') // $qtype=='Multiple Choice/Choose List' || $qtype=='Multiple Choice/Choose Buttons')
+										{	// Force multiple choice types to just have answer index
+											if ($qtype =='Book Page/'){
+												$qanswer =  $qaid; //book page hotspots are 1-based (oops)
+											}
+											else
+											if  ($qtype=='Multiple Choice/Choose List' || $qtype=='Multiple Choice/Choose Buttons' || $qtype=='Multiple Choice/Choose MultiButtons')
+											{ // other answers are 0-based.
+												$qanswer = (1+$qaid);
+											}
+											elseif ( $qtype=='Text Entry/Text Short Answer')
+											{// short answer are 1-based and index 0 are 'no matches'
+												$qanswer = $qaid;
+												$text= ''; // For now, don't include the user's actual Text Short Answers
+											}
+											else
+											{	// For questions that are right/wrong like drag,checkboxes.
+												if ($qgrade=="right")
+													$qanswer=1;
+												else
+													$qanswer=2;
+												//$qanswer="IF".$qgrade;
+											}
+										}
+										else
+										{
+											$qanswer = 1;// not sure what this is, happens in non CALI lessons. 
+										}
+										
+										
+										if (!isset($pages[$qname][$qsub][$qanswer]))
+										{	// add this answer
+											$pages[$qname][$qsub][$qanswer] = array('grade'=>$qgrade,'users'=> array(),'text'=>array()); 
+										}
+										// tally user answers for this choice.
+										$pages[$qname][$qsub][$qanswer]['users'][$uidx]=1;
+										if (INCLUDE_ALL_USER_ANSWERS)
+										{	// Attach this user's unique answer per run. 
+											$pages[$qname][$qsub]['user'][$uidx][$savedate]=$text;
+										}		
+										// Store unique answers
+										$pages[$qname][$qsub][$qanswer]['text'][$text]=true;
+										
+										if ($qgrade!='') // ($qgrade=='RIGHT'||$qgrade=='WRONG')
+										{
+											$pages[$qname][$qsub]['total']++;
+											$pages[$qname][$qsub][$qgrade]++;
+											//$pages[$qname][$qsub][$qanswer]['users'][$uid]=1; 
+											$scores[$qgrade][$uidx]++; // tally this user's total scores
+										} 
+									}
+									}
 								}
-								
-								
-								if (!isset($pages[$qname][$qsub][$qanswer]))
-								{	// add this answer
-									$pages[$qname][$qsub][$qanswer] = array('grade'=>$qgrade,'users'=> array(),'text'=>array()); 
-								}
-								// tally user answers for this choice.
-								$pages[$qname][$qsub][$qanswer]['users'][$uidx]=1;
-		
-								// store unique answers
-								$pages[$qname][$qsub][$qanswer]['text'][$text]=true;
-								
-								if ($qgrade!='') // ($qgrade=='RIGHT'||$qgrade=='WRONG')
-								{
-									$pages[$qname][$qsub]['total']++;
-									$pages[$qname][$qsub][$qgrade]++;
-									//$pages[$qname][$qsub][$qanswer]['users'][$uid]=1; 
-									$scores[$qgrade][$uidx]++; // tally this user's total scores
-								} 
-							}
-							}
+								break;
 						}
-						break;
+					}//for
+					xml_parser_free($p);
 				}
 			}
-			xml_parser_free($p);
 		}
 	}
+//	var_dump($pages);
 	
 	$lesson['LastUpdate']=$maxdate; // indicate last saved date so later queries can return NOOP if there's no new data.
 	$lesson['XMLBytes']=$bytes; 
@@ -280,30 +323,32 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	
 	// 09/09/2016 Gather user information
 	//$SQL='select mail, name, users.uid from users where   users.uid in ('.implode(",",array_keys($users)).')';
-	$SQL = 'select uid,field_first_name_value as firstname,field_last_name_value as lastname
-			from users,field_data_field_first_name,field_data_field_last_name 
-			where (field_data_field_first_name.entity_id = uid and field_data_field_last_name.entity_id=uid) and 
-			users.uid in ('.implode(",",array_keys($users)).')';
-	$query=new QueryMySQLSimple($SQL);
-	$shortusers=array();
-	//	var_dump($scores);
-	while($row=$query->fetchRow())
-	{
-		$shortid=$users[$row['uid']];
-		//$users[$row['uid']] = array(/*'username'=>$row['name'],*/'email'=>$row['mail']);
-		$shortusers[$shortid]= array(
-			'userid'=> REDACTED?'REDACTED':intval($row['uid'])
-			,'name'=>REDACTED?'REDACTED':  $row['lastname'].', '.$row['firstname'] 
-			,'right'=>intval ($scores['right'][$shortid])
-			,'wrong'=>intval ($scores['wrong'][$shortid]) // in case of null where user didn't get any right or any wrong.
-			,'rundates'=> array_keys($rundates[$shortid])
-			//,'email'=>REDACTED?'REDACTED@REDACTED.EDU':$row['mail']
-			);
+	if (count($users)>0)
+	{	
+		$SQL = 'select uid,field_first_name_value as firstname,field_last_name_value as lastname
+				from users,field_data_field_first_name,field_data_field_last_name 
+				where (field_data_field_first_name.entity_id = uid and field_data_field_last_name.entity_id=uid) and 
+				users.uid in ('.implode(",",array_keys($users)).')';
+		$query=new QueryMySQLSimple($SQL);
+		$shortusers=array();
+		//	var_dump($scores);
+		while($row=$query->fetchRow())
+		{
+			$shortid=$users[$row['uid']];
+			//$users[$row['uid']] = array(/*'username'=>$row['name'],*/'email'=>$row['mail']);
+			$shortusers[$shortid]= array(
+				'userid'=> REDACTED?'REDACTED':intval($row['uid'])
+				,'name'=>REDACTED?'REDACTED':  $row['lastname'].', '.$row['firstname'] 
+				,'right'=>intval ($scores['right'][$shortid])
+				,'wrong'=>intval ($scores['wrong'][$shortid]) // in case of null where user didn't get any right or any wrong.
+				,'rundates'=> array_keys($rundates[$shortid])
+				//,'email'=>REDACTED?'REDACTED@REDACTED.EDU':$row['mail']
+				);
+		}
+		$users = $shortusers;
+		ksort($users);
 	}
-	$users = $shortusers;
-	ksort($users);
-	
-	
+
 	
 	function sortPageNameNatural($a, $b){ // Sort our page names sensibly so 'Question 2' appears before 'Question 10'.
 		return strnatcmp($a,$b); //Case sensitive
@@ -312,11 +357,12 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	
 	//var_dump($pages);return;
 	
+	// Aggregate all pages into JSON friendly structure.
 	$pagesFinal=array();
 	foreach($pages as $pagei=>&$page)
-	{	// Procss one page
-		
-		// get max users per question (for many multiple choice pick the highest user count)
+	{	// Process one page
+		//var_dump($page);return;	
+		// Get max users per question (for many multiple choice pick the highest user count)
 		$maxusers=0;
 		foreach ($page as $qi => &$q)
 		{
@@ -393,19 +439,20 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	echo'<hr>';echo json_encode($pagesFinal);
 	echo'<hr>';
 	*/
-	$json= //str_replace("],","],\n",
-		json_encode(array(
+	$ar =array(
 			"_comment"=>$comment,
 			"lesson"=>$lesson,
 			"users"=>array_values($users),
 			"pages"=>$pagesFinal
-		) 
 		);
-	//var_dump($json);
+	$json= //str_replace("],","],\n",
+		json_encode($ar); 
 	if ($json===FALSE)
 	{
-		echo json_last_error() ;
+		echo 'JSONError:'. json_last_error() ;
+		//var_dump($ar);
 	}
+ //var_dump($ar);
 	return $json;
 }
 
@@ -414,6 +461,7 @@ class QueryMySQLSimple
 	function QueryMySQLSimple($SQL)
 	{ 
 		$result=mysql_query($SQL);
+		//echo '<hr>'.$SQL.'<hr>';
 		if (!$result){
 			//abort(json_encode(array("error"=>array("SQL"=>$SQL,"message"=>mysql_error()))));
 		}

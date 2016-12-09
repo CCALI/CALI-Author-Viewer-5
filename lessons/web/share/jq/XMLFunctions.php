@@ -13,5 +13,4 @@ function XMLTagExtract($xml,$tag)
 		return "";
 }
 
-
 ?>

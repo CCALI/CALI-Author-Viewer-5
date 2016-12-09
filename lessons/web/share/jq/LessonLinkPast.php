@@ -392,7 +392,7 @@ $(document).ready(function()
 	runid =  (getParameterByName('runid')); 
 	courseid =  (getParameterByName('courseid'));
 	lessonid =  (getParameterByName('lessonid')); 
-	if (runid>0 || (courseid>0 && lessonid>0)) {
+	if (runid>0 || (courseid>0 && lessonid>0) || lessonid>0) {
 		lessonLiveDownloadSilent();
 	}
 	//trace([runid,courseid,lessonid]);

@@ -58,7 +58,19 @@
 		$ownerID=$row['uid'];
 	}
 	
-	if ($courseID==0)
+	if ($lessonID>0 && $courseID==0)
+	{	// 12/08/2016 If lesson but no course see if it's creator is this user (assume owner is AP)
+		$node = node_load($lessonID);
+		if($node->uid == $user->uid)
+		{
+        $ownerID = $userID;
+		}
+	}
+	
+	//var_dump(array($node->uid,$lessonID,$courseID,$userID,$user->uid,$ownerID));
+	
+	
+	if ($courseID==0 && $lessonID==0 )
 	{
 		echo json_error("Unknown course");
 	}
@@ -67,10 +79,11 @@
 	{
 		echo json_error(
 			"Only LessonLink owner of this course may access this data"
-			/* "Only LessonLink owner of course $courseID may access this data: $userID<>$ownerID"*/);
+			//"Only LessonLink owner of course $courseID may access this data: $userID<>$ownerID"
+			);
 	}
 	else
-	if ($courseID>0 && $lessonID > 0){
+	if ( $lessonID > 0){ //$courseID>0 &&
 		//echo json_error("Got the course ");
 		echo LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate);
 	}
@@ -80,7 +93,8 @@
 	
 function json_error($errmsg) 
 {
-	return json_encode(array('error'=>$errmsg));
+	global $userID;
+	return json_encode(array('error'=>$errmsg, 'user'=>$userID));
 }
 ?>
 
