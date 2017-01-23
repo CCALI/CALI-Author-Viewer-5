@@ -68,12 +68,12 @@
 	 $llMode="";
   }
 
-	if ($betamode!=1)
-	{	// If not in beta mode, deactivate any beta features like LessonLive for Teacher.
-		if ($llMode=="own")
-			$llMode='';
-	}
-	
+//	if ($betamode!=1)
+//	{	// If not in beta mode, deactivate any beta features like LessonLive for Teacher.
+//		if ($llMode=="own")
+//			$llMode='';
+//	}
+
   $custom="<script>var llMode=\"$llMode\"; var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
 
   
