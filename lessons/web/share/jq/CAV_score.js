@@ -2,6 +2,8 @@
 // CALI Viewer 5, Version: 03/15/2012
 // CALI Author Viewer - Scoring
 
+var scoreSaveWarningCount=0;
+
 function printScore()
 {
 	$('#ScoreReportCert').jqprint();
@@ -125,7 +127,6 @@ function downloadScore()
 	});
 }
 
-
 function uploadScoreDone(success,msg)
 {	// Called when Score has been saved or failed. 
 	$(".UploadScore1").show();
@@ -248,16 +249,26 @@ function uploadScoreSilent()
 			clearInterval(uploadScoreSilentInterval);
 			uploadScoreSilentInterval=setInterval("uploadScoreSilent()", 30000);
 			
+			scoreSaveWarningCount++;
+			trace(scoreSaveWarningCount);
+			if (scoreSaveWarningCount>5)
+			{	// After 5 failed attempts to save score data, exit lesson. 
+				win.onbeforeunload=null;if (!$.browser.mozilla)window.onbeforeunload=null;
+				parent.location = 'https://www.cali.org/mylessonruns';
+			}
+			
+			
 		},
 	   success: function(data)
 		{	// 03/02/2015 On success, reset upload rate to 5 seconds.
 			uploadingScore=false;
-			trace("upload success:");
+			//trace("upload success:");
 			$('#ScoreSaveError').addClass('hidestart');
-			lastSavedData=newScoreData;
+			lastSavedData=xmlDocument;// remember data uploaded, in case newScoreData changed during upload;
 			// Success
 			clearInterval(uploadScoreSilentInterval);
 			uploadScoreSilentInterval=setInterval("uploadScoreSilent()", 5000);
+			scoreSaveWarningCount=0;
 	  	}
 	});
 	return false;

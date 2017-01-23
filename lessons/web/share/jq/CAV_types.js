@@ -12,7 +12,13 @@ var RIGHT="RIGHT";
 var WRONG="WRONG";
 var INFO="INFO";
 
-// Classess 
+// Classess
+
+/** 
+ * @constructor
+ * @struct
+ * @this {TPage}
+ */
 function TPage()
 {	// This represents a single page within the lesson book.
 	this.id="";//unique id
@@ -30,6 +36,7 @@ function TPage()
 	this.feedbackShared="";
 	this.attempts=0;//number of attempts to answer this question
 	this.scores=[];//array of TScore.
+	this.scorePoints="";// point value for the current page, 0 records answer but doesn't affect score. "" has not score/answer tracking.
 	this.xml=null;
 	this.textMatches=null;//array of TextMatch
 	this.sortName="";

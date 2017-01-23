@@ -1,0 +1,111 @@
+/* CALI Viewer 5, Version: 03/21/2012 
+   CALI Author HTML Viewer - Full style sheet -  */
+
+body {
+	padding: 10px;
+	font-weight: normal;
+	xfont-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: #f8f8f8;
+}
+
+table {
+	margin: 10px 10px;
+}
+
+tr, td {
+	vertical-align: top;
+	xpadding: 1px;
+}
+.title {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+#userlist td:nth-child(4),
+#userlist td:nth-child(5),
+#userlist td:nth-child(6),
+#pagelist td:nth-child(3),
+#pagelist td:nth-child(4),
+#pagelist td:nth-child(5)
+{
+	text-align: right;
+}
+#userlist tr:nth-child(even) {background: #fff}
+#userlist tr:nth-child(odd)  {background: #eee}
+#userlist tr td:nth-child(3) {
+	white-space: nowrap;
+}
+#userlist tr td:nth-child( 7 ){
+	font-size: 0.75em;
+	white-space: nowrap;
+} 
+#pagelist {
+	
+}
+#pagelist tr {background: #fff}
+#pagelist tr td:nth-child(1) {
+}
+#pagelist td.choice {
+	text-align: left;
+}
+#choices tr {background: white;}
+
+td.users {
+	font-size: 0.75em;
+}
+
+P {
+	padding-top: 0px;
+	margin-top: 0px;
+}
+.lllogo {
+	width: 192px;
+	height: 55px;
+	background-image: url('img/LessonLinkLogo.png');
+	float: right;
+}
+a {
+	color: #0066CC;
+}
+table.choices tr {
+	padding: 2px;
+}
+.choice.right {
+	background-color: #cfc !important;
+}
+.choice.wrong {
+	background-color: #fcc !important;
+}
+.choice.maybe {
+	background-color: #ffc !important;
+}
+.icon {
+	width: 20px;
+	height: 21px;
+	display: inline-block;
+}
+.icon.right {
+	background-image: url('img/grade-right.gif');
+}
+.icon.wrong {
+	background-image: url('img/grade-wrong.gif');
+}
+.icon.maybe {
+	background-image: url('img/grade-maybe.gif');
+}
+.sorted {
+	text-decoration: underline;
+}
+.sortable {
+	color: #88f;
+	cursor: pointer;
+}
+.hidestart { /* hide some elements initially */
+	display: none;
+}
+
+input[type="checkbox"] {
+	border-radius: 0;
+	-webkit-appearance: checkbox;
+	margin-right: 3px;
+}
+

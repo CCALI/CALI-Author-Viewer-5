@@ -1,4 +1,5 @@
 <?php
+// *** PRODUCTION * THIS IS FOR www.cali.org
 /** 
  *@file
  *
@@ -9,6 +10,9 @@
  * 07/20/2015 SJG Add Piwik tracking
  * 07/25/2016 SJG fix Facstaff role test
  * 09/12/2016 SJG add CALI Staff as faculty role test
+ * 09/27/2016 SJG add LessonLive link info
+ * 10/07/2016 SJG add betatester role
+ * 10/26/2016 SJG on production site
 */
   $template=file_get_contents("lesson.html");
   global $user;
@@ -26,6 +30,7 @@
   $org_title = get_organization_name($account); 
   $orgname = render($org_title);
   $runid=$_SESSION['runid'];
+  
   $username= $user->name;
   $firstname_item = field_get_items('user', $account, 'field_first_name' );
   $lastname_item = field_get_items('user', $account, 'field_last_name' );
@@ -35,6 +40,7 @@
   $firstname = render($firstname_value);
   // 09/12/2016 Show Faculty options for Facstaff or CALI Staff
   $authmode=(in_array('Facstaff', $roles) || in_array('CALI Staff', $roles)) ? 1 : 0;
+  $betamode=(in_array('betatester', $roles)) ? 1 : 0;
   if (isset($_SESSION['resume']) && $_SESSION['resume']==1)
 	  $resumescore="/lesson/scoreload/".dechex($runid*47);
   else
@@ -46,7 +52,29 @@
 	  $orgname = '';
   }
   
-  $custom="<script>var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
+  // Grab llMode from the querystring string on referrer:
+  //	/lessons/web/trt10/jq.php?own   Teacher owner of this LessonLink-show usage data
+  //	/lessons/web/trt10/jq.php?stu   Student user of this LessonLink-show watermark
+  //	/lessons/web/trt10/jq.php?go    Any user of a non-LessonLink-show no LessonLink/Live info at all.
+  $referrer=$_SERVER["HTTP_REFERER"];
+  if (strrpos($referrer,"?own")>0){
+	 $llMode="own";
+  }
+  else
+  if (strrpos($referrer,"?stu")>0){
+	 $llMode="stu";
+  }
+  else{
+	 $llMode="";
+  }
+
+//	if ($betamode!=1)
+//	{	// If not in beta mode, deactivate any beta features like LessonLive for Teacher.
+//		if ($llMode=="own")
+//			$llMode='';
+//	}
+
+  $custom="<script>var llMode=\"$llMode\"; var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
 
   
   // 07/20/2016 SJG Add Piwik tracking including user id ($user->uid), organization name ($orgname) and user's full name ($dispname).
@@ -62,9 +90,9 @@
     var u="//analytics.cali.org/";
     _paq.push(["setTrackerUrl", u+"piwik.php"]);
     _paq.push(["setSiteId", 3]);
-	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","page"]);
-	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","page"]);
-	 _paq.push(["setCustomVariable", 4, "Run ID", "'.$runid.'","page"]);
+	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","visit"]);
+	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","visit"]);
+	 _paq.push(["setCustomVariable", 4, "Run ID", "'.$runid.'","visit"]);
 	  var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
     g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
   })();

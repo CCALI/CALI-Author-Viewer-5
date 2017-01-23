@@ -178,10 +178,9 @@ function textWithMedia(pageText, page)
 	if (page.pictureSrc!=null){
 		var src=page.pictureSrc;
 		//if ($.browser.msie) src+= "?"+Math.random(); 
-		trace('attaching image '+src);
+		//trace('attaching image '+src);
 		$('#picloader').attr('src','img/ajax-loader.gif').unbind('load');
 		$('#picloader').load(pictureLoaded).attr('src',src);
-//		trace('w='+$('#picloader')[0].width);
 	}
 }
 
@@ -189,9 +188,7 @@ function textWithMedia(pageText, page)
 function pictureLoaded()
 {	// When picture finally loads (and we have width/height), attach hotspots.
 	page.picWidth=this.width;
-	trace("pictureLoaded :" + $(this).attr('src') + ", "+this.width+"x"+this.height+" xml="+page.srcPicWidth);
-	//$('#picture').css('width','100%').attr('src',$(this).attr('src'));
-	//$('#picture').css({'max-width':this.width,'width':'100%','max-height':this.height,'height':'100%'}).attr('src',$(this).attr('src'));
+	//trace("pictureLoaded :" + $(this).attr('src') + ", "+this.width+"x"+this.height+" xml="+page.srcPicWidth);
 
 	$('#picture').css({'width':'100%' }).attr('src',$(this).attr('src'));
 	$('#picture').parent().css({'max-width':this.width,'max-height':this.height});
@@ -207,7 +204,7 @@ function updateHotSpots()
 	var SC=scaledWidth/page.picWidth;
 	if (lastSC==SC) return;
 	//trace("image size",img[0].offsetWidth,img[0].offsetHeight);
-	trace("updateHotSpots",scaledWidth,page.picWidth,lastSC,SC);
+	//trace("updateHotSpots",scaledWidth,page.picWidth,lastSC,SC);
 	//if (SC>1) $(img).removeAttr('width');
 	lastSC=SC;
 	if (SC<.95) $('.zoomin').show(); else $('.zoomin').hide();
@@ -250,9 +247,11 @@ function renderPage()
 	doHelp=null;
 	
 	pageInteractionDIV.text('');
+	pageInteractionDIV.prepend((lessonLive.isTeacher? '<div class="llPageInfo"/>':''));
 	$(".PageSpecificGrade").empty();
 	$(".PageSpecificNav").empty();
 	pageTextDIV.hide().text('');
+	
 
 	if (textBuffer!="")
 	{
@@ -320,8 +319,23 @@ function renderPage()
 		}
 	}
 	
-	
-
+	var unscored=(page.scorePoints == 0);
+	var pageScoreTitle="";
+	if (page.scorePoints==="")
+		pageScoreTitle='This page does not affect your score.';
+	else
+	if (page.scorePoints===0)
+		pageScoreTitle='Your answer to this question is recorded but does not affect your score.';
+	else
+	if (page.scorePoints==1)
+		pageScoreTitle='This question is worth 1 point.';
+	else
+		pageScoreTitle='These questions are worth '+page.scorePoints+' points.';
+	$('.ScorePoints').text(page.scorePoints).hide();//toggle(!unscored);
+	if (!unscored) {
+		$('.ScorePoints').delay(500).fadeIn(500);
+	}
+	$('.PageScore').toggleClass('unscored',unscored).attr('title', pageScoreTitle);
 	
 	$(".toggler").unbind('click').click(function() {
 		$(this).next().toggle('fast');
@@ -378,6 +392,7 @@ function renderPage()
 		$('.LinkNavBar:first:not(:has(a))').hide();
 	}
 	patchLink();
+	attachLessonLiveReportToPage();
 }
 
 // Handle custom layouts for different page types.
@@ -412,7 +427,12 @@ function Buttons_layout()
 	{
 		var fb=page.feedbacks[fbIndex(c,0)];
 		fb.letter=page.captions[c];
-		choicesText += '<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'+iButton(fb.letter, fb.id);
+		choicesText += (lessonLive.isTeacher? '<div class=llButton>':'' )
+			+'<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
+			+iButton(fb.letter, fb.id)
+			+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>': '')
+			+(lessonLive.isTeacher? '</div>':'' )
+			+' ';
 		fbText += '<div id=fbText'+fb.id+'></div>';
 	}
 	pageInteractionDIV.append('<div class="ButtonGroup">' + choicesText+ '</div>' +  fbText);
@@ -431,16 +451,19 @@ function ButtonList_layout()
 				'<div class=MultipleChoice>'
 					+'<span  style="float:left; margin:5px;"><img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'  
 					+iButton(page.details[d].letter, fb.id )+'</span>'
-					+'<div class="ChoiceText">'+page.details[d].text+"</div>"+'<div id=fbText'+fb.id+'></div></div>';
+					+'<div class="ChoiceText">'+page.details[d].text+"</div>"
+					+(lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>' : '')
+					+'<div id=fbText'+fb.id+'></div></div>';
 		else
 			detailsText += '<tr>'
 				+'<td nowrap width=200>'
 				+'<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
 				+iButton(page.details[d].letter, fb.id )+'</td>'
-				+'<td width=100%>'+
-					'<div class="ChoiceText">'+page.details[d].text+"</div>"+
-					'<div id=fbText'+fb.id+'></div>';
-				'</td>'+ '</tr>';
+				+'<td width=100%>'
+					+ '<div class="ChoiceText">'+page.details[d].text+"</div>"
+					+ '<div id=fbText'+fb.id+'></div>' 
+				+(lessonLive.isTeacher ? '<td nowrap ><div class="llChoice" id="llChoice'+fb.id+'"></div></td>' : '')
+				+ '</td>'+ '</tr>';
 
 	}
 	if (!vertical) detailsText = '<table  class="TableChoices">'+detailsText+'</table>';
@@ -467,7 +490,8 @@ function MultiButtonList_layout()
 				var fb=page.feedbacks[fbIndex(c,d)];
 				fb.letter=page.captions[c];
 				detailsText += '<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
-						+iButton(fb.letter, fb.id);
+						+iButton(fb.letter, fb.id)
+						+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>':'');
 				fbText  += '<div id="fbText'+fb.id+'"></div>';
 			}
 			subQText += '<div class="ButtonGroup">' + detailsText+ '</div>' + fbText;
@@ -486,7 +510,8 @@ function MultiButtonList_layout()
 					var fb=page.feedbacks[fbIndex(c,d)];
 					fb.letter=page.captions[c];
 					detailsText += '<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
-							+iButton(fb.letter, fb.id);
+							+iButton(fb.letter, fb.id)
+							+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>':'');
 					fbText  += '<div id="fbText'+fb.id+'"></div>';
 				}
 				subQText += '<div class="ButtonGroup" style="text-align: left;">' + detailsText+ '</div>' + fbText + "</td></tr>";
@@ -842,12 +867,13 @@ function FlashCards_layout()
 		$(this).find("div.answer").slideToggle('fast');
 		return false;
 	});	
-	
+	page.scorePoints="";
 }
 
 function Hangman_layout()
 {	// not implemented fully, just display for now.
 	pageInteractionDIV.append(page.topic +"<ul><li>"+ page.phrases.join("<li>")+"</ul>");
+	page.scorePoints="";
 }
 
 function RadioButtons_grade(gaveup)

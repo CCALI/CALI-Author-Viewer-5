@@ -12,6 +12,10 @@ var PagesList=[];//list of sorted normal pages
 var vertMinWidth=500; // window narrower than this switches to vertical layout.
 var vertical=false;// vertical layout (for narrow display)
 //var pageHistory=[];//array of bookmark history - names of pages visited for use with Back/Next navigation.
+/**
+ * The message hex ID.
+ * @type {TPage}
+ */
 var page = null;//pointer to current TPage();
 var textBuffer = "";//any text we'd like to have appear at the top of the next page such as errors or feedbacks.
 var ScorePossible=0;// questions answered
@@ -81,7 +85,7 @@ function locationForHash()
 function setHash(name)
 {
 	if (getHash(locationForHash())!=name)
-		locationForHash().hash=name;
+		locationForHash().hash=escape(name);
 }
 
 
@@ -273,7 +277,7 @@ function patchLink()
 function gotoPage(pageName, skipCA)
 {	// Load page with given id. 
 	// null does nothing. blank, topic page, or missing page, always points to table of contents.
-	trace("gotoPage",pageName);
+	//trace("gotoPage",pageName);
 	if (pageName==null) return;
 	if (pageName=="null") return;
 	if (pageName=='')
