@@ -32,17 +32,24 @@ define('INCLUDE_ESSAYS', INCLUDE_ALL_USER_ANSWERS>0);
 // If REDACTED is 1 real user info is redacted. Handy to give git repos as sample data.
 define('REDACTED', 0 );
 
+
+function sortPageNameNatural($a, $b)
+{	// Sort our page names sensibly so 'Question 2' appears before 'Question 10'.
+	// 08/22/2017 GIT#47
+	return strnatcmp($a,$b); //Case sensitive
+};
+	
 function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 {	// courseid is course db table's course id (if 0, assuming an AutoPublish lesson)
 	// lessonid is lesson's node id
 	// lastupdate is optional.
 	//		if blank, returns all JSON.
 	//    if not blank, returns an empty JSON if NO new data has appeared since then.
-	
+	global $trace;
 
 	$courseid=intval($courseID); // Lesson link Course ID
 	$nid=intval($lessonID); // Which lesson in the course
-	$lastupdate=mysql_escape_string ($lastUpdate);
+	$lastupdate=mysql_real_escape_string($lastUpdate); // 08/22/2017 GIT#50
 	$lesson=array();
 	$comment=array();
 	
@@ -57,6 +64,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			and course.orgid = nodeorg.nid";
 			
 		$q=new QueryMySQLSimple ($SQL3);
+		traceSQL($SQL3);
 		$row=$q->fetchRow();
 
 		$lesson['Organization']=$row['orgname'];
@@ -73,8 +81,9 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		// Extract CALI lesson code for lesson, e.g., EVD04.
 		$SQL3="select field_lesson_id_value as code from field_data_field_lesson_id where entity_id = $nid"; 
 		$q=new QueryMySQLSimple ($SQL3);
+		traceSQL($SQL3);
 		$row=$q->fetchRow();
-		$lesson['Lesson Code']=$row['code'];
+		$lesson['Lesson Code']=isset($row['code']) ? $row['code'] : $lesson['Lesson ID'];
 		$courseFilter = " and courseid=$courseid"; // If course specified, we filter on it.
 	}
 	else
@@ -83,6 +92,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			from node as lsn , users as u where  
 			lsn.nid = $nid and lsn.uid = u.uid ;";
 		$q=new QueryMySQLSimple ($SQL3);
+		traceSQL($SQL3);
 		$row=$q->fetchRow();
 		$lesson['Organization']='-';
 		$lesson['Semester']='-';
@@ -104,16 +114,16 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		// 12/08/2016 Include course filter if defined.
 		$SQL="select count(*) as updated from LessonRun where nid=$nid $courseFilter and scoredate > \"$lastupdate\" ";
 		$query=new QueryMySQLSimple($SQL);
+		traceSQL($SQL);
 		$row=$query->fetchRow();
 		$updatedCount = $row['updated'];
 		if ($row['updated'] ==0)
 		{
-			
+			$runDates=Array();
 			if (0)
 			{	// Debugging aid: list of all scoredates
 				$SQL="select scoredate from LessonRun where nid=$nid and courseid=$courseid";
 				$query=new QueryMySQLSimple($SQL);
-				$runDates=Array();
 				while($row=$query->fetchRow())
 				{
 					array_push($runDates, $row['scoredate']);
@@ -131,6 +141,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	// Extract all lesson runs for this course/lesson. 
 	$SQL="select uid, nid,  scoredate, responses from LessonRun where nid=$nid $courseFilter order by runid limit 9999";
 	$query=new QueryMySQLSimple($SQL);
+	traceSQL($SQL);
 
 	$lesson['Lesson Runs']=$query->getNumRecords();
 	array_push($comment,"1. Only a student's first answer to any question is tallied. ","2. Discarding Text Essays and Text Selects.");
@@ -207,7 +218,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 								//$qtime=intval($vals[$i]['value']);
 								break;
 							case 'TEXT':
-								$qanswer=$vals[$i]['value'];
+								$qanswer=isset($vals[$i]['value']) ? $vals[$i]['value'] : '';
 								break;
 							case 'ID': // question answer id: for multiple choice then 0=A, 1=B, etc.
 								$qaid=$vals[$i]['value'];
@@ -300,8 +311,12 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 										if ($qgrade!='') // ($qgrade=='RIGHT'||$qgrade=='WRONG')
 										{
 											$pages[$qname][$qsub]['total']++;
+											if (!isset($pages[$qname][$qsub][$qgrade])) $pages[$qname][$qsub][$qgrade]=0;
 											$pages[$qname][$qsub][$qgrade]++;
-											//$pages[$qname][$qsub][$qanswer]['users'][$uid]=1; 
+											//$pages[$qname][$qsub][$qanswer]['users'][$uid]=1;
+											// GIT#48 Ensure user index slots are allocated.
+											if (!isset($scores[$qgrade])) $scores[$qgrade]=array();
+											if (!isset($scores[$qgrade][$uidx])) $scores[$qgrade][$uidx] = 0;
 											$scores[$qgrade][$uidx]++; // tally this user's total scores
 										} 
 									}
@@ -330,6 +345,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 				where (field_data_field_first_name.entity_id = uid and field_data_field_last_name.entity_id=uid) and 
 				users.uid in ('.implode(",",array_keys($users)).')';
 		$query=new QueryMySQLSimple($SQL);
+		traceSQL($SQL);
 		$shortusers=array();
 		//	var_dump($scores);
 		while($row=$query->fetchRow())
@@ -339,8 +355,8 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			$shortusers[$shortid]= array(
 				'userid'=> REDACTED?'REDACTED':intval($row['uid'])
 				,'name'=>REDACTED?'REDACTED':  $row['lastname'].', '.$row['firstname'] 
-				,'right'=>intval ($scores['right'][$shortid])
-				,'wrong'=>intval ($scores['wrong'][$shortid]) // in case of null where user didn't get any right or any wrong.
+				,'right'=>isset($scores['right'][$shortid]) ? intval ($scores['right'][$shortid]) : 0
+				,'wrong'=>isset($scores['wrong'][$shortid]) ? intval ($scores['wrong'][$shortid]) : 0 // in case of null where user didn't get any right or any wrong.
 				,'rundates'=> array_keys($rundates[$shortid])
 				//,'email'=>REDACTED?'REDACTED@REDACTED.EDU':$row['mail']
 				);
@@ -350,10 +366,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	}
 
 	
-	function sortPageNameNatural($a, $b){ // Sort our page names sensibly so 'Question 2' appears before 'Question 10'.
-		return strnatcmp($a,$b); //Case sensitive
-	};
-	uksort($pages, sortPageNameNatural);
+	uksort($pages, 'sortPageNameNatural');
 	
 	//var_dump($pages);return;
 	
@@ -443,17 +456,29 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			"_comment"=>$comment,
 			"lesson"=>$lesson,
 			"users"=>array_values($users),
-			"pages"=>$pagesFinal
+			"pages"=>$pagesFinal,
+			"trace"=>$trace
 		);
 	$json= //str_replace("],","],\n",
 		json_encode($ar); 
 	if ($json===FALSE)
 	{
-		echo 'JSONError:'. json_last_error() ;
-		//var_dump($ar);
+		echo '{JSONError:'. json_last_error().'}' ;
+		var_dump($ar);
 	}
  //var_dump($ar);
 	return $json;
+}
+
+
+$trace=array();
+function traceSQL($SQL='')
+{	// 08/22/2017 Specify default argument value GIT#46
+	global $trace;
+	if ($SQL!=''){
+		$trace[]=$SQL;
+	}
+	$trace[]=mysql_error();
 }
 
 class QueryMySQLSimple
