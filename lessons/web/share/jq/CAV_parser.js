@@ -300,6 +300,7 @@ function parseBookXML(bookXML)
 	book.description = bookXML.find('INFO > DESCRIPTION').xml();
 	book.lesson=bookXML.find('INFO > LESSON').text();
 	book.version=bookXML.find('INFO > VERSION').text();
+	book.qw='QW'==bookXML.find('INFO > GENERATOR').text();
 	
 	
 	book.CALIdescription = bookXML.find('INFO > CALIDESCRIPTION').xml();
