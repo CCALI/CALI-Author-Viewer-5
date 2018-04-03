@@ -1022,7 +1022,7 @@ function ShortAnswer_reveal()
 	for (r=0;r<page.textMatches.length;r++)
 	{
 		var match = page.textMatches[r];
-		var matches=match.matchlist.toLowerCase().split(DEL);
+		var matches=match.matchlist.split(DEL.toUpperCase());
 		var mtext="";
 		switch (match.matchstyle)
 		{
