@@ -114,10 +114,6 @@ function processBook()
 		if (StartPage=='') StartPage=pageABOUT;
 		gotoPage(StartPage);
 		downloadScore();
-		if (book.qw)
-		{
-			$('#HeaderPageCALI img:first-of-type').attr('src','img/QuizWrightLogo.png');
-		}
 	}
 }
 
