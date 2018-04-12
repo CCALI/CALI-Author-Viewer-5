@@ -10,7 +10,7 @@
 <link href="LessonLinkPast.css" rel="stylesheet" type="text/css" />
 <link href="CALILessonFont/style.css" rel="stylesheet" type="text/css" />
 
-<title>Lesson Link Past - CALI</title>
+<title>Lesson Link Analytics - CALI</title>
 
 
 <script language="javascript">
@@ -30,6 +30,7 @@
 	//### 11/08/2016 Piwik collection: Get user/organization information for piwik
 	// Code copied from lesson.php.
 	require "LessonLinkConfig.php";
+	if ( 1 ) {
 	global $user;
 	// Set the working directory to your Drupal root
 	chdir(DRUPAL_ROOT_DIR);
@@ -51,6 +52,7 @@
 	$dispname= $firstname." ".$lastname;
 	if (!isset($orgname)) {
 		$orgname = '';
+	}
 	}
 
   // 11/09/2016 07/20/2016 SJG Add Piwik tracking organization name ($orgname) and user's full name ($dispname).
@@ -103,7 +105,7 @@ function piwikLog(tag)
 {	// 11/09/2016 
   if (_paq) {
 	//var piwikURL ='/lessonlink/report/lessonpast/' + usage.lesson['Course ID'] + '/' + usage.lesson['Lesson ID'];
-	var piwikTitle='LessonLink - Report - LessonPast - ' + (usage.lesson['Course Name']) + ' - ' + usage.lesson['Lesson Code'];
+	var piwikTitle='LessonLink - Report - Analytics - ' + (usage.lesson['Course Name']) + ' - ' + usage.lesson['Lesson Code'];
 	//_paq.push(['setCustomUrl', piwikURL]);
 	_paq.push(['setDocumentTitle',piwikTitle]);
 	_paq.push(['trackPageView']); 
@@ -501,7 +503,7 @@ function RWMBar(right,wrong,maybe)
 <body>
 	<p class="lllogo"></p>
 	<p class="logo"></p>
-<h1>Lesson Link Past - CALI</h1>
+<h1>Lesson Link Analytics - CALI</h1>
 <h2>Course Lesson Information</h2>
 
 <ul id=info>
