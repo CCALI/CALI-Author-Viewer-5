@@ -24,6 +24,24 @@ amode=0;
 dispName="Student";
 orgName="CALI Library";
 var resumeScoreURL="";
+var llMode='';
+
+
+  var _paq = _paq || [];
+  _paq.push(["setDomains", ["*.www.cali.org"]]);
+  _paq.push(["trackPageView"]);
+  _paq.push(["enableLinkTracking"]);
+  (function() {
+    var u="//analytics.cali.org/";
+    _paq.push(["setTrackerUrl", u+"piwik.php"]);
+    _paq.push(["setSiteId", 3]);
+	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","visit"]);
+	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","visit"]);
+	 _paq.push(["setCustomVariable", 4, "Run ID", "'.$runid.'","visit"]);
+	  var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
+    g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+  })();
+
 </script>
 <!--Mode.END-->
 <link href="jQuery/css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" media="all" />

@@ -1,0 +1,617 @@
+<MAPPER>
+<INFO>
+<TITLE>CALI Author Demonstration Lesson</TITLE>
+</INFO>
+<PAGES>
+<PAGE ID="1" NAME="Alternatives to menu pages" KIND="5" HREF="p_001" BOUNDS="54,56,109"><TIP> You can use Click on Image pages to create alternative menus for your...</TIP>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="92,104,33"/>
+</PAGE>
+
+<PAGE ID="2" NAME="Check Boxes 1" KIND="3" HREF="p_002" BOUNDS="1852,277,109"><TIP> On a Check Boxes page, students respond to your question by checking off...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="3" BOUNDS="1892,325,30"/>
+</PAGE>
+
+<PAGE ID="3" NAME="Check Boxes 2" KIND="3" HREF="p_003" BOUNDS="1852,360,109"><TIP> The question below requires you to select more than one answer. This sample...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="3" BOUNDS="1798,408,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="3" BOUNDS="1836,408,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="1883,408,30"/>
+  <BRANCH KIND="17" NAME="Hints" DEST="3" BOUNDS="1914,408,32"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="1947,408,33"/>
+</PAGE>
+
+<PAGE ID="4" NAME="Check Boxes 3" KIND="3" HREF="p_004" BOUNDS="1852,443,109"><TIP> You can also use Check Box pages to have students categorize items that can...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="4" BOUNDS="1819,491,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="4" BOUNDS="1866,491,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="5" BOUNDS="1922,491,30"/>
+  <BRANCH KIND="17" NAME="Hints" DEST="4" BOUNDS="1962,491,32"/>
+</PAGE>
+
+<PAGE ID="5" NAME="Classic Questions menu" KIND="4" HREF="p_006" BOUNDS="1634,194,109"><TIP>Classic Question Types...</TIP>
+  <BRANCH KIND="12" NAME="Multiple Choice" DEST="7" BOUNDS="1382,242,80"/>
+  <BRANCH KIND="12" NAME="Multiple Choice Set" DEST="8" BOUNDS="1472,242,99"/>
+  <BRANCH KIND="12" NAME="Matching Pairs" DEST="9" BOUNDS="1581,242,78"/>
+  <BRANCH KIND="12" NAME="Check Boxes" DEST="2" BOUNDS="1669,242,71"/>
+  <BRANCH KIND="12" NAME="Radio Buttons" DEST="6" BOUNDS="1750,242,75"/>
+  <BRANCH KIND="12" NAME="Return to Question Types Menu" DEST="10" BOUNDS="1835,242,159"/>
+</PAGE>
+
+<PAGE ID="6" NAME="Radio Buttons 1" KIND="3" HREF="p_005" BOUNDS="2070,277,109"><TIP> In CALI Author terminology, a radio button question is known as a check...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="6" BOUNDS="2037,325,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="6" BOUNDS="2084,325,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="5" BOUNDS="2140,325,30"/>
+  <BRANCH KIND="17" NAME="Hints" DEST="6" BOUNDS="2180,325,32"/>
+</PAGE>
+
+<PAGE ID="7" NAME="Multiple choice 1" KIND="3" HREF="p_046" BOUNDS="1198,277,109"><TIP> Multiple Choice pages allow you to ask students questions and have them...</TIP>
+  <BRANCH KIND="15" NAME="A" DEST="7" BOUNDS="1164,325,16"/>
+  <BRANCH KIND="15" NAME="B" DEST="7" BOUNDS="1190,325,16"/>
+  <BRANCH KIND="15" NAME="C" DEST="7" BOUNDS="1216,325,16"/>
+  <BRANCH KIND="14" NAME="D" DEST="7" BOUNDS="1242,325,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="57" BOUNDS="1268,325,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="1308,325,33"/>
+</PAGE>
+
+<PAGE ID="8" NAME="Multiple Choice Set 1" KIND="3" HREF="p_043" BOUNDS="1416,277,109"><TIP> The second kind of multiple choice page, known as Multiple Choice Set ,...</TIP>
+  <BRANCH KIND="14" NAME="1-1" DEST="8" BOUNDS="1362,325,23"/>
+  <BRANCH KIND="15" NAME="1-2" DEST="8" BOUNDS="1386,325,23"/>
+  <BRANCH KIND="15" NAME="1-3" DEST="8" BOUNDS="1410,325,23"/>
+  <BRANCH KIND="15" NAME="2-1" DEST="8" BOUNDS="1434,325,23"/>
+  <BRANCH KIND="14" NAME="2-2" DEST="8" BOUNDS="1458,325,23"/>
+  <BRANCH KIND="15" NAME="2-3" DEST="8" BOUNDS="1482,325,23"/>
+  <BRANCH KIND="14" NAME="3-1" DEST="8" BOUNDS="1506,325,23"/>
+  <BRANCH KIND="15" NAME="3-2" DEST="8" BOUNDS="1530,325,23"/>
+  <BRANCH KIND="15" NAME="3-3" DEST="8" BOUNDS="1554,325,23"/>
+  <BRANCH KIND="15" NAME="4-1" DEST="8" BOUNDS="1578,325,23"/>
+  <BRANCH KIND="15" NAME="4-2" DEST="8" BOUNDS="1362,341,23"/>
+  <BRANCH KIND="14" NAME="4-3" DEST="8" BOUNDS="1386,341,23"/>
+  <BRANCH KIND="11" NAME="Next" DEST="52" BOUNDS="1410,341,30"/>
+</PAGE>
+
+<PAGE ID="9" NAME="Matching Pairs 1" KIND="3" HREF="p_040" BOUNDS="1634,277,109"><TIP> A Matching Pairs page allows students to match items in one column to items...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="9" BOUNDS="1622,325,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="9" BOUNDS="1669,325,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="5" BOUNDS="1725,325,30"/>
+</PAGE>
+
+<PAGE ID="10" NAME="Question types menu" KIND="4" HREF="p_065" BOUNDS="2288,111,109"><TIP>Question Types...</TIP>
+  <BRANCH KIND="12" NAME="Classic Question Types" DEST="5" BOUNDS="2082,159,118"/>
+  <BRANCH KIND="12" NAME="Innovative Question Types" DEST="29" BOUNDS="2210,159,135"/>
+  <BRANCH KIND="12" NAME="Free Text Question Types" DEST="34" BOUNDS="2355,159,130"/>
+  <BRANCH KIND="12" NAME="Return to Main Menu" DEST="22" BOUNDS="2495,159,108"/>
+</PAGE>
+
+<PAGE ID="11" NAME="Click on Image 1" KIND="3" HREF="p_007" BOUNDS="3814,194,109"><TIP> Click on Image pages allow you to define certain &quot;hotlinks&quot; on a diagram or...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="12" BOUNDS="3854,242,30"/>
+</PAGE>
+
+<PAGE ID="12" NAME="Click on Image 2" KIND="3" HREF="p_008" BOUNDS="3814,277,109"><TIP>...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="13" BOUNDS="3832,325,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="3872,325,33"/>
+</PAGE>
+
+<PAGE ID="13" NAME="Click on Image 3" KIND="3" HREF="p_015" BOUNDS="3814,360,109"><TIP> The possible uses for this page type are limited only by your imagination....</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="20" BOUNDS="3832,408,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="3872,408,33"/>
+</PAGE>
+
+<PAGE ID="14" NAME="Click on Image 2 (A)" KIND="3" HREF="p_009" BOUNDS="272,28,109"><TIP> Computer- ASSISTED Legal Instruction  Note that clicking on the A brought...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="12" BOUNDS="312,76,30"/>
+</PAGE>
+
+<PAGE ID="15" NAME="Click on Image 2 (C)" KIND="5" HREF="p_010" BOUNDS="54,141,109"><TIP> COMPUTER -Assisted Legal Instruction  Note that clicking on the C brought...</TIP>
+</PAGE>
+
+<PAGE ID="16" NAME="Click on Image 2 (I)" KIND="3" HREF="p_011" BOUNDS="272,111,109"><TIP>...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="12" BOUNDS="290,159,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="330,159,33"/>
+</PAGE>
+
+<PAGE ID="17" NAME="Click on Image 2 (I: Body)" KIND="5" HREF="p_012" BOUNDS="54,196,109"><TIP> A judge certainly must know a large body of law! Try the gavel. ...</TIP>
+</PAGE>
+
+<PAGE ID="18" NAME="Click on Image 2 (I: Head)" KIND="5" HREF="p_013" BOUNDS="54,251,109"><TIP> I would judge this incorrect, try the gavel. ...</TIP>
+</PAGE>
+
+<PAGE ID="19" NAME="Click on Image 2 (L)" KIND="3" HREF="p_014" BOUNDS="272,194,109"><TIP> Computer-Assisted LEGAL Instruction  Note that clicking on the L brought...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="12" BOUNDS="312,242,30"/>
+</PAGE>
+
+<PAGE ID="20" NAME="Multimedia menu" KIND="4" HREF="p_045" BOUNDS="4032,111,109"><TIP>Multimedia Page Types...</TIP>
+  <BRANCH KIND="12" NAME="Images" DEST="53" BOUNDS="3882,159,42"/>
+  <BRANCH KIND="12" NAME="Click on Image" DEST="11" BOUNDS="3934,159,78"/>
+  <BRANCH KIND="12" NAME="Sound" DEST="54" BOUNDS="4022,159,39"/>
+  <BRANCH KIND="12" NAME="Video" DEST="55" BOUNDS="4071,159,35"/>
+  <BRANCH KIND="12" NAME="Slideshow" DEST="56" BOUNDS="4116,159,56"/>
+  <BRANCH KIND="12" NAME="Return to Main Menu" DEST="22" BOUNDS="4182,159,108"/>
+</PAGE>
+
+<PAGE ID="21" NAME="Click on Image 3 (CALI)" KIND="5" HREF="p_016" BOUNDS="54,306,109"><TIP> CALI technical support can be obtained from one of the following sources:...</TIP>
+</PAGE>
+
+<PAGE ID="22" NAME="Contents" KIND="4" HREF="contents" BOUNDS="708,28,109"><TIP>CALI-Author Demo Lesson...</TIP>
+  <BRANCH KIND="12" NAME="Introduction" DEST="23" BOUNDS="416,76,64"/>
+  <BRANCH KIND="12" NAME="Text and Hypertext" DEST="24" BOUNDS="490,76,98"/>
+  <BRANCH KIND="12" NAME="Question Types" DEST="10" BOUNDS="598,76,82"/>
+  <BRANCH KIND="12" NAME="Multimedia" DEST="20" BOUNDS="690,76,58"/>
+  <BRANCH KIND="12" NAME="Menu Construction" DEST="25" BOUNDS="758,76,97"/>
+  <BRANCH KIND="12" NAME="Branching Demonstration" DEST="26" BOUNDS="865,76,127"/>
+  <BRANCH KIND="12" NAME="Index of Page Types" DEST="27" BOUNDS="1002,76,106"/>
+</PAGE>
+
+<PAGE ID="23" NAME="Introduction" KIND="3" HREF="p_032" BOUNDS="544,111,109"><TIP> Welcome to the CALI Author sample lesson. The main purpose of this lesson...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="45" BOUNDS="584,159,30"/>
+</PAGE>
+
+<PAGE ID="24" NAME="Hypertext menu" KIND="4" HREF="p_026" BOUNDS="872,111,109"><TIP>Hypertext...</TIP>
+  <BRANCH KIND="12" NAME="Pop-up Pages" DEST="39" BOUNDS="794,159,75"/>
+  <BRANCH KIND="12" NAME="Page Links" DEST="40" BOUNDS="879,159,61"/>
+  <BRANCH KIND="12" NAME="Return to Main Menu" DEST="22" BOUNDS="950,159,108"/>
+</PAGE>
+
+<PAGE ID="25" NAME="Menu Construction 1" KIND="3" HREF="p_041" BOUNDS="4686,111,109"><TIP> You have been using CALI Author menus throughout this lesson. Notice that...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="22" BOUNDS="4704,159,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="4744,159,33"/>
+</PAGE>
+
+<PAGE ID="26" NAME="Branch Introduction" KIND="3" HREF="p_086" BOUNDS="5450,111,109"><TIP> CALI Author is best suited to interactive questions that engage and...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="87" BOUNDS="5468,159,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="5508,159,33"/>
+</PAGE>
+
+<PAGE ID="27" NAME="Index" KIND="3" HREF="p_027" BOUNDS="6212,111,109"><TIP>...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="22" BOUNDS="6230,159,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="6270,159,33"/>
+</PAGE>
+
+<PAGE ID="28" NAME="Sliders 4" KIND="3" HREF="p_018" BOUNDS="2724,526,109"><TIP> Slider pages allow you to ask students questions about compensation and...</TIP>
+  <BRANCH KIND="13" NAME="$0 - $16,666" DEST="28" BOUNDS="2670,574,68"/>
+  <BRANCH KIND="13" NAME="$16,666 - $33,333" DEST="28" BOUNDS="2739,574,95"/>
+  <BRANCH KIND="13" NAME="$33,333 - $50,000" DEST="28" BOUNDS="2835,574,95"/>
+  <BRANCH KIND="13" NAME="$50,000 - $66,666" DEST="28" BOUNDS="2670,590,95"/>
+  <BRANCH KIND="13" NAME="$66,666 - $83,333" DEST="28" BOUNDS="2766,590,95"/>
+  <BRANCH KIND="13" NAME="$83,333 - $100,000" DEST="28" BOUNDS="2862,590,101"/>
+  <BRANCH KIND="11" NAME="Next" DEST="29" BOUNDS="2670,606,30"/>
+</PAGE>
+
+<PAGE ID="29" NAME="Innovative Questions menu" KIND="4" HREF="p_031" BOUNDS="2506,194,109"><TIP>Innovative Question Types...</TIP>
+  <BRANCH KIND="12" NAME="Drag into Order" DEST="31" BOUNDS="2358,242,80"/>
+  <BRANCH KIND="12" NAME="Drag into Category" DEST="30" BOUNDS="2448,242,96"/>
+  <BRANCH KIND="12" NAME="Sliders" DEST="44" BOUNDS="2554,242,39"/>
+  <BRANCH KIND="12" NAME="Return to Question Types Menu" DEST="10" BOUNDS="2603,242,159"/>
+</PAGE>
+
+<PAGE ID="30" NAME="Drag into Category 1" KIND="3" HREF="p_019" BOUNDS="2506,277,109"><TIP> Use Drag into Category pages, also called Drag into boxes pages, to have...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="30" BOUNDS="2472,325,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="30" BOUNDS="2519,325,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="29" BOUNDS="2575,325,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="2615,325,33"/>
+</PAGE>
+
+<PAGE ID="31" NAME="Drag into Order 1" KIND="3" HREF="p_020" BOUNDS="2288,277,109"><TIP> On Drag Into Order pages, or drag boxes pages, a student must sort a...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="31" BOUNDS="2254,325,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="31" BOUNDS="2301,325,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="32" BOUNDS="2357,325,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="2397,325,33"/>
+</PAGE>
+
+<PAGE ID="32" NAME="Drag into Order 2" KIND="3" HREF="p_021" BOUNDS="2288,360,109"><TIP> The second grading option ignores the order altogether. Here, the student's...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="32" BOUNDS="2276,408,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="32" BOUNDS="2323,408,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="33" BOUNDS="2379,408,30"/>
+</PAGE>
+
+<PAGE ID="33" NAME="Drag into Order 3" KIND="3" HREF="p_022" BOUNDS="2288,443,109"><TIP> The third option doesn't actually involve grading at all. Here, you are not...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="33" BOUNDS="2276,491,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="33" BOUNDS="2323,491,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="29" BOUNDS="2379,491,30"/>
+</PAGE>
+
+<PAGE ID="34" NAME="Free Text questions menu" KIND="4" HREF="p_023" BOUNDS="3160,194,109"><TIP>Free Response Question Types...</TIP>
+  <BRANCH KIND="12" NAME="Essay" DEST="35" BOUNDS="3036,242,36"/>
+  <BRANCH KIND="12" NAME="Short answer" DEST="36" BOUNDS="3082,242,70"/>
+  <BRANCH KIND="12" NAME="Text Select" DEST="37" BOUNDS="3162,242,62"/>
+  <BRANCH KIND="12" NAME="Return to Question Types Menu" DEST="10" BOUNDS="3234,242,159"/>
+</PAGE>
+
+<PAGE ID="35" NAME="Essay 1" KIND="3" HREF="p_035" BOUNDS="2942,277,109"><TIP> The Essay page allows you to ask a student a question that requires him to...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="47" BOUNDS="2982,325,30"/>
+</PAGE>
+
+<PAGE ID="36" NAME="Short answer 1" KIND="3" HREF="p_025" BOUNDS="3160,277,109"><TIP> The Short Answer page type allows students to enter an answer to a question...</TIP>
+  <BRANCH KIND="14" NAME="red" DEST="36" BOUNDS="3106,325,23"/>
+  <BRANCH KIND="16" NAME="orange" DEST="36" BOUNDS="3130,325,41"/>
+  <BRANCH KIND="15" NAME="yellow" DEST="36" BOUNDS="3172,325,37"/>
+  <BRANCH KIND="15" NAME="green" DEST="36" BOUNDS="3210,325,35"/>
+  <BRANCH KIND="15" NAME="blue" DEST="36" BOUNDS="3246,325,28"/>
+  <BRANCH KIND="15" NAME="indigo" DEST="36" BOUNDS="3275,325,36"/>
+  <BRANCH KIND="15" NAME="violet" DEST="36" BOUNDS="3312,325,33"/>
+  <BRANCH KIND="13" NAME="Unrecognized" DEST="36" BOUNDS="3106,341,74"/>
+  <BRANCH KIND="11" NAME="Next" DEST="34" BOUNDS="3181,341,30"/>
+  <BRANCH KIND="17" NAME="Hints" DEST="36" BOUNDS="3212,341,32"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="3245,341,33"/>
+</PAGE>
+
+<PAGE ID="37" NAME="Text Select 1" KIND="3" HREF="p_075" BOUNDS="3378,277,109"><TIP> A Text Select page allows you (through the computer) to interact with a...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="37" BOUNDS="3366,325,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="37" BOUNDS="3413,325,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="34" BOUNDS="3469,325,30"/>
+</PAGE>
+
+<PAGE ID="38" NAME="Free text (pop-up)" KIND="5" HREF="p_024" BOUNDS="54,361,109"><TIP> Note that you do not have to supply specific wrong answers when you...</TIP>
+</PAGE>
+
+<PAGE ID="39" NAME="Pop-up 1" KIND="3" HREF="p_053" BOUNDS="762,194,109"><TIP> As you might have seen in this sample lesson, Pop-up pages allow you to...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="61" BOUNDS="780,242,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="820,242,33"/>
+</PAGE>
+
+<PAGE ID="40" NAME="Page Links 1" KIND="3" HREF="p_051" BOUNDS="980,194,109"><TIP> CALI Author gives you the ability to link the pages your lesson with Page...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="24" BOUNDS="998,242,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="1038,242,33"/>
+</PAGE>
+
+<PAGE ID="41" NAME="Index (Hints)" KIND="5" HREF="p_028" BOUNDS="54,416,109"><TIP> Click on a page name to jump directly to that page type. To see the rest of...</TIP>
+</PAGE>
+
+<PAGE ID="42" NAME="Index (True/False)" KIND="5" HREF="p_029" BOUNDS="54,471,109"><TIP> There is no specific page type for true/false questions. However,...</TIP>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="92,519,33"/>
+</PAGE>
+
+<PAGE ID="43" NAME="Index 2" KIND="3" HREF="p_030" BOUNDS="272,277,109"><TIP>...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="22" BOUNDS="290,325,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="330,325,33"/>
+</PAGE>
+
+<PAGE ID="44" NAME="Sliders 1" KIND="3" HREF="p_066" BOUNDS="2724,277,109"><TIP> Slider pages serve a number of functions, the first of which is to allow...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="72" BOUNDS="2764,325,30"/>
+</PAGE>
+
+<PAGE ID="45" NAME="Introduction 2" KIND="3" HREF="p_033" BOUNDS="544,194,109"><TIP> This lesson provides examples of each page type, with suggestions and...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="46" BOUNDS="562,242,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="602,242,33"/>
+</PAGE>
+
+<PAGE ID="46" NAME="Introduction 3" KIND="3" HREF="p_034" BOUNDS="544,277,109"><TIP>  Finding the page type you need   Menus  The basic way to find various page...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="22" BOUNDS="584,325,30"/>
+</PAGE>
+
+<PAGE ID="47" NAME="Essay 2" KIND="3" HREF="p_036" BOUNDS="2942,360,109"><TIP> Variation One : This is the main text box. Here, you supply your initial...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="48" BOUNDS="2982,408,30"/>
+</PAGE>
+
+<PAGE ID="48" NAME="Essay 3" KIND="3" HREF="p_037" BOUNDS="2942,443,109"><TIP> Variation Two:  Again, this is the main text box. Here, you supply your...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="49" BOUNDS="2982,491,30"/>
+</PAGE>
+
+<PAGE ID="49" NAME="Essay 4" KIND="3" HREF="p_038" BOUNDS="2942,526,109"><TIP> Variation Three:  You again supply your initial text, such as a question,...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="50" BOUNDS="2982,574,30"/>
+</PAGE>
+
+<PAGE ID="50" NAME="Essay 5" KIND="3" HREF="p_039" BOUNDS="2942,609,109"><TIP> Variation Four  Variation four is a combination of variations two and...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="34" BOUNDS="2982,657,30"/>
+</PAGE>
+
+<PAGE ID="51" NAME="Multiple Choice Set (pop-up)" KIND="5" HREF="p_042" BOUNDS="54,556,109"><TIP> (Here's more practice with Pop-up pages.) The Multiple Choice Set page type...</TIP>
+</PAGE>
+
+<PAGE ID="52" NAME="Multiple Choice Set 2" KIND="3" HREF="p_044" BOUNDS="1416,360,109"><TIP> To illustrate ambiguities of concepts, you can designate more than one...</TIP>
+  <BRANCH KIND="15" NAME="1-1" DEST="52" BOUNDS="1362,408,23"/>
+  <BRANCH KIND="14" NAME="1-2" DEST="52" BOUNDS="1386,408,23"/>
+  <BRANCH KIND="16" NAME="2-1" DEST="52" BOUNDS="1410,408,23"/>
+  <BRANCH KIND="16" NAME="2-2" DEST="52" BOUNDS="1434,408,23"/>
+  <BRANCH KIND="16" NAME="3-1" DEST="52" BOUNDS="1458,408,23"/>
+  <BRANCH KIND="16" NAME="3-2" DEST="52" BOUNDS="1482,408,23"/>
+  <BRANCH KIND="15" NAME="4-1" DEST="52" BOUNDS="1506,408,23"/>
+  <BRANCH KIND="14" NAME="4-2" DEST="52" BOUNDS="1530,408,23"/>
+  <BRANCH KIND="11" NAME="Next" DEST="5" BOUNDS="1554,408,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="1362,424,33"/>
+</PAGE>
+
+<PAGE ID="53" NAME="Book 1" KIND="3" HREF="p_076" BOUNDS="3596,194,109"><TIP> This is an example of a Book page. The box above contains an image of the...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="79" BOUNDS="3636,242,30"/>
+</PAGE>
+
+<PAGE ID="54" NAME="Picture and Sound 1" KIND="3" HREF="p_052" BOUNDS="4032,194,109"><TIP> Not surprisingly, Picture and Sound pages allow you to include a sound clip...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="20" BOUNDS="4050,242,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="4090,242,33"/>
+</PAGE>
+
+<PAGE ID="55" NAME="Video Page 1" KIND="3" HREF="p_082" BOUNDS="4250,194,109"><TIP> The Video page type allows you to include a short video clip in your...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="84" BOUNDS="4290,242,30"/>
+</PAGE>
+
+<PAGE ID="56" NAME="Slideshow 1" KIND="3" HREF="p_069" BOUNDS="4468,194,109"><TIP> Slideshow pages allow you to include a series of graphics that students can...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="74" BOUNDS="4486,242,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="4526,242,33"/>
+</PAGE>
+
+<PAGE ID="57" NAME="Multiple choice 2" KIND="3" HREF="p_047" BOUNDS="1198,360,109"><TIP> You can use the Multiple choice page type to make simple Yes/No or...</TIP>
+  <BRANCH KIND="14" NAME="True" DEST="57" BOUNDS="1196,408,30"/>
+  <BRANCH KIND="15" NAME="False" DEST="57" BOUNDS="1236,408,33"/>
+  <BRANCH KIND="11" NAME="Next" DEST="58" BOUNDS="1279,408,30"/>
+</PAGE>
+
+<PAGE ID="58" NAME="Multiple choice 3" KIND="3" HREF="p_048" BOUNDS="1198,443,109"><TIP> Notice also that, unlike traditional multiple choice questions, you can...</TIP>
+  <BRANCH KIND="15" NAME="A" DEST="58" BOUNDS="1151,491,16"/>
+  <BRANCH KIND="16" NAME="B" DEST="58" BOUNDS="1177,491,16"/>
+  <BRANCH KIND="14" NAME="C" DEST="58" BOUNDS="1203,491,16"/>
+  <BRANCH KIND="16" NAME="D" DEST="58" BOUNDS="1229,491,16"/>
+  <BRANCH KIND="14" NAME="E" DEST="58" BOUNDS="1255,491,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="5" BOUNDS="1281,491,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="1321,491,33"/>
+</PAGE>
+
+<PAGE ID="59" NAME="Multiple Choice (pop-up 2)" KIND="5" HREF="p_049" BOUNDS="54,611,109"><TIP> This Pop-up page could contain the relevant text in Darby that overturns...</TIP>
+</PAGE>
+
+<PAGE ID="60" NAME="Multiple Choice (pop-up)" KIND="5" HREF="p_050" BOUNDS="54,666,109"><TIP> This is an example of a Pop-up page. Here, you could insert the full or...</TIP>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="92,714,33"/>
+</PAGE>
+
+<PAGE ID="61" NAME="Pop-up 2" KIND="3" HREF="p_062" BOUNDS="762,277,109"><TIP> Keep in mind that creating a Pop-up page is a two step process:  Step 1 :...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="24" BOUNDS="780,325,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="820,325,33"/>
+</PAGE>
+
+<PAGE ID="62" NAME="Pop-up Page 1 (pop-up 1)" KIND="5" HREF="p_054" BOUNDS="54,751,109"><TIP> The simplest kind of Pop-up page uses text only. You could use text-only...</TIP>
+</PAGE>
+
+<PAGE ID="63" NAME="Pop-up Page 1 (pop-up 2)" KIND="5" HREF="p_055" BOUNDS="54,806,109"><TIP> One Pop-up page can have more than one hotlink accessing it. This example...</TIP>
+</PAGE>
+
+<PAGE ID="64" NAME="Pop-up Page 1 (pop-up 4)" KIND="5" HREF="p_056" BOUNDS="54,861,109"><TIP> This Pop-up page combines this text with the picture that you see. ...</TIP>
+</PAGE>
+
+<PAGE ID="65" NAME="Pop-up Page 1 (pop-up 5)" KIND="5" HREF="p_057" BOUNDS="54,916,109"><TIP> Notice the blue border surrounding this box. Typically, blue is used for...</TIP>
+</PAGE>
+
+<PAGE ID="66" NAME="Pop-up Page 1 (pop-up 6)" KIND="6" HREF="p_058" BOUNDS="54,971,109"><TIP> Notice that the border surrounding this box is green. Typically, green is...</TIP>
+</PAGE>
+
+<PAGE ID="67" NAME="Pop-up Page 1 (pop-up 7)" KIND="8" HREF="p_059" BOUNDS="54,1026,109"><TIP> The border of this Pop-up page box is yellow. Typically, yellow is used to...</TIP>
+</PAGE>
+
+<PAGE ID="68" NAME="Pop-up Page 1 (pop-up 8)" KIND="7" HREF="p_060" BOUNDS="54,1081,109"><TIP> The border of this Pop-up page box is red. Typically, red is used to...</TIP>
+</PAGE>
+
+<PAGE ID="69" NAME="Pop-up Page 1 (pop-up 9)" KIND="5" HREF="p_061" BOUNDS="54,1136,109"><TIP> You can also link to Pop-up pages on Click on Image pages.  Note we have...</TIP>
+</PAGE>
+
+<PAGE ID="70" NAME="Pop-up Page 2 (pop-up 1)" KIND="5" HREF="p_063" BOUNDS="54,1191,109"><TIP> In brief, creating any page in your lesson involves two main steps:  Step 1...</TIP>
+</PAGE>
+
+<PAGE ID="71" NAME="Pop-up Page 2 (pop-up 2)" KIND="5" HREF="p_064" BOUNDS="54,1246,109"><TIP> One Pop-up page can have more than one hotlink accessing it. This example...</TIP>
+</PAGE>
+
+<PAGE ID="72" NAME="Sliders 2" KIND="3" HREF="p_067" BOUNDS="2724,360,109"><TIP> You can also use Slider pages to ask students to juxtapose two to four...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="73" BOUNDS="2764,408,30"/>
+</PAGE>
+
+<PAGE ID="73" NAME="Sliders 3" KIND="3" HREF="p_068" BOUNDS="2724,443,109"><TIP> In constructing your Slider page, you can define the measurement units of...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="28" BOUNDS="2764,491,30"/>
+</PAGE>
+
+<PAGE ID="74" NAME="Slideshow 2" KIND="3" HREF="p_071" BOUNDS="4468,277,109"><TIP> Here, we use the Slideshow page type to add elements to a base picture....</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="76" BOUNDS="4508,325,30"/>
+</PAGE>
+
+<PAGE ID="75" NAME="Slideshow 1 (pop-up 1)" KIND="5" HREF="p_070" BOUNDS="54,1301,109"><TIP> CALI Author can read several file formats for graphics: GIF, JPEG, PNG. GIF...</TIP>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="92,1349,33"/>
+</PAGE>
+
+<PAGE ID="76" NAME="Slideshow 3" KIND="3" HREF="p_072" BOUNDS="4468,360,109"><TIP> In this example, each of the pictures is different from (though related to)...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="20" BOUNDS="4486,408,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="4526,408,33"/>
+</PAGE>
+
+<PAGE ID="77" NAME="Slideshow 3 (pop-up 1)" KIND="5" HREF="p_073" BOUNDS="54,1386,109"><TIP> We could have included the entire video (or a portion thereof) on a Video...</TIP>
+</PAGE>
+
+<PAGE ID="78" NAME="Slideshow 3 (pop-up 2)" KIND="5" HREF="p_074" BOUNDS="54,1441,109"><TIP> These snap shots could be edited in a paint program, such as Paintbrush,...</TIP>
+</PAGE>
+
+<PAGE ID="79" NAME="Book 2" KIND="3" HREF="p_077" BOUNDS="3596,277,109"><TIP> On this page, the graphic is located at the bottom of the screen. ...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="80" BOUNDS="3636,325,30"/>
+</PAGE>
+
+<PAGE ID="80" NAME="Book 3" KIND="3" HREF="p_078" BOUNDS="3596,360,109"><TIP> The graphic on this page is located to the right of the text. ...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="81" BOUNDS="3636,408,30"/>
+</PAGE>
+
+<PAGE ID="81" NAME="Book 4" KIND="3" HREF="p_079" BOUNDS="3596,443,109"><TIP> On this page, the graphic is placed to the left of the text.  Notice...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="82" BOUNDS="3636,491,30"/>
+</PAGE>
+
+<PAGE ID="82" NAME="Book 5" KIND="3" HREF="p_080" BOUNDS="3596,526,109"><TIP>...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="83" BOUNDS="3636,574,30"/>
+</PAGE>
+
+<PAGE ID="83" NAME="Book 6" KIND="3" HREF="p_081" BOUNDS="3596,609,109"><TIP> You can also omit the diagram to create a full page of text. You can create...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="20" BOUNDS="3614,657,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="3654,657,33"/>
+</PAGE>
+
+<PAGE ID="84" NAME="Video Page 2" KIND="3" HREF="p_083" BOUNDS="4250,277,109"><TIP> When creating your own Video pages, keep these things in mind: 1. &quot;I didn't...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="20" BOUNDS="4268,325,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="4308,325,33"/>
+</PAGE>
+
+<PAGE ID="85" NAME="Free text defined" KIND="5" HREF="p_084" BOUNDS="54,1496,109"><TIP> Free Text is a category of question types in CALI Author. Included in Free...</TIP>
+</PAGE>
+
+<PAGE ID="86" NAME="All Wrong" KIND="5" HREF="p_085" BOUNDS="54,1551,109"><TIP> Before you make all your answer wrong, or everything a &quot;maybe&quot; here are a...</TIP>
+</PAGE>
+
+<PAGE ID="87" NAME="Nintendoing" KIND="3" HREF="p_087" BOUNDS="5450,194,109"><TIP> A lesson utilizing questions in a basic building block format is the most...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="88" BOUNDS="5490,242,30"/>
+</PAGE>
+
+<PAGE ID="88" NAME="Expert Mode" KIND="3" HREF="p_088" BOUNDS="5450,277,109"><TIP> In the &quot;Expert&quot; mode questions are still presented in a linear fashion....</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="89" BOUNDS="5468,325,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="5508,325,33"/>
+</PAGE>
+
+<PAGE ID="89" NAME="Novice Mode" KIND="3" HREF="p_089" BOUNDS="5450,360,109"><TIP> The &quot;Novice&quot; mode is related in theory and in structure to the &quot;Expert&quot;...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="90" BOUNDS="5468,408,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="5508,408,33"/>
+</PAGE>
+
+<PAGE ID="90" NAME="Stick to your guns" KIND="3" HREF="p_090" BOUNDS="5450,443,109"><TIP> &quot;Stick to your guns&quot; emulates a technique often used in the classroom of...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="91" BOUNDS="5490,491,30"/>
+</PAGE>
+
+<PAGE ID="91" NAME="Fill out Knowledge" KIND="3" HREF="p_091" BOUNDS="5450,526,109"><TIP> The final question model, &quot;Fill out your knowledge/Remedial branch,&quot;...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="92" BOUNDS="5490,574,30"/>
+</PAGE>
+
+<PAGE ID="92" NAME="Examples of branching 1" KIND="3" HREF="p_092" BOUNDS="5450,609,109"><TIP> Questions can branch from a variety of question types including:...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="93" BOUNDS="5468,657,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="5508,657,33"/>
+</PAGE>
+
+<PAGE ID="93" NAME="Examples of branching 2" KIND="3" HREF="p_094" BOUNDS="5450,692,109"><TIP> This multiple choice question, set up like a true/false question,...</TIP>
+  <BRANCH KIND="14" NAME="True" DEST="93" BOUNDS="5426,740,30"/>
+  <BRANCH KIND="15" NAME="False" DEST="95" BOUNDS="5466,740,33"/>
+  <BRANCH KIND="11" NAME="Next" DEST="96" BOUNDS="5509,740,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="5549,740,33"/>
+</PAGE>
+
+<PAGE ID="94" NAME="Text Symbols" KIND="3" HREF="p_093" BOUNDS="272,360,109"><TIP> Special characters:  Section: &#167;&#160;Paragraph:&#182; Euro:&#8364; Copyright: &#169; Registered...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="94" BOUNDS="312,408,30"/>
+</PAGE>
+
+<PAGE ID="95" NAME="Example of branching 2-1" KIND="3" HREF="p_095" BOUNDS="4904,775,109"><TIP> How did we know that there are 4 quarts in a U.S. gallon. Let's look at...</TIP>
+  <BRANCH KIND="14" NAME="1-1" DEST="95" BOUNDS="4850,823,23"/>
+  <BRANCH KIND="15" NAME="1-2" DEST="95" BOUNDS="4874,823,23"/>
+  <BRANCH KIND="14" NAME="2-1" DEST="95" BOUNDS="4898,823,23"/>
+  <BRANCH KIND="15" NAME="2-2" DEST="95" BOUNDS="4922,823,23"/>
+  <BRANCH KIND="14" NAME="3-1" DEST="95" BOUNDS="4946,823,23"/>
+  <BRANCH KIND="15" NAME="3-2" DEST="95" BOUNDS="4970,823,23"/>
+  <BRANCH KIND="11" NAME="Next" DEST="97" BOUNDS="4994,823,30"/>
+</PAGE>
+
+<PAGE ID="96" NAME="Examples of branching 3" KIND="3" HREF="p_097" BOUNDS="5558,775,109"><TIP> Using a Drag into Category question, let's look at a branching question...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="98" BOUNDS="5504,823,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="96" BOUNDS="5551,823,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="99" BOUNDS="5607,823,30"/>
+  <BRANCH KIND="17" NAME="Hints" DEST="96" BOUNDS="5647,823,32"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="5689,823,33"/>
+</PAGE>
+
+<PAGE ID="97" NAME="Example of branching 2-2" KIND="3" HREF="p_096" BOUNDS="4904,858,109"><TIP> Let's work a bit more with measurement. Can you match the correct number of...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="93" BOUNDS="4892,906,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="97" BOUNDS="4939,906,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="93" BOUNDS="4995,906,30"/>
+</PAGE>
+
+<PAGE ID="98" NAME="Examples of branching 3-1" KIND="3" HREF="p_098" BOUNDS="5122,858,109"><TIP> Here, as an example of an Expert Mode question, students who answered the...</TIP>
+  <BRANCH KIND="14" NAME="1-1" DEST="98" BOUNDS="5068,906,23"/>
+  <BRANCH KIND="15" NAME="1-2" DEST="98" BOUNDS="5092,906,23"/>
+  <BRANCH KIND="15" NAME="1-3" DEST="98" BOUNDS="5116,906,23"/>
+  <BRANCH KIND="15" NAME="2-1" DEST="98" BOUNDS="5140,906,23"/>
+  <BRANCH KIND="15" NAME="2-2" DEST="98" BOUNDS="5164,906,23"/>
+  <BRANCH KIND="14" NAME="2-3" DEST="98" BOUNDS="5188,906,23"/>
+  <BRANCH KIND="15" NAME="3-1" DEST="98" BOUNDS="5212,906,23"/>
+  <BRANCH KIND="15" NAME="3-2" DEST="98" BOUNDS="5236,906,23"/>
+  <BRANCH KIND="14" NAME="3-3" DEST="98" BOUNDS="5260,906,23"/>
+  <BRANCH KIND="11" NAME="Next" DEST="96" BOUNDS="5284,906,30"/>
+</PAGE>
+
+<PAGE ID="99" NAME="Example of branching 4" KIND="3" HREF="p_099" BOUNDS="5668,858,109"><TIP> Another question model is &quot; Stick to your guns .&quot; (If you follow this link...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="100" BOUNDS="5614,906,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="99" BOUNDS="5661,906,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="101" BOUNDS="5717,906,30"/>
+  <BRANCH KIND="17" NAME="Hints" DEST="99" BOUNDS="5757,906,32"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="5799,906,33"/>
+</PAGE>
+
+<PAGE ID="100" NAME="Example of Branching 4-1" KIND="3" HREF="p_100" BOUNDS="5340,941,109"><TIP> Are you sure Anne Rice didn't write all four novels? Remember she often...</TIP>
+  <BRANCH KIND="15" NAME="Yes, I'll change my mind." DEST="102" BOUNDS="5286,989,124"/>
+  <BRANCH KIND="14" NAME="No, she only wrote 3 of the 4 titles." DEST="102" BOUNDS="5411,989,171"/>
+  <BRANCH KIND="11" NAME="Next" DEST="101" BOUNDS="5286,1005,30"/>
+</PAGE>
+
+<PAGE ID="101" NAME="Example of Branching 5" KIND="3" HREF="p_102" BOUNDS="5776,941,109"><TIP> Finally, we come to the fifth model of questioning, &quot; Fill-out your...</TIP>
+  <BRANCH KIND="14" NAME="regimen, Regimen, re" DEST="104" BOUNDS="5636,989,108"/>
+  <BRANCH KIND="15" NAME="regiment ,  Regiment" DEST="105" BOUNDS="5754,989,105"/>
+  <BRANCH KIND="13" NAME="Unrecognized" DEST="101" BOUNDS="5869,989,74"/>
+  <BRANCH KIND="11" NAME="Next" DEST="106" BOUNDS="5953,989,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="5993,989,33"/>
+</PAGE>
+
+<PAGE ID="102" NAME="Example of branching 4-1-a" KIND="3" HREF="p_106" BOUNDS="5340,1024,109"><TIP> If Ann Rice didn't write The Testament, who did? ...</TIP>
+  <BRANCH KIND="14" NAME="John Grisham, GrishG" DEST="102" BOUNDS="5286,1072,110"/>
+  <BRANCH KIND="13" NAME="Unrecognized" DEST="102" BOUNDS="5397,1072,74"/>
+  <BRANCH KIND="11" NAME="Next" DEST="103" BOUNDS="5472,1072,30"/>
+</PAGE>
+
+<PAGE ID="103" NAME="Example of branching 4-2" KIND="3" HREF="p_101" BOUNDS="5340,1107,109"><TIP> You got to this page by branching from the response to the &quot;stick to your...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="99" BOUNDS="5380,1155,30"/>
+</PAGE>
+
+<PAGE ID="104" NAME="Examples of branching 5-1a" KIND="3" HREF="p_103" BOUNDS="5558,1024,109"><TIP> Since you understand the difference between &quot;regiment&quot; and &quot;regimen&quot; let's...</TIP>
+  <BRANCH KIND="14" NAME="1-1" DEST="104" BOUNDS="5504,1072,23"/>
+  <BRANCH KIND="15" NAME="1-2" DEST="104" BOUNDS="5528,1072,23"/>
+  <BRANCH KIND="15" NAME="1-3" DEST="104" BOUNDS="5552,1072,23"/>
+  <BRANCH KIND="14" NAME="2-1" DEST="104" BOUNDS="5576,1072,23"/>
+  <BRANCH KIND="15" NAME="2-2" DEST="104" BOUNDS="5600,1072,23"/>
+  <BRANCH KIND="15" NAME="2-3" DEST="104" BOUNDS="5624,1072,23"/>
+  <BRANCH KIND="11" NAME="Next" DEST="107" BOUNDS="5648,1072,30"/>
+</PAGE>
+
+<PAGE ID="105" NAME="Examples of branching 5-1d" KIND="3" HREF="p_104" BOUNDS="5776,1024,109"><TIP> Let's look at the origin of these words to better understand why people...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="108" BOUNDS="5816,1072,30"/>
+</PAGE>
+
+<PAGE ID="106" NAME="What happened in Example 5" KIND="3" HREF="p_109" BOUNDS="5994,1024,109"><TIP> This graph depicts the flow of Question 5. In questions 5-1a and 5-1b...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="22" BOUNDS="6034,1072,30"/>
+</PAGE>
+
+<PAGE ID="107" NAME="Examples of branching 5-1b" KIND="3" HREF="p_105" BOUNDS="5558,1107,109"><TIP> Let's try some more words. Where do these words derive from? ...</TIP>
+  <BRANCH KIND="14" NAME="1-1" DEST="107" BOUNDS="5504,1155,23"/>
+  <BRANCH KIND="15" NAME="1-2" DEST="107" BOUNDS="5528,1155,23"/>
+  <BRANCH KIND="15" NAME="1-3" DEST="107" BOUNDS="5552,1155,23"/>
+  <BRANCH KIND="14" NAME="2-1" DEST="107" BOUNDS="5576,1155,23"/>
+  <BRANCH KIND="15" NAME="2-2" DEST="107" BOUNDS="5600,1155,23"/>
+  <BRANCH KIND="15" NAME="2-3" DEST="107" BOUNDS="5624,1155,23"/>
+  <BRANCH KIND="15" NAME="3-1" DEST="107" BOUNDS="5648,1155,23"/>
+  <BRANCH KIND="14" NAME="3-2" DEST="107" BOUNDS="5672,1155,23"/>
+  <BRANCH KIND="15" NAME="3-3" DEST="107" BOUNDS="5696,1155,23"/>
+  <BRANCH KIND="11" NAME="Next" DEST="101" BOUNDS="5720,1155,30"/>
+</PAGE>
+
+<PAGE ID="108" NAME="Example of branching 5-1e" KIND="3" HREF="p_107" BOUNDS="5776,1107,109"><TIP> To become more comfortable with these two words, let's use them in these...</TIP>
+  <BRANCH KIND="14" NAME="1-1" DEST="108" BOUNDS="5722,1155,23"/>
+  <BRANCH KIND="15" NAME="1-2" DEST="108" BOUNDS="5746,1155,23"/>
+  <BRANCH KIND="15" NAME="2-1" DEST="108" BOUNDS="5770,1155,23"/>
+  <BRANCH KIND="14" NAME="2-2" DEST="108" BOUNDS="5794,1155,23"/>
+  <BRANCH KIND="15" NAME="3-1" DEST="108" BOUNDS="5818,1155,23"/>
+  <BRANCH KIND="14" NAME="3-2" DEST="108" BOUNDS="5842,1155,23"/>
+  <BRANCH KIND="11" NAME="Next" DEST="109" BOUNDS="5866,1155,30"/>
+</PAGE>
+
+<PAGE ID="109" NAME="Example of branching 5-1f" KIND="3" HREF="p_108" BOUNDS="5776,1190,109"><TIP> Now that we've reviewed the difference between regimen and regiment, let's...</TIP>
+  <BRANCH KIND="14" NAME="regimen ,  regime" DEST="109" BOUNDS="5724,1238,88"/>
+  <BRANCH KIND="13" NAME="Unrecognized" DEST="109" BOUNDS="5822,1238,74"/>
+  <BRANCH KIND="11" NAME="Next" DEST="110" BOUNDS="5906,1238,30"/>
+</PAGE>
+
+<PAGE ID="110" NAME="Examples of branching 5-1g" KIND="3" HREF="p_110" BOUNDS="5776,1273,109"><TIP> Would you like to try some extra credit problems, or would you like to...</TIP>
+  <BRANCH KIND="13" NAME="Yes" DEST="104" BOUNDS="5782,1321,26"/>
+  <BRANCH KIND="13" NAME="No" DEST="101" BOUNDS="5818,1321,22"/>
+  <BRANCH KIND="11" NAME="Next" DEST="101" BOUNDS="5850,1321,30"/>
+</PAGE>
+
+<PAGE ID="111" NAME="Naming pages" KIND="5" HREF="p_111" BOUNDS="54,1606,109"><TIP> Briefly, CALI Author permits you to name your own book pages. Names can be...</TIP>
+</PAGE>
+
+<PAGE ID="112" NAME="Blue Sky Defined" KIND="5" HREF="p_112" BOUNDS="54,1661,109"><TIP> Ah, so you were curious! Basically, the sky appears blue because as light...</TIP>
+</PAGE>
+
+<PAGE ID="113" NAME="Hardhat" KIND="5" HREF="p_113" BOUNDS="54,1716,109"><TIP> Hardhats are required on all construction sites today. However, prior to...</TIP>
+</PAGE>
+
+</PAGES>
+
+</MAPPER>
+
