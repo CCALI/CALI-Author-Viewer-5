@@ -36,7 +36,7 @@ lessons/web/share/jq/CAV_urls.js
 	contains URL patterns and links that leave the lesson including lesson runs,
 	score save and jumping to other lessons.
 
-## How to user the Cali Lessons style guide
+## How to use the Cali Lessons style guide
 
 ### Running the style guide:
 
