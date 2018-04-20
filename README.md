@@ -50,11 +50,6 @@ If you don't have documentjs on your machine add it
 npm install documentjs
 ```
 
-Update your packages
-```
-npm install
-```
-
 Go to the style guide folder
 ```
 cd cali-lessons-style-guide/styleguide
@@ -70,5 +65,5 @@ or
 python -m SimpleHTTPServer
 ```
 
-Go to [documentjs](https://documentjs.com/docs/DocumentJS.guides.installing.html) for installation help
+Go to [documentjs](https://documentjs.com/docs/DocumentJS.guides.installing.html) for more installation help
 
