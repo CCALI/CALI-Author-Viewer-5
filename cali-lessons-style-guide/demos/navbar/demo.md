@@ -1,17 +1,3 @@
-@page navbar Navbar
-@parent components
-
-### Cali Lesson Navbar using bootstrap 3
-
-Learn more about bootstrap3 nav [here](http://getbootstrap.com/docs/3.3/components/#navbar)
-
-```
-  <nav class="navbar navbar-default CL-navbar">
-    <div class="container-fluid">
-    </div>
-  </nav>
-```
-
 <!DOCTYPE html>
 <html>
 
