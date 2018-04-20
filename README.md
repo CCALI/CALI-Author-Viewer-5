@@ -70,5 +70,5 @@ or
 python -m SimpleHTTPServer
 ```
 
-Go to [documentjs](https://documentjs.com/docs/DocumentJS.guides.installing.html) for more help on installing
+Go to [documentjs](https://documentjs.com/docs/DocumentJS.guides.installing.html) for installation help
 
