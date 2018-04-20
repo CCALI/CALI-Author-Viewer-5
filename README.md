@@ -36,3 +36,39 @@ lessons/web/share/jq/CAV_urls.js
 	contains URL patterns and links that leave the lesson including lesson runs,
 	score save and jumping to other lessons.
 
+## How to user the Cali Lessons style guide
+
+### Running the style guide:
+
+Go to the style guide folder
+```
+cd cali-lessons-style-guide
+```
+
+If you don't have documentjs on your machine add it
+```
+npm install documentjs
+```
+
+Update your packages
+```
+npm install
+```
+
+Go to the style guide folder
+```
+cd cali-lessons-style-guide/styleguide
+```
+
+Run a local server
+```
+simplehttpserver
+```
+
+or
+```
+python -m SimpleHTTPServer
+```
+
+Go to [documentjs](https://documentjs.com/docs/DocumentJS.guides.installing.html) for more help on installing
+
