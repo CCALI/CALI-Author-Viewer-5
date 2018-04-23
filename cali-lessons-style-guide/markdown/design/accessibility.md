@@ -1,5 +1,5 @@
 @page accessibility Accessibility Guidelines
-@parent design 0
+@parent design 4
 
 Designing and developing your application to reach AA+ standards is good for **all** users, not just disabled users. Thinking about less-than-perfect contexts in which a user may try to access your application will make things more clear and direct throughout. This page will get you on the right track for ensuring everyone can have the best experience possible accessing and interacting with your app.
 

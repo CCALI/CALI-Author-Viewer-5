@@ -1,31 +1,27 @@
 @page navbar Navbar
 @parent components
 
-### Cali Lesson Navbar using bootstrap 3
+## Cali Lesson Navbar
+
+The cali lessons navbar uses bootstrap 3 navbar class.
 
 Learn more about bootstrap3 nav [here](http://getbootstrap.com/docs/3.3/components/#navbar)
 
+---
+
+#### Cali Lesson Navbar using bootstrap 3
+
+HTML
 ```
-  <nav class="navbar navbar-default CL-navbar">
+  <nav class="navbar navbar-default CL-navbar" 
+  	   role="navigation" 
+  	   aria-label="Site Navbar">
     <div class="container-fluid">
     </div>
   </nav>
 ```
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <title>Navs</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-</head>
-
 <style type="text/css">
-	body {
-	  font: "Lucida Grande", "Verdana", "Helvetica Neue", "Lucida Sans Unicode", "Lucida Sans Regular", Arial, sans-serif;
-	  font-weight: 300;
-	}
 	.CL-navbar {
 	  background-color: #003366;
 	  border-color: #003366;
@@ -35,11 +31,6 @@ Learn more about bootstrap3 nav [here](http://getbootstrap.com/docs/3.3/componen
 	}
 </style>
 
-<body>
-  <nav class="navbar navbar-default CL-navbar">
-    <div class="container-fluid">
-    </div>
-  </nav>
-
-</body>
-</html>
+<nav class="navbar navbar-default CL-navbar">
+	<div class="container-fluid"></div>
+</nav>

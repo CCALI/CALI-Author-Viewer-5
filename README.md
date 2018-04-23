@@ -55,14 +55,9 @@ Go to the style guide folder
 cd cali-lessons-style-guide/styleguide
 ```
 
-Run a local server
+Run on a local server (example)
 ```
 simplehttpserver
-```
-
-or
-```
-python -m SimpleHTTPServer
 ```
 
 Go to [documentjs](https://documentjs.com/docs/DocumentJS.guides.installing.html) for more installation help
