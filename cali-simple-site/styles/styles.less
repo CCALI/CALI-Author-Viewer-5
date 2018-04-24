@@ -10,6 +10,9 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @Gold: #d4c229;
 @White: #ffffff;
 @WhiteFakeOpacity:#8099b3;
+@Grey: #efefef;
+
+@CLThemeColor: @DarkBlue;
 
 // images
 @ArrowLeftBlue:
@@ -20,13 +23,25 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @NavMargin: 30px 0px 0px 15px;
 @LightBorders: 1px solid rgba(153,153,153,0.4);
 @Clear: none;
+@Radius: 0px;
 
-.border-radius(@radius) {
-  -webkit-border-radius: @radius;
-  -moz-border-radius: @radius;
-  -o-border-radius: @radius;
-  -ms-border-radius: @radius;
-  border-radius: @radius;
+//brand
+@CLLogo: url(https://image.ibb.co/iKxAeH/cali_lessons_logo_170px.png);
+@CLLogoWidth: 170px;
+
+//icon buttons
+@CLMenuWhite: url(https://image.ibb.co/jPdfwx/hamburger_white_32px.png);
+@CLMenuBlue: url(https://image.ibb.co/gVyoEH/hamburger_menu_32px.png);
+@CLExit: url(https://image.ibb.co/m944oc/exit_32px.png);
+@CLArrowLeftBlue: url(https://image.ibb.co/mVgSOc/arrow_previous.png);
+@CLArrowRightWhite: url(https://image.ibb.co/n7VyUH/arrow_next.png);
+
+.border-radius(@Radius) {
+  -webkit-border-radius: @Radius;
+  -moz-border-radius: @Radius;
+  -o-border-radius: @Radius;
+  -ms-border-radius: @Radius;
+  border-radius: @Radius;
 }
 
 .appearance-hidden (@Clear) {
@@ -42,6 +57,11 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
   box-shadow: none !important;
 }
 
+.CLIconButtonWidth {
+  width: 32px;
+  height: 32px;
+}
+
 .CLButtonRules {
   .border-radius(0px);
   font-size: 18px;
@@ -52,7 +72,7 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 }
 
 .CLButtonPreviousRules {
-  color: @DarkBlue !important;
+  color: @CLThemeColor !important;
   background: lighten(@WhiteFakeOpacity, 35%) !important;
 }
 
@@ -63,8 +83,8 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 
 .CLNextActions {
   .CLButtonRules;
-  background: lighten(@DarkBlue, 5%) !important;
-  border: 2px solid lighten(@DarkBlue, 5%) !important;
+  background: lighten(@CLThemeColor, 5%) !important;
+  border: 2px solid lighten(@CLThemeColor, 5%) !important;
 }
 
 .CLButtonArrowRules {
@@ -83,12 +103,12 @@ body {
 }
 
 h1 {
-  color: @DarkBlue;
+  color: @CLThemeColor;
   padding-bottom: 25px;
 }
 
 h2 {
-  color: @DarkBlue;
+  color: @CLThemeColor;
   margin-top: 0px;
   padding-top: 10px;
   padding-bottom: 5px;
@@ -102,25 +122,47 @@ img {
 // Navigation
 //------------------------------
 
+.CL-navbar-main {
+  background: @CLThemeColor;
+  border-bottom: 5px solid @Gold;
+  .border-radius (@Radius);
+}
+
 .CL-navbar {
-    background-color: @DarkBlue;
-    border-color: @DarkBlue;
-    border-radius: 0px;
-    height: 90px;
-    border-bottom: 5px solid @Gold;
+    height: 84px;
+    background: @CLThemeColor;
+    border-color: @CLThemeColor;
 }
 
 .navbar-text {
   margin: @NavMargin;
 }
 
+.CL-menu-button {
+  margin-top: 16px;
+  border: none;
+  &:hover,
+  &:focus {
+    background: none !important;
+    opacity: 0.9 !important;
+  }
+  &:checked,
+  &:active {
+    opacity: 0.75 !important;
+  }
+}
+
+.CL-hamburger-white {
+  display: block;
+  .CLIconButtonWidth;
+  background: @CLMenuWhite center center no-repeat;
+}
+
 .exit-btn {
-  margin: @NavMargin;
-  margin-top: 20px;
-  width: 40px;
-  height: 40px;
+  margin-top: 10px;
+  .CLIconButtonWidth;
   float:left;
-  background: url(https://image.ibb.co/m944oc/exit_32px.png) top  left no-repeat;
+  background: @CLExit top  left no-repeat;
   &:hover {
     opacity: 0.5;
   }
@@ -130,8 +172,9 @@ img {
 }
 
 .CL-logo {
-  width: 170px;
-  height: auto;
+  content: @CLLogo;
+  width: @CLLogoWidth;
+  height: 49px;
 }
 
 .user-name-link {
@@ -142,23 +185,27 @@ img {
      }  
 }
 
+.exit-link {
+  display: none;
+}
+
 //------------------------------
 // Lessons View
 //------------------------------
 
 input.CL-hamburger[type="checkbox"] {
-  content: url(https://image.ibb.co/gVyoEH/hamburger_menu_32px.png);
+  content: @CLMenuBlue;
   display: block;
   float: right;
   width: 32px;
   height: 32px;
   cursor: pointer;
   .appearance-hidden (@Clear);
-  outline: @Clear;
+  outline: none;
   &:checked {
     content: url(https://image.ibb.co/mVgSOc/arrow_previous.png);
     .appearance-hidden (@Clear);
-    outline: @Clear;
+    outline: none;
   }
 }
 
@@ -182,10 +229,10 @@ input.CL-hamburger[type="checkbox"] {
 
 .CL-next-btn {
   .CLButtonRules;
-  background: @DarkBlue;
-  border: 2px solid @DarkBlue;
+  background: @CLThemeColor;
+  border: 2px solid @CLThemeColor;
   &:hover,
-	&:focus {
+  &:focus {
     .CLNextActions;
     .border-none;
     box-shadow: none !important;
@@ -200,10 +247,10 @@ input.CL-hamburger[type="checkbox"] {
 
 .CL-previous-btn {
   .CLButtonRules;
-  color: @DarkBlue;
+  color: @CLThemeColor;
   background: @White;
   font-weight: 600;
-  border: 2px solid @DarkBlue;
+  border: 2px solid @CLThemeColor;
     &:hover, 
     &:focus {
       .CLPreviousActions;
@@ -216,16 +263,50 @@ input.CL-hamburger[type="checkbox"] {
 }
 
 .next-arrow {
-  background: url(https://image.ibb.co/n7VyUH/arrow_next.png);
+  background: @CLArrowRightWhite;
   float: right;
   .CLButtonArrowRules;
   margin-right: -5px;
 }
 
 .previous-arrow {
-  background: url(https://image.ibb.co/mVgSOc/arrow_previous.png);
+  background: @CLArrowLeftBlue;
   float: left;
   .CLButtonArrowRules;
   margin-right: 5px;
   margin-left: -10px;
+}
+
+//------------------------------
+// Responsive Styles
+//------------------------------
+
+@media (max-width:768px) {
+  .CL-navbar-main {
+    background: @Grey;
+  }
+  .user-name-link {
+    color: @CLThemeColor;
+    font-size: 18px;
+    margin: 0px 0px 0px 20px;
+  }
+  .navbar-text {
+    margin: 20px 0px 20px 0px;
+  }
+  .exit-icon {
+    display: none !important;
+  }
+  .exit-btn {
+    display: none !important;
+  }
+  .exit-link {
+    display: block;
+    color: @CLThemeColor;
+    font-size: 18px;
+    margin: 0px 0px 0px 20px;
+     &:hover {
+      color: @WhiteFakeOpacity;
+      text-decoration: none;
+     }  
+  }
 }

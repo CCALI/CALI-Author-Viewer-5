@@ -1,29 +1,45 @@
 <html>
 <head>
-	<title>@Import</title>
-	  <link rel="stylesheet" href="styles.css" type="text/css">
-    <link rel="stylesheet/less" type="text/css" href="styles.less" />
+  <title>Simple Site</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-  <nav class="navbar navbar-default CL-navbar">
-    <div class="container-fluid">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">
-          <img class="CL-logo" alt="Cali Lessons Logo" src="https://image.ibb.co/f8jBU7/Lessons_Logo_White.png">
+<nav class="navbar navbar-default CL-navbar-main">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header CL-navbar">
+      <button type="button" class="navbar-toggle collapsed CL-menu-button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="CL-hamburger-white"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+          <img class="CL-logo" alt="Cali Lessons Logo" />
         </a>
-      </div>
-      <!-- Collect the nav links, forms, and other content for toggling -->
-      <div class="collapse navbar-collapse navbar-right">
-        <p class="navbar-text">
-          <a href="#" class="user-name-link">Mark Otto</a>
-        </p>
-        <a href="#">
-          <span class="exit-btn" alt="exit"></span>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <p class="navbar-text">
+          <a href="#" class="user-name-link">User Name</a>
+          </p>
+        </li>
+        <li>
+          <a href="#" class="exit-icon">
+            <span class="exit-btn" alt="exit">
+              <p class="navbar-text">
+                <a href="#" class="exit-link">Exit & Resume Later</a>
+            </p>
+          </span>
         </a>
-      </div><!-- /.navbar-collapse -->
-    </div><!-- /.container-fluid -->
-  </nav>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
   <div class="col-sm-12">
      <header>
        <h1>CALI Author Demonstration Lesson</h1>
@@ -33,7 +49,6 @@
           <h2>Table of Contents 
             <input class="CL-hamburger" type="checkbox" id="toc-menu" placeholder="Table of Contents Menu"></input>
           </h2>
-
         </div>
         <div class="col-sm-8 right-outline">
           <h2>Introduction</h2>
