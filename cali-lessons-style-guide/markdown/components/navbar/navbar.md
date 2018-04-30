@@ -13,12 +13,13 @@ Learn more about bootstrap3 nav [here](http://getbootstrap.com/docs/3.3/componen
 
 HTML
 ```
-  <nav class="navbar navbar-default CL-navbar" 
-  	   role="navigation" 
+  <nav class="navbar navbar-default CL-navbar-main"
+  	   role="navigation"
   	   aria-label="Site Navbar">
-    <div class="container-fluid">
-    </div>
-  </nav>
+	  <div class="container-fluid">
+	    <div class="navbar-header CL-navbar"></div>
+	  </div>
+  </nav>  
 ```
 
 <style type="text/css">
