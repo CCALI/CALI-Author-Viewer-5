@@ -6,7 +6,9 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-<nav class="navbar navbar-default CL-navbar-main">
+<nav class="navbar navbar-default CL-navbar-main"
+     role="navigation"
+     aria-label="Site Navbar">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header CL-navbar">
@@ -40,27 +42,116 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-  <div class="col-sm-12">
-     <header>
-       <h1>CALI Author Demonstration Lesson</h1>
-     </header>
-      <div class="row top-bottom-outline">
-        <div class="col-sm-4 right-outline">
-          <h2>Table of Contents 
-            <input class="CL-hamburger" type="checkbox" id="toc-menu" placeholder="Table of Contents Menu"></input>
-          </h2>
-        </div>
-        <div class="col-sm-8 right-outline">
-          <h2>Introduction</h2>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+        <header>
+          <h1>CALI Author Demonstration Lesson</h1>
+        </header>
+    </div>  
+  </div>  
+</div>
+
+<div id="wrapper" class="active">
+
+  <div id="page-content-wrapper">
+    <div class="page-content">
+      <input id="menu-toggle" class="CL-hamburger" type="checkbox" placeholder="Table of Contents Menu"></input><h2>Introduction</h2>
+      <h4>Radio Buttons</h4>
+      <div row>
+        <div class="col-sm-12">
+          <label class="container">Selected
+            <input type="radio" checked="checked" name="radio">
+            <span class="checkmark-rad-selected"></span>
+          </label>
+          <label class="container">Wrong
+            <input type="radio" name="radio">
+            <span class="checkmark-rad-error"></span>
+          </label>
+          <label class="container">Right
+            <input type="radio" name="radio">
+            <span class="checkmark-rad-success"></span>
+          </label>
+          <label class="container">Default
+            <input type="radio" name="radio">
+            <span class="checkmark-rad-default"></span>
+          </label>
         </div>
       </div>
-  </div>
-  <div class="col-sm-12">
-    <div class="row text-center">
-      <button class="btn btn-primary CL-previous-btn" alt="previous"><span class="previous-arrow"></span>Previous</button>
-      <button class="btn btn-primary CL-next-btn" alt="next">Next<span class="next-arrow"></span>
-      </button>   
+      <br>
+      <br>
+      <h4>Checkboxes</h4>
+      <div class="row">
+        <div class="col-sm-12 adjust-left">
+           <label class="container">One
+            <input type="checkbox" checked="checked">
+            <span class="checkmark-selected"></span>
+          </label>
+          <label class="container">Two
+            <input type="checkbox">
+            <span class="checkmark-wrong"></span>
+          </label>
+          <label class="container">Three
+            <input type="checkbox">
+            <span class="checkmark-success"></span>
+          </label>
+          <label class="container">Four
+            <input type="checkbox">
+            <span class="checkmark-default"></span>
+          </label>
+        </div>
+      </div>
     </div>
   </div>
+
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <div class="row">
+      <div class="col-sm-12">
+        <nav class="nav-tree" role="navigation">
+          <h2>Table of Contents</h2>
+          <ul class="nav__list">
+            <li>
+              <input id="group-1" type="checkbox" hidden />
+              <label for="group-1"><span class="fa fa-angle-right"></span>lessons 1</label>
+              <ul class="group-list">
+                <li><a href="#">Question 1</a></li>
+                <li><a href="#">Question 2</a></li>
+                <li><a href="#">Question 3</a></li>
+                <li><a href="#">Question 4</a></li>
+                  </ul>
+            </li>
+            <li>
+              <input id="group-2" type="checkbox" hidden />
+              <label for="group-2"><span class="fa fa-angle-right"></span>lessons 2</label>
+              <ul class="group-list">
+                <li><a href="#">Question 1</a></li>
+                <li><a href="#">Question 2</a></li>
+              </ul>
+            </li>
+          </ul>
+        </nav> 
+      </div>
+    </div>   
+  </div>
+  <!-- Page content -->
+
+</div>
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="text-center">
+        <button class="btn btn-primary CL-next-btn" alt="next">Next<span class="next-arrow"></span></button> 
+    </div>  
+  </div>
+</div>
+
 </body>
+  <script type="text/javascript">
+    $("#menu-toggle").click(function(e) {
+            e.preventDefault();
+            $("#wrapper").toggleClass("active");
+    });
+  </script>
 </html>
