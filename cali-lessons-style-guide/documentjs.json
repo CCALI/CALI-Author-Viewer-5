@@ -1,9 +1,0 @@
-{
-	"sites": {
- 		"styles": {
-           		"glob": "{less,markdown,demos}/**/*.{css,less,scss,md}",
-        		"dest": "styleguide",
-        		"parent": "cali" 
-        	}
-    	}
-}

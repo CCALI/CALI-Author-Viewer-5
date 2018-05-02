@@ -1,0 +1,22 @@
+/**
+* @stylesheet brand.less Brand
+* @parent stylesheet
+*
+* @description
+* Logo treatments, watermarks etc. to represent the brand.
+
+* @iframe demos/brand.html
+**/
+
+@import "variables.less";
+
+.CL-logo {
+  height: auto;
+  background-size: @logoWidth;
+  background: url(@logo) no-repeat left center;
+}
+
+footer .brand {
+  margin-top: 13px;
+  line-height: @footerHeight/2+7;
+}

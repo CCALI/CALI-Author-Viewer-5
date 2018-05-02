@@ -1,0 +1,9 @@
+{
+	"sites": {
+ 		"styles": {
+   		"glob": "styles/{less,markdown,demos}/**/*.{css,less,scss,md}",
+  		"dest": "docs",
+  		"parent": "cali" 
+  	}
+	}
+}
