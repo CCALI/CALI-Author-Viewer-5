@@ -5,7 +5,7 @@ module.exports = function(grunt) {
         options: {
           cleancss: true
         },
-        files: {"docs/styles.css": "styles/less/exitbuttons.less"} // should change to styles/**/*
+        files: {"docs/styles.css": "styles/less/**/*"}
       },
     },
     copy: {
@@ -21,6 +21,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-copy');
 
-  grunt.registerTask('document', ['documentjs', 'less', 'copy:demos']);
-  grunt.registerTask('build', ['less', 'copy:prodStyles']);
+  grunt.registerTask('document', [/*'clean:docs',*/ 'documentjs', 'less', 'copy:demos']);
+  // grunt.registerTask('build', ['less', 'copy:prodStyles']);
 };
