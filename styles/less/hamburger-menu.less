@@ -1,0 +1,42 @@
+/**
+*@stylesheet hamburger-menu.less Hamburger Menu
+*@parent menus
+*
+*@description
+*## CALI Lesson Hamburger Menu for Nav Bar
+*
+*This is the hamburger menu that goes in the navbar.
+*
+*
+*@demo demos/menu/hamburger-menu/hamburger-menu.html
+**/
+
+@import "variables.less";
+
+@CLMenuWhite: url(https://image.ibb.co/jPdfwx/hamburger_white_32px.png);
+
+.CL-navbar-main {
+  background: @CLThemeColor;
+  border-bottom: 5px solid @Gold;
+  .border-radius (@Radius);
+}
+
+.CL-menu-button {
+  margin-top: 16px;
+  border: none;
+  &:hover,
+  &:focus {
+    background: none !important;
+    opacity: 0.9 !important;
+  }
+  &:checked,
+  &:active {
+    opacity: 0.75 !important;
+  }
+}
+
+.CL-hamburger-white {
+  display: block;
+  .CLIconButtonWidth;
+  background: @CLMenuWhite center center no-repeat;
+}

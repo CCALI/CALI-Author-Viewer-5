@@ -1,0 +1,71 @@
+/**
+*@stylesheet navbuttons.less Nav Button
+*@parent components.buttons
+*
+*@description
+*## CALI Lesson Buttons
+*
+*The "Next" button is used to navigate through lessons.
+*
+*HTML
+*```
+*<button class="btn btn-primary CL-next-btn" alt="next">Next
+*	<span class="next-arrow"></span>
+*</button>  
+*```
+*
+*@demo demos/buttons/navbuttons/navbuttons.html
+**/
+
+@import "variables.less";
+
+@CLArrowRightWhite: url(https://image.ibb.co/n7VyUH/arrow_next.png);
+
+.CLButtonRules {
+  .border-radius(0px);
+  font-size: 18px;
+  text-align: left;
+  cursor: hand;
+  width: 140px;
+  height: 40px;
+  padding-top: 4px;
+  margin: 10px 5px 0px 0px;
+}
+
+.CLNextActions {
+  .CLButtonRules;
+  background: lighten(@CLThemeColor, 5%) !important;
+  border: 2px solid lighten(@CLThemeColor, 5%) !important;
+}
+
+.CLButtonArrowRules {
+  height: 30px;
+  width: 30px;
+  margin-top:-7px;
+}
+
+.CL-next-btn {
+  .CLButtonRules;
+  color: @White;
+  background: @CLThemeColor;
+  border: 2px solid @CLThemeColor;
+  &:hover,
+  &:focus {
+    .CLNextActions;
+    .border-none;
+    box-shadow: none !important;
+  }
+  &:active {
+    .CLNextActions;
+    .border-none;
+    box-shadow: none !important;
+    opacity: 0.95;
+  }
+}
+
+.next-arrow {
+  background: @CLArrowRightWhite;
+  float: right;
+  .CLButtonArrowRules;
+  margin-right: -5px;
+}

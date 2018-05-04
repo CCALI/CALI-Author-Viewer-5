@@ -1,0 +1,59 @@
+@import 
+url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
+
+// Variables used to set the font appearance.
+@CLFontFamily: "Lucida Grande", "Verdana", "Helvetica Neue", "Lucida Sans Unicode", "Lucida Sans Regular", Arial, sans-serif; 
+@CLFontWeight: 300;
+
+//color variables
+@DarkBlue: #003366;
+@Gold: #d4c229;
+@White: #ffffff;
+@WhiteFakeOpacity:#8099b3;
+@Grey: #efefef;
+
+@CLThemeColor: @DarkBlue;
+@CLHeaderColor: @CLThemeColor;
+
+// images
+@ArrowLeftBlue:
+"https://image.ibb.co/ksA7nS/arrow_left_white.png";
+@ArrowRightWhite: "https://image.ibb.co/bVnbgn/arrow_right_blue.png";
+
+//content variable
+@NavMargin: 30px 0px 0px 15px;
+@LightBorders: 1px solid rgba(153,153,153,0.4);
+@Clear: none;
+@Radius: 0px;
+
+//brand
+@CLLogo: url(https://image.ibb.co/iKxAeH/cali_lessons_logo_170px.png);
+@CLLogoWidth: 170px;
+
+//icons
+.CLIconButtonWidth {
+  width: 32px;
+  height: 32px;
+}
+
+//border rules
+.border-radius(@Radius) {
+  -webkit-border-radius: @Radius;
+  -moz-border-radius: @Radius;
+  -o-border-radius: @Radius;
+  -ms-border-radius: @Radius;
+  border-radius: @Radius;
+}
+
+.appearance-hidden (@Clear) {
+  -webkit-appearance: @Clear;
+  -moz-appearance: @Clear;
+  -o-appearance: @Clear;
+  -ms-appearance: @Clear;
+  appearance: @Clear;
+}
+
+.border-none {
+  outline: none !important;
+  box-shadow: none !important;
+}
