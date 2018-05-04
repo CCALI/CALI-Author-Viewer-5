@@ -1,0 +1,44 @@
+/**
+*@stylesheet slider-menu.less Slider Menu
+*@parent menus
+*
+*@description
+*## CALI Lesson Slider Hamburger Menu for Table of Contents
+*
+*This is the hamburger menu that opens and closes the table of contents.
+*
+*HTML
+*```
+*<input class="CL-hamburger" 
+     type="checkbox" 
+     id="toc-menu" 
+     placeholder="Table of Contents Menu">
+*</input>
+*```
+*
+*@demo demos/menu/slider-menu/slider-menu.html
+**/
+
+@import "variables.less";
+@CLMenuBlue: url(https://image.ibb.co/gVyoEH/hamburger_menu_32px.png);
+
+input.CL-hamburger[type="checkbox"] {
+  content: @CLMenuBlue;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  float: left;
+  margin-top: 10px;
+  margin-left: 0px;
+  margin-right: 10px;
+  padding-right: px;
+  cursor: pointer;
+  pointer-events:auto;
+  .appearance-hidden (@Clear);
+  outline: none;
+  &:checked {
+    content: url(https://image.ibb.co/mVgSOc/arrow_previous.png);
+    .appearance-hidden (@Clear);
+    outline: none;
+  }
+}
