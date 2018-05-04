@@ -1,9 +1,9 @@
 @page components.buttons Buttons
 @parent components
 
-## Cali Lesson Buttons
+## CALI Lesson Buttons
 
-There are multiple button types to be used in Cali lessons including icon buttons and bootstrap buttons with cali lessons (CL) styles.
+There are multiple button types to be used in CALI lessons including icon buttons and bootstrap buttons with CALI lessons (CL) styles.
 
 ---
 

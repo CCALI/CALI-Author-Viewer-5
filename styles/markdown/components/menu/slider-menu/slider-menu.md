@@ -1,7 +1,7 @@
 @page slider-menu Slider Menu
 @parent menus
 
-## Cali Lesson Slider Hamburger Menu
+## CALI Lesson Slider Hamburger Menu
 
 This slider menu is used for the hamburger menu on the table of contents.
 

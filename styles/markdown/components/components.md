@@ -1,9 +1,9 @@
 @page components Components
 @parent cali 1
 
-## Cali Lessons Components
+## CALI Lessons Components
 
-Cali lessons uses bootstrap 3 as a basis for it's components.
+CALI lessons uses bootstrap 3 as a basis for it's components.
 
 Additional classes are added in LESS styles.
 

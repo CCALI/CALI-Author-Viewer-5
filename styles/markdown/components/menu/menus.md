@@ -1,9 +1,9 @@
 @page menus Menus
 @parent components
 
-## Cali Lessons Menu
+## CALI Lessons Menu
 
-Here are the menus used in Cali Lessons.
+Here are the menus used in CALI Lessons.
 
 ---
 

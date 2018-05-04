@@ -1,15 +1,15 @@
 @page navbar Navbar
 @parent components
 
-## Cali Lesson Navbar
+## CALI Lesson Navbar
 
-The cali lessons navbar uses bootstrap 3 navbar class.
+The CALI lessons navbar uses bootstrap 3 navbar class.
 
 Learn more about bootstrap3 nav [here](http://getbootstrap.com/docs/3.3/components/#navbar)
 
 ---
 
-#### Cali Lesson Navbar using bootstrap 3
+#### CALI Lesson Navbar using bootstrap 3
 
 HTML
 ```
