@@ -13,7 +13,6 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @Grey: #efefef;
 
 @CLThemeColor: @DarkBlue;
-@CLHeaderColor: @CLThemeColor;
 
 // images
 @ArrowLeftBlue:
@@ -25,19 +24,36 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @LightBorders: 1px solid rgba(153,153,153,0.4);
 @Clear: none;
 @Radius: 0px;
+@BoxShadow: 2px 3px 2px 0px rgba(0, 0, 0, 0.5);
+@Transition: all 0.3s;
+@Rotate: rotate(-20deg);
+@Origin: 0 0;
 
 //brand
 @CLLogo: url(https://image.ibb.co/iKxAeH/cali_lessons_logo_170px.png);
 @CLLogoWidth: 170px;
 
-//icons
+//icon buttons
+@CLMenuWhite: url(https://image.ibb.co/jPdfwx/hamburger_white_32px.png);
+@CLMenuBlue: url(https://image.ibb.co/gVyoEH/hamburger_menu_32px.png);
+@CLExit: url(https://image.ibb.co/m944oc/exit_32px.png);
+@CLArrowLeftBlue: url(https://image.ibb.co/mVgSOc/arrow_previous.png);
+@CLArrowRightWhite: url(https://image.ibb.co/n7VyUH/arrow_next.png);
+
 .CLIconButtonWidth {
   width: 32px;
   height: 32px;
 }
 
-//border rules
-.border-radius(@Radius) {
+.CL-button-transition(@Transition) {
+  -webkit-transition: @Transition;
+	-moz-transition: @Transition;
+  -ms-transition: @Transition;
+  -o-transition: @Transition;
+	transition: @Transition;
+}
+
+.border-radius (@Radius) {
   -webkit-border-radius: @Radius;
   -moz-border-radius: @Radius;
   -o-border-radius: @Radius;
@@ -53,7 +69,26 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
   appearance: @Clear;
 }
 
-.border-none {
-  outline: none !important;
-  box-shadow: none !important;
+.button-box-shadow (@BoxShadow) {
+  -webkit-box-shadow: @BoxShadow;
+  -moz-box-shadow: @BoxShadow;
+  -o-box-shadow: @BoxShadow;
+  -ms-box-shadow: @BoxShadow;
+  box-shadow: @BoxShadow;
+}
+
+.transform-rotate(@Rotate) {
+	-webkit-transform: @Rotate;
+	-moz-transform: @Rotate;
+	-ms-transform: @Rotate;
+  -o-transform: @Rotate;
+	transform: @Rotate;  
+}
+
+.transform-origin(@Origin) {
+  -webkit-transform-origin: @Origin;
+  -moz-transform-origin: @Origin;
+  -ms-transform-origin: @Origin;
+  -o-transform-origin: @Origin;
+  transform-origin: @Origin;
 }
