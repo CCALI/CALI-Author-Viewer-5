@@ -53,10 +53,10 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 
 .CL-button-transition(@Transition) {
   -webkit-transition: @Transition;
-	-moz-transition: @Transition;
+  -moz-transition: @Transition;
   -ms-transition: @Transition;
   -o-transition: @Transition;
-	transition: @Transition;
+  transition: @Transition;
 }
 
 .border-radius (@Radius) {
@@ -89,6 +89,14 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 	-ms-transform: @Rotate;
   -o-transform: @Rotate;
 	transform: @Rotate;  
+}
+
+.no-select-label(@Clear) {
+    -webkit-user-select: @Clear;
+    -moz-user-select: @Clear;
+    -ms-user-select: @Clear;
+    -o-user-select: @Clear;
+    user-select: @Clear;  
 }
 
 .transform-origin(@Origin) {
