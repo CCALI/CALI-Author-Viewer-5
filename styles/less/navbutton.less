@@ -3,7 +3,7 @@
 *@parent components.buttons
 *
 *@description
-*## CALI Lesson Buttons
+*## CALI Lessons Buttons
 *
 *The "Next" button is used to navigate through lessons.
 *
@@ -126,4 +126,34 @@
   float: right;
   .CLButtonArrowRules;
   margin-right: -5px;
+}
+
+@media (max-width:768px) {
+  .CL-navbar-main {
+    background: @Grey;
+  }
+  .user-name-link {
+    color: @CLThemeColor;
+    font-size: 18px;
+    margin: 0px 0px 0px 20px;
+  }
+  .navbar-text {
+    margin: 20px 0px 20px 0px;
+  }
+  .exit-icon {
+    display: none !important;
+  }
+  .exit-btn {
+    display: none !important;
+  }
+  .exit-link {
+    display: block;
+    color: @CLThemeColor;
+    font-size: 18px;
+    margin: 0px 0px 0px 20px;
+     &:hover {
+      color: @WhiteFakeOpacity;
+      text-decoration: none;
+     }  
+  }
 }
