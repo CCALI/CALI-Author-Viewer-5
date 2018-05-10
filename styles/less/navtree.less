@@ -1,0 +1,177 @@
+/**
+*@stylesheet navtree.less Nav Tree
+*@parent menus
+*
+*@description
+*## CALI Lessons Nav Tree for Slider menu
+*
+*The Nav Tree goes inside the Slide menu for the Table of Contents.
+*
+*Javascript
+*```
+$('ul.nav-left-ml').toggle();
+$('label.nav-toggle span').click(function () {
+  $(this).parent().parent().children('ul.nav-left-ml').toggle(300);
+  var cs = $(this).attr("class");
+  if(cs == 'nav-toggle-icon glyphicon glyphicon-plus') {
+    $(this).removeClass('glyphicon-plus').addClass('glyphicon-minus');
+  }
+  if(cs == 'nav-toggle-icon glyphicon glyphicon-minus') {
+    $(this).removeClass('glyphicon-minus').addClass('glyphicon-plus');
+  }
+});
+*```
+*@demo demos/menus/navtree/navtree.html
+**/
+
+@import "variables.less";
+
+.grey-border {
+  border-top: 1px solid @Grey;
+}
+
+.CLAccordion h2{
+  padding-left: 15px;
+}
+
+.CLAccordion li a {
+  font-size: 20px;
+  padding: 10px;
+  color: @BlueSelected;
+  font-weight: 400;
+  &:focus,
+  &:active {
+    color: @White !important;
+    background: @DarkBlue !important;
+  }
+}
+
+.nav-list-main {
+  .grey-border;
+}
+
+.nav-left-ml li  {
+  .grey-border;
+}
+
+.nav-toggle {
+  display: inline-block;
+  width: 350px;
+  &:hover {
+    color: @DarkBlue;
+    background: @Grey;
+  }
+  &:active,
+  &:focus {
+    color: @White;
+    background: @DarkBlue;
+  }
+}
+
+li .nav-toggle a {
+  display: inline-block;
+  width: 90%;
+  &:hover {
+    color: @DarkBlue;
+    background: @Grey;
+  }
+  &:active,
+  &:focus {
+    color: @White;
+    background: @DarkBlue;
+  }
+}
+
+li .nav-toggle-no-sub {
+  border-top: 1px solid @Grey;
+  width: 350px;
+  &:hover {
+    background: @Grey;
+  }
+  &:active,
+  &:focus {
+    background: @DarkBlue;
+  }  
+}
+
+li .nav-toggle-no-sub a {
+  display: inline-block;
+  width: 300px;
+  &:hover {
+    color: @DarkBlue;
+  }
+  &:active,
+  &:focus {
+    color: @White !important;
+    background: @DarkBlue !important;
+    width: 350px;
+    padding-left: 30px;
+    margin-left: -24px;
+  }
+}
+
+.nav-list a {
+  display: inline-block;
+  &:hover {
+    color: @DarkBlue;
+    text-decoration: underline !important;
+  }
+}
+
+span.nav-toggle-icon {
+  float: left;
+  top: 15px;
+  font-size: 14px !important;
+  color: #4186f4 !important;
+  &:hover {
+    color:@DarkBlue !important;
+    background: @Grey !important;
+  }
+  &:focus,
+  &:active {
+    color: @White;
+    background:@DarkBlue !important;
+  }
+}
+
+span.nav-toggle-icon a {
+  width: 348px;
+  padding-left: 24px;
+  margin-left: -24px;
+  padding-right: 20px;
+  color:@BlueSelected !important;
+  &:hover {
+    color:@DarkBlue !important;
+    background: @Grey !important;
+  }
+  &:focus,
+  &:active {
+    color: @White;
+    background:@DarkBlue !important;
+  }
+}
+
+label {
+  margin-bottom: 0px !important;
+}
+
+@TreeIndent: 30px !important;
+
+.level-indent {
+  padding-left:@TreeIndent !important;
+}
+.level-indent-no-sub {
+  padding-left: @TreeIndent - 6 !important;
+}
+.level-2-indent {
+  padding-left:@TreeIndent * 2 !important;
+}
+.level-3-indent {
+  padding-left:@TreeIndent * 3 !important;
+}
+.level-4-indent {
+  padding-left:@TreeIndent * 4 !important;
+}
+.level-5-indent {
+  padding-left:@TreeIndent * 5 !important;
+}

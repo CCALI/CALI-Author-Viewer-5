@@ -17,9 +17,7 @@
 *@demo demos/buttons/exitbutton/exitbutton.html
 **/
 
-@import "variables.less";
-
-@CLExit: url(https://image.ibb.co/m944oc/exit_32px.png);
+@CLExit: url(https://image.ibb.co/m944oc/exit_32px.png) no-repeat top left;
 
 .bckgrd {
   display: block;
@@ -28,21 +26,22 @@
   height: 50px;
 }
 
+.CLIconButtonWidth {
+  width: 32px;
+  height: 32px;
+}
+
 .exit-btn {
   margin-top: 10px;
   .CLIconButtonWidth;
   float:left;
-  background: @CLExit top  left no-repeat;
+  background: @CLExit;
   &:hover {
-    opacity: 0.5;
+    opacity: 0.8;
   }
   &:active {
-    opacity: 0.75;
+    opacity: 0.9;
   }
-}
-
-.exit-link {
-  display: none;
 }
 
 

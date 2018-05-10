@@ -13,10 +13,11 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @Grey: #efefef;
 
 //control color variables
-@BlueSelected: #4186f4;
-@RedError: #e91e63;
-@GreenCorrect: #00c752;
-@GreyDefault: #777;
+@BlueSelected: #4186f4 !important;
+@RedError: #e91e63 !important;
+@GreenCorrect: #00c752 !important;
+@GreyDefault: #777 !important;
+@YellowMaybe: #ffc000 !important;
 
 @CLThemeColor: @DarkBlue;
 
@@ -105,4 +106,31 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
   -ms-transform-origin: @Origin;
   -o-transform-origin: @Origin;
   transform-origin: @Origin;
+}
+
+// Body
+.CLHeaderColor {
+  color: @CLThemeColor;
+}
+
+body {
+  overflow-x: hidden;
+  font: @CLFontFamily;
+  font-weight: @CLFontWeight;
+}
+
+h1 {
+  .CLHeaderColor;
+  padding-bottom: 25px;
+}
+
+h2 {
+  .CLHeaderColor;
+  margin-top: 0px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+img {
+  border:0 !important;
 }

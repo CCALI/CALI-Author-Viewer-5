@@ -35,7 +35,7 @@ These are the hex colors used in Cali Lessons.
 		background: #4186f4;
 	}
 	.bright-red {
-		background: #d4c229;
+		background: #e91e63;
 	}
 	.bright-green {
 		background: #00c752;
@@ -80,12 +80,12 @@ These are the hex colors used in Cali Lessons.
 		<span class="swatch-color bright-blue"><h5 class="txt-white">@BlueSelected: #4186f4;</h5></span>
 	</li>
 	<li>	
-		<span class="swatch-color bright-red"><h5 class="txt-white">@RedError: #d4c229;</h5></span>
+		<span class="swatch-color bright-red"><h5 class="txt-white">@RedError: #e91e63;</h5></span>
 	</li>
 	<li>	
-		<span class="swatch-color bright-green"><h5 class="txt-dark">@GreenCorrect: #00c752;</h5></span>
+		<span class="swatch-color bright-green"><h5 class="txt-white">@GreenCorrect: #00c752;</h5></span>
 	</li>
 	<li>	
-		<span class="swatch-color grey-default"><h5 class="txt-dark">@GreyDefault: #777;</h5></span>
+		<span class="swatch-color grey-default"><h5 class="txt-white">@GreyDefault: #777;</h5></span>
 	</li>
 </ul>

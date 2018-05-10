@@ -1,0 +1,151 @@
+/**
+*@stylesheet alerts.less Alerts
+*@parent components
+*
+*@description
+*## CALI Lessons Alerts
+*
+*Alert panels for success, error, description, and maybe.
+*
+*HTML
+*```
+<!--Success Error-->
+<div class="panel panel-default" id="error-wrap">
+ <div class="panel-heading alert-success-heading"><h4>Success</h4>
+   <button type="button" class="close" data-target="#success-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-success-x">&times;</span><span class="sr-only">Close</span>
+    </button>
+ </div>
+ <div class="panel-body alert-success-body">
+    Success Content
+ </div>
+</div>
+
+<!--Alert Error-->
+<div class="panel panel-default" id="error-wrap">
+ <div class="panel-heading alert-error-heading"><h4>Error</h4>
+   <button type="button" class="close" data-target="#error-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-error-x">&times;</span><span class="sr-only">Close</span>
+    </button>
+ </div>
+ <div class="panel-body alert-error-body">
+    Error Content
+ </div>
+</div>
+
+<!--Alert Description-->
+<div class="panel panel-default" id="description-wrap">
+ <div class="panel-heading alert-description-heading"><h4>Description</h4>
+   <button type="button" class="close" data-target="#description-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-description-x">&times;</span><span class="sr-only">Close</span>
+    </button>
+ </div>
+ <div class="panel-body alert-description-body">
+    Description Content
+ </div>
+</div>
+
+<!--Alert Maybe-->
+<div class="panel panel-default" id="maybe-wrap">
+ <div class="panel-heading alert-maybe-heading"><h4>Maybe</h4>
+   <button type="button" class="close" data-target="#maybe-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-maybe-x">&times;</span><span class="sr-only">Close</span>
+    </button>
+ </div>
+ <div class="panel-body alert-maybe-body">
+    Maybe Content
+ </div>
+</div>
+*```
+*
+*@demo demos/alerts/alerts.html
+**/
+@import "variables.less";
+
+.close {
+  margin-top: -40px;
+}
+
+.alert-success-border {
+  border-bottom:2px solid @GreenCorrect !important;
+  border-left:2px solid @GreenCorrect !important;
+  border-right:2px solid @GreenCorrect !important; 
+}
+
+.alert-success-x {
+  color: #00c752;;
+  font-size: 35px;
+}
+.alert-success-heading {
+  background: lighten(@GreenCorrect, 58%) !important;
+  border:2px solid @GreenCorrect !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-success-body {
+  .alert-success-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}
+
+.alert-error-border {
+  border-bottom:2px solid @RedError !important;
+  border-left:2px solid @RedError !important;
+  border-right:2px solid @RedError !important; 
+}
+
+.alert-error-x {
+  color: #e91e63;
+  font-size: 35px;
+}
+.alert-error-heading {
+  background: lighten(@RedError, 46%) !important;
+  border:2px solid @RedError !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-error-body {
+  .alert-error-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}
+
+.alert-description-border {
+  border-bottom:2px solid @BlueSelected !important;
+  border-left:2px solid @BlueSelected !important;
+  border-right:2px solid @BlueSelected !important; 
+}
+
+.alert-description-x {
+  color: @BlueSelected;
+  font-size: 35px;
+}
+.alert-description-heading {
+  background: lighten(@BlueSelected, 37%) !important;
+  border:2px solid @BlueSelected !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-description-body {
+  .alert-description-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}
+
+.alert-maybe-border {
+  border-bottom:2px solid @YellowMaybe !important;
+  border-left:2px solid @YellowMaybe !important;
+  border-right:2px solid @YellowMaybe !important; 
+}
+
+.alert-maybe-x {
+  color: @YellowMaybe;
+  font-size: 35px;
+}
+.alert-maybe-heading {
+  background: lighten(@YellowMaybe, 47%) !important;
+  border:2px solid @YellowMaybe !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-maybe-body {
+  .alert-maybe-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}

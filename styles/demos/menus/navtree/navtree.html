@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript">
+    $('ul.nav-left-ml').toggle();
+    $('label.nav-toggle span').click(function () {
+      $(this).parent().parent().children('ul.nav-left-ml').toggle(300);
+      var cs = $(this).attr("class");
+      if(cs == 'nav-toggle-icon glyphicon glyphicon-plus') {
+        $(this).removeClass('glyphicon-plus').addClass('glyphicon-minus');
+      }
+      if(cs == 'nav-toggle-icon glyphicon glyphicon-minus') {
+        $(this).removeClass('glyphicon-minus').addClass('glyphicon-plus');
+      }
+    });
+  </script>
+</head>
+<body>
+  <div class="CLAccordion">
+    <h2>Table of Contents</h2>
+     <ul class="nav nav-list-main">
+      <li><label class="nav-toggle nav-header level-indent"><span class="nav-toggle-icon glyphicon glyphicon-plus"></span> <a href="#">Header 1</a></label>
+            <ul class="nav nav-list nav-left-ml">
+                <li><a href="#" class="level-2-indent">Link</a></li>
+                <li><a href="#" class="level-2-indent">Link</a></li>
+                <li><label class="nav-toggle nav-header level-2-indent"><span class="nav-toggle-icon glyphicon glyphicon-plus"></span> <a href="#">Header 1.1 with lots and lots of text just in case this title was really really long</a></label>
+                    <ul class="nav nav-list nav-left-ml">
+                        <li><a href="#" class="level-3-indent">Link</a></li>
+                        <li><a href="#" class="level-3-indent">Link</a></li>
+                        <li><label class="nav-toggle nav-header level-3-indent"><span class="nav-toggle-icon glyphicon glyphicon-plus"></span> <a href="#">Header 1.1.1</a></label>
+                            <ul class="nav nav-list nav-left-ml">
+                                <li><a href="#" class="level-4-indent">Link</a></li>
+                                <li><a href="#" class="level-4-indent">Link</a></li>
+                              <li><label class="nav-toggle nav-header level-4-indent"><span class="nav-toggle-icon glyphicon glyphicon-plus"></span> <a href="#">Header 1.1.1.1</a></label>
+                                <ul class="nav nav-list nav-left-ml">
+                                  <li><a href="#" class="level-5-indent">Link</a></li>
+                                  <li><a href="#" class="level-5-indent">Link</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><label class="nav-toggle-no-sub level-indent-no-sub"> <a href="#">Header 1</a></label>
+        </li>
+    </ul>
+  </div>
+</body>
+</html>
+

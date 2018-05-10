@@ -8,17 +8,31 @@
 *This is the hamburger menu that goes in the navbar.
 *
 *
-*@demo demos/menu/hamburger-menu/hamburger-menu.html
+*@demo demos/menus/hamburger-menu/hamburger-menu.html
 **/
 
 @import "variables.less";
 
 @CLMenuWhite: url(https://image.ibb.co/jPdfwx/hamburger_white_32px.png);
 
+.navbar-toggle {
+  border: none !important;
+}
+
 .CL-navbar-main {
   background: @CLThemeColor;
-  border-bottom: 5px solid @Gold;
+  border-bottom: 5px solid @Gold !important;
   .border-radius (@Radius);
+}
+
+.CL-navbar {
+    height: 84px;
+    background: @CLThemeColor;
+    border-color: @CLThemeColor;
+}
+
+.navbar-text {
+  margin: @NavMargin;
 }
 
 .CL-menu-button {
@@ -39,4 +53,31 @@
   display: block;
   .CLIconButtonWidth;
   background: @CLMenuWhite center center no-repeat;
+}
+
+.exit-btn {
+  margin-top: 10px;
+  .CLIconButtonWidth;
+  float:left;
+  background: @CLExit top  left no-repeat;
+  &:hover {
+    opacity: 0.5;
+  }
+  &:active {
+    opacity: 0.75;
+  }
+}
+
+.CL-logo {
+  content: @CLLogo;
+  width: @CLLogoWidth;
+  height: 49px;
+}
+
+.user-name-link {
+  color: @White;
+     &:hover {
+      color: @WhiteFakeOpacity;
+      text-decoration: none;
+     }  
 }
