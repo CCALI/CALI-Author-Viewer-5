@@ -3,11 +3,11 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 
 // Variables used to set the font appearance.
 @CLFontFamily: "Lucida Grande", "Verdana", "Helvetica Neue", "Lucida Sans Unicode", "Lucida Sans Regular", Arial, sans-serif; 
-@CLFontWeight: 300;
+@CLFontWeight: 400;
 
 //color variables
 @DarkBlue: #003366;
-@Gold: #d4c229;
+@Gold: #d4c229 !important;
 @White: #ffffff;
 @WhiteFakeOpacity:#8099b3;
 @Grey: #efefef;
@@ -35,6 +35,7 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @Transition: all 0.3s;
 @Rotate: rotate(-20deg);
 @Origin: 0 0;
+@BottomShadow: 0 4px 2px -2px @Grey;
 
 //brand
 @CLLogo: url(https://image.ibb.co/iKxAeH/cali_lessons_logo_170px.png);
@@ -43,14 +44,10 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 //icon buttons
 @CLMenuWhite: url(https://image.ibb.co/jPdfwx/hamburger_white_32px.png);
 @CLMenuBlue: url(https://image.ibb.co/gVyoEH/hamburger_menu_32px.png);
+@CLCloseArrow: url(https://image.ibb.co/mVgSOc/arrow_previous.png);
 @CLExit: url(https://image.ibb.co/m944oc/exit_32px.png);
 @CLArrowLeftBlue: url(https://image.ibb.co/mVgSOc/arrow_previous.png);
 @CLArrowRightWhite: url(https://image.ibb.co/n7VyUH/arrow_next.png);
-
-.CLIconButtonWidth {
-  width: 32px;
-  height: 32px;
-}
 
 .CL-button-transition(@Transition) {
   -webkit-transition: @Transition;
@@ -84,20 +81,20 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
   box-shadow: @BoxShadow;
 }
 
-.transform-rotate(@Rotate) {
-	-webkit-transform: @Rotate;
-	-moz-transform: @Rotate;
-	-ms-transform: @Rotate;
-  -o-transform: @Rotate;
-	transform: @Rotate;  
-}
-
 .no-select-label(@Clear) {
     -webkit-user-select: @Clear;
     -moz-user-select: @Clear;
     -ms-user-select: @Clear;
     -o-user-select: @Clear;
     user-select: @Clear;  
+}
+
+.transform-rotate(@Rotate) {
+  -webkit-transform: @Rotate;
+  -moz-transform: @Rotate;
+  -ms-transform: @Rotate;
+  -o-transform: @Rotate;
+  transform: @Rotate;  
 }
 
 .transform-origin(@Origin) {
@@ -108,29 +105,55 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
   transform-origin: @Origin;
 }
 
-// Body
+.toc-shadow(@BottomShadow) {
+   -webkit-box-shadow: @BottomShadow;
+    -moz-box-shadow: @BottomShadow;
+    -ms-box-shadow: @BottomShadow;
+    -o-box-shadow: @BottomShadow;
+    box-shadow: @BottomShadow;  
+}
+
+.border-none {
+  outline: none !important;
+}
+
+.CLIconButtonWidth {
+  width: 32px;
+  height: 32px;
+}
+
+.CLButtonRules {
+  .border-radius(0px);
+  font-size: 18px;
+  text-align: left;
+  width: 140px;
+  height: 40px;
+  margin: 10px 5px 0px 0px;
+  .button-box-shadow(@BoxShadow);
+}
+
+.CLButtonPreviousRules {
+  color: @CLThemeColor !important;
+  background: lighten(@WhiteFakeOpacity, 35%) !important;
+}
+
+.CLPreviousActions {
+  .CLButtonRules;
+  .CLButtonPreviousRules;
+}
+
+.CLNextActions {
+  .CLButtonRules;
+  background: lighten(@CLThemeColor, 5%) !important;
+  border: 2px solid lighten(@CLThemeColor, 5%) !important;
+}
+
+.CLButtonArrowRules {
+  height: 30px;
+  width: 30px;
+  margin-top:-3px;
+}
+
 .CLHeaderColor {
   color: @CLThemeColor;
-}
-
-body {
-  overflow-x: hidden;
-  font: @CLFontFamily;
-  font-weight: @CLFontWeight;
-}
-
-h1 {
-  .CLHeaderColor;
-  padding-bottom: 25px;
-}
-
-h2 {
-  .CLHeaderColor;
-  margin-top: 0px;
-  padding-top: 10px;
-  padding-bottom: 5px;
-}
-
-img {
-  border:0 !important;
 }

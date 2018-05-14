@@ -7,27 +7,35 @@
 *
 *The Nav Tree goes inside the Slide menu for the Table of Contents.
 *
-*Javascript
+*Old Design
+
+![Old nav tree](https://image.ibb.co/jb6M6J/oldtableofcontents.jpg "Old Navtree Example")
+*
 *```
-$('ul.nav-left-ml').toggle();
-$('label.nav-toggle span').click(function () {
-  $(this).parent().parent().children('ul.nav-left-ml').toggle(300);
-  var cs = $(this).attr("class");
-  if(cs == 'nav-toggle-icon glyphicon glyphicon-plus') {
-    $(this).removeClass('glyphicon-plus').addClass('glyphicon-minus');
-  }
-  if(cs == 'nav-toggle-icon glyphicon glyphicon-minus') {
-    $(this).removeClass('glyphicon-minus').addClass('glyphicon-plus');
-  }
-});
+<div class="PageText" style="display: block;"><div class="ReadText"><ul><li><a href="jump://Introduction">Introduction</a></li><li>Text and Hypertext</li><ul><li><a href="jump://Pop-up 1">Pop-up Pages</a></li><li><a href="jump://Page Links 1">Page Links</a></li></ul><li>Question Types</li><ul><li>Classic Question Types</li><ul><li><a href="jump://Multiple choice 1">Multiple Choice</a></li><li><a href="jump://Multiple Choice Set 1">Multiple Choice Set</a></li><li><a href="jump://Matching Pairs 1">Matching Pairs</a></li><li><a href="jump://Check Boxes 1" class="visited">Check Boxes</a></li><li><a href="jump://Radio Buttons 1">Radio Buttons</a></li></ul><li>Innovative Question Types</li><ul><li><a href="jump://Drag into Order 1">Drag into Order</a></li><li><a href="jump://Drag into Category 1">Drag into Category</a></li><li><a href="jump://Sliders 1">Sliders</a></li></ul><li>Free Text Question Types</li><ul><li><a href="jump://Essay 1">Essay</a></li><li><a href="jump://Short answer 1">Short answer</a></li><li><a href="jump://Text Select 1">Text Select</a></li></ul></ul><li>Multimedia</li><ul><li><a href="jump://Book 1">Images</a></li><li><a href="jump://Click on Image 1">Click on Image</a></li><li><a href="jump://Picture and Sound 1">Sound</a></li><li><a href="jump://Video Page 1">Video</a></li><li><a href="jump://Slideshow 1">Slideshow</a></li></ul><li><a href="jump://Menu Construction 1">Menu Construction</a></li><li><a href="jump://Branch Introduction">Branching Demonstration</a></li><li><a href="jump://Index">Index of Page Types</a></li><li><a href="jump://Lesson Completed">Complete the lesson</a></li></ul></div></div>
 *```
+*New Design
 *@demo demos/menus/navtree/navtree.html
 **/
 
 @import "variables.less";
+@import "body.less";
 
-.grey-border {
-  border-top: 1px solid @Grey;
+@TreeIndent: 93%;
+@TreeSubIndent: 23px !important;
+
+.toc-view {
+  width:auto;
+  display: inline-block;
+}
+
+.lesson-view {
+  width: auto;
+  display: inline-block;
+}
+
+.CLAccordion {
+  border-right: 1px solid @Grey;
 }
 
 .CLAccordion h2{
@@ -35,143 +43,125 @@ $('label.nav-toggle span').click(function () {
 }
 
 .CLAccordion li a {
-  font-size: 20px;
+  font-size: 18px;
   padding: 10px;
   color: @BlueSelected;
   font-weight: 400;
-  &:focus,
-  &:active {
-    color: @White !important;
-    background: @DarkBlue !important;
+  border-bottom: 1px solid @Grey;
+  margin-top: 0px !important;
+  &:hover {
+    color: @CLThemeColor !important;
+    background: @Grey !important;
   }
-}
-
-.nav-list-main {
-  .grey-border;
-}
-
-.nav-left-ml li  {
-  .grey-border;
+  &:active,
+  &:focus {
+    color: @White !important;
+    background: @CLThemeColor !important;
+  }
 }
 
 .nav-toggle {
   display: inline-block;
-  width: 350px;
-  &:hover {
-    color: @DarkBlue;
-    background: @Grey;
-  }
-  &:active,
-  &:focus {
-    color: @White;
-    background: @DarkBlue;
-  }
+  width: 100%;
+  cursor: pointer;
 }
 
 li .nav-toggle a {
   display: inline-block;
-  width: 90%;
-  &:hover {
-    color: @DarkBlue;
-    background: @Grey;
-  }
-  &:active,
-  &:focus {
-    color: @White;
-    background: @DarkBlue;
-  }
+  width: 100%;
+  text-decoration: none !important;
+  margin-top: -2px;
 }
 
 li .nav-toggle-no-sub {
-  border-top: 1px solid @Grey;
-  width: 350px;
-  &:hover {
-    background: @Grey;
-  }
-  &:active,
-  &:focus {
-    background: @DarkBlue;
-  }  
+  width: 100%;
+  margin-top: 0px !important;
 }
 
 li .nav-toggle-no-sub a {
   display: inline-block;
-  width: 300px;
+  width: 100%;
+  border-bottom: none;
+  margin-bottom: -4px;
   &:hover {
-    color: @DarkBlue;
+    color: @CLThemeColor !important;
+    background: @Grey !important;
   }
   &:active,
   &:focus {
     color: @White !important;
-    background: @DarkBlue !important;
-    width: 350px;
-    padding-left: 30px;
-    margin-left: -24px;
+    background: @CLThemeColor !important;
+    width: 100%;
   }
 }
 
-.nav-list a {
+p.toc-title {
+  font-family:@CLFontFamily;
   display: inline-block;
+  line-height: 1.25;
+  width: @TreeIndent;
+  float: right;
   &:hover {
-    color: @DarkBlue;
-    text-decoration: underline !important;
+    text-decoration: underline;
   }
 }
 
-span.nav-toggle-icon {
-  float: left;
-  top: 15px;
-  font-size: 14px !important;
-  color: #4186f4 !important;
+.nav-list li a {
   &:hover {
-    color:@DarkBlue !important;
-    background: @Grey !important;
-  }
-  &:focus,
-  &:active {
-    color: @White;
-    background:@DarkBlue !important;
+    text-decoration: underline;
   }
 }
-
-span.nav-toggle-icon a {
-  width: 348px;
-  padding-left: 24px;
-  margin-left: -24px;
-  padding-right: 20px;
-  color:@BlueSelected !important;
-  &:hover {
-    color:@DarkBlue !important;
-    background: @Grey !important;
-  }
-  &:focus,
-  &:active {
-    color: @White;
-    background:@DarkBlue !important;
-  }
+.toc-visited {
+  background-color: lighten(@BlueSelected, 37.5%);
 }
 
-label {
-  margin-bottom: 0px !important;
+.level-1-header {
+  border-top: 1px solid @Grey;
 }
 
-@TreeIndent: 30px !important;
-
-.level-indent {
-  padding-left:@TreeIndent !important;
-}
-.level-indent-no-sub {
-  padding-left: @TreeIndent - 6 !important;
-}
 .level-2-indent {
-  padding-left:@TreeIndent * 2 !important;
+  padding-left:@TreeSubIndent * 2 !important;
 }
+
+.level-2-header {
+  padding-left: 35px !important;
+}
+
 .level-3-indent {
-  padding-left:@TreeIndent * 3 !important;
+  padding-left:@TreeSubIndent * 3 !important;
 }
+
+.level-3-header {
+  padding-left: 60px !important;
+}
+
 .level-4-indent {
-  padding-left:@TreeIndent * 4 !important;
+  padding-left:@TreeSubIndent * 4 !important;
 }
+
+.level-4-header {
+  padding-left: 86px !important;
+}
+
 .level-5-indent {
-  padding-left:@TreeIndent * 5 !important;
+  padding-left:@TreeSubIndent * 5 !important;
+}
+
+@media (max-width:786px) {
+  p.toc-title {
+    width: 95%;
+  }
+  .toc-view {
+    width: 100% !important;
+  }
+  .lesson-view {
+    float: left;
+  }
+  .lesson-view h2 {
+    padding-left: 15px;
+  }
+  li .nav-toggle-no-sub a {
+    border-bottom: 1px solid darken(@Grey, 5%);
+    .toc-shadow(@BottomShadow);
+  }
 }

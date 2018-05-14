@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="toc-view col-sm-12">
+    <input class="CL-hamburger" type="checkbox" placeholder="Table of Contents Menu"></input>
+    <div id="SliderControl" class="CLAccordion">
+      <h2><!--Table of Contents--></h2>
+      <!-- Insert navtree here -->
+    </div>
+</div>
+<div  id="LessonControl" class="lesson-view col-sm-12">
+  <h2><!--Lesson Title--></h2>
+    <div class="container-fluid">
+      <!-- Insert Lesson Content here -->
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+	//slider menu
+    $('.CL-hamburger').on('click', function () {
+        $('#SliderControl').fadeToggle(300);
+    });
+
+    //toc link close
+    $('.toc-link').on('click', function () {
+        $('#SliderControl').fadeToggle(300);
+    });
+</script>
+</html>

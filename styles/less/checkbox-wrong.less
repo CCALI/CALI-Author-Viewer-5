@@ -1,0 +1,45 @@
+/**
+*@stylesheet checkbox-wrong.less Checkbox Wrong
+*@parent components.buttons
+
+*@description
+*## CALI Lessons Checkbox Wrong Button
+*
+*This is the checkmark for when the answer is wrong(incorrect).
+*
+*
+*Old Design
+
+![Old Checkmark](https://image.ibb.co/bKESwJ/checkmark_wrong.jpg "Old Checkmark Example")
+*```
+<tr><td class="cbcol"><div><img id="grade0_3" src="img/grade-wrong.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="cbcol"><input type="checkbox" name="cb0_3" id="cb0_3" value="0"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Question Text</p></div><div id="fbText0_3"></div></td></tr>
+*```
+*
+*New Design
+*@demo demos/buttons/checkbox-wrong/wrong.html
+**/
+
+@import "variables.less";
+@import "body.less";
+@import "checkbox-variables.less";
+
+.checkmark-wrong {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-wrong {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-wrong {
+    border: 3px solid @RedError;
+    background-color: @RedError;
+}
+.checkmark-wrong:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-wrong:after {
+    display: block;
+}
+.checkbox-container .checkmark-wrong:after {
+    .checkbox-control-after;
+}

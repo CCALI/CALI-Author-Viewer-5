@@ -1,0 +1,55 @@
+@import "variables.less";
+@import "body.less";
+
+@RotateCM: rotate(45deg);
+
+.label-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    .no-select-label(@Clear);  
+}
+.label-container-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkmark-control {
+    position: absolute;
+    top: 0;
+    left: 5;
+    height: 20px;
+    width: 20px;
+    background-color: @White;
+    border: 3px solid @GreyDefault;  
+}
+.checkmark-control-after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.checkbox-rotate(@RotateCM) {
+    -webkit-transform: @RotateCM;
+    -moz-transform: @RotateCM;
+    -ms-transform: @RotateCM;
+    -o-transform: @RotateCM;
+    transform: @RotateCM;    
+}
+.checkbox-control-after {
+    left: 4px;
+    top: 0px;
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    .checkbox-rotate(@RotateCM); 
+}
+.checkbox-container {
+    .label-container;
+}
+.checkbox-container input {
+    .label-container-input;
+}

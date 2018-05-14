@@ -1,0 +1,23 @@
+@import "variables.less";
+@import "body.less";
+@import "checkbox-variables.less";
+
+.checkmark-default {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-default {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-default {
+    border: 3px solid @GreyDefault;
+    background-color: @GreyDefault;
+}
+.checkmark-default:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-default:after {
+    display: block;
+}
+.checkbox-container .checkmark-default:after {
+    .checkbox-control-after;
+}

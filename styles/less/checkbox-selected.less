@@ -1,0 +1,44 @@
+/**
+*@stylesheet checkbox-selected.less Checkbox Selected
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Checkbox Selected Button
+*
+*This is the checkmark button for when the selection is made before anything has been graded.
+*
+*
+*Old Design
+
+![Old Checkmark](https://image.ibb.co/fQzcwJ/oldcheckmarkselected.jpg "Old Checkmark Example")
+*```
+<tr><td class="cbcol"><input type="checkbox" name="cb0_0" id="cb0_0" value="0"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Question Text</p></div><div id="fbText0_0"></div></td></tr>
+*```
+*
+*New Design
+*@demo demos/buttons/checkbox-selected/selected.html
+**/
+
+@import "variables.less";
+@import "body.less";
+@import "checkbox-variables.less";
+
+.checkmark-selected {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-selected {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-selected {
+    border: 3px solid @BlueSelected;
+    background-color: @BlueSelected;
+}
+.checkmark-selected:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-selected:after {
+    display: block;
+}
+.checkbox-container .checkmark-selected:after {
+    .checkbox-control-after;
+}

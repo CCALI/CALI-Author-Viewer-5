@@ -7,38 +7,74 @@
 *
 *This is the hamburger menu that opens and closes the table of contents.
 *
-*HTML
+*Old Design
+
+![Old toc link](https://image.ibb.co/mM1Sfd/toc_link.jpg "Old table of contents link example")
 *```
-*<input class="CL-hamburger" 
-     type="checkbox" 
-     id="toc-menu" 
-     placeholder="Table of Contents Menu">
-*</input>
+<a class="NavClick NoWrap" href="jump://Table of Contents">Table of Contents</a>
 *```
 *
+*New Design
 *@demo demos/menus/slider-menu/slider-menu.html
 **/
 
 @import "variables.less";
-@CLMenuBlue: url(https://image.ibb.co/gVyoEH/hamburger_menu_32px.png);
+@import "body.less";
+
+.toc-view {
+  width:auto;
+  display: inline-block;
+}
+
+.lesson-view {
+  width: auto;
+  display: inline-block;
+}
 
 input.CL-hamburger[type="checkbox"] {
-  content: @CLMenuBlue;
+  content: @CLCloseArrow;
   display: inline-block;
   width: 32px;
   height: 32px;
-  float: left;
-  margin-top: 10px;
-  margin-left: 0px;
-  margin-right: 10px;
-  padding-right: px;
+  float: right;
+  margin-left: 5px;
+  margin-top: 13px;
   cursor: pointer;
   pointer-events:auto;
   .appearance-hidden (@Clear);
-  outline: none;
+  outline: none !important;
   &:checked {
-    content: url(https://image.ibb.co/mVgSOc/arrow_previous.png);
+    content: @CLMenuBlue;
     .appearance-hidden (@Clear);
     outline: none;
   }
+}
+
+.CLAccordion {
+  border-right: 1px solid @Grey;
+}
+
+.CLAccordion h2{
+  padding-left: 15px;
+}
+
+#SliderControl {
+  width: 400px;
+}
+
+@media (max-width:786px) {
+  .toc-view {
+    width: 100% !important;
+  }
+  .lesson-view {
+    float: left;
+  }
+  .lesson-view h2 {
+    padding-left: 15px;
+  }  
+  #SliderControl {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }  
 }

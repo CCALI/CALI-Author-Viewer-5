@@ -5,52 +5,57 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
-    $('ul.nav-left-ml').toggle();
-    $('label.nav-toggle span').click(function () {
-      $(this).parent().parent().children('ul.nav-left-ml').toggle(300);
-      var cs = $(this).attr("class");
-      if(cs == 'nav-toggle-icon glyphicon glyphicon-plus') {
-        $(this).removeClass('glyphicon-plus').addClass('glyphicon-minus');
-      }
-      if(cs == 'nav-toggle-icon glyphicon glyphicon-minus') {
-        $(this).removeClass('glyphicon-minus').addClass('glyphicon-plus');
-      }
-    });
-  </script>
 </head>
 <body>
-  <div class="CLAccordion">
-    <h2>Table of Contents</h2>
-     <ul class="nav nav-list-main">
-      <li><label class="nav-toggle nav-header level-indent"><span class="nav-toggle-icon glyphicon glyphicon-plus"></span> <a href="#">Header 1</a></label>
-            <ul class="nav nav-list nav-left-ml">
-                <li><a href="#" class="level-2-indent">Link</a></li>
-                <li><a href="#" class="level-2-indent">Link</a></li>
-                <li><label class="nav-toggle nav-header level-2-indent"><span class="nav-toggle-icon glyphicon glyphicon-plus"></span> <a href="#">Header 1.1 with lots and lots of text just in case this title was really really long</a></label>
-                    <ul class="nav nav-list nav-left-ml">
-                        <li><a href="#" class="level-3-indent">Link</a></li>
-                        <li><a href="#" class="level-3-indent">Link</a></li>
-                        <li><label class="nav-toggle nav-header level-3-indent"><span class="nav-toggle-icon glyphicon glyphicon-plus"></span> <a href="#">Header 1.1.1</a></label>
-                            <ul class="nav nav-list nav-left-ml">
-                                <li><a href="#" class="level-4-indent">Link</a></li>
-                                <li><a href="#" class="level-4-indent">Link</a></li>
-                              <li><label class="nav-toggle nav-header level-4-indent"><span class="nav-toggle-icon glyphicon glyphicon-plus"></span> <a href="#">Header 1.1.1.1</a></label>
-                                <ul class="nav nav-list nav-left-ml">
-                                  <li><a href="#" class="level-5-indent">Link</a></li>
-                                  <li><a href="#" class="level-5-indent">Link</a></li>
-                                </ul>
-                              </li>
-                            </ul>
-                        </li>
-                    </ul>
+<!--This section is also part of slider-menu -->  
+<div id="SliderControl" class="CLAccordion">
+  <h2>Table of Contents</h2>
+<!--This section is also part of slider-menu end-->   
+  <ul class="nav nav-list-main">
+    <li><label class="nav-toggle nav-header toggle-icon level-1-header"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited"> <p class="toc-title">Header 1</p></a></label>
+      <ul class="nav nav-list slider-left">
+        <li><a href="#" class="level-2-indent toc-link visited">Lesson Link</a></li>
+        <li><a href="#" class="level-2-indent toc-link visited" onclick="slider()">Lesson Link</a></li>
+        <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-2-header visited"> <p class="toc-title">Header 1.1</p></a></label>
+          <ul class="nav nav-list slider-left">
+            <li><a href="#" class="level-3-indent toc-link visited">Lesson Link</a></li>
+            <li><a href="#" class="level-3-indent toc-link visited">Lesson Link</a></li>
+            <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-3-header visited"> <p class="toc-title">Header 1.1.1</p></a></label>
+              <ul class="nav nav-list slider-left">
+                <li><a href="#" class="level-4-indent toc-link visited">Lesson Link</a></li>
+                <li><a href="#" class="level-4-indent toc-link visited">Lesson Link</a></li>
+                <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-4-header visited"> <p class="toc-title">Header 1.1.1.1</p></a></label>
+                  <ul class="nav nav-list slider-left">
+                    <li><a href="#" class="level-5-indent toc-link visited">Lesson Link</a></li>
+                    <li><a href="#" class="level-5-indent toc-link visited">Lesson Link</a></li>
+                  </ul>
                 </li>
-            </ul>
+              </ul>
+            </li>
+          </ul>
         </li>
-        <li><label class="nav-toggle-no-sub level-indent-no-sub"> <a href="#">Header 1</a></label>
-        </li>
-    </ul>
-  </div>
+      </ul>
+    </li>
+    <li><label class="nav-toggle-no-sub level-indent-no-sub"> <a class="toc-link visited" href="#" onclick="slider()"><p class="toc-title no-sub">Header as Lesson Link</p></a></label>
+    </li>
+  </ul>
+</div>
 </body>
+  <script type="text/javascript">
+    //Nav tree
+    $('ul.slider-left').toggle();
+    $('label.nav-toggle a').click(function () {
+      $(this).parent().parent().children('ul.slider-left').toggle(300);
+    });
+
+    $('.toggle-icon').click(function(){
+      $(this).find('a').toggleClass('glyphicon-plus glyphicon-minus');
+    });
+
+    //toc link visted
+    $('.visited').click(function(){
+      $(this).addClass('toc-visited');
+    });
+  </script>
 </html>
 
