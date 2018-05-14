@@ -1,0 +1,45 @@
+/**
+*@stylesheet radio-wrong.less Radio Wrong
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Radio Button Wrong
+*
+*This is the radio button for when an answer is wrong(incorrect).
+*
+*Old Design
+
+![Old Radio](https://image.ibb.co/m2KfGJ/oldradiowrong.jpg "Old Radio Example")
+*```
+<tr><td class="cbcol"><div><img id="grade0_0" src="img/grade-wrong.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="cbcol"><input type="radio" name="rb0" id="rb0_0" value="0"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p></p></div><div id="fbText0_0"></div></td></tr>
+*```
+*
+*New Design
+*@demo demos/buttons/radio-wrong/wrong.html
+**/
+
+@import "variables.less";
+@import "body.less";
+@import "checkbox-radio-variables.less";
+
+.checkmark-rad-error {
+    .radio-control;
+}
+.radio-container:hover input ~ .checkmark-rad-error {
+    background-color: #ccc;
+}
+.radio-container input:checked ~ .checkmark-rad-error {
+    background-color: #fff;
+    border: 3px solid @RedError;
+}
+.checkmark-rad-error:after {
+    .radio-control-after;
+}
+.radio-container input:checked ~ .checkmark-rad-error:after {
+    display: block;
+}
+.radio-container .checkmark-rad-error:after {
+    .radio-control-selected;
+    background: @RedError;
+}

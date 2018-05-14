@@ -1,20 +1,24 @@
 /**
-*@stylesheet navbuttons.less Nav Button
+*@stylesheet nextbutton.less Next Button
 *@parent components.buttons
 *
 *@description
-*## CALI Lessons Buttons
+*## CALI Lessons Next Button
 *
-*The "Next" button is used to navigate through lessons.
+*The "Next" button is used to navigate through lessons. It is
+designed to replace the old "Back" and "Next" methods of navigation.  Now students will only press the new "Next" button to continue. If they wish to navigation elsewere in the lesson they will use the slider menu for the table of conents. (see menus/slider menu & navtree)
 *
-*HTML
+*Old Design
+
+![Next Button](https://image.ibb.co/cZnviy/oldnextbtn.jpg "Next Button")
+*
 *```
-<a href="#"><button class="CL-btn CL-next-btn shine icon-arrow-right">Next
-  <span class="next-arrow"></span>
-</button></a>
+<div class="PageNavBar">&nbsp;
+  <a href="choice://gonext">Next</a>
+</div>
 *```
-*
-*@demo demos/buttons/navbuttons/navbuttons.html
+*New Design
+*@demo demos/buttons/navbuttons/nextbutton.html
 **/
 
 @import "variables.less";

@@ -1,0 +1,44 @@
+/**
+*@stylesheet radio-selected.less Radio Selected
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Radio Button Selected
+*
+*This is the radio button for when an answer is selected before the answer has been graded.
+*
+*Old Design
+
+![Old Radio](https://image.ibb.co/imP5GJ/oldradioselected.jpg "Old Radio Example")
+*```
+<tr><td class="cbcol"><input type="radio" name="rb0" id="rb0_0" value="0"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p></p></div><div id="fbText0_0"></div></td></tr>
+*```
+*
+*New Design
+*@demo demos/buttons/radio-selected/selected.html
+**/
+
+@import "variables.less";
+@import "body.less";
+@import "checkbox-radio-variables.less";
+
+.checkmark-rad-selected {
+    .radio-control;
+}
+.radio-container:hover input ~ .checkmark-rad-selected {
+    background-color: #ccc;
+}
+.radio-container input:checked ~ .checkmark-rad-selected {
+    background-color: @White;
+    border: 3px solid @BlueSelected;
+}
+.checkmark-rad-selected:after {
+    .radio-control-after;
+}
+.radio-container input:checked ~ .checkmark-rad-selected:after {
+    display: block;
+}
+.radio-container .checkmark-rad-selected:after {
+    .radio-control-selected;
+    background: @BlueSelected;
+}
