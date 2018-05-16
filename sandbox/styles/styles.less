@@ -1,0 +1,965 @@
+@import 
+url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
+
+// Variables used to set the font appearance.
+@CLFontFamily: "Lucida Grande", "Verdana", "Helvetica Neue", "Lucida Sans Unicode", "Lucida Sans Regular", Arial, sans-serif; 
+@CLFontWeight: 400;
+
+//primary color variables
+@DarkBlue: #003366;
+@Gold: #d4c229 !important;
+@White: #ffffff;
+@WhiteFakeOpacity:#8099b3;
+@Grey: #efefef;
+
+//secondary color variables
+@BlueSelected: #4186f4 !important;
+@RedError: #e91e63 !important;
+@GreenCorrect: #00c752 !important;
+@GreyDefault: #777 !important;
+@YellowMaybe: #ffc000 !important;
+
+@CLThemeColor: @DarkBlue;
+
+// images
+@ArrowLeftBlue:
+"https://image.ibb.co/ksA7nS/arrow_left_white.png";
+@ArrowRightWhite: "https://image.ibb.co/bVnbgn/arrow_right_blue.png";
+
+//content variable
+@NavMargin: 30px 0px 0px 15px;
+@LightBorders: 1px solid rgba(153,153,153,0.4);
+@Clear: none;
+@Radius: 0px;
+@BoxShadow: 2px 3px 2px 0px rgba(0, 0, 0, 0.5);
+@Transition: all 0.3s;
+@TocTrans: all 500ms ease;
+@Rotate: rotate(-20deg);
+@Origin: 0 0;
+@BottomShadow: 0 4px 2px -2px @Grey;
+
+//brand
+@CLLogo: url(https://image.ibb.co/iKxAeH/cali_lessons_logo_170px.png);
+@CLLogoWidth: 170px;
+
+//icon buttons
+@CLMenuWhite: url(https://image.ibb.co/jPdfwx/hamburger_white_32px.png);
+@CLMenuBlue: url(https://image.ibb.co/gVyoEH/hamburger_menu_32px.png);
+@CLCloseArrow: url(https://image.ibb.co/mVgSOc/arrow_previous.png);
+@CLExit: url(https://image.ibb.co/m944oc/exit_32px.png);
+@CLArrowLeftBlue: url(https://image.ibb.co/mVgSOc/arrow_previous.png);
+@CLArrowRightWhite: url(https://image.ibb.co/n7VyUH/arrow_next.png);
+
+.CL-button-transition(@Transition) {
+  -webkit-transition: @Transition;
+  -moz-transition: @Transition;
+  -ms-transition: @Transition;
+  -o-transition: @Transition;
+  transition: @Transition;
+}
+
+.border-radius (@Radius) {
+  -webkit-border-radius: @Radius;
+  -moz-border-radius: @Radius;
+  -o-border-radius: @Radius;
+  -ms-border-radius: @Radius;
+  border-radius: @Radius;
+}
+
+.appearance-hidden (@Clear) {
+  -webkit-appearance: @Clear;
+  -moz-appearance: @Clear;
+  -o-appearance: @Clear;
+  -ms-appearance: @Clear;
+  appearance: @Clear;
+}
+
+.button-box-shadow (@BoxShadow) {
+  -webkit-box-shadow: @BoxShadow;
+  -moz-box-shadow: @BoxShadow;
+  -o-box-shadow: @BoxShadow;
+  -ms-box-shadow: @BoxShadow;
+  box-shadow: @BoxShadow;
+}
+
+.no-select-label(@Clear) {
+    -webkit-user-select: @Clear;
+    -moz-user-select: @Clear;
+    -ms-user-select: @Clear;
+    -o-user-select: @Clear;
+    user-select: @Clear;  
+}
+
+.transform-rotate(@Rotate) {
+  -webkit-transform: @Rotate;
+  -moz-transform: @Rotate;
+  -ms-transform: @Rotate;
+  -o-transform: @Rotate;
+  transform: @Rotate;  
+}
+
+.transform-origin(@Origin) {
+  -webkit-transform-origin: @Origin;
+  -moz-transform-origin: @Origin;
+  -ms-transform-origin: @Origin;
+  -o-transform-origin: @Origin;
+  transform-origin: @Origin;
+}
+
+.toc-shadow(@BottomShadow) {
+   -webkit-box-shadow: @BottomShadow;
+    -moz-box-shadow: @BottomShadow;
+    -ms-box-shadow: @BottomShadow;
+    -o-box-shadow: @BottomShadow;
+    box-shadow: @BottomShadow;  
+}
+
+.toc-transition(@TocTrans) {
+  -webkit-transition: @TocTrans;
+  -moz-transition: @TocTrans;
+  -ms-transition: @TocTrans;
+  -o-transition: @TocTrans;
+  transition: @TocTrans;  
+}
+
+.border-none {
+  outline: none !important;
+}
+
+.CLHeaderColor {
+  color: @CLThemeColor;
+}
+
+.CLIconButtonWidth {
+  width: 32px;
+  height: 32px;
+}
+
+.CLButtonRules {
+  .border-radius(0px);
+  font-size: 18px;
+  text-align: left;
+  width: 140px;
+  height: 40px;
+  margin: 10px 5px 0px 0px;
+  .button-box-shadow(@BoxShadow);
+}
+
+.CLButtonPreviousRules {
+  color: @CLThemeColor !important;
+  background: lighten(@WhiteFakeOpacity, 35%) !important;
+}
+
+.CLPreviousActions {
+  .CLButtonRules;
+  .CLButtonPreviousRules;
+}
+
+.CLNextActions {
+  .CLButtonRules;
+  background: lighten(@CLThemeColor, 5%) !important;
+  border: 2px solid lighten(@CLThemeColor, 5%) !important;
+}
+
+.CLButtonArrowRules {
+  height: 30px;
+  width: 30px;
+  margin-top:-3px;
+}
+
+//------------------------------
+// Body
+//------------------------------
+
+body {
+  overflow-x: hidden;
+  font: @CLFontFamily;
+  font-weight: @CLFontWeight;
+}
+
+h1 {
+  .CLHeaderColor;
+  padding-bottom: 25px;
+}
+
+h2 {
+  .CLHeaderColor;
+  margin-top: 0px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+p {
+  font-size: 16px;
+}
+
+img {
+  border:0 !important;
+}
+
+label {
+  margin-bottom: 1px !important;
+  margin-top: -1px !important;
+}
+
+.eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.eq-height > [class*='col-'] {
+  flex-direction: column;
+}
+
+
+//------------------------------
+// Navigation
+//------------------------------
+
+.CL-navbar-main {
+  background: @CLThemeColor;
+  border-bottom: 5px solid @Gold !important;
+  .border-radius (@Radius);
+}
+
+.CL-navbar {
+    height: 84px;
+    background: @CLThemeColor;
+    border-color: @CLThemeColor;
+}
+
+.navbar-text {
+  margin: @NavMargin;
+}
+
+.CL-menu-button {
+  margin-top: 16px;
+  border: none !important;
+  &:hover,
+  &:focus {
+    background: none !important;
+    opacity: 0.9 !important;
+  }
+  &:checked,
+  &:active {
+    opacity: 0.75 !important;
+  }
+}
+
+.CL-hamburger-white {
+  display: block;
+  .CLIconButtonWidth;
+  background: @CLMenuWhite center center no-repeat;
+}
+
+.exit-btn {
+  margin-top: 10px;
+  .CLIconButtonWidth;
+  float:left;
+  background: @CLExit top  left no-repeat;
+  &:hover {
+    opacity: 0.5;
+  }
+  &:active {
+    opacity: 0.75;
+  }
+}
+
+.CL-logo {
+  content: @CLLogo;
+  width: @CLLogoWidth;
+  height: 49px;
+}
+
+.user-name-link {
+  color: @White;
+  text-decoration: none !important;
+    &:hover {
+      color: @WhiteFakeOpacity !important;
+    }
+}
+
+.exit-link {
+  display: none;
+}
+
+//------------------------------
+// Bottom Controls
+//------------------------------
+
+.CL-btn {
+  border: none;
+  font-size: 18px;
+  background: none;
+  cursor: pointer;
+  padding: 25px 80px;
+  display: inline-block;
+  margin: 15px 30px;
+  letter-spacing: 2px;
+  .border-none;
+  position: relative;
+  .CL-button-transition(@Transition);
+  .button-box-shadow(@BoxShadow);
+}
+
+.CL-btn:after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  .CL-button-transition(@Transition);
+}
+
+.CL-next-btn {
+  background: @CLThemeColor;
+  color: #fff;
+  text-align: left;
+  &:hover {
+    background: lighten(@CLThemeColor, 10%) !important;
+  }
+  &:active {
+    background: @CLThemeColor;
+    transform: translateY(1px);
+    transition: box-shadow 0.05s ease-in-out;
+    .button-box-shadow(1px 1px 0px 0px rgba(0, 0, 0, 0.7));  
+  }
+}
+
+.CL-next-btn:before {
+  position: absolute;
+  height: 100%;
+  left: 0;
+  top: 0;
+  line-height: 3;
+}
+
+.shine {
+  width: 175px;
+  padding: 10px 30px 10px 30px;
+  overflow: hidden;
+}
+
+.shine:before {
+  left: auto;
+  right: 10px;
+  z-index: 2;
+}
+
+.shine:after {
+  width: 30%;
+  height: 200%;
+  background: rgba(255,255,255,0.025);
+  z-index: 1;
+  right: 0;
+  top: 0;
+  margin: -5px 0 0 -5px;
+  .transform-rotate(@Rotate);
+  .transform-origin(@Origin);
+}
+
+.shine:hover:after {
+  background: rgba(255,255,255,0.1);
+  width: 46%;
+}
+
+.next-arrow {
+  background: @CLArrowRightWhite;
+  float: right;
+  .CLButtonArrowRules;
+  margin-right: -5px;
+}
+
+@media screen and (max-width: 479px) {
+  .CL-next-btn {
+    width: 85%;
+  }
+  .shine:after {
+    height: 300%;
+  }
+}
+
+//------------------------------
+// Responsive Styles
+//------------------------------
+
+@media (max-width:768px) {
+  .CL-navbar-main {
+    background: @Grey;
+  }
+  .user-name-link {
+    color: @CLThemeColor;
+    font-size: 18px;
+    margin: 0px 0px 0px 20px;
+  }
+  .navbar-text {
+    margin: 20px 0px 20px 0px;
+  }
+  .exit-icon {
+    display: none !important;
+  }
+  .exit-btn {
+    display: none !important;
+  }
+  .exit-link {
+    display: block;
+    color: @CLThemeColor;
+    font-size: 18px;
+    margin: 0px 0px 0px 20px;
+     &:hover {
+      color: @WhiteFakeOpacity;
+      text-decoration: none;
+     }  
+  }
+}
+
+//------------------------------
+// Lessons View
+//------------------------------
+
+.page-content {
+  border: 1px solid @Grey;
+}
+
+input.CL-hamburger[type="checkbox"] {
+  content: @CLCloseArrow;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  float: right;
+  margin-left: 5px;
+  margin-right: -40px;
+  margin-top: 13px;
+  cursor: pointer;
+  pointer-events:auto;
+  .appearance-hidden (@Clear);
+  outline: none;
+  &:checked {
+    content: @CLMenuBlue;
+    .appearance-hidden (@Clear);
+    outline: none;   
+  }
+}
+
+/*----------------*/
+/* Toggle Styles */
+/*----------------*/
+
+#SliderControl {
+//  width: 400px;
+  border-left: 1px solid @Grey;
+}
+
+@media (max-width:786px) {
+  #SliderControl {
+    width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+    margin-bottom: 10px;
+  }
+}
+
+/*----------------*/
+/* Nav Tree
+/*----------------*/
+
+@TreeIndent: 90%;
+@TreeSubIndent: 23px !important;
+
+#LessonTitle {
+  
+}
+
+.toc-view {
+  display: inline-block;
+  border-right: 1px solid @Grey;
+  width: 35%;
+  padding-right: 0;
+}
+
+.toc-view-close {
+  width: 0px;
+  .toc-transition(@TocTrans);
+}
+
+.lesson-view {
+  display: inline-block;
+  margin-left: 30px;
+  margin-right: 30px;
+  width: 57%;
+}
+
+.lesson-view-close {
+  margin-left: 30px;
+  margin-right: 30px;
+  width: 90%;
+  .toc-transition(@TocTrans);
+}
+
+.CLAccordion h2{
+  padding-left: 15px;
+}
+
+.CLAccordion li a {
+  font-size: 18px;
+  padding: 10px;
+  color: @BlueSelected;
+  font-weight: 400;
+  border-bottom: 1px solid @Grey;
+  margin-top: 0px !important;
+  &:hover {
+    color: @CLThemeColor !important;
+    background: @Grey !important;
+  }
+  &:active,
+  &:focus {
+    color: @White !important;
+    background: @CLThemeColor !important;
+  }
+}
+
+.nav-toggle {
+  display: inline-block;
+  width: 100%;
+  cursor: pointer;
+}
+
+li .nav-toggle a {
+  display: inline-block;
+  width: 100%;
+  text-decoration: none !important;
+  margin-top: -2px;
+}
+
+li .nav-toggle-no-sub {
+  width: 100%;
+  margin-top: 0px !important;
+}
+
+li .nav-toggle-no-sub a {
+  display: inline-block;
+  width: 100%;
+  border-bottom: none;
+  margin-bottom: -4px;
+  &:hover {
+    color: @CLThemeColor !important;
+    background: @Grey !important;
+  }
+  &:active,
+  &:focus {
+    color: @White !important;
+    background: @CLThemeColor !important;
+    width: 100%;
+  }
+}
+
+p.toc-title {
+  font-family:@CLFontFamily;
+  display: inline-block;
+  line-height: 1.25;
+  width: @TreeIndent;
+  float: right;
+  padding-left: 4px;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.nav-list li a {
+  &:hover {
+    text-decoration: underline;
+  }
+}
+.toc-visited {
+  background-color: lighten(@BlueSelected, 37.5%);
+}
+
+@LevelIndent: 35px;
+
+.level-1-header {
+  border-top: 1px solid @Grey;
+}
+
+.level-2-indent {
+  padding-left:@TreeSubIndent * 2 !important;
+}
+
+.level-2-header {
+  padding-left: @LevelIndent !important;
+}
+
+.level-3-indent {
+  padding-left:@TreeSubIndent * 3 !important;
+}
+
+.level-3-header {
+  padding-left: @LevelIndent + 25 !important;
+}
+
+.level-4-indent {
+  padding-left:@TreeSubIndent * 4 !important;
+}
+
+.level-4-header {
+  padding-left: @LevelIndent + (25*2) !important;
+}
+
+.level-5-indent {
+  padding-left:@TreeSubIndent * 5 !important;
+}
+
+.level-5-header {
+  padding-left: @LevelIndent + (25*3) !important;
+}
+
+.level-6-indent {
+  padding-left:@TreeSubIndent * 6 !important;
+}
+
+.level-6-header {
+  padding-left: @LevelIndent + (25*4) !important;
+}
+
+.level-7-indent {
+  padding-left:@TreeSubIndent * 7 !important;
+}
+
+.level-7-header {
+  padding-left: @LevelIndent + (25*5) !important;
+}
+
+.level-8-indent {
+  padding-left:@TreeSubIndent * 8 !important;
+}
+
+.level-8-header {
+  padding-left: @LevelIndent + (25*6) !important;
+}
+
+@media (max-width:786px) {
+  input.CL-hamburger[type=checkbox] {
+    margin-right: 15px;
+  }
+  p.toc-title {
+    width: 95%;
+  }
+  .toc-view {
+    width: 100% !important;
+  }
+  .lesson-view {
+    float: left;
+    width: 100% !important;
+  }
+  .lesson-view h2 {
+    padding-left: 15px;
+  }
+  li .nav-toggle-no-sub a {
+    border-bottom: 1px solid darken(@Grey, 5%);
+    .toc-shadow(@BottomShadow);
+  }
+}
+
+@media (max-width:479px) {
+  p.toc-title {
+    width: 92%;
+  }
+}
+
+/*-----------------------/
+/* Checkboxes
+/------------------------*/
+
+@RotateCM: rotate(45deg);
+
+.label-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    .no-select-label(@Clear);  
+}
+.label-container-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkmark-control {
+    position: absolute;
+    top: 0;
+    left: 5;
+    height: 20px;
+    width: 20px;
+    background-color: @White;
+    border: 3px solid @GreyDefault;  
+}
+.checkmark-control-after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.checkbox-rotate(@RotateCM) {
+    -webkit-transform: @RotateCM;
+    -moz-transform: @RotateCM;
+    -ms-transform: @RotateCM;
+    -o-transform: @RotateCM;
+    transform: @RotateCM;    
+}
+.checkbox-control-after {
+    left: 4px;
+    top: 0px;
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    .checkbox-rotate(@RotateCM); 
+}
+.checkbox-container {
+    .label-container;
+}
+.checkbox-container input {
+    .label-container-input;
+}
+
+.checkmark-selected {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-selected {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-selected {
+    border: 3px solid @BlueSelected;
+    background-color: @BlueSelected;
+}
+.checkmark-selected:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-selected:after {
+    display: block;
+}
+.checkbox-container .checkmark-selected:after {
+    .checkbox-control-after;
+}
+
+.checkmark-wrong {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-wrong {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-wrong {
+    border: 3px solid @RedError;
+    background-color: @RedError;
+}
+.checkmark-wrong:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-wrong:after {
+    display: block;
+}
+.checkbox-container .checkmark-wrong:after {
+    .checkbox-control-after;
+}
+
+.checkmark-success {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-success {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-success {
+    border: 3px solid @GreenCorrect;
+    background-color: @GreenCorrect;
+}
+.checkmark-success:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-success:after {
+    display: block;
+}
+.checkbox-container .checkmark-success:after {
+    .checkbox-control-after;
+}
+
+.checkmark-default {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-default {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-default {
+    border: 3px solid @GreyDefault;
+    background-color: @GreyDefault;
+}
+.checkmark-default:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-default:after {
+    display: block;
+}
+.checkbox-container .checkmark-default:after {
+    .checkbox-control-after;
+}
+
+.radio-control {
+    position: absolute;
+    top: 0;
+    left: 5;
+    height: 20px;
+    width: 20px;
+    border: 3px solid #999;
+    background-color: @White;
+    border-radius: 50%;
+}
+.radio-control-selected {
+    top: 3.5px;
+    left: 4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+.radio-control-after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.radio-container {
+    .label-container;
+}
+.radio-container input {
+    .label-container-input;
+}
+
+.checkmark-rad-selected {
+    .radio-control;
+}
+.radio-container:hover input ~ .checkmark-rad-selected {
+    background-color: #ccc;
+}
+.radio-container input:checked ~ .checkmark-rad-selected {
+    background-color: @White;
+    border: 3px solid @BlueSelected;
+}
+.checkmark-rad-selected:after {
+    .radio-control-after;
+}
+.radio-container input:checked ~ .checkmark-rad-selected:after {
+    display: block;
+}
+.radio-container .checkmark-rad-selected:after {
+    .radio-control-selected;
+    background: @BlueSelected;
+}
+
+.checkmark-rad-success {
+    .radio-control;
+}
+.radio-container:hover input ~ .checkmark-rad-success {
+    background-color: #ccc;
+}
+.radio-container input:checked ~ .checkmark-rad-success {
+    background-color: #fff;
+    border: 3px solid @GreenCorrect;
+}
+.checkmark-rad-success:after {
+    .radio-control-after;
+}
+.radio-container input:checked ~ .checkmark-rad-success:after {
+    display: block;
+}
+.radio-container .checkmark-rad-success:after {
+    .radio-control-selected;
+    background: @GreenCorrect;
+}
+
+.checkmark-rad-error {
+    .radio-control;
+}
+.radio-container:hover input ~ .checkmark-rad-error {
+    background-color: #ccc;
+}
+.radio-container input:checked ~ .checkmark-rad-error {
+    background-color: #fff;
+    border: 3px solid @RedError;
+}
+.checkmark-rad-error:after {
+    .radio-control-after;
+}
+.radio-container input:checked ~ .checkmark-rad-error:after {
+    display: block;
+}
+.radio-container .checkmark-rad-error:after {
+    .radio-control-selected;
+    background: @RedError;
+}
+
+.checkmark-rad-default {
+    .radio-control;
+}
+.radio-container:hover input ~ .checkmark-rad-default {
+    background-color: #ccc;
+}
+.radio-container input:checked ~ .checkmark-rad-default {
+    background-color: @White;
+    border: 3px solid @GreyDefault;
+}
+.checkmark-rad-default:after {
+    .radio-control-after;
+}
+.radio-container input:checked ~ .checkmark-rad-default:after {
+    display: block;
+}
+.radio-container .checkmark-rad-default:after {
+    .radio-control-selected;
+    background: @GreyDefault;
+}
+
+/*-----------------*/
+/* Drag and Drop
+/*-----------------*/
+
+.ui-sortable {
+  padding: 15px 15px 1px 15px;
+}
+
+.ui-sortable {
+  -moz-box-shadow:    inset 0 0 4px darken(@Grey, 20%);
+  -webkit-box-shadow: inset 0 0 4px darken(@Grey, 20%);
+  -ms-box-shadow: inset 0 0 4px darken(@Grey, 20%);
+  -o-box-shadow: inset 0 0 4px darken(@Grey, 20%);
+   box-shadow:         inset 0 0 4px darken(@Grey, 20%);
+}
+
+#draggablePanel1 .panel,
+#draggablePanel2 .panel {
+  border-radius: 0px !important;
+  box-shadow: 1px 2px 3px @Grey !important;
+}
+
+#draggablePanel1 .panel-heading,
+#draggablePanel2 .panel-heading {
+  cursor: move;
+}
+
+.drag-panel-border {
+  border-bottom:2px solid @BlueSelected !important;
+  border-left:2px solid @BlueSelected !important;
+  border-right:2px solid @BlueSelected !important; 
+}
+
+.drag-panel-heading {
+  background: lighten(@BlueSelected, 37%) !important;
+  border:2px solid @BlueSelected !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+
+.drag-panel-heading p {
+  margin: 4px !important;
+}
+
+.drag-panel-body {
+  .drag-panel-border;
+  .border-radius (@Radius);
+}
