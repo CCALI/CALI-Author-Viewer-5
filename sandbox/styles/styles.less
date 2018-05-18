@@ -11,6 +11,7 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @White: #ffffff;
 @WhiteFakeOpacity:#8099b3;
 @Grey: #efefef;
+@Black: #141414;
 
 //secondary color variables
 @BlueSelected: #4186f4 !important;
@@ -962,4 +963,206 @@ p.toc-title {
 .drag-panel-body {
   .drag-panel-border;
   .border-radius (@Radius);
+}
+
+/*-----------------------------*/
+/* multi choice > choose buttons
+/*-----------------------------*/
+
+.truncate {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.default-style {
+  outline: 0 !important;
+  background: @White;
+  border-radius: 4 !important;  
+}
+
+.selected-style {
+  color: @BlueSelected;
+  .default-style;
+}
+
+.btn-group {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.multi-btn-style {
+  border: 3px solid #999;
+  font-size: 16px;
+  font-weight: 900 !important;
+  color: #666; 
+}
+
+.CL-multi-btn {
+  .multi-btn-style;
+  .truncate;
+  &:hover {
+    background: @Grey;
+  }
+  &:focus {
+    border: 3px solid @BlueSelected;
+    .selected-style;
+  }
+  &:active,
+  &::selected {
+    border: 3px solid @BlueSelected;
+    .selected-style;  
+  }
+}
+
+.CL-multi-btn.active {
+  border: 3px solid @BlueSelected;
+  .selected-style;
+}
+
+.btn-group > .CL-multi-btn,
+.btn-group > .CL-multi-btn-right,
+.btn-group > .CL-multi-btn-wrong,
+.btn-group > .CL-multi-btn-maybe {
+  border-radius: 4px !important;
+  margin-right: 40px;
+}
+
+/* right */
+
+.right-style {
+  color: @GreenCorrect;
+  .default-style;
+}
+
+.CL-multi-btn-right {
+  .multi-btn-style;
+  .truncate;
+  &:hover {
+    background: @Grey;
+  }
+  &:focus {
+    border: 3px solid @GreenCorrect;
+    .right-style;
+  }
+  &:active,
+  &::selected {
+    border: 3px solid @GreenCorrect;
+    .right-style;  
+  }
+}
+
+.CL-multi-btn-right.active {
+  border: 3px solid @GreenCorrect;
+  .right-style;  
+}
+
+/* wrong */
+
+.wrong-style {
+  color: @RedError;
+  .default-style;
+}
+
+.CL-multi-btn-wrong {
+  .multi-btn-style;
+  .truncate;
+  &:hover {
+    background: @Grey;
+  }
+  &:focus {
+    border: 3px solid @RedError;
+    .wrong-style;
+  }
+  &:active,
+  &::selected {
+    border: 3px solid @RedError;
+    .wrong-style;  
+  }
+}
+
+.CL-multi-btn-wrong.active {
+  border: 3px solid @RedError;
+  .wrong-style;  
+}
+
+/* maybe */
+
+.maybe-style {
+  color: @YellowMaybe;
+  .default-style;
+}
+
+.CL-multi-btn-maybe {
+  .multi-btn-style;
+  .truncate;
+  &:hover {
+    background: @Grey;
+  }
+  &:focus {
+    border: 3px solid @YellowMaybe;
+    .maybe-style;
+  }
+  &:active,
+  &::selected {
+    border: 3px solid @YellowMaybe;
+    .maybe-style;  
+  }
+}
+
+.CL-multi-btn-maybe.active {
+  border: 3px solid @YellowMaybe;
+  .maybe-style;  
+}
+
+/* hints */
+
+.hint {
+  display: block;
+}
+
+.hint span {
+  margin-top: 6px;
+}
+
+.hint p {
+  display: inline-block;
+  font-family:@CLFontFamily;
+  margin-left: -15px;
+}
+
+/* Right hint */
+.glyphicon-ok {
+  color: @GreenCorrect;
+}
+
+.glyphicon-ok:before {
+  padding-right: 5px;
+}
+
+.glyphicon-ok .hint {
+  color: @GreenCorrect; 
+}
+
+/* Wrong */
+
+.glyphicon-remove {
+  color: @RedError;
+}
+
+.glyphicon-remove:before {
+  padding-right: 5px;
+}
+
+.glyphicon-remove .hint {
+  color: @RedError; 
+}
+
+/* Maybe */
+
+.question-symbol p {
+  margin-top: 5px;
+  margin-left: 0px;
+  color: @YellowMaybe;
 }
