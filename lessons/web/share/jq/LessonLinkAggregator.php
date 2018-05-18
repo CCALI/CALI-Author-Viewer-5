@@ -1,6 +1,7 @@
 <?php
 /*
 	09/23/2016 Generate summary report for specific course/lesson.
+
 	This is a Helper .php which is called by another .php.
 	
 	Ensures for a particular course/lesson, user's first answer to a question.
@@ -17,12 +18,10 @@
 	Efficieny issues: currently the JSON package contains everything needed to know.
 	Could be broken into separate queries such as student info could be separate call since it's only needed if teacher choose to reveal student names.
 	
-	10/24/2016 WARNING: any UTF-8 or Windows 1252 characters will break JSON encoding.
-	May need to run through utf8_encode
-	
+	10/24/2016 WARNING: any UTF-8 or Windows 1252 characters will break JSON encoding. May need to run through utf8_encode
 	11/16/2016 Added flag to load Text Essay and track all of a user's answers to a question.
-	
 	12/08/2016 Allow empty course for use with AutoPublish.
+	05/17/2018 Updated to mysqli
 */
 
 // 11/16/2016 Option to attach all answers given by each user for each run. Attached to question>user>rundate>text. Allows essays to be attached.
@@ -32,6 +31,7 @@ define('INCLUDE_ESSAYS', INCLUDE_ALL_USER_ANSWERS>0);
 // If REDACTED is 1 real user info is redacted. Handy to give git repos as sample data.
 define('REDACTED', 0 );
 
+$connect_CALISQL;
 
 function sortPageNameNatural($a, $b)
 {	// Sort our page names sensibly so 'Question 2' appears before 'Question 10'.
@@ -45,11 +45,11 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	// lastupdate is optional.
 	//		if blank, returns all JSON.
 	//    if not blank, returns an empty JSON if NO new data has appeared since then.
-	global $trace;
+	global $trace,$connect_CALISQL;
 
 	$courseid=intval($courseID); // Lesson link Course ID
 	$nid=intval($lessonID); // Which lesson in the course
-	$lastupdate=mysql_real_escape_string($lastUpdate); // 08/22/2017 GIT#50
+	$lastupdate=mysqli_real_escape_string($connect_CALISQL,$lastUpdate); // 08/22/2017 GIT#50
 	$lesson=array();
 	$comment=array();
 	
@@ -474,18 +474,19 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 $trace=array();
 function traceSQL($SQL='')
 {	// 08/22/2017 Specify default argument value GIT#46
-	global $trace;
+	global $trace,$connect_CALISQL;
 	if ($SQL!=''){
 		$trace[]=$SQL;
 	}
-	$trace[]=mysql_error();
+	$trace[]=mysqli_error($connect_CALISQL);
 }
 
 class QueryMySQLSimple
 {	// The MySQL SELECT version of Query (used by Oink but simplified to work in Drupal OR the oink test site. )
 	function QueryMySQLSimple($SQL)
-	{ 
-		$result=mysql_query($SQL);
+	{
+		global $connect_CALISQL;
+		$result=mysqli_query($connect_CALISQL,$SQL);
 		//echo '<hr>'.$SQL.'<hr>';
 		if (!$result){
 			//abort(json_encode(array("error"=>array("SQL"=>$SQL,"message"=>mysql_error()))));
@@ -494,11 +495,11 @@ class QueryMySQLSimple
 	}
 	function fetchRow()
 	{
-		return mysql_fetch_array($this->queryresult);
+		return mysqli_fetch_array($this->queryresult);
 	}
 	function getNumRecords()
 	{
-		return mysql_num_rows($this->queryresult);
+		return mysqli_num_rows($this->queryresult);
 	}
 }
 

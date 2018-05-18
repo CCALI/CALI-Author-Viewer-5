@@ -11,6 +11,8 @@
 	Querystring Parameters:
 	Requires:  runid=#
 	Optional:  lastupdate=#
+
+	05/17/2018 Updated to mysqli
 */
 	require "LessonLinkConfig.php";
 	require_once "LessonLinkAggregator.php";
@@ -22,30 +24,38 @@
 
 
 	// ### Security check should be done to assure user getting this data is course teacher.
-	$userID=0;
-	global $user;
-	// Set the working directory to your Drupal root
-	chdir(DRUPAL_ROOT_DIR);
-	define('DRUPAL_ROOT', getcwd());
-	require_once("./includes/bootstrap.inc");
-	drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+	if (!isset($user))
+	{
+		$userID=0;
+		global $user;
+		// Set the working directory to your Drupal root
+		chdir(DRUPAL_ROOT_DIR);
+		define('DRUPAL_ROOT', getcwd());
+		require_once("./includes/bootstrap.inc");
+		drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+	}
 	$userID = $user->uid; 
 	
 	//### Connect to Drupal www.cali.org clone database (read only)
-	$connect_CALISQL=mysql_connect($dbhost,$dbuser,$dbpass);
-	$Database=mysql_select_db($dbdatabase,$connect_CALISQL);
+	$connect_CALISQL=mysqli_connect($dbhost,$dbuser,$dbpass);//mysql_connect($dbhost,$dbuser,$dbpass);
+	traceSQL('mysqli');
+	traceSQL();
+	$Database=mysqli_select_db($connect_CALISQL,$dbdatabase);
+	traceSQL();
 	
 	
 	//### Gather query string parameters
-	$runID=intval($_GET['runid']);
-	$courseID=intval($_GET['courseid']); // debugging only
-	$lessonID=intval($_GET['lessonid']); // debugging only
-	$lastUpdate=mysql_escape_string ($_GET['lastupdate']);
+	$runID= isset($_GET['runid']) ? intval($_GET['runid']) : 0;
+	$courseID= isset($_GET['courseid']) ? intval($_GET['courseid']) : 0; // debugging only
+	$lessonID= isset($_GET['lessonid']) ? intval($_GET['lessonid']) : 0; // debugging only
+	$lastUpdate= isset($_GET['lastupdate']) ?  ($_GET['lastupdate']) : ''; // Fix GIT#50
 	
+	$ownerID=0;
 	if ($runID>0)
 	{	//### If runid is specified, lookup LessonRun by runid to find course and lesson id.
 		$SQL="select nid, courseid from LessonRun where runid = $runID limit 1";
 		$q=new QueryMySQLSimple ($SQL);
+		traceSQL($SQL);
 		$row=$q->fetchRow();
 		$courseID=$row['courseid'];
 		$lessonID=$row['nid'];
@@ -54,6 +64,7 @@
 	{	//### Given course id, lookup the owner so that only the Owner can actually load course data.
 		$SQL="select uid from course where courseid = $courseID limit 1";
 		$q=new QueryMySQLSimple ($SQL);
+		traceSQL($SQL);
 		$row=$q->fetchRow();
 		$ownerID=$row['uid'];
 	}
@@ -93,8 +104,8 @@
 	
 function json_error($errmsg) 
 {
-	global $userID;
-	return json_encode(array('error'=>$errmsg, 'user'=>$userID));
+	global $userID, $trace;
+	return json_encode(array('error'=>$errmsg, 'user'=>$userID,'trace'=>$trace));
 }
 ?>
 
