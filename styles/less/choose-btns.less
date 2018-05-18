@@ -1,0 +1,209 @@
+/**
+*@stylesheet choose-btns.less Choose Buttons
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Choose Buttons
+*
+*These are the choose button for when students can select multiple choice. There maybe more than one correct answer and some answers might also be maybe.
+*
+*
+*Old Design
+
+![Old Choose Buttons](https://image.ibb.co/nsAa88/choose_btns.jpg "Old Choose Buttons Example")
+*```
+<div class="ButtonGroup"><img id="grade0_0" src="img/grade-maybe.gif" width="20" height="21" class="GradeIcon"><a class="HyperButton MAYBE" href="choice://0_0" id="0_0"><span class="0_0">Yes</span></a> <img id="grade1_0" src="img/grade-wrong.gif" width="20" height="21" class="GradeIcon"><a class="HyperButton WRONG" href="choice://1_0" id="1_0"><span class="1_0">No</span></a> <img id="grade2_0" src="img/grade-right.gif" width="20" height="21" class="GradeIcon"><a class="HyperButton RIGHT" href="choice://2_0" id="2_0"><span class="2_0">Maybe</span></a> </div>
+*```
+*
+*New Design
+*@demo demos/buttons/choose-btns/choose-btns.html
+**/
+@import "variables.less";
+@import "body.less";
+
+.truncate {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.default-style {
+  outline: 0 !important;
+  background: @White;
+  border-radius: 4 !important;  
+}
+
+.selected-style {
+  color: @BlueSelected !important;
+  .default-style;
+}
+
+.btn-group {
+  margin-top: 5px;
+  margin-bottom: 10px;
+}
+
+.multi-btn-style {
+  border: 3px solid #999;
+  font-size: 16px;
+  font-weight: 900 !important;
+  color: #666; 
+}
+
+.CL-multi-btn {
+  .multi-btn-style;
+  .truncate;
+  &:hover {
+    background: @Grey;
+  }
+  &:focus {
+    border: 3px solid @BlueSelected !important;
+    .selected-style;
+  }
+  &:active,
+  &::selected {
+    border: 3px solid @BlueSelected !important;
+    .selected-style;  
+  }
+}
+
+.CL-multi-btn.active {
+  border: 3px solid @BlueSelected !important;
+  .selected-style;
+}
+
+.btn-group > .CL-multi-btn,
+.btn-group > .CL-multi-btn-right,
+.btn-group > .CL-multi-btn-wrong,
+.btn-group > .CL-multi-btn-maybe {
+  border-radius: 4px !important;
+  margin-right: 40px;
+}
+
+.right-style {
+  color: @GreenCorrect;
+  .default-style;
+}
+
+.CL-multi-btn-right {
+  .multi-btn-style;
+  .truncate;
+  &:hover {
+    background: @Grey;
+  }
+  &:focus {
+    border: 3px solid @GreenCorrect;
+    .right-style;
+  }
+  &:active,
+  &::selected {
+    border: 3px solid @GreenCorrect;
+    .right-style;  
+  }
+}
+
+.CL-multi-btn-right.active {
+  border: 3px solid @GreenCorrect;
+  .right-style;  
+}
+
+.wrong-style {
+  color: @RedError;
+  .default-style;
+}
+
+.CL-multi-btn-wrong {
+  .multi-btn-style;
+  .truncate;
+  &:hover {
+    background: @Grey;
+  }
+  &:focus {
+    border: 3px solid @RedError;
+    .wrong-style;
+  }
+  &:active,
+  &::selected {
+    border: 3px solid @RedError;
+    .wrong-style;  
+  }
+}
+
+.CL-multi-btn-wrong.active {
+  border: 3px solid @RedError;
+  .wrong-style;  
+}
+
+/* maybe */
+
+.maybe-style {
+  color: @YellowMaybe;
+  .default-style;
+}
+
+.CL-multi-btn-maybe {
+  .multi-btn-style;
+  .truncate;
+  &:hover {
+    background: @Grey;
+  }
+  &:focus {
+    border: 3px solid @YellowMaybe;
+    .maybe-style;
+  }
+  &:active,
+  &::selected {
+    border: 3px solid @YellowMaybe;
+    .maybe-style;  
+  }
+}
+
+.CL-multi-btn-maybe.active {
+  border: 3px solid @YellowMaybe;
+  .maybe-style;  
+}
+
+.hint {
+  display: block;
+}
+
+.hint span {
+  margin-top: 6px;
+}
+
+.hint p {
+  display: inline-block;
+  font-family:@CLFontFamily;
+  margin-left: -15px;
+}
+
+.glyphicon-ok {
+  color: @GreenCorrect;
+}
+
+.glyphicon-ok:before {
+  padding-right: 5px;
+}
+
+.glyphicon-ok .hint {
+  color: @GreenCorrect; 
+}
+
+.glyphicon-remove {
+  color: @RedError;
+}
+
+.glyphicon-remove:before {
+  padding-right: 5px;
+}
+
+.glyphicon-remove .hint {
+  color: @RedError; 
+}
+
+.question-symbol p {
+  margin-top: 5px;
+  margin-left: 0px;
+  color: @YellowMaybe;
+}

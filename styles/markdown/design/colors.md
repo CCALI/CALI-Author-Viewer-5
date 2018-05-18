@@ -1,5 +1,5 @@
 @page colors Color Guide
-@parent design 2
+@parent design 4
 
 ## Cali Lesson Color Guide
 

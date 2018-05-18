@@ -1,5 +1,5 @@
 @page logo Cali Lessons Logos
-@parent design 1
+@parent design 2
 
 ## Cali Lesson Logo
 
