@@ -7,50 +7,70 @@ crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
+<body>
 <div class="btn-group" data-toggle="buttons">
-
+  <!-- Right -->
   <div class="btn-group">
-    <label class="btn btn-default CL-choose-btn">
-      <input type="checkbox" autocomplete="off"> Select
+    <label for="chooseBtn1" class="btn btn-default CL-choose-btn-right">
+      <input id="chooseBtn1" name="choosebtn1" type="checkbox" autocomplete="off"> Right
     </label>
     <div class="hint">
-      <span><p></p></span>
+      <span id="chooseBtnGrade1" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="correctAnswer1">
+        <p id="correctAnswer1">Right</p>
+      </span>
+    </div> 
+  </div>
+  <!-- Wrong -->
+  <div class="btn-group">
+    <label for="chooseBtn2" class="btn btn-default CL-choose-btn-wrong">
+      <input id="chooseBtn2" name="choosebtn2" type="checkbox" autocomplete="off"> Wrong
+    </label>
+    <div class="hint">
+      <span id="chooseBtnGrade2" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="wrongAnswer1">
+        <p id="wrongAnswer1">Wrong<p>
+      </span>
+    </div> 
+  </div>
+  <!-- Maybe -->
+  <div class="btn-group">
+    <label for="chooseBtn3" class="btn btn-default CL-choose-btn-maybe">
+      <input id="chooseBtn3" name="choosebtn2" type="checkbox" autocomplete="off"> Maybe
+    </label>
+    <div class="hint">
+      <span id="chooseBtnGrade3" class="question-symbol" aria-live="polite" role="definition" aria-labelledby="sometimesRight1">
+        <p id="sometimesRight1"><strong>?</strong> Maybe<p>
+      </span>
+    </div> 
+  </div>
+  <!-- Selected -->
+  <div class="btn-group">
+    <label for="chooseBtn4" class="btn btn-default CL-choose-btn">
+      <input id="chooseBtn4" name="choosebtn3" type="checkbox" autocomplete="off"> Selected
+    </label>
+    <div class="hint">
+      <span></span>
     </div>
   </div>
-  <!-- Right Selection -->
-  <div class="btn-group">
-    <label class="btn btn-default CL-choose-btn-right active">
-      <input type="checkbox" autocomplete="off" checked> Yes
-    </label>
-    <div class="hint">
-      <span class="glyphicon glyphicon-ok" aria-hidden="true">
-        <p>Left</p>
-      </span>
-    </div> 
-  </div>
-  <!-- Right Selection  End -->
-  <!-- Wrong Selection -->
-  <div class="btn-group">
-    <label class="btn btn-default CL-choose-btn-wrong active">
-      <input type="checkbox" autocomplete="off" checked> No
-    </label>
-    <div class="hint">
-      <span class="glyphicon glyphicon-remove" aria-hidden="true">
-        <p>Wrong<p>
-      </span>
-    </div> 
-  </div>
-  <!-- Wrong Selection End-->
-  <!-- Maybe Selection -->
-  <div class="btn-group">
-    <label class="btn btn-default CL-choose-btn-maybe active">
-      <input type="checkbox" autocomplete="off" checked> Maybe
-    </label>
-    <div class="hint">
-      <span class="question-symbol" aria-hidden="true">
-        <p><b>?</b> Maybe<p>
-      </span>
-    </div> 
-  </div>
-  <!-- Maybe Selection End-->
 </div>
+<script type="text/javascript">
+    $('label[for="chooseBtn1"]').click(function() {
+      $('#chooseBtnGrade1').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn2"]').click(function() {
+      $('#chooseBtnGrade2').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn3"]').click(function() {
+      $('#chooseBtnGrade3').fadeIn().css('display','inline-block');
+    })
+
+    $('label[for="chooseBtn5"]').click(function() {
+      $('#chooseBtnGrade5').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn6"]').click(function() {
+      $('#chooseBtnGrade6').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn7"]').click(function() {
+      $('#chooseBtnGrade7').fadeIn().css('display','inline-block');
+    })  
+</script>
+</body>
