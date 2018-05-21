@@ -15,10 +15,11 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 
 //secondary color variables
 @BlueSelected: #0074e7 !important;
-@RedError: #e91e63 !important;
-@GreenCorrect: #008e00 !important;
+@RedError: #e80c5f !important;
+@GreenCorrect: #008a00 !important;
 @GreyDefault: #777 !important;
 @YellowMaybe: #ffc000 !important;
+@YellowDark: #977000 !important;
 
 @CLThemeColor: @DarkBlue;
 
@@ -514,7 +515,7 @@ input.CL-hamburger[type="checkbox"] {
   margin-top: 0px !important;
   &:hover {
     color: @CLThemeColor !important;
-    background: @Grey !important;
+    background: darken(@Grey, 5%) !important;
   }
   &:active,
   &:focus {
@@ -548,7 +549,7 @@ li .nav-toggle-no-sub a {
   margin-bottom: -4px;
   &:hover {
     color: @CLThemeColor !important;
-    background: @Grey !important;
+    background: darken(@Grey, 5%) !important;
   }
   &:active,
   &:focus {
@@ -576,7 +577,8 @@ p.toc-title {
   }
 }
 .toc-visited {
-  background-color: lighten(@BlueSelected, 37.5%);
+  color: @DarkBlue !important;
+  background-color: lighten(@Grey, 3%);
 }
 
 @LevelIndent: 35px;
@@ -1114,7 +1116,7 @@ p.toc-title {
 /* maybe */
 
 .maybe-style {
-  color: @YellowMaybe;
+  color: @YellowDark;
   .default-style;
 }
 
@@ -1193,5 +1195,5 @@ p.toc-title {
 .question-symbol p {
   margin-top: -3px;
   margin-left: 0px;
-  color: @YellowMaybe;
+  color: @YellowDark;
 }
