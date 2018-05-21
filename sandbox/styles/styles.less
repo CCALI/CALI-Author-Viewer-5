@@ -472,10 +472,6 @@ input.CL-hamburger[type="checkbox"] {
 @TreeIndent: 90%;
 @TreeSubIndent: 23px !important;
 
-#LessonTitle {
-  
-}
-
 .toc-view {
   display: inline-block;
   border-right: 1px solid @Grey;
@@ -495,11 +491,8 @@ input.CL-hamburger[type="checkbox"] {
   width: 57%;
 }
 
-.lesson-view-close {
-  margin-left: 30px;
-  margin-right: 30px;
-  width: 90%;
-  .toc-transition(@TocTrans);
+.CLAccordion {
+  border-right: 1px solid @Grey;
 }
 
 .CLAccordion h2{
@@ -549,7 +542,7 @@ li .nav-toggle-no-sub a {
   margin-bottom: -4px;
   &:hover {
     color: @CLThemeColor !important;
-    background: darken(@Grey, 5%) !important;
+    background: @Grey !important;
   }
   &:active,
   &:focus {
