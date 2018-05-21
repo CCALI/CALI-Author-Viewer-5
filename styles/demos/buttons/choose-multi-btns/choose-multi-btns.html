@@ -1,0 +1,76 @@
+<head>
+  <link rel="stylesheet" href="/styles.css"><head>
+  <script
+src="https://code.jquery.com/jquery-2.2.4.min.js"
+integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="row" style="margin-left: 20px;"><!--ignore margin-left: 20px, for display purposes only-->
+  <ol class="ol-multi-bts">
+    <li>
+      <p><span id="multiAnswer" class="glyphicon glyphicon-ok multi-answer" role="definition" aria-labelledby="correct-answer"></span> Question set to be the right answer</p>
+    </li>
+  </ol>   
+</div>    
+<div class="btn-group" data-toggle="buttons"> 
+<!-- Right -->  
+  <div class="btn-group">
+    <label for="multiBtn1" class="btn btn-default CL-choose-btn-right">
+      <input id="multiBtn1" name="multibtn1" type="checkbox" autocomplete="off"> Right
+    </label>
+    <div class="hint">
+      <span id="multiBtnGrade1" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="correctAnswer4">
+        <p id="correctAnswer4">Right</p>
+      </span>
+    </div> 
+  </div>
+<!-- Wrong -->   
+  <div class="btn-group">
+    <label for="multiBtn2" class="btn btn-default CL-choose-btn-wrong">
+      <input id="multiBtn2" name="multibtn2" type="checkbox" autocomplete="off"> Wrong
+    </label>
+    <div class="hint">
+      <span id="multiBtnGrade2" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="incorrectAnswer4">
+        <p id="incorrectAnswer4">Wrong<p>
+      </span>
+    </div> 
+  </div>
+<!-- Maybe -->   
+  <div class="btn-group">
+    <label for="multiBtn3" class="btn btn-default CL-choose-btn-maybe">
+      <input id="multiBtn3" name="multibtn3" type="checkbox" autocomplete="off"> Maybe
+    </label>
+    <div class="hint">
+      <span id="multiBtnGrade3" class="question-symbol" aria-live="polite" role="definition" aria-labelledby="sometimesRight4">
+        <p id="sometimesRight4"><strong>?</strong> Maybe<p>
+      </span>
+    </div> 
+  </div>
+<!-- Selected -->   
+  <div class="btn-group">
+    <label for="multiBtn4" class="btn btn-default CL-choose-btn">
+      <input id="multiBtn4" name="multibtn4"type="checkbox" autocomplete="off"> Selected
+    </label>
+  </div>              
+</div>
+<script type="text/javascript">
+    $('label[for="multiBtn1"]').click(function() {
+      $('#multiBtnGrade1').fadeIn().css('display','inline-block');
+    });
+    $('label[for="multiBtn2"]').click(function() {
+      $('#multiBtnGrade2').fadeIn().css('display','inline-block');
+    });
+      $('label[for="multiBtn3"]').click(function() {
+      $('#multiBtnGrade3').fadeIn().css('display','inline-block');
+    });
+    $('label[for="multiBtn4"]').click(function() {
+      $('#multiBtnGrade4').fadeIn().css('display','inline-block');
+    });
+    $('label[for="multiBtn1"]').click(function() {
+      $('#multiAnswer').fadeIn().css('display','inline-block');
+    });       
+</script>
+</body>
