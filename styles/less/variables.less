@@ -5,7 +5,7 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @CLFontFamily: "Lucida Grande", "Verdana", "Helvetica Neue", "Lucida Sans Unicode", "Lucida Sans Regular", Arial, sans-serif; 
 @CLFontWeight: 400;
 
-//color variables
+//primary color variables
 @DarkBlue: #003366;
 @Gold: #d4c229 !important;
 @White: #ffffff;
@@ -13,12 +13,13 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @Grey: #efefef;
 @Black: #141414;
 
-//control color variables
-@BlueSelected: #4186f4 !important;
-@RedError: #e91e63 !important;
-@GreenCorrect: #00c752 !important;
+//secondary color variables
+@BlueSelected: #0074e7 !important;
+@RedError: #e80c5f !important;
+@GreenCorrect: #008a00 !important;
 @GreyDefault: #777 !important;
 @YellowMaybe: #ffc000 !important;
+@YellowDark: #977000 !important;
 
 @CLThemeColor: @DarkBlue;
 
@@ -34,6 +35,7 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @Radius: 0px;
 @BoxShadow: 2px 3px 2px 0px rgba(0, 0, 0, 0.5);
 @Transition: all 0.3s;
+@TocTrans: all 500ms ease;
 @Rotate: rotate(-20deg);
 @Origin: 0 0;
 @BottomShadow: 0 4px 2px -2px @Grey;
@@ -114,8 +116,20 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
     box-shadow: @BottomShadow;  
 }
 
+.toc-transition(@TocTrans) {
+  -webkit-transition: @TocTrans;
+  -moz-transition: @TocTrans;
+  -ms-transition: @TocTrans;
+  -o-transition: @TocTrans;
+  transition: @TocTrans;  
+}
+
 .border-none {
   outline: none !important;
+}
+
+.CLHeaderColor {
+  color: @CLThemeColor;
 }
 
 .CLIconButtonWidth {
@@ -153,8 +167,4 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
   height: 30px;
   width: 30px;
   margin-top:-3px;
-}
-
-.CLHeaderColor {
-  color: @CLThemeColor;
 }
