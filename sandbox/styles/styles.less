@@ -14,9 +14,9 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 @Black: #141414;
 
 //secondary color variables
-@BlueSelected: #4186f4 !important;
+@BlueSelected: #0074e7 !important;
 @RedError: #e91e63 !important;
-@GreenCorrect: #00c752 !important;
+@GreenCorrect: #008e00 !important;
 @GreyDefault: #777 !important;
 @YellowMaybe: #ffc000 !important;
 
@@ -201,6 +201,10 @@ img {
 label {
   margin-bottom: 1px !important;
   margin-top: -1px !important;
+}
+
+.gap {
+  height: 40px;
 }
 
 .eq-height {
@@ -652,7 +656,7 @@ p.toc-title {
     width: 100% !important;
   }
   .lesson-view h2 {
-    padding-left: 15px;
+    //padding-left: 15px;
   }
   li .nav-toggle-no-sub a {
     border-bottom: 1px solid darken(@Grey, 5%);
@@ -966,14 +970,44 @@ p.toc-title {
 }
 
 /*-----------------------------*/
-/* multi choice > choose buttons
+/* choose list > choose buttons > multi choose
 /*-----------------------------*/
 
 .truncate {
-  max-width: 250px;
+  max-width: 350px !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.btn-group {
+  margin-top: 5px;
+}
+
+.btn-group-vertical>.btn-group>.btn {
+  display: block !important;
+  width: auto !important; 
+  float: left !important;
+}
+
+.btn-group > .CL-choose-btn,
+.btn-group > .CL-choose-btn-right,
+.btn-group > .CL-choose-btn-wrong,
+.btn-group > .CL-choose-btn-maybe {
+  border-radius: 4px !important;
+  margin-right: 40px;
+}
+
+.ol-multi-bts {
+  display: inline-block;
+  margin-left: -20px;
+  font-size: 18px;  
+}
+
+.multi-answer {
+  float: left;
+  margin-left: -40px;
+  margin-top: 4px;
 }
 
 .default-style {
@@ -987,11 +1021,6 @@ p.toc-title {
   .default-style;
 }
 
-.btn-group {
-  margin-top: 5px;
-  margin-bottom: 10px;
-}
-
 .multi-btn-style {
   border: 3px solid #999;
   font-size: 16px;
@@ -999,9 +1028,8 @@ p.toc-title {
   color: #666; 
 }
 
-.CL-multi-btn {
+.CL-choose-btn {
   .multi-btn-style;
-  .truncate;
   &:hover {
     background: @Grey;
   }
@@ -1016,17 +1044,15 @@ p.toc-title {
   }
 }
 
-.CL-multi-btn.active {
+.CL-choose-btn.active {
   border: 3px solid @BlueSelected;
   .selected-style;
 }
 
-.btn-group > .CL-multi-btn,
-.btn-group > .CL-multi-btn-right,
-.btn-group > .CL-multi-btn-wrong,
-.btn-group > .CL-multi-btn-maybe {
-  border-radius: 4px !important;
-  margin-right: 40px;
+.multi-btn-txt {
+  display: inline-block;
+    margin-top: 10px;
+    margin-left: -25px;
 }
 
 /* right */
@@ -1036,9 +1062,8 @@ p.toc-title {
   .default-style;
 }
 
-.CL-multi-btn-right {
+.CL-choose-btn-right {
   .multi-btn-style;
-  .truncate;
   &:hover {
     background: @Grey;
   }
@@ -1053,7 +1078,7 @@ p.toc-title {
   }
 }
 
-.CL-multi-btn-right.active {
+.CL-choose-btn-right.active {
   border: 3px solid @GreenCorrect;
   .right-style;  
 }
@@ -1065,9 +1090,8 @@ p.toc-title {
   .default-style;
 }
 
-.CL-multi-btn-wrong {
+.CL-choose-btn-wrong {
   .multi-btn-style;
-  .truncate;
   &:hover {
     background: @Grey;
   }
@@ -1082,7 +1106,7 @@ p.toc-title {
   }
 }
 
-.CL-multi-btn-wrong.active {
+.CL-choose-btn-wrong.active {
   border: 3px solid @RedError;
   .wrong-style;  
 }
@@ -1094,9 +1118,8 @@ p.toc-title {
   .default-style;
 }
 
-.CL-multi-btn-maybe {
+.CL-choose-btn-maybe {
   .multi-btn-style;
-  .truncate;
   &:hover {
     background: @Grey;
   }
@@ -1111,7 +1134,7 @@ p.toc-title {
   }
 }
 
-.CL-multi-btn-maybe.active {
+.CL-choose-btn-maybe.active {
   border: 3px solid @YellowMaybe;
   .maybe-style;  
 }
@@ -1135,6 +1158,7 @@ p.toc-title {
 /* Right hint */
 .glyphicon-ok {
   color: @GreenCorrect;
+  display:none;
 }
 
 .glyphicon-ok:before {
@@ -1149,6 +1173,7 @@ p.toc-title {
 
 .glyphicon-remove {
   color: @RedError;
+  display: none;
 }
 
 .glyphicon-remove:before {
@@ -1161,8 +1186,12 @@ p.toc-title {
 
 /* Maybe */
 
+.question-symbol {
+  display: none;
+}
+
 .question-symbol p {
-  margin-top: 5px;
+  margin-top: -3px;
   margin-left: 0px;
   color: @YellowMaybe;
 }

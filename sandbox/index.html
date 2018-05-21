@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Simple Site</title>
+  <title>Sandbox</title>
     <link rel="stylesheet" href="styles.css" type="text/css">
     <script
   src="https://code.jquery.com/jquery-2.2.4.min.js"
@@ -33,10 +33,10 @@
           </p>
         </li>
         <li>
-          <a href="#" class="exit-icon">
+          <a href="#" class="exit-icon" title="Exit and resume lesson later button">
             <span class="exit-btn" alt="exit">
               <p class="navbar-text">
-                <a href="#" class="exit-link">Exit & Resume Later</a>
+                <a href="#" class="exit-link" title="Exit and resume lesson later text for link button">Exit & Resume Later</a>
             </p>
           </span>
         </a>
@@ -60,11 +60,11 @@
   <div class="page-content">
     <div class="row eq-height">
       <div class="toc-view col-xs-12">
-        <input class="CL-hamburger" type="checkbox" placeholder="Table of Contents Menu"></input>
+        <input id="cl-hamburger" class="CL-hamburger" type="checkbox" placeholder="Table of Contents Menu"></input>
         <div id="SliderControl" class="CLAccordion">
           <h2>Table of Contents</h2>
           <ul class="nav nav-list-main">
-            <li><label class="nav-toggle nav-header toggle-icon level-1-header"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited"> <p class="toc-title">Header 1</p></a></label>
+            <li><label class="nav-toggle nav-header toggle-icon level-1-header" for="cl-hamburger"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited"> <p class="toc-title">Header 1</p></a></label>
               <ul class="nav nav-list slider-left">
                 <li><a href="#" class="level-2-indent toc-link visited">Lesson Link</a></li>
                 <li><a href="#" class="level-2-indent toc-link visited" onclick="slider()">Lesson Link</a></li>
@@ -112,7 +112,7 @@
         </div>
       </div>
       <div  id="LessonControl" class="lesson-view col-xs-12">
-        <h2 id="LessonTitle">Introduction</h2>
+        <h2>Introduction</h2>
         <div class="row">
           <div class="col-sm-12">
             <p>
@@ -120,7 +120,10 @@
           </p>
           </div>
         </div>
-        <div class="row">
+        
+        <!-- Draggable Questions -->
+
+        <!--<div class="row">
           <div class="col-sm-12">
             <ul id="draggablePanel2" class="list-unstyled">
               <li>
@@ -143,8 +146,11 @@
               </li>
             </ul>
           </div>
-        </div>
-        <div class="row">
+        </div>-->
+
+        <!-- checkboxes and radio buttons -->
+
+        <!--<div class="row">
           <div class="col-sm-12">
             <label class="checkbox-container">One
               <input type="checkbox" checked="checked">
@@ -179,8 +185,7 @@
               <span class="checkmark-rad-default"></span>
             </label>
           </div>
-        </div>
-        <h2 id="LessonTitle">Title</h2>
+        </div>-->
         <div class="row">
           <div class="col-sm-12">
             <p>As I said before, "market" usually means replacement cost, but there are two exceptions:
@@ -200,47 +205,202 @@
           <div class="col-sm-12">
             <div class="btn-group" data-toggle="buttons">
               <div class="btn-group">
-                <label class="btn btn-default CL-multi-btn-right active">
-                  <input type="checkbox" autocomplete="off" checked> right
+                <label for="chooseBtn1" class="btn btn-default CL-choose-btn-right">
+                  <input id="chooseBtn1" name="choosebtn1" type="checkbox" autocomplete="off"> Yes
                 </label>
                 <div class="hint">
-                  <span class="glyphicon glyphicon-ok" aria-hidden="true">
+                  <span id="chooseBtnGrade1" class="glyphicon glyphicon-ok" aria-hidden="true">
                     <p>Right</p>
                   </span>
                 </div> 
               </div>
               <div class="btn-group">
-                <label class="btn btn-default CL-multi-btn-wrong active">
-                  <input type="checkbox" autocomplete="off" checked> middle
+                <label for="chooseBtn2" class="btn btn-default CL-choose-btn-wrong">
+                  <input id="chooseBtn2" name="choosebtn2" type="checkbox" autocomplete="off"> No
                 </label>
                 <div class="hint">
-                  <span class="glyphicon glyphicon-remove" aria-hidden="true">
+                  <span id="chooseBtnGrade2" class="glyphicon glyphicon-remove" aria-hidden="true">
                     <p>Wrong<p>
                   </span>
                 </div> 
               </div>
               <div class="btn-group">
-                <label class="btn btn-default CL-multi-btn-maybe active">
-                  <input type="checkbox" autocomplete="off" checked> Maybe
+                <label for="chooseBtn3" class="btn btn-default CL-choose-btn-maybe">
+                  <input id="chooseBtn3" name="choosebtn2" type="checkbox" autocomplete="off"> Maybe
                 </label>
                 <div class="hint">
-                  <span class="question-symbol" aria-hidden="true">
-                    <p><b>?</b> Maybe<p>
+                  <span id="chooseBtnGrade3"class="question-symbol" aria-hidden="true">
+                    <p><strong>?</strong> Maybe<p>
                   </span>
                 </div> 
               </div>
               <div class="btn-group">
-                <label class="btn btn-default CL-multi-btn">
-                  <input type="checkbox" autocomplete="off"> left
+                <label for="chooseBtn4" class="btn btn-default CL-choose-btn">
+                  <input id="chooseBtn4" name="choosebtn3" type="checkbox" autocomplete="off"> selected
                 </label>
                 <div class="hint">
-                  <span><p></p></span>
+                  <span></span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div class="gap"></div>
         <div class="row">
+          <div class="col-sm-12">
+            <p>The terms used on the balance sheet and the income statement open up the potential for defining ratios that can be used to compare businesses and describe them. Some of these ratios are routinely used as conditions in contracts, mostly loan contracts. Some notable ones include the ones below. Can you infer their use (columns)?</p>
+            <p>1. Capacity of a financial institution to remain solvent during a financial crisis.</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="btn-group-vertical" data-toggle="buttons">
+              <div class="btn-group">
+                <label for="chooseBtn5" class="btn btn-default CL-choose-btn-right truncate">
+                  <input id="chooseBtn5" name="choosebtn5" type="checkbox" autocomplete="off"> Debt to Assets.
+                </label>
+              </div>
+              <div class="hint">
+                <span id="chooseBtnGrade5" class="glyphicon glyphicon-ok" aria-hidden="true">
+                  <p>Right</p>
+                </span>
+              </div>                
+              <div class="btn-group">
+                <label for="chooseBtn6" class="btn btn-default CL-choose-btn-wrong truncate">
+                  <input id="chooseBtn6" name="choosebtn6" type="checkbox" autocomplete="off"> Debt to Equity.
+                </label>
+              </div>
+              <div class="hint">
+                <span id="chooseBtnGrade6" class="glyphicon glyphicon-remove" aria-hidden="true">
+                  <p>Wrong<p>
+                </span>
+              </div>                             
+              <div class="btn-group">
+                <label for="chooseBtn7" class="btn btn-default CL-choose-btn-maybe truncate">
+                  <input id="chooseBtn7" name="choosebtn7" type="checkbox" autocomplete="off"> Price to Earnings [per share].
+                </label>
+              </div>
+              <div class="hint">
+                <span id="chooseBtnGrade7" class="question-symbol" aria-hidden="true">
+                  <p><strong>?</strong> Maybe<p>
+                </span>
+              </div>
+              <div class="btn-group">
+                <label for="chooseBtn8" class="btn btn-default CL-choose-btn truncate">
+                  <input id="chooseBtn8" type="checkbox" autocomplete="off"> Current ratio: Current assets / current liabilities.
+                </label>
+              </div>
+              <div class="hint">
+                <span></span>
+              </div>                                  
+            </div>
+          </div>
+        </div>
+        <div class="gap"></div>
+
+        <div class="row">
+          <div class="col-sm-12">
+            <p>At the beginning of Year 1, Acme Corporation buys a truck for $36,000. The truck will probably last for ten years, but the company plans to sell it after six years. At that time, it expects to receive $6,000 for the truck.</p>
+            <p>Acme uses the straight-line method of depreciation. What will the annual depreciation expense for the truck be in Year 1?</p>
+          </div>
+        </div>        
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="btn-group-vertical" data-toggle="buttons">
+              <div class="btn-group">
+                <label for="chooseListBtn2" class="btn btn-default CL-choose-btn-right truncate">
+                  <input id="chooseListBtn2" name="chooseListbtn2" type="checkbox" autocomplete="off"> A
+                </label><p class="multi-btn-txt">$36,000</p>
+              </div>
+              <div class="hint">
+                <span id="chooseListBtnGrade2" class="glyphicon glyphicon-ok" aria-hidden="true">
+                  <p>Right</p>
+                </span>
+              </div>                
+              <div class="btn-group">
+                <label for="chooseListBtn3" class="btn btn-default CL-choose-btn-wrong truncate">
+                  <input id="chooseListBtn3" name="chooseListbtn3" type="checkbox" autocomplete="off"> B
+                </label><p class="multi-btn-txt">$3,000</p>
+              </div>
+              <div class="hint">
+                <span id="chooseListBtnGrade3" class="glyphicon glyphicon-remove" aria-hidden="true">
+                  <p>Wrong</p>
+                </span>
+              </div>                             
+              <div class="btn-group">
+                <label for="chooseListBtn4" class="btn btn-default CL-choose-btn-maybe truncate">
+                  <input id="chooseListBtn4" name="chooseListbtn4" type="checkbox" autocomplete="off"> C
+                </label><p class="multi-btn-txt">$5,000</p>
+              </div>
+              <div class="hint">
+                <span id="chooseListBtnGrade4" class="question-symbol" aria-hidden="true">
+                  <p><strong>?</strong> Maybe<p>
+                </span>
+              </div>
+              <div class="btn-group">
+                <label for="chooseListBtn1" class="btn btn-default CL-choose-btn active truncate">
+                  <input id="chooseListBtn1" name="chooseListbtn1" type="checkbox" autocomplete="off"> D
+                </label><p class="multi-btn-txt">$30,000</p>
+              </div>
+              <div class="hint">
+                <span></span>
+              </div>           
+            </div>
+          </div>
+        </div>
+        <div class="gap"></div>        
+
+        <div class="row">
+          <div class="col-sm-12">
+            <ol class="ol-multi-bts">
+              <li>
+                <p><span id="multiAnswer" class="glyphicon glyphicon-ok multi-answer" role="definition" aria-labelledby="correct-answer"></span> On May 1, Debtortrucking enters into a contract with Gascompany for Gascompany to provide Debtortrucking with 1,000 gallons of gas each month for six months at a price of $3.00 per gallon. Debtortrucking pays in full on June 1 the entire amount (six months times 1,000 times $3.00 = $18,000). Debtortrucking files for bankruptcy on July 1, when the price of gas is $3.50.</p>
+              </li>
+            </ol>
+          </div>
+        </div>  
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="btn-group" data-toggle="buttons">
+              <div class="btn-group">
+                <label for="multiBtn1" class="btn btn-default CL-choose-btn-right">
+                  <input id="multiBtn1" name="multibtn1" type="checkbox" autocomplete="off"> Not Executory
+                </label>
+                <div class="hint">
+                  <span id="multiBtnGrade1" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="correct-answer">
+                    <p id="correct-answer">Right</p>
+                  </span>
+                </div> 
+              </div>
+              <div class="btn-group">
+                <label for="multiBtn2" class="btn btn-default CL-choose-btn-wrong">
+                  <input id="multiBtn2" name="multibtn2" type="checkbox" autocomplete="off"> Executory &amp; Asset
+                </label>
+                <div class="hint">
+                  <span id="multiBtnGrade2" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="incorrect-answer">
+                    <p id="incorrect-answer">Wrong<p>
+                  </span>
+                </div> 
+              </div>
+              <div class="btn-group">
+                <label for="multiBtn3" class="btn btn-default CL-choose-btn-maybe">
+                  <input id="multiBtn3" name="multibtn3" type="checkbox" autocomplete="off"> Executory &amp; Liability
+                </label>
+                <div class="hint">
+                  <span id="multiBtnGrade3" class="question-symbol" aria-live="polite" role="definition" aria-labelledby="sometimes-right">
+                    <p id="sometimes-right"><strong>?</strong> Maybe<p>
+                  </span>
+                </div> 
+              </div>
+              <div class="btn-group">
+                <label for="multiBtn4" class="btn btn-default CL-choose-btn">
+                  <input id="multiBtn4" name="multibtn4"type="checkbox" autocomplete="off"> Other
+                </label>
+              </div>              
+            </div>
+          </div>
+        </div>
+        <!--<div class="row">
           <div class="col-sm-12">
             <div class="btn-group" data-toggle="buttons">
               <label class="btn btn-primary active">
@@ -254,22 +414,8 @@
               </label>
             </div>
           </div>
-        </div>
-        <div class="form-group" for="test2">
-          <div class="col-sm-12" role="group">
-            <button type="button" class="btn btn-default CL-multi-btn">What happens if I type a lot of text in this button</button>
-            <button type="button" class="btn btn-default CL-multi-btn">blah blah blah blah</button>
-            <button type="button" class="btn btn-default CL-multi-btn">What happens if I type a lot of text in this button</button>
-          </div>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-sm-12">
-            <button type="button" class="btn btn-default CL-multi-btn">A</button>
-            <button type="button" class="btn btn-default CL-multi-btn">B</button>
-            <button type="button" class="btn btn-default CL-multi-btn">C</button>
-          </div>
-        </div>
+        </div>-->
+        <div class="gap"></div> 
       </div>
     </div> 
   </div>
@@ -356,5 +502,55 @@
         }
       });
     });
+
+    // Choose Buttons
+    $('label[for="chooseBtn1"]').click(function() {
+      $('#chooseBtnGrade1').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn2"]').click(function() {
+      $('#chooseBtnGrade2').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn3"]').click(function() {
+      $('#chooseBtnGrade3').fadeIn().css('display','inline-block');
+    })
+
+    $('label[for="chooseBtn5"]').click(function() {
+      $('#chooseBtnGrade5').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn6"]').click(function() {
+      $('#chooseBtnGrade6').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn7"]').click(function() {
+      $('#chooseBtnGrade7').fadeIn().css('display','inline-block');
+    })
+    // Choose List
+    $('label[for="chooseListBtn2"]').click(function() {
+      $('#chooseListBtnGrade2').fadeIn().css('display','inline-block');
+    })
+      $('label[for="chooseListBtn3"]').click(function() {
+      $('#chooseListBtnGrade3').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseListBtn4"]').click(function() {
+      $('#chooseListBtnGrade4').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseListBtn5"]').click(function() {
+      $('#chooseListBtnGrade5').fadeIn().css('display','inline-block');
+    })
+    // Multi Buttons
+    $('label[for="multiBtn1"]').click(function() {
+      $('#multiBtnGrade1').fadeIn().css('display','inline-block');
+    });
+    $('label[for="multiBtn2"]').click(function() {
+      $('#multiBtnGrade2').fadeIn().css('display','inline-block');
+    });
+      $('label[for="multiBtn3"]').click(function() {
+      $('#multiBtnGrade3').fadeIn().css('display','inline-block');
+    });
+    $('label[for="multiBtn4"]').click(function() {
+      $('#multiBtnGrade4').fadeIn().css('display','inline-block');
+    });
+    $('label[for="multiBtn1"]').click(function() {
+      $('#multiAnswer').fadeIn().css('display','inline-block');
+    });        
   </script>
 </html>
