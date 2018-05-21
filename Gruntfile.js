@@ -5,7 +5,7 @@ module.exports = function(grunt) {
         options: {
           cleancss: true
         },
-        files: {"docs/styles.css": "styles/less/**/*"}
+        files: {"docs/styles.css": "styles/styles.less"}
       },
     },
     copy: {
