@@ -961,11 +961,19 @@ p.toc-title {
 }
 
 .drag-panel-heading {
-  background: lighten(@BlueSelected, 50%) !important;
+  background: lighten(@BlueSelected, 53%) !important;
   border:2px solid @BlueSelected !important;
   //border-left: 6px solid @BlueSelected !important;
   .border-radius (@Radius);
   padding: 0px 5px!important;
+}
+
+.drag-panel-heading-line {
+   background: lighten(@BlueSelected, 53%) !important;
+  border:2px solid @BlueSelected !important;
+  border-left: 10px solid @BlueSelected !important;
+  .border-radius (@Radius);
+  padding: 0px 5px!important; 
 }
 
 .drag-panel-heading p {
@@ -985,6 +993,16 @@ p.toc-title {
 .glyphicon-th:before > .bottom-icon {
   color: @BlueSelected;
 }
+
+.glyphicon-move:before {
+  color: @BlueSelected;
+  margin-left: -3px;
+}
+
+.glyphicon-move:before > .bottom-icon {
+  color: @BlueSelected;
+}
+
 
 /*-----------------------------*/
 /* choose list > choose buttons > multi choose
