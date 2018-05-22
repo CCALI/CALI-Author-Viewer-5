@@ -85,11 +85,11 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 }
 
 .no-select-label(@Clear) {
-    -webkit-user-select: @Clear;
-    -moz-user-select: @Clear;
-    -ms-user-select: @Clear;
-    -o-user-select: @Clear;
-    user-select: @Clear;  
+  -webkit-user-select: @Clear;
+  -moz-user-select: @Clear;
+  -ms-user-select: @Clear;
+  -o-user-select: @Clear;
+  user-select: @Clear;  
 }
 
 .transform-rotate(@Rotate) {
@@ -114,6 +114,14 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
     -ms-box-shadow: @BottomShadow;
     -o-box-shadow: @BottomShadow;
     box-shadow: @BottomShadow;  
+}
+
+.sticky-shadow(@BottomShadow) {
+   -webkit-box-shadow: @BottomShadow;
+    -moz-box-shadow: @BottomShadow;
+    -ms-box-shadow: @BottomShadow;
+    -o-box-shadow: @BottomShadow;
+    box-shadow: @BottomShadow;    
 }
 
 .toc-transition(@TocTrans) {
@@ -490,6 +498,10 @@ input.CL-hamburger[type="checkbox"] {
   margin-right: 30px;
   width: 57%;
 }
+
+.lesson-view-close {
+  width: 100%;
+} 
 
 .CLAccordion {
   border-right: 1px solid @Grey;
@@ -949,10 +961,11 @@ p.toc-title {
 }
 
 .drag-panel-heading {
-  background: lighten(@BlueSelected, 37%) !important;
+  background: lighten(@BlueSelected, 50%) !important;
   border:2px solid @BlueSelected !important;
+  //border-left: 6px solid @BlueSelected !important;
   .border-radius (@Radius);
-  padding: 5px 15px !important;
+  padding: 0px 5px!important;
 }
 
 .drag-panel-heading p {
@@ -962,6 +975,15 @@ p.toc-title {
 .drag-panel-body {
   .drag-panel-border;
   .border-radius (@Radius);
+}
+
+.glyphicon-th:before {
+  color: @BlueSelected;
+  margin-left: -3px;
+}
+
+.glyphicon-th:before > .bottom-icon {
+  color: @BlueSelected;
 }
 
 /*-----------------------------*/
@@ -989,7 +1011,7 @@ p.toc-title {
 .btn-group > .CL-choose-btn-right,
 .btn-group > .CL-choose-btn-wrong,
 .btn-group > .CL-choose-btn-maybe {
-  border-radius: 4px !important;
+  border-radius: 2px !important;
   margin-right: 40px;
 }
 
@@ -1189,4 +1211,60 @@ p.toc-title {
   margin-top: -3px;
   margin-left: 0px;
   color: @YellowDark;
+}
+
+/*----------------------*/
+/*    Sticky Header
+/*----------------------*/
+
+.sticky-header {
+  padding: 10px 16px;
+  background: @White;
+  color: @Black;
+}
+
+.content-under-sticky {
+  padding-bottom: 20px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 40px 10px 20px 60px;
+  margin-left: -45px;
+  z-index: 999;
+  .sticky-shadow(@BottomShadow);
+  border-bottom: 3px solid @Gold;
+}
+
+.sticky + .content-under-sticky {
+  padding-top: 50px;
+  .toc-transition(@TocTrans);  
+}
+
+/*----------------------*/
+/*        Toolbar
+/*----------------------*/
+
+.toolbar-button {
+  padding: 0px 10px 0px 4px;
+  margin: 2px;
+  background: @White;
+  border-style: dashed;
+  border-radius: 0px;
+  .no-select-label(@Clear) !important;
+  &:focus,
+  &:active {
+    outline:0 !important;
+    border: 1px dashed  @BlueSelected;
+  }
+  &:focus {
+    background: @White;
+    color:@BlueSelected;
+  }
+}
+
+.toolbar-button p {
+  margin:0px;
 }

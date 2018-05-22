@@ -1,0 +1,29 @@
+<head>
+	<link rel="stylesheet" href="../../styles.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<div id="stickyHeader" class="sticky-header">
+	<p>A. These are the answers students pick from.</p>
+	<p>B. These are the answers students pick from</p>
+	<p>C. These are the answers students pick from</p>
+	<p>D. These are the answers students pick from</p>
+</div>
+<div class="content-under-sticky">
+	<p>
+		Lesson radio buttons go here
+	</p>   				
+</div>
+<script type="text/javascript">
+    window.onscroll = function() {myFunction()};
+
+    var header = document.getElementById("stickyHeader");
+    var sticky = header.offsetTop;
+
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        header.classList.add("sticky");
+      } else {
+        header.classList.remove("sticky");
+      }
+    }	
+</script>

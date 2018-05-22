@@ -1,0 +1,44 @@
+/**
+*@stylesheet toolbar-btn.less Toolbar Button
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Toolbar Button
+*
+*The toolbar button appears at the bottom of the lesson and allows students to open pages in the lesson that provide more information.
+*
+*
+*Old Design
+
+![Old toolbar button](https://image.ibb.co/jbPFFo/toolbar_btn.jpg "Old Tool Bar Button Example")
+*```
+<div class="LinkNavBar">&nbsp;<a href="popup://CCH2 facts (p)" class="" style="display: inline;">Review Facts</a> <a href="popup://UPA 7" class="" style="display: inline;">UPA §&nbsp;7</a> <a href="popup://RUPA 202" class="" style="display: inline;">RUPA §&nbsp;202</a> </div>
+*```
+*
+*New Design
+*@demo docs/demos/buttons/toolbar-button/toolbar-button.html
+**/
+@import "variables.less";
+@import "body.less";
+
+.toolbar-button {
+  padding: 0px 10px 0px 4px;
+  margin: 2px;
+  background: @White;
+  border-style: dashed;
+  border-radius: 0px;
+  .no-select-label(@Clear) !important;
+  &:focus,
+  &:active {
+    outline:0 !important;
+    border: 1px dashed  @BlueSelected;
+  }
+  &:focus {
+    background: @White;
+    color:@BlueSelected;
+  }
+}
+
+.toolbar-button p {
+  margin:0px;
+}
