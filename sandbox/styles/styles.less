@@ -327,8 +327,9 @@ label {
 
 .CL-next-btn {
   background: @CLThemeColor;
-  color: #fff;
+  color: @White;
   text-align: left;
+  width: 180px;
   &:hover {
     background: lighten(@CLThemeColor, 10%) !important;
   }
@@ -348,8 +349,26 @@ label {
   line-height: 3;
 }
 
+.CL-grade-btn {
+  background: @White;
+  color: @BlueSelected !important;
+  border: 3px solid @BlueSelected !important;
+  padding: 8px 18px!important;
+  font-size: 18px !important;
+  font-weight: 800;
+  &:hover {
+    background: lighten(@BlueSelected, 50%);
+    color: darken(@BlueSelected, 10%) !important;
+    border: 3px solid darken(@BlueSelected, 10%) !important;
+  }
+  &:active {
+    transform: translateY(1px);
+    transition: box-shadow 0.05s ease-in-out;
+    .button-box-shadow(1px 1px 0px 0px rgba(0, 0, 0, 0.7));  
+  }
+}
+
 .shine {
-  width: 175px;
   padding: 10px 30px 10px 30px;
   overflow: hidden;
 }
