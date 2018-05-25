@@ -28,6 +28,8 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 "https://image.ibb.co/ksA7nS/arrow_left_white.png";
 @ArrowRightWhite: "https://image.ibb.co/bVnbgn/arrow_right_blue.png";
 
+@CLFeedback: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='utf-8'%3F%3E%3C!-- Generator: Adobe Illustrator 21.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0%29 --%3E%3Csvg version='1.1' id='Layer_1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 225 225' style='enable-background:new 0 0 225 225;' xml:space='preserve'%3E%3Cstyle type='text/css'%3E .st0%7Bopacity:0.25;%7D .st1%7Bfill:%23FFFFFF;%7D .st2%7Bfill:%23003366;%7D .st3%7Bfill:none;stroke:%23003366;stroke-width:14;stroke-linecap:round;stroke-miterlimit:10;%7D%0A%3C/style%3E%3Cg%3E%3Cg class='st0'%3E%3Ccircle class='st1' cx='112.5' cy='112.5' r='104.5'/%3E%3C/g%3E%3Cg%3E%3Cpath class='st2' d='M112.5,22c49.9,0,90.5,40.6,90.5,90.5S162.4,203,112.5,203S22,162.4,22,112.5S62.6,22,112.5,22 M112.5,8 C54.8,8,8,54.8,8,112.5S54.8,217,112.5,217S217,170.2,217,112.5S170.2,8,112.5,8L112.5,8z'/%3E%3C/g%3E%3Cg%3E%3Cg%3E%3Ccircle class='st1' cx='74' cy='127' r='7.5'/%3E%3Cpath class='st2' d='M74,126.5c0.3,0,0.5,0.2,0.5,0.5s-0.2,0.5-0.5,0.5s-0.5-0.2-0.5-0.5S73.7,126.5,74,126.5 M74,112.5 c-8,0-14.5,6.5-14.5,14.5S66,141.5,74,141.5S88.5,135,88.5,127S82,112.5,74,112.5L74,112.5z'/%3E%3C/g%3E%3Cg%3E%3Ccircle class='st1' cx='151' cy='127' r='7.5'/%3E%3Cpath class='st2' d='M151,126.5c0.3,0,0.5,0.2,0.5,0.5s-0.2,0.5-0.5,0.5s-0.5-0.2-0.5-0.5S150.7,126.5,151,126.5 M151,112.5 c-8,0-14.5,6.5-14.5,14.5s6.5,14.5,14.5,14.5s14.5-6.5,14.5-14.5S159,112.5,151,112.5L151,112.5z'/%3E%3C/g%3E%3C/g%3E%3Cg%3E%3Cpath class='st3' d='M88.1,170.2c11.3,13.6,43.6,12.7,52.8-2.2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E ");
+
 //content variable
 @NavMargin: 30px 0px 0px 15px;
 @LightBorders: 1px solid rgba(153,153,153,0.4);
@@ -228,6 +230,28 @@ label {
 }
 
 
+.btn {
+  .border-radius (@Radius);
+}
+
+.btn-default {
+  &:focus {
+    outline: 0 !important;
+  } 
+}
+
+.btn-primary {
+  background-color: @DarkBlue;
+  &:hover {
+    background-color: darken(@DarkBlue, 10%);
+  }
+  &:focus,
+  &:active {
+    background-color: @DarkBlue;
+    outline: 0 !important;
+  }
+}
+
 //------------------------------
 // Navigation
 //------------------------------
@@ -356,6 +380,7 @@ label {
   padding: 8px 18px!important;
   font-size: 18px !important;
   font-weight: 800;
+  letter-spacing: 1px !important;
   &:hover {
     background: lighten(@BlueSelected, 50%);
     color: darken(@BlueSelected, 10%) !important;
@@ -1304,4 +1329,108 @@ p.toc-title {
 
 .toolbar-button p {
   margin:0px;
+}
+
+/*----------------------*/
+/*    feedback button
+/*----------------------*/
+
+.bubble-var {
+  position: fixed !important;
+  float: right;
+  bottom: 10;
+  right: 20;
+  position: relative;
+  color: @DarkBlue;
+  font-weight: 800;
+  text-align: center;
+  background: @Gold;
+  cursor: pointer;
+  .border-radius (10px);
+  z-index: 3;
+  box-shadow: 3px 2px 5px #999;
+  &:hover {
+    background: linear-gradient(lighten(@Gold, 20%), @Gold);
+  }   
+}
+
+.bubble-bef-aft-var {
+  content: "";
+  position: absolute;
+  display: block;
+  border-style: solid;
+  width: 0;
+}
+
+.feedback-bubble {
+  padding: 8px;
+  .bubble-var;
+}
+
+.feedback-bubble:before {
+  bottom: -15px;
+  right: 14px;
+  border-width: 16px 6px 0;
+  border-color: rgba(0,0,0, 0.2) transparent;
+  .bubble-bef-aft-var;
+}
+
+.feedback-bubble:after {
+  bottom: -14px;
+  right: 15px;
+  border-width: 15px 6px 0;
+  border-color: @Gold transparent;
+  .bubble-bef-aft-var;
+}
+
+.happyface-bubble {
+  padding: 5px;
+  .bubble-var;
+}
+
+.happyface-bubble:before {
+  bottom: -15px;
+  right: 14px;
+  border-width: 16px 6px 0;
+  border-color: rgba(0,0,0, 0.2) transparent;
+  .bubble-bef-aft-var;
+}
+
+.happyface-bubble:after {
+  bottom: -14px;
+  right: 15px;
+  border-width: 15px 6px 0;
+  border-color: @Gold transparent;
+  .bubble-bef-aft-var;
+}
+
+.happyface-icon {
+  display: inline-block;
+  background-image: @CLFeedback;
+}
+
+span.happyface-icon {
+  width: 35px;
+  height: 35px;
+}
+
+/* Modal */
+
+.modal-dialog {
+  position: fixed;
+  bottom: 40px;
+  right: 2.5%;
+}
+
+.modal-content {
+  border-radius: 0px;
+}
+
+.modal-header {
+  border-bottom: 2px solid @Gold;
+}
+
+.modal.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(0, 25%, 0);
+    transform: translate3d( 0, 25%, 0);
 }

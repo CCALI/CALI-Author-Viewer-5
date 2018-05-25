@@ -1,0 +1,70 @@
+@import "variables.less";
+
+body {
+  overflow-x: hidden;
+  font: @CLFontFamily;
+  font-weight: @CLFontWeight;
+}
+
+h1 {
+  .CLHeaderColor;
+  padding-bottom: 25px;
+}
+
+h2 {
+  .CLHeaderColor;
+  margin-top: 0px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+p {
+  font-size: 16px;
+}
+
+img {
+  border:0 !important;
+}
+
+label {
+  margin-bottom: 1px !important;
+  margin-top: -1px !important;
+}
+
+.gap {
+  height: 40px;
+}
+
+.eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.eq-height > [class*='col-'] {
+  flex-direction: column;
+}
+
+
+.btn {
+  .border-radius (@Radius);
+}
+
+.btn-default {
+  &:focus {
+    outline: 0 !important;
+  } 
+}
+
+.btn-primary {
+  background-color: @DarkBlue;
+  &:hover {
+    background-color: darken(@DarkBlue, 10%);
+  }
+  &:focus,
+  &:active {
+    background-color: @DarkBlue;
+    outline: 0 !important;
+  }
+}

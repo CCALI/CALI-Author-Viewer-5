@@ -1,0 +1,41 @@
+<head>
+	<link rel="stylesheet" href="../../../styles.css">
+	<script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>	
+</head>
+<body style="height: 380px;">
+<div>
+  <div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
+    <p class="happyface-bubble"><span class="happyface-icon"></span></p>
+  </div>  
+</div>
+<div id="feedbackModal" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Let us know what you think!</h4>
+            </div>
+            <div class="modal-body">
+              <!--<p>If you have comments on a particular lesson you must include the lesson name, the  section title (the title at the top of the page), and your teachers name.</p>-->
+              <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" rows="5" id="comment" placeholder="If you have comments on a particular lesson you must include the lesson name, which question you are on in the lesson and your teachers name in this text area."></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    ( "#open-feedback" ).click(function() {
+      $("#feedbackModal").modal('show');
+    }	
+</script>
