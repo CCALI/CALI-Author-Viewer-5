@@ -1,0 +1,56 @@
+/**
+*@stylesheet footer-links.less Footer Links
+*@parent components
+*
+*@description
+*## CALI Lessons Footer Links
+*
+*CALI Lessons footer links. Here are the styles for how the links at the bottom of the page should look. Faculty links are the designs in the theme gold color.
+*
+*Old Design
+*
+![Footer Link](https://image.ibb.co/md65mT/oldfooter.jpg "Footer Link")
+*
+![Faculty View Link](https://image.ibb.co/btrGt8/oldfacultyview.jpg "Faculty View Link")
+*
+*```
+<div class="Copyright">All Contents © <img alt="CALI Logo" src="img/CALILogo.gif">, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. 08/31/2016</div>
+*```
+*New Design
+*@demo docs/demos/footer-links/footer-links.html
+**/
+
+@import "variables.less";
+@import "main.less";
+
+@Grayscale: grayscale(1);
+
+.grayscale(@Grayscale) {
+  -webkit-filter: @Grayscale;
+  -moz-filter: @Grayscale;
+  -ms-filter: @Grayscale;
+  -o-filter: @Grayscale;
+  filter: @Grayscale;  
+}
+
+a.faculty-link {
+  color: @Gold;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: darken(@Gold, 15%);
+  &:hover {
+  color: darken(@Gold, 50%);
+  }
+  &:focus,
+  &:active {
+  color: @DarkBlue !important;
+  text-decoration: none;
+  }
+}
+
+img.footer-logo {
+  opacity: 0.6;
+  .grayscale(@Grayscale);
+}

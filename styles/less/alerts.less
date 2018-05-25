@@ -7,53 +7,22 @@
 *
 *Alert panels for success, error, description, and maybe.
 *
+*Old Design
+*
+![Alerts](https://image.ibb.co/dHnxY8/oldalerts.png "Alerts")
+*
 *HTML
 *```
-<!--Success Error-->
-<div class="panel panel-default" id="error-wrap">
- <div class="panel-heading alert-success-heading"><h4>Success</h4>
-   <button type="button" class="close" data-target="#success-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-success-x">&times;</span><span class="sr-only">Close</span>
-    </button>
- </div>
- <div class="panel-body alert-success-body">
-    Success Content
- </div>
-</div>
+<div class="Feedback RIGHT" style="display: block;"><div class="Icon RIGHT">&nbsp;</div><div class="Close"><a href="#">&nbsp;</a></div><div class="Title">C.</div><br clear="all"><div class="Text ReadText"><p></p></div><div class="FeedbackButton"><a class="HyperButton" href="#">Close</a></div></div>
 
-<!--Alert Error-->
-<div class="panel panel-default" id="error-wrap">
- <div class="panel-heading alert-error-heading"><h4>Error</h4>
-   <button type="button" class="close" data-target="#error-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-error-x">&times;</span><span class="sr-only">Close</span>
-    </button>
- </div>
- <div class="panel-body alert-error-body">
-    Error Content
- </div>
-</div>
+<div class="Feedback WRONG" style="display: block;"><div class="Icon WRONG">&nbsp;</div><div class="Close"><a href="#">&nbsp;</a></div><div class="Title">A.</div><br clear="all"><div class="Text ReadText"><p></p></div><div class="FeedbackButton"><a class="HyperButton" href="#">Close</a></div></div>
 
-<!--Alert Description-->
-<div class="panel panel-default" id="description-wrap">
- <div class="panel-heading alert-description-heading"><h4>Description</h4>
-   <button type="button" class="close" data-target="#description-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-description-x">&times;</span><span class="sr-only">Close</span>
-    </button>
- </div>
- <div class="panel-body alert-description-body">
-    Description Content
- </div>
-</div>
+<div id="fbText"><div class="Feedback INFO" style="display: block;"><div class="Icon INFO">&nbsp;</div><div class="Close"><a href="#">&nbsp;</a></div><div class="Title"></div><br clear="all"><div class="Text ReadText"><p></p></div><div class="FeedbackButton"><a class="HyperButton" href="#">Close</a></div></div></div>
 
-<!--Alert Maybe-->
-<div class="panel panel-default" id="maybe-wrap">
- <div class="panel-heading alert-maybe-heading"><h4>Maybe</h4>
-   <button type="button" class="close" data-target="#maybe-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-maybe-x">&times;</span><span class="sr-only">Close</span>
-    </button>
- </div>
- <div class="panel-body alert-maybe-body">
-    Maybe Content
- </div>
-</div>
+<div class="Feedback MAYBE" style="display: block;"><div class="Icon MAYBE">&nbsp;</div><div class="Close"><a href="#">&nbsp;</a></div><div class="Title">B.</div><br clear="all"><div class="Text ReadText"><p></p></div><div class="FeedbackButton"><a class="HyperButton" href="#">Close</a></div></div>
 *```
 *
+*New Design
 *@demo docs/demos/alerts/alerts.html
 **/
 
@@ -71,11 +40,11 @@
 }
 
 .alert-success-x {
-  color: #00c752;;
+  color: @GreenCorrect;
   font-size: 35px;
 }
 .alert-success-heading {
-  background: lighten(@GreenCorrect, 58%) !important;
+  background: lighten(@GreenCorrect, 68%) !important;
   border:2px solid @GreenCorrect !important;
   .border-radius (@Radius);
   padding: 5px 15px !important;
@@ -93,11 +62,11 @@
 }
 
 .alert-error-x {
-  color: #e91e63;
+  color: @RedError;
   font-size: 35px;
 }
 .alert-error-heading {
-  background: lighten(@RedError, 46%) !important;
+  background: lighten(@RedError, 47%) !important;
   border:2px solid @RedError !important;
   .border-radius (@Radius);
   padding: 5px 15px !important;
@@ -119,7 +88,7 @@
   font-size: 35px;
 }
 .alert-description-heading {
-  background: lighten(@BlueSelected, 37%) !important;
+  background: lighten(@BlueSelected, 49%) !important;
   border:2px solid @BlueSelected !important;
   .border-radius (@Radius);
   padding: 5px 15px !important;
@@ -137,7 +106,7 @@
 }
 
 .alert-maybe-x {
-  color: @YellowMaybe;
+  color: darken(@YellowMaybe, 30%);
   font-size: 35px;
 }
 .alert-maybe-heading {

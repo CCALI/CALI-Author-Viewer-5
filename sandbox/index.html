@@ -67,7 +67,7 @@
             <li><label class="nav-toggle nav-header toggle-icon level-1-header" for="cl-hamburger"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1</p></a></label>
               <ul class="nav nav-list slider-left">
                 <li><a href="#" class="level-2-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                <li><a href="#" class="level-2-indent toc-link visited" onclick="slider()" title="link to lesson">Lesson Link</a></li>
+                <li><a href="#" class="level-2-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
                 <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-2-header visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1</p></a></label>
                   <ul class="nav nav-list slider-left">
                     <li><a href="#" class="level-3-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
@@ -448,27 +448,76 @@
             </div>
           </div>
           <br>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="panel panel-default" id="error-wrap">
+               <div class="panel-heading alert-success-heading"><h4>Success</h4>
+                 <button type="button" class="close" data-target="#success-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-success-x">&times;</span><span class="sr-only">Close</span>
+                  </button>
+               </div>
+               <div class="panel-body alert-success-body">
+                  Success Content
+               </div>
+              </div>
+              <div class="panel panel-default" id="error-wrap">
+               <div class="panel-heading alert-error-heading"><h4>Error</h4>
+                 <button type="button" class="close" data-target="#error-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-error-x">&times;</span><span class="sr-only">Close</span>
+                  </button>
+               </div>
+               <div class="panel-body alert-error-body">
+                  Error Content
+               </div>
+              </div>
+              <div class="panel panel-default" id="description-wrap">
+               <div class="panel-heading alert-description-heading"><h4>Description</h4>
+                 <button type="button" class="close" data-target="#description-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-description-x">&times;</span><span class="sr-only">Close</span>
+                  </button>
+               </div>
+               <div class="panel-body alert-description-body">
+                  Description Content
+               </div>
+              </div>
+              <div class="panel panel-default" id="maybe-wrap">
+               <div class="panel-heading alert-maybe-heading"><h4>Maybe</h4>
+                 <button type="button" class="close" data-target="#maybe-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-maybe-x">&times;</span><span class="sr-only">Close</span>
+                  </button>
+               </div>
+               <div class="panel-body alert-maybe-body">
+                  Maybe Content
+               </div>
+            </div>
+          </div>
           <a href="#" alt="Grade my answer button"><button class="CL-btn CL-grade-btn shine">Grade my answer</button></a>          
         </div>
         <div class="gap"></div>
-
       </div>
-    </div> 
+    </div>
+    <div class="gap"></div>
   </div>
  </div>
+  <div class="container-fluid">
+    <div class="row">
+        <div class="text-center">
+        <a href="#" alt="Next button to take you to the next lesson"><button class="CL-btn CL-next-btn shine icon-arrow-right">Next<span class="next-arrow"></span></button></a>
+        </div>  
+    </div>
+  </div>
 </div>
-  
-<div class="container-fluid">
-  <div class="row">
+<footer>
+  <div class="container-fluid">
+    <div class="row">
+      <br>
       <div class="text-center">
-      <!--<button class="btn btn-primary CL-next-btn shine" alt="next">Next<span class="next-arrow"></span></button>-->
-        <a href="#" alt="Go to next page in lesson button">
-          <button class="CL-btn CL-next-btn shine icon-arrow-right">Next<span class="next-arrow"></span></button>
-        </a>
-    </div>  
+        <p>All Contents &copy; <img src="https://www.cali.org/lessons/web/share/jq/img/CALILogo.gif" class="footer-logo">, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. 08/31/2016</p>
+      </div>
+      <div class="text-center">
+        <!--<a href="#" alt="Faculty Options Link" class="faculty-link">Faculty Options</a> |--> <a href="#" alt="Faculty View Link" class="faculty-link">Faculty View</a>
+      </div>          
+    </div>
   </div>
   <div class="gap"></div>
-</div>
+  <div class="gap"></div>
+</footer>
 <div>
   <!--<div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
     <p class="feedback-bubble">Feedback</p>
@@ -621,7 +670,13 @@
     });
     $('label[for="multiBtn1"]').click(function() {
       $('#multiAnswer').fadeIn().css('display','inline-block');
-    });        
+    });
+
+  // modal 
+
+    $('#open-feedback').on('click',function () {
+      $('#feedbackModal').modal('show');
+    });
 
   //Sticky Header
 
@@ -636,11 +691,6 @@
       } else {
         header.classList.remove("sticky");
       }
-    }
-
-    // modal 
-    ( "#open-feedback" ).click(function() {
-      $("#feedbackModal").modal('show');
     }
 
   </script>

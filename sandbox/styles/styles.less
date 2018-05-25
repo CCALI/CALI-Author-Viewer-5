@@ -1434,3 +1434,134 @@ span.happyface-icon {
     -webkit-transform: translate3d(0, 25%, 0);
     transform: translate3d( 0, 25%, 0);
 }
+
+/*-----------------------------------*/
+/*      Alerts
+/*-----------------------------------*/
+.close {
+  margin-top: -40px;
+}
+
+.alert-success-border {
+  border-bottom:2px solid @GreenCorrect !important;
+  border-left:2px solid @GreenCorrect !important;
+  border-right:2px solid @GreenCorrect !important; 
+}
+
+.alert-success-x {
+  color: @GreenCorrect;
+  font-size: 35px;
+}
+.alert-success-heading {
+  background: lighten(@GreenCorrect, 68%) !important;
+  border:2px solid @GreenCorrect !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-success-body {
+  .alert-success-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}
+
+.alert-error-border {
+  border-bottom:2px solid @RedError !important;
+  border-left:2px solid @RedError !important;
+  border-right:2px solid @RedError !important; 
+}
+
+.alert-error-x {
+  color: @RedError;
+  font-size: 35px;
+}
+.alert-error-heading {
+  background: lighten(@RedError, 47%) !important;
+  border:2px solid @RedError !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-error-body {
+  .alert-error-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}
+
+.alert-description-border {
+  border-bottom:2px solid @BlueSelected !important;
+  border-left:2px solid @BlueSelected !important;
+  border-right:2px solid @BlueSelected !important; 
+}
+
+.alert-description-x {
+  color: @BlueSelected;
+  font-size: 35px;
+}
+.alert-description-heading {
+  background: lighten(@BlueSelected, 49%) !important;
+  border:2px solid @BlueSelected !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-description-body {
+  .alert-description-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}
+
+.alert-maybe-border {
+  border-bottom:2px solid @YellowMaybe !important;
+  border-left:2px solid @YellowMaybe !important;
+  border-right:2px solid @YellowMaybe !important; 
+}
+
+.alert-maybe-x {
+  color: darken(@YellowMaybe, 30%);
+  font-size: 35px;
+}
+.alert-maybe-heading {
+  background: lighten(@YellowMaybe, 47%) !important;
+  border:2px solid @YellowMaybe !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-maybe-body {
+  .alert-maybe-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}
+
+/*-----------------------------------*/
+/*      Faculty Links
+/*-----------------------------------*/
+
+@Grayscale: grayscale(1);
+
+.grayscale(@Grayscale) {
+  -webkit-filter: @Grayscale;
+  -moz-filter: @Grayscale;
+  -ms-filter: @Grayscale;
+  -o-filter: @Grayscale;
+  filter: @Grayscale;  
+}
+
+a.faculty-link {
+  color: @Gold;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: darken(@Gold, 15%);
+  &:hover {
+  color: darken(@Gold, 50%);
+  }
+  &:focus,
+  &:active {
+  color: @DarkBlue !important;
+  text-decoration: none;
+  }
+}
+
+img.footer-logo {
+  opacity: 0.6;
+  .grayscale(@Grayscale);
+}
