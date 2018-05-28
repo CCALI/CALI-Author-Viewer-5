@@ -8,6 +8,11 @@
   crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src='slip.js'></script>
+    <script type='text/javascript'>
+      var list = document.getElementById('slippylist');
+      new Slip(list);
+    </script>    
 </head>
 <body>
   
@@ -693,5 +698,9 @@
       }
     }
 
+    // Drag and Drop
+    list.addEventListener('slip:reorder', function(e) {
+      e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
+    }
   </script>
 </html>

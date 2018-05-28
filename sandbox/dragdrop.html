@@ -8,6 +8,15 @@
   crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src='slip.js'></script>
+    <script type='text/javascript'>
+      var list = document.getElementById('slippylist');
+      new Slip(list);
+
+      list.addEventListener('slip:reorder', function(e) {
+        e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
+      }   
+    </script>       
 </head>
 <body>
   
@@ -126,9 +135,9 @@
 
         <div class="row">
           <div class="col-sm-12">
-            <ul id="draggablePanel2" class="list-unstyled">
+            <ul id="slippylist">
               <li>
-                 <div class="panel panel-default" id="description-wrap">
+                 <div class="panel panel-default">
                   <div class="panel-heading horizontal div1">
                       <div class="vertical">
                           <div class="drag-drop-dots"></div>
@@ -138,7 +147,7 @@
                 </div>
               </li>
               <li>
-                <div class="panel panel-default" id="description-wrap">
+                <div class="panel panel-default">
                   <div class="panel-heading horizontal div1">
                       <div class="vertical">
                           <div class="drag-drop-dots"></div>
@@ -148,7 +157,7 @@
                 </div>
               </li>
               <li>
-                <div class="panel panel-default" id="description-wrap">
+                <div class="panel panel-default">
                   <div class="panel-heading horizontal div1">
                       <div class="vertical">
                           <div class="drag-drop-dots"></div>
@@ -223,95 +232,32 @@
     });
 
     // drag and drop
-    jQuery(function($) {
-      var panelList = $('#draggablePanel1');
-      panelList.sortable({
-        handle: '.panel-heading', 
-        update: function() {
-          $('.panel', panelList).each(function(index, elem) {
-            var $listItem = $(elem),
-                newIndex = $listItem.index();
-          });
-        }
-      });
-    });
-        // drag and drop
-    jQuery(function($) {
-      var panelList = $('#draggablePanel2');
-      panelList.sortable({
-        handle: '.panel-heading', 
-        update: function() {
-          $('.panel', panelList).each(function(index, elem) {
-            var $listItem = $(elem),
-                newIndex = $listItem.index();
-          });
-        }
-      });
-    });
+//    jQuery(function($) {
+//      var panelList = $('#draggablePanel1');
+//      panelList.sortable({
+//        handle: '.panel-heading', 
+//        update: function() {
+//          $('.panel', panelList).each(function(index, elem) {
+//            var $listItem = $(elem),
+//                newIndex = $listItem.index();
+//          });
+//        }
+//      });
+//    });
 
-    // Choose Buttons
-    $('label[for="chooseBtn1"]').click(function() {
-      $('#chooseBtnGrade1').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn2"]').click(function() {
-      $('#chooseBtnGrade2').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn3"]').click(function() {
-      $('#chooseBtnGrade3').fadeIn().css('display','inline-block');
-    })
-
-    $('label[for="chooseBtn5"]').click(function() {
-      $('#chooseBtnGrade5').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn6"]').click(function() {
-      $('#chooseBtnGrade6').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn7"]').click(function() {
-      $('#chooseBtnGrade7').fadeIn().css('display','inline-block');
-    })
-    // Choose List
-    $('label[for="chooseListBtn2"]').click(function() {
-      $('#chooseListBtnGrade2').fadeIn().css('display','inline-block');
-    })
-      $('label[for="chooseListBtn3"]').click(function() {
-      $('#chooseListBtnGrade3').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseListBtn4"]').click(function() {
-      $('#chooseListBtnGrade4').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseListBtn5"]').click(function() {
-      $('#chooseListBtnGrade5').fadeIn().css('display','inline-block');
-    })
-    // Multi Buttons
-    $('label[for="multiBtn1"]').click(function() {
-      $('#multiBtnGrade1').fadeIn().css('display','inline-block');
-    });
-    $('label[for="multiBtn2"]').click(function() {
-      $('#multiBtnGrade2').fadeIn().css('display','inline-block');
-    });
-      $('label[for="multiBtn3"]').click(function() {
-      $('#multiBtnGrade3').fadeIn().css('display','inline-block');
-    });
-    $('label[for="multiBtn4"]').click(function() {
-      $('#multiBtnGrade4').fadeIn().css('display','inline-block');
-    });
-    $('label[for="multiBtn1"]').click(function() {
-      $('#multiAnswer').fadeIn().css('display','inline-block');
-    });        
-
-  //Sticky Header
-
-    window.onscroll = function() {myFunction()};
-
-    var header = document.getElementById("stickyHeader");
-    var sticky = header.offsetTop;
-
-    function myFunction() {
-      if (window.pageYOffset >= sticky) {
-        header.classList.add("sticky");
-      } else {
-        header.classList.remove("sticky");
-      }
-    }
+    // drag and drop
+//    jQuery(function($) {
+//      var panelList = $('#draggablePanel2');
+//      panelList.sortable({
+//        handle: '.panel-heading', 
+//        update: function() {
+//          $('.panel', panelList).each(function(index, elem) {
+//            var $listItem = $(elem),
+//                newIndex = $listItem.index();
+//          });
+//        }
+//      });
+//    });    
+ 
   </script>
 </html>
