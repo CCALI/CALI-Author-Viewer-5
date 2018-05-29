@@ -194,12 +194,25 @@
   color: @RedError; 
 }
 
+.symbol-margin {
+  margin-top: -3px;
+  margin-left: 0px;  
+}
+
 .question-symbol {
   display: none;
 }
 
 .question-symbol p {
-  margin-top: -3px;
-  margin-left: 0px;
+  .symbol-margin; 
   color: @YellowDark;
+}
+
+.info-symbol {
+  display:none;
+}
+
+.info-symbol p {
+  .symbol-margin;
+  color: @BlueSelected;  
 }

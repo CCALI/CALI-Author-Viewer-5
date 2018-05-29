@@ -198,10 +198,12 @@
                 </div>
                 <div class="btn-group">
                   <label for="chooseBtn4" class="btn btn-default CL-choose-btn">
-                    <input id="chooseBtn4" name="choosebtn3" type="checkbox" autocomplete="off"> selected
+                    <input id="chooseBtn4" name="choosebtn3" type="checkbox" autocomplete="off"> Description
                   </label>
                   <div class="hint">
-                    <span></span>
+                    <span id="chooseBtnGrade4" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="infoAnswer1">
+                      <p id="infoAnswer1"><strong>i </strong> About</p>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -248,12 +250,14 @@
                   </span>
                 </div>
                 <div class="btn-group">
-                  <label for="chooseBtn8" class="btn btn-default CL-choose-btn truncate">
+                  <label for="chooseBtn8" class="btn btn-default CL-choose-btn">
                     <input id="chooseBtn8" type="checkbox" autocomplete="off"> Current ratio: Current assets / current liabilities.
                   </label>
                 </div>
                 <div class="hint">
-                  <span></span>
+                  <span id="chooseBtnGrade8" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="infoAnswer2">
+                    <p id="infoAnswer2"><strong>i </strong> About</p>
+                  </span>
                 </div>                                  
               </div>
             </div>
@@ -296,17 +300,19 @@
                 </div>
                 <div class="hint">
                   <span id="chooseListBtnGrade4" class="question-symbol" aria-live="polite" aria-live="polite" role="definition" aria-labelledby="sometimesRight3">
-                    <p ic="sometimesRight3"><strong>?</strong> Maybe<p>
+                    <p id="sometimesRight3"><strong>?</strong> Maybe<p>
                   </span>
                 </div>
                 <div class="btn-group">
-                  <label for="chooseListBtn1" class="btn btn-default CL-choose-btn active truncate">
+                  <label for="chooseListBtn1" class="btn btn-default CL-choose-btn active">
                     <input id="chooseListBtn1" name="chooseListbtn1" type="checkbox" autocomplete="off"> D
                   </label><p class="multi-btn-txt">$30,000</p>
                 </div>
                 <div class="hint">
-                  <span></span>
-                </div>           
+                  <span id="chooseListBtnGrade1" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="infoAnswer3">
+                    <p id="infoAnswer3"><strong>i </strong> About</p>
+                  </span>
+                </div>            
               </div>
             </div>
           </div>
@@ -356,8 +362,13 @@
                 </div>
                 <div class="btn-group">
                   <label for="multiBtn4" class="btn btn-default CL-choose-btn">
-                    <input id="multiBtn4" name="multibtn4"type="checkbox" autocomplete="off"> Other
+                    <input id="multiBtn4" name="multibtn4" type="checkbox" autocomplete="off"> Description
                   </label>
+                  <div class="hint">
+                    <span id="multiBtnGrade4" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="infoAnswer4">
+                      <p id="infoAnswer4"><strong>i </strong> About</p>
+                    </span>
+                  </div>  
                 </div>              
               </div>
             </div>
@@ -575,6 +586,9 @@
     $('label[for="chooseBtn3"]').click(function() {
       $('#chooseBtnGrade3').fadeIn().css('display','inline-block');
     })
+    $('label[for="chooseBtn4"]').click(function() {
+      $('#chooseBtnGrade4').fadeIn().css('display','inline-block');
+    })
 
     $('label[for="chooseBtn5"]').click(function() {
       $('#chooseBtnGrade5').fadeIn().css('display','inline-block');
@@ -585,7 +599,14 @@
     $('label[for="chooseBtn7"]').click(function() {
       $('#chooseBtnGrade7').fadeIn().css('display','inline-block');
     })
+    $('label[for="chooseBtn8"]').click(function() {
+      $('#chooseBtnGrade8').fadeIn().css('display','inline-block');
+    })
+
     // Choose List
+    $('label[for="chooseListBtn1"]').click(function() {
+      $('#chooseListBtnGrade1').fadeIn().css('display','inline-block');
+    })
     $('label[for="chooseListBtn2"]').click(function() {
       $('#chooseListBtnGrade2').fadeIn().css('display','inline-block');
     })

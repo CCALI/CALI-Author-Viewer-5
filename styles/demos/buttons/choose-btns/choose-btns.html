@@ -48,7 +48,9 @@ crossorigin="anonymous"></script>
       <input id="chooseBtn4" name="choosebtn3" type="checkbox" autocomplete="off"> Selected
     </label>
     <div class="hint">
-      <span></span>
+      <span id="chooseBtnGrade4" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="infoAnswer1">
+        <p id="infoAnswer1"><strong>i </strong> About</p>
+      </span>
     </div>
   </div>
 </div>
@@ -62,15 +64,8 @@ crossorigin="anonymous"></script>
     $('label[for="chooseBtn3"]').click(function() {
       $('#chooseBtnGrade3').fadeIn().css('display','inline-block');
     })
-
-    $('label[for="chooseBtn5"]').click(function() {
-      $('#chooseBtnGrade5').fadeIn().css('display','inline-block');
+    $('label[for="chooseBtn4"]').click(function() {
+      $('#chooseBtnGrade4').fadeIn().css('display','inline-block');
     })
-    $('label[for="chooseBtn6"]').click(function() {
-      $('#chooseBtnGrade6').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn7"]').click(function() {
-      $('#chooseBtnGrade7').fadeIn().css('display','inline-block');
-    })  
 </script>
 </body>

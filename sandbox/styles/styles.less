@@ -936,6 +936,10 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
    box-shadow:         inset 0 0 4px darken(@Grey, 20%);
 }
 
+.drag-content {
+  overflow:auto !important;
+}
+
 .drag-drop-dots {
   background-image: @DragDropDots;
   height: 60px;
@@ -965,7 +969,6 @@ div.vertical {
   padding: 4px;
   Cursor: move;
 }
-
 
 /*-----------------------------*/
 /* choose list > choose buttons > multi choose
@@ -1192,6 +1195,18 @@ div.vertical {
   margin-top: -3px;
   margin-left: 0px;
   color: @YellowDark;
+}
+
+/* Description/About/Info */
+
+.info-symbol {
+  display:none;
+}
+
+.info-symbol p {
+  margin-top: -3px;
+  margin-left: 0px;
+  color: @BlueSelected;  
 }
 
 /*----------------------*/

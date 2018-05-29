@@ -1,0 +1,72 @@
+/**
+*@stylesheet drag-drop.less Drag Drop
+*@parent components
+*
+*@description
+*## CALI Lessons Drag Drop Components
+*
+*The drag drop components are only used for simple ordered lists. Other more complex drag drop styles are now multiple choice style questions. This allows for the best mobile experience so the CALI Lessons is responsive.
+*
+*
+*Old Design
+
+![Old Drag Drop](https://image.ibb.co/gRN1nd/olddragdrop.jpg "Old Drag Drop Example")
+*```
+<div class="PageInteraction"><table width="100%" class="DragTable noborder"><tbody><tr><th align="center" width="50%">Items</th><th align="center" width="50%">Elements of a Claim for Breach of Contract</th></tr><tr><td><ul id="sortable0" class="sortable droptrue ui-sortable" style="min-height: 150px;"><li id="item3" itemid="3" class="ui-state-default dragItem dragCollapse"><a href="#" class="dragExpander" style="display: none;">[+]</a><span class="dragItemText">Plaintiff was damaged.</span></li><li id="item2" itemid="2" class="ui-state-default dragItem dragCollapse"><a href="#" class="dragExpander" style="display: none;">[+]</a><span class="dragItemText">Defendant breached the contract.</span></li><li id="item1" itemid="1" class="ui-state-default dragItem dragCollapse"><a href="#" class="dragExpander" style="display: none;">[+]</a><span class="dragItemText">There is a contract between Plaintiff and Defendant.</span></li><li id="item0" itemid="0" class="ui-state-default dragItem dragCollapse" style="position: relative; left: 0px; top: 0px;"><a href="#" class="dragExpander" style="display: none;">[+]</a><span class="dragItemText">Defendant has no affirmative defenses to Plaintiff's claim.</span></li></ul></td><td><ul id="sortable1" class="sortable droptrue ui-sortable" style="min-height: 150px;"></ul></td></tr></tbody></table><table></table><br clear="both"></div>
+*```
+*
+*New Design
+*
+*(To correct drag drop problems on mobile jquery.ui.touch-punch.min.js is required.)
+*@demo docs/demos/drag-drop/drag-drop.html
+**/
+
+@import "variables.less";
+@import "main.less";
+@import "img-variables.less";
+
+.ui-sortable {
+  padding: 15px 15px 1px 15px;
+}
+
+.ui-sortable {
+  -moz-box-shadow:    inset 0 0 4px darken(@Grey, 20%);
+  -webkit-box-shadow: inset 0 0 4px darken(@Grey, 20%);
+  -ms-box-shadow: inset 0 0 4px darken(@Grey, 20%);
+  -o-box-shadow: inset 0 0 4px darken(@Grey, 20%);
+   box-shadow:         inset 0 0 4px darken(@Grey, 20%);
+}
+
+.drag-content {
+  overflow:auto !important;
+}
+
+.drag-drop-dots {
+  background-image: @DragDropDots;
+  height: 60px;
+  width: 12px;
+}
+
+div.horizontal {
+  display: flex;
+  justify-content: center;
+  background: lighten(@BlueSelected, 53%) !important;
+  border:2px solid @BlueSelected !important;
+  .border-radius (@Radius);
+  padding: 0px 5px 0px 0px !important;
+  margin-bottom: 10px;
+  cursor: move;
+}
+
+div.horizontal p {
+  margin: 4px !important;
+  Cursor: move;
+}
+
+div.vertical {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4px;
+  Cursor: move;
+}

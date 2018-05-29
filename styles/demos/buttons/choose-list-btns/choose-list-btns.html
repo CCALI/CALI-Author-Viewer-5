@@ -44,15 +44,20 @@ crossorigin="anonymous"></script>
   </div>
 <!-- Selected -->
   <div class="btn-group">
-    <label for="chooseListBtn1" class="btn btn-default CL-choose-btn active">
+    <label for="chooseListBtn1" class="btn btn-default CL-choose-btn">
       <input id="chooseListBtn1" name="chooseListbtn1" type="checkbox" autocomplete="off"> D
     </label><p class="multi-btn-txt">List style.</p>
   </div>
   <div class="hint">
-    <span></span>
+    <span id="chooseListBtnGrade1" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="infoAnswer3">
+      <p id="infoAnswer3"><strong>i </strong> About</p>
+    </span>
   </div>           
 </div>
 <script type="text/javascript">
+    $('label[for="chooseListBtn1"]').click(function() {
+      $('#chooseListBtnGrade1').fadeIn().css('display','inline-block');
+    })  
     $('label[for="chooseListBtn2"]').click(function() {
       $('#chooseListBtnGrade2').fadeIn().css('display','inline-block');
     })
