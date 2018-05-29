@@ -989,48 +989,6 @@ p.toc-title {
    box-shadow:         inset 0 0 4px darken(@Grey, 20%);
 }
 
-#draggablePanel1 .panel,
-#draggablePanel2 .panel {
-  border-radius: 0px !important;
-  box-shadow: 1px 2px 3px @Grey !important;
-}
-
-#draggablePanel1 .panel-heading,
-#draggablePanel2 .panel-heading {
-  cursor: move;
-}
-
-.drag-panel-border {
-  border-bottom:2px solid @BlueSelected !important;
-  border-left:2px solid @BlueSelected !important;
-  border-right:2px solid @BlueSelected !important; 
-}
-
-/*.drag-panel-heading {
-  background: lighten(@BlueSelected, 53%) !important;
-  border:2px solid @BlueSelected !important;
-  //border-left: 6px solid @BlueSelected !important;
-  .border-radius (@Radius);
-  padding: 0px 5px!important;
-}
-
-.drag-panel-heading-line {
-   background: lighten(@BlueSelected, 53%) !important;
-  border:2px solid @BlueSelected !important;
-  border-left: 10px solid @BlueSelected !important;
-  .border-radius (@Radius);
-  padding: 0px 5px!important; 
-}
-
-.drag-panel-heading p {
-  margin: 4px !important;
-}
-
-.drag-panel-body {
-  .drag-panel-border;
-  .border-radius (@Radius);
-}*/
-
 .drag-drop-dots {
   background-image: @DragDropDots;
   height: 60px;
@@ -1044,6 +1002,7 @@ div.horizontal {
   border:2px solid @BlueSelected !important;
   .border-radius (@Radius);
   padding: 0px 5px 0px 0px !important;
+  margin-bottom: 10px;
 }
 
 div.horizontal p {
@@ -1055,24 +1014,6 @@ div.vertical {
   flex-direction: column;
   justify-content: center;
   padding: 4px;
-}
-
-.glyphicon-th:before {
-  color: @BlueSelected;
-  margin-left: -3px;
-}
-
-.glyphicon-th:before > .bottom-icon {
-  color: @BlueSelected;
-}
-
-.glyphicon-move:before {
-  color: @BlueSelected;
-  margin-left: -3px;
-}
-
-.glyphicon-move:before > .bottom-icon {
-  color: @BlueSelected;
 }
 
 
