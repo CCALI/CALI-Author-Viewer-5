@@ -524,7 +524,7 @@ input.CL-hamburger[type="checkbox"] {
 /*----------------*/
 
 @TreeIndent: 90%;
-@TreeSubIndent: 23px !important;
+@TreeSubIndent: 20px !important;
 
 .toc-view {
   display: inline-block;
@@ -566,7 +566,7 @@ input.CL-hamburger[type="checkbox"] {
   margin-top: 0px !important;
   &:hover {
     color: @CLThemeColor !important;
-    background: darken(@Grey, 5%) !important;
+    background: linear-gradient(-90deg, darken(@Grey, 5%), @White);
   }
   &:active,
   &:focus {
@@ -600,7 +600,7 @@ li .nav-toggle-no-sub a {
   margin-bottom: -4px;
   &:hover {
     color: @CLThemeColor !important;
-    background: @Grey !important;
+    background: linear-gradient(-90deg, darken(@Grey, 5%), @White);
   }
   &:active,
   &:focus {
@@ -629,69 +629,17 @@ p.toc-title {
 }
 .toc-visited {
   color: @DarkBlue !important;
-  background-color: lighten(@Grey, 3%);
+  background: linear-gradient(-90deg, lighten(@Grey, 3%), @White);
 }
 
-@LevelIndent: 35px;
-
-.level-1-header {
-  border-top: 1px solid @Grey;
-}
-
-.level-2-indent {
-  padding-left:@TreeSubIndent * 2 !important;
-}
-
-.level-2-header {
-  padding-left: @LevelIndent !important;
-}
-
-.level-3-indent {
-  padding-left:@TreeSubIndent * 3 !important;
-}
-
-.level-3-header {
-  padding-left: @LevelIndent + 25 !important;
-}
-
-.level-4-indent {
-  padding-left:@TreeSubIndent * 4 !important;
-}
-
-.level-4-header {
-  padding-left: @LevelIndent + (25*2) !important;
-}
-
-.level-5-indent {
-  padding-left:@TreeSubIndent * 5 !important;
-}
-
-.level-5-header {
-  padding-left: @LevelIndent + (25*3) !important;
-}
-
-.level-6-indent {
-  padding-left:@TreeSubIndent * 6 !important;
-}
-
-.level-6-header {
-  padding-left: @LevelIndent + (25*4) !important;
-}
-
-.level-7-indent {
-  padding-left:@TreeSubIndent * 7 !important;
-}
-
-.level-7-header {
-  padding-left: @LevelIndent + (25*5) !important;
-}
-
-.level-8-indent {
-  padding-left:@TreeSubIndent * 8 !important;
-}
-
-.level-8-header {
-  padding-left: @LevelIndent + (25*6) !important;
+ul.nav-list-main li ul li,
+ul.nav-list-main li ul li ul li,
+ul.nav-list-main li ul li ul li ul li,
+ul.nav-list-main li ul li ul li ul li ul li,
+ul.nav-list-main li ul li ul li ul li ul li ul li,
+ul.nav-list-main li ul li ul li ul li ul li ul li ul li,
+ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
+  padding-left:@TreeSubIndent !important;
 }
 
 @media (max-width:786px) {

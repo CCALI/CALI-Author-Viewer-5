@@ -8,12 +8,8 @@
   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
   crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-    <script src='slip.js'></script>
-    <script type='text/javascript'>
-      var list = document.getElementById('slippylist');
-      new Slip(list);
-    </script>    
+    <script src="jquery.ui.touch-punch.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
 </head>
 <body>
   
@@ -70,34 +66,34 @@
         <div id="SliderControl" class="CLAccordion">
           <h2>Table of Contents</h2>
           <ul class="nav nav-list-main">
-            <li><label class="nav-toggle nav-header toggle-icon level-1-header" for="cl-hamburger"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1</p></a></label>
+            <li><label class="nav-toggle nav-header toggle-icon" for="cl-hamburger"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1</p></a></label>
               <ul class="nav nav-list slider-left">
-                <li><a href="#" class="level-2-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                <li><a href="#" class="level-2-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-2-header visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1</p></a></label>
+                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1</p></a></label>
                   <ul class="nav nav-list slider-left">
-                    <li><a href="#" class="level-3-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                    <li><a href="#" class="level-3-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                    <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-3-header visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1</p></a></label>
+                    <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                    <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                    <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1</p></a></label>
                       <ul class="nav nav-list slider-left">
-                        <li><a href="#" class="level-4-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                        <li><a href="#" class="level-4-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                        <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-4-header visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1</p></a></label>
+                        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                        <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1</p></a></label>
                           <ul class="nav nav-list slider-left">
-                            <li><a href="#" class="level-5-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                            <li><a href="#" class="level-5-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                            <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-5-header visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1</p></a></label>
+                            <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                            <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                            <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1</p></a></label>
                               <ul class="nav nav-list slider-left">
-                                <li><a href="#" class="level-6-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                                <li><a href="#" class="level-6-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                                <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-6-header visited"  title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1.1</p></a></label>
+                                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited"  title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1.1</p></a></label>
                                   <ul class="nav nav-list slider-left">
-                                    <li><a href="#" class="level-7-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                                    <li><a href="#" class="level-7-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                                    <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-7-header visited"  title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1.1.1</p></a></label>
+                                    <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                    <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                    <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited"  title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1.1.1</p></a></label>
                                       <ul class="nav nav-list slider-left">
-                                        <li><a href="#" class="level-8-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
-                                        <li><a href="#" class="level-8-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
                                       </ul>
                                     </li>
                                   </ul>
@@ -380,40 +376,6 @@
             </div>
           </div>-->
           <div class="gap"></div>
-          <!-- Draggable Questions -->
-
-          <div class="row">
-            <div class="col-sm-12">
-              <ul id="draggablePanel2" class="list-unstyled">
-                <li>
-                  <div class="panel panel-default" id="description-wrap">
-                    <div class="panel-heading drag-panel-heading">
-                      <i class="glyphicon glyphicon-th"></i>
-                      <p>
-                        1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="panel panel-default" id="description-wrap">
-                    <div class="panel-heading drag-panel-heading">
-                      <i class="glyphicon glyphicon-move"></i>
-                      <p>
-                        2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
-                      </p>
-                    </div>
-                  </div>
-                </li>
-                <li>
-                  <div class="panel panel-default" id="description-wrap">
-                    <div class="panel-heading drag-panel-heading-line"><p>3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.</p>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
 
           <!-- checkboxes and radio buttons -->
 
@@ -601,33 +563,6 @@
       $(this).addClass('toc-visited');
     });
 
-    // drag and drop
-    jQuery(function($) {
-      var panelList = $('#draggablePanel1');
-      panelList.sortable({
-        handle: '.panel-heading', 
-        update: function() {
-          $('.panel', panelList).each(function(index, elem) {
-            var $listItem = $(elem),
-                newIndex = $listItem.index();
-          });
-        }
-      });
-    });
-        // drag and drop
-    jQuery(function($) {
-      var panelList = $('#draggablePanel2');
-      panelList.sortable({
-        handle: '.panel-heading', 
-        update: function() {
-          $('.panel', panelList).each(function(index, elem) {
-            var $listItem = $(elem),
-                newIndex = $listItem.index();
-          });
-        }
-      });
-    });
-
     // Choose Buttons
     $('label[for="chooseBtn1"]').click(function() {
       $('#chooseBtnGrade1').fadeIn().css('display','inline-block');
@@ -697,11 +632,6 @@
       } else {
         header.classList.remove("sticky");
       }
-    }
-
-    // Drag and Drop
-    list.addEventListener('slip:reorder', function(e) {
-      e.target.parentNode.insertBefore(e.target, e.detail.insertBefore);
     }
   </script>
 </html>
