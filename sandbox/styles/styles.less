@@ -588,15 +588,17 @@ li .nav-toggle a {
   margin-top: -2px;
 }
 
-li .nav-toggle-no-sub {
+li .nav-toggle-no-sub,
+li .about-lesson-link {
   width: 100%;
   margin-top: 0px !important;
 }
 
-li .nav-toggle-no-sub a {
+li .nav-toggle-no-sub a,
+li .about-lesson-link a {
   display: inline-block;
   width: 100%;
-  border-bottom: none;
+  border-bottom: 1px solid @Grey;
   margin-bottom: -4px;
   &:hover {
     color: @CLThemeColor !important;
@@ -656,10 +658,7 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
     float: left;
     width: 100% !important;
   }
-  .lesson-view h2 {
-    //padding-left: 15px;
-  }
-  li .nav-toggle-no-sub a {
+  li .about-lesson-link a {
     border-bottom: 1px solid darken(@Grey, 5%);
     .toc-shadow(@BottomShadow);
   }
