@@ -7,19 +7,34 @@
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="toc-view col-sm-12">
-    <input class="CL-hamburger" type="checkbox" placeholder="Table of Contents Menu"></input>
-    <div id="SliderControl" class="CLAccordion">
-      <h2><!--Table of Contents--></h2>
-      <!-- Insert navtree here -->
-    </div>
-</div>
-<div  id="LessonControl" class="lesson-view col-sm-12">
-  <h2><!--Lesson Title--></h2>
-    <div class="container-fluid">
-      <!-- Insert Lesson Content here -->
-    </div>
-</div>
+<div class="active">
+  <div class="page-content">
+    <div class="row eq-height">
+      <div class="toc-view col-xs-12">
+        <input id="cl-hamburger" class="CL-hamburger" type="checkbox" placeholder="Table of Contents Menu"></input>
+        <div id="SliderControl" class="CLAccordion">
+          <!-- Nav tree goes here - see navtree -->
+          <h2>Table of Contents</h2>
+          <ul class="nav nav-list-main">
+            <li><label class="nav-toggle-no-sub level-indent-no-sub"> <a class="toc-link visited" href="#"><p class="toc-title no-sub">Just a sample for this example</p></a></label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div  id="LessonControl" class="lesson-view col-xs-12">
+        <!-- Main lesson view goes here -->
+        <h2>Introduction</h2>
+        <div class="row">
+          <div class="col-sm-12">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>      
 </body>
 <script type="text/javascript">
 	//slider menu
