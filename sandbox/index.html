@@ -394,22 +394,38 @@
 
           <div class="row">
             <div class="col-sm-12">
-              <label class="checkbox-container">One
+              <label for="checkboxSelected1" class="checkbox-container">One
                 <input type="checkbox" checked="checked">
                 <span class="checkmark-selected"></span>
               </label>
-              <label class="checkbox-container">Two
+              <div class="hint">
+                <span id="checkboxSelected1" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="checkboxCorrect1">
+                  <p id="checkboxCorrect1">Right</p>
+                </span>
+              </div>
+              <label for="checkboxSelected2" class="checkbox-container">Two
                 <input type="checkbox">
                 <span class="checkmark-wrong"></span>
               </label>
-              <label class="checkbox-container">Three
+              <div class="hint">
+                <span id="checkboxSelected2" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="checkboxWrong1">
+                  <p id="checkboxWrong1">Right</p>
+                </span>
+              </div>              
+              <label for="checkboxSelected3" class="checkbox-container">Three
                 <input type="checkbox">
                 <span class="checkmark-success"></span>
               </label>
+              <div class="hint">
+                <span id="checkboxSelected3" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="checkboxSuccess1">
+                  <p id="checkboxSuccess1">Right</p>
+                </span>
+              </div>                
               <label class="checkbox-container">Four
                 <input type="checkbox">
                 <span class="checkmark-default"></span>
               </label>
+              
               <label class="radio-container">Selected
                 <input type="radio" checked="checked" name="radio">
                 <span class="checkmark-rad-selected"></span>
@@ -589,6 +605,18 @@
     $('.visited').click(function(){
       $(this).addClass('toc-visited');
     });
+
+    // checkbox hints
+    $('label[for="checkboxSelected1"]').click(function() {
+      $('#checkboxCorrect1').fadeIn().css('display','inline-block');
+    })     
+    $('label[for="checkboxSelected2"]').click(function() {
+      $('#checkboxWrong1').fadeIn().css('display','inline-block');
+    }) 
+    $('label[for="checkboxSelected3"]').click(function() {
+      $('#checkboxSuccess1').fadeIn().css('display','inline-block');
+    })            
+
 
     // Choose Buttons
     $('label[for="chooseBtn1"]').click(function() {

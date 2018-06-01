@@ -1,0 +1,78 @@
+<head>
+	<link rel="stylesheet" href="../../../styles.css">
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 	
+</head>
+<div class="row">
+  <div class="col-sm-12">
+  	<!-- Checkmark with About Grade -->
+    <label id="question1" class="checkbox-container">
+      <p>Example for checkboxes with really long answers and this answer isn't right or wrong but only give a description.</p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.</p>
+      <input type="checkbox">
+      <span class="checkmark-selected"></span>
+    </label>
+    <div class="hint">
+      <span id="answer1" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="Description">
+        <p><strong>i </strong> About</p>
+      </span>
+    </div>
+    <div class="gap"></div>
+    <!-- Checkmark with wrong grade -->
+    <label id="question2" class="checkbox-container">Example for if this answer is wrong
+      <input type="checkbox">
+      <span class="checkmark-wrong"></span>
+    </label>
+    <div class="hint">
+      <span id="answer2" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="Wrong">
+        <p>Wrong</p>
+      </span>
+    </div>
+    <div class="gap"></div>
+    <!-- Checkmark with right grade -->           
+    <label id="question3" class="checkbox-container">Example for if this answer is right
+      <input type="checkbox">
+      <span class="checkmark-success"></span>
+    </label>
+    <div class="hint">
+      <span id="answer3" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="Right">
+        <p>Right</p>
+      </span>
+    </div>
+    <div class="gap"></div>
+    <!-- Checkmark with maybe grade -->
+    <label id="question4" class="checkbox-container">Example for if this answer is maybe right
+      <input type="checkbox">
+      <span class="checkmark-maybe"></span>
+    </label>
+    <div class="hint">
+      <span id="answer4" class="question-symbol" aria-live="polite" role="definition" aria-labelledby="Mayeb Right">
+        <p><strong>?</strong> Maybe<p>
+      </span>
+    </div>
+    <div class="gap"></div>
+    <!-- Checkmark with default before grading -->                  
+    <label class="checkbox-container">Example for a default style
+      <input type="checkbox">
+      <span class="checkmark-default"></span>
+    </label>
+  </div>
+</div>
+<script type="text/javascript">
+    // example of jquery for checkbox hints
+    $('#question1').click(function() {
+      $('#answer1').fadeIn().css('display','inline-block');
+    })     
+    $('#question2').click(function() {
+      $('#answer2').fadeIn().css('display','inline-block');
+    }) 
+    $('#question3').click(function() {
+      $('#answer3').fadeIn().css('display','inline-block');
+    })
+    $('#question4').click(function() {
+      $('#answer4').fadeIn().css('display','inline-block');
+    })    	
+</script>

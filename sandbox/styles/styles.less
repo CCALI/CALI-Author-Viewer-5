@@ -721,6 +721,7 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
     .checkbox-rotate(@RotateCM); 
 }
 .checkbox-container {
+    margin-left: -4px;
     .label-container;
 }
 .checkbox-container input {
@@ -784,6 +785,26 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
     display: block;
 }
 .checkbox-container .checkmark-success:after {
+    .checkbox-control-after;
+}
+
+.checkmark-maybe {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-maybe {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-maybe {
+    border: 3px solid @YellowMaybe;
+    background-color: @YellowMaybe;
+}
+.checkmark-maybe:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-maybe:after {
+    display: block;
+}
+.checkbox-container .checkmark-maybe:after {
     .checkbox-control-after;
 }
 

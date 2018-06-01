@@ -1,0 +1,181 @@
+/**
+*@stylesheet checkbox-btns.less Checkbox Buttons
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Checkbox Right Button
+*
+*This is the checkmark button for when the selection is right(correct).
+*
+*
+*Old Design
+
+![Old Checkmark](https://image.ibb.co/c2vXiJ/oldcheckmarks.jpg "Old Checkmark Example")
+*```
+<tr><td class="cbcol"><input type="checkbox" name="cb0_0" id="cb0_0" value="0"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Question Text</p></div><div id="fbText0_0"></div></td></tr>
+<tr><td class="cbcol"><div><img id="grade0_3" src="img/grade-wrong.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="cbcol"><input type="checkbox" name="cb0_3" id="cb0_3" value="0"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Question Text</p></div><div id="fbText0_3"></div></td></tr>
+<tr><td class="cbcol"><div><img id="grade0_0" src="img/grade-right.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="cbcol"><input type="checkbox" name="cb0_0" id="cb0_0" value="0"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Question Text</p></div><div id="fbText0_0"></div></td></tr>
+*```
+*
+*New Design
+*@demo docs/demos/buttons/checkbox-btns/checkbox-btns.html
+**/
+
+@import "variables.less";
+@import "main.less";
+
+@RotateCM: rotate(45deg);
+
+.label-container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    .no-select-label(@Clear);  
+}
+.label-container-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.checkmark-control {
+    position: absolute;
+    top: 0;
+    left: 5;
+    height: 20px;
+    width: 20px;
+    background-color: @White;
+    border: 3px solid @GreyDefault;  
+}
+.checkmark-control-after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+.checkbox-rotate(@RotateCM) {
+    -webkit-transform: @RotateCM;
+    -moz-transform: @RotateCM;
+    -ms-transform: @RotateCM;
+    -o-transform: @RotateCM;
+    transform: @RotateCM;    
+}
+.checkbox-control-after {
+    left: 4px;
+    top: 0px;
+    width: 6px;
+    height: 12px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    .checkbox-rotate(@RotateCM); 
+}
+.checkbox-container {
+    margin-left: -4px;
+    .label-container;
+}
+.checkbox-container input {
+    .label-container-input;
+}
+
+.checkmark-selected {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-selected {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-selected {
+    border: 3px solid @BlueSelected;
+    background-color: @BlueSelected;
+}
+.checkmark-selected:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-selected:after {
+    display: block;
+}
+.checkbox-container .checkmark-selected:after {
+    .checkbox-control-after;
+}
+
+.checkmark-wrong {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-wrong {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-wrong {
+    border: 3px solid @RedError;
+    background-color: @RedError;
+}
+.checkmark-wrong:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-wrong:after {
+    display: block;
+}
+.checkbox-container .checkmark-wrong:after {
+    .checkbox-control-after;
+}
+
+.checkmark-success {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-success {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-success {
+    border: 3px solid @GreenCorrect;
+    background-color: @GreenCorrect;
+}
+.checkmark-success:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-success:after {
+    display: block;
+}
+.checkbox-container .checkmark-success:after {
+    .checkbox-control-after;
+}
+
+.checkmark-maybe {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-maybe {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-maybe {
+    border: 3px solid @YellowMaybe;
+    background-color: @YellowMaybe;
+}
+.checkmark-maybe:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-maybe:after {
+    display: block;
+}
+.checkbox-container .checkmark-maybe:after {
+    .checkbox-control-after;
+}
+
+.checkmark-default {
+    .checkmark-control;
+}
+.checkbox-container:hover input ~ .checkmark-default {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-default {
+    border: 3px solid @GreyDefault;
+    background-color: @GreyDefault;
+}
+.checkmark-default:after {
+    .checkmark-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-default:after {
+    display: block;
+}
+.checkbox-container .checkmark-default:after {
+    .checkbox-control-after;
+}
