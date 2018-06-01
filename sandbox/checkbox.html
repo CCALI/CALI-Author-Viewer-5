@@ -124,7 +124,7 @@
             </p>
           </div>
         </div>
- 
+        
         <!-- checkboxes and radio buttons -->
         <div class="row">
           <div class="col-sm-12">
@@ -173,6 +173,55 @@
             <label class="checkbox-container">Four
               <input type="checkbox">
               <span class="checkmark-default"></span>
+            </label>
+          </div>
+        </div>
+        <div class="gap"></div>
+        <div class="row">
+          <div class="col-sm-12">
+            <label id="question5" class="radio-container">Selected
+              <input type="radio" name="radio">
+              <span class="checkmark-rad-selected"></span>
+            </label>
+            <div class="hint">
+              <span id="answer5" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="Description">
+                <p><strong>i </strong> About</p>
+              </span>
+            </div>
+            <div class="gap"></div>            
+            <label id="question6" class="radio-container">Wrong
+              <input type="radio" name="radio">
+              <span class="checkmark-rad-error"></span>
+            </label>
+            <div class="hint">
+              <span id="answer6" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="Wrong">
+                <p>Wrong</p>
+              </span>
+            </div>
+            <div class="gap"></div>           
+            <label id="question7"  class="radio-container">Right
+              <input type="radio" name="radio">
+              <span class="checkmark-rad-success"></span>
+            </label>
+            <div class="hint">
+              <span id="answer7" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="Right">
+                <p>Right</p>
+              </span>
+            </div>
+            <div class="gap"></div>
+            <label id="question8"  class="radio-container">Maybe
+              <input type="radio" name="radio">
+              <span class="checkmark-rad-maybe"></span>
+            </label>
+            <div class="hint">
+              <span id="answer8" class="question-symbol" aria-live="polite" role="definition" aria-labelledby="Mayeb Right">
+                <p><strong>?</strong> Maybe<p>
+              </span>
+            </div>
+            <div class="gap"></div>                   
+            <label class="radio-container">Default
+              <input type="radio" name="radio">
+              <span class="checkmark-rad-default"></span>
             </label>
           </div>
         </div>
@@ -270,31 +319,18 @@
       $('#answer4').fadeIn().css('display','inline-block');
     })       
 
-    // Choose Buttons
-    $('label[for="chooseBtn1"]').click(function() {
-      $('#chooseBtnGrade1').fadeIn().css('display','inline-block');
+    // radio hints
+    $('#question5').click(function() {
+      $('#answer5').fadeIn().css('display','inline-block');
+    })     
+    $('#question6').click(function() {
+      $('#answer6').fadeIn().css('display','inline-block');
+    }) 
+    $('#question7').click(function() {
+      $('#answer7').fadeIn().css('display','inline-block');
     })
-    $('label[for="chooseBtn2"]').click(function() {
-      $('#chooseBtnGrade2').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn3"]').click(function() {
-      $('#chooseBtnGrade3').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn4"]').click(function() {
-      $('#chooseBtnGrade4').fadeIn().css('display','inline-block');
-    })
-
-    $('label[for="chooseBtn5"]').click(function() {
-      $('#chooseBtnGrade5').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn6"]').click(function() {
-      $('#chooseBtnGrade6').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn7"]').click(function() {
-      $('#chooseBtnGrade7').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn8"]').click(function() {
-      $('#chooseBtnGrade8').fadeIn().css('display','inline-block');
-    })
+    $('#question8').click(function() {
+      $('#answer8').fadeIn().css('display','inline-block');
+    })     
   </script>
 </html>

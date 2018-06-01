@@ -851,6 +851,7 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
     display: none;
 }
 .radio-container {
+    margin-left: -5px;
     .label-container;
 }
 .radio-container input {
@@ -877,6 +878,7 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
     .radio-control-selected;
     background: @BlueSelected;
 }
+
 
 .checkmark-rad-success {
     .radio-control;
@@ -918,6 +920,27 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
 .radio-container .checkmark-rad-error:after {
     .radio-control-selected;
     background: @RedError;
+}
+
+.checkmark-rad-maybe {
+    .radio-control;
+}
+.radio-container:hover input ~ .checkmark-rad-maybe {
+    background-color: #ccc;
+}
+.radio-container input:checked ~ .checkmark-rad-maybe {
+    background-color: @White;
+    border: 3px solid @YellowMaybe;
+}
+.checkmark-rad-maybe:after {
+    .radio-control-after;
+}
+.radio-container input:checked ~ .checkmark-rad-maybe:after {
+    display: block;
+}
+.radio-container .checkmark-rad-maybe:after {
+    .radio-control-selected;
+    background: @YellowMaybe;
 }
 
 .checkmark-rad-default {
@@ -1160,6 +1183,7 @@ div.vertical {
 
 .hint {
   display: block;
+  margin-left: 4px;
 }
 
 .hint span {

@@ -1,0 +1,77 @@
+<head>
+	<link rel="stylesheet" href="../../../styles.css">
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 	
+</head>
+<div class="row">
+	<div class="col-sm-12">
+		<!-- Radio button with description hint -->
+	    <label id="question5" class="radio-container">
+	    	<p>Example for a radio buttons with a really long answer. This answer isn't right or wrong but only gives a description.</p>
+      		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.</p>
+          <input type="radio" name="radio">
+          <span class="checkmark-rad-selected"></span>
+        </label>
+        <div class="hint">
+          <span id="answer5" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="Description">
+            <p><strong>i </strong> About</p>
+          </span>
+        </div>
+        <div class="gap"></div>
+        <!-- Radio button graded as wrong -->        
+        <label id="question6" class="radio-container">Example for if this answer is wrong
+          <input type="radio" name="radio">
+          <span class="checkmark-rad-error"></span>
+        </label>
+        <div class="hint">
+          <span id="answer6" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="Wrong">
+            <p>Wrong</p>
+          </span>
+        </div>
+        <div class="gap"></div>
+        <!-- Radio button graded as right -->       
+        <label id="question7"  class="radio-container">Example for if this answer is right
+          <input type="radio" name="radio">
+          <span class="checkmark-rad-success"></span>
+        </label>
+        <div class="hint">
+          <span id="answer7" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="Right">
+            <p>Right</p>
+          </span>
+        </div>
+        <div class="gap"></div>
+        <!-- Radio button graded as maybe -->
+        <label id="question8"  class="radio-container">Example for if this answer is maybe right
+          <input type="radio" name="radio">
+          <span class="checkmark-rad-maybe"></span>
+        </label>
+        <div class="hint">
+          <span id="answer8" class="question-symbol" aria-live="polite" role="definition" aria-labelledby="Mayeb Right">
+            <p><strong>?</strong> Maybe<p>
+          </span>
+        </div>
+        <div class="gap"></div>
+        <!-- Radio button with default style -->                 
+        <label class="radio-container">Example for a default style
+          <input type="radio" name="radio">
+          <span class="checkmark-rad-default"></span>
+        </label>
+	</div>
+</div>
+<script type="text/javascript">
+    $('#question5').click(function() {
+      $('#answer5').fadeIn().css('display','inline-block');
+    })     
+    $('#question6').click(function() {
+      $('#answer6').fadeIn().css('display','inline-block');
+    }) 
+    $('#question7').click(function() {
+      $('#answer7').fadeIn().css('display','inline-block');
+    })
+    $('#question8').click(function() {
+      $('#answer8').fadeIn().css('display','inline-block');
+    })   	
+</script>
