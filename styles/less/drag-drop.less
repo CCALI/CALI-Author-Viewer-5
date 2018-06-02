@@ -24,27 +24,35 @@
 @import "variables.less";
 @import "main.less";
 @import "img-variables.less";
-
-.ui-sortable {
-  padding: 15px 15px 1px 15px;
-}
-
-.ui-sortable {
-  -moz-box-shadow:    inset 0 0 4px darken(@Grey, 20%);
-  -webkit-box-shadow: inset 0 0 4px darken(@Grey, 20%);
-  -ms-box-shadow: inset 0 0 4px darken(@Grey, 20%);
-  -o-box-shadow: inset 0 0 4px darken(@Grey, 20%);
-   box-shadow:         inset 0 0 4px darken(@Grey, 20%);
-}
+@import "button-variables.less";
 
 .drag-content {
   overflow:auto !important;
 }
 
-.drag-drop-dots {
-  background-image: @DragDropDots;
+.dot-size {
   height: 60px;
-  width: 12px;
+  width: 12px;  
+}
+
+.dots-blue {
+  background-image: @DotsBlue;
+  .dot-size;
+}
+
+.dots-green {
+  background-image: @DotsGreen;
+  .dot-size;
+}
+
+.dots-red {
+  background-image: @DotsRed;
+  .dot-size;
+}
+
+.dots-yellow {
+  background-image: @DotsYellow;
+  .dot-size;
 }
 
 div.horizontal {
@@ -59,8 +67,24 @@ div.horizontal {
 }
 
 div.horizontal p {
-  margin: 4px !important;
+  margin-top: 6px!important;
+  margin-right: 4px;
   Cursor: move;
+}
+
+div.horizontal.right {
+  background: lighten(@GreenCorrect, 70%) !important;
+  border:2px solid @GreenCorrect !important;
+}
+
+div.horizontal.wrong {
+  background: lighten(@RedError, 48%) !important;
+  border:2px solid @RedError !important;
+}
+
+div.horizontal.maybe {
+  background: lighten(@YellowMaybe, 45%) !important;
+  border:2px solid @YellowMaybe !important;
 }
 
 div.vertical {

@@ -79,11 +79,11 @@
 .checkbox-container input {
     .label-container-input;
 }
-
-.checkmark-selected {
-    .checkmark-control;
-}
-.checkbox-container:hover input ~ .checkmark-selected {
+.checkbox-container:hover input ~ .checkmark-selected,
+.checkbox-container:hover input ~ .checkmark-wrong,
+.checkbox-container:hover input ~ .checkmark-success,
+.checkbox-container:hover input ~ .checkmark-maybe,
+.checkbox-container:hover input ~ .checkmark-default {
     background-color: #ccc;
 }
 .checkbox-container input:checked ~ .checkmark-selected {
@@ -93,89 +93,48 @@
 .checkmark-selected:after {
     .checkmark-control-after;
 }
-.checkbox-container input:checked ~ .checkmark-selected:after {
-    display: block;
-}
 .checkbox-container .checkmark-selected:after {
     .checkbox-control-after;
 }
-
-.checkmark-wrong {
+.checkbox-container input:checked ~ .checkmark-selected:after,
+.checkbox-container input:checked ~ .checkmark-wrong:after,
+.checkbox-container input:checked ~ .checkmark-success:after,
+.checkbox-container input:checked ~ .checkmark-maybe:after,
+.checkbox-container input:checked ~ .checkmark-default:after {
+    display: block;
+}
+.checkmark-selected,
+.checkmark-success,
+.checkmark-wrong,
+.checkmark-maybe,
+.checkmark-default {
     .checkmark-control;
 }
-.checkbox-container:hover input ~ .checkmark-wrong {
-    background-color: #ccc;
+.checkmark-success:after,
+.checkmark-wrong:after,
+.checkmark-maybe:after,
+.checkmark-default:after {
+    .checkmark-control-after;
+}
+.checkbox-container .checkmark-wrong:after,
+.checkbox-container .checkmark-success:after,
+.checkbox-container .checkmark-maybe:after,
+.checkbox-container .checkmark-default:after {
+    .checkbox-control-after;
 }
 .checkbox-container input:checked ~ .checkmark-wrong {
     border: 3px solid @RedError;
     background-color: @RedError;
 }
-.checkmark-wrong:after {
-    .checkmark-control-after;
-}
-.checkbox-container input:checked ~ .checkmark-wrong:after {
-    display: block;
-}
-.checkbox-container .checkmark-wrong:after {
-    .checkbox-control-after;
-}
-
-.checkmark-success {
-    .checkmark-control;
-}
-.checkbox-container:hover input ~ .checkmark-success {
-    background-color: #ccc;
-}
 .checkbox-container input:checked ~ .checkmark-success {
     border: 3px solid @GreenCorrect;
     background-color: @GreenCorrect;
-}
-.checkmark-success:after {
-    .checkmark-control-after;
-}
-.checkbox-container input:checked ~ .checkmark-success:after {
-    display: block;
-}
-.checkbox-container .checkmark-success:after {
-    .checkbox-control-after;
-}
-
-.checkmark-maybe {
-    .checkmark-control;
-}
-.checkbox-container:hover input ~ .checkmark-maybe {
-    background-color: #ccc;
 }
 .checkbox-container input:checked ~ .checkmark-maybe {
     border: 3px solid @YellowMaybe;
     background-color: @YellowMaybe;
 }
-.checkmark-maybe:after {
-    .checkmark-control-after;
-}
-.checkbox-container input:checked ~ .checkmark-maybe:after {
-    display: block;
-}
-.checkbox-container .checkmark-maybe:after {
-    .checkbox-control-after;
-}
-
-.checkmark-default {
-    .checkmark-control;
-}
-.checkbox-container:hover input ~ .checkmark-default {
-    background-color: #ccc;
-}
 .checkbox-container input:checked ~ .checkmark-default {
     border: 3px solid @GreyDefault;
     background-color: @GreyDefault;
-}
-.checkmark-default:after {
-    .checkmark-control-after;
-}
-.checkbox-container input:checked ~ .checkmark-default:after {
-    display: block;
-}
-.checkbox-container .checkmark-default:after {
-    .checkbox-control-after;
 }
