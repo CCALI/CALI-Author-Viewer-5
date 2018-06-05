@@ -1934,7 +1934,16 @@ img.footer-logo {
 /*     Hotspots       */
 /*--------------------*/
 
-@Opacity: 0.3;
+@Opacity: 0.4;
+@Pulse: fadein 2s infinite alternate;
+
+.pulse-animation(@Pulse) {
+  -webkit-animation: @Pulse;
+     -moz-animation: @Pulse;
+      -ms-animation: @Pulse;
+       -o-animation: @Pulse;
+          animation: @Pulse;   
+}
 
 .opacity(@Opacity) {
   -moz-opacity: @Opacity;
@@ -1947,7 +1956,7 @@ img.footer-logo {
 .hotspot-area {
   margin-left: auto;
   margin-right: auto;
-  max-width: 688px; 
+  width: 688px; 
 }
 
 .zoom {
@@ -1966,13 +1975,13 @@ img.footer-logo {
 }
 
 .hotspot-container {
+  position: relative;
   .hotspot-area;
 }
 
 #hotSpotImg {
   display: block;
   border-radius: 5px;
-  width: 100%;
   .hotspot-area;
 }
 
@@ -1996,28 +2005,49 @@ img.footer-logo {
   max-width: 700px;
 }
 
-.hotspot:hover {
-    border: 2px dotted darken(@BlueSelected, 20%);
-    cursor: pointer;
-}
-
 .hotspot_transparent {
-  background-color: lighten(@Gold, 10%);
+  position: absolute;
+  background-color: lighten(#fff824, 10%);
   filter: alpha(opacity=20);
   .opacity(@Opacity);
-  -webkit-box-shadow: 0px 0px 5px 3px lighten(@Gold, 10%);
-  -moz-box-shadow: 0px 0px 5px 3px lighten(@Gold, 10%);
-  box-shadow: 0px 0px 5px 3px lighten(@Gold, 10%);
+  -webkit-box-shadow: 0px 0px 3px 1px lighten(@Black, 20%);
+  -moz-box-shadow: 0px 0px 3px 1px lighten(@Black, 20%);
+  box-shadow: 0px 0px 3px 1px lighten(@Black, 20%);
+  .pulse-animation(@Pulse);
+  &:hover {
+    border: 2px dotted @BlueSelected;
+    cursor: pointer;
+    opacity: 1;
+    background-color: fade(@White, 30%);
+    .pulse-animation(fadein 0s infinite alternate);
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;      
+  }
 }    
 
-@keyframes fadeIn {
-  99% {
-    visibility: hidden;
-  }
-  100% {
-    visibility: visible;
-  }
+
+@keyframes fadein {
+    from { opacity: 0.1; }
+    to   { opacity: @Opacity; }
 }
+@-moz-keyframes fadein {
+    from { opacity: 0.1; }
+    to   { opacity: @Opacity; }
+}
+@-webkit-keyframes fadein {
+    from { opacity: 0.1; }
+    to   { opacity: @Opacity; }
+}
+@-ms-keyframes fadein {
+    from { opacity: 0.1; }
+    to   { opacity: @Opacity; }
+}
+@-o-keyframes fadein {
+    from { opacity: 0.1; }
+    to   { opacity: @Opacity; }
+}
+
 
 
 #caption {
