@@ -100,31 +100,30 @@ designed to replace the old "Back" and "Next" methods of navigation.  Now studen
 }
 
 .shine {
-	padding: 10px 30px 10px 30px;
+  padding: 10px 30px 10px 30px;
   overflow: hidden;
-}
-
-.shine:before {
-	left: auto;
-	right: 10px;
-	z-index: 2;
-}
-
-.shine:after {
-	width: 30%;
-	height: 200%;
-	background: rgba(255,255,255,0.025);
-	z-index: 1;
-	right: 0;
-	top: 0;
-	margin: -5px 0 0 -5px;
-  .transform-rotate(@Rotate);
-  .transform-origin(@Origin);
-}
-
-.shine:hover:after {
-  background: rgba(255,255,255,0.1);
-	width: 46%;
+  &:before {
+    left: auto;
+    right: 10px;
+    z-index: 2;  
+  }
+  &:after {
+    width: 30%;
+    height: 200%;
+    background: rgba(255,255,255,0.025);
+    z-index: 1;
+    right: 0;
+    top: 0;
+    margin: -5px 0 0 -5px;
+    .transform-rotate(@Rotate);
+    .transform-origin(@Origin);
+  }
+  &:hover {
+    &:after {
+      background: rgba(255,255,255,0.1);
+      width: 46%;    
+    }
+  }
 }
 
 .next-arrow {
@@ -132,6 +131,19 @@ designed to replace the old "Back" and "Next" methods of navigation.  Now studen
   float: right;
   .CLButtonArrowRules;
   margin-right: -5px;
+}
+
+.btn-disabled {
+  padding: 10px 30px;
+  opacity: 0.3 !important;
+  cursor: default !important;
+  box-shadow: none !important;
+}
+
+.btn-disabled.CL-next-btn {
+  &:hover {
+    background: @CLThemeColor !important;
+  }
 }
 
 @media (max-width:768px) {

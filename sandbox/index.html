@@ -502,7 +502,7 @@
                </div>
             </div>
           </div>
-          <a href="#" alt="Grade my answer button"><button class="CL-btn CL-grade-btn shine">Grade my answer</button></a>          
+          <a href="#" alt="Grade my answer button"><button class="CL-btn CL-grade-btn shine btn-disabled">Grade my answer</button></a>          
         </div>
         <div class="gap"></div>
       </div>
@@ -513,7 +513,7 @@
   <div class="container-fluid">
     <div class="row">
         <div class="text-center">
-        <a href="#" alt="Next button to take you to the next lesson"><button class="CL-btn CL-next-btn shine icon-arrow-right">Next<span class="next-arrow"></span></button></a>
+        <a href="#" alt="Next button to take you to the next lesson"><button class="CL-btn CL-next-btn icon-arrow-right shine btn-disabled">Next<span class="next-arrow"></span></button></a>
         </div>  
     </div>
   </div>
@@ -716,5 +716,8 @@
         header.classList.remove("sticky");
       }
     }
+
+   // disabled buttons
+   $('.btn-disabled').removeClass("shine"); 
   </script>
 </html>

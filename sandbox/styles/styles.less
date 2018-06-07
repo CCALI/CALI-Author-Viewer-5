@@ -406,29 +406,49 @@ label {
 .shine {
   padding: 10px 30px 10px 30px;
   overflow: hidden;
+  &:before {
+    left: auto;
+    right: 10px;
+    z-index: 2;  
+  }
+  &:after {
+    width: 30%;
+    height: 200%;
+    background: rgba(255,255,255,0.025);
+    z-index: 1;
+    right: 0;
+    top: 0;
+    margin: -5px 0 0 -5px;
+    .transform-rotate(@Rotate);
+    .transform-origin(@Origin);
+  }
+  &:hover {
+    &:after {
+      background: rgba(255,255,255,0.1);
+      width: 46%;    
+    }
+  }
 }
 
-.shine:before {
-  left: auto;
-  right: 10px;
-  z-index: 2;
+.btn-disabled {
+  padding: 10px 30px;
+  opacity: 0.3 !important;
+  cursor: default !important;
+  box-shadow: none !important;
 }
 
-.shine:after {
-  width: 30%;
-  height: 200%;
-  background: rgba(255,255,255,0.025);
-  z-index: 1;
-  right: 0;
-  top: 0;
-  margin: -5px 0 0 -5px;
-  .transform-rotate(@Rotate);
-  .transform-origin(@Origin);
+.btn-disabled.CL-next-btn {
+  &:hover {
+    background: @CLThemeColor !important;
+  }
 }
 
-.shine:hover:after {
-  background: rgba(255,255,255,0.1);
-  width: 46%;
+.btn-disabled.CL-grade-btn {
+  &:hover {
+    background: @White;
+    color: @BlueSelected !important;
+    border: 3px solid @BlueSelected !important;
+  }
 }
 
 .next-arrow {
