@@ -1,5 +1,5 @@
 <html lang="en">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no">
 <head>
   <title>Sandbox</title>
     <link rel="stylesheet" href="styles.css" type="text/css">
@@ -12,7 +12,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
 </head>
 <body>
-  
+
+<div id="#wrapper">
 <nav class="navbar navbar-default CL-navbar-main"
      role="navigation"
      aria-label="Site Navbar">
@@ -116,26 +117,18 @@
         </div>
       </div>
       <div  id="LessonControl" class="lesson-view col-xs-12">
-        <h2>Introduction</h2>
-        <div class="toolbar-section">
-          <button class="btn btn-default toolbar-button" type="button"><p>Defined Benefits Plan</p></button>
-          <button class="btn btn-default toolbar-button" type="button"><p>Defined Contributions Plan</p></button>
-          <button class="btn btn-default toolbar-button" type="button"><p>Unvested Pension</p></button>
-          <button class="btn btn-default toolbar-button" type="button"><p>ERISA covered plans</p></button>
-          <button class="btn btn-default toolbar-button" type="button"><p>State pension</p></button>
-          <button class="btn btn-default toolbar-button" type="button"><p>Distributing Pensions</p></button>
-          <button class="btn btn-default toolbar-button" type="button"><p>Return to Question</p></button>
-        </div>
-        <br>
-        <div class="row">
-          <div class="col-sm-12">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, <a href="#">molestie at velit</a>. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
-            </p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
-            </p>
-          </div>
+        <div id="sticky-remove">
+          <h2>Introduction</h2>
+          <div class="row">
+            <div class="col-sm-12">
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, <a href="#">molestie at velit</a>. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+              </p>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+              </p>
+            </div>
+          </div>          
         </div>
 
         <div id="stickyHeader" class="sticky-header">
@@ -145,8 +138,41 @@
           <p>D. This is ansnwer D</p>
         </div>
 
-        <!-- choose button, choose list, choose multi buttons -->
+        <script type="text/javascript">
 
+          var header = document.getElementById("stickyHeader");
+          var sticky = header.offsetTop;
+
+          function stickFunction() {
+            if (window.pageYOffset >= sticky) {
+              header.classList.add("sticky");
+//              var divHeight = document.getElementByClassName('sticky').scrollHeight;
+//              getElementById('#stickyHeight').height = divHeight + 'px';
+              var divHeight = $('.sticky').height();
+              $('div#stickyHeight').css('min-height', divHeight+'px');
+            } else {
+              header.classList.remove('sticky');
+//              getElementById('#stickyHeight').height = noHeight + 'px';
+              $('div#stickyHeight').css('min-height', 0+'px');
+            }         
+          }
+          
+          window.onscroll = stickFunction;
+
+          $(window).scroll(function(){
+              var h = 45;    
+              if($(window).scrollTop() < 200){
+                  $("#stickyHeader").css({
+                      'paddingTop': h-$(window).scrollTop() + "px",
+                      'paddingBottom': h-$(window).scrollTop() + "px"
+                  });
+              }
+          });                      
+        </script>
+
+        <!-- choose button, choose list, choose multi buttons -->
+        
+        <div id="stickyHeight"></div>
         <div class="content-under-sticky">
           <div class="row">
             <div class="col-sm-12">
@@ -180,7 +206,7 @@
                 </tr>
               </tbody>
             </table>
-          </div>
+          </div>       
           <div class="row">
             <div class="col-sm-12">
               <div class="btn-group" data-toggle="buttons">
@@ -463,47 +489,7 @@
             </div>
           </div>
           <br>
-          <div class="row">
-            <div class="col-sm-12">
-              <div class="panel panel-default" id="error-wrap">
-               <div class="panel-heading alert-success-heading"><h4>Success</h4>
-                 <button type="button" class="close" data-target="#success-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-success-x">&times;</span><span class="sr-only">Close</span>
-                  </button>
-               </div>
-               <div class="panel-body alert-success-body">
-                  Success Content
-               </div>
-              </div>
-              <div class="panel panel-default" id="error-wrap">
-               <div class="panel-heading alert-error-heading"><h4>Error</h4>
-                 <button type="button" class="close" data-target="#error-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-error-x">&times;</span><span class="sr-only">Close</span>
-                  </button>
-               </div>
-               <div class="panel-body alert-error-body">
-                  Error Content
-               </div>
-              </div>
-              <div class="panel panel-default" id="description-wrap">
-               <div class="panel-heading alert-description-heading"><h4>Description</h4>
-                 <button type="button" class="close" data-target="#description-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-description-x">&times;</span><span class="sr-only">Close</span>
-                  </button>
-               </div>
-               <div class="panel-body alert-description-body">
-                  Description Content
-               </div>
-              </div>
-              <div class="panel panel-default" id="maybe-wrap">
-               <div class="panel-heading alert-maybe-heading"><h4>Maybe</h4>
-                 <button type="button" class="close" data-target="#maybe-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-maybe-x">&times;</span><span class="sr-only">Close</span>
-                  </button>
-               </div>
-               <div class="panel-body alert-maybe-body">
-                  Maybe Content
-               </div>
-            </div>
-          </div>
           <a href="#" alt="Grade my answer button"><button class="CL-btn CL-grade-btn shine btn-disabled">Grade my answer</button></a>          
-        </div>
         <div class="gap"></div>
       </div>
     </div>
@@ -577,8 +563,8 @@
         </div>
     </div>
 </div>
-
-
+</div>
+ 
 </body>
   <script type="text/javascript">
     //Nav tree
@@ -703,19 +689,6 @@
     });
 
   //Sticky Header
-
-    window.onscroll = function() {myFunction()};
-
-    var header = document.getElementById("stickyHeader");
-    var sticky = header.offsetTop;
-
-    function myFunction() {
-      if (window.pageYOffset >= sticky) {
-        header.classList.add("sticky");
-      } else {
-        header.classList.remove("sticky");
-      }
-    }
 
    // disabled buttons
    $('.btn-disabled').removeClass("shine"); 

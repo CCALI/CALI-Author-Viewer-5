@@ -195,6 +195,8 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 
 body {
   overflow-x: hidden;
+  overflow-y:scroll;
+  -webkit-overflow-scrolling: touch;
   font: @CLFontFamily;
   font-weight: @CLFontWeight;
 }
@@ -1280,14 +1282,15 @@ div.vertical {
 }
 
 .content-under-sticky {
+  margin-top: 30px;
   padding-bottom: 20px;
 }
 
 .sticky {
   position: fixed;
-  top: 0;
+  top: 0 !important;
   width: 100%;
-  padding: 40px 10px 20px 60px;
+  padding: 40px 10px 20px 60px !important;
   margin-left: -45px;
   z-index: 999;
   .sticky-shadow(@BottomShadow);
@@ -1296,8 +1299,22 @@ div.vertical {
 
 .sticky + .content-under-sticky {
   padding-top: 50px;
-  .toc-transition(@TocTrans);  
+  .toc-transition(@TocTrans); 
 }
+
+@media only screen and (max-width: 768px) {
+    .sticky {
+//    padding-top: 50px !important;
+    margin-left: 0px;
+    left: 0;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .sticky {
+//    padding-top: 120px !important;
+  }
+}
+
 
 /*----------------------*/
 /*        Toolbar
