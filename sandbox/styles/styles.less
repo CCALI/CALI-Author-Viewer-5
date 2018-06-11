@@ -692,6 +692,7 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
   .lesson-view {
     float: left;
     width: 100% !important;
+    padding-right:40px;
   }
   li .about-lesson-link a {
     border-bottom: 1px solid darken(@Grey, 5%);
@@ -703,6 +704,9 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
   p.toc-title {
     width: 92%;
   }
+  .lesson-view {
+    padding-right:70px;
+  }  
 }
 
 /*-----------------------/
@@ -1275,6 +1279,7 @@ div.vertical {
 /*    Sticky Header
 /*----------------------*/
 
+
 .sticky-header {
   padding: 10px 16px;
   background: @White;
@@ -1282,7 +1287,6 @@ div.vertical {
 }
 
 .content-under-sticky {
-  margin-top: 30px;
   padding-bottom: 20px;
 }
 
@@ -1290,15 +1294,14 @@ div.vertical {
   position: fixed;
   top: 0 !important;
   width: 100%;
-  padding: 40px 10px 20px 60px !important;
+  padding: 40px 10px 20px 60px;
   margin-left: -45px;
   z-index: 999;
   .sticky-shadow(@BottomShadow);
   border-bottom: 3px solid @Gold;
 }
 
-.sticky + .content-under-sticky {
-  padding-top: 50px;
+.content-under-sticky {
   .toc-transition(@TocTrans); 
 }
 

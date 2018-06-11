@@ -117,19 +117,18 @@
         </div>
       </div>
       <div  id="LessonControl" class="lesson-view col-xs-12">
-        <div id="sticky-remove">
-          <h2>Introduction</h2>
-          <div class="row">
-            <div class="col-sm-12">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, <a href="#">molestie at velit</a>. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
-              </p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
-              </p>
-            </div>
-          </div>          
-        </div>
+        <h2>Introduction</h2>
+        <div class="row">
+          <div class="col-sm-12">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, <a href="#">molestie at velit</a>. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+            </p>
+          </div>
+        </div>          
+
 
         <div id="stickyHeader" class="sticky-header">
           <p>A. This is ansnwer A</p>
@@ -138,44 +137,12 @@
           <p>D. This is ansnwer D</p>
         </div>
 
-        <script type="text/javascript">
-
-          var header = document.getElementById("stickyHeader");
-          var sticky = header.offsetTop;
-
-          function stickFunction() {
-            if (window.pageYOffset >= sticky) {
-              header.classList.add("sticky");
-//              var divHeight = document.getElementByClassName('sticky').scrollHeight;
-//              getElementById('#stickyHeight').height = divHeight + 'px';
-              var divHeight = $('.sticky').height();
-              $('div#stickyHeight').css('min-height', divHeight+'px');
-            } else {
-              header.classList.remove('sticky');
-//              getElementById('#stickyHeight').height = noHeight + 'px';
-              $('div#stickyHeight').css('min-height', 0+'px');
-            }         
-          }
-          
-          window.onscroll = stickFunction;
-
-          $(window).scroll(function(){
-              var h = 45;    
-              if($(window).scrollTop() < 200){
-                  $("#stickyHeader").css({
-                      'paddingTop': h-$(window).scrollTop() + "px",
-                      'paddingBottom': h-$(window).scrollTop() + "px"
-                  });
-              }
-          });                      
-        </script>
-
-        <!-- choose button, choose list, choose multi buttons -->
-        
         <div id="stickyHeight"></div>
+                <!-- choose button, choose list, choose multi buttons -->       
+                
         <div class="content-under-sticky">
           <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-12">      
               <p>As I said before, "market" usually means replacement cost, but there are two exceptions:
               </p>
               <p>(1) If replacement cost is greater than net realizable value, you use net realizable value as the "market" value instead.</p>
@@ -689,6 +656,23 @@
     });
 
   //Sticky Header
+
+    var header = document.getElementById("stickyHeader");
+    var sticky = header.offsetTop;
+
+    function stickFunction() {
+      if (window.pageYOffset >= sticky) {
+        header.classList.add("sticky");
+        $("#stickyHeight").height($("#stickyHeader").height());
+      } else {
+        header.classList.remove('sticky');
+        $('#stickyHeight').css('height', 0);
+      }         
+    }
+
+    $(document).ready(stickFunction);
+    $(window).resize(stickFunction);
+    $(window).scroll(stickFunction);  
 
    // disabled buttons
    $('.btn-disabled').removeClass("shine"); 
