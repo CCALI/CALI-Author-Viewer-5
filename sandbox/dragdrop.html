@@ -13,7 +13,7 @@
     <script type="text/javascript">
           // drag and drop
     $( function() {
-      $( "#sortable" ).sortable({ 
+      $( "#sortable" ).sortable({
         forcePlaceholderSize: true,
         tolerance: "pointer",
         axis: "y",
@@ -22,6 +22,24 @@
       });
       $( "#sortable" ).disableSelection();
     } );
+
+    jQuery(document).ready(function() {
+        var is_dragging = false;
+        
+        $( 'ul' ).disableSelection().sortable({
+            axis: 'y',
+            start: function() { is_dragging = true },
+            stop: function() { is_dragging = false }
+        }).mousemove( function( e ) {
+            if( is_dragging ) {
+                $( 'ul' ).scrollTop(function(i, v) {
+                    var h = $( 'ul' ).height();
+                    var y = e.clientY - h / 2;
+                    return v + y * 0.1;
+                });
+            }
+        });
+    });   
     </script>
 </head>
 <body>
@@ -140,7 +158,7 @@
         </div>
 
         <div class="row">
-          <div class="col-sm-12 drag-content">
+          <div class="col-sm-12 drag-content well">
             <ul id="sortable" class="list-unstyled">
               <li>
                 <div class="horizontal">
@@ -260,56 +278,6 @@
     $('.visited').click(function(){
       $(this).addClass('toc-visited');
     });
-
-    // Choose Buttons
-    $('label[for="chooseBtn1"]').click(function() {
-      $('#chooseBtnGrade1').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn2"]').click(function() {
-      $('#chooseBtnGrade2').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn3"]').click(function() {
-      $('#chooseBtnGrade3').fadeIn().css('display','inline-block');
-    })
-
-    $('label[for="chooseBtn5"]').click(function() {
-      $('#chooseBtnGrade5').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn6"]').click(function() {
-      $('#chooseBtnGrade6').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseBtn7"]').click(function() {
-      $('#chooseBtnGrade7').fadeIn().css('display','inline-block');
-    })
-    // Choose List
-    $('label[for="chooseListBtn2"]').click(function() {
-      $('#chooseListBtnGrade2').fadeIn().css('display','inline-block');
-    })
-      $('label[for="chooseListBtn3"]').click(function() {
-      $('#chooseListBtnGrade3').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseListBtn4"]').click(function() {
-      $('#chooseListBtnGrade4').fadeIn().css('display','inline-block');
-    })
-    $('label[for="chooseListBtn5"]').click(function() {
-      $('#chooseListBtnGrade5').fadeIn().css('display','inline-block');
-    })
-    // Multi Buttons
-    $('label[for="multiBtn1"]').click(function() {
-      $('#multiBtnGrade1').fadeIn().css('display','inline-block');
-    });
-    $('label[for="multiBtn2"]').click(function() {
-      $('#multiBtnGrade2').fadeIn().css('display','inline-block');
-    });
-      $('label[for="multiBtn3"]').click(function() {
-      $('#multiBtnGrade3').fadeIn().css('display','inline-block');
-    });
-    $('label[for="multiBtn4"]').click(function() {
-      $('#multiBtnGrade4').fadeIn().css('display','inline-block');
-    });
-    $('label[for="multiBtn1"]').click(function() {
-      $('#multiAnswer').fadeIn().css('display','inline-block');
-    });        
 
   </script>
 </html>
