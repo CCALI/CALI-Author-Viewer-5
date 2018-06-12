@@ -39,12 +39,28 @@
 <script type="text/javascript">
 	//slider menu
     $('.CL-hamburger').on('click', function () {
-        $('#SliderControl').fadeToggle(300);
+        $('#SliderControl').toggle(300);
+    });
+
+    $('.CL-hamburger').on('click', function () {
+        $('.toc-view').toggleClass("toc-view-close");
+    });
+
+    $('.CL-hamburger').on('click', function () {
+        $('.lesson-view').toggleClass("lesson-view-close");
     });
 
     //toc link close
     $('.toc-link').on('click', function () {
-        $('#SliderControl').fadeToggle(300);
+        $('#SliderControl').toggle(300);
+    });
+
+    $('.toc-link').on('click', function () {
+        $('.toc-view').toggleClass("toc-view-close");
+    });
+
+    $('.toc-link').on('click', function () {
+        $('.lesson-view').toggleClass("lesson-view-close");
     });
 </script>
 </html>

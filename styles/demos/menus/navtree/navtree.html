@@ -63,7 +63,8 @@
   <script type="text/javascript">
     //Nav tree
     $('ul.slider-left').toggle();
-    $('label.nav-toggle a').click(function () {
+    $('label.nav-toggle a').click(function ($e) {
+      $e.preventDefault();
       $(this).parent().parent().children('ul.slider-left').toggle(300);
     });
 
