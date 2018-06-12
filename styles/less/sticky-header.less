@@ -37,7 +37,7 @@
 
 .sticky {
   position: fixed;
-  top: 0;
+  top: 0 !important;
   width: 100%;
   padding: 40px 10px 20px 60px;
   margin-left: -45px;
@@ -46,7 +46,17 @@
   border-bottom: 3px solid @Gold;
 }
 
-.sticky + .content-under-sticky {
-  padding-top: 50px;
-  .toc-transition(@TocTrans);  
+.content-under-sticky {
+  .toc-transition(@TocTrans); 
+}
+
+@media only screen and (max-width: 768px) {
+    .sticky {
+    margin-left: 0px;
+    left: 0;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .sticky {
+  }
 }

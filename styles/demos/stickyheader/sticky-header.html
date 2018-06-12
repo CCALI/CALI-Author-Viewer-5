@@ -14,16 +14,20 @@
 	</p>   				
 </div>
 <script type="text/javascript">
-    window.onscroll = function() {myFunction()};
-
     var header = document.getElementById("stickyHeader");
     var sticky = header.offsetTop;
 
-    function myFunction() {
+    function stickFunction() {
       if (window.pageYOffset >= sticky) {
         header.classList.add("sticky");
+        $("#stickyHeight").height($("#stickyHeader").height());
       } else {
-        header.classList.remove("sticky");
-      }
-    }	
+        header.classList.remove('sticky');
+        $('#stickyHeight').css('height', 0);
+      }         
+    }
+
+    $(document).ready(stickFunction);
+    $(window).resize(stickFunction);
+    $(window).scroll(stickFunction);  
 </script>
