@@ -29,8 +29,17 @@
 @import "variables.less";
 @import "main.less";
 
+.no-glow {
+  outline: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
 .close {
   margin-top: -40px;
+  &:active {
+    .no-glow;
+  }
 }
 
 .alert-success-border {
@@ -42,6 +51,9 @@
 .alert-success-x {
   color: @GreenCorrect;
   font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
 }
 .alert-success-heading {
   background: lighten(@GreenCorrect, 68%) !important;
@@ -64,6 +76,9 @@
 .alert-error-x {
   color: @RedError;
   font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
 }
 .alert-error-heading {
   background: lighten(@RedError, 47%) !important;
@@ -86,6 +101,9 @@
 .alert-description-x {
   color: @BlueSelected;
   font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
 }
 .alert-description-heading {
   background: lighten(@BlueSelected, 49%) !important;
@@ -108,6 +126,9 @@
 .alert-maybe-x {
   color: darken(@YellowMaybe, 30%);
   font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
 }
 .alert-maybe-heading {
   background: lighten(@YellowMaybe, 47%) !important;

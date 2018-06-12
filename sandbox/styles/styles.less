@@ -1461,8 +1461,19 @@ span.happyface-icon {
 /*-----------------------------------*/
 /*      Alerts
 /*-----------------------------------*/
+
+.no-glow {
+  outline: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+
 .close {
   margin-top: -40px;
+  &:active {
+    .no-glow;
+  }
 }
 
 .alert-success-border {
@@ -1474,6 +1485,9 @@ span.happyface-icon {
 .alert-success-x {
   color: @GreenCorrect;
   font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
 }
 .alert-success-heading {
   background: lighten(@GreenCorrect, 68%) !important;
@@ -1496,6 +1510,9 @@ span.happyface-icon {
 .alert-error-x {
   color: @RedError;
   font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
 }
 .alert-error-heading {
   background: lighten(@RedError, 47%) !important;
@@ -1518,6 +1535,9 @@ span.happyface-icon {
 .alert-description-x {
   color: @BlueSelected;
   font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
 }
 .alert-description-heading {
   background: lighten(@BlueSelected, 49%) !important;
@@ -1540,6 +1560,9 @@ span.happyface-icon {
 .alert-maybe-x {
   color: darken(@YellowMaybe, 30%);
   font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
 }
 .alert-maybe-heading {
   background: lighten(@YellowMaybe, 47%) !important;
@@ -2103,8 +2126,9 @@ img.footer-logo {
   height: 150px;
 }
 
-.close {
+.img-close {
   position: absolute;
+  margin-top: -40px;
   top: 90px;
   right: 70px;
   color: #fff;

@@ -106,7 +106,7 @@
             </div>
             <!-- The hotspot-modal -->
             <div id="myModal" class="hotspot-modal">
-              <span class="close">&times;</span>
+              <span class="img-close">&times;</span>
               <img class="hotspot-content" id="img01">
               <div id="caption"></div>
             </div>
@@ -185,7 +185,7 @@
         captionText.innerHTML = img.alt;
     }
 
-    var span = document.getElementsByClassName("close")[0];
+    var span = document.getElementsByClassName("img-close")[0];
 
     span.onclick = function() { 
         modal.style.display = "none";
