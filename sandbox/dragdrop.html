@@ -22,24 +22,6 @@
       });
       $( "#sortable" ).disableSelection();
     } );
-
-    jQuery(document).ready(function() {
-        var is_dragging = false;
-        
-        $( 'ul' ).disableSelection().sortable({
-            axis: 'y',
-            start: function() { is_dragging = true },
-            stop: function() { is_dragging = false }
-        }).mousemove( function( e ) {
-            if( is_dragging ) {
-                $( 'ul' ).scrollTop(function(i, v) {
-                    var h = $( 'ul' ).height();
-                    var y = e.clientY - h / 2;
-                    return v + y * 0.1;
-                });
-            }
-        });
-    });   
     </script>
 </head>
 <body>
