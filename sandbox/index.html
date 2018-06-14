@@ -127,9 +127,8 @@
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
             </p>
           </div>
-        </div>          
-
-
+        </div>
+        <!--sticky header-->
         <div id="stickyHeader" class="sticky-header">
           <p>A. This is ansnwer A</p>
           <p>B. This is ansnwer B</p>
@@ -138,8 +137,7 @@
         </div>
 
         <div id="stickyHeight"></div>
-                <!-- choose button, choose list, choose multi buttons -->       
-                
+
         <div class="content-under-sticky">
           <div class="row">
             <div class="col-sm-12">      
@@ -156,7 +154,28 @@
               </p>
             </div>
           </div>
+          <!--Animation Slider-->
+          <div class="MediaPanel">
+            <div id="slideshow" style="width: 400px; height: 300px; overflow: hidden;">
+              <ul style="width: 800px; margin-left: 0px;">
+                <li style="float: left;">
+                  <img src="https://www.cali.org/lessons/web/ava01/ftw83_factual_01_lo.jpg">
+                </li>
+                <li style="float: left;">
+                  <img src="https://www.cali.org/lessons/web/ava01/ftw83_factual_02_log.jpg">
+                </li>
+              </ul>
+            </div> 
+            <span id="prevBtn">
+              <a href="javascript:void(0);" style="display: none;"><span id="rightArrow" class="right-arrow"></span>Previous</a>
+            </span> 
+            <span id="nextBtn">
+              <a href="javascript:void(0);" style="display: inline;">Next<span id="leftArrow" class="left-arrow"></span></a>
+            </span>
+          </div>
+          <!--Tables-->
           <div class="row">
+            <div class="gap"></div>
             <table class="table table-bordered">
               <thead>
                 <tr>
@@ -173,7 +192,8 @@
                 </tr>
               </tbody>
             </table>
-          </div>       
+          </div>
+          <!--Choose btns-->   
           <div class="row">
             <div class="col-sm-12">
               <div class="btn-group" data-toggle="buttons">
@@ -274,14 +294,13 @@
             </div>
           </div>
           <div class="gap"></div>
-
           <div class="row">
             <div class="col-sm-12">
               <p>At the beginning of Year 1, Acme Corporation buys a truck for $36,000. The truck will probably last for ten years, but the company plans to sell it after six years. At that time, it expects to receive $6,000 for the truck.</p>
               <p>Acme uses the straight-line method of depreciation. What will the annual depreciation expense for the truck be in Year 1?</p>
             </div>
-          </div>        
-          <div class="row">
+          </div>
+                    <div class="row">
             <div class="col-sm-12">
               <div class="btn-group-vertical" data-toggle="buttons">
                 <div class="btn-group">
@@ -327,9 +346,8 @@
               </div>
             </div>
           </div>
-          <div class="gap"></div>        
-
-          <div class="row">
+          <div class="gap"></div>
+                    <div class="row">
             <div class="col-sm-12">
               <ol class="ol-multi-bts">
                 <li>
@@ -337,7 +355,7 @@
                 </li>
               </ol>
             </div>
-          </div>  
+          </div>
           <div class="row">
             <div class="col-sm-12">
               <div class="btn-group" data-toggle="buttons">
@@ -384,25 +402,7 @@
               </div>
             </div>
           </div>
-          <!--<div class="row">
-            <div class="col-sm-12">
-              <div class="btn-group" data-toggle="buttons">
-                <label class="btn btn-primary active">
-                  <input type="radio" name="options" id="option1" autocomplete="off" checked> Radio 1 (preselected)
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="option2" autocomplete="off"> Radio 2
-                </label>
-                <label class="btn btn-primary">
-                  <input type="radio" name="options" id="option3" autocomplete="off"> Radio 3
-                </label>
-              </div>
-            </div>
-          </div>-->
-          <div class="gap"></div>
-
           <!-- checkboxes and radio buttons -->
-
           <div class="row">
             <div class="col-sm-12">
               <label for="checkboxSelected1" class="checkbox-container">One
@@ -436,7 +436,6 @@
                 <input type="checkbox">
                 <span class="checkmark-default"></span>
               </label>
-              
               <label class="radio-container">Selected
                 <input type="radio" checked="checked" name="radio">
                 <span class="checkmark-rad-selected"></span>
@@ -455,118 +454,118 @@
               </label>
             </div>
           </div>
-          <br>
-          <a href="#" alt="Grade my answer button"><button class="CL-btn CL-grade-btn shine btn-disabled">Grade my answer</button></a>          
-        <div class="gap"></div>
-        <div class="panel panel-default" id="error-wrap">
-         <div class="panel-heading alert-success-heading"><h4>Success</h4>
-           <button type="button" class="close" data-target="#success-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-success-x">&times;</span><span class="sr-only">Close</span>
-            </button>
-         </div>
-         <div class="panel-body alert-success-body">
-            Success Content
-         </div>
+          <div class="gap"></div>
+          <a href="#" alt="Grade my answer button"><button class="CL-btn CL-grade-btn shine btn-disabled">Grade my answer</button></a>
+          <div class="gap"></div>
+          <div class="panel panel-default" id="error-wrap">
+            <div class="panel-heading alert-success-heading"><h4>Success</h4>
+              <button type="button" class="close" data-target="#success-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-success-x">&times;</span><span class="sr-only">Close</span>
+              </button>
+            </div>
+            <div class="panel-body alert-success-body">
+                Success Content
+            </div>
+          </div> 
+          <div class="panel panel-default" id="error-wrap">
+            <div class="panel-heading alert-error-heading"><h4>Error</h4>
+              <button type="button" class="close" data-target="#error-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-error-x">&times;</span><span class="sr-only">Close</span>
+              </button>
+            </div>
+            <div class="panel-body alert-error-body">
+              Error Content
+            </div>
+          </div>
+          <div class="panel panel-default" id="description-wrap">
+            <div class="panel-heading alert-description-heading"><h4>Description</h4>
+              <button type="button" class="close" data-target="#description-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-description-x">&times;</span><span class="sr-only">Close</span>
+              </button>
+            </div>
+            <div class="panel-body alert-description-body">
+              Description Content
+            </div>
+          </div>
+          <div class="panel panel-default" id="maybe-wrap">
+            <div class="panel-heading alert-maybe-heading"><h4>Maybe</h4>
+              <button type="button" class="close" data-target="#maybe-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-maybe-x">&times;</span><span class="sr-only">Close</span>
+              </button>
+            </div>
+            <div class="panel-body alert-maybe-body">
+              Maybe Content
+            </div>
+          </div>                                    
+          <div class="gap"></div>
         </div>
-        <div class="panel panel-default" id="error-wrap">
-         <div class="panel-heading alert-error-heading"><h4>Error</h4>
-           <button type="button" class="close" data-target="#error-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-error-x">&times;</span><span class="sr-only">Close</span>
-            </button>
-         </div>
-         <div class="panel-body alert-error-body">
-            Error Content
-         </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+    <div class="container-fluid">
+      <div class="row">
+          <div class="text-center">
+          <a href="#" alt="Next button to take you to the next lesson"><button class="CL-btn CL-next-btn icon-arrow-right shine btn-disabled">Next<span class="next-arrow"></span></button></a>
+          </div>  
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <br>
+        <div class="text-center">
+          <p>All Contents &copy; <img src="https://www.cali.org/lessons/web/share/jq/img/CALILogo.gif" class="footer-logo">, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. 08/31/2016</p>
         </div>
-        <div class="panel panel-default" id="description-wrap">
-         <div class="panel-heading alert-description-heading"><h4>Description</h4>
-           <button type="button" class="close" data-target="#description-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-description-x">&times;</span><span class="sr-only">Close</span>
-            </button>
-         </div>
-         <div class="panel-body alert-description-body">
-            Description Content
-         </div>
-        </div>
-        <div class="panel panel-default" id="maybe-wrap">
-         <div class="panel-heading alert-maybe-heading"><h4>Maybe</h4>
-           <button type="button" class="close" data-target="#maybe-wrap" data-dismiss="alert"> <span aria-hidden="true" class="alert-maybe-x">&times;</span><span class="sr-only">Close</span>
-            </button>
-         </div>
-         <div class="panel-body alert-maybe-body">
-            Maybe Content
-         </div>
-        </div>        
+        <div class="text-center">
+          <!--<a href="#" alt="Faculty Options Link" class="faculty-link">Faculty Options</a> |--> <a href="#" alt="Faculty View Link" class="faculty-link">Faculty View</a>
+        </div>          
       </div>
     </div>
     <div class="gap"></div>
-  </div>
- </div>
-  <div class="container-fluid">
-    <div class="row">
-        <div class="text-center">
-        <a href="#" alt="Next button to take you to the next lesson"><button class="CL-btn CL-next-btn icon-arrow-right shine btn-disabled">Next<span class="next-arrow"></span></button></a>
-        </div>  
+    <div class="gap"></div>
+  </footer>
+  <div>
+    <div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
+      <p class="feedback-bubble">Feedback</p>
     </div>
-  </div>
-</div>
-<footer>
-  <div class="container-fluid">
-    <div class="row">
-      <br>
-      <div class="text-center">
-        <p>All Contents &copy; <img src="https://www.cali.org/lessons/web/share/jq/img/CALILogo.gif" class="footer-logo">, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. 08/31/2016</p>
-      </div>
-      <div class="text-center">
-        <!--<a href="#" alt="Faculty Options Link" class="faculty-link">Faculty Options</a> |--> <a href="#" alt="Faculty View Link" class="faculty-link">Faculty View</a>
-      </div>          
-    </div>
-  </div>
-  <div class="gap"></div>
-  <div class="gap"></div>
-</footer>
-<div>
-  <div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
-    <p class="feedback-bubble">Feedback</p>
-  </div>
-  <!--<div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
-    <p class="happyface-bubble"><span class="happyface-icon"></span></p>-->
+    <!--<div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
+      <p class="happyface-bubble"><span class="happyface-icon"></span></p></div>-->
   </div>  
-</div>
 
-<div id="feedbackModal" class="modal fade">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Let us know what you think!</h4>
-            </div>
-            <div class="modal-body">
-              <!--<p>If you have comments on a particular lesson you must include the lesson name, the  section title (the title at the top of the page), and your teachers name.</p>-->
-              <div class="form-group">
-                <label for="comment">Comment:</label>
-                <textarea class="form-control" rows="5" id="comment" placeholder="If you have comments on a particular lesson you must include the lesson name, which question you are on in the lesson and your teachers name in this text area."></textarea>
+  <div id="feedbackModal" class="modal fade">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title">Let us know what you think!</h4>
               </div>
-              <table>
-                <tr>
-                  <td><label for="course">Course:</label></td>
-                  <td>Course Name/#</td>
-                </tr>
-                <tr>
-                  <td><label for="lesson">Lesson:</label></td>
-                  <td>Lesson name/#</td>
-                </tr>
-                <tr>
-                  <td><label for="Instructor">Instructor:</label></td>
-                  <td>Teacher Name</td>
-                </tr>
-              </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send</button>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
+              <div class="modal-body">
+                <!--<p>If you have comments on a particular lesson you must include the lesson name, the  section title (the title at the top of the page), and your teachers name.</p>-->
+                <div class="form-group">
+                  <label for="comment">Comment:</label>
+                  <textarea class="form-control" rows="5" id="comment" placeholder="If you have comments on a particular lesson you must include the lesson name, which question you are on in the lesson and your teachers name in this text area."></textarea>
+                </div>
+                <table>
+                  <tr>
+                    <td><label for="course">Course:</label></td>
+                    <td>Course Name/#</td>
+                  </tr>
+                  <tr>
+                    <td><label for="lesson">Lesson:</label></td>
+                    <td>Lesson name/#</td>
+                  </tr>
+                  <tr>
+                    <td><label for="Instructor">Instructor:</label></td>
+                    <td>Teacher Name</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Send</button>
+              </div>
+          </div>
+      </div>
+  </div>
  
 </body>
   <script type="text/javascript">
@@ -711,6 +710,24 @@
     $(window).scroll(stickFunction);  
 
    // disabled buttons
-   $('.btn-disabled').removeClass("shine"); 
+   $('.btn-disabled').removeClass("shine");
+
+   //Zoom Image
+    var modal = document.getElementById('myModal');
+    var img = document.getElementById('ZoomImg');
+    var zoom = document.getElementById('zoom');
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    zoom.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = img.src;
+        captionText.innerHTML = img.alt;
+    }
+
+    var span = document.getElementsByClassName("img-close")[0];
+
+    span.onclick = function() { 
+        modal.style.display = "none";
+    }
   </script>
 </html>
