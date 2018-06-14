@@ -1,0 +1,143 @@
+/**
+*@stylesheet hints.less Hints
+*@parent components
+*
+*@description
+*## CALI Lessons Hints
+*
+*Hint panels for success, error, description, and maybe.
+*
+*Old Design
+*
+![Hints](https://image.ibb.co/dHnxY8/oldalerts.png "Hints Example")
+*
+*HTML
+*```
+<div class="Feedback RIGHT" style="display: block;"><div class="Icon RIGHT">&nbsp;</div><div class="Close"><a href="#">&nbsp;</a></div><div class="Title">C.</div><br clear="all"><div class="Text ReadText"><p></p></div><div class="FeedbackButton"><a class="HyperButton" href="#">Close</a></div></div>
+
+<div class="Feedback WRONG" style="display: block;"><div class="Icon WRONG">&nbsp;</div><div class="Close"><a href="#">&nbsp;</a></div><div class="Title">A.</div><br clear="all"><div class="Text ReadText"><p></p></div><div class="FeedbackButton"><a class="HyperButton" href="#">Close</a></div></div>
+
+<div id="fbText"><div class="Feedback INFO" style="display: block;"><div class="Icon INFO">&nbsp;</div><div class="Close"><a href="#">&nbsp;</a></div><div class="Title"></div><br clear="all"><div class="Text ReadText"><p></p></div><div class="FeedbackButton"><a class="HyperButton" href="#">Close</a></div></div></div>
+
+<div class="Feedback MAYBE" style="display: block;"><div class="Icon MAYBE">&nbsp;</div><div class="Close"><a href="#">&nbsp;</a></div><div class="Title">B.</div><br clear="all"><div class="Text ReadText"><p></p></div><div class="FeedbackButton"><a class="HyperButton" href="#">Close</a></div></div>
+*```
+*
+*New Design
+*@demo docs/demos/hints/hints.html
+**/
+
+@import "variables.less";
+@import "main.less";
+
+.no-glow {
+  outline: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.close {
+  margin-top: -40px;
+  &:active {
+    .no-glow;
+  }
+}
+
+.alert-success-border {
+  border-bottom:2px solid @GreenCorrect !important;
+  border-left:2px solid @GreenCorrect !important;
+  border-right:2px solid @GreenCorrect !important; 
+}
+
+.alert-success-x {
+  color: @GreenCorrect;
+  font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
+}
+.alert-success-heading {
+  background: lighten(@GreenCorrect, 68%) !important;
+  border:2px solid @GreenCorrect !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-success-body {
+  .alert-success-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}
+
+.alert-error-border {
+  border-bottom:2px solid @RedError !important;
+  border-left:2px solid @RedError !important;
+  border-right:2px solid @RedError !important; 
+}
+
+.alert-error-x {
+  color: @RedError;
+  font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
+}
+.alert-error-heading {
+  background: lighten(@RedError, 47%) !important;
+  border:2px solid @RedError !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-error-body {
+  .alert-error-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}
+
+.alert-description-border {
+  border-bottom:2px solid @BlueSelected !important;
+  border-left:2px solid @BlueSelected !important;
+  border-right:2px solid @BlueSelected !important; 
+}
+
+.alert-description-x {
+  color: @BlueSelected;
+  font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
+}
+.alert-description-heading {
+  background: lighten(@BlueSelected, 49%) !important;
+  border:2px solid @BlueSelected !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-description-body {
+  .alert-description-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}
+
+.alert-maybe-border {
+  border-bottom:2px solid @YellowMaybe !important;
+  border-left:2px solid @YellowMaybe !important;
+  border-right:2px solid @YellowMaybe !important; 
+}
+
+.alert-maybe-x {
+  color: darken(@YellowMaybe, 30%);
+  font-size: 35px;
+  &:active {
+    .no-glow;
+  }  
+}
+.alert-maybe-heading {
+  background: lighten(@YellowMaybe, 47%) !important;
+  border:2px solid @YellowMaybe !important;
+  .border-radius (@Radius);
+  padding: 5px 15px !important;
+}
+.alert-maybe-body {
+  .alert-maybe-border;
+  .border-radius (@Radius);
+  font-size: 18px !important;
+}

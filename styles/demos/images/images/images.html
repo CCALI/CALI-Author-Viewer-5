@@ -1,0 +1,39 @@
+<head>
+  <link rel="stylesheet" href="../../../styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script
+src="https://code.jquery.com/jquery-2.2.4.min.js"
+integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>  
+</head>
+<body style="width:480px; overflow-x: scroll;">
+<div class="img-frame">
+  <img id="ZoomImg" src="https://www.cali.org/lessons/web/ba06/DefaultRulesExample2.gif" alt="Default Rules Apply image.">
+  <span id="zoom" class="zoom"></span>
+</div>
+<div id="myModal" class="img-frame-modal">
+  <span class="img-close">&times;</span>
+  <img class="hotspot-content" id="img01">
+  <div id="caption"></div>
+</div>  
+</body>
+<script type="text/javascript">
+  var modal = document.getElementById('myModal');
+  var img = document.getElementById('ZoomImg');
+  var zoom = document.getElementById('zoom');
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
+  zoom.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = img.src;
+      captionText.innerHTML = img.alt;
+  }
+
+  var span = document.getElementsByClassName("img-close")[0];
+
+  span.onclick = function() { 
+      modal.style.display = "none";
+  }
+</script>
