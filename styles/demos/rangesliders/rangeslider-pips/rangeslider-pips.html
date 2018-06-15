@@ -10,10 +10,11 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 	
 </head>
 <body style="margin: 10px;">    
-  <div class="row">
-    <div class="col-xs-12">
-      <p>Sed malesuada, lacus eu elementum bibendum, orci velit facilisis orci, nec consequat magna dolor sed justo. Suspendisse potenti. Curabitur nunc dolor, tempor in magna a, tincidunt fermentum velit. Aenean sit amet quam quis eros blandit egestas. Donec a nulla sit amet purus bibendum aliquet vel nec nulla. Fusce semper suscipit condimentum. Donec consequat ultricies aliquam. Praesent non mattis felis, in condimentum tellus. Etiam lectus nisl, semper id elit nec, mollis placerat nisi. Ut tempor elit sit amet sem suscipit convallis.</p>
-    </div>
+<div class="row">
+  <div class="col-xs-12">
+    <p>Sed malesuada, lacus eu elementum bibendum, orci velit facilisis orci, nec consequat magna dolor sed justo. Suspendisse potenti. Curabitur nunc dolor, tempor in magna a, tincidunt fermentum velit. Aenean sit amet quam quis eros blandit egestas. Donec a nulla sit amet purus bibendum aliquet vel nec nulla. Fusce semper suscipit condimentum. Donec consequat ultricies aliquam. Praesent non mattis felis, in condimentum tellus. Etiam lectus nisl, semper id elit nec, mollis placerat nisi. Ut tempor elit sit amet sem suscipit convallis.</p>
+  </div>
+  <div class="slider-row ">
     <div class="col-sm-12">
       <h4 class="text-center">
         <strong>
@@ -21,23 +22,19 @@
         </strong>
       </h4>
     </div>
-    <div class="col-sm-8">
+    <div class="col-sm-12">
       <p>Mauris libero arcu, mollis nec sapien eu, elementum ultrices eros. In ac eros in felis tristique volutpat. In eget lectus ac lacus pretium lacinia sed ut dui. Nunc condimentum ut odio sit amet imperdiet.</p>
-    </div>
-    <div class="col-sm-4">
-        <input id="inputPips" class="slider-input" type="" name="">
     </div>
     <div class="gap"></div>
     <div class="col-sm-12">
       <div id="pipSlider" class="slider"></div>
-    </div>                   
-  </div>
-  <div class="gap"></div>
+    </div>   
+  </div>                
+</div> 
+<div class="gap"></div>
 </body> 
 <script type="text/javascript">
-//Pip slider
 var points = 6;
-/* jquery slider pips plugin, version 0.1 */
   (function($) {
     var extensionMethods = {
       pips: function( settings ) {
@@ -70,14 +67,12 @@ var points = 6;
               if( "number" == options.rest ) { s.addClass('ui-slider-pip-number'); }
               if( false == options.rest ) { s.addClass('ui-slider-pip-hide'); }
             }
-
             // if it's a horizontal slider we'll set the left offset,
             // and the top if it's vertical.
             if( this.options.orientation == "horizontal" ) 
               s.css({ left: '' + (100/pips)*i + '%' });
             else
               s.css({ top: '' + (100/pips)*i + '%' });
-
             // append the span to the slider.
             this.element.append( s );
           }
@@ -86,8 +81,6 @@ var points = 6;
     $.extend(true, $['ui']['slider'].prototype, extensionMethods);
   })(jQuery);
 
-/* ------------------------- */
-/* Demo pips */
 $(document).ready(function() {
   $('#pipSlider').slider({
     range: "min",
@@ -95,16 +88,8 @@ $(document).ready(function() {
     min:0,
     max:points,
     animate:true,
-    slide: function( event, ui ) {
-        $( "#inputPips" ).val( "" + ui.value );
-    }
   });
   $('#pipSlider').slider('pips', {rest:'number'});
 });
-
-$("#inputPips").change(function () {
-    var value = this.value.substring(1);
-    console.log(value);
-    $("#pipSlider").slider("value", parseInt(value));
-});  
+ 
 </script>

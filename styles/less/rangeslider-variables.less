@@ -3,9 +3,11 @@
 
 .slider-input {
   border: 1px solid darken(@Grey, 15%);
+  margin-bottom: 30px;
   text-align: right !important;
   padding: 0px 5px !important;
   width: 100% !important;
+  max-width: 140px !important;
   &:active {
     outline: @BlueSelected !important;
   }
@@ -186,5 +188,12 @@ background: #afe32c;
 @media (max-width: 959px) {
   .slider-input {
     width: 140px !important;
+  }
+}
+
+@media (min-width: 959px) {
+  .slider-row {
+      width: 75% !important;
+      margin: auto;
   }
 }
