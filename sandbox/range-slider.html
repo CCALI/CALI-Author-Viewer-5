@@ -98,37 +98,30 @@
         <div class="gap"></div>
         <div class="row">
           <div class="col-sm-12">
-            <div class="slider"></div>
+            <input id="inputNumbers" class="slider-input" type="" name="">
+            <br/><br/>
+            <div id="numberSlider" class="slider"></div>
           </div>
         </div>        
-        <div class="gap"></div>        <div class="row">
+        <div class="gap"></div>
+        <div class="row">
           <div class="col-sm-12">
-            <input id="slider" type="" name="">
+            <input id="inputDollars" class="slider-input"  type="" name="">
             <br/><br/>
-            <div id="rangeSlider"></div>
-          </div>
+            <div id="dollarSlider"></div>
+          </div>          
         </div>
+        <div class="gap"></div>
+        <div class="row">
+          <div class="col-sm-12">
+            <input id="inputPercentages" class="slider-input"  type="" name="">
+            <br/><br/>
+            <div id="percentageSlider"></div>
+          </div>          
+        </div>        
 
           <script type="text/javascript">
-          //Old slider
-          $("#rangeSlider").slider({
-              range: "min",
-              value: 1,
-              step: 100,
-              min: 0,
-              max: 800,
-              slide: function( event, ui ) {
-                  $( "input" ).val( "$" + ui.value );
-              }
-          });
-          // Old slider end
-
-          $("#slider").change(function () {
-              var value = this.value.substring(1);
-              console.log(value);
-              $("#rangeSlider").slider("value", parseInt(value));
-          });
-
+          //Pip slider
           var points = 6;
           /* jquery slider pips plugin, version 0.1 */
             (function($) {
@@ -142,15 +135,15 @@
                   $.extend( options, settings );
                   // get rid of all pips that might already exist.
                   this.element.addClass('ui-slider-pips').find( '.ui-slider-pip' ).remove();
-                  // we need teh amount of pips to create.
+                  // amount of pips to created
                   var pips = this.options.max - this.options.min;         
                     // for every stop in the slider, we create a pip.
                     for( i=0; i<=pips; i++ ) {
                       // hold a span element for the pip
                       var s = $('<span class="ui-slider-pip"><span class="ui-slider-line"></span><span class="ui-slider-number">'+i+'</span></span>');
                       // add a class so css can handle the display
-                      // we'll hide numbers by default in CSS, and show them if set.
-                      // we'll also use CSS to hide the pip altogether.
+                      // hide numbers by default in CSS, and show them if set.
+                      // use CSS to hide the pip altogether.
                       if( 0 == i ) {
                         s.addClass('ui-slider-pip-first');
                         if( "number" == options.first ) { s.addClass('ui-slider-pip-number'); }
@@ -167,9 +160,9 @@
                       // if it's a horizontal slider we'll set the left offset,
                       // and the top if it's vertical.
                       if( this.options.orientation == "horizontal" ) 
-                        s.css({ left: '' + (100/pips)*i + '%'  });
+                        s.css({ left: '' + (100/pips)*i + '%' });
                       else
-                        s.css({ top: '' + (100/pips)*i + '%'  });
+                        s.css({ top: '' + (100/pips)*i + '%' });
 
                       // append the span to the slider.
                       this.element.append( s );
@@ -179,58 +172,64 @@
               $.extend(true, $['ui']['slider'].prototype, extensionMethods);
             })(jQuery);
 
-          (function($) {
-              var extensionMethods = {
-                float: function( settings ) {
-                  options = {};
-                  $.extend( options, settings );
-                  // add a class for the CSS
-                  this.element.addClass('ui-slider-float');
-                  
-                  // if this is a range slider
-                  if( this.options.values ) {
-                    var $tip = [
-                      $('<span class="ui-slider-tip">'+ this.options.values[0]+'</span>'),
-                      $('<span class="ui-slider-tip">'+ this.options.values[1]+'</span>')
-                    ];
-                  // else if its just a normal slider
-                  } else {
-                  // create a tip element
-                    var $tip = $('<span class="ui-slider-tip">'+ this.options.value+'</span>');
-                  }
-                  // now we append it to all the handles
-                  this.element.find('.ui-slider-handle').each( function(k,v) {
-                    $(v).append($tip[k]);
-                  })
-                  // if this slider also has numbers, we'll make those into tips, too; by cloning and changing class.
-                  this.element.find('.ui-slider-number').each(function(k,v) {
-                    var $e = $(v).clone().removeClass('ui-slider-number').addClass('ui-slider-tip-number');
-                    $e.insertAfter($(v));
-                  });
-                  // when slider changes, update handle tip value.
-                  this.element.on('slidechange slide', function(e,ui) {
-                    $(ui.handle).find('.ui-slider-tip').text( ui.value );
-                  });
-                }
-              };
-              $.extend(true, $['ui']['slider'].prototype, extensionMethods);
-            })(jQuery);
-
-
           /* ------------------------- */
-          /* demo stuff */
-
-            $(document).ready(function() {
-              $('.slider').slider({min:0,max:points,animate:true, value:3});
-              $('.slider').slider('pips', {rest:'number'});
+          /* Pip demo for numbers */
+          $(document).ready(function() {
+            $('#numberSlider').slider({
+              range: "min",
+              value:0,
+              min:0,
+              max:points,
+              animate:true,
+              slide: function( event, ui ) {
+                  $( "#inputNumbers" ).val( "" + ui.value );
+              }
             });
+            $('#numberSlider').slider('pips', {rest:'number'});
+          });
 
-            $("#slider").change(function () {
-                var value = this.value.substring(1);
-                console.log(value);
-                $(".slider").slider("value", parseInt(value));
-            });
-          </script>       
+          $("#inputNumbers").change(function () {
+              var value = this.value.substring(1);
+              console.log(value);
+              $("#numberSlider").slider("value", parseInt(value));
+          });  
+
+          // Demo for $
+          $("#dollarSlider").slider({
+              range: "min",
+              value: 1,
+              step: 1,
+              min: 0,
+              max: 300000,
+              slide: function( event, ui ) {
+                  $( "#inputDollars" ).val( "$" + ui.value );
+              }
+          });
+
+          $("#inputDollars").change(function () {
+              var value = this.value.substring(1);
+              console.log(value);
+              $("#dollarSlider").slider("value", parseInt(value));
+          });
+
+          // Demo for %
+          $("#percentageSlider").slider({
+              range: "min",
+              value: 1,
+              step: 100,
+              min: 0,
+              max: 800,
+              slide: function( event, ui ) {
+                  $( "#inputPercentages" ).val( ui.value + "%" );
+              }
+          });
+
+          $("#inputPercentages").change(function () {
+              var value = this.value.substring(1);
+              console.log(value);
+              $("#percentageSlider").slider("value", parseInt(value));
+          });
+          </script>        
 
           <div class="gap"></div>
         </div>

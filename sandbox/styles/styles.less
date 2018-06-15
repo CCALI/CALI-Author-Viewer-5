@@ -2317,11 +2317,6 @@ img.footer-logo {
 /*       Range Slider       */
 /*--------------------------*/
 
-@import url('https://fonts.googleapis.com/css?family=Bitter:400,700,400italic');
-
-
-
-
 
 /* ui slider pips */
   
@@ -2402,24 +2397,93 @@ img.footer-logo {
 /* ------------------------- */
 /* demo stuff */
 
+.slider-input {
+  border: 1px solid darken(@Grey, 15%);
+  text-align: right !important;
+  padding: 0px 5px !important;
+  width: 100px !important;
+  &:active {
+    outline: @BlueSelected !important;
+  }
+  &:before {
+    outline: @BlueSelected !important;
+    box-sizing: none !important;
+  }
+  &:after {
+    outline: @BlueSelected !important;
+    box-sizing: none !important;
+  }  
+}
+
 .ui-slider { box-shadow: inset 0 2px 1px #aaa; border-color: #000; }
 
 .ui-slider-horizontal { height: 10px; background: #ddd; }
 .ui-slider-horizontal .ui-slider-handle { height: 18px; width: 14px; background: #2cafe3; border: 1px solid rgba(0,0,0,0.6); margin-left: -8px; cursor: pointer; }
 .ui-slider-horizontal.green .ui-slider-handle { background: #afe32c;}
 
-
-
-
 @media (max-width: 700px) {
-
   .ui-slider-pip:nth-child(odd) .ui-slider-number { display: none; }
-
 }
 
 @media (max-width: 400px) {
-
   .ui-slider-pip:nth-child(2n+1) .ui-slider-number { display: none; }
   .ui-slider-pip:nth-child(4n) .ui-slider-number { display: none; }
+}
 
+.ui-widget-header {
+  border: 1px solid @BlueSelected !important;
+  background: @BlueSelected !important;
+  color: @Black !important;
+  font-weight: bold;  
+}
+
+.ui-widget-content {
+  border: 1px solid darken(@Grey, 10%) !important;
+  background: @White !important;
+  color: @Black;
+}
+
+.ui-slider {
+  box-shadow: none !important;
+}
+
+.ui-state-default, .ui-widget-content .ui-state-default {
+    border: 1px solid @CLThemeColor !important;
+    background: @CLThemeColor !important;
+    font-weight: bold !important;
+    color: @White !important;  
+}
+
+.ui-corner-all {
+  border-bottom-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+}
+
+.ui-slider-horizontal {
+    height: .5em !important;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+  top: -.6em !important;
+  margin-left: -.6em !important;
+}
+
+.ui-slider-horizontal .ui-slider-range {
+    top: -0.1 !important;
+}
+
+.ui-slider-pips .ui-slider-pip, .ui-slider-number {
+    color: @Black !important;
+    cursor: pointer !important;
+    &:hover {
+      color: @BlueSelected !important;
+    }
+}
+
+.ui-slider .ui-slider-handle {
+    width: 1.5em !important;
+    height: 1.5em !important;
+    cursor: pointer !important;
 }
