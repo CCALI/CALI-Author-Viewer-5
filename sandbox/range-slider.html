@@ -98,11 +98,19 @@
         <div class="gap"></div>
         <div class="row">
           <div class="col-sm-12">
-            <input id="inputNumbers" class="slider-input" type="" name="">
+            <input id="inputPips" class="slider-input" type="" name="">
             <br/><br/>
-            <div id="numberSlider" class="slider"></div>
+            <div id="pipSlider" class="slider"></div>
           </div>
-        </div>        
+        </div>
+        <div class="gap"></div>
+        <div class="row">
+          <div class="col-sm-12">
+            <input id="inputNumbers" class="slider-input"  type="" name="">
+            <br/><br/>
+            <div id="numberSlider"></div>
+          </div>          
+        </div>               
         <div class="gap"></div>
         <div class="row">
           <div class="col-sm-12">
@@ -173,26 +181,44 @@
             })(jQuery);
 
           /* ------------------------- */
-          /* Pip demo for numbers */
+          /* Demo pips */
           $(document).ready(function() {
-            $('#numberSlider').slider({
+            $('#pipSlider').slider({
               range: "min",
               value:0,
               min:0,
               max:points,
               animate:true,
               slide: function( event, ui ) {
-                  $( "#inputNumbers" ).val( "" + ui.value );
+                  $( "#inputPips" ).val( "" + ui.value );
               }
             });
-            $('#numberSlider').slider('pips', {rest:'number'});
+            $('#pipSlider').slider('pips', {rest:'number'});
+          });
+
+          $("#inputPips").change(function () {
+              var value = this.value.substring(1);
+              console.log(value);
+              $("#pipSlider").slider("value", parseInt(value));
+          });  
+
+          // Demo for #
+          $("#numberSlider").slider({
+              range: "min",
+              value: 1,
+              step: 1,
+              min: 0,
+              max: 9999,
+              slide: function( event, ui ) {
+                  $( "#inputNumbers" ).val( ui.value );
+              }
           });
 
           $("#inputNumbers").change(function () {
               var value = this.value.substring(1);
               console.log(value);
               $("#numberSlider").slider("value", parseInt(value));
-          });  
+          });
 
           // Demo for $
           $("#dollarSlider").slider({
