@@ -1,0 +1,54 @@
+<head>
+	<link rel="stylesheet" href="../../../styles.css">
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/flick/jquery-ui.css">
+	<script
+	src="https://code.jquery.com/jquery-2.2.4.min.js"
+	integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+	<script src="jquery.ui.touch-punch.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 	
+</head>
+<body style="margin: 10px;">
+<div class="row">
+  <div class="col-sm-12">
+    <p>Given what you know about the case and the law of torts, how much would you award Cleveland from Piper Aircraft Corporation?</p>            
+  </div>
+  <div class="col-sm-12">
+    <h4 class="text-center">
+      <strong>
+        Enter a $ in the range 0 to 5000000
+      </strong>
+    </h4>
+  </div>
+  <div class="col-sm-8">
+    <p>Award to Cleveland from Piper Aircraft</p>
+  </div>
+  <div class="col-sm-4">
+    <input id="inputDollars" class="slider-input"  type="" name="">
+  </div>
+  <div class="gap"></div>
+  <div class="col-sm-12">
+    <div id="dollarSlider"></div>
+  </div>                   
+</div>
+<div class="gap"></div>
+</body>
+<script type="text/javascript">
+  $("#dollarSlider").slider({
+      range: "min",
+      value: 1,
+      step: 1,
+      min: 0,
+      max: 300000,
+      slide: function( event, ui ) {
+          $( "#inputDollars" ).val( "$" + ui.value );
+      }
+  });
+
+  $("#inputDollars").change(function () {
+      var value = this.value.substring(1);
+      console.log(value);
+      $("#dollarSlider").slider("value", parseInt(value));
+  });	
+</script>

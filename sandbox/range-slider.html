@@ -96,36 +96,103 @@
       <div  id="LessonControl" class="lesson-view col-xs-12">
         <h2>Introduction</h2>
         <div class="gap"></div>
+        <!-- Pips Examples -->
         <div class="row">
-          <div class="col-sm-12">
-            <input id="inputPips" class="slider-input" type="" name="">
-            <br/><br/>
-            <div id="pipSlider" class="slider"></div>
+          <div class="col-xs-12">
+            <p>Sed malesuada, lacus eu elementum bibendum, orci velit facilisis orci, nec consequat magna dolor sed justo. Suspendisse potenti. Curabitur nunc dolor, tempor in magna a, tincidunt fermentum velit. Aenean sit amet quam quis eros blandit egestas. Donec a nulla sit amet purus bibendum aliquet vel nec nulla. Fusce semper suscipit condimentum. Donec consequat ultricies aliquam. Praesent non mattis felis, in condimentum tellus. Etiam lectus nisl, semper id elit nec, mollis placerat nisi. Ut tempor elit sit amet sem suscipit convallis.</p>
           </div>
-        </div>
+          <div class="col-sm-12">
+            <h4 class="text-center">
+              <strong>
+                Curabitur egestas purus dictum pretium finibus
+              </strong>
+            </h4>
+          </div>
+          <div class="col-sm-8">
+            <p>Mauris libero arcu, mollis nec sapien eu, elementum ultrices eros. In ac eros in felis tristique volutpat. In eget lectus ac lacus pretium lacinia sed ut dui. Nunc condimentum ut odio sit amet imperdiet.</p>
+          </div>
+          <div class="col-sm-4">
+              <input id="inputPips" class="slider-input" type="" name="">
+          </div>
+          <div class="gap"></div>
+          <div class="col-sm-12">
+            <div id="pipSlider" class="slider"></div>
+          </div>                   
+        </div>  
         <div class="gap"></div>
+
+        <!-- Number Examples -->
         <div class="row">
           <div class="col-sm-12">
+            <p>Indicate below where you think the cutoffs are for a probable unfavorable outcome and a remote unfavorable outcome.</p>
+          </div>
+          <div class="col-xs-12">
+            <h4>
+              <strong>
+                Enter a Number in the range 0 to 100
+              </strong>
+            </h4>
+          </div>
+          <div class="col-sm-8">
+            <p>Probable</p>
+          </div>
+          <div class="col-sm-4">
             <input id="inputNumbers" class="slider-input"  type="" name="">
-            <br/><br/>
+          </div>
+          <div class="gap"></div>
+          <div class="col-sm-12">
             <div id="numberSlider"></div>
-          </div>          
+          </div>                
         </div>               
         <div class="gap"></div>
+
+        <!-- Dollar Examples -->
         <div class="row">
           <div class="col-sm-12">
+            <p>Given what you know about the case and the law of torts, how much would you award Cleveland from Piper Aircraft Corporation?</p>            
+          </div>
+          <div class="col-sm-12">
+            <h4 class="text-center">
+              <strong>
+                Enter a $ in the range 0 to 5000000
+              </strong>
+            </h4>
+          </div>
+          <div class="col-sm-8">
+            <p>Award to Cleveland from Piper Aircraft</p>
+          </div>
+          <div class="col-sm-4">
             <input id="inputDollars" class="slider-input"  type="" name="">
-            <br/><br/>
+          </div>
+          <div class="gap"></div>
+          <div class="col-sm-12">
             <div id="dollarSlider"></div>
-          </div>          
+          </div>                   
         </div>
+
         <div class="gap"></div>
+        <!-- Percentage Examples -->
         <div class="row">
           <div class="col-sm-12">
+            <p>Suspendisse sed lacinia nibh. In tortor est, fermentum quis lorem hendrerit, eleifend vestibulum dui.</p>            
+          </div>
+          <div class="col-sm-12">
+            <h4 class="text-center">
+              <strong>
+                Aliquam aliquam eu erat ac iaculis
+              </strong>
+            </h4>
+          </div>
+          <div class="col-sm-8">
+            <p>Cras tincidunt faucibus dolor in pellentesque</p>
+          </div>                              
+          <div class="col-sm-4">
             <input id="inputPercentages" class="slider-input"  type="" name="">
-            <br/><br/>
+          </div>
+          <div class="gap"></div>
+          <div class="col-sm-12">
             <div id="percentageSlider"></div>
-          </div>          
+          </div>       
         </div>        
 
           <script type="text/javascript">
@@ -206,9 +273,9 @@
           $("#numberSlider").slider({
               range: "min",
               value: 1,
-              step: 1,
+              step: 10000,
               min: 0,
-              max: 9999,
+              max: 10000000,
               slide: function( event, ui ) {
                   $( "#inputNumbers" ).val( ui.value );
               }
