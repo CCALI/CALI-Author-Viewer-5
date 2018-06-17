@@ -711,6 +711,7 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
     width: 92%;
   }
   .lesson-view {
+  width: 87% !important;
     //padding-right:70px;
   }  
 }
@@ -769,6 +770,15 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
     margin-left: -4px;
     .label-container;
 }
+
+.checkbox-container p {
+    font-weight: 500 !important;
+}
+
+.checkbox-container.btn {
+	box-shadow: none !important;
+}
+
 .checkbox-container input {
     .label-container-input;
 }
@@ -1285,11 +1295,11 @@ div.vertical {
 /*    Sticky Header
 /*----------------------*/
 
-
 .sticky-header {
   padding: 10px 16px;
   background: @White;
   color: @Black;
+  transform-origin:left top;
 }
 
 .content-under-sticky {
@@ -1305,6 +1315,10 @@ div.vertical {
   z-index: 999;
   .sticky-shadow(@BottomShadow);
   border-bottom: 3px solid @Gold;
+  -webkit-backface-visibility: hidden;
+  -ms-backface-visibility:hidden;
+  -o-backface-visibility:hidden;
+  backface-visibility: hidden;
 }
 
 .content-under-sticky {
@@ -1322,6 +1336,32 @@ div.vertical {
   }
 }
 
+/* Disable mobile menu bar auto-hide */
+#mobile-bar > .inner {
+	-webkit-transition: none;
+	-ms-transition: none;
+	transition: none;
+	-webkit-transform: none;
+	-ms-transform: none;
+	transform: none;
+}
+/* Disable mobile menu bar floating */
+#mobile-bar {
+	position: absolute;
+}
+.mobile-ui-on #mobile-bar,
+.mobile-ui-on #mobile-bar + .top-menu-clone {
+	display: block !important;
+	opacity: 1 !important;
+}
+#mobile-bar > .inner {
+	-webkit-transition: none;
+	-ms-transition: none;
+	transition: none;
+	-webkit-transform: none;
+	-ms-transform: none;
+	transform: none;
+}
 
 /*----------------------*/
 /*        Toolbar

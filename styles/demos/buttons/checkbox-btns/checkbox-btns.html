@@ -8,57 +8,83 @@
 </head>
 <div class="row">
   <div class="col-sm-12">
-  	<!-- Checkmark with description hint -->
-    <label id="question1" class="checkbox-container">
-      <p>Example of a checkbox button a with really long answer. This answer isn't right or wrong but only gives a description.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.</p>
-      <input type="checkbox">
-      <span class="checkmark-selected"></span>
-    </label>
-    <div class="hint">
-      <span id="answer1" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="Description">
-        <p><strong>i </strong> About</p>
-      </span>
+    <!-- Checkmark with description hint -->
+    <div class="btn-group">
+      <label id="question1" class="btn checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark-selected"></span>
+      </label>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+      </p>
+      <div class="hint">
+        <span id="answer1" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="Description">
+          <p><strong>i </strong> About</p>
+        </span>
+      </div>
     </div>
     <div class="gap"></div>
     <!-- Checkmark graded as wrong -->
-    <label id="question2" class="checkbox-container">Example for if this answer is wrong
-      <input type="checkbox">
-      <span class="checkmark-wrong"></span>
-    </label>
-    <div class="hint">
-      <span id="answer2" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="Wrong">
-        <p>Wrong</p>
-      </span>
+    <div class="btn-group">
+      <label id="question2" class="btn checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark-wrong"></span>
+      </label>
+      <p>
+        Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+      </p>
+      <div class="hint">
+        <span id="answer2" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="Wrong">
+          <p>Wrong</p>
+        </span>
+      </div>
     </div>
     <div class="gap"></div>
-    <!-- Checkmark graded as right -->      
-    <label id="question3" class="checkbox-container">Example for if this answer is right
-      <input type="checkbox">
-      <span class="checkmark-success"></span>
-    </label>
-    <div class="hint">
-      <span id="answer3" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="Right">
-        <p>Right</p>
-      </span>
+    <!-- Checkmark graded as right -->
+    <div class="btn-group">      
+      <label id="question3" class="btn checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark-success"></span>
+      </label>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+      </p>
+      <div class="hint">
+        <span id="answer3" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="Right">
+          <p>Right</p>
+        </span>
+      </div>
     </div>
     <div class="gap"></div>
     <!-- Checkmark graded as maybe -->
-    <label id="question4" class="checkbox-container">Example for if this answer is maybe right
-      <input type="checkbox">
-      <span class="checkmark-maybe"></span>
-    </label>
-    <div class="hint">
-      <span id="answer4" class="question-symbol" aria-live="polite" role="definition" aria-labelledby="Mayeb Right">
-        <p><strong>?</strong> Maybe<p>
-      </span>
+    <div class="btn-group">
+      <label id="question4" class="btn checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark-maybe"></span>
+      </label>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+      </p>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+      </p>
+      <div class="hint">
+        <span id="answer4" class="question-symbol" aria-live="polite" role="definition" aria-labelledby="Mayeb Right">
+          <p><strong>?</strong> Maybe<p>
+        </span>
+      </div>
     </div>
     <div class="gap"></div>
-    <!-- Checkmark with default style -->                  
-    <label class="checkbox-container">Example for a default style
-      <input type="checkbox">
-      <span class="checkmark-default"></span>
-    </label>
+    <!-- Checkmark with default style -->
+    <div class="btn-group">                  
+      <label class="btn checkbox-container">
+        <input type="checkbox">
+        <span class="checkmark-default"></span>
+        <p>
+          Vestibulum tristique sodales tincidunt.
+        </p>
+      </label>
+    </div>
   </div>
 </div>
 <script type="text/javascript">

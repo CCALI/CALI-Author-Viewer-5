@@ -1,5 +1,5 @@
 <html lang="en">
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=2, minimum-scale=1, user-scalable=yes">
 <head>
   <title>Sandbox</title>
     <link rel="stylesheet" href="styles.css" type="text/css">
@@ -131,6 +131,7 @@
         </div>
         <!--sticky header-->
         <div id="stickyHeader" class="sticky-header">
+          <h4>Test answers:</h4>
           <p>A. This is ansnwer A</p>
           <p>B. This is ansnwer B</p>
           <p>C. This is ansnwer C</p>
@@ -348,7 +349,7 @@
             </div>
           </div>
           <div class="gap"></div>
-                    <div class="row">
+          <div class="row">
             <div class="col-sm-12">
               <ol class="ol-multi-bts">
                 <li>
@@ -691,7 +692,7 @@
       $('#feedbackModal').modal('show');
     });
 
-  //Sticky Header
+  //Sticky Header stickyAnchor
 
     var header = document.getElementById("stickyHeader");
     var sticky = header.offsetTop;
@@ -700,9 +701,15 @@
       if (window.pageYOffset >= sticky) {
         header.classList.add("sticky");
         $("#stickyHeight").height($("#stickyHeader").height());
+        /*$('html, body').animate({
+          scrollTop: $("#stickyAnchor").offset().top
+        }, 3000);*/
       } else {
         header.classList.remove('sticky');
         $('#stickyHeight').css('height', 0);
+        /*$('html, body').animate({
+          scrollTop: $("#stickyAnchor").offset().top
+        }, 3000).stop(true, false);*/       
       }         
     }
 
