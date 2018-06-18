@@ -17,6 +17,7 @@ module.exports = function(grunt) {
             "node_modules/jquery/dist/jquery.min.js",
             "node_modules/jquery-ui-dist/jquery-ui.min.js",
             "node_modules/jquery-ui-touch-punch/jquery.ui.touch-punch.min.js",
+            "node_modules/bootstrap/js/*.js",
             "styles/js/**/*.js"
           ]
         }

@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html>
 <head>
   <link rel="stylesheet" href="../../../styles.css">
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="../../../styles.js"></script>
 </head>
 <body>
 <!--This section is also part of slider-menu -->  
@@ -59,7 +56,22 @@
     </li>
   </ul>
 </div>
-<script type="text/javascript" src="../../../styles.js"></script>
 </body>
-</html>
+<script type="text/javascript">
+  // Nav Tree
+  $('ul.slider-left').toggle();
+  $('label.nav-toggle a').click(function ($e) {
+    $e.preventDefault();
+    $(this).parent().parent().children('ul.slider-left').toggle(300);
+  });
+
+  $('.toggle-icon').click(function(){
+    $(this).find('a').toggleClass('glyphicon-plus glyphicon-minus');
+  });
+
+  //toc link visted
+  $('.visited').click(function(){
+    $(this).addClass('toc-visited');
+  });  
+</script>
 

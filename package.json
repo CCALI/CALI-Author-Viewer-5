@@ -5,7 +5,7 @@
   "author": "CALI",
   "license": "",
   "devDependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap": "^3.3.6",
     "documentjs": "^0.4.4",
     "grunt": "~0.4.2",
     "grunt-contrib-clean": "^1.1.0",
@@ -13,7 +13,10 @@
     "grunt-contrib-less": "~0.8.2",
     "grunt-contrib-uglify": "^3.3.0",
     "jquery": "^2.2.4",
-    "jquery-ui": "^1.12.1",
+    "jquery-ui": "1.12.1",
     "jquery-ui-touch-punch": "^0.2.3"
+  },
+  "dependencies": {
+    "jquery-ui-dist": "^1.12.1"
   }
 }
