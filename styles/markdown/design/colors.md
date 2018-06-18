@@ -32,13 +32,16 @@ These are the hex colors used in Cali Lessons.
 		background: #003366;
 	}
 	.bright-blue {
-		background: #4186f4;
+		background: #0074e7;
 	}
 	.bright-red {
-		background: #e91e63;
+		background: #e80c5f;
 	}
 	.bright-green {
-		background: #00c752;
+		background: #008a00;
+	}
+	.yellow-maybe {
+		background: #ffc000;
 	}
 	.grey-default {
 		background: #777;
@@ -60,6 +63,7 @@ These are the hex colors used in Cali Lessons.
 	}
 </style>
 
+<p>Primary Colors</p>
 <ul>
 	<li>
 		<span class="swatch-color dark-blue"><h5 class="txt-white">@DarkBlue: #003366;</h5></span>
@@ -70,22 +74,29 @@ These are the hex colors used in Cali Lessons.
 	<li>	
 		<span class="swatch-color white"><h5 class="txt-dark">@White: #ffffff;</h5></span>
 	</li>
-	<li>	
-		<span class="swatch-color white-fake-opacity"><h5 class="txt-dark">@WhiteFakeOpacity: #8099b3;</h5></span>
+</ul>
+<br>
+<p>Secondary Colors</p>
+<ul>
+	<li>
+		<span class="swatch-color bright-blue"><h5 class="txt-white">@BlueSelected: #0074e7;</h5></span>
 	</li>
+	<li>	
+		<span class="swatch-color bright-red"><h5 class="txt-white">@RedError: #e80c5f;</h5></span>
+	</li>
+	<li>	
+		<span class="swatch-color bright-green"><h5 class="txt-white">@GreenCorrect: #008a00;</h5></span>
+	</li>	
+	<li>	
+		<span class="swatch-color yellow-maybe"><h5 class="txt-white">@YellowMaybe: #ffc000;</h5></span>
+	</li>	
 </ul>
 
 <ul>
-	<li>
-		<span class="swatch-color bright-blue"><h5 class="txt-white">@BlueSelected: #4186f4;</h5></span>
-	</li>
-	<li>	
-		<span class="swatch-color bright-red"><h5 class="txt-white">@RedError: #e91e63;</h5></span>
-	</li>
-	<li>	
-		<span class="swatch-color bright-green"><h5 class="txt-white">@GreenCorrect: #00c752;</h5></span>
-	</li>
 	<li>	
 		<span class="swatch-color grey-default"><h5 class="txt-white">@GreyDefault: #777;</h5></span>
 	</li>
+	<li>	
+		<span class="swatch-color white-fake-opacity"><h5 class="txt-dark">@WhiteFakeOpacity: #8099b3;</h5></span>
+	</li>	
 </ul>
