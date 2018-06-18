@@ -842,7 +842,6 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
     background-color: @GreyDefault;
 }
 
-
 .radio-control {
     position: absolute;
     top: 0;
@@ -856,8 +855,8 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
 .radio-control-selected {
     top: 3.5px;
     left: 4px;
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
     border-radius: 50%;
 }
 .radio-control-after {
@@ -868,6 +867,12 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
 .radio-container {
     margin-left: -5px;
     .label-container;
+}
+/*.radio-container + p {
+	float: left !important;
+}*/
+.radio-container.btn {
+    box-shadow: none !important;
 }
 .radio-container input {
     .label-container-input;
@@ -1058,6 +1063,7 @@ div.vertical {
 
 .btn-group {
   margin-top: 5px;
+  display: inherit !important;
 }
 
 .btn-group-vertical>.btn-group>.btn {

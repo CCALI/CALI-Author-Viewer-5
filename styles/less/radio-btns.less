@@ -23,39 +23,7 @@
 @import "variables.less";
 @import "main.less";
 @import "checkbox-radio-variables.less";
-
-.radio-control {
-    position: absolute;
-    top: 0;
-    left: 5;
-    height: 20px;
-    width: 20px;
-    border: 3px solid #999;
-    background-color: @White;
-    border-radius: 50%;
-}
-.radio-control-selected {
-    top: 3.5px;
-    left: 4px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-}
-.radio-control-after {
-    content: "";
-    position: absolute;
-    display: none;
-}
-.radio-container {
-    margin-left: -5px;
-    .label-container;
-}
-.radio-container.btn {
-    box-shadow: none !important;
-}
-.radio-container input {
-    .label-container-input;
-}
+@import "button-variables.less";
 
 .checkmark-rad-selected {
     .radio-control;

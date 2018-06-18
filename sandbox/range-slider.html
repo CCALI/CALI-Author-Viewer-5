@@ -197,8 +197,106 @@
               <div id="percentageSlider"></div>
             </div>            
           </div>     
-        </div>              
+        </div>
+
         <div class="gap"></div>
+          <div class="row">
+            <p>Why should there ever be any knowledge requirement?</p>
+            <p>The drafters of subchapter F took the sensible position that, if the director was unaware of the interest at the time of the transaction, there was no reason to worry about any conflict of interest. If the director doesn't know that he or a related person has a financial interest in a transaction, it won't affect his behavior. (Technically, they didn't require in § 8.60(1)(i) that the director have knowledge when he's a party to the transaction, but it's hard to imagine many situations where a director will be a party to a transaction and not know it.)</p>
+            <p>For example, if I tell you to rate me by sliding the slider below, and don't tell you that you will receive $1 million for rating me "wonderful", the $1 million won't affect you. It's only if you know about the financial interest that your behavior is suspect.</p>
+            <div class="gap"></div>
+            <p><strong>How I Rate the Author of this Lesson</strong></p>
+          </div>
+          <div class="row">
+            <div class="btn-group">
+              <label id="question1" class="btn radio-container">
+                <input type="radio" name="radio">
+                <span class="checkmark-rad-error"></span>
+              </label>
+              <p>
+                Horrible
+              </p>
+              <div class="hint">
+                <span id="answer1" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="Wrong">
+                  <p>Wrong</p>
+                </span>
+              </div>          
+            </div>            
+          </div>
+          <div class="row">
+            <div class="btn-group">
+              <label id="question2" class="btn radio-container">
+                <input type="radio" name="radio">
+                <span class="checkmark-rad-error"></span>
+              </label>
+              <p>
+                Mediocre
+              </p>
+              <div class="hint">
+                <span id="answer2" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="Wrong">
+                  <p>Wrong</p>
+                </span>
+              </div>          
+            </div>            
+          </div>
+          <div class="row">
+            <div class="btn-group">
+              <label id="question3" class="btn radio-container">
+                <input type="radio" name="radio">
+                <span class="checkmark-rad-success"></span>
+              </label>
+              <p>
+                Wonderful
+              </p>        
+              <div class="hint">
+                <span id="answer3" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="Right">
+                  <p>Right</p>
+                </span>
+              </div>          
+            </div>
+          </div>
+          <div class="gap"></div>
+          <!-- Right -->  
+          <div class="btn-group-vertical" data-toggle="buttons">
+            <div class="btn-group">
+              <label for="chooseListBtn2" class="btn btn-default CL-choose-btn-right">
+                <input id="chooseListBtn2" name="chooseListbtn2" type="checkbox" autocomplete="off"> A
+              </label><div class="multi-btn-txt"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris egestas non eros a condimentum. Nunc enim massa, cursus et lectus quis, sagittis tempor lectus.</p></div>
+            </div>
+            <div class="hint">
+              <span id="chooseListBtnGrade2" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="correctAnswer3">
+                <p id="correctAnswer3">Right</p>
+              </span>
+            </div>
+            <div class="gap"></div>
+          <!-- Wrong -->             
+            <div class="btn-group">
+              <label for="chooseListBtn3" class="btn btn-default CL-choose-btn-wrong">
+                <input id="chooseListBtn3" name="chooseListbtn3" type="checkbox" autocomplete="off"> B
+              </label><div class="multi-btn-txt"><p>List style.</p></div>
+            </div>
+            <div class="hint">
+              <span id="chooseListBtnGrade3" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="wrongAnswer3">
+                <p id="wrongAnswer3">Wrong</p>
+              </span>
+            </div>
+            <div class="gap"></div>
+          <!-- Maybe -->                         
+            <div class="btn-group">
+              <label for="chooseListBtn4" class="btn btn-default CL-choose-btn-maybe">
+                <input id="chooseListBtn4" name="chooseListbtn4" type="checkbox" autocomplete="off"> C
+              </label><div class="multi-btn-txt">
+                <p>Maecenas vel suscipit enim. Sed rutrum commodo tincidunt. Mauris vitae convallis libero. Praesent tincidunt cursus leo, et tincidunt ipsum convallis vel. Mauris in velit efficitur, laoreet neque sit amet, venenatis ipsum. Suspendisse in urna a risus auctor vulputate ac et urna. Aliquam est lectus, auctor ac mauris nec, blandit malesuada metus.</p>
+                <p>Etiam nec aliquet ligula. Nam vestibulum tincidunt quam, quis iaculis odio dapibus nec. Pellentesque suscipit massa nec justo ultricies malesuada. Mauris at tincidunt nisl. Quisque lobortis iaculis ipsum, sit amet feugiat augue finibus ac. Nulla varius tortor id suscipit dignissim. Sed vitae dictum sapien, in lobortis dolor. Vivamus accumsan sem in sem suscipit sodales. Proin vitae lorem vel velit egestas dictum eget sed mauris. Mauris massa tellus, lacinia eget hendrerit sit amet, euismod ac est. Donec in condimentum erat. Integer commodo, orci sed sodales elementum, erat est rhoncus eros, a sollicitudin libero augue sit amet ex.</p>
+              </div>
+            </div>
+            <div class="hint">
+              <span id="chooseListBtnGrade4" class="question-symbol" aria-live="polite" aria-live="polite" role="definition" aria-labelledby="sometimesRight3">
+                <p ic="sometimesRight3"><strong>?</strong> Maybe<p>
+              </span>
+            </div>
+            <div class="gap"></div>                 
+
         </div>
       </div>
     </div>  
@@ -272,6 +370,33 @@
    // disabled buttons
    $('.btn-disabled').removeClass("shine");
 
+   // Radio buttons
+    $('#question1').click(function() {
+      $('#answer1').fadeIn().css('display','inline-block');
+    })     
+    $('#question2').click(function() {
+      $('#answer2').fadeIn().css('display','inline-block');
+    }) 
+    $('#question3').click(function() {
+      $('#answer3').fadeIn().css('display','inline-block');
+    })
+
+   // Choose btns
+    $('label[for="chooseListBtn1"]').click(function() {
+      $('#chooseListBtnGrade1').fadeIn().css('display','inline-block');
+    })  
+    $('label[for="chooseListBtn2"]').click(function() {
+      $('#chooseListBtnGrade2').fadeIn().css('display','inline-block');
+    })
+      $('label[for="chooseListBtn3"]').click(function() {
+      $('#chooseListBtnGrade3').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseListBtn4"]').click(function() {
+      $('#chooseListBtnGrade4').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseListBtn5"]').click(function() {
+      $('#chooseListBtnGrade5').fadeIn().css('display','inline-block');
+    })     
 
    // Range sliders
     var points = 6;
