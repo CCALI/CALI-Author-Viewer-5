@@ -135,8 +135,6 @@
           <p>D. This is ansnwer D</p>
         </div>
 
-        <div id="stickyHeight"></div>
-
         <div class="content-under-sticky">
           <div class="row">
             <div class="col-sm-12">      
@@ -690,29 +688,42 @@
     });
 
   //Sticky Header stickyAnchor
-
     var header = document.getElementById("stickyHeader");
-    var sticky = header.offsetTop;
 
+    // Initial lesson control height
+    const initialLCHeight = $("#LessonControl").height()
+    // Initial Sticky height
+    const initialStickyHeight = $("#stickyHeader").height()
+
+    var sticky = header.offsetTop - header.style.paddingTop;
     function stickFunction() {
-      if (window.pageYOffset >= sticky) {
-        header.classList.add("sticky");
-        $("#stickyHeight").height($("#stickyHeader").height());
-        /*$('html, body').animate({
-          scrollTop: $("#stickyAnchor").offset().top
-        }, 3000);*/
-      } else {
-        header.classList.remove('sticky');
-        $('#stickyHeight').css('height', 0);
-        /*$('html, body').animate({
-          scrollTop: $("#stickyAnchor").offset().top
-        }, 3000).stop(true, false);*/       
-      }         
+        if (window.pageYOffset >= sticky) {
+            header.classList.add("sticky");
+            // New height of the sticky header
+            const newStickyHeight = $("#stickyHeader").outerHeight()
+            // New Height of the lesson control
+            const newLCHeight = $("#LessonControl").height()
+            // Get the difference between lesson control heights
+            const dLCHeight = initialLCHeight - newLCHeight
+            // Get the difference between sticky heights
+            const dStickyHeight = initialStickyHeight - newStickyHeight
+
+            
+            // Add the differences between the lesson control heights and
+            // the sticky heights to the top padding of the lesson control
+            // for a seemless transition
+            console.log(dStickyHeight)
+            $("#LessonControl").css('paddingTop', dLCHeight - dStickyHeight + 40)
+        } else {
+            header.classList.remove('sticky');
+            // Return to normal padding
+            $("#LessonControl").css('paddingTop', 0)
+        }
     }
 
     $(document).ready(stickFunction);
     $(window).resize(stickFunction);
-    $(window).scroll(stickFunction);  
+    $(window).scroll(stickFunction);
 
    // disabled buttons
    $('.btn-disabled').removeClass("shine");
