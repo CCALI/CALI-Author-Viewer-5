@@ -60,3 +60,30 @@
   .sticky {
   }
 }
+
+/* Disable mobile menu bar auto-hide */
+#mobile-bar > .inner {
+  -webkit-transition: none;
+  -ms-transition: none;
+  transition: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+/* Disable mobile menu bar floating */
+#mobile-bar {
+  position: absolute;
+}
+.mobile-ui-on #mobile-bar,
+.mobile-ui-on #mobile-bar + .top-menu-clone {
+  display: block !important;
+  opacity: 1 !important;
+}
+#mobile-bar > .inner {
+  -webkit-transition: none;
+  -ms-transition: none;
+  transition: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}

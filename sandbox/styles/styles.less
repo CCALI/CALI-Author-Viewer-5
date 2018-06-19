@@ -201,8 +201,6 @@ url(https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css);
 
 body {
   overflow-x: hidden;
-  overflow-y:scroll;
-  -webkit-overflow-scrolling: touch;
   font: @CLFontFamily;
   font-weight: @CLFontWeight;
 }
@@ -225,7 +223,6 @@ p {
 
 a {
   color: @BlueSelected;
-  text-decoration: underline;
 }
 
 img {
@@ -251,7 +248,6 @@ label {
 .eq-height > [class*='col-'] {
   flex-direction: column;
 }
-
 
 .btn {
   .border-radius (@Radius);
@@ -990,6 +986,7 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
 
 .drag-content {
   overflow:auto !important;
+  position: static !important;
 }
 
 .dot-size {
@@ -1015,6 +1012,13 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
 .dots-yellow {
   background-image: @DotsYellow;
   .dot-size;
+}
+
+.ui-state-highlight {
+	opacity: 0.75;
+	margin-bottom: 10px !important;
+	margin-top: 10px !important;
+	background: @White;
 }
 
 div.horizontal {
@@ -1337,10 +1341,6 @@ div.vertical {
     left: 0;
   }
 }
-@media only screen and (max-width: 480px) {
-  .sticky {
-  }
-}
 
 /* Disable mobile menu bar auto-hide */
 #mobile-bar > .inner {
@@ -1641,7 +1641,7 @@ span.happyface-icon {
 }
 
 a.faculty-link {
-  color: @Gold;
+  color: dark(@Gold, 5%);
   font-size: 16px;
   font-weight: 900;
   letter-spacing: 1px;
@@ -2367,6 +2367,7 @@ img.footer-logo {
 .slider-input {
   border: 1px solid darken(@Grey, 15%);
   margin-bottom: 30px;
+  margin-left: 6px;
   text-align: right !important;
   padding: 0px 5px !important;
   width: 100% !important;

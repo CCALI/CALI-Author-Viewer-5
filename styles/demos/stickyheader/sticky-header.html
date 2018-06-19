@@ -2,32 +2,72 @@
 	<link rel="stylesheet" href="../../styles.css">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
-<div id="stickyHeader" class="sticky-header">
-	<p>A. These are the answers students pick from.</p>
-	<p>B. These are the answers students pick from</p>
-	<p>C. These are the answers students pick from</p>
-	<p>D. These are the answers students pick from</p>
-</div>
-<div class="content-under-sticky">
-	<p>
-		Lesson radio buttons go here
-	</p>   				
-</div>
+<body style="overflow-x: scroll;">
+<div id="LessonControl" class="lesson-view col-xs-12">
+  <h2>Lesson Title</h2>      
+  <div class="row">
+    <div class="col-sm-12">
+      <p>
+        Description about lesson. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+      </p>
+    </div>
+  </div>
+  <div id="stickyHeader" class="sticky-header">
+    <p>A. These are the answers students pick from.</p>
+    <p>B. These are the answers students pick from</p>
+    <p>C. These are the answers students pick from</p>
+    <p>D. These are the answers students pick from</p>
+  </div>
+  <div class="content-under-sticky">
+    <div class="row">
+      <div class="col-sm-12">
+        <p>
+          Questions to be answered go here. 
+        </p>
+        <p>  
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+        </p>      
+      </div>
+    </div>        
+  </div>
+</div>  
+</body>
 <script type="text/javascript">
-    var header = document.getElementById("stickyHeader");
-    var sticky = header.offsetTop;
+  //Sticky Header stickyAnchor
+  var header = document.getElementById("stickyHeader");
 
-    function stickFunction() {
+  // Initial lesson control height
+  const initialLCHeight = $("#LessonControl").height()
+  // Initial Sticky height
+  const initialStickyHeight = $("#stickyHeader").height()
+
+  var sticky = header.offsetTop - header.style.paddingTop;
+  function stickFunction() {
       if (window.pageYOffset >= sticky) {
-        header.classList.add("sticky");
-        $("#stickyHeight").height($("#stickyHeader").height());
-      } else {
-        header.classList.remove('sticky');
-        $('#stickyHeight').css('height', 0);
-      }         
-    }
+          header.classList.add("sticky");
+          // New height of the sticky header
+          const newStickyHeight = $("#stickyHeader").outerHeight()
+          // New Height of the lesson control
+          const newLCHeight = $("#LessonControl").height()
+          // Get the difference between lesson control heights
+          const dLCHeight = initialLCHeight - newLCHeight
+          // Get the difference between sticky heights
+          const dStickyHeight = initialStickyHeight - newStickyHeight
 
-    $(document).ready(stickFunction);
-    $(window).resize(stickFunction);
-    $(window).scroll(stickFunction);  
+          
+          // Add the differences between the lesson control heights and
+          // the sticky heights to the top padding of the lesson control
+          // for a seemless transition
+          console.log(dStickyHeight)
+          $("#LessonControl").css('paddingTop', dLCHeight - dStickyHeight)
+      } else {
+          header.classList.remove('sticky');
+          // Return to normal padding
+          $("#LessonControl").css('paddingTop', 0)
+      }
+  }
+
+  $(document).ready(stickFunction);
+  $(window).resize(stickFunction);
+  $(window).scroll(stickFunction);
 </script>
