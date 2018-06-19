@@ -34,20 +34,19 @@
 }
 
 a.faculty-link {
-  color: @Gold;
-  font-size: 1em;
+  color: dark(@Gold, 5%);
+  font-size: 16px;
   font-weight: 900;
   letter-spacing: 1px;
   -webkit-text-stroke-width: 1px;
   -webkit-text-stroke-color: darken(@Gold, 15%);
   &:hover {
-    color: darken(@Gold, 50%);
-    text-decoration: underline;
+  color: darken(@Gold, 50%);
   }
   &:focus,
   &:active {
-    color: @DarkBlue !important;
-    text-decoration: none;
+  color: @DarkBlue !important;
+  text-decoration: none;
   }
 }
 
