@@ -1,4 +1,8 @@
 {
+	"siteDefaults": {
+		"templates": "styles/documentjs-theme/templates",
+		"static": "styles/documentjs-theme/static"
+	},
 	"sites": {
 	 		"styles": {
 	   		"glob": "styles/{less,markdown,demos}/**/*.{css,less,scss,md}",
