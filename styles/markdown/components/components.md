@@ -13,16 +13,73 @@ Learn more about bootstrap3 components [here](https://getbootstrap.com/docs/3.3/
 
 #### List of components:
 
+* Animation Slides
+
 * Buttons
-	* Previous button
+	* Checkbox buttons
+
+	* Choose buttons
+
+	* Choose list buttons
+
+	* Choose multi buttons
+
+	* Feedback button
+
+	* Grade button
+
+	* Icon buttons
 	
 	* Next button
 
-* Menu
+	* Radio buttons
+
+	* Toolbar button
+
+* Images
+	* Hotspot
+
+	* Embedded images
+
+	* Images
+
+* Range Slider
+	* Slider dollars
+
+	* Slider numbers
+	
+	* Slider percentages
+
+	* Slider pips
+
+	* Slider text
+
+* Text Essays
+	* Text essays AC
+
+	* Text essays IA
+
+	* Text essays IAC
+
+* Drag Drop
+
+* Footer Links
+
+* Headers
+
+* Hints
+
+* Links
+
+* Menus
 	* Hamburger menu
 	
+	* Nav tree
+
 	* Slider menu
 
-* Navbar
+* Score
 
-* Header styles
+* Stickky Header
+
+* Tables

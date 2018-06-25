@@ -11,10 +11,12 @@ Here you can find information about the design elements and process used for tho
 
 * Icon Library
 
-* Cali Lessons Logos
+* Javascript and Jquery Libraries
 
-* Color Guide
+* CALI meta tags
 
-* Font Guide
+* Font guide
+
+* Color guide
 
 * Accessibility Guidelines
