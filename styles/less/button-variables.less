@@ -199,19 +199,31 @@
   color: @RedError; 
 }
 
-.question-symbol,
+.symbol-size {
+  width: 18px;
+  height: 16px;    
+}
+
 .info-symbol {
   display: none;
+  background: @InfoIcon;
+  .symbol-size;
 }
 
 .symbol-margin {
   margin-top: -3px;
-  margin-left: 0px;  
+  margin-left: 20px;  
 }
 
 .question-symbol p {
   .symbol-margin;
   color: @YellowDark;
+}
+
+.question-symbol {
+  display: none;
+  background: @MaybeIcon; 
+  .symbol-size;
 }
 
 .info-symbol p {
