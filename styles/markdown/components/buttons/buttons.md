@@ -12,6 +12,22 @@ There are multiple button types to be used in CALI lessons including icon button
 * Exit and resume later icon button
 
 * Navigation buttons
-	* Previous button
+	* Checkbox buttons
+
+	* Choose buttons
+
+	* Choose list buttons
+
+	* Choose multi buttons
+
+	* Feedback buttons
+
+	* Grade buttons
+
+	* Icon buttons
 	
 	* Next button
+
+	* Radio button
+
+	* Toolbar button

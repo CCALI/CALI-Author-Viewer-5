@@ -91,7 +91,8 @@ These are the hex colors used in Cali Lessons.
 		<span class="swatch-color yellow-maybe"><h5 class="txt-white">@YellowMaybe: #ffc000;</h5></span>
 	</li>	
 </ul>
-
+<br/>
+<p>Other Colors</p>
 <ul>
 	<li>	
 		<span class="swatch-color grey-default"><h5 class="txt-white">@GreyDefault: #777;</h5></span>

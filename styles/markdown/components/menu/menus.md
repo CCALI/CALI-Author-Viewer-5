@@ -11,4 +11,6 @@ Here are the menus used in CALI Lessons.
 
 * Hamburger menu
 
+* Nav Tree
+
 * Slider hamburger menu
