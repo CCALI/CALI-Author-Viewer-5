@@ -30,6 +30,12 @@ module.exports = function(grunt) {
         src: '**',
         dest: 'docs/demos/'
       },
+      fonts: {
+        expand: true,
+        cwd: 'node_modules/bootstrap/fonts',
+        src: '**',
+        dest: 'docs/fonts/'
+      },
       prodStyles: {
         src: 'docs/styles.css',
         dest: 'lessons/web/share/jq/cav-ux.css'
@@ -37,6 +43,12 @@ module.exports = function(grunt) {
       prodScripts: {
         src: 'docs/styles.js',
         dest: 'lessons/web/share/jq/cav-ux.js'
+      },
+      prodFonts: {
+        expand: true,
+        cwd: 'docs/fonts',
+        src: '**',
+        dest: 'lessons/web/share/jq/fonts/'
       }
     },
     clean: ['docs/']
@@ -47,6 +59,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
-  grunt.registerTask('document', ['clean', 'documentjs', 'less', 'uglify', 'copy:demos']);
-  grunt.registerTask('build', ['less', 'copy:prodStyles', 'copy:prodScripts']);
+  grunt.registerTask('document', ['clean', 'documentjs', 'less', 'uglify', 'copy:demos', 'copy:fonts']);
+  grunt.registerTask('build', ['document', 'copy:prodStyles', 'copy:prodScripts', 'copy:prodFonts']);
 };
