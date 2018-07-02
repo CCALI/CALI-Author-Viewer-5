@@ -1342,6 +1342,14 @@ div.vertical {
   margin-left: -15px;
 }
 
+.spacer {
+	margin-bottom: 40px !important;
+}
+
+.un-spacer {
+	margin-top: -30px !important;
+}
+
 /* Right hint */
 .glyphicon-ok {
   color: @GreenCorrect;
@@ -1383,7 +1391,8 @@ div.vertical {
 
 .info-symbol {
   display: none;
-  background: @InfoIcon;
+  background: @InfoIcon no-repeat;
+  background-repeat: no-repeat;
   .symbol-size;  
 }
 
@@ -1402,12 +1411,13 @@ div.vertical {
 .question-symbol {
   display: none;
   background: @MaybeIcon no-repeat;
+  background-repeat: no-repeat;
   .symbol-size;
 }
 
 .info-symbol p {
   .symbol-margin;
-  color: @BlueSelected no-repeat;  
+  color: @BlueSelected; 
 }
 
 /*----------------------*/
