@@ -308,13 +308,25 @@ function ScoreScreenToggle()
 	$("#ScoreReport").slideToggle("slow");
 }
 
+function updateProgressCircle()
+{	// Bitovi Tally visited pages for progress circle
+	let visited=0;
+	for (var p in PagesList)//book.pages)
+	{
+		if (PagesList[p].timeSpent>0) visited++
+	}
+	let progressNum = 1+ Math.floor(visited / PagesList.length*99);// Progress from 1 to 100.
+	$('#progress-circle').removeClass().addClass('score-circle progress-'+progressNum);
+	trace(progressNum);
+}
+
+
 function tallyScores()
 {
 	ScoreCorrect=0;
 	ScorePossible=0;
 	ScoreTotalQuestions=0;
 	ScoreTotalPages=0;
-	ScorePercent="";
 	ScoreDetails = "";
 	for (var p in PagesList)//book.pages)
 	{
@@ -335,24 +347,11 @@ function tallyScores()
 			ScoreTotalPages++;
 		}
 	}
-	var badgeID;
-	if (ScorePossible>0)
-	{
-		ScorePercent=Math.floor(ScoreCorrect*100/ScorePossible);
-		if (ScorePercent>99) badgeID='1';
-		else if (ScorePercent>=75) badgeID='2';
-		else if (ScorePercent>=60)  badgeID='3';
-		else badgeID='4';
-		ScorePercent=ScorePercent+"%"
-	}
-	else
-	{	// no score, default to lower badge
-		badgeID='4';
-		ScorePercent="-";
-	}
-	$('.ScorePercent').text(ScorePercent);
-	$('.ScoreTotal').text(ScorePossible);
-	$('.ScoreCorrect').text(ScoreCorrect);
+	
+	// Update score display: right, wrong and progress.	
+	$('.right-txt').text(ScoreCorrect);
+	$('.wrong-txt').text(ScorePossible-ScoreCorrect);
+	updateProgressCircle();	
 	$(".UploadScore3").hide();
 }
 
@@ -412,10 +411,10 @@ function makeScoreDetails()
 	ScoreDetails = pagetypes[0]+pagetypes[1];
 }
 
-function scoreAndShowFeedback(grade,answerid,answertext,partid, fbID, feedbackText,branch)
+function scoreAndShowFeedback(grade,answerid,answerText,partid, fbID, feedbackText,branch)
 {	// save score, display feedback at specified location with Jump button activated, if applicable. 
-	saveScore(grade,answerid,answertext,partid);
-	showFeedback(grade,(answertext.length<30 ? answertext : answertext.substr(0,30)+"..."),fbID,feedbackText,branch);
+	saveScore(grade,answerid,answerText,partid);
+	showFeedback(grade,answerText,fbID,feedbackText,branch); //(answertext.length<30 ? answertext : answertext.substr(0,30)+"...")
 }
 
 

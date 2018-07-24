@@ -1,289 +1,478 @@
-<!DOCTYPE html PUBLIC "-//WAPFORUM//DTD XHTML Mobile 1.0//EN" "http://www.wapforum.org/DTD/xhtml-mobile10.dtd">
 <!-- // CALI Viewer 5, Version: 07/15/2016
-Copyright 1999-2016 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. -->
+Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. -->
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head><meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
+
+	<title>CALI Viewer 5 - Center for Computer-Assisted Legal Instruction</title>
+	<!-- All Contents Copyright CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. -->
+	<!--Mode.BEGIN-->
+
+	<script type="text/javascript">
+//<![CDATA[
+	var username=null;
+	var runid=null;
+	var amode=0;
+	var dispName=null;
+	var orgName=null;
+	var resumeScoreURL=null;
+	runid="";
+	username="";
+	amode=0;
+	dispName="Student";
+	orgName="CALI Library";
+	var resumeScoreURL="";
+	var llMode='';
+
+
+	var _paq = _paq || [];
+	_paq.push(["setDomains", ["*.www.cali.org"]]);
+	_paq.push(["trackPageView"]);
+	_paq.push(["enableLinkTracking"]);
+	(function() {
+	 var u="//analytics.cali.org/";
+	 _paq.push(["setTrackerUrl", u+"piwik.php"]);
+	 _paq.push(["setSiteId", 3]);
+			_paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","visit"]);
+			_paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","visit"]);
+			_paq.push(["setCustomVariable", 4, "Run ID", "'.$runid.'","visit"]);
+			 var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
+	 g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
+	})();
+
+	//]]>
+	</script><!--Mode.END-->
+	<link xhref="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+	<link href="jQuery/css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" media="all" />
+	<link href="cavall.css" rel="stylesheet" type="text/css" />
+	<link href="cavmobile.css" media="screen" rel="stylesheet" type="text/css" />
+	<link href="jQuery/qtip.css" type="text/css" />
+	<link href="cav-ux.css" rel="stylesheet" type="text/css" />
+	<link href="cavfinal.css" rel="stylesheet" type="text/css" />
 	
-
-
-	
-	
-<title>CALI Viewer 5 - Center for Computer-Assisted Legal Instruction</title>
-<!-- All Contents Copyright CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. -->
-<!--Mode.BEGIN-->
-<script type="text/javascript">
-var username=null;
-var runid=null;
-var amode=0;
-var dispName=null;
-var orgName=null;
-var resumeScoreURL=null;
-runid="";
-username="";
-amode=0;
-dispName="Student";
-orgName="CALI Library";
-var resumeScoreURL="";
-var llMode='';
-
-
-  var _paq = _paq || [];
-  _paq.push(["setDomains", ["*.www.cali.org"]]);
-  _paq.push(["trackPageView"]);
-  _paq.push(["enableLinkTracking"]);
-  (function() {
-    var u="//analytics.cali.org/";
-    _paq.push(["setTrackerUrl", u+"piwik.php"]);
-    _paq.push(["setSiteId", 3]);
-	 _paq.push(["setCustomVariable", 2, "Organization", "'.$orgname.'","visit"]);
-	 _paq.push(["setCustomVariable", 3, "User Name", "'.$dispname.'","visit"]);
-	 _paq.push(["setCustomVariable", 4, "Run ID", "'.$runid.'","visit"]);
-	  var d=document, g=d.createElement("script"), s=d.getElementsByTagName("script")[0];
-    g.type="text/javascript"; g.async=true; g.defer=true; g.src=u+"piwik.js"; s.parentNode.insertBefore(g,s);
-  })();
-
-</script>
-<!--Mode.END-->
-<link href="jQuery/css/custom-theme/jquery-ui-1.8.18.custom.css" rel="stylesheet" type="text/css" media="all" />
-<link href="cavall.css" rel="stylesheet" type="text/css" />
-<link href="cavscreen.css" title="style" media="screen" rel="stylesheet" type="text/css"  />
-<link href="jQuery/qtip.css"  type="text/css" />
-<script src="jQuery/jquery-1.6.1.min.js" type="text/javascript"></script>
-<script src="jQuery/jquery-ui-1.8.6.custom.min.js" type="text/javascript"></script>
-<script src="jQuery/jquery.ui.ipad.js" type="text/javascript"></script>
-<script src="jQuery/easySlider1.5.js" type="text/javascript"></script>
-<script src="jQuery/jquery.xml.min.js" type="text/javascript"></script>
-<script src="jQuery/jquery.shuffle.js" type="text/javascript"></script>
-<script src="jQuery/jquery-fieldselection.js" type="text/javascript"></script>
-<script src="jQuery/jquery.scrollTo.js" type="text/javascript"></script>
-<script src="jQuery/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
-<script src="jQuery/flowplayer/flowplayer-3.2.6.min.js" type="text/javascript"></script>
-<script src="jQuery/jqprint.0.3.js" type="text/javascript"></script>
-<script src="CAV_types.js?201608" id="CAVjs" type="text/javascript"></script>
-<script src="CAV.js?201608" id="CAVjs" type="text/javascript"></script>
-<script src="CAV_mapper.js?201608" id="CAVjs" type="text/javascript"></script>
-<script src="CAV_layout.js?201608" id="CAVjs" type="text/javascript"></script>
-<script src="CAV_parser.js?201608" id="CAVjs" type="text/javascript"></script>
-<script src="CAV_score.js?201608" id="CAVjs" type="text/javascript"></script>
-<script src="CAV_urls.js?201608" id="CAVjs" type="text/javascript"></script>
-<script src="CAV_LessonLive.js?201608" id="CAVjs" type="text/javascript"></script>
+	<script src="jQuery/jquery.1.12.4.min.js" xsrc="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js" type="text/javascript"></script>
+	<script xsrc="jQuery/jquery-1.6.1.min.js" type="text/javascript"></script>
+	<script src="jQuery/jquery-ui-1.8.6.custom.min.js" type="text/javascript"></script>
+	<script src="jQuery/jquery.ui.ipad.js" type="text/javascript"></script>
+	<script src="jQuery/easySlider1.5.js" type="text/javascript"></script>
+	<script src="jQuery/jquery.xml.min.js" type="text/javascript"></script>
+	<script src="jQuery/jquery.shuffle.js" type="text/javascript"></script>
+	<script src="jQuery/jquery-fieldselection.js" type="text/javascript"></script>
+	<script src="jQuery/jquery.scrollTo.js" type="text/javascript"></script>
+	<script src="jQuery/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
+	<script src="jQuery/flowplayer/flowplayer-3.2.6.min.js" type="text/javascript"></script>
+	<script src="jQuery/jqprint.0.3.js" type="text/javascript"></script>
+	<script src="jQuery/bootstrap.3.3.6.min.js" xsrc="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="CAV_types.js?201608" id="CAVjs" type="text/javascript"></script>
+	<script src="CAV_lang.js" id="CAVjs" type="text/javascript"></script>
+	<script src="CAV.js?201608" id="CAVjs" type="text/javascript"></script>
+	<script src="CAV_mapper.js?201608" id="CAVjs" type="text/javascript"></script>
+	<script src="CAV_layout.js" id="CAVjs" type="text/javascript"></script>
+	<script src="CAV_parser.js?201608" id="CAVjs" type="text/javascript"></script>
+	<script src="CAV_score.js?201608" id="CAVjs" type="text/javascript"></script>
+	<script src="CAV_urls.js?201608" id="CAVjs" type="text/javascript"></script>
+	<script src="CAV_LessonLive.js?201608" id="CAVjs" type="text/javascript"></script>
 </head>
+
 <body>
-<div id="Loader"><img alt="CALI" src="img/CALILessonsLogo.gif" width="192" height="55" border="0"/>
-	<P>Loading the lesson. Please wait... <img alt="Loading..." src="img/ajax-loader.gif" width="16" height="16" /></P>
-	<noscript>
-	<div  class="NoJS">JavaScript is disabled. Please enable JavaScript to continue with this lesson.</div>
-	</noscript>
-</div>
-<div id="Viewer" class="hidestart">
-	<div id="Lesson">
-		<div id="HeaderLesson">
-			<div id="HeaderLessonBook"> <a class="NavClick" href="jump://About this lesson">About this lesson</a> | <a class="NavClick NoWrap" href="jump://Table of Contents">Table of Contents</a> </div>
-			<div id="HeaderLessonCAV"> <a class="UserName" href="#" target=_blank title="View your lesson runs">user@school.edu</a> | <a href="#" class="styleswitch" rel="cavmobile">mobile</a> <a href="#" class="styleswitch" rel="cavscreen">non-mobile</a> | <a href="#" class="textchanger" id="linkSmall" style="font-size: 90%">A</a> <a href="#" class="textchanger" id="linkLarge" style="font-size: 100%">A</a>
-			| <a class="PageComment" href="#" title="We welcome your comments and feedback over email">Feedback</a> | <a class="Exit" target="_parent" href="#" title="Exit the lesson and resume later">Exit &amp; Resume Later</a>
-			</div>
-		</div>
-		<div id="HeaderPage">
-			<div id="HeaderPageCALI"><a href="http://www.cali.org" title="CALI lessons online" target="_blank"><img alt="CALI Logo" src="img/CALILessonsLogo.gif" width="192" height="55" border="0"/></a></div>
-			<div id="llHeaderPage" class="hidestart">
-				<img id="llLiveLogo" class="hidestart" alt="LessonLive" src="img/LessonLiveLogo.png" width="192" height="55" border="0"/>
-				<img id="llLinkLogo" class="hidestart" alt="LessonLink" src="img/LessonLinkLogo.png" width="192" height="55" border="0"/></div>
-			<div class="LessonName">Lesson</div>
-		</div>
-		<div class="Navigation">
-			<div class="NavigationLesson hidestart" id="LessonNavigation">
-				<ul>
-					<li><a href="#" class="toggler">Outline</a>
-						<div id="TOCList"> Outline</div>
-					<li> <a href="#" class="maptoggler">Mapper</a>
-						<div class="MapBorder">
-							<div class="MapViewer">
-								<div class="map"></div>
-							</div>
-							<a href="#" onclick="mapsize(0);">Small</a> <a href="#" onclick="mapsize(1);">Big</a> </div>
-					<li><a href="#" class="toggler">Pages</a>
-					<ul>
-						<li><a href="#" class="toggler">Alphabetical</a>
-							<ul id="PagesList"><li>Alphabetical</li></ul>
-						<li><a href="#" class="toggler">Popups</a><ul id="PopupsList"><li>Popups</li></ul>
-					</ul>
-					<li><a href="/lessonlink/create" target="_blank" title="Create a lesson link for your students">LessonLink</a>
+	<div id="Loader">
+		<img alt="CALI" src="img/CALILessonsLogo.gif" width="192" height="55" border="0" />
+
+		<p>Loading the lesson. Please wait... <img alt="Loading..." src="img/ajax-loader.gif" width="16" height="16" /></p><noscript>
+		<div class="NoJS">
+			JavaScript is disabled. Please enable JavaScript to continue with this lesson.
+		</div></noscript>
+	</div>
+
+	<div id="Viewer" class="hidestart">
+		<div id="Lesson">
+			
+			
+			<nav class="navbar navbar-default CL-navbar-main" role="navigation" aria-label="Site Navbar">
+  <div class="container-fluid">
+    <div class="navbar-header CL-navbar">
+      <button type="button" class="navbar-toggle collapsed CL-menu-button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="CL-hamburger-white"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+        <img class="CL-logo" alt="CALI Lessons Logo">
+      </a>
+		<div id="llHeaderPage" class="hidestart"><img id="llLiveLogo" class="hidestart" alt="LessonLive" src="img/LessonLiveLogo.png" width="192" height="55" border="0" /> <img id="llLinkLogo" class="hidestart" alt="LessonLink" src="img/LessonLinkLogo.png" width="192" height="55" border="0" /></div>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <p class="navbar-text">
+            <a href="#" class="user-name-link UserName"  target="_blank" title="View your lesson runs">User Name</a>
+          </p>
+        </li>
+        <li>
+          <a href="#" class="exit-icon">
+            <span class="exit-btn" alt="exit">
+              </span></a><p class="navbar-text"><a href="#" class="exit-icon">
+                </a><a href="#" class="exit-link">Exit & Resume Later</a>
+              </p>
+            
+          
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-9 col-sm-8 col-xs-12">
+						<header  >
+							<h1 class="LessonName">Lesson Title</h1>
+						</header>
+					</div>
 					
-				</ul>
-			</div>
-			<div class="NavigationPage">
-				<div class="PageBorder">
-					<div class="PageHeader">
-						<div class="PageName">Page</div>
-                  
-						<div class="PageScore">
-							<span class="ScorePoints"></span>
-							<span class="ScoringButton">Score: <span class="ScoreCorrect">0</span>/ <span class="ScoreTotal">0</span>
-							(<span class="ScorePercent">0%</span>)</span>
-						</div>
-					</div>
-					<div id="ScoreSaveError" class="hidestart">
-  
-            <li>We're unable to save your recent answers for this lesson.
-				<li>Are you still logged in? You can login again in a new <a target=_blank" href="/user/">tab or window</a> then return here to continue your lesson.
-				<li>We'll try to save your answers again but after 3 minutes you will be disconnected from the lesson and will be required to login again.</li>
+		<!--								<span class="ScoringButton">Score: <span class="ScoreCorrect">0</span>/ <span class="ScoreTotal">0</span> (<span class="ScorePercent">0%</span>)</span>	-->
+
+
+	  <div class="col-md-3 col-sm-4 col-xs-12 score-center PageScore">
+      <div class="score-right">
+        <h3 id="right-txt" class="right-txt">1</h3><h4>Right</h4>
       </div>
-					<div id="ScoreReport"  class="hidestart">
-					<div class="Icon INFO">&nbsp;</div>
-	<div class="Close"><a class="ScoringButton" href="#"></a></div>
-	<div class="Title">Lesson Score</div>
-	<br clear=all><div class="ScoreReport">
-						<div class="Certificate" id="ScoreReportCert">
-						<p>
-						<img alt="CALI Lesson" class="ScoreBadge normal" src="img/CALILogoMedium.png" width="195" height="51" /></p>
-						<p>Center for Computer-Assisted Legal Instruction</p>
-						<p>www.cali.org</p><div class="gray">
-						<div class="LessonName">Lesson Title</div>
-										<div class="UserName"> User  </div>
-							<div class="OrgName"> School </div></div>
-									<p>&nbsp; </p>
-										<table width="100%" border="0">
-											<tr>
-																						<td align="right" valign="top">URL:</td>
-												<td align="left" valign="top"><span class="ScoreURL">url</span></td>
-												<td rowspan="4" valign="middle"><img align="right" alt="CALI Lesson" class="ScoreBadge normal" src="img/LessonLogo.gif" width="60" height="60" /></td>
-											</tr>
-																					<tr>
-																						<td align="right" valign="top">Score:</td>
-																						<td align="left" valign="top"><span class="ScoreCorrect">correct</span> correct answers
-																							out of <span class="ScoreTotal">total</span> questions
-																						attempted (<span class="ScorePercent">percent</span>)</td>
-											</tr>
-																					<tr>
-																						<td align="right" valign="top">Date:</td>
-																						<td align="left" valign="top"><span class="ScoreDate">date</span></td>
-											</tr>
-																					<tr>
-																						<td align="right" valign="top">Time:</td>
-																						<td align="left" valign="top"><span class="ScoreTime">time</span></td>
-											</tr>
-																				</table>
-							<p>&nbsp;</p>										
-							 
-						</div>
-						<div class="ScoreButtons hidestart">
-						<div class="ButtonRow">
-							<a onclick="printScore()" class="HyperButton">Print this score</a>
-							<a onclick="uploadScoreYN()" class="UploadScore1 HyperButton">Finalize this score</a> </div>
-						<div id="dialog-finalize" title="Finalize your score?" class="UploadScore Ask hidestart">Would you like to finalize this score? If you click yes, this score will be finalized and preserved in your CALI profile; you will exit this lesson immediately and cannot resume it. You may, however, run this lesson again from the beginning, starting with no score. </div>
-						<div id="dialog-revealnames" title="Reveal student names?" class="llDialogRevealNames Ask hidestart">Would you like to reveal student names? If you click yes, names will be displayed in place of the anonymous names in the participants panel.  </div>
-						<div class="UploadScore UploadScore2 hidestart">Saving score...<img src="img/ajax-loader.gif" width="16" height="16"></div>
-						<div  class="UploadScore UploadScore3 hidestart"><span class="message"></span></div>
-						<a href="#" class="toggler"><span class="t hidestart" ref="ScoreDetails">Details</span></a>
-						<div id="ScoreReportDetails" >
-							<table width="80%" border="1" align="center" cellpadding="5" cellspacing="0" bgcolor="#FFFFFF">
-								<colgroup>
-								<col class="ScoreReportCol1" />
-								<col class="ScoreReportCol2" />
-								<col class="ScoreReportCol3" />
-								<col class="ScoreReportCol4" />
-								<col class="ScoreReportCol5" />
-								</colgroup>
-								<tr>
-									<th nowrap="nowrap">Page</th>
-									<th nowrap="nowrap">Time</th>
-									<th nowrap="nowrap">Attempts</th>
-									<th nowrap="nowrap">Score</th>
-									<th nowrap="nowrap">1st Answer</th>
-								</tr>
-								<tr>
-									<td>Question 1 </td>
-									<td>n/a</td>
-									<td>n/a</td>
-									<td>n/a</td>
-								</tr>
-							</table>
-						</div>
-						<div>
-						</div></div>
-					</div></div>
-					<div class="LinkNavBar">&nbsp;</div>
-					<div class="PageText"></div>
-					<div class="PageInteraction">Please wait...<img alt="Loading..." src="img/ajax-loader.gif" width="16" height="16" /></div>
-					<div class="PageSpecificGrade"></div>
-					<div class="PageSpecificNav"></div>
-					<div class="PageNavigation">
-						<div class="PageNavBar">&nbsp;
-							<a  href="choice://goback">Back</a> <a href="choice://gonext">Next</a>
-							&nbsp;</div>
-						<div class="LinkNavBar">&nbsp;</div>
-					</div>
+      <!-- score circle -->
+      <div id="progress-circle" class="score-circle"><span></span></div>
+      <!-- score circle end -->
+      <div class="score-wrong">
+        <h3 id="wrong-txt" class="wrong-txt">2</h3><h4>Wrong</h4>
+      </div>
+    </div>
+	  
+					
 				</div>
 			</div>
-			<div class="llNavigation hidestart" id="llPanel"><h2>Participants</h2>
-				<div class="llUserList"></div><br/>
-				<!--<input id="llRevealResponsesCB" type=checkbox>Reveal Responses</input>-->
-				<label><input id="llRevealNamesCB" type=checkbox></input>Reveal Names</label>
-				<br/><br/><a id="llLessonPast"  target="_blank" class="hidestart HyperButton" href="about">Analytics</a>
-				
-				
-			</div>
-			<div id="dataTrace"  class="Trace" style="overflow:scroll;height:400px">
-				<table>
-					<tr>
-						<th>#</th>
-						<th>Msg</th>
-					</tr>
-				</table>
-			</div>
-		</div>
-		<div class="Footer">
-			<div class="LessonName">Lesson</div>
-			<div class="Copyright">All Contents &copy; <img alt="CALI Logo" src="img/CALILogo.gif"/>, The Center for Computer-Assisted Legal Instruction.
-				All Rights Reserved.</div>
-		</div>
-		<img id="picloader" />
-		<div id="dialog-survey" style="display:none" title="Give us your feedback">Would you like to take an anonymous survey?</div>
-		<div id="dialog-lightbox" title="Image"></div>
-	</div></div>
-	<div class="Assets" id="Assets" style="display:none"><div id="Languages">
-	<div ref="TOC">Table of Contents</div>
-	<div ref="LeaveLesson">You are about to leave the CALI lesson<BR>{1}</div><!--1=lesson title-->
-	<div ref="gradeCaption">Grade</div>
-	<div ref="playVideo">Play video in a new window</div>
-	<div ref="GradeAnswer">Grade my answer</div>
-	<div ref="ResetAnswer">Clear answer</div>
-	<div ref="ReviewAnswer">Review my answer</div>
-	<div ref="RevealAnswer">I give up</div>
-	<div ref="GaveUpHeading">The correct response is...</div>
-	<div ref="EmailSubject">CALI Lesson Comment: {1}</div>
-	<div ref="PageMissing">The page named '{1}' wasn't found.</div>
-	<div ref="PageMissingReturnTOC">The page named '{1}' wasn't found. Returning to table of contents</div>
-	<div ref="ScoreDetails">Your score details...</div>
-	<div ref="TryOnce">Try answering the question at least once.</div>
-	<div ref="MakeSelection">Make a selection</div>
-	<div ref="TypeSomething">You should try typing something into the box.</div>
-	<div ref="ClosePopup">Close</div>
-	<div ref="NextPage">Next</div>
-	<div ref="ModelAnswerWillAppear">The model answer will appear here.</div>
-	<div ref="NextPageDisabled">You'll need to answer the question correctly first.</div>
-	<div ref="HotSpotDescription">Description</div>
-	<div ref="AudioTranscription">Transcription</div>
-	<div ref="PlayAudio">Play this audio file</div>
-	<div ref="FacultyView">Faculty View</div>
-	<div ref="PageTypeUnsupported">This page type is not supported.</div>
-	<div ref="GaveUpSA">Short answer analysis:</div>
-	<div ref="HelpEssay">CALI Lessons cannot score essay questions. Essay questions do not count for or against your lesson score. Once you submit your answer, we will provide a model answer for self-evaluation.</div>
-	<div ref="ScoreSaveOff">ScoreSave not available</div>
-	<div ref="ScoreSaveOffNote"><b>Please note:</b> You will not be able to save your score to the CALI website if you use the DVD or download version. If you wish to save your score, please <a href="http://www.cali.org">run the lesson</a> on the CALI web site instead.</div>
-	<div ref="ScoreSaveError">Error occurred saving scores to {1}.</div><!--1=full url save path-->
-	<div ref="ScoreSaveSaved">Your scores are saved. Redirecting to your detailed score report... </div>
-	<div ref="ScoreSaveExit">Exit the lesson</div>
-	<div ref="scoreSaveViewReport">Visit the ScoreSave page.</div>
-	<div ref="ScoreSaveFail">Unable to save data.</div>
-	<div ref="HelpStudentDragDrop"><p>First, click and drag items from the column on the left into the correct column(s) on the right. Use your mouse/finger to drag the items. If a (+) icon is present click to expand the item.</p></div>
-	<div ref="HelpStudentDragDropSort"><p>The items will also need to be placed in the correct order.</p></div>
-	</div>
+
+				<div class="active">
+					<div class="page-content">
+						<div class="row eq-height">
+							<div class="toc-view col-xs-12">
+								<input id="cl-hamburger" class="CL-hamburger" placeholder="Table of Contents Menu" type="checkbox" />
+
+								<div id="SliderControl" class="CLAccordion">
+									<h2>Table of Contents</h2>
+<!--This section is also part of slider-menu end--> 
+  <ul class="nav nav-list-main">
+    <li><label class="nav-toggle nav-header toggle-icon" for="cl-hamburger">
+	 <a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1</p></a></label>
+      <ul class="nav nav-list slider-left" style="display: none;">
+        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+        <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1</p></a></label>
+          <ul class="nav nav-list slider-left" style="display: none;">
+            <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+            <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+            <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1</p></a></label>
+              <ul class="nav nav-list slider-left" style="display: none;">
+                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1</p></a></label>
+                  <ul class="nav nav-list slider-left" style="display: none;">
+                    <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                    <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                    <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1</p></a></label>
+                      <ul class="nav nav-list slider-left" style="display: none;">
+                        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                        <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1.1</p></a></label>
+                          <ul class="nav nav-list slider-left" style="display: none;">
+                            <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                            <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                            <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1.1.1</p></a></label>
+                              <ul class="nav nav-list slider-left" style="display: none;">
+                                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><label class="nav-toggle-no-sub level-indent-no-sub"> <a class="toc-link visited" href="#" onclick="slider()" title="button to open and close sub menus"><p class="toc-title no-sub">Header as Lesson Link</p></a></label>
+    </li>
+    <li><label class="about-lesson-link level-indent-no-sub"> <a class="toc-link visited" href="#" onclick="slider()" title="button to open and close sub menus"><p class="toc-title no-sub">About this lesson</p></a></label>
+    </li>
+  
+
+										<li>
+											<label class="nav-toggle-no-sub level-indent-no-sub"><a class="toc-link visited" href="#" onclick="slider()" title="button to open and close sub menus"></a></label>
+
+											<p class="toc-title no-sub"><label class="nav-toggle-no-sub level-indent-no-sub">Header as Lesson Link</label></p>
+										</li>
+									</ul>
+
+								</div>
+							</div>
+
+							<div id="LessonControl" class="xlesson-view col-xs-12">
+								<div class="PageHeader">
+
+									
+
+								<div class="row">
+									<div class="col-sm-12">
+									<div id="ScoreSaveError" class="hidestart panel panel-default">
+									<div class="panel-heading alert-maybe-heading"><h4>Error</h4> </div>
+									 <div class="panel-body alert-maybe-body">
+										<ul>
+											<li>We're unable to save your recent answers for this lesson.</li>
 	
-</div>
-	<div class="DevBar"> <a href="#" id="Tracer-toggle">tracer</a>
-		<div id="dataInput"  class="Trace" style="xvisibility:hidden"></div>
-		<div id="dataOutput" class="Trace" style="xvisibility:hidden">dataOutput </div>
+											<li>Are you still logged in? You can login again in a new <a target="_blank&quot;" href="/user/">tab or window</a> then return here to continue your lesson.</li>
+	
+											<li>We'll try to save your answers again but after 3 minutes you will be disconnected from the lesson and will be required to login again.</li>
+										</ul>
+									 </div>
+								</div>
+
+									<div id="ScoreReport" class="hidestart">
+									<div class="Icon INFO">
+										&nbsp;
+									</div>
+
+									<div class="Close">
+										<a class="ScoringButton" href="#"></a>
+									</div>
+
+									<div class="Title">
+										Lesson Score
+									</div><br clear="all" />
+
+									<div class="ScoreReport">
+										<div class="Certificate" id="ScoreReportCert">
+											<p><img alt="CALI Lesson" class="ScoreBadge normal" src="img/CALILogoMedium.png" width="195" height="51" /></p>
+
+											<p>Center for Computer-Assisted Legal Instruction</p>
+
+											<p>www.cali.org</p>
+
+											<div class="gray">
+												<div class="LessonName">
+													Lesson Title
+												</div>
+
+												<div class="UserName">
+													User
+												</div>
+
+												<div class="OrgName">
+													School
+												</div>
+											</div>
+
+											<p>&nbsp;</p>
+
+											<table width="100%" border="0">
+												<tr>
+													<td align="right" valign="top">URL:</td>
+
+													<td align="left" valign="top"><span class="ScoreURL">url</span></td>
+
+													<td rowspan="4" valign="middle"><img align="right" alt="CALI Lesson" class="ScoreBadge normal" src="img/LessonLogo.gif" width="60" height="60" /></td>
+												</tr>
+
+												<tr>
+													<td align="right" valign="top">Score:</td>
+
+													<td align="left" valign="top"><span class="ScoreCorrect">correct</span> correct answers out of <span class="ScoreTotal">total</span> questions attempted (<span class="ScorePercent">percent</span>)</td>
+												</tr>
+
+												<tr>
+													<td align="right" valign="top">Date:</td>
+
+													<td align="left" valign="top"><span class="ScoreDate">date</span></td>
+												</tr>
+
+												<tr>
+													<td align="right" valign="top">Time:</td>
+
+													<td align="left" valign="top"><span class="ScoreTime">time</span></td>
+												</tr>
+											</table>
+
+											<p>&nbsp;</p>
+										</div>
+
+										<div class="ScoreButtons hidestart">
+											<div class="ButtonRow">
+												<a onclick="printScore()" class="HyperButton">Print this score</a> <a onclick="uploadScoreYN()" class="UploadScore1 HyperButton">Finalize this score</a>
+											</div>
+
+											<div id="dialog-finalize" title="Finalize your score?" class="UploadScore Ask hidestart">
+												Would you like to finalize this score? If you click yes, this score will be finalized and preserved in your CALI profile; you will exit this lesson immediately and cannot resume it. You may, however, run this lesson again from the beginning, starting with no score.
+											</div>
+
+											<div id="dialog-revealnames" title="Reveal student names?" class="llDialogRevealNames Ask hidestart">
+												Would you like to reveal student names? If you click yes, names will be displayed in place of the anonymous names in the participants panel.
+											</div>
+
+											<div class="UploadScore UploadScore2 hidestart">Saving score...<img src="img/ajax-loader.gif" width="16" height="16" /></div>
+
+											<div class="UploadScore UploadScore3 hidestart"></div><a href="#" class="toggler"><span class="t hidestart" ref="ScoreDetails">Details</span></a>
+
+											<div id="ScoreReportDetails">
+												<table width="80%" border="1" align="center" cellpadding="5" cellspacing="0" bgcolor="#FFFFFF">
+													<colgroup>
+														<col class="ScoreReportCol1" />
+														<col class="ScoreReportCol2" />
+														<col class="ScoreReportCol3" />
+														<col class="ScoreReportCol4" />
+														<col class="ScoreReportCol5" />
+													</colgroup>
+
+													<tr>
+														<th nowrap="nowrap">Page</th>
+
+														<th nowrap="nowrap">Time</th>
+
+														<th nowrap="nowrap">Attempts</th>
+
+														<th nowrap="nowrap">Score</th>
+
+														<th nowrap="nowrap">1st Answer</th>
+													</tr>
+
+													<tr>
+														<td>Question 1</td>
+
+														<td>n/a</td>
+
+														<td>n/a</td>
+
+														<td>n/a</td>
+													</tr>
+												</table>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								
+								
+									<h2 class="PageName">Page</h2>
+									
+								</div>
+							
+								</div>
+								</div>
+<br />
+							<div class="gap"></div>
+								
+									
+
+								<div class="row">
+									<div class="col-sm-12">
+										<!--<div id="stickyHeader" class="sticky-header"></div>-->
+										<div class="PageText"></div>
+									</div>
+								</div>
+								
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="LinkNavBar toolbar-section">
+											<!--<button class="btn btn-default toolbar-button" type="button"><p>Defined Benefits Plan</p></button>-->
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="PageInteraction">Please wait...<img alt="Loading..." src="img/ajax-loader.gif" width="16" height="16" /></div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="PageSpecificGrade"></div>
+										<div class="PageSpecificNav"></div>
+										<div class="PageNavigation">
+											<div class="PageNavBar"></div>
+										</div>
+									</div>
+								</div>
+								<div class="content-under-sticky"></div>
+							</div>
+
+							<div class="gap"></div>
+						</div>
+					
+
+					<div class="container-fluid">
+						<div class="row">
+							<div class="text-center">
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="llNavigation hidestart" id="llPanel">
+					<h2>Participants</h2>
+
+					<div class="llUserList"></div><br />
+					<!--<input id="llRevealResponsesCB" type=checkbox>Reveal Responses</input>-->
+					 <label><input id="llRevealNamesCB" type="checkbox" />Reveal Names</label><br />
+					<br />
+					<a id="llLessonPast" target="_blank" class="hidestart HyperButton" href="about">Analytics</a>
+				</div>
+
+				<div id="dataTrace" class="Trace" style="overflow:scroll;height:400px">
+					<table>
+						<tr>
+							<th>#</th>
+
+							<th>Msg</th>
+						</tr>
+					</table>
+				</div>
+			</div>
+
+			<footer>
+				<div class="container-fluid">
+				  <div class="row">
+					 <br>
+					 <div class="text-center">
+						<p>All Contents © CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. </p>
+					 </div>
+					 <div class="text-center faculty-view">
+						<a href="#" alt="Faculty View Link" class="faculty-link"></a>
+					 </div>          
+				  </div>
+				</div>
+				<div class="gap"></div>
+				<div class="gap"></div>
+		 </footer>
+			
+			
+			<img id="picloader" />
+
+			<div id="dialog-survey" style="display:none" title="Give us your feedback">
+				Would you like to take an anonymous survey?
+			</div>
+
+			<div id="dialog-lightbox" title="Image"></div>
+		</div>
+	</div>
+
+	<div class="Assets" id="Assets" style="display:none">
+	</div>
+
+	<div class="DevBar">
+		<a href="#" id="Tracer-toggle">tracer</a>
+
+		<div id="dataInput" class="Trace" ></div>
+
+		<div id="dataOutput" class="Trace" ></div>
 	</div>
 </body>
 </html>

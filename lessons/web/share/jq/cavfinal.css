@@ -1,0 +1,13 @@
+/* CALI Viewer 6 Temp override */
+blockquote{ /* blockquote from CA lessons does NOT expect a left gray bar */
+	border: 0px solid #999;
+	page-break-inside:avoid;
+}
+
+.hint p { /* hint caption overrides grade icon for checkbox/radio button */
+	margin-left: 0;
+}
+
+p {
+	font-size: 1em;
+}

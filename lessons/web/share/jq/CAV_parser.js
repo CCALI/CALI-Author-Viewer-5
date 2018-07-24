@@ -62,7 +62,7 @@ function parsePageXML(pageXML)
 	{
 		page.details.push({});
 		page.details[d].text =jQuery.trim($(this).xml());
-		page.details[d].letter = "ABCDEFG".charAt(d)+".";
+		page.details[d].letter = nthLetter(d);//"ABCDEFG".charAt(d)+".";
 	});
 
 	page.rightFeedback=pageXML.find("RIGHT").xml(); 	page.rightDest=pageXML.find("RIGHT").attr("NEXTPAGE");
@@ -267,19 +267,24 @@ function parsePageXML(pageXML)
 	
 	return page;
 }
-
+function emptyMatrix(numRows,numCols)
+{
+	let map=[];
+	for (let row=0;row<numRows;row++)
+	{
+		map[row]=[];
+		for (let col=0;col<numCols;col++)
+			map[row][col]=0;
+	}
+	return map;
+}
 function checkMatrix(checklist )  
 {	// Convert list of correct checkbox/radio button items into matrix.
 	// Sample Checklist "1-1,3-1,4-1"
 	// Checklist is 1-based. but we'll work with 0-based.
 	var row;
 	var col;
-	var map=[];
-	for (row=0;row<MAX_ROWS;row++){
-		map[row]=[];
-		for (col=0;col<MAX_COLUMNS;col++)
-			map[row][col]=0;
-	}
+	var map=emptyMatrix(MAX_ROWS,MAX_COLUMNS);
 	if (checklist!="")
 	{
 		var parts=checklist.split(",");

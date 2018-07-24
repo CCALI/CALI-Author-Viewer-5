@@ -1,0 +1,350 @@
+<MAPPER>
+<INFO>
+<TITLE>Statutory Interpretation</TITLE>
+</INFO>
+<PAGES>
+<PAGE ID="1" NAME="Introduction 1 of 7" KIND="3" HREF="p_001" BOUNDS="544,111,109"><TIP> Statutes are an important part of our law.  Law students, graduate students...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="2" BOUNDS="584,159,30"/>
+</PAGE>
+
+<PAGE ID="2" NAME="Introduction 2 of 7" KIND="3" HREF="p_054" BOUNDS="544,194,109"><TIP> Before we begin, let's clear up some confusion that may be produced by the...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="22" BOUNDS="584,242,30"/>
+</PAGE>
+
+<PAGE ID="3" NAME="Conclusion" KIND="3" HREF="p_002" BOUNDS="2506,111,109"><TIP> Learning about statutory interpretation can seem frustrating, but it is...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="2524,159,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="2564,159,33"/>
+</PAGE>
+
+<PAGE ID="4" NAME="Contents" KIND="4" HREF="contents" BOUNDS="708,28,109"><TIP>...</TIP>
+  <BRANCH KIND="12" NAME="Introduction" DEST="1" BOUNDS="140,76,64"/>
+  <BRANCH KIND="12" NAME="Why It's Challenging" DEST="5" BOUNDS="214,76,104"/>
+  <BRANCH KIND="12" NAME="Legislative Intent" DEST="33" BOUNDS="328,76,88"/>
+  <BRANCH KIND="12" NAME="Plain Meaning v. Purpose Approach" DEST="14" BOUNDS="426,76,178"/>
+  <BRANCH KIND="12" NAME="Linguistic Canons" DEST="16" BOUNDS="614,76,91"/>
+  <BRANCH KIND="12" NAME="Implications of the Legislative Process" DEST="18" BOUNDS="715,76,187"/>
+  <BRANCH KIND="12" NAME="Substantive Canons" DEST="20" BOUNDS="912,76,103"/>
+  <BRANCH KIND="12" NAME="Statutes Affecting Statutory Interpretation" DEST="28" BOUNDS="1025,76,202"/>
+  <BRANCH KIND="12" NAME="A Little Review" DEST="60" BOUNDS="1237,76,79"/>
+  <BRANCH KIND="12" NAME="Conclusion" DEST="3" BOUNDS="1326,76,60"/>
+</PAGE>
+
+<PAGE ID="5" NAME="Why 1 of 12" KIND="3" HREF="p_003" BOUNDS="762,111,109"><TIP> Why would statutory interpretation be complicated? It sounds like it should...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="6" BOUNDS="802,159,30"/>
+</PAGE>
+
+<PAGE ID="6" NAME="Why 2 of 12" KIND="3" HREF="p_004" BOUNDS="762,194,109"><TIP> Language is not an exact tool. That is particularly so for the English...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="7" BOUNDS="802,242,30"/>
+</PAGE>
+
+<PAGE ID="7" NAME="Why 3 of 12" KIND="3" HREF="p_055" BOUNDS="762,277,109"><TIP> Consider a term used frequently in the legal profession, &quot;cite.&quot; Put a...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="43" BOUNDS="750,325,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="7" BOUNDS="797,325,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="43" BOUNDS="853,325,30"/>
+</PAGE>
+
+<PAGE ID="8" NAME="Why 7 of 12" KIND="3" HREF="p_005" BOUNDS="762,609,109"><TIP> Words may have surprisingly different meanings to people of different...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="9" BOUNDS="802,657,30"/>
+</PAGE>
+
+<PAGE ID="9" NAME="Why 8 of 12" KIND="3" HREF="p_016" BOUNDS="762,692,109"><TIP> How a statute affects a person will probably affect how that person thinks...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="10" BOUNDS="802,740,30"/>
+</PAGE>
+
+<PAGE ID="10" NAME="Why 9 of 12" KIND="3" HREF="p_006" BOUNDS="762,775,109"><TIP> A statute provides that one lane of a highway can be designated an &quot;express...</TIP>
+  <BRANCH KIND="14" NAME="A" DEST="11" BOUNDS="776,823,16"/>
+  <BRANCH KIND="15" NAME="B" DEST="11" BOUNDS="802,823,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="11" BOUNDS="828,823,30"/>
+</PAGE>
+
+<PAGE ID="11" NAME="Why 10 of 12" KIND="3" HREF="p_007" BOUNDS="762,858,109"><TIP> Here is the same question but looked at from a different perspective. Bob...</TIP>
+  <BRANCH KIND="15" NAME="A" DEST="12" BOUNDS="776,906,16"/>
+  <BRANCH KIND="14" NAME="B" DEST="12" BOUNDS="802,906,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="12" BOUNDS="828,906,30"/>
+</PAGE>
+
+<PAGE ID="12" NAME="Why 11 of 12" KIND="3" HREF="p_008" BOUNDS="762,941,109"><TIP> Who is right? John or Bob? To each it seems clear that the statute's...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="13" BOUNDS="802,989,30"/>
+</PAGE>
+
+<PAGE ID="13" NAME="Why 12 of 12" KIND="3" HREF="p_047" BOUNDS="762,1024,109"><TIP> You have now completed the section that addresses why the process of...</TIP>
+  <BRANCH KIND="13" NAME="A" DEST="33" BOUNDS="776,1072,16"/>
+  <BRANCH KIND="13" NAME="B" DEST="4" BOUNDS="802,1072,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="828,1072,30"/>
+</PAGE>
+
+<PAGE ID="14" NAME="Plain Meaning 1 of 7" KIND="3" HREF="p_009" BOUNDS="1198,111,109"><TIP> The two most popular approaches to statutory interpretation today are the...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="15" BOUNDS="1238,159,30"/>
+</PAGE>
+
+<PAGE ID="15" NAME="Plain Meaning 2 of 7" KIND="3" HREF="p_024" BOUNDS="1198,194,109"><TIP> Consider the following hypothetical problem. In response to a citizen...</TIP>
+  <BRANCH KIND="14" NAME="A" DEST="39" BOUNDS="1212,242,16"/>
+  <BRANCH KIND="15" NAME="B" DEST="39" BOUNDS="1238,242,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="39" BOUNDS="1264,242,30"/>
+</PAGE>
+
+<PAGE ID="16" NAME="Linguistic 1 of 7" KIND="3" HREF="p_010" BOUNDS="1416,111,109"><TIP> A linguistic canon is a rule of interpretation that is based upon the way...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="17" BOUNDS="1434,159,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="1474,159,33"/>
+</PAGE>
+
+<PAGE ID="17" NAME="Linguistic 2 of 7" KIND="3" HREF="p_039" BOUNDS="1416,194,109"><TIP> Ejusdem generis means of the same class. It is used to narrow a general...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="52" BOUNDS="1456,242,30"/>
+</PAGE>
+
+<PAGE ID="18" NAME="Process 1 of 4" KIND="3" HREF="p_011" BOUNDS="1634,111,109"><TIP> Each legislature has an operational procedure that establishes the way...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="19" BOUNDS="1674,159,30"/>
+</PAGE>
+
+<PAGE ID="19" NAME="Process 2 of 4" KIND="3" HREF="p_044" BOUNDS="1634,194,109"><TIP> Here is an example to illustrate this concept.  Congress provides funds for...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="50" BOUNDS="1674,242,30"/>
+</PAGE>
+
+<PAGE ID="20" NAME="Substantive 1 of 3" KIND="3" HREF="p_012" BOUNDS="1852,111,109"><TIP> As you have seen, a number of canons of interpretation have developed. A...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="21" BOUNDS="1870,159,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="1910,159,33"/>
+</PAGE>
+
+<PAGE ID="21" NAME="Substantive 2 of 3" KIND="3" HREF="p_032" BOUNDS="1852,194,109"><TIP> Consider the following hypothetical facts. A federal statute provided that...</TIP>
+  <BRANCH KIND="15" NAME="Yes" DEST="47" BOUNDS="1858,242,26"/>
+  <BRANCH KIND="14" NAME="No" DEST="47" BOUNDS="1894,242,22"/>
+  <BRANCH KIND="11" NAME="Next" DEST="47" BOUNDS="1926,242,30"/>
+</PAGE>
+
+<PAGE ID="22" NAME="Introduction 3 of 7" KIND="3" HREF="p_013" BOUNDS="544,277,109"><TIP> In each of the following sections, you will be introduced to an aspect of...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="23" BOUNDS="584,325,30"/>
+</PAGE>
+
+<PAGE ID="23" NAME="Introduction 4 of 7" KIND="3" HREF="p_014" BOUNDS="544,360,109"><TIP> Statutes are rules of law that are produced by a legislature, as...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="24" BOUNDS="562,408,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="602,408,33"/>
+</PAGE>
+
+<PAGE ID="24" NAME="Introduction 5 of 7" KIND="3" HREF="p_036" BOUNDS="544,443,109"><TIP> Statutes produced by local governments such as cities and counties are...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="27" BOUNDS="562,491,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="602,491,33"/>
+</PAGE>
+
+<PAGE ID="25" NAME="Introduction 6 of 7 (4/30/2010 replaced drawlines)" KIND="3" HREF="p_015" BOUNDS="272,28,109"><TIP> Here are the basic facts of this hypothetical question.  Bob operates a...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="26" BOUNDS="260,76,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="24" BOUNDS="307,76,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="27" BOUNDS="363,76,30"/>
+</PAGE>
+
+<PAGE ID="26" NAME="Introduction 7 of 7" KIND="3" HREF="p_046" BOUNDS="544,609,109"><TIP> You have completed the introductory section of this lesson. What would you...</TIP>
+  <BRANCH KIND="13" NAME="A" DEST="5" BOUNDS="558,657,16"/>
+  <BRANCH KIND="13" NAME="B" DEST="4" BOUNDS="584,657,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="610,657,30"/>
+</PAGE>
+
+<PAGE ID="27" NAME="Introduction 6 of 7" KIND="3" HREF="p_065" BOUNDS="544,526,109"><TIP> Here are the basic facts of this hypothetical question.  Bob operates a...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="26" BOUNDS="532,574,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="26" BOUNDS="579,574,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="26" BOUNDS="635,574,30"/>
+</PAGE>
+
+<PAGE ID="28" NAME="Statutes 1 of 6" KIND="3" HREF="p_017" BOUNDS="2070,111,109"><TIP> The United States Code and the statutes of many states have sections that...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="29" BOUNDS="2110,159,30"/>
+</PAGE>
+
+<PAGE ID="29" NAME="Statutes 2 of 6" KIND="3" HREF="p_033" BOUNDS="2070,194,109"><TIP> Let's illustrate this with a hypothetical question.  A general state...</TIP>
+  <BRANCH KIND="14" NAME="Yes" DEST="48" BOUNDS="2076,242,26"/>
+  <BRANCH KIND="15" NAME="No" DEST="48" BOUNDS="2112,242,22"/>
+  <BRANCH KIND="11" NAME="Next" DEST="48" BOUNDS="2144,242,30"/>
+</PAGE>
+
+<PAGE ID="30" NAME="Statutes 4 of 6" KIND="3" HREF="p_018" BOUNDS="2070,360,109"><TIP> In 1995, the National Conference of Commissioners on Uniform State Laws...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="31" BOUNDS="2088,408,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="2128,408,33"/>
+</PAGE>
+
+<PAGE ID="31" NAME="Statutes 5 of 6" KIND="3" HREF="p_034" BOUNDS="2070,443,109"><TIP> A question arose as to the proper interpretation of a California statute....</TIP>
+  <BRANCH KIND="15" NAME="Yes" DEST="4" BOUNDS="2076,491,26"/>
+  <BRANCH KIND="14" NAME="No" DEST="4" BOUNDS="2112,491,22"/>
+  <BRANCH KIND="11" NAME="Next" DEST="49" BOUNDS="2144,491,30"/>
+</PAGE>
+
+<PAGE ID="32" NAME="additional research" KIND="5" HREF="p_019" BOUNDS="54,56,109"><TIP> Further study and research might be most efficient if begun with the brief...</TIP>
+</PAGE>
+
+<PAGE ID="33" NAME="Legislative Intent 1 of 5" KIND="3" HREF="p_020" BOUNDS="980,111,109"><TIP> The critical factor in statutory interpretation is legislative intent . In...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="34" BOUNDS="1020,159,30"/>
+</PAGE>
+
+<PAGE ID="34" NAME="Legislative Intent 2 of 5" KIND="3" HREF="p_037" BOUNDS="980,194,109"><TIP> Intent is a state of mind. So the legislative intent is what the...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="35" BOUNDS="1020,242,30"/>
+</PAGE>
+
+<PAGE ID="35" NAME="Legislative Intent 3 of 5" KIND="3" HREF="p_021" BOUNDS="980,277,109"><TIP> How can we say legislative intent is a fiction? Consider the following set...</TIP>
+  <BRANCH KIND="15" NAME="A" DEST="36" BOUNDS="968,325,16"/>
+  <BRANCH KIND="15" NAME="B" DEST="36" BOUNDS="994,325,16"/>
+  <BRANCH KIND="15" NAME="C" DEST="36" BOUNDS="1020,325,16"/>
+  <BRANCH KIND="14" NAME="D" DEST="36" BOUNDS="1046,325,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="36" BOUNDS="1072,325,30"/>
+</PAGE>
+
+<PAGE ID="36" NAME="Legislative Intent 4 of 5" KIND="3" HREF="p_022" BOUNDS="980,360,109"><TIP> How can legislative intent be determined when it doesn't really exist?...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="37" BOUNDS="998,408,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="1038,408,33"/>
+</PAGE>
+
+<PAGE ID="37" NAME="Legislative Intent 5 of 5" KIND="3" HREF="p_048" BOUNDS="980,443,109"><TIP> You have now completed the section on legislative intent. What would you...</TIP>
+  <BRANCH KIND="13" NAME="A" DEST="14" BOUNDS="994,491,16"/>
+  <BRANCH KIND="13" NAME="B" DEST="4" BOUNDS="1020,491,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="1046,491,30"/>
+</PAGE>
+
+<PAGE ID="38" NAME="Objective Theory of Contracts" KIND="5" HREF="p_023" BOUNDS="54,111,109"><TIP> Under the Objective Theory of Contracts, a person whose conduct would be...</TIP>
+</PAGE>
+
+<PAGE ID="39" NAME="Plain Meaning 3 of 7" KIND="3" HREF="p_025" BOUNDS="1198,277,109"><TIP> Another method of statutory interpretation is called the purpose approach ....</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="40" BOUNDS="1216,325,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="1256,325,33"/>
+</PAGE>
+
+<PAGE ID="40" NAME="Plain Meaning 4 of 7" KIND="3" HREF="p_056" BOUNDS="1198,360,109"><TIP> To illustrate these comments, reconsider the hypothetical question. In...</TIP>
+  <BRANCH KIND="15" NAME="Yes" DEST="61" BOUNDS="1204,408,26"/>
+  <BRANCH KIND="14" NAME="No" DEST="61" BOUNDS="1240,408,22"/>
+  <BRANCH KIND="11" NAME="Next" DEST="61" BOUNDS="1272,408,30"/>
+</PAGE>
+
+<PAGE ID="41" NAME="preamble" KIND="5" HREF="p_026" BOUNDS="54,166,109"><TIP> A preamble is a statement that appears in the bill before the enacting...</TIP>
+</PAGE>
+
+<PAGE ID="42" NAME="structure" KIND="5" HREF="p_027" BOUNDS="54,221,109"><TIP> The federal government as well as all state governments divides...</TIP>
+</PAGE>
+
+<PAGE ID="43" NAME="Why 4 of 12" KIND="3" HREF="p_028" BOUNDS="762,360,109"><TIP> Often the uncertainty of language is latent. That means the uncertainty is...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="44" BOUNDS="802,408,30"/>
+</PAGE>
+
+<PAGE ID="44" NAME="Why 5 of 12" KIND="3" HREF="p_029" BOUNDS="762,443,109"><TIP> A hypothetical state statute provides for an import tax on imported foods....</TIP>
+  <BRANCH KIND="15" NAME="Yes" DEST="45" BOUNDS="742,491,26"/>
+  <BRANCH KIND="14" NAME="No" DEST="45" BOUNDS="778,491,22"/>
+  <BRANCH KIND="15" NAME="Maybe" DEST="45" BOUNDS="810,491,40"/>
+  <BRANCH KIND="11" NAME="Next" DEST="45" BOUNDS="860,491,30"/>
+</PAGE>
+
+<PAGE ID="45" NAME="Why 6 of 12" KIND="3" HREF="p_030" BOUNDS="762,526,109"><TIP> Let's reconsider the same statute in light of the following facts. A...</TIP>
+  <BRANCH KIND="14" NAME="Yes" DEST="8" BOUNDS="768,574,26"/>
+  <BRANCH KIND="15" NAME="No" DEST="8" BOUNDS="804,574,22"/>
+  <BRANCH KIND="11" NAME="Next" DEST="8" BOUNDS="836,574,30"/>
+</PAGE>
+
+<PAGE ID="46" NAME="canon" KIND="5" HREF="p_031" BOUNDS="54,276,109"><TIP> A canon is a rule. It may be embodied in a saying (sometimes referred to as...</TIP>
+</PAGE>
+
+<PAGE ID="47" NAME="Substantive 3 of 3" KIND="3" HREF="p_052" BOUNDS="1852,277,109"><TIP> You have completed the section on substantative canons of interpretation....</TIP>
+  <BRANCH KIND="13" NAME="A" DEST="28" BOUNDS="1866,325,16"/>
+  <BRANCH KIND="13" NAME="B" DEST="4" BOUNDS="1892,325,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="1918,325,30"/>
+</PAGE>
+
+<PAGE ID="48" NAME="Statutes 3 of 6" KIND="3" HREF="p_035" BOUNDS="2070,277,109"><TIP> In contrast to the prior example, some state or federal statutes may...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="30" BOUNDS="2088,325,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="2128,325,33"/>
+</PAGE>
+
+<PAGE ID="49" NAME="Statutes 6 of 6" KIND="3" HREF="p_053" BOUNDS="2070,526,109"><TIP> You have finished this section. What would you like to do next? ...</TIP>
+  <BRANCH KIND="13" NAME="A" DEST="60" BOUNDS="2084,574,16"/>
+  <BRANCH KIND="13" NAME="B" DEST="4" BOUNDS="2110,574,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="2136,574,30"/>
+</PAGE>
+
+<PAGE ID="50" NAME="Process 3 of 4" KIND="3" HREF="p_038" BOUNDS="1634,277,109"><TIP> Consider these hypothetical facts. In a particular appropriations act,...</TIP>
+  <BRANCH KIND="15" NAME="Yes" DEST="51" BOUNDS="1640,325,26"/>
+  <BRANCH KIND="14" NAME="No" DEST="51" BOUNDS="1676,325,22"/>
+  <BRANCH KIND="11" NAME="Next" DEST="51" BOUNDS="1708,325,30"/>
+</PAGE>
+
+<PAGE ID="51" NAME="Process 4 of 4" KIND="3" HREF="p_051" BOUNDS="1634,360,109"><TIP> You have completed the section that reveals how legislative process can be...</TIP>
+  <BRANCH KIND="13" NAME="A" DEST="20" BOUNDS="1648,408,16"/>
+  <BRANCH KIND="13" NAME="B" DEST="4" BOUNDS="1674,408,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="1700,408,30"/>
+</PAGE>
+
+<PAGE ID="52" NAME="Linguistic 3 of 7" KIND="3" HREF="p_040" BOUNDS="1416,277,109"><TIP> Expressio unius est exclussio alterius means that the inclusion of one...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="53" BOUNDS="1456,325,30"/>
+</PAGE>
+
+<PAGE ID="53" NAME="Linguistic 4 of 7" KIND="3" HREF="p_066" BOUNDS="1416,360,109"><TIP> Below are samples of statutory language. The headings are two canons of...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="55" BOUNDS="1382,408,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="53" BOUNDS="1429,408,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="55" BOUNDS="1485,408,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="1525,408,33"/>
+</PAGE>
+
+<PAGE ID="54" NAME="Linguistic 4 of 7 (4/30/2010 replaced drawlines)" KIND="3" HREF="p_041" BOUNDS="272,111,109"><TIP> In the boxes on the left below are samples of statutory language. On the...</TIP>
+  <BRANCH KIND="14" NAME="If right" DEST="55" BOUNDS="238,159,37"/>
+  <BRANCH KIND="15" NAME="If wrong" DEST="54" BOUNDS="285,159,46"/>
+  <BRANCH KIND="11" NAME="Next" DEST="53" BOUNDS="341,159,30"/>
+  <BRANCH KIND="18" NAME="Links" DEST="" BOUNDS="381,159,33"/>
+</PAGE>
+
+<PAGE ID="55" NAME="Linguistic 5 of 7" KIND="3" HREF="p_042" BOUNDS="1416,443,109"><TIP> Try to solve the following hypothetical question: The school rule is that a...</TIP>
+  <BRANCH KIND="14" NAME="A" DEST="56" BOUNDS="1404,491,16"/>
+  <BRANCH KIND="15" NAME="B" DEST="56" BOUNDS="1430,491,16"/>
+  <BRANCH KIND="15" NAME="C" DEST="56" BOUNDS="1456,491,16"/>
+  <BRANCH KIND="15" NAME="D" DEST="56" BOUNDS="1482,491,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="56" BOUNDS="1508,491,30"/>
+</PAGE>
+
+<PAGE ID="56" NAME="Linguistic 6 of 7" KIND="3" HREF="p_043" BOUNDS="1416,526,109"><TIP> The school rule is that the person taking a final exam can bring in &quot;pens,...</TIP>
+  <BRANCH KIND="15" NAME="A" DEST="57" BOUNDS="1404,574,16"/>
+  <BRANCH KIND="15" NAME="B" DEST="57" BOUNDS="1430,574,16"/>
+  <BRANCH KIND="14" NAME="C" DEST="57" BOUNDS="1456,574,16"/>
+  <BRANCH KIND="15" NAME="D" DEST="57" BOUNDS="1482,574,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="57" BOUNDS="1508,574,30"/>
+</PAGE>
+
+<PAGE ID="57" NAME="Linguistic 7 of 7" KIND="3" HREF="p_050" BOUNDS="1416,609,109"><TIP> You have completed the section on linguistic canons of interpretation....</TIP>
+  <BRANCH KIND="13" NAME="A" DEST="18" BOUNDS="1430,657,16"/>
+  <BRANCH KIND="13" NAME="B" DEST="4" BOUNDS="1456,657,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="1482,657,30"/>
+</PAGE>
+
+<PAGE ID="58" NAME="liberal construction" KIND="5" HREF="p_045" BOUNDS="54,331,109"><TIP> The term &quot;liberal construction&quot; has nothing to do with the &quot;liberal&quot; and...</TIP>
+</PAGE>
+
+<PAGE ID="59" NAME="Plain Meaning 7 of 7" KIND="3" HREF="p_049" BOUNDS="1198,609,109"><TIP> You have completed the section on the plain meaning and the purpose...</TIP>
+  <BRANCH KIND="13" NAME="A" DEST="16" BOUNDS="1212,657,16"/>
+  <BRANCH KIND="13" NAME="B" DEST="4" BOUNDS="1238,657,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="1264,657,30"/>
+</PAGE>
+
+<PAGE ID="60" NAME="Review 1" KIND="3" HREF="p_059" BOUNDS="2288,111,109"><TIP> Let's try a little review question to pull these concepts together. A state...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="64" BOUNDS="2328,159,30"/>
+</PAGE>
+
+<PAGE ID="61" NAME="Plain Meaning 5 of 7" KIND="3" HREF="p_062" BOUNDS="1198,443,109"><TIP> Can a court decide to ignore the plain meaning and use the purpose approach...</TIP>
+  <BRANCH KIND="11" NAME="Next" DEST="67" BOUNDS="1238,491,30"/>
+</PAGE>
+
+<PAGE ID="62" NAME="Ejusdem generis" KIND="5" HREF="p_057" BOUNDS="54,386,109"><TIP> Ejusdem generis means of the same class. It is used to narrow a general...</TIP>
+</PAGE>
+
+<PAGE ID="63" NAME="Expressio unius" KIND="5" HREF="p_058" BOUNDS="54,441,109"><TIP> Expressio unius est exclusio alterius means that the inclusion of one...</TIP>
+</PAGE>
+
+<PAGE ID="64" NAME="Review 2" KIND="3" HREF="p_064" BOUNDS="2288,194,109"><TIP> Now that you've finished the review question, what would you like to do? ...</TIP>
+  <BRANCH KIND="13" NAME="A" DEST="3" BOUNDS="2302,242,16"/>
+  <BRANCH KIND="13" NAME="B" DEST="4" BOUNDS="2328,242,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="4" BOUNDS="2354,242,30"/>
+</PAGE>
+
+<PAGE ID="65" NAME="NCCUSL" KIND="5" HREF="p_060" BOUNDS="54,496,109"><TIP> The National Conference of Commissioners on Uniform State Laws is an...</TIP>
+</PAGE>
+
+<PAGE ID="66" NAME="Legislature" KIND="5" HREF="p_061" BOUNDS="54,551,109"><TIP> The federal legislature (the United States Congress) and most state...</TIP>
+</PAGE>
+
+<PAGE ID="67" NAME="Plain Meaning 6 of 7" KIND="3" HREF="p_063" BOUNDS="1198,526,109"><TIP> Attorney is planning her oral argument before the state supreme court. The...</TIP>
+  <BRANCH KIND="14" NAME="A" DEST="59" BOUNDS="1212,574,16"/>
+  <BRANCH KIND="15" NAME="B" DEST="59" BOUNDS="1238,574,16"/>
+  <BRANCH KIND="11" NAME="Next" DEST="59" BOUNDS="1264,574,30"/>
+</PAGE>
+
+</PAGES>
+
+</MAPPER>
+
