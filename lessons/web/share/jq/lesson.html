@@ -73,8 +73,31 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
 	<script src="CAV_score.js?201608" id="CAVjs" type="text/javascript"></script>
 	<script src="CAV_urls.js?201608" id="CAVjs" type="text/javascript"></script>
 	<script src="CAV_LessonLive.js?201608" id="CAVjs" type="text/javascript"></script>
-</head>
 
+</head>
+<style type="text/css">
+	.page-content {
+	  border: 1px solid #efefef; /*border: 1px solid @Grey;*/
+	}
+	input.CL-hamburger[type=checkbox] {
+		margin-right: -40px;
+        /*display: inline-block;
+	    width: 32px;
+	    height: 32px;
+	    float: right;
+	    margin-left: 5px;
+	    margin-right: -40px;
+	    margin-top: 13px;
+	    cursor: pointer;
+	    pointer-events: auto;
+	    -webkit-appearance: none;
+	    -moz-appearance: none;
+	    -o-appearance: none;
+	    -ms-appearance: none;
+	    appearance: none;
+	    outline: 0;*/
+	}
+</style>
 <body>
 	<div id="Loader">
 		<img alt="CALI" src="img/CALILessonsLogo.gif" width="192" height="55" border="0" />
@@ -89,7 +112,7 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
 		<div id="Lesson">
 			
 			
-			<nav class="navbar navbar-default CL-navbar-main" role="navigation" aria-label="Site Navbar">
+<nav class="navbar navbar-default CL-navbar-main" role="navigation" aria-label="Site Navbar">
   <div class="container-fluid">
     <div class="navbar-header CL-navbar">
       <button type="button" class="navbar-toggle collapsed CL-menu-button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -122,41 +145,41 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
   </div>
 </nav>
 
-			<div class="container-fluid">
-				<div class="row">
-					<div class="col-md-9 col-sm-8 col-xs-12">
-						<header  >
-							<h1 class="LessonName">Lesson Title</h1>
-						</header>
-					</div>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-9 col-sm-8 col-xs-12">
+			<header  >
+				<h1 class="LessonName">Lesson Title</h1>
+			</header>
+		</div>
 					
 		<!--								<span class="ScoringButton">Score: <span class="ScoreCorrect">0</span>/ <span class="ScoreTotal">0</span> (<span class="ScorePercent">0%</span>)</span>	-->
 
 
 	  <div class="col-md-3 col-sm-4 col-xs-12 score-center PageScore">
-      <div class="score-right">
-        <h3 id="right-txt" class="right-txt">1</h3><h4>Right</h4>
+	      <div class="score-right">
+	        <h3 id="right-txt" class="right-txt">1</h3><h4>Right</h4>
+	      </div>
+	      <!-- score circle -->
+	      <div id="progress-circle" class="score-circle"><span></span></div>
+	      <!-- score circle end -->
+	      <div class="score-wrong">
+	        <h3 id="wrong-txt" class="wrong-txt">2</h3><h4>Wrong</h4>
+	      </div>
       </div>
-      <!-- score circle -->
-      <div id="progress-circle" class="score-circle"><span></span></div>
-      <!-- score circle end -->
-      <div class="score-wrong">
-        <h3 id="wrong-txt" class="wrong-txt">2</h3><h4>Wrong</h4>
-      </div>
-    </div>
 	  
 					
-				</div>
-			</div>
+	</div>
+</div>
 
-				<div class="active">
-					<div class="page-content">
-						<div class="row eq-height">
-							<div class="toc-view col-xs-12">
-								<input id="cl-hamburger" class="CL-hamburger" placeholder="Table of Contents Menu" type="checkbox" />
+			<div class="active">
+				<div class="page-content">
+					<div class="row eq-height">
+						<div class="toc-view col-xs-12">
+							<input id="cl-hamburger" class="CL-hamburger" placeholder="Table of Contents Menu" type="checkbox" />
 
-								<div id="SliderControl" class="CLAccordion">
-									<h2>Table of Contents</h2>
+							<div id="SliderControl" class="CLAccordion">
+								<h2>Table of Contents</h2>
 <!--This section is also part of slider-menu end--> 
   <ul class="nav nav-list-main">
     <li><label class="nav-toggle nav-header toggle-icon" for="cl-hamburger">
