@@ -75,29 +75,6 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
 	<script src="CAV_LessonLive.js?201608" id="CAVjs" type="text/javascript"></script>
 
 </head>
-<style type="text/css">
-	.page-content {
-	  border: 1px solid #efefef; /*border: 1px solid @Grey;*/
-	}
-	input.CL-hamburger[type=checkbox] {
-		margin-right: -40px;
-        /*display: inline-block;
-	    width: 32px;
-	    height: 32px;
-	    float: right;
-	    margin-left: 5px;
-	    margin-right: -40px;
-	    margin-top: 13px;
-	    cursor: pointer;
-	    pointer-events: auto;
-	    -webkit-appearance: none;
-	    -moz-appearance: none;
-	    -o-appearance: none;
-	    -ms-appearance: none;
-	    appearance: none;
-	    outline: 0;*/
-	}
-</style>
 <body>
 	<div id="Loader">
 		<img alt="CALI" src="img/CALILessonsLogo.gif" width="192" height="55" border="0" />
@@ -172,14 +149,14 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
 	</div>
 </div>
 
-			<div class="active">
-				<div class="page-content">
-					<div class="row eq-height">
-						<div class="toc-view col-xs-12">
-							<input id="cl-hamburger" class="CL-hamburger" placeholder="Table of Contents Menu" type="checkbox" />
+<div class="active">
+	<div class="page-content">
+		<div class="row eq-height">
+			<div class="toc-view col-xs-12">
+				<input id="cl-hamburger" class="CL-hamburger" placeholder="Table of Contents Menu" type="checkbox" />
 
-							<div id="SliderControl" class="CLAccordion">
-								<h2>Table of Contents</h2>
+				<div id="SliderControl" class="CLAccordion">
+					<h2>Table of Contents</h2>
 <!--This section is also part of slider-menu end--> 
   <ul class="nav nav-list-main">
     <li><label class="nav-toggle nav-header toggle-icon" for="cl-hamburger">
@@ -241,7 +218,7 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
 								</div>
 							</div>
 
-							<div id="LessonControl" class="xlesson-view col-xs-12">
+							<div id="LessonControl" class="lesson-view col-xs-12">
 								<div class="PageHeader">
 
 									
@@ -428,13 +405,12 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
 							</div>
 
 							<div class="gap"></div>
-						</div>
-					
+						</div>					
+				</div>
 
-					<div class="container-fluid">
-						<div class="row">
-							<div class="text-center">
-							</div>
+				<div class="container-fluid">
+					<div class="row">
+						<div class="text-center">
 						</div>
 					</div>
 				</div>
@@ -498,4 +474,9 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
 		<div id="dataOutput" class="Trace" ></div>
 	</div>
 </body>
+<script type="text/javascript">
+    $('.CL-hamburger').on('click', function () {
+        $('.toc-view').toggleClass("toc-view-close");
+    });	
+</script>
 </html>

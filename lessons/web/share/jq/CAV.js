@@ -93,7 +93,7 @@ function sortPageBySortName(a,b)
 {
 	return icaseCompare(a.sortName,b.sortName);
 }
-function showTOC(show)
+/*function showTOC(show)
 {	// Programmatic toggling of TOC (such as going to page 'Contents')
 	let checked = !show;
 	//console.log({showTOC:{show:checked,checked:$('#cl-hamburger').prop('checked')}});
@@ -102,7 +102,7 @@ function showTOC(show)
 		$('#cl-hamburger').prop('checked',checked);
 		$('#SliderControl').fadeToggle(300);
 	}
-}
+}*/
 function processBook()
 {
 	updatePageLists();
@@ -162,6 +162,9 @@ function processBook()
 			return false;
 		});
 		showTOC(false);
+	    $('.CL-hamburger').on('click', function () {
+	        $('.toc-view').toggleClass("toc-view-close");
+	    });		
 	}
 }
 

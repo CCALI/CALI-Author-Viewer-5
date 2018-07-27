@@ -102,7 +102,7 @@ OLD.#Viewer {
 	padding-right: 25px;
 }
 .PageHeader {
-	height: 25px;
+	height: auto;
 	padding: 5px;
 	margin: 5px;
 }
