@@ -36,10 +36,10 @@
 } 
 
 input.CL-hamburger[type="checkbox"] {
-  content: @CLCloseArrow;
+  background-image: @CLCloseArrow;
   display: inline-block;
-  width: 32px;
-  height: 32px;
+  width: 20px;
+  height: 20px;
   float: right;
   margin-left: 5px;
   margin-top: 13px;
@@ -48,7 +48,9 @@ input.CL-hamburger[type="checkbox"] {
   .appearance-hidden (@Clear);
   outline: none !important;
   &:checked {
-    content: @CLMenuBlue;
+    background-image: @CLMenuBlue;
+    width: 32px;
+    height: 32px;
     .appearance-hidden (@Clear);
     outline: none;
   }
