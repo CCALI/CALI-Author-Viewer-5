@@ -155,13 +155,13 @@ function processBook()
 			$('#SliderControl').fadeToggle(300);
 		});
 		//toc link close
-		$('.toc-link').click(function () {
+		/*$('.toc-link').click(function () {
 			showTOC(false);
 			trace('TOC click page '+$('a',this).attr('href'));
 			navHREF($('a',this).attr('href'));
 			return false;
 		});
-		showTOC(false);
+		showTOC(false);*/
 	    $('.CL-hamburger').on('click', function () {
 	        $('.toc-view').toggleClass("toc-view-close");
 	    });		
