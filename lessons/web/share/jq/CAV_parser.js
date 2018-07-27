@@ -11,6 +11,39 @@ var STYLE_PERCENT="Percent"
 var pid=100;
 var lessonPath;//Folder where book data and media files reside. // ="TestBookXML/"+  StartBook + "_jQueryBookData.xml";
 
+function mapTOCUL2Viewer(ul,depth)
+{	// 7/26/18 Map CA's simple ul/li outline into viewer's expandable TOC.
+	let txt='';
+	ul.children().each(function( )
+	{
+		if ($(this).is('UL'))
+		{
+			txt+='<li><label class="nav-toggle nav-header toggle-icon" for="cl-hamburger"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus" aria-label="Button to open and close sub menus."><p class="toc-title">'+text+'</p></a></label><ul class="nav nav-list slider-left" style="display: none;">'+mapTOCUL2Viewer($(this),depth+1)+'</ul></li>\n';
+		}
+		else
+		if (!$(this).next().is('UL'))
+		{
+			text=$(this).text();
+			let href=$('A',this).attr('HREF');
+			if (depth>0)
+				txt+='<li><a href="'+href+'" class="toc-link visited" title="link to lesson">'+text+'</a></li>\n';
+			else
+				txt+='<li><label class="nav-toggle-no-sub level-indent-no-sub"><a class="toc-link visited" href="'+href+'"><p class="toc-title no-sub">'+text+'</p></a></label></li>\n';
+		}
+		else
+		{
+			text=$(this).text();
+		}
+
+	});
+	if (depth==0)
+	{	// Add special pages.
+		txt='<li><label class="nav-toggle-no-sub level-indent-no-sub"><a class="toc-link visited" href="'+pageABOUT+'"><p class="toc-title no-sub">About this Lesson</p></a></label></li>\n'+txt
+			+'<li><label class="nav-toggle-no-sub level-indent-no-sub"><a class="toc-link visited" href="'+pageLessonCompleted+'"><p class="toc-title no-sub">Complete the lesson</p></a></label></li>\n';
+	}
+	return txt;
+}
+
 function parsePageXML(pageXML)
 {	// Decode page XML into TPage object.
 	var page = new TPage();
@@ -34,8 +67,9 @@ function parsePageXML(pageXML)
 	}
 	if (page.type=="Topics")
 	{
-		page.text = pageXML.find("TOC").xml();
-		page.text = page.text.replace(/HREF="/g,'HREF="jump://');
+		trace(pageXML.find("TOC").xml());
+		page.text=mapTOCUL2Viewer(pageXML.find("TOC").find("UL:first"),0);
+		page.text = page.text.replace(/href="/gi,'href="jump://');
 		page.nextPageDisabled=true;
 		book.lastPage=pageXML.find("LASTPAGE").xml();
 	}
