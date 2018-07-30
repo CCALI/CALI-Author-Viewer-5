@@ -1468,7 +1468,7 @@ function convertDragBox2RB()
 	page.style="Radio Buttons";
 	RadioButtons_layout();
 }
-function DragBox_help()
+function DragBoxOld_help()
 {
 	embedHelpHTML(this,lang.HelpStudentDragDrop + (page.ordered ? lang.HelpStudentDragDropSort : ''));
 }
@@ -1484,7 +1484,7 @@ function DragBox_layout()
 		convertDragBox2RB();
 		return;
 	}
-	DragBoxOld_layout();		
+	DragBoxOld_layout();
 }
 
 

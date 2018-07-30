@@ -1,10 +1,9 @@
 <!-- // CALI Viewer 5, Version: 07/15/2016
 Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. -->
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8" />
-
+	<meta charset="utf-8"/>
 	<title>CALI Viewer 5 - Center for Computer-Assisted Legal Instruction</title>
 	<!-- All Contents Copyright CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. -->
 	<!--Mode.BEGIN-->
@@ -453,7 +452,32 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
 				<div class="gap"></div>
 				<div class="gap"></div>
 		 </footer>
-			
+			<div>
+  <div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
+    <p class="feedback-bubble">Feedback</p>
+  </div> 
+</div>
+<div id="feedbackModal" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close feedback modal">×</button>
+                <h4 class="modal-title">Let us know what you think!</h4>
+            </div>
+            <div class="modal-body">
+                
+              <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" rows="5" id="feedbackComment" placeholder="Enter you comment here." aria-label="Text box to enter your comment." aria-multiline="true"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" id="submitFeedback" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
 			
 			<img id="picloader" />
 
