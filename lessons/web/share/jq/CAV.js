@@ -104,6 +104,7 @@ function showTOC(show)
 	else
 		$('#SliderControl').fadeOut(300);
 	$('.toc-view').toggleClass("toc-view-close",shouldCollapse);
+	$('.lesson-view').toggleClass("lesson-view-close",shouldCollapse);
 }
 function processBook()
 {
@@ -361,12 +362,6 @@ function gotoPage(pageName, skipCA)
 	 _paq.push(['trackPageView']); 
   }
 	
-	var commentEmail=("mailto:" + escape(emailContact) + "?" +
-		"cc=" + escape(emailTechSupportContact)  +
-		"&subject=" + escape(t(lang.EmailSubject,book.lesson +
-		"/" + page.name + " (" + book.version + ")-CALI5")));
-	$('a.PageComment').attr('href',commentEmail);
-
 		
 	page.startSeconds = curSeconds();// remember when we've seen this page.
 	page.destPage=null;//clear setting to allow user to choose new path if revisiting old question.
@@ -943,6 +938,21 @@ function initialize()
 	}
 	
 	$('span.t').each(function(){$(this).html(lang[$(this).attr('ref')]);});
+	
+	// Bitovi
+	$('#open-feedback').on('click',function () {
+      $('#feedbackModal').modal('show');
+    });
+	$('#submitFeedback').click(function(){
+		//submit feedback
+		let feedback = $('#feedbackComment').val();	
+		window.open('https://docs.google.com/forms/d/e/1FAIpQLSe_SDPlzoxjfthI-zJG-k_kvvHQYM4mlBZjKDU1sNVlFTqcdg/viewform?usp=pp_url&entry.1035788757='
+			+encodeURI(feedback)+'&entry.337593368='
+			+encodeURI(book.lesson+" (" + book.version + ")-CALI5")+'&entry.1796155339='
+			+encodeURI(page.name));
+		$('#feedbackModal').modal('hide');
+	});
+	
 }//end of load after document
 
 /*
