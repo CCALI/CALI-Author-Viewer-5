@@ -20,7 +20,8 @@
 .btn-group > .CL-choose-btn,
 .btn-group > .CL-choose-btn-right,
 .btn-group > .CL-choose-btn-wrong,
-.btn-group > .CL-choose-btn-maybe {
+.btn-group > .CL-choose-btn-maybe,
+.btn-group > .CL-choose-btn-info {
   border-radius: 2px !important;
   margin-right: 40px;
 }
@@ -56,7 +57,7 @@
   margin-right: 20px !important;
 }
 
-.CL-choose-btn {
+.CL-choose-btn, .CL-choose-btn-info {
   .multi-btn-style;
   &:hover {
     background: @Grey;
@@ -72,7 +73,8 @@
   }
 }
 
-.CL-choose-btn.active {
+.CL-choose-btn.active,
+.CL-choose-btn-info.active {
   border: 3px solid @BlueSelected !important;
   .selected-style;
 }
