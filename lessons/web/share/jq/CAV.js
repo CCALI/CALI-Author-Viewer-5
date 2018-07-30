@@ -93,16 +93,18 @@ function sortPageBySortName(a,b)
 {
 	return icaseCompare(a.sortName,b.sortName);
 }
-/*function showTOC(show)
-{	// Programmatic toggling of TOC (such as going to page 'Contents')
-	let checked = !show;
-	//console.log({showTOC:{show:checked,checked:$('#cl-hamburger').prop('checked')}});
-	if (checked != $('#cl-hamburger').prop('checked'))
-	{
-		$('#cl-hamburger').prop('checked',checked);
-		$('#SliderControl').fadeToggle(300);
-	}
-}*/
+function showTOC(show)
+{	// Required to allow programmatic toggling of TOC (such as going to page 'Contents')
+	let collapsed=!$('#cl-hamburger').prop('checked');
+	let shouldCollapse = (show===undefined) ? !collapsed : !show;
+	//console.log({fnc:showTOC,show:show,collapsed:collapsed,shouldCollapse:shouldCollapse});
+	$('#cl-hamburger').prop('checked',shouldCollapse);
+	if (!shouldCollapse)
+		$('#SliderControl').fadeIn(300);
+	else
+		$('#SliderControl').fadeOut(300);
+	$('.toc-view').toggleClass("toc-view-close",shouldCollapse);
+}
 function processBook()
 {
 	updatePageLists();
@@ -128,43 +130,28 @@ function processBook()
 			$('#HeaderPageCALI img:first-of-type').attr('src','img/QuizWrightLogo.png');
 		}
 			
-		// 5/2018 Bitovi. TODO - lot's of custom markup to add. 
+		// 5/2018 TOC revised.
 		let page=book.pages[pageCONTENTS];
-		trace(page.text);
-		$('#SliderControl ul:first').replaceWith(page.text);
-		$('#SliderControl ul:first').addClass('nav nav-list-main').append('<li><a href="jump://Lesson Completed">Complete the lesson</a></li>');
-		//$('#SliderControl ul').addClass("nav nav-list slider-left");
-		$('#SliderControl li').addClass("toc-link visited");
-		trace($('#SliderControl').html());
-		$('#SliderControl a').click(function () {
-			 $('#SliderControl').fadeToggle(300);
-		});		
-		$('ul.slider-left').toggle();
+		$('#SliderControl ul:first').replaceWith('<ul class="nav nav-list-main">'+page.text+'</ul>');
 		$('label.nav-toggle a').click(function () {
 			$(this).parent().parent().children('ul.slider-left').toggle(300);
 		});
-		$('.toggle-icon').click(function(){
+		$('.toggle-icon').click(function(){// Expand/collapse sub level
 			$(this).find('a').toggleClass('glyphicon-plus glyphicon-minus');
-		});
-		//toc link visted
-		$('.visited').click(function(){
-			$(this).addClass('toc-visited');
-		});
-		//slider menu
-		$('.CL-hamburger').click(function () {
-			$('#SliderControl').fadeToggle(300);
-		});
-		//toc link close
-		/*$('.toc-link').click(function () {
-			showTOC(false);
-			trace('TOC click page '+$('a',this).attr('href'));
-			navHREF($('a',this).attr('href'));
 			return false;
 		});
-		showTOC(false);*/
-	    $('.CL-hamburger').on('click', function () {
-	        $('.toc-view').toggleClass("toc-view-close");
-	    });		
+		$('.visited').click(function(){	//Flag TOC link as visited
+			$(this).addClass('toc-visited');
+		});
+		$('.CL-hamburger').click(function () {//slider menu
+			showTOC();
+		});
+		$('.toc-link').click(function () {// Jump to page, close TOC.
+			showTOC(false);
+			navHREF($(this).attr('href'));
+			return false;
+		});
+		showTOC(StartPage==pageCONTENTS);
 	}
 }
 
@@ -200,7 +187,6 @@ function updatePageLists()
 	$("#PopupsList").html(txt);
 	
 }
-
 function addError(msg)
 {
 	textBuffer += msg;
@@ -280,8 +266,8 @@ function thtml(msg)
 
 function patchLink()
 {	// todo jquery .live() handler instead
-	$('#Lesson a[href^="jump"]').unbind('click').click(navClick);
-	$('#SliderControl a[href^="jump"]').unbind('click');//Bitovi 
+	$('#LessonControl a[href^="jump"]').unbind('click').click(navClick);
+	//$('#SliderControl a[href^="jump"]').unbind('click');//Bitovi 
 	$('#Lesson a[href^="popup"]').unbind('click').click(navClick);
 	$('#Lesson a[href^="choice"]').unbind('click').click(navClick);
 	$('#Lesson a[href^="lesson"]').unbind('click').click(navClick);
