@@ -1044,7 +1044,7 @@ ul.nav-list-main li ul li ul li ul li ul li ul li ul li ul li {
 
 div.horizontal {
   display: flex;
-  justify-content: center;
+  justify-content: stretch;
   background: lighten(@BlueSelected, 53%) !important;
   border:2px solid @BlueSelected !important;
   .border-radius (@Radius);
@@ -1058,6 +1058,7 @@ div.horizontal div p {
 
 div.horizontal div {
 	cursor: move;
+	margin-right: 0px;
 }
 
 div.horizontal p {
@@ -1114,10 +1115,14 @@ div.vertical {
 	display: inline-block;
 	float: right;
 	margin-top: 5px;
-	margin-right: 20px;
 	width: 30px;
 	height: 30px;
 	cursor: pointer;
+}
+
+.drag-body {
+	margin-left: 0px;
+    width: 100%;		
 }
 
 .drag-txt {
@@ -1140,6 +1145,7 @@ div.vertical {
 .undo-icon {
 	background: @UndoIcon;
 	.icon-size;
+	margin-right: 20px;
 }
 
 .remove-txt {
@@ -1150,6 +1156,7 @@ div.vertical {
 .remove-icon {
 	background: @RemoveIcon;
 	.icon-size;
+	margin-right: 30px;
 }
 
 .remove, 
@@ -1403,7 +1410,7 @@ div.vertical {
 
 .symbol-margin {
   margin-top: -3px;
-  margin-left: 20px;  
+  margin-left: 0px;  
 }
 
 .question-symbol p {
