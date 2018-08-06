@@ -408,7 +408,7 @@ $(document).ready(function()
 		$('#llLinkLogo').removeClass('hidestart').click(function()
 		{	// Jump to the teacher's page
 			$.ajax({
-				url: "LessonLinkTeacherPage.php?runid="+runid,
+				url: "/lessons/web/share/jq/LessonLinkTeacherPage.php?runid="+runid,
 				dataType: "json",
 				timeout: 15000,
 				error: function(data,textStatus,thrownError)

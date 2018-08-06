@@ -6,6 +6,8 @@
 	
 	Querystring Parameters:
 	Requires:  runid=#
+	
+	05/25/2018 Updated to mysqli
 */
 	require "LessonLinkConfig.php"; // Config for Drupal/database for current website.
 	require "XMLFunctions.php"; // Quick xml extractor. TODO: use the one in Drupal codeset.
@@ -18,8 +20,8 @@
 
 
 	//### Connect to database, per Config.
-	$connect_CALISQL=mysql_connect($dbhost,$dbuser,$dbpass);
-	$Database=mysql_select_db($dbdatabase,$connect_CALISQL);
+	$connect_CALISQL=mysqli_connect($dbhost,$dbuser,$dbpass);
+	$Database=mysqli_select_db($connect_CALISQL,$dbdatabase);
 	
 	// ### No security check
 	
@@ -44,6 +46,7 @@
 		//$info['Student ID']=$userID;
 	}
 	
+	$ownerID=0;
 	if ($courseID>0)
 	{	//### Given course id, lookup the teacher (owner)
 		$SQL="select uid from course where courseid = $courseID limit 1";
@@ -88,8 +91,10 @@ function json_error($errmsg)
 class QueryMySQLSimple
 {	// The MySQL SELECT version of Query (used by Oink but simplified to work in Drupal OR the oink test site. )
 	function QueryMySQLSimple($SQL)
-	{ 
-		$result=mysql_query($SQL);
+	{
+		global $connect_CALISQL;
+		$result=mysqli_query($connect_CALISQL,$SQL);
+		//echo '<hr>'.$SQL.'<hr>';
 		if (!$result){
 			//abort(json_encode(array("error"=>array("SQL"=>$SQL,"message"=>mysql_error()))));
 		}
@@ -97,11 +102,11 @@ class QueryMySQLSimple
 	}
 	function fetchRow()
 	{
-		return mysql_fetch_array($this->queryresult);
+		return mysqli_fetch_array($this->queryresult);
 	}
 	function getNumRecords()
 	{
-		return mysql_num_rows($this->queryresult);
+		return mysqli_num_rows($this->queryresult);
 	}
 }
 ?>
