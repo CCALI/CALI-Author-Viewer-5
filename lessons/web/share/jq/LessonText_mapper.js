@@ -334,4 +334,3 @@ function loadDefaultMap()
 	  buildMap(data);
 	});
 }
-

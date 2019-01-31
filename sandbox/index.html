@@ -1,0 +1,831 @@
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=2, minimum-scale=1, user-scalable=yes">
+<head>
+  <title>Sandbox</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script src="jquery-2.2.4.min.js"></script>
+    <script src="jquery-ui.min.js" type="text/javascript"></script>
+    <script src="jquery.ui.touch-punch.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+</head>
+<body>
+
+<div id="#wrapper">
+<nav class="navbar navbar-default CL-navbar-main"
+     role="navigation"
+     aria-label="Site Navbar">
+  <div class="container-fluid">
+    <div class="navbar-header CL-navbar">
+      <button type="button" class="navbar-toggle collapsed CL-menu-button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="CL-hamburger-white"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+          <img class="CL-logo" alt="Cali Lessons Logo" />
+        </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <p class="navbar-text">
+          <a href="#" class="user-name-link" aria-hidden="false">User Name</a>
+          </p>
+        </li>
+        <li>
+          <a href="#" class="exit-icon">
+            <span class="exit-btn" alt="Exit the lesson and resume later.">
+              <p class="navbar-text">
+                <a href="#" class="exit-link" aria-hidden="false">Exit &amp; Resume Later</a>
+              </p>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+        <header>
+          <h1>CALI Author Demonstration Lesson</h1>
+        </header>
+    </div>  
+  </div>  
+</div>
+ 
+<div class="active">
+  <div class="page-content">
+    <div class="row eq-height">
+      <div class="toc-view col-xs-12">
+        <input id="cl-hamburger" class="CL-hamburger" type="checkbox" placeholder="Table of Contents Menu" aria-label="Table of Contents Menu"></input>
+        <div id="SliderControl" class="CLAccordion">
+          <h2>Table of Contents</h2>
+          <ul class="nav nav-list-main">
+            <li><label class="nav-toggle nav-header toggle-icon" for="cl-hamburger"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus" aria-label="Button to open and close sub menus."> <p class="toc-title">Header 1</p></a></label>
+              <ul class="nav nav-list slider-left">
+                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus" aria-label="Button to open and close sub menus."> <p class="toc-title">Header 1.1</p></a></label>
+                  <ul class="nav nav-list slider-left">
+                    <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                    <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                    <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus" aria-label="Button to open and close sub menus."> <p class="toc-title">Header 1.1.1</p></a></label>
+                      <ul class="nav nav-list slider-left">
+                        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                        <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title" aria-label="Button to open and close sub menus.">Header 1.1.1.1</p></a></label>
+                          <ul class="nav nav-list slider-left">
+                            <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                            <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                            <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus" aria-label="Button to open and close sub menus."> <p class="toc-title">Header 1.1.1.1.1</p></a></label>
+                              <ul class="nav nav-list slider-left">
+                                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited"  title="button to open and close sub menus" aria-label="Button to open and close sub menus."> <p class="toc-title">Header 1.1.1.1.1.1</p></a></label>
+                                  <ul class="nav nav-list slider-left">
+                                    <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                    <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                    <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited"  title="button to open and close sub menus" aria-label="Button to open and close sub menus."> <p class="toc-title">Header 1.1.1.1.1.1.1</p></a></label>
+                                      <ul class="nav nav-list slider-left">
+                                        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                        <li><a href="#" class="toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><label class="nav-toggle-no-sub level-indent-no-sub"> <a class="toc-link visited" href="#" onclick="slider()" title="button to open and close sub menus"><p class="toc-title no-sub">Header as Lesson Link</p></a></label>
+            <li><label class="about-lesson-link level-indent-no-sub"> <a class="toc-link visited" href="#" onclick="slider()" title="button to open and close sub menus"><p class="toc-title no-sub">About this lesson</p></a></label>
+            </li>  
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div  id="LessonControl" class="lesson-view col-xs-12">
+        <h2>Introduction</h2>      
+        <div class="row">
+          <div class="col-sm-12">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, <a href="#">molestie at velit</a>. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+            </p>
+          </div>
+        </div>
+        <!--sticky header-->
+        <div id="stickyHeader" class="sticky-header">
+          <h4>Test answers:</h4>
+          <p>A. This is ansnwer A</p>
+          <p>B. This is ansnwer B</p>
+          <p>C. This is ansnwer C</p>
+          <p>D. This is ansnwer D</p>
+        </div>
+
+        <div class="content-under-sticky">
+          <div class="row">
+            <div class="col-sm-12">      
+              <p>As I said before, "market" usually means replacement cost, but there are two exceptions:
+              </p>
+              <p>(1) If replacement cost is greater than net realizable value, you use net realizable value as the "market" value instead.</p>
+              <p>(2) If replacement cost is less than net realizable value less normal profit, you use net realizable value less normal profit as the "market" value instead.</p>
+              <p>To put it another way, "market" for purposes of the rule can never exceed net realizable value and can never be less than net realizable value less normal profit.</p>
+              <p>Assume we come up with the following figures:</p>
+              <p>Replacement Cost = $15/widget</p>
+              <p>Net Realizable Value = $12/widget</p>
+              <p>Net Realizable Value Less Normal Profit = $10/widget</p>
+              <p>What "market" figure should we use when we apply the lower-of-cost-or-market rule?
+              </p>
+            </div>
+          </div>
+          <div class="gap"></div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <p>
+                GOOD! You've correctly decided that--as in York itself--a state statute of limitations is considered substantive law for purposes of the Erie doctrine, and hence federal courts must apply the state rule.
+              </p>
+              <p>
+                <strong>
+                  Why is a statute of limitations substantive law for purposes of the Erie doctrine?
+                </strong>
+              </p>
+            </div>
+          </div>
+          <div class="EssayTable">
+            <div class="row">
+              <div class="col-sm-4 col-xs-12">
+                <textarea class="EssayBox" wrap="soft" id="INITIAL" name="INITIAL" rows="12">Under the  York  "outcome determinative" test, 
+                </textarea> 
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <textarea class="EssayBox" wrap="soft" id="ANSWER" name="ANSWER" rows="12">
+                </textarea>
+              </div>
+              <div class="col-sm-4 col-xs-12">
+                <textarea class="EssayBox" wrap="soft" id="CORRECT" name="CORRECT" rows="12">The model answer will appear here.
+                </textarea>
+              </div>
+            </div>
+          </div>
+          <div class="gap"></div>
+
+
+          <div class="row">
+            <div class="col-sm-12">
+              <p>
+                Contractor contracts with Owner to build a stone wall around three equal sides of Owner's property for $25,000. When Contractor has completed one side at a cost to Contractor of $10,000, Owner breaches and tells Contractor not to finish. An appraiser puts the value of the wall that was built at $5,000, but Owner does not like it and would have only paid $2,000 for it.
+              </p>
+              <p>
+                How much should Contractor recover and why?
+              </p>
+            </div>
+          </div>
+          <div class="EssayTable">
+            <div class="row">
+              <div class="col-sm-6 col-xs-12">
+                <textarea class="EssayBox" wrap="soft" id="INITIAL" name="INITIAL" rows="12">If the Contractor had completed, Contractor's expectancy damages would have been ... 
+
+Falling back on reliance, Contractor's reliance damages would be ... 
+
+Falling back on restitution, is this a situation where Contractor would be entitled to restitution? ... 
+
+If Contractor were entitled to restitution, his restitution damages would be ... 
+                </textarea>
+              </div>
+              <div class="col-sm-6 col-xs-12">
+                <textarea class="EssayBox" wrap="soft" id="ANSWER" name="ANSWER" rows="12"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="gap"></div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <p>
+                To conclude, let's reconsider the holding in the Wyman-Gordon case, in which the plurality suggested that agencies should not be allowed to create their own quasi-notice and comment procedures to be applied in adjudicative proceedings (e.g. , by inviting interested entities, who are not parties to the litigation, to submit comments on the proposed rule), and then use those procedures to create a rule to be applied only prospectively. In light of the fact that the Court routinely permits administrative agencies to adopt rules adjudicatively, and even allows them to apply those rules retroactively (in the sense that the rules might be applied to pre-existing facts in the adjudicative proceeding before the agency), does the Wyman-Gordon plurality's suggestion (that an agency should not articulate an adjudicative rule for prospective application only) make sense?
+              </p>
+            </div>
+          </div>
+          <div class="EssayTable">
+            <div class="row">
+              <div class="col-sm-6 col-xs-12">
+                <textarea class="EssayBox" wrap="soft" id="ANSWER" name="ANSWER" rows="12"></textarea>
+              </div>
+              <div class="col-sm-6 col-xs-12">
+                <textarea class="EssayBox" wrap="soft" id="CORRECT" name="CORRECT" rows="12">The model answer will appear here.</textarea>
+              </div>
+            </div>
+          </div>
+          <div class="gap"></div>
+
+          <!--Animation Slider-->
+          <div class="MediaPanel">
+            <div id="slideshow" style="width: 400px; height: 300px; overflow: hidden;">
+              <ul style="width: 800px; margin-left: 0px;">
+                <li style="float: left;">
+                  <img src="https://www.cali.org/lessons/web/ava01/ftw83_factual_01_lo.jpg" alt="Sample Image">
+                </li>
+                <li style="float: left;">
+                  <img src="https://www.cali.org/lessons/web/ava01/ftw83_factual_02_log.jpg" alt="Sample Image">
+                </li>
+              </ul>
+            </div> 
+            <span id="prevBtn">
+              <a href="javascript:void(0);" style="display: none;"><span id="rightArrow" class="right-arrow"></span>Previous</a>
+            </span> 
+            <span id="nextBtn">
+              <a href="javascript:void(0);" style="display: inline;">Next<span id="leftArrow" class="left-arrow"></span></a>
+            </span>
+          </div>
+          <!--Tables-->
+          <div class="row">
+            <div class="gap"></div>
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Header 1</th>
+                  <th>Header 2</th>
+                  <th>Header 3</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>title 1</td>
+                  <td>title 2</td>
+                  <td>title 3</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!--Choose btns-->   
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="btn-group" data-toggle="buttons">
+                <div class="btn-group">
+                  <label for="chooseBtn1" class="btn btn-default CL-choose-btn-right">
+                    <input id="chooseBtn1" name="choosebtn1" type="checkbox" autocomplete="off"> Yes
+                  </label>
+                  <div class="hint">
+                    <span id="chooseBtnGrade1" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="correctAnswer1">
+                      <p id="correctAnswer1">Right</p>
+                    </span>
+                  </div> 
+                </div>
+                <div class="btn-group">
+                  <label for="chooseBtn2" class="btn btn-default CL-choose-btn-wrong">
+                    <input id="chooseBtn2" name="choosebtn2" type="checkbox" autocomplete="off"> No
+                  </label>
+                  <div class="hint">
+                    <span id="chooseBtnGrade2" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="wrongAnswer1">
+                      <p id="wrongAnswer1">Wrong<p>
+                    </span>
+                  </div> 
+                </div>
+                <div class="btn-group">
+                  <label for="chooseBtn3" class="btn btn-default CL-choose-btn-maybe">
+                    <input id="chooseBtn3" name="choosebtn2" type="checkbox" autocomplete="off"> Maybe
+                  </label>
+                  <div class="hint">
+                    <span id="chooseBtnGrade3" class="question-symbol" aria-live="polite" role="definition" aria-labelledby="sometimesRight1">
+                      <p id="sometimesRight1"> Maybe<p>
+                    </span>
+                  </div> 
+                </div>
+                <div class="btn-group">
+                  <label for="chooseBtn4" class="btn btn-default CL-choose-btn">
+                    <input id="chooseBtn4" name="choosebtn3" type="checkbox" autocomplete="off"> Description
+                  </label>
+                  <div class="hint">
+                    <span id="chooseBtnGrade4" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="infoAnswer1">
+                      <p id="infoAnswer1"> About</p>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="gap"></div>
+          <div class="row">
+            <div class="col-sm-12">
+              <p>The terms used on the balance sheet and the income statement open up the potential for defining ratios that can be used to compare businesses and describe them. Some of these ratios are routinely used as conditions in contracts, mostly loan contracts. Some notable ones include the ones below. Can you infer their use (columns)?</p>
+              <p>1. Capacity of a financial institution to remain solvent during a financial crisis.</p>
+            </div>
+          </div>
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="btn-group-vertical" data-toggle="buttons">
+                  <div class="btn-group">
+                    <label for="chooseBtn5" class="btn btn-default CL-choose-btn-right spacer">
+                      <input id="chooseBtn5" name="choosebtn5" type="checkbox" autocomplete="off"> Debt to Assets.
+                    </label>
+                  </div>
+                  <div class="hint">
+                    <span id="chooseBtnGrade5" class="glyphicon glyphicon-ok un-spacer" aria-live="polite" role="definition" aria-labelledby="correctAnswer2">
+                      <p id="correctAnswer2">Right</p>
+                    </span>
+                  </div>                
+                  <div class="btn-group">
+                    <label for="chooseBtn6" class="btn btn-default CL-choose-btn-wrong spacer">
+                      <input id="chooseBtn6" name="choosebtn6" type="checkbox" autocomplete="off"> Debt to Equity.
+                    </label>
+                  </div>
+                  <div class="hint">
+                    <span id="chooseBtnGrade6" class="glyphicon glyphicon-remove un-spacer" aria-live="polite" role="definition" aria-labelledby="wrongAnswer2">
+                      <p id="wrongAnswer2">Wrong<p>
+                    </span>
+                  </div>                             
+                  <div class="btn-group">
+                    <label for="chooseBtn7" class="btn btn-default CL-choose-btn-maybe spacer">
+                      <input id="chooseBtn7" name="choosebtn7" type="checkbox" autocomplete="off"> Price to Earnings [per share].
+                    </label>
+                  </div>
+                  <div class="hint">
+                    <span id="chooseBtnGrade7" class="question-symbol un-spacer" aria-live="polite" role="definition" aria-labelledby="sometimesRight2">
+                      <p id="sometimesRight2"> Maybe<p>
+                    </span>
+                  </div>
+                  <div class="btn-group">
+                    <label for="chooseBtn8" class="btn btn-default CL-choose-btn spacer">
+                      <input id="chooseBtn8" type="checkbox" autocomplete="off"> Current ratio: Current assets / current liabilities.
+                    </label>
+                  </div>
+                  <div class="hint">
+                    <span id="chooseBtnGrade8" class="info-symbol un-spacer" aria-live="polite" role="definition" aria-labelledby="infoAnswer2">
+                      <p id="infoAnswer2"> About</p>
+                    </span>
+                  </div>                                  
+                </div>
+              </div>
+            </div>            
+          </div>
+          <div class="gap"></div>
+          <div class="row">
+            <div class="col-sm-12">
+              <p>At the beginning of Year 1, Acme Corporation buys a truck for $36,000. The truck will probably last for ten years, but the company plans to sell it after six years. At that time, it expects to receive $6,000 for the truck.</p>
+              <p>Acme uses the straight-line method of depreciation. What will the annual depreciation expense for the truck be in Year 1?</p>
+            </div>
+          </div>
+                    <div class="row">
+            <div class="col-sm-12">
+              <div class="btn-group-vertical" data-toggle="buttons">
+                <div class="btn-group">
+                  <label for="chooseListBtn2" class="btn btn-default CL-choose-btn-right truncate">
+                    <input id="chooseListBtn2" name="chooseListbtn2" type="checkbox" autocomplete="off"> A
+                  </label><p class="multi-btn-txt">$36,000</p>
+                </div>
+                <div class="hint">
+                  <span id="chooseListBtnGrade2" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="correctAnswer3">
+                    <p id="correctAnswer3">Right</p>
+                  </span>
+                </div>                
+                <div class="btn-group">
+                  <label for="chooseListBtn3" class="btn btn-default CL-choose-btn-wrong truncate">
+                    <input id="chooseListBtn3" name="chooseListbtn3" type="checkbox" autocomplete="off"> B
+                  </label><p class="multi-btn-txt">$3,000</p>
+                </div>
+                <div class="hint">
+                  <span id="chooseListBtnGrade3" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="wrongAnswer3">
+                    <p id="wrongAnswer3">Wrong</p>
+                  </span>
+                </div>                             
+                <div class="btn-group">
+                  <label for="chooseListBtn4" class="btn btn-default CL-choose-btn-maybe truncate">
+                    <input id="chooseListBtn4" name="chooseListbtn4" type="checkbox" autocomplete="off"> C
+                  </label><p class="multi-btn-txt">$5,000</p>
+                </div>
+                <div class="hint">
+                  <span id="chooseListBtnGrade4" class="question-symbol" aria-live="polite" aria-live="polite" role="definition" aria-labelledby="sometimesRight3">
+                    <p id="sometimesRight3"> Maybe<p>
+                  </span>
+                </div>
+                <div class="btn-group">
+                  <label for="chooseListBtn1" class="btn btn-default CL-choose-btn active">
+                    <input id="chooseListBtn1" name="chooseListbtn1" type="checkbox" autocomplete="off"> D
+                  </label><p class="multi-btn-txt">$30,000</p>
+                </div>
+                <div class="hint">
+                  <span id="chooseListBtnGrade1" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="infoAnswer3">
+                    <p id="infoAnswer3"> About</p>
+                  </span>
+                </div>            
+              </div>
+            </div>
+          </div>
+          <div class="gap"></div>
+          <div class="row">
+            <div class="col-sm-12">
+              <ol class="ol-multi-bts">
+                <li>
+                  <p><span id="multiAnswer" class="glyphicon glyphicon-ok multi-answer" role="definition" aria-labelledby="correct-answer"></span> On May 1, Debtortrucking enters into a contract with Gascompany for Gascompany to provide Debtortrucking with 1,000 gallons of gas each month for six months at a price of $3.00 per gallon. Debtortrucking pays in full on June 1 the entire amount (six months times 1,000 times $3.00 = $18,000). Debtortrucking files for bankruptcy on July 1, when the price of gas is $3.50.</p>
+                </li>
+              </ol>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="btn-group" data-toggle="buttons">
+                <div class="btn-group">
+                  <label for="multiBtn1" class="btn btn-default CL-choose-btn-right spacer">
+                    <input id="multiBtn1" name="multibtn1" type="checkbox" autocomplete="off"> Not Executory
+                  </label>
+                  <div class="hint">
+                    <span id="multiBtnGrade1" class="glyphicon glyphicon-ok un-spacer" aria-live="polite" role="definition" aria-labelledby="correctAnswer4">
+                      <p id="correctAnswer4">Right</p>
+                    </span>
+                  </div> 
+                </div>
+                <div class="btn-group">
+                  <label for="multiBtn2" class="btn btn-default CL-choose-btn-wrong spacer">
+                    <input id="multiBtn2" name="multibtn2" type="checkbox" autocomplete="off"> Executory &amp; Asset
+                  </label>
+                  <div class="hint">
+                    <span id="multiBtnGrade2" class="glyphicon glyphicon-remove un-spacer" aria-live="polite" role="definition" aria-labelledby="incorrectAnswer4">
+                      <p id="incorrectAnswer4">Wrong<p>
+                    </span>
+                  </div> 
+                </div>
+                <div class="btn-group">
+                  <label for="multiBtn3" class="btn btn-default CL-choose-btn-maybe spacer">
+                    <input id="multiBtn3" name="multibtn3" type="checkbox" autocomplete="off"> Executory &amp; Liability
+                  </label>
+                  <div class="hint">
+                    <span id="multiBtnGrade3" class="question-symbol un-spacer" aria-live="polite" role="definition" aria-labelledby="sometimesRight4">
+                      <p id="sometimesRight4">Maybe<p>
+                    </span>
+                  </div> 
+                </div>
+                <div class="btn-group">
+                  <label for="multiBtn4" class="btn btn-default CL-choose-btn spacer">
+                    <input id="multiBtn4" name="multibtn4" type="checkbox" autocomplete="off"> Description
+                  </label>
+                  <div class="hint">
+                    <span id="multiBtnGrade4" class="info-symbol un-spacer" aria-live="polite" role="definition" aria-labelledby="infoAnswer4">
+                      <p id="infoAnswer4">About</p>
+                    </span>
+                  </div>  
+                </div>              
+              </div>
+            </div>
+          </div>
+          <!-- checkboxes and radio buttons -->
+          <div class="row">
+            <div class="col-sm-12">
+              <label for="checkboxSelected1" class="checkbox-container">One
+                <input type="checkbox" checked="checked">
+                <span class="checkmark-selected"></span>
+              </label>
+              <div class="hint">
+                <span id="checkboxSelected1" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="checkboxCorrect1">
+                  <p id="checkboxCorrect1">Right</p>
+                </span>
+              </div>
+              <label for="checkboxSelected2" class="checkbox-container">Two
+                <input type="checkbox">
+                <span class="checkmark-wrong"></span>
+              </label>
+              <div class="hint">
+                <span id="checkboxSelected2" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="checkboxWrong1">
+                  <p id="checkboxWrong1">Right</p>
+                </span>
+              </div>              
+              <label for="checkboxSelected3" class="checkbox-container">Three
+                <input type="checkbox">
+                <span class="checkmark-success"></span>
+              </label>
+              <div class="hint">
+                <span id="checkboxSelected3" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="checkboxSuccess1">
+                  <p id="checkboxSuccess1">Right</p>
+                </span>
+              </div>                
+              <label class="checkbox-container">Four
+                <input type="checkbox">
+                <span class="checkmark-default"></span>
+              </label>
+              <label class="radio-container">Selected
+                <input type="radio" checked="checked" name="radio">
+                <span class="checkmark-rad-selected"></span>
+              </label>
+              <label class="radio-container">Wrong
+                <input type="radio" name="radio">
+                <span class="checkmark-rad-error"></span>
+              </label>
+              <label class="radio-container">Right
+                <input type="radio" name="radio">
+                <span class="checkmark-rad-success"></span>
+              </label>
+              <label class="radio-container">Default
+                <input type="radio" name="radio">
+                <span class="checkmark-rad-default"></span>
+              </label>
+            </div>
+          </div>
+          <div class="gap"></div>
+          <a href="#" alt="Grade my answer button"><button class="CL-btn CL-grade-btn shine btn-disabled">Grade my answer</button></a>
+          <div class="gap"></div>
+          <div class="panel panel-default" id="success-wrap">
+            <div class="panel-heading alert-success-heading"><h4>Success</h4>
+              <button type="button" class="close" data-target="#success-wrap" data-dismiss="alert"> <span class="alert-success-x" aria-label="close button">&times;</span><span class="sr-only">Close</span>
+              </button>
+            </div>
+            <div class="panel-body alert-success-body">
+                Success Content
+            </div>
+          </div> 
+          <div class="panel panel-default" id="error-wrap">
+            <div class="panel-heading alert-error-heading"><h4>Error</h4>
+              <button type="button" class="close" data-target="#error-wrap" data-dismiss="alert"> <span class="alert-error-x" aria-label="close button">&times;</span><span class="sr-only">Close</span>
+              </button>
+            </div>
+            <div class="panel-body alert-error-body">
+              Error Content
+            </div>
+          </div>
+          <div class="panel panel-default" id="description-wrap">
+            <div class="panel-heading alert-description-heading"><h4>Description</h4>
+              <button type="button" class="close" data-target="#description-wrap" data-dismiss="alert"> <span class="alert-description-x" aria-label="close button">&times;</span><span class="sr-only">Close</span>
+              </button>
+            </div>
+            <div class="panel-body alert-description-body">
+              Description Content
+            </div>
+          </div>
+          <div class="panel panel-default" id="maybe-wrap">
+            <div class="panel-heading alert-maybe-heading"><h4>Maybe</h4>
+              <button type="button" class="close" data-target="#maybe-wrap" data-dismiss="alert"> <span class="alert-maybe-x" aria-label="close button">&times;</span><span class="sr-only">Close</span>
+              </button>
+            </div>
+            <div class="panel-body alert-maybe-body">
+              Maybe Content
+            </div>
+          </div>                                    
+          <div class="gap"></div>
+        </div>
+      </div>
+    </div>  
+  </div>
+</div>
+
+    <div class="container-fluid">
+      <div class="row">
+          <div class="text-center">
+          <a href="#" alt="Next button to take you to the next lesson"><button class="CL-btn CL-next-btn icon-arrow-right shine btn-disabled">Next<span class="next-arrow"></span></button></a>
+          </div>  
+      </div>
+    </div>
+  </div>
+  <footer>
+    <div class="container-fluid">
+      <div class="row">
+        <br>
+        <div class="text-center">
+          <p>All Contents &copy; <img src="https://www.cali.org/lessons/web/share/jq/img/CALILogo.gif" class="footer-logo" alt="Grey CALI logo image">, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. 08/31/2016</p>
+        </div>
+        <div class="text-center">
+          <!--<a href="#" alt="Faculty Options Link" class="faculty-link">Faculty Options</a> |--> <a href="#" alt="Faculty View Link" class="faculty-link" class="faculty-link">Faculty View</a>
+        </div>          
+      </div>
+    </div>
+    <div class="gap"></div>
+    <div class="gap"></div>
+  </footer>
+  <div>
+    <div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
+      <p class="feedback-bubble">Feedback</p>
+    </div>
+    <!--<div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
+      <p class="happyface-bubble"><span class="happyface-icon"></span></p></div>-->
+  </div>  
+
+  <div id="feedbackModal" class="modal fade">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close feedback modal">&times;</button>
+                  <h4 class="modal-title">Let us know what you think!</h4>
+              </div>
+              <div class="modal-body">
+                <!--<p>If you have comments on a particular lesson you must include the lesson name, the  section title (the title at the top of the page), and your teachers name.</p>-->
+                <div class="form-group">
+                  <label for="comment">Comment:</label>
+                  <textarea class="form-control" rows="5" id="comment" placeholder="Enter you comment here." aria-label="Text box to enter your comment." aria-multiline="true"></textarea>
+                </div>
+                <table>
+                  <tr>
+                    <td><label for="course">Course:</label></td>
+                    <td>Course Name/#</td>
+                  </tr>
+                  <tr>
+                    <td><label for="lesson">Lesson:</label></td>
+                    <td>Lesson name/#</td>
+                  </tr>
+                  <tr>
+                    <td><label for="Instructor">Instructor:</label></td>
+                    <td>Teacher Name</td>
+                  </tr>
+                </table>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Send</button>
+              </div>
+          </div>
+      </div>
+  </div>
+ 
+</body>
+  <script type="text/javascript">
+    //Nav tree
+    $('ul.slider-left').toggle();
+    $('label.nav-toggle a').click(function ($e) {
+      $e.preventDefault();
+      $(this).parent().parent().children('ul.slider-left').toggle(300);
+    });
+
+    $('.toggle-icon').click(function(){
+      $(this).find('a').toggleClass('glyphicon-plus glyphicon-minus');
+    });
+
+    //slider menu
+    $('.CL-hamburger').on('click', function () {
+        $('#SliderControl').toggle(300);
+    });
+
+    $('.CL-hamburger').on('click', function () {
+        $('.toc-view').toggleClass("toc-view-close");
+    });
+
+    $('.CL-hamburger').on('click', function () {
+        $('.lesson-view').toggleClass("lesson-view-close");
+    });
+
+    //toc link close
+
+    $('.toc-link').on('click', function () {
+        $('#SliderControl').toggle(300);
+    });
+
+    $('.toc-link').on('click', function () {
+        $('.toc-view').toggleClass("toc-view-close");
+    });
+
+    $('.toc-link').on('click', function () {
+        $('.lesson-view').toggleClass("lesson-view-close");
+    });             
+
+    //toc link visted
+    $('.visited').click(function(){
+      $(this).addClass('toc-visited');
+    });
+
+    // checkbox hints
+    $('label[for="checkboxSelected1"]').click(function() {
+      $('#checkboxCorrect1').fadeIn().css('display','inline-block');
+    })     
+    $('label[for="checkboxSelected2"]').click(function() {
+      $('#checkboxWrong1').fadeIn().css('display','inline-block');
+    }) 
+    $('label[for="checkboxSelected3"]').click(function() {
+      $('#checkboxSuccess1').fadeIn().css('display','inline-block');
+    })            
+
+
+    // Choose Buttons
+    $('label[for="chooseBtn1"]').click(function() {
+      $('#chooseBtnGrade1').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn2"]').click(function() {
+      $('#chooseBtnGrade2').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn3"]').click(function() {
+      $('#chooseBtnGrade3').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn4"]').click(function() {
+      $('#chooseBtnGrade4').fadeIn().css('display','inline-block');
+    })
+
+    $('label[for="chooseBtn5"]').click(function() {
+      $('#chooseBtnGrade5').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn6"]').click(function() {
+      $('#chooseBtnGrade6').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn7"]').click(function() {
+      $('#chooseBtnGrade7').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn8"]').click(function() {
+      $('#chooseBtnGrade8').fadeIn().css('display','inline-block');
+    })
+
+    // Choose List
+    $('label[for="chooseListBtn1"]').click(function() {
+      $('#chooseListBtnGrade1').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseListBtn2"]').click(function() {
+      $('#chooseListBtnGrade2').fadeIn().css('display','inline-block');
+    })
+      $('label[for="chooseListBtn3"]').click(function() {
+      $('#chooseListBtnGrade3').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseListBtn4"]').click(function() {
+      $('#chooseListBtnGrade4').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseListBtn5"]').click(function() {
+      $('#chooseListBtnGrade5').fadeIn().css('display','inline-block');
+    })
+    // Multi Buttons
+    $('label[for="multiBtn1"]').click(function() {
+      $('#multiBtnGrade1').fadeIn().css('display','inline-block');
+    });
+    $('label[for="multiBtn2"]').click(function() {
+      $('#multiBtnGrade2').fadeIn().css('display','inline-block');
+    });
+      $('label[for="multiBtn3"]').click(function() {
+      $('#multiBtnGrade3').fadeIn().css('display','inline-block');
+    });
+    $('label[for="multiBtn4"]').click(function() {
+      $('#multiBtnGrade4').fadeIn().css('display','inline-block');
+    });
+    $('label[for="multiBtn1"]').click(function() {
+      $('#multiAnswer').fadeIn().css('display','inline-block');
+    });
+
+  // modal 
+
+    $('#open-feedback').on('click',function () {
+      $('#feedbackModal').modal('show');
+    });
+
+  //Sticky Header stickyAnchor
+    var header = document.getElementById("stickyHeader");
+
+    // Initial lesson control height
+    const initialLCHeight = $("#LessonControl").height()
+    // Initial Sticky height
+    const initialStickyHeight = $("#stickyHeader").height()
+
+    var sticky = header.offsetTop - header.style.paddingTop;
+    function stickFunction() {
+        if (window.pageYOffset >= sticky) {
+            header.classList.add("sticky");
+            // New height of the sticky header
+            const newStickyHeight = $("#stickyHeader").outerHeight()
+            // New Height of the lesson control
+            const newLCHeight = $("#LessonControl").height()
+            // Get the difference between lesson control heights
+            const dLCHeight = initialLCHeight - newLCHeight
+            // Get the difference between sticky heights
+            const dStickyHeight = initialStickyHeight - newStickyHeight
+
+            
+            // Add the differences between the lesson control heights and
+            // the sticky heights to the top padding of the lesson control
+            // for a seemless transition
+            console.log(dStickyHeight)
+            $("#LessonControl").css('paddingTop', dLCHeight - dStickyHeight + 40)
+        } else {
+            header.classList.remove('sticky');
+            // Return to normal padding
+            $("#LessonControl").css('paddingTop', 0)
+        }
+    }
+
+    $(document).ready(stickFunction);
+    $(window).resize(stickFunction);
+    $(window).scroll(stickFunction);
+
+   // disabled buttons
+   $('.btn-disabled').removeClass("shine");
+
+   //Zoom Image
+    var modal = document.getElementById('myModal');
+    var img = document.getElementById('ZoomImg');
+    var zoom = document.getElementById('zoom');
+    var modalImg = document.getElementById("img01");
+    var captionText = document.getElementById("caption");
+    zoom.onclick = function(){
+        modal.style.display = "block";
+        modalImg.src = img.src;
+        captionText.innerHTML = img.alt;
+    }
+
+    var span = document.getElementsByClassName("img-close")[0];
+
+    span.onclick = function() { 
+        modal.style.display = "none";
+    }
+  </script>
+</html>

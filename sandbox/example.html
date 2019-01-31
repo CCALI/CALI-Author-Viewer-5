@@ -1,0 +1,133 @@
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=2, minimum-scale=1, user-scalable=yes">
+<head>
+  <title>Sandbox</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <link rel="stylesheet" href="jquery.ui.slider.css">
+    <script src="jquery-2.2.4.min.js"></script>
+    <script src="jquery-ui.min.js" type="text/javascript"></script>
+    <script src="jquery.ui.touch-punch.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+</head>
+<body>
+
+<div id="#wrapper">
+<!--Header / Nav bar top of page -->
+<!-- In the style guide see Compontent/Menus/Hamburger Menu -->  
+  <nav class="navbar navbar-default CL-navbar-main" role="navigation" aria-label="Site Navbar">
+    <div class="container-fluid">
+      <div class="navbar-header CL-navbar">
+        <button type="button" class="navbar-toggle collapsed CL-menu-button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="CL-hamburger-white"></span>
+        </button>
+        <a class="navbar-brand" href="#">
+          <img class="CL-logo" alt="CALI Lessons Logo">
+        </a>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <p class="navbar-text">
+              <a href="#" class="user-name-link" aria-hidden="false">User Name</a>
+            </p>
+          </li>
+          <li>
+            <a href="#" class="exit-icon">
+              <span class="exit-btn" alt="Exit the lesson and resume later."></span>
+            </a>
+            <p class="navbar-text">
+              <a href="#" class="exit-icon"></a>
+              <a href="#" class="exit-link" aria-hidden="false">Exit & Resume Latet</a>
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Lesson Title -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-12">
+          <header>
+            <h1>CALI Author Demonstration Lesson</h1>
+          </header>
+      </div>  
+    </div>  
+  </div>
+
+  <!-- Lesson Body Starts -->
+  <!-- Slider Menu -->
+  <!-- In the style guide see Components/Menus/Slider Menu -->
+  <div class="active">
+    <div class="page-content">
+      <div class="row eq-height">
+        <div class="toc-view col-xs-12">
+          <input id="cl-hamburger" class="CL-hamburger" type="checkbox" placeholder="Table of Contents Menu" aria-label="Table of Contents Menu">
+          <div id="SliderControl" class="CLAccordion">
+            <h2>Table of Contents</h2>
+            <!-- Nav tree goes here - see navtree -->
+          </div>
+        </div>
+        <div id="LessonControl" class="lesson-view col-xs-12">
+          <!-- Main lesson view goes here -->
+          <h2>Introduction</h2>
+          <div class="row">
+            <div class="col-sm-12">
+              <p>
+                Lesson content goes here
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+  <!-- Lesson Body Ends -->
+
+  <!-- Next Button -->
+  <!-- In the style guide see Compontent/Buttons/Next Button -->
+  <div class="container-fluid">
+    <div class="row">
+        <div class="text-center">
+        <a href="#" alt="Next button to take you to the next lesson"><button type="button" class="CL-btn CL-next-btn shine icon-arrow-right">Next<span class="next-arrow"></span></button></a>
+    </div>
+  </div>
+
+</div>
+
+<!-- Footer -->
+<!-- In the style guide see Components/Footer Links-->
+<footer>
+  <div class="container-fluid">
+    <div class="row">
+      <br>
+      <div class="text-center">
+        <p>All Contents © <img src="https://www.cali.org/lessons/web/share/jq/img/CALILogo.gif" class="footer-logo" alt="Grey CALI logo image">, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. 08/31/2016</p>
+      </div>
+      <div class="text-center">
+        <a href="#" alt="Faculty View Link" class="faculty-link">Faculty View</a>
+      </div>          
+    </div>
+  </div>
+  <div class="gap"></div>
+  <div class="gap"></div>
+</footer>
+
+</body>
+
+  <script type="text/javascript">
+    //slider menu
+    $('.CL-hamburger').on('click', function () {
+        $('#SliderControl').toggle(300);
+    });
+    $('.CL-hamburger').on('click', function () {
+        $('.toc-view').toggleClass("toc-view-close");
+    });
+    $('.CL-hamburger').on('click', function () {
+        $('.lesson-view').toggleClass("lesson-view-close");
+    });
+
+  </script>
+</html>

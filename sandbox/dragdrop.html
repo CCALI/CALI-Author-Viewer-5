@@ -1,0 +1,384 @@
+<html lang="en">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <title>Sandbox</title>
+    <link rel="stylesheet" href="styles.css" type="text/css">
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" type="text/javascript"></script>
+    <script src="jquery.ui.touch-punch.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+</head>
+<body>
+  
+<nav class="navbar navbar-default CL-navbar-main"
+     role="navigation"
+     aria-label="Site Navbar">
+  <div class="container-fluid">
+    <div class="navbar-header CL-navbar">
+      <button type="button" class="navbar-toggle collapsed CL-menu-button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="CL-hamburger-white"></span>
+      </button>
+      <a class="navbar-brand" href="#">
+          <img class="CL-logo" alt="Cali Lessons Logo" />
+        </a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <p class="navbar-text">
+          <a href="#" class="user-name-link" title="Link to user information">User Name</a>
+          </p>
+        </li>
+        <li>
+          <a href="#" class="exit-icon" title="Exit and resume lesson later button">
+            <span class="exit-btn" alt="exit">
+              <p class="navbar-text">
+                <a href="#" class="exit-link" title="Exit and resume lesson later text for link button">Exit & Resume Later</a>
+            </p>
+          </span>
+        </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12">
+        <header>
+          <h1>CALI Author Demonstration Lesson</h1>
+        </header>
+    </div>  
+  </div>  
+</div>
+ 
+<div class="active">
+  <div class="page-content">
+    <div class="row eq-height">
+      <div class="toc-view col-xs-12">
+        <input id="cl-hamburger" class="CL-hamburger" type="checkbox" placeholder="Table of Contents Menu"></input>
+        <div id="SliderControl" class="CLAccordion">
+          <h2>Table of Contents</h2>
+          <ul class="nav nav-list-main">
+            <li><label class="nav-toggle nav-header toggle-icon level-1-header" for="cl-hamburger"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus"> <p class="toc-title">Header 1</p></a></label>
+              <ul class="nav nav-list slider-left">
+                <li><a href="#" class="level-2-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                <li><a href="#" class="level-2-indent toc-link visited" onclick="slider()" title="link to lesson">Lesson Link</a></li>
+                <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-2-header visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1</p></a></label>
+                  <ul class="nav nav-list slider-left">
+                    <li><a href="#" class="level-3-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                    <li><a href="#" class="level-3-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                    <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-3-header visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1</p></a></label>
+                      <ul class="nav nav-list slider-left">
+                        <li><a href="#" class="level-4-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                        <li><a href="#" class="level-4-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                        <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-4-header visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1</p></a></label>
+                          <ul class="nav nav-list slider-left">
+                            <li><a href="#" class="level-5-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                            <li><a href="#" class="level-5-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                            <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-5-header visited" title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1</p></a></label>
+                              <ul class="nav nav-list slider-left">
+                                <li><a href="#" class="level-6-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                <li><a href="#" class="level-6-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-6-header visited"  title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1.1</p></a></label>
+                                  <ul class="nav nav-list slider-left">
+                                    <li><a href="#" class="level-7-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                    <li><a href="#" class="level-7-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                    <li><label class="nav-toggle nav-header toggle-icon"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus level-7-header visited"  title="button to open and close sub menus"> <p class="toc-title">Header 1.1.1.1.1.1.1</p></a></label>
+                                      <ul class="nav nav-list slider-left">
+                                        <li><a href="#" class="level-8-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                        <li><a href="#" class="level-8-indent toc-link visited" title="link to lesson">Lesson Link</a></li>
+                                      </ul>
+                                    </li>
+                                  </ul>
+                                </li>
+                              </ul>
+                            </li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><label class="nav-toggle-no-sub level-indent-no-sub"> <a class="toc-link visited" href="#" onclick="slider()" title="button to open and close sub menus"><p class="toc-title no-sub">Header as Lesson Link</p></a></label>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div  id="LessonControl" class="lesson-view col-xs-12">
+        <h2>Introduction</h2>
+        <div class="row">
+          <div class="col-sm-12">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+            </p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 drag-content well">
+            <ul id="sortable" class="list-unstyled">
+              <li>
+                <div class="horizontal">
+                    <div class="vertical">
+                        <div class="dots-blue"></div>
+                    </div>
+                    <div class="row drag-body">
+                      <div>
+                        <p>1. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.</p>
+                      </div>
+                      <div class="row remove"><span class="remove-icon"></span><p class="remove-txt">Remove from list</p></div>
+                    </div>
+                </div>
+              </li>              
+              <li>
+                <div class="horizontal removed">
+                    <div class="vertical">
+                        <div class="dots-grey"></div>
+                    </div>
+                    <div class="row drag-body">
+                      <div>
+                        <p>1. Lorem ipsum</p>
+                      </div>
+                      <div class="undo"><span class="undo-icon"></span><p class="undo-txt">Undo remove</p></div>
+                    </div>
+                </div>
+              </li>
+              <li>
+                <div class="horizontal right">
+                  <div class="vertical">
+                      <div class="dots-green"></div>
+                  </div>
+                  <div class="row drag-body">
+                    <div>
+                      <p>2. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.</p>
+                    </div>
+                    <div class="hint">
+                      <span class="glyphicon glyphicon-ok drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Right">
+                        <p id="correctAnswer2">Right</p>
+                      </span>
+                    </div>                        
+                  </div>                 
+                </div>               
+              </li>
+              <li>
+                <div class="horizontal wrong">
+                  <div class="vertical">
+                      <div class="dots-red"></div>
+                  </div>
+                  <div class="row drag-body">
+                    <div>
+                      <p>3. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.</p>
+                    </div>
+                    <div class="hint">
+                      <span class="glyphicon glyphicon-remove drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Wrong">
+                        <p id="wrongAnswer2">Wrong<p>
+                      </span>
+                    </div>                     
+                  </div>                      
+                </div>             
+              </li>
+              <li>
+                <div class="horizontal maybe">
+                  <div class="vertical">
+                      <div class="dots-yellow"></div>
+                  </div>
+                  <div class="row drag-body">
+                    <div>
+                      <p>4. Lorem.
+                    </p>
+                    </div>
+                    <div class="hint">
+                      <span class="question-symbol drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Maybe">
+                        <p id="sometimesRight2"> Maybe<p>
+                      </span>
+                    </div>                     
+                  </div>                   
+                </div>                
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="gap"></div>
+       
+      </div>
+    </div> 
+  </div>
+ </div>
+</div>
+  
+<div class="container-fluid">
+  <div class="row">
+      <div class="text-center">
+      <!--<button class="btn btn-primary CL-next-btn shine" alt="next">Next<span class="next-arrow"></span></button>-->
+  <a href="#"><button class="CL-btn CL-next-btn shine icon-arrow-right">Next<span class="next-arrow"></span></button></a>
+    </div>  
+  </div>
+</div>
+
+</body>
+  <script type="text/javascript">
+    //Nav tree
+    $('ul.slider-left').toggle();
+    $('label.nav-toggle a').click(function ($e) {
+      $e.preventDefault();
+      $(this).parent().parent().children('ul.slider-left').toggle(300);
+    });
+
+    $('.toggle-icon').click(function(){
+      $(this).find('a').toggleClass('glyphicon-plus glyphicon-minus');
+    });
+
+    //slider menu
+    $('.CL-hamburger').on('click', function () {
+        $('#SliderControl').toggle(300);
+    });
+
+    $('.CL-hamburger').on('click', function () {
+        $('.toc-view').toggleClass("toc-view-close");
+    });
+
+    $('.CL-hamburger').on('click', function () {
+        $('.lesson-view').toggleClass("lesson-view-close");
+    });
+
+    //toc link close
+
+    $('.toc-link').on('click', function () {
+        $('#SliderControl').toggle(300);
+    });
+
+    $('.toc-link').on('click', function () {
+        $('.toc-view').toggleClass("toc-view-close");
+    });
+
+    $('.toc-link').on('click', function () {
+        $('.lesson-view').toggleClass("lesson-view-close");
+    });             
+
+    //toc link visted
+    $('.visited').click(function(){
+      $(this).addClass('toc-visited');
+    });
+
+    //Drag and Drop
+      $(function () {
+          // Used to signal when a user has began dragging an item
+          var touchDown = false
+          // Used to prevent automatic scrolling when a user selects an item
+          // which is partially above or below the screen
+          var scroll = "normal"
+          $("#sortable").sortable({
+              forcePlaceholderSize: true,
+              tolerance: "pointer",
+              axis: "y",
+              cursor: "move",
+              scroll: true,
+              placeholder: "ui-state-highlight",
+              sort: function(e) {
+
+                  // The selected item
+                  const selected = $(e.target).children('.ui-sortable-helper')[0]
+                  // The top of the selected item
+                  selectedTop = parseFloat(selected.style.top.slice(0, -2))
+                  // The bottom of the selected item
+                  selectedBottom = selectedTop + $(selected).height()
+                  // The height of the selected item
+                  const selectedHeight = $(selected).height()
+
+                  // The top of the sortable list
+                  const sortableTop = $(e.target).offset().top
+                  // The bottom of the sortable list
+                  const sortableBottom = sortableTop + $(e.target).height()
+
+                  // The top of the window
+                  const windowTop = $(window).scrollTop()
+                  // The bottom of the window
+                  const windowBottom = windowTop + window.innerHeight
+
+                  // If the top of the selected item is less than that
+                  // of the list, and the top of the screen is less than
+                  // that of the list do not let the user scroll any higher
+                  if (selectedTop < sortableTop && windowTop < sortableTop) {
+                      $(selected).offset({top: sortableTop})
+                      return
+                  // If the bottom of the selected item is greater than that
+                  // of the list, and the bottom of the screen is greater than
+                  // that of the list do not let the user scroll any lower
+                  } else if (selectedBottom > sortableBottom && (windowBottom > sortableBottom)) {
+                      $(selected).offset({top: (sortableBottom - selectedHeight)})
+                  }
+
+                  // If the user has just touched down...
+                  if (touchDown) {
+                      // If the top of the window is greater than that of the selected item
+                      if (windowTop > selectedTop) {
+                          console.log("Top")
+                          scroll = "top"
+                      // If the bottom of the window is less than that of the selected bottom
+                      } else if (windowBottom < selectedBottom) {
+                          scroll = "bottom"
+                      } else {
+                          scroll = "normal"
+                      }
+                      touchDown = false
+                  }
+
+                  // If the item has not just been selected with the top out of the screen
+                  // and the top of the window is greater than that of the item...
+                  if (scroll != "top" && windowTop > selectedTop) {
+                      // Scroll up
+                      $(window).scrollTop(selectedTop)
+                  // If the item has not just been selected with the bottom out of the screen
+                  // and the bottom of hte window is less than that of the itemm...
+                  } else if (scroll != "bottom" && windowBottom < selectedBottom) {
+                      // Scroll down
+                      $(window).scrollTop(selectedBottom - window.innerHeight)
+                  }
+
+                  if (scroll != "normal") {
+                      // If the top of the item was out of the screen when selected
+                      // and is now in the screen...
+                      if (scroll == "top" && windowTop < selectedTop) {
+                          scroll = "normal"
+                      // If the bottom of the item was out of the screen when selected
+                      // and is now in the screen...
+                      } else if (scroll == "bottom" && $(window).scrollTop() + window.innerHeight > selectedBottom) {
+                          scroll = "normal"
+                      }
+                  }
+              }
+              
+          });
+          $("#sortable").disableSelection();
+          $("#sortable").on('touchstart', (e) => {
+              touchDown = true
+          })
+      });
+
+      subtractTop = (selected, amt) => {
+          var top = parseFloat(selected.style.top.slice(0, -2)) - amt
+
+          return top.toString() + "px"
+      }
+
+      $('.sortable').on('drag', () => {
+          console.log('moving')
+      })
+
+      $('ul').on('dragstart', () => {
+          console.log("Hello")
+      })
+  </script>
+</html>
