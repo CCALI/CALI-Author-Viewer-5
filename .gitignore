@@ -1,6 +1,5 @@
-
 .DS_Store
 docs/
-sandbox/
 node_modules/*
 package-lock.json
+sandbox/node_modules/*
