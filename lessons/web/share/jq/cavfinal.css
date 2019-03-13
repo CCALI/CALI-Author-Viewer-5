@@ -1,0 +1,47 @@
+/* CALI Viewer 6 Temp override */
+
+/* blockquote from CA lessons does NOT expect a left gray bar */
+blockquote{ 
+	border: 0px solid #999;
+	page-break-inside:avoid;
+}
+
+/* hint caption overrides grade icon for checkbox/radio button */
+.hint p { 
+	margin-left: 0;
+}
+
+p {
+	font-size: 1em;
+}
+
+/* Erase Slide show offsets */
+#slideshow {	
+	margin: auto;
+	border: 3px solid #886;
+	padding: 0px;
+}
+#slideshow li{
+	width:400px;
+	height:300px;
+}
+#slideshow ul, li{
+	padding:0;
+	margin:0;
+	border:0;
+}
+#slideshow img{
+	width: 100%;
+	height: 100%;
+}
+#slideshow ul li{
+	padding:0;
+	margin:0;
+	border:0;
+}
+.UploadScore1 {
+	width: 20em;
+}
+.CLAccordion li a {
+	font-size: 14px!important;
+}
