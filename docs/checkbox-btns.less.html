@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Style Guide - Checkbox Buttons </title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<!--[if lt IE 9]>
+   <script type="text/javascript" src="static/html5shiv.js"></script>
+    <!--<![endif]-->
+</head>
+
+<body class="docs">
+	<header>
+		<nav class="container">
+
+			<div class="logo-menu">
+				<a class="navbar-brand" href="index.html">
+                  <img src="static/img/cali-lessons-logo.png" style="height:50px;width:auto;"/>
+                </a>
+			</div>
+
+			<ul class="main-nav">
+		        <li><a href="index.html">Style Guide</a></li>
+		        <li><a href="components.html">Components</a></li>
+		        <li><a href="design.html">Design Elements</a></li>
+		    </ul>
+		</nav>
+	</header>
+
+	
+<div class="container api">
+
+	
+	<nav class="sidebar">
+		
+		<ul class="api cascading primary-grouping"> 
+	
+		
+		<li class="search-container active parent">
+			<a class="sidebar-title" href="index.html" data-search="Style Guide">
+				Style Guide
+			</a>
+			
+		</li>
+		
+		<li class="search-container active parent">
+			<a class="sidebar-title" href="components.html" data-search="Components">
+				Components
+			</a>
+			
+		</li>
+		
+		
+			
+			<li class="search-container active">
+			<a class="sidebar-title" href="components.buttons.html" data-search="Buttons">
+				Buttons
+			</a>
+			
+	<ul>
+		
+			
+				
+				
+				<li class="search-container active ">
+					<a class="stylesheet" href="checkbox-btns.less.html" data-search="Checkbox Buttons">
+						Checkbox Buttons
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="choose-btns.less.html" data-search="Choose Buttons">
+						Choose Buttons
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="choose-list-btns.less.html" data-search="Choose List Buttons">
+						Choose List Buttons
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="choose-multi-btns.less.html" data-search="Choose Multi Buttons">
+						Choose Multi Buttons
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="feedback-button.less.html" data-search="Feedback Button">
+						Feedback Button
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="grade-button.less.html" data-search="Grade Button">
+						Grade Button
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="icon-btns.less.html" data-search="Icon Buttons">
+						Icon Buttons
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="next-button.less.html" data-search="Next Button">
+						Next Button
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="radio-btns.less.html" data-search="Radio Buttons">
+						Radio Buttons
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="toolbar-btn.less.html" data-search="Toolbar Button">
+						Toolbar Button
+					</a>
+				</li>
+				
+			
+			
+		
+	</ul>
+
+		</li>
+			
+		
+	
+</ul>
+	</nav>
+	
+	
+	
+	<article class="content docs">
+	
+	
+		
+		<section class="title">
+			<div class="heading">
+<h1>Checkbox Buttons</h1>
+	<ul class="tags">
+		<li>stylesheet</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+		<span class="module">checkbox-btns.less</span>
+	
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+		
+		
+		<section class="contents">
+		</section>
+		
+		
+		
+
+		
+		<section class="description">
+			<h2>CALI Lessons Checkbox Right Button</h2>
+<p>These are styles for the different types of checkmark buttons and their hints (if they are right, wrong, etc).</p>
+<p>Old Design</p>
+<p><img src="https://image.ibb.co/c2vXiJ/oldcheckmarks.jpg" alt="Old Checkmark" title="Old Checkmark Example" /></p>
+<pre><code>&lt;tr&gt;&lt;td class=&quot;cbcol&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;cb0_0&quot; id=&quot;cb0_0&quot; value=&quot;0&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcoltext&quot;&gt;&lt;div class=&quot;ChoiceText ReadText&quot;&gt;&lt;p&gt;Question Text&lt;/p&gt;&lt;/div&gt;&lt;div id=&quot;fbText0_0&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class=&quot;cbcol&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade0_3&quot; src=&quot;img/grade-wrong.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class=&quot;cbcol&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;cb0_3&quot; id=&quot;cb0_3&quot; value=&quot;0&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcoltext&quot;&gt;&lt;div class=&quot;ChoiceText ReadText&quot;&gt;&lt;p&gt;Question Text&lt;/p&gt;&lt;/div&gt;&lt;div id=&quot;fbText0_3&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class=&quot;cbcol&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade0_0&quot; src=&quot;img/grade-right.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td class=&quot;cbcol&quot;&gt;&lt;input type=&quot;checkbox&quot; name=&quot;cb0_0&quot; id=&quot;cb0_0&quot; value=&quot;0&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcoltext&quot;&gt;&lt;div class=&quot;ChoiceText ReadText&quot;&gt;&lt;p&gt;Question Text&lt;/p&gt;&lt;/div&gt;&lt;div id=&quot;fbText0_0&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;
+</code></pre>
+<p>New Design</p>
+<div class='demo_wrapper' data-demo-src='docs/demos/buttons/checkbox-btns/checkbox-btns.html'></div>
+
+		</section>
+		
+
+		
+			
+		
+		
+		
+		
+
+		
+		
+
+		
+			
+		
+
+		
+	
+	
+	</article>
+	
+	
+
+</div>
+
+
+
+
+
+
+	<footer>
+	  <p class="center">Built by <a href="http://bitovi.com/">Bitovi</a> using <a href="http://documentjs.com/">DocumentJS</a>.
+	</footer>
+
+	<script type="text/javascript">
+		var docObject = {"src":"styles/less/checkbox-btns.less","line":0,"codeLine":25,"type":"stylesheet","description":"## CALI Lessons Checkbox Right Button\n\nThese are styles for the different types of checkmark buttons and their hints (if they are right, wrong, etc).\n\n\nOld Design\n\n![Old Checkmark](https://image.ibb.co/c2vXiJ/oldcheckmarks.jpg \"Old Checkmark Example\")\n```\n<tr><td class=\"cbcol\"><input type=\"checkbox\" name=\"cb0_0\" id=\"cb0_0\" value=\"0\"></td><td>&nbsp;</td><td class=\"cbcoltext\"><div class=\"ChoiceText ReadText\"><p>Question Text</p></div><div id=\"fbText0_0\"></div></td></tr>\n<tr><td class=\"cbcol\"><div><img id=\"grade0_3\" src=\"img/grade-wrong.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr>\n<tr><td class=\"cbcol\"><input type=\"checkbox\" name=\"cb0_3\" id=\"cb0_3\" value=\"0\"></td><td>&nbsp;</td><td class=\"cbcoltext\"><div class=\"ChoiceText ReadText\"><p>Question Text</p></div><div id=\"fbText0_3\"></div></td></tr>\n<tr><td class=\"cbcol\"><div><img id=\"grade0_0\" src=\"img/grade-right.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr>\n<tr><td class=\"cbcol\"><input type=\"checkbox\" name=\"cb0_0\" id=\"cb0_0\" value=\"0\"></td><td>&nbsp;</td><td class=\"cbcoltext\"><div class=\"ChoiceText ReadText\"><p>Question Text</p></div><div id=\"fbText0_0\"></div></td></tr>\n```\n\nNew Design\n<div class='demo_wrapper' data-demo-src='docs/demos/buttons/checkbox-btns/checkbox-btns.html'></div>","name":"checkbox-btns.less","title":"Checkbox Buttons","showChildrenInPage":true,"hideChildrenInMenu":true,"parent":"components.buttons","templates":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5/styles/documentjs-theme/templates","static":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5/styles/documentjs-theme/static","glob":{"pattern":"styles/{less,markdown,demos}/**/*.{css,less,scss,md}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5"},"dest":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5/docs","demoSrcRoot":".","generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+	</script>
+
+	
+		<script>
+		  steal = {
+		    instantiated: {
+		      "bundles/static.css!$css" : null
+		    }
+		  }
+		</script>
+		<script type="text/javascript" data-main="static" data-config="./static/config.js" src="./static/steal.production.js" bundles-path="bundles"></script>
+	
+</body>
+
+</html>

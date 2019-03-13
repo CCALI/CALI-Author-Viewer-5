@@ -1,0 +1,26 @@
+/**
+*@stylesheet choose-multi-btns.less Choose Multi Buttons
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Choose Multi Buttons
+*
+*These are the choose multi buttons for when students can select from multiple answers. There may be more than one correct answer and some answers might also be maybe.
+
+<span style="color:blue">(NOTE for Dutch: The hints on the buttons are set for english text sizing. To give more spacing for hint text you will need to change the css in .btn-group and change margin-right: 0px; to the needed pixel margin for spacing to the right.)</span>
+*
+*
+*Old Design
+
+![Old Choose Multi Buttons](https://image.ibb.co/h1nqBT/multi_buttons.jpg "Old Choose Multi Buttons Example")
+*```
+<div class="ButtonGroup" style="text-align: left;"><img id="grade0_1" src="img/grade-wrong.gif" width="20" height="21" class="GradeIcon"><a class="HyperButton WRONG" href="choice://0_1" id="0_1"><span class="0_1">Not V.</span></a><img id="grade1_1" src="img/grade-right.gif" width="20" height="21" class="GradeIcon"><a class="HyperButton RIGHT" href="choice://1_1" id="1_1"><span class="1_1">V. by Any (§&nbsp;4)</span></a><img id="grade2_1" src="img/grade-wrong.gif" width="20" height="21" class="GradeIcon"><a class="HyperButton WRONG" href="choice://2_1" id="2_1"><span class="2_1">V. by Present (§&nbsp;5)</span></a></div>
+*```
+*
+*New Design
+*@demo docs/demos/buttons/choose-multi-btns/choose-multi-btns.html
+**/
+
+@import "variables.less";
+@import "main.less";
+@import "button-variables.less";

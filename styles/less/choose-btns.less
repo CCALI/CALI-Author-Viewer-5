@@ -1,0 +1,25 @@
+/**
+*@stylesheet choose-btns.less Choose Buttons
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Choose Buttons
+*
+*These are the choose buttons for when students can select from several answer choices. There may be more than one correct answer and some answers might also be maybe.
+
+<span style="color:blue">(NOTE for Dutch: The hints on the buttons are set for english text sizing. To give more spacing for hint text you will need to change the css in .btn-group and change margin-right: 0px; to the needed pixel margin for spacing to the right.)</span>
+*
+*
+*Old Design
+
+![Old Choose Buttons](https://image.ibb.co/nsAa88/choose_btns.jpg "Old Choose Buttons Example")
+*```
+<div class="ButtonGroup"><img id="grade0_0" src="img/grade-maybe.gif" width="20" height="21" class="GradeIcon"><a class="HyperButton MAYBE" href="choice://0_0" id="0_0"><span class="0_0">Yes</span></a> <img id="grade1_0" src="img/grade-wrong.gif" width="20" height="21" class="GradeIcon"><a class="HyperButton WRONG" href="choice://1_0" id="1_0"><span class="1_0">No</span></a> <img id="grade2_0" src="img/grade-right.gif" width="20" height="21" class="GradeIcon"><a class="HyperButton RIGHT" href="choice://2_0" id="2_0"><span class="2_0">Maybe</span></a> </div>
+*```
+*
+*New Design
+*@demo docs/demos/buttons/choose-btns/choose-btns.html
+**/
+@import "variables.less";
+@import "main.less";
+@import "button-variables.less";

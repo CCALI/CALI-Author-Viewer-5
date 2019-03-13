@@ -1,0 +1,163 @@
+// Variables used to set the font appearance.
+@icon-font-path: "./fonts/";
+
+@CLFontFamily: "Lucida Grande", "Verdana", "Helvetica Neue", "Lucida Sans Unicode", "Lucida Sans Regular", Arial, sans-serif; 
+@CLFontWeight: 400;
+
+//primary color variables
+@DarkBlue: #003366;
+@Gold: #d4c229 !important;
+@White: #ffffff;
+@WhiteFakeOpacity:#8099b3;
+@Grey: #efefef;
+@Black: #141414;
+
+//secondary color variables
+@BlueSelected: #0074e7 !important;
+@RedError: #e80c5f !important;
+@GreenCorrect: #008a00 !important;
+@GreyDefault: #777 !important;
+@YellowMaybe: #ffc000 !important;
+@YellowDark: #977000 !important;
+
+@CLThemeColor: @DarkBlue;
+
+//content variable
+@NavMargin: 30px 0px 0px 15px;
+@LightBorders: 1px solid rgba(153,153,153,0.4);
+@Clear: none;
+@Radius: 0px;
+@BoxShadow: 2px 3px 2px 0px rgba(0, 0, 0, 0.5);
+@Transition: all 0.3s;
+@TocTrans: all 500ms ease;
+@Rotate: rotate(-20deg);
+@Origin: 0 0;
+@BottomShadow: 0 4px 2px -2px @Grey;
+
+//brand
+@CLLogoWidth: 165px;
+
+.CL-button-transition(@Transition) {
+  -webkit-transition: @Transition;
+  -moz-transition: @Transition;
+  -ms-transition: @Transition;
+  -o-transition: @Transition;
+  transition: @Transition;
+}
+
+.border-radius (@Radius) {
+  -webkit-border-radius: @Radius;
+  -moz-border-radius: @Radius;
+  -o-border-radius: @Radius;
+  -ms-border-radius: @Radius;
+  border-radius: @Radius;
+}
+
+.appearance-hidden (@Clear) {
+  -webkit-appearance: @Clear;
+  -moz-appearance: @Clear;
+  -o-appearance: @Clear;
+  -ms-appearance: @Clear;
+  appearance: @Clear;
+}
+
+.button-box-shadow (@BoxShadow) {
+  -webkit-box-shadow: @BoxShadow;
+  -moz-box-shadow: @BoxShadow;
+  -o-box-shadow: @BoxShadow;
+  -ms-box-shadow: @BoxShadow;
+  box-shadow: @BoxShadow;
+}
+
+.no-select-label(@Clear) {
+    -webkit-user-select: @Clear;
+    -moz-user-select: @Clear;
+    -ms-user-select: @Clear;
+    -o-user-select: @Clear;
+    user-select: @Clear;  
+}
+
+.transform-rotate(@Rotate) {
+  -webkit-transform: @Rotate;
+  -moz-transform: @Rotate;
+  -ms-transform: @Rotate;
+  -o-transform: @Rotate;
+  transform: @Rotate;  
+}
+
+.transform-origin(@Origin) {
+  -webkit-transform-origin: @Origin;
+  -moz-transform-origin: @Origin;
+  -ms-transform-origin: @Origin;
+  -o-transform-origin: @Origin;
+  transform-origin: @Origin;
+}
+
+.sticky-shadow(@BottomShadow) {
+   -webkit-box-shadow: @BottomShadow;
+    -moz-box-shadow: @BottomShadow;
+    -ms-box-shadow: @BottomShadow;
+    -o-box-shadow: @BottomShadow;
+    box-shadow: @BottomShadow;    
+}
+
+.toc-shadow(@BottomShadow) {
+   -webkit-box-shadow: @BottomShadow;
+    -moz-box-shadow: @BottomShadow;
+    -ms-box-shadow: @BottomShadow;
+    -o-box-shadow: @BottomShadow;
+    box-shadow: @BottomShadow;  
+}
+
+.toc-transition(@TocTrans) {
+  -webkit-transition: @TocTrans;
+  -moz-transition: @TocTrans;
+  -ms-transition: @TocTrans;
+  -o-transition: @TocTrans;
+  transition: @TocTrans;  
+}
+
+.border-none {
+  outline: none !important;
+}
+
+.CLHeaderColor {
+  color: @CLThemeColor;
+}
+
+.CLIconButtonWidth {
+  width: 32px;
+  height: 32px;
+}
+
+.CLButtonRules {
+  .border-radius(0px);
+  font-size: 1.125em;
+  text-align: left;
+  width: 140px;
+  height: 40px;
+  margin: 10px 5px 0px 0px;
+  .button-box-shadow(@BoxShadow);
+}
+
+.CLButtonPreviousRules {
+  color: @CLThemeColor !important;
+  background: lighten(@WhiteFakeOpacity, 35%) !important;
+}
+
+.CLPreviousActions {
+  .CLButtonRules;
+  .CLButtonPreviousRules;
+}
+
+.CLNextActions {
+  .CLButtonRules;
+  background: lighten(@CLThemeColor, 5%) !important;
+  border: 2px solid lighten(@CLThemeColor, 5%) !important;
+}
+
+.CLButtonArrowRules {
+  height: 30px;
+  width: 30px;
+  margin-top:-3px;
+}

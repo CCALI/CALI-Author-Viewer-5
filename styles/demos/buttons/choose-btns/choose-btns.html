@@ -1,0 +1,66 @@
+<head>
+  <link rel="stylesheet" href="../../../styles.css"><head>
+  <script type="text/javascript" src="../../../styles.js"></script>  
+</head>
+<body>
+<div class="btn-group" data-toggle="buttons">
+  <!-- Right -->
+  <div class="btn-group">
+    <label for="chooseBtn1" class="btn btn-default CL-choose-btn-right spacer">
+      <input id="chooseBtn1" name="choosebtn1" type="checkbox" autocomplete="off"> Right
+    </label>
+    <div class="hint">
+      <span id="chooseBtnGrade1" class="glyphicon glyphicon-ok un-spacer" aria-live="polite" role="definition" aria-labelledby="correctAnswer1">
+        <p id="correctAnswer1">Right</p>
+      </span>
+    </div> 
+  </div>
+  <!-- Wrong -->
+  <div class="btn-group">
+    <label for="chooseBtn2" class="btn btn-default CL-choose-btn-wrong spacer">
+      <input id="chooseBtn2" name="choosebtn2" type="checkbox" autocomplete="off"> Wrong
+    </label>
+    <div class="hint">
+      <span id="chooseBtnGrade2" class="glyphicon glyphicon-remove un-spacer" aria-live="polite" role="definition" aria-labelledby="wrongAnswer1">
+        <p id="wrongAnswer1">Wrong<p>
+      </span>
+    </div> 
+  </div>
+  <!-- Maybe -->
+  <div class="btn-group">
+    <label for="chooseBtn3" class="btn btn-default CL-choose-btn-maybe spacer">
+      <input id="chooseBtn3" name="choosebtn2" type="checkbox" autocomplete="off"> Maybe
+    </label>
+    <div class="hint">
+      <span id="chooseBtnGrade3" class="question-symbol un-spacer" aria-live="polite" role="definition" aria-labelledby="sometimesRight1">
+        <p id="sometimesRight1"> Maybe<p>
+      </span>
+    </div> 
+  </div>
+  <!-- Selected -->
+  <div class="btn-group">
+    <label for="chooseBtn4" class="btn btn-default CL-choose-btn spacer">
+      <input id="chooseBtn4" name="choosebtn3" type="checkbox" autocomplete="off"> Selected
+    </label>
+    <div class="hint">
+      <span id="chooseBtnGrade4" class="info-symbol un-spacer" aria-live="polite" role="definition" aria-labelledby="infoAnswer1">
+        <p id="infoAnswer1"> About</p>
+      </span>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+    $('label[for="chooseBtn1"]').click(function() {
+      $('#chooseBtnGrade1').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn2"]').click(function() {
+      $('#chooseBtnGrade2').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn3"]').click(function() {
+      $('#chooseBtnGrade3').fadeIn().css('display','inline-block');
+    })
+    $('label[for="chooseBtn4"]').click(function() {
+      $('#chooseBtnGrade4').fadeIn().css('display','inline-block');
+    })
+</script>
+</body>

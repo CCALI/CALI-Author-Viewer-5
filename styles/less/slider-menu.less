@@ -1,0 +1,84 @@
+/**
+*@stylesheet slider-menu.less Slider Menu
+*@parent menus
+*
+*@description
+*## CALI Lesson Slider Hamburger Menu for Table of Contents
+*
+*This is the slider menu that opens and closes the table of contents.
+*
+*Old Design
+
+![Old toc link](https://image.ibb.co/mM1Sfd/toc_link.jpg "Old table of contents link example")
+*```
+<a class="NavClick NoWrap" href="jump://Table of Contents">Table of Contents</a>
+*```
+*
+*New Design
+*
+*@demo docs/demos/menus/slider-menu/slider-menu.html
+**/
+
+@import "variables.less";
+@import "img-variables.less";
+@import "main.less";
+@import "navtree.less";
+
+.lesson-view {
+  display: inline-block;
+  margin-left: 30px;
+  margin-right: 30px;
+  width: 57%;
+}
+
+.lesson-view-close {
+  width: 100%;
+} 
+
+input.CL-hamburger[type="checkbox"] {
+  background-image: @CLCloseArrow;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  float: right;
+  margin-left: 5px;
+  margin-top: 13px;
+  cursor: pointer;
+  pointer-events:auto;
+  .appearance-hidden (@Clear);
+  outline: none !important;
+  &:checked {
+    background-image: @CLMenuBlue;
+    width: 32px;
+    height: 32px;
+    .appearance-hidden (@Clear);
+    outline: none;
+  }
+}
+
+.CLAccordion {
+  border-right: 1px solid @Grey;
+}
+
+.CLAccordion h2{
+  padding-left: 15px;
+}
+
+#SliderControl {
+  width: auto;
+}
+
+@media (max-width:786px) {
+  .toc-view {
+    width: 100% !important;
+  }
+  .lesson-view {
+    float: left;
+    width: 100% !important;
+  }
+  #SliderControl {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }  
+}

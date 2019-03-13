@@ -1,0 +1,99 @@
+<head>
+	<link rel="stylesheet" href="../../../styles.css">
+    <script type="text/javascript" src="../../../styles.js"></script> 	
+</head>
+<div class="row">
+	<div class="col-sm-12">
+		<!-- Radio button with description hint -->
+        <div class="btn-group">
+          <label id="question5" class="btn radio-container">
+            <input type="radio" name="radio">
+            <span class="checkmark-rad-selected"></span>
+          </label>  
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+          </p>
+          <div class="hint">
+            <span id="answer5" class="info-symbol" aria-live="polite" role="definition" aria-labelledby="Description">
+              <p> About</p>
+            </span>
+          </div>        
+        </div>
+        <div class="gap"></div>
+        <!-- Radio button graded as wrong -->
+        <div class="btn-group">
+          <label id="question6" class="btn radio-container">
+            <input type="radio" name="radio">
+            <span class="checkmark-rad-error"></span>
+          </label>
+          <p>
+            Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+          </p>
+          <div class="hint">
+            <span id="answer6" class="glyphicon glyphicon-remove" aria-live="polite" role="definition" aria-labelledby="Wrong">
+              <p>Wrong</p>
+            </span>
+          </div>          
+        </div>     
+        <div class="gap"></div>
+        <!-- Radio button graded as right -->
+        <div class="btn-group">
+          <label id="question7" class="btn radio-container">
+            <input type="radio" name="radio">
+            <span class="checkmark-rad-success"></span>
+          </label>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam orci elit, elementum sed facilisis nec, facilisis ac metus. Vestibulum tristique sodales tincidunt. Curabitur non tellus eget tortor eleifend iaculis. Donec felis neque, lobortis sed varius eget, molestie at velit. Cras nec quam dapibus elit sodales dictum sed aliquet risus. Etiam aliquam lorem rutrum velit sollicitudin, at gravida risus semper.
+          </p>          
+          <div class="hint">
+            <span id="answer7" class="glyphicon glyphicon-ok" aria-live="polite" role="definition" aria-labelledby="Right">
+              <p>Right</p>
+            </span>
+          </div>          
+        </div>    
+        <div class="gap"></div>
+        <!-- Radio button graded as maybe -->
+        <div class="btn-group">
+          <label id="question8"  class="btn radio-container">
+            <input type="radio" name="radio">
+            <span class="checkmark-rad-maybe"></span>
+          </label>
+          <p>
+            Cras nec quam dapibus elit sodales dictum sed aliquet risus.
+          </p>
+          <div class="hint">
+            <span id="answer8" class="question-symbol" aria-live="polite" role="definition" aria-labelledby="Mayeb Right">
+              <p> Maybe<p>
+            </span>
+          </div>          
+        </div>
+        <div class="gap"></div>
+        <!-- Radio button with default style -->
+        <div class="btn-group">
+          <label class="btn radio-container">
+            <input type="radio" name="radio">
+            <span class="checkmark-rad-default"></span>
+          </label>
+          <p>
+            Vestibulum
+          </p>
+        </div>                
+	</div>
+</div>
+<script type="text/javascript">
+    $('#question5').click(function() {
+      $('#answer5').fadeIn().css('display','inline-block');
+    })     
+    $('#question6').click(function() {
+      $('#answer6').fadeIn().css('display','inline-block');
+    }) 
+    $('#question7').click(function() {
+      $('#answer7').fadeIn().css('display','inline-block');
+    })
+    $('#question8').click(function() {
+      $('#answer8').fadeIn().css('display','inline-block');
+    })   	
+</script>

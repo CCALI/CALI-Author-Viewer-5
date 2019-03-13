@@ -1,5 +1,4 @@
 .DS_Store
-docs/
 node_modules/*
 package-lock.json
 sandbox/node_modules/*

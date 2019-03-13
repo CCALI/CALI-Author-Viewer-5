@@ -1,0 +1,138 @@
+/**
+*@stylesheet hamburger-menu.less Hamburger Menu
+*@parent menus
+*
+*@description
+*## CALI Lesson Hamburger Menu for Nav Bar
+*
+*This examples shows how the navbar and the hamburger menu functions.
+*
+*Old Design 
+
+![Old Checkmark](https://image.ibb.co/dxBcfd/oldnavbar.jpg "Old Checkmark Example")
+*
+*```
+<div id="HeaderLesson">
+  <div id="HeaderLessonBook"> <a class="NavClick" href="jump://About this lesson">About this lesson</a> | <a class="NavClick NoWrap" href="jump://Table of Contents">Table of Contents</a>  | <a id="facoptions" class="NavClick" href="#">Faculty Options</a></div>
+  <div id="HeaderLessonCAV"> <a class="UserName" href="/mylessonruns" target="_blank" title="View your lesson runs">Amanda Edling</a> | <a href="#" class="styleswitch" rel="cavmobile">mobile</a> <a href="#" class="styleswitch" rel="cavscreen">non-mobile</a> | <a href="#" class="textchanger" id="linkSmall" style="font-size: 90%">A</a> <a href="#" class="textchanger" id="linkLarge" style="font-size: 100%">A</a>
+  | <a class="PageComment" href="mailto:dquentel@cali.org?cc=calitech@cali.org&amp;subject=CALI%20Lesson%20Comment%3A%20DEMO/Contents%20%2805/08/2018%29-CALI5" title="We welcome your comments and feedback over email">Feedback</a> | <a class="Exit" target="_parent" href="/mylessonruns" title="Exit the lesson and resume later">Exit &amp; Resume Later</a>
+  </div>
+</div>
+<div id="HeaderPage">
+  <div id="HeaderPageCALI"><a href="http://www.cali.org" title="CALI lessons online" target="_blank"><img alt="CALI Logo" src="img/CALILessonsLogo.gif" width="192" height="55" border="0"></a></div>
+  <div id="llHeaderPage" class="hidestart">
+    <img id="llLiveLogo" class="hidestart" alt="LessonLive" src="img/LessonLiveLogo.png" width="192" height="55" border="0">
+    <img id="llLinkLogo" class="hidestart" alt="LessonLink" src="img/LessonLinkLogo.png" width="192" height="55" border="0"></div>
+  <div class="LessonName">CALI Author Demonstration Lesson</div>
+</div>
+*```
+*
+*New Design
+*@demo docs/demos/menus/hamburger-menu/hamburger-menu.html
+*
+**/
+
+@import "variables.less";
+@import "img-variables.less";
+@import "main.less";
+
+.CL-navbar-main {
+  background: @CLThemeColor;
+  border-bottom: 5px solid @Gold !important;
+  .border-radius (@Radius);
+}
+
+.CL-navbar {
+    height: 84px;
+    background: @CLThemeColor;
+    border-color: @CLThemeColor;
+}
+
+.navbar-text {
+  margin: @NavMargin;
+}
+
+.CL-menu-button {
+  margin-top: 16px;
+  border: none !important;
+  &:hover,
+  &:focus {
+    background: none !important;
+    opacity: 0.9 !important;
+  }
+  &:checked,
+  &:active {
+    opacity: 0.75 !important;
+  }
+}
+
+.CL-hamburger-white {
+  display: block;
+  .CLIconButtonWidth;
+  background: @CLMenuWhite center center no-repeat;
+}
+
+.exit-btn {
+  margin-top: 10px;
+  .CLIconButtonWidth;
+  float:left;
+  background: @CLExit top  left no-repeat;
+  &:hover {
+    opacity: 0.5;
+  }
+  &:active {
+    opacity: 0.75;
+  }
+}
+
+.CL-logo {
+  background-image: @CLLogo;
+  width: @CLLogoWidth;
+  height: 49px;
+}
+
+/*.CL-logo {
+  background-image: data-uri('image/svg+xml;charset=UTF-8', '../../assets/img/cali-lessons-logo.svg');
+}*/
+
+.user-name-link {
+  color: @White;
+  text-decoration: none !important;
+    &:hover {
+      color: @WhiteFakeOpacity !important;
+    }
+}
+
+.exit-link {
+  display: none;
+}
+
+@media (max-width:768px) {
+  .CL-navbar-main {
+    background: @Grey;
+  }
+  .user-name-link {
+    color: @CLThemeColor;
+    font-size: 1.125em;
+    margin: 0px 0px 0px 20px;
+  }
+  .navbar-text {
+    margin: 20px 0px 20px 0px;
+  }
+  .exit-icon {
+    display: none !important;
+  }
+  .exit-btn {
+    display: none !important;
+  }
+  .exit-link {
+    display: block;
+    color: @CLThemeColor;
+    font-size: 1.125em;
+    margin: 0px 0px 0px 20px;
+     &:hover {
+      color: @WhiteFakeOpacity;
+      text-decoration: none;
+     }  
+  }
+}

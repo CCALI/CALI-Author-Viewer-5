@@ -1,0 +1,36 @@
+<head>
+	<link rel="stylesheet" href="../../../styles.css">
+	<script type="text/javascript" src="../../../styles.js"></script>
+</head>
+<body style="height: 400px;">
+<div>
+  <div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
+    <p class="feedback-bubble">Feedback</p>
+  </div> 
+</div>
+<div id="feedbackModal" class="modal fade">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close feedback modal">&times;</button>
+                <h4 class="modal-title">Let us know what you think!</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="comment">Comment:</label>
+                <textarea class="form-control" rows="5" id="comment" placeholder="Enter you comment here." aria-label="Text box to enter your comment." aria-multiline="true"></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Send</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $('#open-feedback').on('click',function () {
+      $('#feedbackModal').modal('show');
+    });
+</script>

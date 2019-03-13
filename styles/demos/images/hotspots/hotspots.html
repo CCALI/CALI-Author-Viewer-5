@@ -1,0 +1,36 @@
+<head>
+  <link rel="stylesheet" href="../../../styles.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="../../../styles.js"></script>   
+</head>
+<body style="height:480px; overflow-x: scroll;">
+<div class="img-frame">
+  <div role="button" id="hotspot1" href="popup://HUB.5P Direct" class=" hotspot_transparent" grade="INFO" hotspot="1" style="left:15px; top:162px; width:163px; height:32px;" aria-label="Selectable hotspot"></div>
+  <img id="ZoomImg" src="https://www.cali.org/lessons/web/evd10_3/perf.gif" alt=" Graphic Review for Performative 8">
+  <span id="zoom" class="zoom" aria-label="Zoom icon button"><span class="sr-only">Zoom icon button.</span></span>
+</div>
+<!-- The img-frame-modal -->
+<div id="myModal" class="img-frame-modal">
+  <span class="img-close">&times;</span>
+  <img class="hotspot-content" alt="Graphic Review for Performative 8" id="img01">
+  <div id="caption"></div>
+</div>
+</body>
+<script type="text/javascript">
+  var modal = document.getElementById('myModal');
+  var img = document.getElementById('ZoomImg');
+  var zoom = document.getElementById('zoom');
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
+  zoom.onclick = function(){
+      modal.style.display = "block";
+      modalImg.src = img.src;
+      captionText.innerHTML = img.alt;
+  }
+
+  var span = document.getElementsByClassName("img-close")[0];
+
+  span.onclick = function() { 
+      modal.style.display = "none";
+  }
+</script>

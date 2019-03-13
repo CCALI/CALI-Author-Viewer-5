@@ -1,0 +1,89 @@
+/**
+*@stylesheet sticky-header.less Sticky Header
+*@parent components
+*
+*@description
+*## CALI Lessons Sticky Header
+*
+*The sticky header is used for multiple choise radio buttons. The sticky header is used when there are lengthy multiple radio button answers for multiple questions. The answers the students can pick from scroll up and under the sticky header so that students can always see the answers they can pick from.
+*
+*
+*Old Design
+
+![Old Multi Choice Radio Buttons](https://image.ibb.co/gXhuao/multi_choice_radio_btns.jpg "Old Multi Choice Radio Buttons Example")
+*```
+<tbody><tr><td class="cbcol0 CheckBoxHeading" colspan="10">Immediate viability.</td></tr><tr><td class="cbcol0"></td><td class="cbcolgap"></td><td class="cbcolgap" colspan="10"></td></tr><tr><td class="cbcol0"></td><td class="cbcolgap">&nbsp;</td><td class="cbcol1 CheckBoxHeading" colspan="8">Long term health.</td></tr><tr><td class="cbcol0"></td><td class="cbcolgap"></td><td class="cbcol1"></td><td class="cbcolgap"></td><td class="cbcolgap" colspan="8"></td></tr><tr><td class="cbcol0"></td><td class="cbcolgap">&nbsp;</td><td class="cbcol1"></td><td class="cbcolgap">&nbsp;</td><td class="cbcol2 CheckBoxHeading" colspan="6">Valuation yardstick.</td></tr><tr><td class="cbcol0"></td><td class="cbcolgap"></td><td class="cbcol1"></td><td class="cbcolgap"></td><td class="cbcol2"></td><td class="cbcolgap"></td><td class="cbcolgap" colspan="6"></td></tr><tr><td class="cbcol0"></td><td class="cbcolgap">&nbsp;</td><td class="cbcol1"></td><td class="cbcolgap">&nbsp;</td><td class="cbcol2"></td><td class="cbcolgap">&nbsp;</td><td class="cbcol3 CheckBoxHeading" colspan="4">Capacity of a financial institution to remain solvent during a financial crisis.</td></tr><tr><td class="cbcol0"></td><td class="cbcolgap"></td><td class="cbcol1"></td><td class="cbcolgap"></td><td class="cbcol2"></td><td class="cbcolgap"></td><td class="cbcol3"></td><td class="cbcolgap"></td><td class="cbcolgap" colspan="4"></td></tr><tr><td class="cbcol0"><div><img id="grade0_0" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol1"><div><img id="grade1_0" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol2"><div><img id="grade2_0" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol3"><div><img id="grade3_0" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td class="cbcol0"><input type="radio" name="rb0" id="rb0_0" value="0"></td><td>&nbsp;</td><td class="cbcol1"><input type="radio" name="rb0" id="rb1_0" value="1"></td><td>&nbsp;</td><td class="cbcol2"><input type="radio" name="rb0" id="rb2_0" value="2"></td><td>&nbsp;</td><td class="cbcol3"><input type="radio" name="rb0" id="rb3_0" value="3"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Current ratio: Current assets / current liabilities.</p></div><div id="fbText0_0"></div></td></tr><tr><td class="cbcol0"><div><img id="grade0_1" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol1"><div><img id="grade1_1" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol2"><div><img id="grade2_1" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol3"><div><img id="grade3_1" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td class="cbcol0"><input type="radio" name="rb1" id="rb0_1" value="0"></td><td>&nbsp;</td><td class="cbcol1"><input type="radio" name="rb1" id="rb1_1" value="1"></td><td>&nbsp;</td><td class="cbcol2"><input type="radio" name="rb1" id="rb2_1" value="2"></td><td>&nbsp;</td><td class="cbcol3"><input type="radio" name="rb1" id="rb3_1" value="3"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Debt to Assets.</p></div><div id="fbText0_1"></div></td></tr><tr><td class="cbcol0"><div><img id="grade0_2" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol1"><div><img id="grade1_2" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol2"><div><img id="grade2_2" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol3"><div><img id="grade3_2" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td class="cbcol0"><input type="radio" name="rb2" id="rb0_2" value="0"></td><td>&nbsp;</td><td class="cbcol1"><input type="radio" name="rb2" id="rb1_2" value="1"></td><td>&nbsp;</td><td class="cbcol2"><input type="radio" name="rb2" id="rb2_2" value="2"></td><td>&nbsp;</td><td class="cbcol3"><input type="radio" name="rb2" id="rb3_2" value="3"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Debt to Equity.</p></div><div id="fbText0_2"></div></td></tr><tr><td class="cbcol0"><div><img id="grade0_3" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol1"><div><img id="grade1_3" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol2"><div><img id="grade2_3" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol3"><div><img id="grade3_3" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td class="cbcol0"><input type="radio" name="rb3" id="rb0_3" value="0"></td><td>&nbsp;</td><td class="cbcol1"><input type="radio" name="rb3" id="rb1_3" value="1"></td><td>&nbsp;</td><td class="cbcol2"><input type="radio" name="rb3" id="rb2_3" value="2"></td><td>&nbsp;</td><td class="cbcol3"><input type="radio" name="rb3" id="rb3_3" value="3"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Price to Earnings [per share].</p></div><div id="fbText0_3"></div></td></tr><tr><td class="cbcol0"><div><img id="grade0_4" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol1"><div><img id="grade1_4" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol2"><div><img id="grade2_4" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td class="cbcol3"><div><img id="grade3_4" src="img/grade-blank.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td class="cbcol0"><input type="radio" name="rb4" id="rb0_4" value="0"></td><td>&nbsp;</td><td class="cbcol1"><input type="radio" name="rb4" id="rb1_4" value="1"></td><td>&nbsp;</td><td class="cbcol2"><input type="radio" name="rb4" id="rb2_4" value="2"></td><td>&nbsp;</td><td class="cbcol3"><input type="radio" name="rb4" id="rb3_4" value="3"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Bank capital as a percentage of assets, meaning equity to assets.</p></div><div id="fbText0_4"></div></td></tr></tbody>
+*```
+*
+*New Design
+*
+![New Multi Choice Radio Buttons](https://image.ibb.co/bNdBMT/multi_choice_radio_btns_new.jpg "New Multi Choice Radio Buttons Example")
+*
+*(Note: must have scrollable view for styling to work)
+*@demo docs/demos/stickyheader/sticky-header.html
+**/
+@import "variables.less";
+@import "main.less";
+
+.sticky-header {
+  padding: 10px 16px;
+  background: @White;
+  color: @Black;
+}
+
+.content-under-sticky {
+  padding-bottom: 20px;
+}
+
+.sticky {
+  position: fixed;
+  top: 0 !important;
+  width: 100%;
+  padding: 40px 10px 20px 60px;
+  margin-left: -45px;
+  z-index: 999;
+  .sticky-shadow(@BottomShadow);
+  border-bottom: 3px solid @Gold;
+}
+
+.content-under-sticky {
+  .toc-transition(@TocTrans); 
+}
+
+@media only screen and (max-width: 768px) {
+    .sticky {
+    margin-left: 0px;
+    left: 0;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .sticky {
+  }
+}
+
+/* Disable mobile menu bar auto-hide */
+#mobile-bar > .inner {
+  -webkit-transition: none;
+  -ms-transition: none;
+  transition: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}
+/* Disable mobile menu bar floating */
+#mobile-bar {
+  position: absolute;
+}
+.mobile-ui-on #mobile-bar,
+.mobile-ui-on #mobile-bar + .top-menu-clone {
+  display: block !important;
+  opacity: 1 !important;
+}
+#mobile-bar > .inner {
+  -webkit-transition: none;
+  -ms-transition: none;
+  transition: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+}

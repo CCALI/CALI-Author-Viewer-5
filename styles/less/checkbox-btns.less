@@ -1,0 +1,89 @@
+/**
+*@stylesheet checkbox-btns.less Checkbox Buttons
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Checkbox Right Button
+*
+*These are styles for the different types of checkmark buttons and their hints (if they are right, wrong, etc).
+*
+*
+*Old Design
+
+![Old Checkmark](https://image.ibb.co/c2vXiJ/oldcheckmarks.jpg "Old Checkmark Example")
+*```
+<tr><td class="cbcol"><input type="checkbox" name="cb0_0" id="cb0_0" value="0"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Question Text</p></div><div id="fbText0_0"></div></td></tr>
+<tr><td class="cbcol"><div><img id="grade0_3" src="img/grade-wrong.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="cbcol"><input type="checkbox" name="cb0_3" id="cb0_3" value="0"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Question Text</p></div><div id="fbText0_3"></div></td></tr>
+<tr><td class="cbcol"><div><img id="grade0_0" src="img/grade-right.gif" width="20" height="21" class="GradeIcon"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr>
+<tr><td class="cbcol"><input type="checkbox" name="cb0_0" id="cb0_0" value="0"></td><td>&nbsp;</td><td class="cbcoltext"><div class="ChoiceText ReadText"><p>Question Text</p></div><div id="fbText0_0"></div></td></tr>
+*```
+*
+*New Design
+*@demo docs/demos/buttons/checkbox-btns/checkbox-btns.html
+**/
+
+@import "variables.less";
+@import "main.less";
+@import "checkbox-radio-variables.less";
+@import "button-variables.less";
+
+.checkbox-container:hover input ~ .checkmark-selected,
+.checkbox-container:hover input ~ .checkmark-wrong,
+.checkbox-container:hover input ~ .checkmark-success,
+.checkbox-container:hover input ~ .checkmark-maybe,
+.checkbox-container:hover input ~ .checkmark-default {
+    background-color: #ccc;
+}
+.checkbox-container input:checked ~ .checkmark-selected {
+    border: 3px solid @BlueSelected;
+    background-color: @BlueSelected;
+}
+.checkmark-selected:after {
+    .checkmark-control-after;
+}
+.checkbox-container .checkmark-selected:after {
+    .checkbox-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-selected:after,
+.checkbox-container input:checked ~ .checkmark-wrong:after,
+.checkbox-container input:checked ~ .checkmark-success:after,
+.checkbox-container input:checked ~ .checkmark-maybe:after,
+.checkbox-container input:checked ~ .checkmark-default:after {
+    display: block;
+}
+.checkmark-selected,
+.checkmark-success,
+.checkmark-wrong,
+.checkmark-maybe,
+.checkmark-default {
+    .checkmark-control;
+}
+.checkmark-success:after,
+.checkmark-wrong:after,
+.checkmark-maybe:after,
+.checkmark-default:after {
+    .checkmark-control-after;
+}
+.checkbox-container .checkmark-wrong:after,
+.checkbox-container .checkmark-success:after,
+.checkbox-container .checkmark-maybe:after,
+.checkbox-container .checkmark-default:after {
+    .checkbox-control-after;
+}
+.checkbox-container input:checked ~ .checkmark-wrong {
+    border: 3px solid @RedError;
+    background-color: @RedError;
+}
+.checkbox-container input:checked ~ .checkmark-success {
+    border: 3px solid @GreenCorrect;
+    background-color: @GreenCorrect;
+}
+.checkbox-container input:checked ~ .checkmark-maybe {
+    border: 3px solid @YellowMaybe;
+    background-color: @YellowMaybe;
+}
+.checkbox-container input:checked ~ .checkmark-default {
+    border: 3px solid @GreyDefault;
+    background-color: @GreyDefault;
+}

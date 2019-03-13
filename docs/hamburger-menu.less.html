@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Style Guide - Hamburger Menu </title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<!--[if lt IE 9]>
+   <script type="text/javascript" src="static/html5shiv.js"></script>
+    <!--<![endif]-->
+</head>
+
+<body class="docs">
+	<header>
+		<nav class="container">
+
+			<div class="logo-menu">
+				<a class="navbar-brand" href="index.html">
+                  <img src="static/img/cali-lessons-logo.png" style="height:50px;width:auto;"/>
+                </a>
+			</div>
+
+			<ul class="main-nav">
+		        <li><a href="index.html">Style Guide</a></li>
+		        <li><a href="components.html">Components</a></li>
+		        <li><a href="design.html">Design Elements</a></li>
+		    </ul>
+		</nav>
+	</header>
+
+	
+<div class="container api">
+
+	
+	<nav class="sidebar">
+		
+		<ul class="api cascading primary-grouping"> 
+	
+		
+		<li class="search-container active parent">
+			<a class="sidebar-title" href="index.html" data-search="Style Guide">
+				Style Guide
+			</a>
+			
+		</li>
+		
+		<li class="search-container active parent">
+			<a class="sidebar-title" href="components.html" data-search="Components">
+				Components
+			</a>
+			
+		</li>
+		
+		
+			
+			<li class="search-container active">
+			<a class="sidebar-title" href="menus.html" data-search="Menus">
+				Menus
+			</a>
+			
+	<ul>
+		
+			
+				
+				
+				<li class="search-container active ">
+					<a class="stylesheet" href="hamburger-menu.less.html" data-search="Hamburger Menu">
+						Hamburger Menu
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="navtree.less.html" data-search="Nav Tree">
+						Nav Tree
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="slider-menu.less.html" data-search="Slider Menu">
+						Slider Menu
+					</a>
+				</li>
+				
+			
+			
+		
+	</ul>
+
+		</li>
+			
+		
+	
+</ul>
+	</nav>
+	
+	
+	
+	<article class="content docs">
+	
+	
+		
+		<section class="title">
+			<div class="heading">
+<h1>Hamburger Menu</h1>
+	<ul class="tags">
+		<li>stylesheet</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+		<span class="module">hamburger-menu.less</span>
+	
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+		
+		
+		<section class="contents">
+		</section>
+		
+		
+		
+
+		
+		<section class="description">
+			<h2>CALI Lesson Hamburger Menu for Nav Bar</h2>
+<p>This examples shows how the navbar and the hamburger menu functions.</p>
+<p>Old Design</p>
+<p><img src="https://image.ibb.co/dxBcfd/oldnavbar.jpg" alt="Old Checkmark" title="Old Checkmark Example" /></p>
+<pre><code>&lt;div id=&quot;HeaderLesson&quot;&gt;
+  &lt;div id=&quot;HeaderLessonBook&quot;&gt; &lt;a class=&quot;NavClick&quot; href=&quot;jump://About this lesson&quot;&gt;About this lesson&lt;/a&gt; | &lt;a class=&quot;NavClick NoWrap&quot; href=&quot;jump://Table of Contents&quot;&gt;Table of Contents&lt;/a&gt;  | &lt;a id=&quot;facoptions&quot; class=&quot;NavClick&quot; href=&quot;#&quot;&gt;Faculty Options&lt;/a&gt;&lt;/div&gt;
+  &lt;div id=&quot;HeaderLessonCAV&quot;&gt; &lt;a class=&quot;UserName&quot; href=&quot;/mylessonruns&quot; target=&quot;_blank&quot; title=&quot;View your lesson runs&quot;&gt;Amanda Edling&lt;/a&gt; | &lt;a href=&quot;#&quot; class=&quot;styleswitch&quot; rel=&quot;cavmobile&quot;&gt;mobile&lt;/a&gt; &lt;a href=&quot;#&quot; class=&quot;styleswitch&quot; rel=&quot;cavscreen&quot;&gt;non-mobile&lt;/a&gt; | &lt;a href=&quot;#&quot; class=&quot;textchanger&quot; id=&quot;linkSmall&quot; style=&quot;font-size: 90%&quot;&gt;A&lt;/a&gt; &lt;a href=&quot;#&quot; class=&quot;textchanger&quot; id=&quot;linkLarge&quot; style=&quot;font-size: 100%&quot;&gt;A&lt;/a&gt;
+  | &lt;a class=&quot;PageComment&quot; href=&quot;mailto:dquentel@cali.org?cc=calitech@cali.org&amp;amp;subject=CALI%20Lesson%20Comment%3A%20DEMO/Contents%20%2805/08/2018%29-CALI5&quot; title=&quot;We welcome your comments and feedback over email&quot;&gt;Feedback&lt;/a&gt; | &lt;a class=&quot;Exit&quot; target=&quot;_parent&quot; href=&quot;/mylessonruns&quot; title=&quot;Exit the lesson and resume later&quot;&gt;Exit &amp;amp; Resume Later&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&quot;HeaderPage&quot;&gt;
+  &lt;div id=&quot;HeaderPageCALI&quot;&gt;&lt;a href=&quot;http://www.cali.org&quot; title=&quot;CALI lessons online&quot; target=&quot;_blank&quot;&gt;&lt;img alt=&quot;CALI Logo&quot; src=&quot;img/CALILessonsLogo.gif&quot; width=&quot;192&quot; height=&quot;55&quot; border=&quot;0&quot;&gt;&lt;/a&gt;&lt;/div&gt;
+  &lt;div id=&quot;llHeaderPage&quot; class=&quot;hidestart&quot;&gt;
+    &lt;img id=&quot;llLiveLogo&quot; class=&quot;hidestart&quot; alt=&quot;LessonLive&quot; src=&quot;img/LessonLiveLogo.png&quot; width=&quot;192&quot; height=&quot;55&quot; border=&quot;0&quot;&gt;
+    &lt;img id=&quot;llLinkLogo&quot; class=&quot;hidestart&quot; alt=&quot;LessonLink&quot; src=&quot;img/LessonLinkLogo.png&quot; width=&quot;192&quot; height=&quot;55&quot; border=&quot;0&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;LessonName&quot;&gt;CALI Author Demonstration Lesson&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>New Design</p>
+<div class='demo_wrapper' data-demo-src='docs/demos/menus/hamburger-menu/hamburger-menu.html'></div>
+
+		</section>
+		
+
+		
+			
+		
+		
+		
+		
+
+		
+		
+
+		
+			
+		
+
+		
+	
+	
+	</article>
+	
+	
+
+</div>
+
+
+
+
+
+
+	<footer>
+	  <p class="center">Built by <a href="http://bitovi.com/">Bitovi</a> using <a href="http://documentjs.com/">DocumentJS</a>.
+	</footer>
+
+	<script type="text/javascript">
+		var docObject = {"src":"styles/less/hamburger-menu.less","line":0,"codeLine":34,"type":"stylesheet","description":"## CALI Lesson Hamburger Menu for Nav Bar\n\nThis examples shows how the navbar and the hamburger menu functions.\n\nOld Design \n\n![Old Checkmark](https://image.ibb.co/dxBcfd/oldnavbar.jpg \"Old Checkmark Example\")\n\n```\n<div id=\"HeaderLesson\">\n  <div id=\"HeaderLessonBook\"> <a class=\"NavClick\" href=\"jump://About this lesson\">About this lesson</a> | <a class=\"NavClick NoWrap\" href=\"jump://Table of Contents\">Table of Contents</a>  | <a id=\"facoptions\" class=\"NavClick\" href=\"#\">Faculty Options</a></div>\n  <div id=\"HeaderLessonCAV\"> <a class=\"UserName\" href=\"/mylessonruns\" target=\"_blank\" title=\"View your lesson runs\">Amanda Edling</a> | <a href=\"#\" class=\"styleswitch\" rel=\"cavmobile\">mobile</a> <a href=\"#\" class=\"styleswitch\" rel=\"cavscreen\">non-mobile</a> | <a href=\"#\" class=\"textchanger\" id=\"linkSmall\" style=\"font-size: 90%\">A</a> <a href=\"#\" class=\"textchanger\" id=\"linkLarge\" style=\"font-size: 100%\">A</a>\n  | <a class=\"PageComment\" href=\"mailto:dquentel@cali.org?cc=calitech@cali.org&amp;subject=CALI%20Lesson%20Comment%3A%20DEMO/Contents%20%2805/08/2018%29-CALI5\" title=\"We welcome your comments and feedback over email\">Feedback</a> | <a class=\"Exit\" target=\"_parent\" href=\"/mylessonruns\" title=\"Exit the lesson and resume later\">Exit &amp; Resume Later</a>\n  </div>\n</div>\n<div id=\"HeaderPage\">\n  <div id=\"HeaderPageCALI\"><a href=\"http://www.cali.org\" title=\"CALI lessons online\" target=\"_blank\"><img alt=\"CALI Logo\" src=\"img/CALILessonsLogo.gif\" width=\"192\" height=\"55\" border=\"0\"></a></div>\n  <div id=\"llHeaderPage\" class=\"hidestart\">\n    <img id=\"llLiveLogo\" class=\"hidestart\" alt=\"LessonLive\" src=\"img/LessonLiveLogo.png\" width=\"192\" height=\"55\" border=\"0\">\n    <img id=\"llLinkLogo\" class=\"hidestart\" alt=\"LessonLink\" src=\"img/LessonLinkLogo.png\" width=\"192\" height=\"55\" border=\"0\"></div>\n  <div class=\"LessonName\">CALI Author Demonstration Lesson</div>\n</div>\n```\n\nNew Design\n<div class='demo_wrapper' data-demo-src='docs/demos/menus/hamburger-menu/hamburger-menu.html'></div>","name":"hamburger-menu.less","title":"Hamburger Menu","showChildrenInPage":true,"hideChildrenInMenu":true,"parent":"menus","templates":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5/styles/documentjs-theme/templates","static":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5/styles/documentjs-theme/static","glob":{"pattern":"styles/{less,markdown,demos}/**/*.{css,less,scss,md}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5"},"dest":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5/docs","demoSrcRoot":".","generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+	</script>
+
+	
+		<script>
+		  steal = {
+		    instantiated: {
+		      "bundles/static.css!$css" : null
+		    }
+		  }
+		</script>
+		<script type="text/javascript" data-main="static" data-config="./static/config.js" src="./static/steal.production.js" bundles-path="bundles"></script>
+	
+</body>
+
+</html>

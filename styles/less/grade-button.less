@@ -1,0 +1,51 @@
+/**
+*@stylesheet grade-button.less Grade Button
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Grade or Review Button
+*
+*The "Grade" button is used to grade or check the answers on a question or series of questions. After pressing the grade buttons students will be able to view the results of their answers unless it is an essay question. If it is an essay questions students will get their results from their instructors.
+*
+*Old Design
+
+![Grade Button](https://image.ibb.co/cOJd6T/grade_answer_button.jpg "Grade Button")
+*
+*```
+<a class="HyperButton" href="#" id="grade">Grade my answer</a>
+*```
+*New Design
+*@demo docs/demos/buttons/grade-button/grade-button.html
+**/
+
+@import "variables.less";
+@import "main.less";
+@import "next-button.less";
+
+.CL-grade-btn {
+  background: @White;
+  color: @BlueSelected !important;
+  border: 3px solid @BlueSelected !important;
+  padding: 8px 18px!important;
+  font-size: 1.125em !important;
+  font-weight: 800;
+  letter-spacing: 1px !important;
+  &:hover {
+    background: lighten(@BlueSelected, 50%);
+    color: darken(@BlueSelected, 10%) !important;
+    border: 3px solid darken(@BlueSelected, 10%) !important;
+  }
+  &:active {
+    transform: translateY(1px);
+    transition: box-shadow 0.05s ease-in-out;
+    .button-box-shadow(1px 1px 0px 0px rgba(0, 0, 0, 0.7));  
+  }
+}
+
+.btn-disabled.CL-grade-btn {
+  &:hover {
+    background: @White;
+    color: @BlueSelected !important;
+    border: 3px solid @BlueSelected !important;
+  }
+}

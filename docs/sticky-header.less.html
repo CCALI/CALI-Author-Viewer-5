@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<head>
+	<meta charset="utf-8">
+	<title>Style Guide - Sticky Header </title>
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<link rel="stylesheet" type="text/css" href="./static/bundles/static.css">
+	
+	<!--[if lt IE 9]>
+   <script type="text/javascript" src="static/html5shiv.js"></script>
+    <!--<![endif]-->
+</head>
+
+<body class="docs">
+	<header>
+		<nav class="container">
+
+			<div class="logo-menu">
+				<a class="navbar-brand" href="index.html">
+                  <img src="static/img/cali-lessons-logo.png" style="height:50px;width:auto;"/>
+                </a>
+			</div>
+
+			<ul class="main-nav">
+		        <li><a href="index.html">Style Guide</a></li>
+		        <li><a href="components.html">Components</a></li>
+		        <li><a href="design.html">Design Elements</a></li>
+		    </ul>
+		</nav>
+	</header>
+
+	
+<div class="container api">
+
+	
+	<nav class="sidebar">
+		
+		<ul class="api cascading primary-grouping"> 
+	
+		
+		<li class="search-container active parent">
+			<a class="sidebar-title" href="index.html" data-search="Style Guide">
+				Style Guide
+			</a>
+			
+		</li>
+		
+		
+			
+			<li class="search-container active">
+			<a class="sidebar-title" href="components.html" data-search="Components">
+				Components
+			</a>
+			
+	<ul>
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="animation-slides.less.html" data-search="Animation Slides">
+						Animation Slides
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="page" href="components.buttons.html" data-search="Buttons">
+						Buttons
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="page" href="components.images.html" data-search="Images">
+						Images
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="page" href="components.rangesliders.html" data-search="Range Slider">
+						Range Slider
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="page" href="components.textessays.html" data-search="Text Essays">
+						Text Essays
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="drag-drop.less.html" data-search="Drag Drop">
+						Drag Drop
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="footer-links.less.html" data-search="Footer Links">
+						Footer Links
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="headers.less.html" data-search="Headers">
+						Headers
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="hints.less.html" data-search="Hints">
+						Hints
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="links.less.html" data-search="Links">
+						Links
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="page" href="menus.html" data-search="Menus">
+						Menus
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="score.less.html" data-search="Score">
+						Score
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container active ">
+					<a class="stylesheet" href="sticky-header.less.html" data-search="Sticky Header">
+						Sticky Header
+					</a>
+				</li>
+				
+			
+			
+		
+			
+				
+				
+				<li class="search-container">
+					<a class="stylesheet" href="tables.less.html" data-search="Tables">
+						Tables
+					</a>
+				</li>
+				
+			
+			
+		
+	</ul>
+
+		</li>
+			
+		
+	
+</ul>
+	</nav>
+	
+	
+	
+	<article class="content docs">
+	
+	
+		
+		<section class="title">
+			<div class="heading">
+<h1>Sticky Header</h1>
+	<ul class="tags">
+		<li>stylesheet</li>
+	</ul>
+	
+	
+</div>
+
+<div class="sub-heading">
+	
+	
+		<span class="module">sticky-header.less</span>
+	
+	
+	
+	<span class="inherits">&nbsp;</span>
+</div>
+
+<ul class="links">
+	
+	
+	
+	
+</ul>
+<br />
+		</section>
+		
+		
+		
+		<section class="contents">
+		</section>
+		
+		
+		
+
+		
+		<section class="description">
+			<h2>CALI Lessons Sticky Header</h2>
+<p>The sticky header is used for multiple choise radio buttons. The sticky header is used when there are lengthy multiple radio button answers for multiple questions. The answers the students can pick from scroll up and under the sticky header so that students can always see the answers they can pick from.</p>
+<p>Old Design</p>
+<p><img src="https://image.ibb.co/gXhuao/multi_choice_radio_btns.jpg" alt="Old Multi Choice Radio Buttons" title="Old Multi Choice Radio Buttons Example" /></p>
+<pre><code>&lt;tbody&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0 CheckBoxHeading&quot; colspan=&quot;10&quot;&gt;Immediate viability.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot; colspan=&quot;10&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1 CheckBoxHeading&quot; colspan=&quot;8&quot;&gt;Long term health.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot; colspan=&quot;8&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2 CheckBoxHeading&quot; colspan=&quot;6&quot;&gt;Valuation yardstick.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot; colspan=&quot;6&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3 CheckBoxHeading&quot; colspan=&quot;4&quot;&gt;Capacity of a financial institution to remain solvent during a financial crisis.&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot;&gt;&lt;/td&gt;&lt;td class=&quot;cbcolgap&quot; colspan=&quot;4&quot;&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade0_0&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade1_0&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade2_0&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade3_0&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb0&quot; id=&quot;rb0_0&quot; value=&quot;0&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb0&quot; id=&quot;rb1_0&quot; value=&quot;1&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb0&quot; id=&quot;rb2_0&quot; value=&quot;2&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb0&quot; id=&quot;rb3_0&quot; value=&quot;3&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcoltext&quot;&gt;&lt;div class=&quot;ChoiceText ReadText&quot;&gt;&lt;p&gt;Current ratio: Current assets / current liabilities.&lt;/p&gt;&lt;/div&gt;&lt;div id=&quot;fbText0_0&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade0_1&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade1_1&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade2_1&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade3_1&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb1&quot; id=&quot;rb0_1&quot; value=&quot;0&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb1&quot; id=&quot;rb1_1&quot; value=&quot;1&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb1&quot; id=&quot;rb2_1&quot; value=&quot;2&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb1&quot; id=&quot;rb3_1&quot; value=&quot;3&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcoltext&quot;&gt;&lt;div class=&quot;ChoiceText ReadText&quot;&gt;&lt;p&gt;Debt to Assets.&lt;/p&gt;&lt;/div&gt;&lt;div id=&quot;fbText0_1&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade0_2&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade1_2&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade2_2&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade3_2&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb2&quot; id=&quot;rb0_2&quot; value=&quot;0&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb2&quot; id=&quot;rb1_2&quot; value=&quot;1&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb2&quot; id=&quot;rb2_2&quot; value=&quot;2&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb2&quot; id=&quot;rb3_2&quot; value=&quot;3&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcoltext&quot;&gt;&lt;div class=&quot;ChoiceText ReadText&quot;&gt;&lt;p&gt;Debt to Equity.&lt;/p&gt;&lt;/div&gt;&lt;div id=&quot;fbText0_2&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade0_3&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade1_3&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade2_3&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade3_3&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb3&quot; id=&quot;rb0_3&quot; value=&quot;0&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb3&quot; id=&quot;rb1_3&quot; value=&quot;1&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb3&quot; id=&quot;rb2_3&quot; value=&quot;2&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb3&quot; id=&quot;rb3_3&quot; value=&quot;3&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcoltext&quot;&gt;&lt;div class=&quot;ChoiceText ReadText&quot;&gt;&lt;p&gt;Price to Earnings [per share].&lt;/p&gt;&lt;/div&gt;&lt;div id=&quot;fbText0_3&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade0_4&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade1_4&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade2_4&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;div&gt;&lt;img id=&quot;grade3_4&quot; src=&quot;img/grade-blank.gif&quot; width=&quot;20&quot; height=&quot;21&quot; class=&quot;GradeIcon&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td class=&quot;cbcol0&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb4&quot; id=&quot;rb0_4&quot; value=&quot;0&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol1&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb4&quot; id=&quot;rb1_4&quot; value=&quot;1&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol2&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb4&quot; id=&quot;rb2_4&quot; value=&quot;2&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcol3&quot;&gt;&lt;input type=&quot;radio&quot; name=&quot;rb4&quot; id=&quot;rb3_4&quot; value=&quot;3&quot;&gt;&lt;/td&gt;&lt;td&gt;&amp;nbsp;&lt;/td&gt;&lt;td class=&quot;cbcoltext&quot;&gt;&lt;div class=&quot;ChoiceText ReadText&quot;&gt;&lt;p&gt;Bank capital as a percentage of assets, meaning equity to assets.&lt;/p&gt;&lt;/div&gt;&lt;div id=&quot;fbText0_4&quot;&gt;&lt;/div&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+</code></pre>
+<p>New Design</p>
+<p><img src="https://image.ibb.co/bNdBMT/multi_choice_radio_btns_new.jpg" alt="New Multi Choice Radio Buttons" title="New Multi Choice Radio Buttons Example" /></p>
+<p>(Note: must have scrollable view for styling to work)</p>
+<div class='demo_wrapper' data-demo-src='docs/demos/stickyheader/sticky-header.html'></div>
+
+		</section>
+		
+
+		
+			
+		
+		
+		
+		
+
+		
+		
+
+		
+			
+		
+
+		
+	
+	
+	</article>
+	
+	
+
+</div>
+
+
+
+
+
+
+	<footer>
+	  <p class="center">Built by <a href="http://bitovi.com/">Bitovi</a> using <a href="http://documentjs.com/">DocumentJS</a>.
+	</footer>
+
+	<script type="text/javascript">
+		var docObject = {"src":"styles/less/sticky-header.less","line":0,"codeLine":24,"type":"stylesheet","description":"## CALI Lessons Sticky Header\n\nThe sticky header is used for multiple choise radio buttons. The sticky header is used when there are lengthy multiple radio button answers for multiple questions. The answers the students can pick from scroll up and under the sticky header so that students can always see the answers they can pick from.\n\n\nOld Design\n\n![Old Multi Choice Radio Buttons](https://image.ibb.co/gXhuao/multi_choice_radio_btns.jpg \"Old Multi Choice Radio Buttons Example\")\n```\n<tbody><tr><td class=\"cbcol0 CheckBoxHeading\" colspan=\"10\">Immediate viability.</td></tr><tr><td class=\"cbcol0\"></td><td class=\"cbcolgap\"></td><td class=\"cbcolgap\" colspan=\"10\"></td></tr><tr><td class=\"cbcol0\"></td><td class=\"cbcolgap\">&nbsp;</td><td class=\"cbcol1 CheckBoxHeading\" colspan=\"8\">Long term health.</td></tr><tr><td class=\"cbcol0\"></td><td class=\"cbcolgap\"></td><td class=\"cbcol1\"></td><td class=\"cbcolgap\"></td><td class=\"cbcolgap\" colspan=\"8\"></td></tr><tr><td class=\"cbcol0\"></td><td class=\"cbcolgap\">&nbsp;</td><td class=\"cbcol1\"></td><td class=\"cbcolgap\">&nbsp;</td><td class=\"cbcol2 CheckBoxHeading\" colspan=\"6\">Valuation yardstick.</td></tr><tr><td class=\"cbcol0\"></td><td class=\"cbcolgap\"></td><td class=\"cbcol1\"></td><td class=\"cbcolgap\"></td><td class=\"cbcol2\"></td><td class=\"cbcolgap\"></td><td class=\"cbcolgap\" colspan=\"6\"></td></tr><tr><td class=\"cbcol0\"></td><td class=\"cbcolgap\">&nbsp;</td><td class=\"cbcol1\"></td><td class=\"cbcolgap\">&nbsp;</td><td class=\"cbcol2\"></td><td class=\"cbcolgap\">&nbsp;</td><td class=\"cbcol3 CheckBoxHeading\" colspan=\"4\">Capacity of a financial institution to remain solvent during a financial crisis.</td></tr><tr><td class=\"cbcol0\"></td><td class=\"cbcolgap\"></td><td class=\"cbcol1\"></td><td class=\"cbcolgap\"></td><td class=\"cbcol2\"></td><td class=\"cbcolgap\"></td><td class=\"cbcol3\"></td><td class=\"cbcolgap\"></td><td class=\"cbcolgap\" colspan=\"4\"></td></tr><tr><td class=\"cbcol0\"><div><img id=\"grade0_0\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol1\"><div><img id=\"grade1_0\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol2\"><div><img id=\"grade2_0\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol3\"><div><img id=\"grade3_0\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td class=\"cbcol0\"><input type=\"radio\" name=\"rb0\" id=\"rb0_0\" value=\"0\"></td><td>&nbsp;</td><td class=\"cbcol1\"><input type=\"radio\" name=\"rb0\" id=\"rb1_0\" value=\"1\"></td><td>&nbsp;</td><td class=\"cbcol2\"><input type=\"radio\" name=\"rb0\" id=\"rb2_0\" value=\"2\"></td><td>&nbsp;</td><td class=\"cbcol3\"><input type=\"radio\" name=\"rb0\" id=\"rb3_0\" value=\"3\"></td><td>&nbsp;</td><td class=\"cbcoltext\"><div class=\"ChoiceText ReadText\"><p>Current ratio: Current assets / current liabilities.</p></div><div id=\"fbText0_0\"></div></td></tr><tr><td class=\"cbcol0\"><div><img id=\"grade0_1\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol1\"><div><img id=\"grade1_1\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol2\"><div><img id=\"grade2_1\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol3\"><div><img id=\"grade3_1\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td class=\"cbcol0\"><input type=\"radio\" name=\"rb1\" id=\"rb0_1\" value=\"0\"></td><td>&nbsp;</td><td class=\"cbcol1\"><input type=\"radio\" name=\"rb1\" id=\"rb1_1\" value=\"1\"></td><td>&nbsp;</td><td class=\"cbcol2\"><input type=\"radio\" name=\"rb1\" id=\"rb2_1\" value=\"2\"></td><td>&nbsp;</td><td class=\"cbcol3\"><input type=\"radio\" name=\"rb1\" id=\"rb3_1\" value=\"3\"></td><td>&nbsp;</td><td class=\"cbcoltext\"><div class=\"ChoiceText ReadText\"><p>Debt to Assets.</p></div><div id=\"fbText0_1\"></div></td></tr><tr><td class=\"cbcol0\"><div><img id=\"grade0_2\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol1\"><div><img id=\"grade1_2\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol2\"><div><img id=\"grade2_2\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol3\"><div><img id=\"grade3_2\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td class=\"cbcol0\"><input type=\"radio\" name=\"rb2\" id=\"rb0_2\" value=\"0\"></td><td>&nbsp;</td><td class=\"cbcol1\"><input type=\"radio\" name=\"rb2\" id=\"rb1_2\" value=\"1\"></td><td>&nbsp;</td><td class=\"cbcol2\"><input type=\"radio\" name=\"rb2\" id=\"rb2_2\" value=\"2\"></td><td>&nbsp;</td><td class=\"cbcol3\"><input type=\"radio\" name=\"rb2\" id=\"rb3_2\" value=\"3\"></td><td>&nbsp;</td><td class=\"cbcoltext\"><div class=\"ChoiceText ReadText\"><p>Debt to Equity.</p></div><div id=\"fbText0_2\"></div></td></tr><tr><td class=\"cbcol0\"><div><img id=\"grade0_3\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol1\"><div><img id=\"grade1_3\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol2\"><div><img id=\"grade2_3\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol3\"><div><img id=\"grade3_3\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td class=\"cbcol0\"><input type=\"radio\" name=\"rb3\" id=\"rb0_3\" value=\"0\"></td><td>&nbsp;</td><td class=\"cbcol1\"><input type=\"radio\" name=\"rb3\" id=\"rb1_3\" value=\"1\"></td><td>&nbsp;</td><td class=\"cbcol2\"><input type=\"radio\" name=\"rb3\" id=\"rb2_3\" value=\"2\"></td><td>&nbsp;</td><td class=\"cbcol3\"><input type=\"radio\" name=\"rb3\" id=\"rb3_3\" value=\"3\"></td><td>&nbsp;</td><td class=\"cbcoltext\"><div class=\"ChoiceText ReadText\"><p>Price to Earnings [per share].</p></div><div id=\"fbText0_3\"></div></td></tr><tr><td class=\"cbcol0\"><div><img id=\"grade0_4\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol1\"><div><img id=\"grade1_4\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol2\"><div><img id=\"grade2_4\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td class=\"cbcol3\"><div><img id=\"grade3_4\" src=\"img/grade-blank.gif\" width=\"20\" height=\"21\" class=\"GradeIcon\"></div></td><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td class=\"cbcol0\"><input type=\"radio\" name=\"rb4\" id=\"rb0_4\" value=\"0\"></td><td>&nbsp;</td><td class=\"cbcol1\"><input type=\"radio\" name=\"rb4\" id=\"rb1_4\" value=\"1\"></td><td>&nbsp;</td><td class=\"cbcol2\"><input type=\"radio\" name=\"rb4\" id=\"rb2_4\" value=\"2\"></td><td>&nbsp;</td><td class=\"cbcol3\"><input type=\"radio\" name=\"rb4\" id=\"rb3_4\" value=\"3\"></td><td>&nbsp;</td><td class=\"cbcoltext\"><div class=\"ChoiceText ReadText\"><p>Bank capital as a percentage of assets, meaning equity to assets.</p></div><div id=\"fbText0_4\"></div></td></tr></tbody>\n```\n\nNew Design\n\n![New Multi Choice Radio Buttons](https://image.ibb.co/bNdBMT/multi_choice_radio_btns_new.jpg \"New Multi Choice Radio Buttons Example\")\n\n(Note: must have scrollable view for styling to work)\n<div class='demo_wrapper' data-demo-src='docs/demos/stickyheader/sticky-header.html'></div>","name":"sticky-header.less","title":"Sticky Header","showChildrenInPage":true,"hideChildrenInMenu":true,"parent":"components","templates":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5/styles/documentjs-theme/templates","static":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5/styles/documentjs-theme/static","glob":{"pattern":"styles/{less,markdown,demos}/**/*.{css,less,scss,md}","ignore":"{node_modules,bower_components}/**/*","cwd":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5"},"dest":"/Users/sam/Desktop/dev/GIT/CALI-Author-Viewer-5/docs","demoSrcRoot":".","generators":["html"],"docConfigDest":"../documentjs.json","project":{}};
+	</script>
+
+	
+		<script>
+		  steal = {
+		    instantiated: {
+		      "bundles/static.css!$css" : null
+		    }
+		  }
+		</script>
+		<script type="text/javascript" data-main="static" data-config="./static/config.js" src="./static/steal.production.js" bundles-path="bundles"></script>
+	
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+/**
+*@stylesheet animation-slides.less Animation Slides
+*@parent components
+*
+*@description
+*## CALI Lessons Animation Slides
+*
+*CALI Lessons animation slides are based on the old CALI lessons styles. 
+
+*(Note: Only slight style changes have been added so that old code can be used.)
+*
+*Old Design
+*
+
+![Animation Slides](https://image.ibb.co/gEdThy/oldanimationslides.jpg "Animation Slides")
+*
+*```
+<div class="MediaPanel"><div id="slideshow" style="width: 400px; height: 300px; overflow: hidden;"><ul style="width: 800px;"><li style="float: left;"><img src="https://www.cali.org/lessons/web/ava01/ftw83_factual_01_lo.jpg"></li><li style="float: left;"><img src="https://www.cali.org/lessons/web/ava01/ftw83_factual_02_log.jpg"></li></ul></div> <span id="prevBtn"><a href="javascript:void(0);" style="display: none;">Previous</a></span> <span id="nextBtn"><a href="javascript:void(0);">Next</a></span></div>
+*```
+*New Design
+*@demo docs/demos/animation-slides/animation-slides.html
+**/
+@import "variables.less";
+@import "main.less";
+
+.arrow-position {
+  display: inline-block;
+  margin: 5px 5px -2.5px 5px;
+  height: 18px;
+  width: 18px;  
+}
+
+.slider-animation-btns {
+  color: @CLThemeColor !important;
+  font-size: 1.125em;
+  font-weight: 800;
+  text-decoration: none;
+  &:hover {
+    opacity: 0.7;
+  }
+   &:active {
+    opacity: 1;
+    font-weight: 900;
+  }   
+}
+
+.MediaPanel {
+  text-align: center;
+  vertical-align: top;
+}
+
+.MediaPanel ul {
+  width: 800px; 
+  margin-left: 0px;
+  list-style: none;
+}
+
+.MediaPanel ul li {
+  display: block;
+  float: left;
+  margin: 0;
+  margin-left: -23px;
+  padding: 0;
+}
+
+.MediaPanel Ul li img {
+  width: 400px; 
+  height: 300px;
+}
+
+#prevBtn, 
+#nextBtn {
+  margin: 5px 10px;
+}
+
+#prevBtn > a {
+  .slider-animation-btns;
+  display: none;   
+}
+
+#nextBtn > a {
+  .slider-animation-btns;
+  display: inline;   
+}
+
+.left-arrow {
+  background: @ArrowSliderPrevious;
+  .arrow-position;
+}
+
+.right-arrow {
+  background:@ArrowSliderNext;
+  .arrow-position;  
+}
+
+#slideshow {
+  width: 400px; 
+  height: 300px; 
+  overflow: hidden;
+  background-color: darken(@Grey, 10%);
+  margin: auto;
+  border: 2px solid darken(@Grey, 10%);
+  padding: 0px;
+}

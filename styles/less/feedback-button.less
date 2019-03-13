@@ -1,0 +1,122 @@
+/**
+*@stylesheet feedback-button.less Feedback Button
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Feedback button
+*
+*This button is for student feedback about CALI lessons. It now has a new position at the bottom of the screen on the lover right hand side. It is fixed so students can always see it and click on it to give feedback. It uses a small modal for student to input their comments.
+*
+*Old Design
+
+![Feedback Button](https://image.ibb.co/e42QmT/oldfeedback.jpg "Feedback Button")
+*
+*```
+<a class="PageComment" href="mailto:dquentel@cali.org?cc=calitech@cali.org&amp;subject=CALI%20Lesson%20Comment%3A%20BA05/3.0a%20Who%20can%20ratify%20%2804/23/2010%29-CALI5" title="We welcome your comments and feedback over email">Feedback</a>
+*```
+*New Design
+*@demo docs/demos/buttons/feedback-button/feedback-button.html
+**/
+
+@import "variables.less";
+@import "main.less";
+
+.bubble-var {
+  position: fixed !important;
+  float: right;
+  bottom: 10;
+  right: 20;
+  position: relative;
+  color: @DarkBlue;
+  font-weight: 800;
+  text-align: center;
+  background: @Gold;
+  cursor: pointer;
+  .border-radius (10px);
+  z-index: 3;
+  box-shadow: 3px 2px 5px #999;
+  &:hover {
+    background: linear-gradient(lighten(@Gold, 20%), @Gold);
+  }   
+}
+
+.bubble-bef-aft-var {
+  content: "";
+  position: absolute;
+  display: block;
+  border-style: solid;
+  width: 0;
+}
+
+.feedback-bubble {
+  padding: 8px;
+  .bubble-var;
+}
+
+.feedback-bubble:before {
+  bottom: -15px;
+  right: 14px;
+  border-width: 16px 6px 0;
+  border-color: rgba(0,0,0, 0.2) transparent;
+  .bubble-bef-aft-var;
+}
+
+.feedback-bubble:after {
+  bottom: -14px;
+  right: 15px;
+  border-width: 15px 6px 0;
+  border-color: @Gold transparent;
+  .bubble-bef-aft-var;
+}
+
+.happyface-bubble {
+  padding: 5px;
+  .bubble-var;
+}
+
+.happyface-bubble:before {
+  bottom: -15px;
+  right: 14px;
+  border-width: 16px 6px 0;
+  border-color: rgba(0,0,0, 0.2) transparent;
+  .bubble-bef-aft-var;
+}
+
+.happyface-bubble:after {
+  bottom: -14px;
+  right: 15px;
+  border-width: 15px 6px 0;
+  border-color: @Gold transparent;
+  .bubble-bef-aft-var;
+}
+
+.happyface-icon {
+  display: inline-block;
+  background-image: @CLFeedback;
+}
+
+span.happyface-icon {
+  width: 35px;
+  height: 35px;
+}
+
+/* Modal */
+
+.modal-dialog {
+  position: fixed;
+  bottom: 40px;
+  right: 2.5%;
+}
+
+.modal-content {
+  border-radius: 0px;
+}
+
+.modal-header {
+  border-bottom: 2px solid @Gold;
+}
+
+.modal.fade:not(.in) .modal-dialog {
+    -webkit-transform: translate3d(0, 25%, 0);
+    transform: translate3d( 0, 25%, 0);
+}

@@ -1,0 +1,171 @@
+/**
+*@stylesheet next-button.less Next Button
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Next Button
+*
+*The "Next" button is used to navigate through lessons. It is
+designed to replace the old "Back" and "Next" methods of navigation.  Now students will only press the new "Next" button to continue. If they wish to navigation elsewere in the lesson they will use the slider menu for the table of conents. (see menus/slider menu & navtree)
+*
+*Old Design
+
+![Next Button](https://image.ibb.co/cZnviy/oldnextbtn.jpg "Next Button")
+*
+*```
+<div class="PageNavBar">&nbsp;
+  <a href="choice://gonext">Next</a>
+</div>
+*```
+*New Design
+*@demo docs/demos/buttons/next-button/next-button.html
+**/
+
+@import "variables.less";
+@import "img-variables.less";
+@import "main.less";
+
+@CLArrowRightWhite: url(https://image.ibb.co/n7VyUH/arrow_next.png);
+
+.border-none {
+  outline: none !important;
+}
+
+.CLButtonRules {
+  .border-radius(0px);
+  font-size: 1.125em;
+  text-align: left;
+  width: 140px;
+  height: 40px;
+  margin: 10px 5px 0px 0px;
+  .button-box-shadow(@BoxShadow);
+}
+
+.CLNextActions {
+  .CLButtonRules;
+  background: lighten(@CLThemeColor, 5%) !important;
+  border: 2px solid lighten(@CLThemeColor, 5%) !important;
+}
+
+.CLButtonArrowRules {
+  height: 30px;
+  width: 30px;
+  margin-top:-3px;
+}
+
+.CL-btn {
+	border: none;
+  font-size: 1.125em;
+	background: none;
+	cursor: pointer;
+	padding: 25px 80px;
+	display: inline-block;
+	margin: 15px 30px;
+	letter-spacing: 2px;
+	.border-none;
+	position: relative;
+	.CL-button-transition(@Transition);
+  	.button-box-shadow(@BoxShadow);
+}
+
+.CL-btn:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+	.CL-button-transition(@Transition);
+}
+
+.CL-next-btn {
+	background: @CLThemeColor;
+	color: #fff;
+  text-align: left;
+  width: 180px;
+  height: 44px;
+  &:hover {
+    background: lighten(@CLThemeColor, 10%) !important;
+  }
+  &:active {
+    background: @CLThemeColor;
+    transform: translateY(1px);
+    transition: box-shadow 0.05s ease-in-out;
+    .button-box-shadow(1px 1px 0px 0px rgba(0, 0, 0, 0.7));  
+  }
+}
+
+.CL-next-btn:before {
+	position: absolute;
+	height: 100%;
+	left: 0;
+	top: 0;
+	line-height: 3;
+}
+
+.shine {
+  padding: 10px 30px 10px 30px;
+  overflow: hidden;
+  &:before {
+    left: auto;
+    right: 10px;
+    z-index: 2;  
+  }
+  &:after {
+    width: 30%;
+    height: 200%;
+    background: rgba(255,255,255,0.025);
+    z-index: 1;
+    right: 0;
+    top: 0;
+    margin: -5px 0 0 -5px;
+    .transform-rotate(@Rotate);
+    .transform-origin(@Origin);
+  }
+  &:hover {
+    &:after {
+      background: rgba(255,255,255,0.1);
+      width: 46%;    
+    }
+  }
+}
+
+.next-arrow {
+  background: @CLArrowRightWhite;
+  float: right;
+  .CLButtonArrowRules;
+  margin-right: -5px;
+}
+
+.btn-disabled {
+  padding: 10px 30px;
+  opacity: 0.3 !important;
+  cursor: default !important;
+  box-shadow: none !important;
+}
+
+.btn-disabled.CL-next-btn {
+  &:hover {
+    background: @CLThemeColor !important;
+  }
+}
+
+@media (max-width:768px) {
+  .CL-navbar-main {
+    background: @Grey;
+  }
+  .user-name-link {
+    color: @CLThemeColor;
+    font-size: 1.125em;
+    margin: 0px 0px 0px 20px;
+  }
+  .navbar-text {
+    margin: 20px 0px 20px 0px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .CL-next-btn {
+    width: 85%;
+  }
+  .shine:after {
+    height: 300%;
+  }
+}

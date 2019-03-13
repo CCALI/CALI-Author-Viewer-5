@@ -1,0 +1,54 @@
+/**
+*@stylesheet icon-btns.less Icon Buttons
+*@parent components.buttons
+*
+*@description
+*## CALI Lessons Icon Buttons
+*
+*These are the icons buttons zoom and description. (Note: See components/images/hotspot to see how zoom works with images)
+*
+*
+*Old Design
+
+![Old Icon Buttons](https://image.ibb.co/cFnLaJ/old_zoom_des_btns.jpg "Old Icon Buttons Example")
+*```
+<a href="#" class="togglervert HyperButton Small">Description</a>
+<a class="zoomin HyperButton Small" href="https://www.cali.org/lessons/web/evd10_3/final.gif" title="Image" target="_blank">Zoom</a>
+*```
+*
+*New Design
+*@demo docs/demos/buttons/icon-btns/icon-btns.html
+**/
+
+@import "variables.less";
+@import "main.less";
+
+.zoom {
+  position: relative;
+  display: inline-block;
+  background-image: @ZoomImg;
+  float: right;
+  cursor: pointer;
+  transition: .3s;  
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.description {
+  position: relative;
+  display: inline-block;
+  background-image: @DescriptionImg;
+  float: right;
+  cursor: pointer;
+  transition: .3s;  
+  margin-top: 10px;
+  width: 30px;
+  height: 30px;
+  &:hover {
+    opacity: 0.7;
+  }
+}
