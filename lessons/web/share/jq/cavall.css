@@ -55,7 +55,7 @@ a {
 	text-align: center;
 }
 	
-#Viewer {
+OLD.#Viewer {
 	text-align: center;
 	/* display: none; */
 }
@@ -76,9 +76,11 @@ a {
 #HeaderLessonBook {
 	float: left;
 }
+/*
 #HeaderLessonCAV {
 	float: right;
 }
+*/
 #HeaderLesson a {
 	text-decoration: none; 
 }
@@ -100,28 +102,28 @@ a {
 	padding-right: 25px;
 }
 .PageHeader {
-	height: 25px;
+	height: auto;
 	padding: 5px;
 	margin: 5px;
 }
-.PageName {
+x.PageName {
 	color:#000;
 	text-align: left;
 	float: left;
 }
-.PageScore {
+x.PageScore {
 	float: right;
 }
 .PageComment{
 }
 
-#ScoreSaveError {
+x#ScoreSaveError {
 	background:yellow;
 	padding:1em;
 	margin:1em;
 	text-align:left;
 }
-.Navigation {
+OLD.Navigation {
 	clear: both;
 	display: table;
 	width: 100%;
@@ -212,7 +214,7 @@ a {
 	padding: 15px;
 	text-align: center;
 }
-.PageSpecificNav {
+x.PageSpecificNav {
 	background-color: #fff;
 	padding: 15px;
 	text-align: center;
@@ -226,11 +228,11 @@ a {
 	padding-bottom: 5px;
 	padding-left: 5px;
 }
-.LinkNavBar{
+OLD.LinkNavBar{
 	text-align: left;
 	padding-bottom: 5px;
 }
-.LinkNavBar > a {
+OLD.LinkNavBar > a {
 	-moz-border-radius:5px;
 	border-radius:5px;
 	border-right: #ececec outset;
@@ -262,7 +264,7 @@ a {
 	color:#000;
 	white-space: nowrap;
 }
-.LinkNavBar > a.hilite {
+OLD.LinkNavBar > a.hilite {
 	background-color:#FFFF00;
 	background: url(img/button_gradient_yellow.png) repeat-x;
 }
@@ -390,7 +392,7 @@ table.layout{
 	padding: 1em;
 }
 .TableCB {
-	//width: 100%;
+	/*width: 100%;*/
 	border: none;
 	border-spacing: 0px;
 	border-collapse: collapse;
@@ -428,7 +430,7 @@ table.layout{
 	padding:  0px 0px 0px 5px  ;
 }
 
-.MultipleChoice {
+x.MultipleChoice {
 	clear: both;
 }
 
@@ -439,7 +441,7 @@ table.layout{
 	padding: 5px;
 }
 
-.EssayBox {
+x.EssayBox {
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* IE 8+ */
@@ -449,16 +451,16 @@ table.layout{
 	padding: 5px;
 	font-family: Tahoma, sans-serif;
 }
-.EssayTable {
+x.EssayTable {
 	width : 100%;
 	/*  align=center*/
 }
-.EssayTable * TD {
+x.EssayTable * TD {
 	text-align: center;
 	padding: 15px;
 }
 
-#slideshow {
+x#slideshow {
 	background-color: #eec;
 	-moz-border-radius:5px;
 	border-radius:5px;
@@ -466,15 +468,15 @@ table.layout{
 	border: 3px solid #886;
 	padding: 0px;
 }
-#slideshow li{
+x#slideshow li{
 	width:400px;
 	height:300px;
 }
-#slideshow ul, li{
+x#slideshow ul, li{
 	padding:0;
 	margin:0;
 }
-#slideshow img{
+x#slideshow img{
 	width: 100%;
 	height: 100%;
 }
@@ -484,8 +486,6 @@ table.layout{
 
 /*  backgrounds for feedback popups */
 .Feedback, #ScoreReport {
-	-moz-border-radius:10px 10px 10px 10px;
-	border-radius:10px 10px 10px 10px;
 	padding: 5px;
 	margin: 15px;
 	background-attachment: scroll;
@@ -501,22 +501,18 @@ table.layout{
 }
 .Feedback.RIGHT {
 	border: 3px solid #009900;
-	background:url("img/button_gradient_green.png") repeat-x scroll 0 0 transparent;
 	background-color: #efe;
 }
 .Feedback.WRONG {
 	border: 3px solid #990000;
-	background:url("img/button_gradient_red.png") repeat-x scroll 0 0 transparent;
 	background-color: #fee;
 }
 .Feedback.MAYBE {
 	border: 3px solid #ff0;
-	background:url("img/button_gradient_yellow.png") repeat-x scroll 0 0 transparent;
 	background-color: #ffe;
 }
 .Feedback.INFO{
 	border: 3px solid #00f;
-	background:url("img/button_gradient_blue.png") repeat-x scroll 0 0 transparent;
 	background-color: #ddf;
 }
 .Feedback.Blank {
@@ -584,7 +580,7 @@ table.layout{
 	padding-bottom: 25px;
 }
 
-
+/*
 input[type="button"]:enabled, button:enabled {
 	-moz-border-radius:10px 10px 10px 10px;
 	border-radius:10px 10px 10px 10px;
@@ -597,7 +593,7 @@ input[type="button"]:enabled, button:enabled {
 input[type="button"]:enabled:focus, input[type="submit"]:enabled:hover, button:enabled:focus, button:enabled:hover {
 	border-color:#666666;
 }
-
+*/
 
 .GradeIconRIGHT, .GradeIconWRONG{
 	padding: 8px;
@@ -615,14 +611,14 @@ input[type="button"]:enabled:focus, input[type="submit"]:enabled:hover, button:e
 
 
 .ReadText {/*applied to lesson's content text*/
-	font-family: Lucida Grande,Verdana,Lucida Sans Regular,Lucida Sans Unicode,Arial,sans-serif;
+	/*font-family: Lucida Grande,Verdana,Lucida Sans Regular,Lucida Sans Unicode,Arial,sans-serif;*/
 	color: #000;
 	text-align: left;
 	text-decoration: none;
 	font-weight: normal;
 	font-style: normal;
 }
-.ReadText > TABLE {
+.ReadText > TABLE, .multi-btn-txt > TABLE {
 	border: 1px;
 	border-style: solid;
 	border-color: #000000;
@@ -633,7 +629,7 @@ input[type="button"]:enabled:focus, input[type="submit"]:enabled:hover, button:e
 	margin-left: 1em;
 	margin-right: 1em;
 }
-.ReadText * TD {
+.ReadText * TD, .multi-btn-txt * TD {
 	border: 1px solid #000;
 	padding: 5px;
 }
@@ -649,7 +645,7 @@ input[type="button"]:enabled:focus, input[type="submit"]:enabled:hover, button:e
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
-.HyperButton {
+x.HyperButton {
 	cursor: pointer;
 	-moz-border-radius:10px;
 	border-radius:10px;
@@ -697,7 +693,7 @@ input[type="button"]:enabled:focus, input[type="submit"]:enabled:hover, button:e
 .HyperButton#gonext{
 	background: url(img/button_gradient_blue.png) repeat-x;
 }
-.HyperButton .gonext {/*gonext chevron*/
+x.HyperButton .gonext {/*gonext chevron*/
 	background-position: 100% 2px;
 	background-repeat: no-repeat;
 	padding: 0px 20px 5px 5px; 
@@ -744,8 +740,6 @@ td.info {
 }
 .UploadScore {
 	border: 3px solid #C4E1FF;
-	-moz-border-radius:10px 10px 10px 10px;
-	border-radius:10px 10px 10px 10px;
 	margin: auto;
 	text-align:left;
 	padding: 5px;
@@ -765,10 +759,6 @@ td.info {
 }
 .Certificate {
 	font-size:larger;
-	-moz-border-radius:30px;
-	border-radius:30px;
-   -webkit-border-radius: 30px;
-   -khtml-border-radius: 30px;
 
 	border:10px solid #C4E1FF;
 	color: #008;
@@ -1174,30 +1164,30 @@ div.flashcard.answer{
 	padding-right: 25px;
 }
 .llNavigation {
+	float: right;
 	font-size: smaller;
 	margin: 0px;
 	padding: 5px;
 	text-align:left;
-	display: table-cell;
+	display: table-cell; 
 	vertical-align:top;
-	/*
-		min-width:250px;
-	*/
-	
-	xbackground-color: #c4e1ff;
-	xborder: 3px solid #0066cc;
-	xborder-radius: 5px;
+	min-width:250px;
 	height: auto;
+	/*
+	 height: 100%;
+	 */
 }
 #llPanel {
-	white-space: nowrap;		
+	white-space: nowrap;	
+	xwidth: 25%;
+	xbackground-color: #f8f;
 }
 .llPageInfo {
 	text-align:center;
-	background-color: #c4e1ff; 
 	padding: 1em;
 	margin-right: -5px;
 	margin-left: -5px;
+	xbackground-color: #c4e1ff; 
 }
 .llButton {
 	display: inline;
@@ -1207,9 +1197,9 @@ div.flashcard.answer{
 	display: inline-block;
 	margin-left: 2px;
 	vertical-align: middle;
-	background-color: #c4e1ff;
 	padding-left: 4px;
 	padding-right: 4px; 
+	xbackground-color: #c4e1ff;
 }
 .llBar {
 	display: inline-block;
@@ -1217,8 +1207,9 @@ div.flashcard.answer{
 	height: 1.2em;
 	padding: 0;
 	margin: 0;
-	xbackground-color: #eee;
-	xwidth: 66px;
+	margin-right: 1em;
+	background-color: #d4f1ff;
+	width: 66px;
 }
 .llBarSlots {
 	background-color: inherit;
@@ -1326,7 +1317,7 @@ div.flashcard.answer{
 	width: 1em;
    padding: 1px;
 }
-.PageScore {
+x.PageScore {
 	cursor: pointer;
 }
 .PageScore.unscored{
@@ -1336,3 +1327,10 @@ div.flashcard.answer{
 .hidestart { /* hide some elements initially */
 	display: none;
 }
+
+blockquote{
+	border:0px solid #999;
+	page-break-inside:avoid;
+}
+
+

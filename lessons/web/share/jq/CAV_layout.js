@@ -1,6 +1,24 @@
 // Copyright 1999-2014 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved.
 // CALI Viewer 5, Version: 09/11/2014
 
+
+function stickyHeader()
+{	// Bitovi
+	return;
+/*	window.onscroll = function() {myFunction()};
+	var header = document.getElementById("stickyHeader");
+	var sticky = header.offsetTop;  
+	function myFunction() {
+	  if (window.pageYOffset >= sticky) {
+		 header.classList.add("sticky");
+	  } else {
+		 header.classList.remove("sticky");
+	  }
+	}
+*/
+}
+
+
 function clickButton(id)
 { 
 	if (id=="return")
@@ -43,11 +61,13 @@ function clickButton(id)
 			gotoPage(page.nextPage);
 	}
 	else
-	if (id=="goback"){
+	if (id=="goback")
+	{
 		win.history.go(-1);//if (!isLocalFF()) parent.history.back();else window.history.back();
 	}
 	else
-	if (page.type=="Multiple Choice"  && (page.style=="Choose List" || page.style=="Choose MultiButtons" || page.style=="Choose Buttons")){
+	if (page.type=="Multiple Choice"  && (page.style=="Choose List" || page.style=="Choose MultiButtons" || page.style=="Choose Buttons"))
+	{
 		MulipleChoice_grade(id);
 	}
 	return false;
@@ -62,39 +82,44 @@ function textWithMedia(pageText, page)
 	// Build any media widgets
 	if (page.animationSlideSrcs.length>0)
 	{	// Slide show
-		media += '<div id="slideshow"><ul>';
+		media += '<div id="slideshow"><ul class="">';
 		for (var s=0;s<page.animationSlideSrcs.length; s++)
 		{
-			media += '<li><IMG SRC="' + (page.animationSlideSrcs[s])+'"/></li>';
+			media += '<li class=""><IMG SRC="' + (page.animationSlideSrcs[s])+'"/></li>';
 			//sample:	<li><a href="http://templatica.com/preview/30"><img src="images/01.jpg" alt="Css Template Preview" /></a></li>
 		}
 		media+="</ul></div>";
 	}
 	if (page.pictureSrc!=null)
 	{	// Picture with possible hotspots.
-		media+='<div class="picture">'
-			+'<img id="picture"  />'
-			+'<div class="hotspots"></div>'
-			+'</div>';
-		media +='<a class="zoomin HyperButton Small" href="'+page.pictureSrc+'" title="'+'Image'+'">Zoom</a> ';
+		media+='<div class="picture"><img id="picture"  /><div class="hotspots"></div></div>';
+		//media +='<a class="zoomin HyperButton Small" href="'+page.pictureSrc+'" title="'+'Image'+'">Zoom</a> ';
+		media += '<div class="row">\
+			  <span id="zoom" class="zoom zoomin" aria-label="Zoom icon button"><span class="sr-only">Zoom icon button.</span></span>\
+			  <span class="description" aria-label="Description icon button"><span class="sr-only">Description icon button.</span></span>\
+			  </div><div class="gap"></div>';
+		
 		if (page.ada!="" || page.hotspots.length>0)
 		{
-			var hotspots="";
-			var hotspotsMap="";
-			for (var h=0;h<page.hotspots.length;h++)
+			let hotspots="";
+			let hotspotsMap="";
+			for (let h=0;h<page.hotspots.length;h++)
 			{
-				var hotspot=page.hotspots[h];
+				let hotspot=page.hotspots[h];
 				if (typeof  hotspot.href=='undefined')
 				{
 					hotspot.href='#';
-					hotspots+='<li>'+ hotspot.ada;
+					hotspots+='<li>'+ hotspot.ada+'</li>';
 				}else
 				{
-					hotspots+='<li>'+'<a href="'+hotspot.href+'">'+hotspot.ada+' '+hotspot.href+"</a>";
+					let pageName=hotspot.href.split('://')[1];
+					if (pageName===undefined) pageName=hotspot;
+					hotspots+='<li>'+'<a href="'+hotspot.href+'">'+hotspot.ada+' '+pageName+'</a></li>';
 				}
-			}
-			media +='<a href=# class="togglervert HyperButton Small">'+t(lang.HotSpotDescription)+'</a>'+
-				'<div class="Transcript">'+ page.ada + '<div class="HotspotList"><ol>'+hotspots+'</ol></div>' +'</div>';
+			}			
+			
+			//media +='<a href=# class="togglervert HyperButton Small">'+t(lang.HotSpotDescription)+'</a>'+
+			media += '<div class="Transcript">'+ page.ada + '<div class="HotspotList"><ol>'+hotspots+'</ol></div>' +'</div>';
 		}
 	}
 	
@@ -106,7 +131,9 @@ function textWithMedia(pageText, page)
 			'</audio></div>';
 		if (page.transcript!="")
 		{
-			media+='<a href=# class=togglervert>'+t(lang.AudioTranscription)+':</a><div class="Transcript">'+ page.transcript + '</div>';
+			media+='<div class="row"><span class="description" aria-label="Description icon button"><span class="sr-only">Description icon button.</span></span></div>';
+			//media+='<a href=# class=togglervert>'+t(lang.AudioTranscription)+':</a>
+			media+='<div class="Transcript">'+ page.transcript + '</div>';
 		}
 	}
 	
@@ -135,7 +162,7 @@ function textWithMedia(pageText, page)
 			media+='<span href="'+video+'" style="display:block;width:'+w+'px;height:'+h+'px"  id="videoplayer"> </span>';
 			addflowplayer=1;
 		}
-		trace("Video",video);
+		//trace("Video",video);
 	}
 	
 	var html="";
@@ -188,6 +215,10 @@ function textWithMedia(pageText, page)
 function pictureLoaded()
 {	// When picture finally loads (and we have width/height), attach hotspots.
 	page.picWidth=this.width;
+	if (this.width==16)
+	{
+		return;
+	}
 	//trace("pictureLoaded :" + $(this).attr('src') + ", "+this.width+"x"+this.height+" xml="+page.srcPicWidth);
 
 	$('#picture').css({'width':'100%' }).attr('src',$(this).attr('src'));
@@ -235,9 +266,60 @@ function updateHotSpots()
 
 
 
+function lightbox(url)
+{	// clone existing image/hotspots into full width popup
+	$('#Lesson, .PageBorder').hide(); 
+	$('#zoomin').remove();
+	let txt;
+	//txt='<div id=zoomin class="img-frame-modal xFeedback"  style="display:block"><div class="Close"><span class="img-close">×</span></div><div class="Text ReadText"></div><div class="FeedbackButton">'+hyperButton(t(lang.ClosePopup),'#')+'</div></div>';
+	txt='<div id=zoomin class="img-frame-modal xFeedback xINFO" style="padding:10px;">'
+			+'<div class="Icon Info">&nbsp;</div>'
+			+'<span class="img-close">×</span>'
+			//+'<div class="Close"><a href="#">&nbsp;</a></div>'
+			//+'<div class="Title">'+(page.name)+' Image</div><br clear=all>'
+			+'<div class="Text ReadText"></div>'	
+			//+'<div class="FeedbackButton">'+hyperButton(t(lang.ClosePopup),'#')+'</div>'
+		+ '</div>';
+
+	//txt='<div id="zoominx" class="img-frame-modal"><span class="img-close">×</span><div class="ReadText"><div id="caption"></div></div></div>';
+	$(txt).prependTo('#Viewer');
+	$('.MediaPanel').clone(true,true).appendTo('#zoomin .ReadText');
+	$('#zoomin * .zoomin').remove();
+	$('#zoomin * .picture #picture').unbind('click').dblclick(lightbox_unzoom);
+	$('#zoomin * .picture #picture').css({width:'100%' });
+	$('#zoomin .FeedbackButton a, #zoomin .Close a,#zoomin .img-close').unbind('click').click(lightbox_unzoom)
+	$('#zoomin').show();
+	updateHotSpots();
+	return false;
+}
+function lightbox_unzoom()
+{
+	$('#zoomin').remove();
+	$('#Lesson, .PageBorder').show();
+	updateHotSpots();
+	scrollIntoView($('#picture'),0);
+	return false;
+}
+
+
+
+
+
+
+
+
+
+
 function doReset()
 {	// Reset the answer, just redraw the question.
 	renderPage();
+}
+function addNextButton(url,disabled)
+{
+	disabled=false;// leave it always on for now. 
+	$(".PageSpecificNav").append('<div class="container-fluid"><div class="row"><div class="text-center">\
+		<a href="'+url+'"><button class="CL-btn CL-next-btn shine icon-arrow-right '+(disabled==true?'btn-disabled':'')+'"><span class="next-caption">'+t(lang.NextPage)+'</span><span class="next-arrow"/ ></button></a>\
+	</div></div></div>');
 }
 
 function renderPage()
@@ -258,18 +340,35 @@ function renderPage()
 		pageTextDIV.text(textBuffer);
 		textBuffer="";
 	}
-	$(".PageName").text(page.name).append('<span class="Trace">(Type='+page.type+', Style='+page.style+')</span>');
-	if (amode==1) $(".PageName").append(' <a target="LessonText" href="' +LessonTextJump(page.name) + '">'+t(lang.FacultyView)+'</a>');
-
+	$(".PageName").text(page.name);//.append('<span class="Trace">(Type='+page.type+', Style='+page.style+')</span>');
+	if (amode==1)
+	{
+		//$(".PageName").append('<a target="LessonText" href="'+LessonTextJump(page.name) + '">'+t(lang.FacultyView)+'</a>');
+		$('.faculty-view').html('<a target="LessonText" href="'+LessonTextJump(page.name)+'" class="faculty-link">'+t(lang.FacultyView)+'</a>');
+	}
+	
+	// Page type specific layout
 	if (page.type=="Topics")
 	{
-		pageTextDIV.append('<div class="ReadText">'+page.text+'</div>');
-		$('.ReadText ul:first').append('<li><a href="jump://Lesson Completed">Complete the lesson</a></li>');
+		//TODO: slide out the TOC. //pageTextDIV.append('<div class="ReadText">'+page.text+'</div>');
+		$(".PageName").text('');
 	}
 	else
-	if (page.name==pageABOUT) About_layout();
+	if (page.name==pageABOUT)
+	{
+		pageTextDIV.append('<div class="ReadText">'+page.text+'</div>');
+		if (runid == null)
+		{
+			pageTextDIV.append('<div class="Feedback INFO"><div class="Text ReadText">'+thtml(lang.ScoreSaveOffNote)+'</div></div>');
+		}
+		//$(".PageSpecificNav").append(hyperButton(t(lang.TOC),'jump://'+pageTOC));
+		addNextButton('jump://Table of Contents');
+	}
 	else
-	if (page.name==pageLessonCompleted) LessonCompleted_layout();
+	if (page.name==pageLessonCompleted)
+	{
+		LessonCompleted_layout();
+	}
 	else
 	if (page.type==kPOPUP)
 	{	
@@ -281,7 +380,7 @@ function renderPage()
 		textWithMedia(pageTextDIV,page);
 		if (page.type == "Book Page")
 		{
-			$(".PageSpecificNav").append(iButton(t(lang.NextPage),'gonext'));
+			//$(".PageSpecificNav").append(iButton(t(lang.NextPage),'gonext'));
 		}
 		else
 		{
@@ -297,13 +396,8 @@ function renderPage()
 			else if (page.type=="Prioritize" && page.style=="PDrag")								DragBox_layout();
 			else if (page.type=="Prioritize" && page.style=="PMatch")							DrawLines_layout();
 			else if (page.type=="Slider")																	Sliders_layout();
-
-	
 			else if (page.type=="GAME" && page.style=="FLASHCARD")								FlashCards_layout();
 			else if (page.type=="GAME" && page.style=="HANGMAN")									Hangman_layout();
-	
-				
-			
 			else
 			{
 				pageInteractionDIV.prepend(t(lang.PageTypeUnsupported));
@@ -314,9 +408,9 @@ function renderPage()
 			if (doReset!=null) $("#reset").click(doReset);
 			if (doReveal!=null) $("#reveal").click(doReveal).hide();
 			if (doHelp!=null) $("#help").click(doHelp);
-			if (!page.nextPageDisabled) $(".PageSpecificNav").append(iButton(t(lang.NextPage),'gonext'));
-			
+
 		}
+		addNextButton('choice://gonext',page.nextPageDisabled);
 	}
 	
 	var unscored=(page.scorePoints == 0);
@@ -341,8 +435,8 @@ function renderPage()
 		$(this).next().toggle('fast');
 		return false;
 	  });
-	$(".togglervert").unbind('click').click(function() {
-		$(this).next().slideToggle('fast');
+	$(".description").unbind('click').click(function() {
+		$('.transcript').slideToggle('fast');//$(this).next()
 		return false;
 	});	
 	
@@ -381,231 +475,168 @@ function renderPage()
 		for (var g=0;g<globalToolbarLinks.length;g++)
 		{
 			var tb=globalToolbarLinks[g];
-			$('.LinkNavBar').append('<a href="'+tb.url+'">'+tb.text+'</a> ');
+			//Bitovi <button class="btn btn-default toolbar-button" type="button"><p>Defined Benefits Plan</p></button>
+			$('.LinkNavBar').append('<a class="btn btn-default toolbar-button" type="button" href="'+tb.url+'">'+tb.text+'</a> ');
+			//$('.LinkNavBar').append('<a href="'+tb.url+'">'+tb.text+'</a> ');
 			if (tb.fresh)
 			{	// newly seen toolbars are hilited for the user.
 				newButtonCount++;
-				$('.LinkNavBar>a:last-child').clearQueue().hide().delay(newButtonCount*1000).addClass('hilite').toggle(500).delay(500).queue(function(){$(this).removeClass('hilite')});
+				$('.LinkNavBar>a:last-child').clearQueue().hide().delay(newButtonCount*250).addClass('hilite').toggle(500).delay(500).queue(function(){$(this).removeClass('hilite')});
 				tb.fresh=false;
 			}
 		}
 		$('.LinkNavBar:first:not(:has(a))').hide();
 	}
 	patchLink();
+	stickyHeader();//bitovi
 	attachLessonLiveReportToPage();
 }
 
 // Handle custom layouts for different page types.
-function About_layout()
-{
-	pageTextDIV.append('<div class="ReadText">'+page.text+'</div>');
-	if (runid == null)
-	{
-		pageTextDIV.append('<div class="Feedback INFO"><div class="Text ReadText">'+thtml(lang.ScoreSaveOffNote)+'</div></div>');
-	}
-	$(".PageSpecificNav").append(hyperButton(t(lang.TOC),'jump://'+pageTOC));
-}
-
 
 jQuery.fn.outerhtml = function() {
 	return $( $('<div></div>').html(this.clone()) ).html();
 }
 function LessonCompleted_layout()
 {
+	//oldPageTypeWarning();
 //	pageTextDIV.append($('#ScoreReportCert').outerhtml());
 	pageTextDIV.append($('.ScoreReport').outerhtml());
+	//<span class="ScoreCorrect">correct</span> correct answers out of <span class="ScoreTotal">total</span> questions attempted (<span class="ScorePercent">percent</span>)</td>
 	//$(".PageSpecificNav").append(hyperButton(t(lang.TOC),'jump://'+pageTOC));
 	$(".PageText .ScoreReport .ScoreButtons").removeClass('hidestart');
 	ScoreScreenUpdate();
 }
 
-function Buttons_layout()
+
+
+function MulipleChoice_grade(id)
 {
-	var choicesText="";
-	var fbText="";
-	for (var c in page.captions)
+	page.attempts++;
+	$('#chooseBtnGrade'+id).fadeIn().css('display','inline-block');
+
+	var fb=page.feedbacks[id];
+	var text=fb.text + page.feedbackShared;
+	if (!(fb.next && text==""))
+	{	// if not a direct branch, show grade icon/color.
+		$("#grade"+id).attr("src",gradeIcon(fb.grade));
+		$("#"+id).addClass(fb.grade);
+	}
+	if (page.style=="Choose MultiButtons")
 	{
-		var fb=page.feedbacks[fbIndex(c,0)];
+		$("#grade"+fb.detail).attr("src",gradeIcon(fb.grade));
+	}
+		
+	scoreAndShowFeedback(fb.grade,
+		(page.style=="Choose List"? fb.detail : fb.button), 
+		(page.style=="Choose List"? page.details[fb.detail].letter : page.captions[fb.button]), 
+		(page.style=="Choose MultiButtons"? fb.detail : null),
+	 	"#fbText"+id, text,fb.next);
+	//trace(page.subq+','+fb.detail);
+	if (page.style=="Choose MultiButtons")
+	{
+		if (fb.detail >= page.subq)
+		{	// Reveal next subquestion
+			page.subq = fb.detail+1;
+			$('#subq'+page.subq).delay(1000).fadeIn('slow');
+		}
+	}
+}
+
+
+
+let gradeGlyphIconMap={
+	RIGHT:'glyphicon glyphicon-ok',
+	WRONG:'glyphicon glyphicon-remove',
+	MAYBE:'question-symbol',//'btn btn-default CL-choose-btn-maybe',
+	INFO:'info-symbol' //'btn btn-default CL-choose-btn'
+};
+
+function iButton2(caption,id,grade)
+{	// Button like 'Yes' which gets a grade icon and error message.
+	return '<div class="btn-group"><label id="'+id+'" for="grade'+id+'" class="btn btn-default CL-choose-btn-'+grade.toLowerCase()+' spacer"><input id="grade'+id+'" name="grade'+id+'" autocomplete="off" type="checkbox">'+caption+'</label><div class="hint"><span id="chooseBtnGrade'+id+'" class="'+gradeGlyphIconMap[grade]+' un-spacer" aria-live="polite" role="definition" aria-labelledby="correctAnswer'+id+'"><p id="correctAnswer'+id+'">'+lang[grade]+'</p></span></div></div>';
+}
+function Buttons_layout()
+{	// Page type: Just Buttons like Yes, No, Maybe.
+	let choicesText="";
+	let ll='';
+	let fbText="";
+	for (let c in page.captions)
+	{
+		let fb=page.feedbacks[fbIndex(c,0)];
 		fb.letter=page.captions[c];
-		choicesText += (lessonLive.isTeacher? '<div class=llButton>':'' )
-			+'<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
-			+iButton(fb.letter, fb.id)
-			+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>': '')
-			+(lessonLive.isTeacher? '</div>':'' )
-			+' ';
+		choicesText +=  iButton2(fb.letter, fb.id,fb.grade);
+		ll+= (lessonLive.isTeacher? '<div class=llButton>':'' )+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>': '')+(lessonLive.isTeacher? '</div>':'' )+' ';
 		fbText += '<div id=fbText'+fb.id+'></div>';
 	}
-	pageInteractionDIV.append('<div class="ButtonGroup">' + choicesText+ '</div>' +  fbText);
-	pageInteractionDIV.append('<div id=fbText></div>');
+	pageInteractionDIV.append('<div class="btn-group" data-toggle="buttons">' + choicesText+ '</div>\
+		<div class="gap"></div><div class="gap"></div><div class="gap">\
+		</div><div class=llButton>'+ll+'</div><div id=fbText>'+fbText+'</div>');
+	 $('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
 } 
 
+function MultiButtonList_layout()
+{	// Multiple buttons for multiple items (subquestions)
+	let html="";
+	for (let d in page.details)
+	{
+		let buttonList="";
+		let fbText="";
+		html += '<div class="subq" id="subq'+d+'">';
+		html += '<table width=100%><tr><td>';
+		//if (page.details.length>1) html += '<span class="BigLetter">'+(parseInt(d)+1)+"."+'</span>';
+		html += '</td><td>';
+		html += '<div class="ChoiceText ReadText">' + page.details[d].text +"</div>";
+		for (let c in page.captions)
+		{
+			let fb=page.feedbacks[fbIndex(c,d)];
+			fb.letter=page.captions[c];
+			buttonList += iButton2(fb.letter, fb.id,fb.grade)+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>':'');
+			fbText  += '<div id="fbText'+fb.id+'"></div>';
+		}
+		html+= '<div class="btn-group" data-toggle="buttons">'+buttonList+'</div>'+'<br clear=all><div class="gap"></div>'+ fbText+'</div></td></tr></table>';
+	}
+	pageInteractionDIV.append(html);
+	pageInteractionDIV.append('<div id=fbText></div>');
+	$('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
+
+	// Fade in subquestions
+	page.subq=0;
+	$('.subq').hide();
+	$('#subq0').fadeIn('slow');
+}
+
 function ButtonList_layout()
-{
+{	// Page type: Multiple choice style A,B,C,...
 	var detailsText="";
+
+	function iButton3(caption,id,grade,text)
+	{	// A button like 'A' or 'B' next to paragraph(s) of text with coloring and icon/error text appearing below the paragraph(s).
+		return '<div class="btn-group"><label id="'+id+'" for="grade'+id+'" class="btn btn-default CL-choose-btn-'+grade.toLowerCase()+'"><input id="grade'+id+'" name="grade'+id+'" autocomplete="off" type="checkbox">'+caption+'</label><div class="multi-btn-txt">'+text+'</div><div class="hint"><span id="chooseBtnGrade'+id+'" class="'+gradeGlyphIconMap[grade]+'" aria-live="polite" role="definition" aria-labelledby="correctAnswer'+id+'"><p id="correctAnswer'+id+'">'+lang[grade]+'</p></span></div></div><div class="gap"></div>';
+	}
 	for (var d in page.details)
 	{
 		var fb=page.feedbacks[fbIndex(0,d)];
 		fb.letter=page.details[d].letter;
-		if (vertical)
-			detailsText +=  
-				'<div class=MultipleChoice>'
-					+'<span  style="float:left; margin:5px;"><img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'  
-					+iButton(page.details[d].letter, fb.id )+'</span>'
-					+'<div class="ChoiceText">'+page.details[d].text+"</div>"
+		detailsText +=  iButton3(fb.letter, fb.id,fb.grade,page.details[d].text)
+					//+'<p class="multi-btn-txt">'+'The highlighting means that this is linked to some other page or Pop-up page in the lesson. Creating such pages and pop-up boxes can be very useful to deliver more information to students. Such links can be created in any of your questions or feedback. How these links, pages, and pop-up boxes are created is discussed elsewhere in this lesson. Click on the highlighted word to see where this link takes you'
 					+(lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>' : '')
-					+'<div id=fbText'+fb.id+'></div></div>';
-		else
-			detailsText += '<tr>'
-				+'<td nowrap width=200>'
-				+'<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
-				+iButton(page.details[d].letter, fb.id )+'</td>'
-				+'<td width=100%>'
-					+ '<div class="ChoiceText">'+page.details[d].text+"</div>"
-					+ '<div id=fbText'+fb.id+'></div>' 
-				+(lessonLive.isTeacher ? '<td nowrap ><div class="llChoice" id="llChoice'+fb.id+'"></div></td>' : '')
-				+ '</td>'+ '</tr>';
-
+					+'<div id=fbText'+fb.id+'></div>';
 	}
-	if (!vertical) detailsText = '<table  class="TableChoices">'+detailsText+'</table>';
-	pageInteractionDIV.append( detailsText );
+	pageInteractionDIV.append('<div class="btn-group-vertical" data-toggle="buttons">'+detailsText +'</div>');
 	pageInteractionDIV.append('<div id=fbText></div>');
+	 $('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
 }
 
-function MultiButtonList_layout()
+function iButton(caption,id)
+{	// choice option hyperlink styled as button
+	return '<a class="HyperButton" href="choice://'+id + '" id='+id+'><span class='+id+'>' + caption + '</span></a>';
+}
+
+function oldPageTypeWarning()
 {
-	var subQText="";
-	for (var d in page.details)
-	{
-		var detailsText="";
-		var fbText="";
-		if (vertical)
-		{
-			subQText +='<div class=Choice>'
-				+'<img id=grade'+d+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
-				+'<span class="BigLetter">'
-				+(parseInt(d)+1)+"."
-				+'</span><div class="ChoiceText ReadText">' + page.details[d].text +"</div></div>";
-			for (var c in page.captions)
-			{
-				var fb=page.feedbacks[fbIndex(c,d)];
-				fb.letter=page.captions[c];
-				detailsText += '<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
-						+iButton(fb.letter, fb.id)
-						+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>':'');
-				fbText  += '<div id="fbText'+fb.id+'"></div>';
-			}
-			subQText += '<div class="ButtonGroup">' + detailsText+ '</div>' + fbText;
-		}
-		else
-			{
-				subQText += '<tr><td>'
-					+'<span style="width:200px; white-space: nowrap"><img id=grade'+d+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
-					+'<span class="BigLetter">'
-					+(parseInt(d)+1)+"."
-					+'</span>'
-					+'</span></td><td width=100%>'
-					+'<div class="ChoiceText ReadText">' + page.details[d].text +"</div>";
-				for (var c in page.captions)
-				{
-					var fb=page.feedbacks[fbIndex(c,d)];
-					fb.letter=page.captions[c];
-					detailsText += '<img id=grade'+fb.id+' src='+jqPath+'img/grade-blank.gif width="20" height="21" class="GradeIcon">'
-							+iButton(fb.letter, fb.id)
-							+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>':'');
-					fbText  += '<div id="fbText'+fb.id+'"></div>';
-				}
-				subQText += '<div class="ButtonGroup" style="text-align: left;">' + detailsText+ '</div>' + fbText + "</td></tr>";
-			}
-	}
-	if (!vertical) subQText= '<table class="TableChoices">'+subQText+'</table>';
-	pageInteractionDIV.append(subQText);
-	pageInteractionDIV.append('<div id=fbText></div>');
-	if (MCREVEAL)
-	{
-		$('.TableChoices TR').hide();
-		page.subq=1;$('.TableChoices  TR:lt('+page.subq+')').fadeIn('slow');
-	}
+	pageInteractionDIV.append('<h3>This page type is not in Mobile UX format</h3>');
 }
-var CMIN=1;
-function CheckBoxRadioButtonColumnHeadings()
-{	// Generate columns/rows for checkbox and radio button types
-	// Column Headings
-	var table="";
-	var caps=page.captions.length;
-	if (caps> CMIN)
-		for (var c in page.captions)
-		{
-			table+="<tr>";
-			for (var c1=0;c1<c;c1++) table+="<td class=cbcol"+c1+"></td>" + '<td class=cbcolgap>&nbsp;</td>';;
-			table+='<td class="cbcol'+ c + ' CheckBoxHeading" colspan='+((caps-c + 1 )*2)+'>'+page.captions[c]+'</td>'
-			table+='</tr>';
-			table+="<tr>";
-				for (var c1=0;c1<=c;c1++) table+="<td class=cbcol"+c1+"></td>" + '<td class=cbcolgap></td>';;
-				table+='<td class="cbcolgap" colspan='+((caps-c + 1 )*2)+'></td>'
-			table+='</tr>';
-		}
-	
-	var radio=(page.style=="Radio Buttons");
-	
-	for (var d in page.details)
-	{
-		var row1="";
-		var row2="";
-		for (var c in page.captions)
-		{
-			var cbi =fbIndex(c,d);
-			var cbcol="cbcol"+ (caps>CMIN ? c : "");
-			row1+="<td class="+cbcol+">" 
-				 +'<div>'
-				 +'<img id=grade'+cbi+' src='+jqPath+'img/grade-blank.gif width=20 height=21 class=GradeIcon>'
-				 +'</td>'
-				 + '<td>&nbsp;</td>'; 
-			row2+="<td class="+cbcol+">"  
-					//+ page.checks[d][c]  
-					+ (radio ? 
-					'<input type=radio    name=rb'+d+'   id=rb'+cbi+' value='+c+' />' : 
-				 	'<input type=checkbox name=cb'+cbi+' id=cb'+cbi+' value='+c+' />' )
-				 +"</td>"
-				 + '<td>&nbsp;</td>'
-					;
-		}
-		table+="<tr>"+row1+ '<td>&nbsp;</td>' + "</tr><tr>"+row2
-		+ '<td class=cbcoltext>'
-					+'<div class="ChoiceText ReadText">' 
-					+page.details[d].text +'</div>'
-					+'<div id="fbText'+fbIndex(0,d)+'"></div>'
-					+'</td></tr>';
-	}
-	
-	return "<table class=TableCB>"+table+"</table>";
-}
-
-function RadioButtons_layout()
-{	// vertical layout: each subquestion followed by radio button list. 
-	var subQText=CheckBoxRadioButtonColumnHeadings();
-	pageInteractionDIV.append(subQText);
-	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
-	doGrade=RadioButtons_grade;
-	doReveal=RadioButtons_reveal;
-}
-function CheckBoxes_layout()
-{	// vertical layout: each subquestion followed by radio button list. 
-	var subQText=CheckBoxRadioButtonColumnHeadings();
-	pageInteractionDIV.append(subQText);
-	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
-	doGrade=CheckBoxes_grade;
-	doReveal=CheckBoxes_reveal;
-}
-function CheckBoxesSet_layout()
-{	// vertical layout: each subquestion followed by radio button list. 
-	page.captions=[""];//fake column
-	var subQText=CheckBoxRadioButtonColumnHeadings();
-	pageInteractionDIV.append(subQText);
-	$(".PageSpecificGrade").append(gradeButton() +  resetButton()  + revealButton()).append('<div id=fbText></div>');
-	doGrade=CheckBoxesSet_grade;
-	doReveal=CheckBoxesSet_reveal;
-}
-
 function ShortAnswer_layout()
 {
 	doGrade=ShortAnswer_grade;
@@ -620,110 +651,54 @@ function ShortAnswer_layout()
 	$('#textResponse').keypress(function(e){if(e.keyCode == 13) { doGrade()}});
 }
 
+
+function writeEssayOrSelectColumn(classCol,name,title,text)
+{
+	return ' <div class="'+classCol+' col-xs-12"><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></div>';
+}
+
 function TextSelect_layout()
 {
-	var iText= "<table class=EssayTable><tr>"
-		+writeEssayColumn("ANSWER","",page.initialText,100)
-		+"</tr></table>";
+	let iText= '<div class=EssayTable><div class="row">'
+		+writeEssayOrSelectColumn('col-sm-12',"ANSWER","",page.initialText)
+		+"</div></div>";
 	pageInteractionDIV.append(iText);
 	$(".PageSpecificGrade").append(gradeButton()+revealButton()).append('<div id=fbText></div>');
 	doGrade=TextSelect_grade;
 	doReveal=TextSelect_reveal;
 }
 
-
-function writeEssayColumn(name,title,text,width)
-{
-	//return '<td width='+width+'%><b>'+title+"</b><BR><textarea class=EssayBox wrap=soft id="+name+" name="+name+" rows=12>"+text+"</textarea></td>";
-	return '<td width='+width+'%><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></td>';
-	// disabled=true to make columns read-only.
-}
-
-
 function TextEssay_layout()
-{
+{	// Essays in 3 forms: optional Initial text for user to examine, user's editable Answer field, and optional Final text for user to compare with.
+	let lastAnswer= (page.scores[0] ? page.scores[0].text : "");// restore user's last answer
 	page.TextColumns = 1;
 	if (page.initialText != "") page.TextColumns++;
 	if (page.correctText != "") page.TextColumns++;
-	var width=100/page.TextColumns;
-	var iText= "<table class=EssayTable><tr>";//width=100% align=center
+	let classCol='';
+	if (page.TextColumns==1)
+		classCol='col-sm-12';
+	else if (page.TextColumns==2)
+		classCol='col-sm-6';
+	else
+		classCol='col-sm-4';
+	let iText= '<div class=EssayTable><div class="row">';
 	if (page.initialText!="")
-		iText+=writeEssayColumn("INITIAL","",page.initialText,width);
-	var lastAnswer= (page.scores[0] ? page.scores[0].text : "");
-	iText+=writeEssayColumn("ANSWER","",lastAnswer,width);
+		iText+=writeEssayOrSelectColumn(classCol,"INITIAL","",page.initialText);
+	iText+=writeEssayOrSelectColumn(classCol,"ANSWER","",lastAnswer);
 	if (page.correctText!="")
-		iText+=writeEssayColumn("CORRECT",t(lang.ModelAnswerWillAppear),"",width);
-	iText+="</tr></table>";
+		iText+=writeEssayOrSelectColumn(classCol,"CORRECT",t(lang.ModelAnswerWillAppear),"");
+	iText+="</div></div>";
 	$(".PageSpecificGrade").append(helpTextWrapper(t(lang.HelpEssay))).append(reviewButton()).append('<div id=fbText></div>');
 	pageInteractionDIV.append(iText);
 	doGrade=TextEssay_grade;
 }
 var zIndex; // z-order drag items above background
 
-function DragBox_layout()
-{
-	zIndex=999;
-	var cats="";
-	var items="";
-	// Layout categories and items in a grid	
-	cats+='<table width=100% class="DragTable noborder"><tr>';
-	for (var c=0;c<page.categories.length;c++)
-	{
-		cats += "<th align=center width=" +( 100/page.categories.length)+"%" + ">"+  page.categories[c]+ "</th>";
-	}
-	cats += "</tr><tr>";
-	for (var c=0;c<page.categories.length;c++)
-	{
-		cats +=  '<td>' + '<ul id=sortable'+c+' class="sortable droptrue">' + "</ul>" + '</td>';
-	}
-	cats+="</tr><table>";
-	
-	for (var i=0;i<page.items.length;i++)
-	{
-		items+='<li id=item'+i+' itemid='+i+' class="ui-state-default dragItem dragCollapse"><a href="#" class="dragExpander">[+]</a><span class=dragItemText>'+page.items[i].text+'</span></li>';
-	}
-	pageInteractionDIV.append(cats).append('<br clear="both" />');
-	$("#sortable0").append(items);
-	if (page.shuffle) $("#sortable0").shuffle();
-	$('.dragItemText').each(function(){
-		//TODO hide the expand option if not needed? 
-		if ($(this).height()<=$(this).parent().height())
-			$(this).parent().find('.dragExpander').hide();
-	 });
-	$("ul.droptrue").sortable({
-		connectWith: 'ul',
-		xforcePlaceholderSize: true
-	});
-	$("#sortable0, #sortable1, #sortable2, #sortable3").disableSelection();
-	var maxheight=$('#sortable0').height();
-	$('.sortable').css('min-height',maxheight);
-	
-	$('a.dragExpander').bind('click', function( )
-	{
-		var targetContent = $(this).parent();
-		if ($(this).text()=="[-]" )
-		{	// normal size
-			targetContent.removeClass('dragCollapse dragExpanded').addClass('dragCollapse');
-			$(this).html('[+]');
-		} else
-		{	// expanded for full reading
-			targetContent.removeClass('dragCollapse dragExpanded').addClass('dragExpanded').css('z-index',++zIndex);
-			$(this).html('[-]');
-		}
-		return false;
-	})
-	$("ul.droptrue li").addTouch();
-
-	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()  + helpButton() +  '<div id=fbText></div>');
-	doGrade=DragBox_grade;
-	doReveal = DragBox_reveal;
-	doHelp = DragBox_help;
-}
-
 function DrawLines_layout()
 {	// 11/23/10 Layout categories on right, items to move on left.
 	// TODO This should be drawing lines between item and category.
 	// For now, hacked to emulate DragBox behavior, grading is identical anyway.
+	//oldPageTypeWarning();
 	var cats="";
 	var items="";
 	var cat0='<ul id=sortable'+0+' class="drawable droptrue">' +  page.categories[0]+ "</ul>";
@@ -777,6 +752,7 @@ function DrawLines_layout()
 
 function Sliders_layout()
 {
+	//oldPageTypeWarning();
 	pageInteractionDIV.append(Sliders_form())
 	$(".PageSpecificGrade").append(gradeButton())
 		//+revealButton());
@@ -876,62 +852,6 @@ function Hangman_layout()
 	page.scorePoints="";
 }
 
-function RadioButtons_grade(gaveup)
-{
-	var isRight=true;
-	for (var d in page.details)
-	{
-		for (var c in page.captions)
-		{
-			var cdi =fbIndex(c,d);
-			$('#grade'+cdi).attr("src",gradeIcon());
-		}
-		
-		var grade;
-		var col=$('input[name=rb'+d+']:checked').val();
-		var cdi =fbIndex(col,d);
-		
-		
-		
-		if (page.checks[d][col] == false || col==null)
-		{
-			isRight=false;
-			grade=WRONG;
-			$('#grade'+cdi).attr("src",gradeIcon(WRONG));
-		}
-		else
-		{
-			grade=RIGHT;
-			$('#grade'+cdi).attr("src",gradeIcon(RIGHT));
-		}
-	}
-	var answer="";
-	page.attempts ++;
-	$("#reveal").fadeIn();
-	if (isRight)
-		scoreAndShowFeedback(RIGHT,1, (gaveup==true ? lang.GaveUpHeading : '') + answer,null,"#fbText", page.rightFeedback,page.rightDest);
-	else
-	if (page.attempts<=page.hints.length)
-		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.hints[page.attempts-1],null);
-	else
-		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.wrongFeedback,page.wrongDest);
-	return false;
-}
-function RadioButtons_reveal()
-{
-	for (var d in page.details)
-	{
-		for (var c in page.captions)
-		{
-			var cdi =fbIndex(c,d);
-			$('input[id=rb'+cdi+']').attr('checked',page.checks[d][c]==true);
-			$('#grade'+cdi).attr("src",gradeIcon());
-		}
-	}
-	RadioButtons_grade(true);
-	return false;
-}
-
 function ShortAnswer_grade()
 {
 	//Answers compared in lowercase.
@@ -1002,21 +922,25 @@ function ShortAnswer_grade()
 	// If user didn't match, the ID will be 0. Otherwise will be >=1.
 	page.attempts ++;
 	if (resp==-1) 
-	{	// A match wasn't found
+	{	// A match wasn't found, show any hints.
 		if (page.attempts<=page.hints.length)
+		{
 			scoreAndShowFeedback(WRONG,0,originalanswer,null,"#fbText", page.hints[page.attempts-1],null);
+		}
 		else
 		{
 			scoreAndShowFeedback(WRONG,0,originalanswer,null,"#fbText", page.wrongFeedback,page.wrongDest);
 		}
 	}
 	else
+	{	// Display grade/feedback for given match.
 		scoreAndShowFeedback(page.textMatches[resp].grade,(resp+1),originalanswer,null,"#fbText", page.textMatches[resp].feedback,page.textMatches[resp].dest);
+	}
 	return false;
 }
 
 function ShortAnswer_reveal()
-{
+{	// Display all the answers that are matched. 
 	if (page.attempts==0) {tryitonce();return false;}
 	var txt="";
 	for (r=0;r<page.textMatches.length;r++)
@@ -1056,49 +980,6 @@ function ShortAnswer_reveal()
 	return false;
 }
 
-
-
-function CheckBoxesSet_grade(gaveup)
-{
-	var isRight=true;
-	var c=0;
-	for (var d in page.details)
-	{
-		var cdi =fbIndex(c,d);
-		var checked = $('#cb'+cdi).is(':checked');
-		var shouldCheck  = page.feedbacks[fbIndex(0,d)].grade==RIGHT;
-		var grade;
-		//trace(checked,shouldCheck, page.feedbacks[fbIndex(0,d)].grade, page.feedbacks[fbIndex(1,d)].grade);
-		if (checked != shouldCheck)
-		{
-			isRight=false;
-			grade=WRONG;
-		}
-		else
-		{
-			grade=RIGHT;
-		}
-		feedbackText = page.feedbacks[fbIndex(checked ? 0 : 1,d)].text;
-			
-		$('#grade'+cdi).attr("src",gradeIcon(grade));
-		$('#fbText'+cdi).empty().append('<div class="Feedback ' + grade + '">'
-			+'<div class="Text ReadText">'+feedbackText
-			+'</div></div>');
-			
-	}
-	var answer="";
-	page.attempts ++;
-	$("#reveal").fadeIn();
-	if (isRight)
-		scoreAndShowFeedback(RIGHT,1,(gaveup==true ? lang.GaveUpHeading : '') + answer,null,"#fbText", page.rightFeedback,page.rightDest);
-	else
-	if (page.attempts<=page.hints.length)
-		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.hints[page.attempts-1],null);
-	else
-		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.wrongFeedback,page.wrongDest);
-	return false;
-}
-
 function CheckBoxesSet_reveal()
 {
 	for (var d in page.details)
@@ -1114,49 +995,6 @@ function CheckBoxesSet_reveal()
 }
 
 
-function CheckBoxes_grade(gaveup)
-{
-	var isRight=true;
-	for (var d in page.details)
-		for (var c in page.captions)
-		{
-			var cdi =fbIndex(c,d);
-			var checked = $('#cb'+cdi).is(':checked');
-			if (checked != page.checks[d][c])
-			{
-				isRight=false;
-				$('#grade'+cdi).attr("src",gradeIcon(WRONG));
-			}
-			else
-				$('#grade'+cdi).attr("src",gradeIcon(RIGHT));
-		}
-	var answer="";
-	page.attempts ++;
-	$("#reveal").fadeIn();
-	if (isRight)
-		scoreAndShowFeedback(RIGHT,1,(gaveup==true ? lang.GaveUpHeading : '') + answer,null,"#fbText", page.rightFeedback,page.rightDest);
-	else
-	if (page.attempts<=page.hints.length)
-		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.hints[page.attempts-1],null);
-	else
-		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.wrongFeedback,page.wrongDest);
-	return false;
-}
-
-function CheckBoxes_reveal()
-{
-	for (var d in page.details)
-	{
-		for (var c in page.captions)
-		{
-			var cdi =fbIndex(c,d);
-			$('input[id=cb'+cdi+']').attr('checked',page.checks[d][c]==true);
-			$('#grade'+cdi).attr("src",gradeIcon());
-		}
-	}
-	CheckBoxes_grade(true);
-	return false;
-}
 
 function Sliders_grade()
 {
@@ -1222,74 +1060,15 @@ function Sliders_reveal()
 		else
 			cap="<th>"+page.sliders[0]+"</th>"
 		txt = ("<table border><tr>"+cap+"<th>Grade</th><th>Feedback</th></tr>"+txt+"</table>");
-		scoreAndShowFeedback(INFO,0,"",null,"#fbText",txt,'');	
+		scoreAndShowFeedback(INFO,0,"Possible Values",null,"#fbText",txt,'');	
 	}
 	else
 	{
-		scoreAndShowFeedback(INFO,0,"",null,"#fbText",page.feedbackShared,'');	
+		scoreAndShowFeedback(INFO,0,"Information",null,"#fbText",page.feedbackShared,'');	
 	}
+	return true;
 }
 
-
-function DragBox_grade()
-{
-	var isRight=true;
-	for (var c=0;c<page.categories.length;c++)
-	{
-		var result = $('#sortable'+c).sortable('toArray');
-		var lastidx=-1;//for ordering.
-		for (var i=0;i<result.length;i++)
-		{
-			var idx=parseInt($('#'+result[i]).attr('itemid'));
-			var itemRight;
-			if (page.items[idx].category==c)
-				if (page.ordered && c>0)
-				{
-					if (idx>lastidx)
-						itemRight=true;
-					else
-						itemRight=false;
-					lastidx=idx;
-				}
-				else
-					itemRight = true
-			else
-				itemRight=false;
-			//trace("category "+c+", slot "+i+" has item "+idx+"="+itemRight);
-			$('#item'+idx).removeClass('dragRIGHT dragWRONG').addClass('drag'+ (itemRight?RIGHT:WRONG));
-			if (!itemRight) isRight=false;
-		}
-	}
-	
-	var answer="";//TODO save drag positions as an answer.
-	page.attempts ++;
-	$("#reveal").fadeIn();
-	if (isRight)
-		scoreAndShowFeedback(RIGHT,0,answer,null,"#fbText",page.rightFeedback,page.rightDest);	
-	else
-	if (page.attempts<=page.hints.length)
-		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.hints[page.attempts-1],null);
-	else
-		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.wrongFeedback,page.wrongDest);
-	
-	return false;
-}
-function DragBox_help()
-{
-	embedHelpHTML(this,lang.HelpStudentDragDrop + (page.ordered ? lang.HelpStudentDragDropSort : ''));
-}
-
-function DragBox_reveal()
-{
-	if (page.attempts==0) {tryitonce();return false;}
-	for (var i=0;i<page.items.length;i++)
-	{
-		$('#item'+i).removeClass('dragRIGHT dragWRONG').addClass('dragRIGHT');
-		$('#sortable'+page.items[i].category).append($('#item'+i));
-	}
-	scoreAndShowFeedback(RIGHT,0,lang.GaveUpHeading,null,"#fbText",page.rightFeedback,page.rightDest);	
-	return false;
-}
 
 
 function TextEssay_grade()
@@ -1354,69 +1133,702 @@ function TextSelect_reveal()
 }
 
 
-function MulipleChoice_grade(id)
-{
-	page.attempts++;
-	var fb=page.feedbacks[id];
-	var text=fb.text + page.feedbackShared;
-	if (!(fb.next && text==""))
-	{	// if not a direct branch, show grade icon/color.
-		$("#grade"+id).attr("src",gradeIcon(fb.grade));
-		$("#"+id).addClass(fb.grade);
-	}
-	if (page.style=="Choose MultiButtons")
-		$("#grade"+fb.detail).attr("src",gradeIcon(fb.grade));
-		
-	scoreAndShowFeedback(fb.grade,
-		(page.style=="Choose List"? fb.detail : fb.button), 
-		(page.style=="Choose List"? page.details[fb.detail].letter : page.captions[fb.button]), 
-		(page.style=="Choose MultiButtons"? fb.detail : null),
-	 	"#fbText"+id, text,fb.next);
-	if (MCREVEAL && (page.style=="Choose MultiButtons" && (fb.detail==page.subq-1)))
+
+
+function nthLetter(n){ return "ABCDEFG".charAt(n)+".";}
+
+var CMIN=1;
+
+function addCBHint(cdi,grade)
+{	// Attach right/wrong icon to each check box.
+	if(grade==null)
 	{
-		page.subq++;
-		$('.TableChoices  TR:lt('+page.subq+')').delay(1000).fadeIn('slow');
+		$('#cdi'+cdi+' .hint').hide();
+	}
+	else
+	{
+		let classCB={RIGHT:'checkmark-success',WRONG:'checkmark-wrong'};
+		$('#cdi'+cdi+' .hint').html('<span class="'+gradeGlyphIconMap[grade]+'" aria-live="polite" role="definition"><p>'+lang[grade]+'</p></span>');
+		$('#cdi'+cdi+' .checkmark').removeClass('checkmark-selected').addClass(classCB[grade]);
+		$('#cdi'+cdi+' .hint span').fadeIn().css('display','inline-block');
 	}
 }
 
 
-
-
-
-
-
-
-
-
-function lightbox(url)
-{	// clone existing image/hotspots into full width popup
-	$('.PageBorder').hide(); 
-	txt='<div id=zoomin class="Feedback INFO">'
-			+'<div class="Icon Info">&nbsp;</div>'
-			+'<div class="Close"><a href="#">&nbsp;</a></div>'
-			+'<div class="Title">'+(page.name)+' Image</div><br clear=all>'
-			+'<div class="Text ReadText">' 
-			+'</div>'	
-			+'<div class="FeedbackButton">'+hyperButton(t(lang.ClosePopup),'#')+'</div>'
-		+ '</div>';
-	$(txt).prependTo('.NavigationPage');
-	$('.MediaPanel').clone(true,true).appendTo('#zoomin .ReadText');
-	$('#zoomin * .zoomin').remove();
-	$('#zoomin * .picture #picture').unbind('click').dblclick(lightbox_unzoom);
-	$('#zoomin * .picture #picture').css({width:'100%'
-													 //,height:'100%'
-													 });
-	$('#zoomin .FeedbackButton a, #zoomin .Close a').unbind('click').click(lightbox_unzoom)
-	updateHotSpots();
-	return false;
+function addRBHint(cdi,grade)
+{	// Attach right/wrong icon to each radio button.
+	if(grade==null)
+	{
+		$('#cdi'+cdi+' .hint').fadeOut();//('display','block');
+	}
+	else
+	{
+		let classRB={RIGHT:'checkmark-rad-success',WRONG:'checkmark-rad-error'};
+		$('#cdi'+cdi+' .hint').html('<span class="'+gradeGlyphIconMap[grade]+'" aria-live="polite" role="definition"><p>'+lang[grade]+'</p></span>');
+		$('#cdi'+cdi+' .checkmark').removeClass('checkmark-rad-selected').addClass(classRB[grade]);
+		$('#cdi'+cdi+' .hint span').fadeIn().css('display','inline-block');
+	}
 }
-function lightbox_unzoom()
+function RadioButtons_grade(gaveup)
 {
-	$('#zoomin').remove();
-	$('.PageBorder').show();
-	updateHotSpots();
-	scrollIntoView($('#picture'),0);
+	let isRight=true;
+	let caps=page.captions.length;
+
+	if (caps == CMIN)
+	{	// 1 column, standard layout, only one correct answer/item
+		isRight=false;
+		let col=$('input[name=rb0]:checked').val();
+		for (let d in page.details)
+		{
+			let grade;
+			let cdi =fbIndex(0,d);
+			if (col==d)
+			{
+				if (page.checks[d][0])
+				{
+					isRight=true;
+					addRBHint(cdi,RIGHT);
+				}
+				else
+				{
+					addRBHint(cdi,WRONG);
+				}
+			}
+		}
+	}
+	else
+	{	// Multiple columns, each radio for each item must be correctly set for credit. 
+		isRight=true;
+		for (let d in page.details)
+		{
+			
+			//for (let c in page.captions)
+			//{
+				//let cdi =fbIndex(c,d);
+				//addRBHint(cdi,null);
+			//}
+			let col=$('input[name=rb'+d+']:checked').val();
+			if (!col)
+			{
+				isRight=false;
+			}
+			else
+			{
+				for (let c in page.captions)
+				{
+					let cdi =fbIndex(c,d);
+					if (col==c)
+					{
+						if (page.checks[d][col])
+						{
+							addRBHint(cdi,RIGHT);
+						}
+						else
+						{
+							isRight=false;
+							addRBHint(cdi,WRONG);
+						}
+					}
+					else
+					{
+						//addRBHint(cdi,null);
+					}
+				}
+			}
+		}
+	}
+	return cbrbFeedback(gaveup,isRight);
+}
+function cbrbFeedback(gaveup,isRight)
+{	// Feedback for radio or checkboxes.
+	page.attempts ++;
+	$("#reveal").fadeIn();
+	if (isRight)
+		scoreAndShowFeedback(RIGHT,1,(gaveup==true ? lang.GaveUpHeading : lang.RIGHT) ,null,"#fbText", page.rightFeedback,page.rightDest);
+	else
+	if (page.attempts<=page.hints.length)
+		scoreAndShowFeedback(WRONG,0,lang.Hint,null,"#fbText", page.hints[page.attempts-1],null);
+	else
+		scoreAndShowFeedback(WRONG,0,lang.WRONG,null,"#fbText", page.wrongFeedback,page.wrongDest);
 	return false;
 }
 
-//
+function RadioButtons_reveal()
+{
+	for (let d in page.details)
+	{
+		for (let c in page.captions)
+		{
+			let cdi =fbIndex(c,d);
+			$('input[id=rb'+cdi+']').attr('checked',page.checks[d][c]==true);
+		}
+	}
+	RadioButtons_grade(true);
+	return false;
+}
+
+
+function CheckBoxesSet_grade(gaveup)
+{	// Each check box item gets a custom response for checked and unchecked plus a final right/wrong response for the entire set of checkboxes.
+	let isRight=true;
+	let c=0;
+	for (let d in page.details)
+	{
+		let cdi =fbIndex(c,d);
+		let checked = $('#cb'+cdi).is(':checked');
+		let shouldCheck  = page.feedbacks[fbIndex(0,d)].grade==RIGHT;
+		let grade;
+		if (checked != shouldCheck)
+		{
+			isRight=false;
+			grade=WRONG;
+		}
+		else
+		{
+			grade=RIGHT;
+		}
+		addCBHint(cdi,grade);
+		feedbackText = page.feedbacks[fbIndex(checked ? 0 : 1,d)].text;
+		showFeedback(grade,'-','#fbText'+cdi, feedbackText,'')
+			
+	}
+	return cbrbFeedback(gaveup,isRight);
+}
+
+function CheckBoxes_grade(gaveup)
+{	// If box is checked flag as right/wrong. If box unchecked flag as wrong only if wrong to avoid clutter.
+	let isRight=true;
+	for (let d in page.details)
+	{
+		for (let c in page.captions)
+		{
+			let cdi =fbIndex(c,d);
+			let checked = $('#cb'+cdi).is(':checked');
+			if (checked != page.checks[d][c])
+			{
+				isRight=false;
+				addCBHint(cdi,WRONG);
+			}
+			else
+			{
+				if (checked)
+				{
+					addCBHint(cdi,RIGHT);
+				}
+				else
+				{
+					addCBHint(cdi,null);
+				}
+			}
+		}
+	}
+	return cbrbFeedback(gaveup,isRight);
+}
+
+function CheckBoxes_reveal()
+{
+	for (var d in page.details)
+	{
+		for (var c in page.captions)
+		{
+			var cdi =fbIndex(c,d);
+			$('input[id=cb'+cdi+']').attr('checked',page.checks[d][c]==true);
+		}
+	}
+	CheckBoxes_grade(true);
+	return false;
+}
+
+function RadioButtons_layout()
+{	// vertical layout: each subquestion followed by radio button list. 
+	let subQText=CheckBoxRadioButtonColumnHeadings();
+	pageInteractionDIV.append(subQText);
+	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
+	doGrade=RadioButtons_grade;
+	doReveal=RadioButtons_reveal;
+}
+
+function CheckBoxes_layout()
+{	// vertical layout: each subquestion followed by radio button list. 
+	let subQText=CheckBoxRadioButtonColumnHeadings();
+	pageInteractionDIV.append(subQText);
+	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
+	doGrade=CheckBoxes_grade;
+	doReveal=CheckBoxes_reveal;
+}
+function CheckBoxesSet_layout()
+{	// vertical layout: each subquestion followed by radio button list.
+	page.captions=[""];//fake column
+	let subQText=CheckBoxRadioButtonColumnHeadings();
+	pageInteractionDIV.append(subQText);
+	$(".PageSpecificGrade").append(gradeButton() +  resetButton()  + revealButton()).append('<div id=fbText></div>');
+	doGrade=CheckBoxesSet_grade;
+	doReveal=CheckBoxesSet_reveal;
+}
+
+
+
+
+
+
+
+
+function CheckBoxRadioButtonColumnHeadings()
+{	// Generate columns/rows for checkbox and radio button types
+	// 1 column yields standard looking cb/rb.
+	// >1 column yields each item followed by cb/rb labeled A., B., C., etc. with key above.
+	
+	// Column Headings
+	let html="";
+	let radio=(page.style=="Radio Buttons");
+	let caps=page.captions.length;
+	//trace('CheckBoxRadioButtonColumnHeadings '+radio+' '+caps);
+	if (caps == CMIN)
+	{	// 1 column, standard layout
+		for (let d in page.details)
+		{
+			let c=0;
+			let cdi =fbIndex(c,d);
+			let cbcol="cbcol";
+			html += '<div class="btn-group" id="cdi'+cdi+'">'+ (radio ?
+					'<label class="btn radio-container">   <input type=radio    name=rb'+c+'   id=rb'+cdi+' value='+d+' /><span class="checkmark checkmark-rad-selected"></span></label>' : 
+					'<label class="btn checkbox-container"><input type=checkbox name=cb'+cdi+' id=cb'+cdi+' value='+d+' /><span class="checkmark checkmark-selected"></span></label>' )
+				
+          +page.details[d].text
+          +'<div class="hint"></div>\
+        </div>\
+		  <div id="fbText'+fbIndex(0,d)+'"></div>'
+		}
+	}
+	else
+	{	// Need captions for each rb/cb.
+		//for (let c=0;c<page.captions.length;c++)
+		//{
+		//	html+= '<div>'+(c+1) +'&nbsp;' + page.captions[c]+'</div>';
+		//}
+		for (let d in page.details)
+		{
+			html+='<div class="ChoiceText ReadText"><p>'+page.details[d].text +'</p></div>';
+			for (let c in page.captions)
+			{
+				let cdi =fbIndex(c,d);
+				html+='<div class="btn-group" id="cdi'+cdi+'">';
+				let cbcol="cbcol"+ c;
+				let caption=/*nthLetter(c)+' ' + */page.captions[c];
+				html +=  (radio ?
+					'<label class="btn radio-container"><input    type=radio    name=rb'+d+'   id=rb'+cdi+' value='+c+' /><span class="checkmark checkmark-rad-selected"></span>'+caption+'</label>' : 
+					'<label class="btn checkbox-container"><input type=checkbox name=cb'+cdi+' id=cb'+cdi+' value='+c+' /><span class="checkmark checkmark-selected"></span>'+caption+'</label>' )
+				+'<br clear=all><div class="hint"></div>';
+				html+='</div>';
+			}
+			html+='<div id="fbText'+fbIndex(0,d)+'"></div>	<div class="gap"></div>';
+		}
+	}
+	return '<div class="row"><div class="col-sm-12">'+html+'</div></div>';
+}
+
+
+/**
+ * Shuffles array in place. ES6 version
+ * @param {Array} a items An array containing the items.
+ */
+function shuffle(a) {//https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
+    for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+}
+
+function convertDragBox2RB()
+{	// 6/29/18 Convert drag boxes into checkboxes
+	let numCategories = page.categories.length;
+	let convert={captions:[],details:[],checks:emptyMatrix( page.items.length, numCategories)};
+	for (let c=1;c<numCategories;c++)
+	{
+		convert.captions.push(page.categories[c]);
+	}
+	let addHerring=false;
+	let shuffledItems=shuffle(page.items);
+	for (let i=0;i<shuffledItems.length;i++)
+	{
+		convert.details.push( {text: shuffledItems[i].text});
+		if (shuffledItems[i].category ==0)
+		{
+			addHerring=true;
+		}
+		convert.checks[i][(shuffledItems[i].category -1  + numCategories )% numCategories]=true;// move the n/a to end of choices.
+	}
+	if (addHerring)
+	{
+		convert.captions.push(page.categories[0]);
+	}
+	page.captions=convert.captions;
+	page.details=convert.details;
+	page.checks=convert.checks;
+	page.type="Multiple Choice";
+	page.style="Radio Buttons";
+	RadioButtons_layout();
+}
+function DragBoxOld_help()
+{
+	embedHelpHTML(this,lang.HelpStudentDragDrop + (page.ordered ? lang.HelpStudentDragDropSort : ''));
+}
+function DragBox_layout()
+{
+	if (page.categories.length>2 && page.ordered)
+	{	// Deprecated! Multiple categories with ordering uses the old format.
+		DragBoxOld_layout();
+		return;
+	}
+	if (!page.ordered)
+	{	// Convert 1 or more categories drag/drop into a radio button style, the new replacement.
+		convertDragBox2RB();
+		return;
+	}
+	// We now have one drag box column to sort so use the new Ordering interaction.
+	// Stuff items into boxes that are both sortable and deletable.
+	let items='';
+	
+	page.herrings=0;// if herrings exists, allow the 'remove' option.
+	for (let i=0;i<page.items.length;i++)
+	{
+		if (page.items[i].category==0) page.herrings++;
+	}
+	for (let i=0;i<page.items.length;i++)
+	{
+		items+='<li id=item'+i+' itemid='+i+' class="ui-sortable-handle"><div class="horizontal" aria-label="draggable box"><div class="vertical"><div class="dots-blue" aria-label="blue texture dots that show that this box is draggable"></div></div><div class="row drag-body"><div><p>'
+	//	+('<b>Cheat'+(page.items[i].category==0?"H":(i+1))+"</b> ")
+		+page.items[i].text+'</p></div>'
+		+(page.herrings?'<div class="row remove"><span class="remove-icon"></span><p class="remove-txt">Remove from list</p></div><div class="row undo"><span class="undo-icon"></span><p class="undo-txt">Undo remove</p></div></div>':'')+'</div></li>';
+//	TODO add right/wrong icons and change grip color
+// <div class="hint right"><span class="glyphicon glyphicon-ok drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Right"><p>Right</p></span></div>\
+//	<iv class="hint wrong"><span class="glyphicon glyphicon-remove drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Wrong"><p>Wrong</p><p></p></span>\
+	}
+	pageInteractionDIV.append('<div class="row"><div class="col-sm-12 drag-content well"><ul id="sortable" class="list-unstyled ui-sortable">'+items+'</ul></div></div>');
+	$('#sortable .undo').hide();
+	$("#sortable").shuffle();
+	
+	$('#sortable .remove p').click(function(){
+		$(this).parent().hide();
+		$(this).parent().parent().find('.undo').show();
+		$(this).parent().parent().parent().addClass('removed')});
+	$('#sortable .undo p').click(function(){
+		$(this).parent().hide();
+		$(this).parent().parent().find('.remove').show();
+		$(this).parent().parent().parent().removeClass('removed')});
+	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()  +  '<div id=fbText></div>');
+	$("#sortable").shuffle();
+	doGrade=DragBox_grade;
+	doReveal = DragBox_reveal;
+	//doHelp = DragBoxOld_help;
+	
+	$("#sortable").sortable({
+		//xforcePlaceholderSize: true
+		forcePlaceholderSize: true
+	});
+	
+/*
+	// 8/2018 To correct drag drop problems on mobile jquery.ui.touch-punch.min.js is required.
+  //Drag and Drop
+  $(function () {
+      // Used to signal when a user has began dragging an item
+      var touchDown = false
+      // Used to prevent automatic scrolling when a user selects an item
+      // which is partially above or below the screen
+      var scroll = "normal"
+      $("#sortable").sortable({
+          forcePlaceholderSize: true,
+          tolerance: "pointer",
+          axis: "y",
+          cursor: "move",
+          scroll: true,
+          sort: function(e) {
+
+              // The selected item
+              const selected = $(e.target).children('.ui-sortable-helper')[0]
+              // The top of the selected item
+              selectedTop = parseFloat(selected.style.top.slice(0, -2))
+              // The bottom of the selected item
+              selectedBottom = selectedTop + $(selected).height()
+              // The height of the selected item
+              const selectedHeight = $(selected).height()
+
+              // The top of the sortable list
+              const sortableTop = $(e.target).offset().top
+              // The bottom of the sortable list
+              const sortableBottom = sortableTop + $(e.target).height()
+
+              // The top of the window
+              const windowTop = $(window).scrollTop()
+              // The bottom of the window
+              const windowBottom = windowTop + window.innerHeight
+
+              // If the top of the selected item is less than that
+              // of the list, and the top of the screen is less than
+              // that of the list do not let the user scroll any higher
+              if (selectedTop < sortableTop && windowTop < sortableTop) {
+                  $(selected).offset({top: sortableTop})
+                  return
+              // If the bottom of the selected item is greater than that
+              // of the list, and the bottom of the screen is greater than
+              // that of the list do not let the user scroll any lower
+              } else if (selectedBottom > sortableBottom && (windowBottom > sortableBottom)) {
+                  $(selected).offset({top: (sortableBottom - selectedHeight)})
+              }
+
+              // If the user has just touched down...
+              if (touchDown) {
+                  // If the top of the window is greater than that of the selected item
+                  if (windowTop > selectedTop) {
+                      console.log("Top")
+                      scroll = "top"
+                  // If the bottom of the window is less than that of the selected bottom
+                  } else if (windowBottom < selectedBottom) {
+                      scroll = "bottom"
+                  } else {
+                      scroll = "normal"
+                  }
+                  touchDown = false
+              }
+
+              // If the item has not just been selected with the top out of the screen
+              // and the top of the window is greater than that of the item...
+              if (scroll != "top" && windowTop > selectedTop) {
+                  // Scroll up
+                  $(window).scrollTop(selectedTop)
+              // If the item has not just been selected with the bottom out of the screen
+              // and the bottom of hte window is less than that of the itemm...
+              } else if (scroll != "bottom" && windowBottom < selectedBottom) {
+                  // Scroll down
+                  $(window).scrollTop(selectedBottom - window.innerHeight)
+              }
+
+              if (scroll != "normal") {
+                  // If the top of the item was out of the screen when selected
+                  // and is now in the screen...
+                  if (scroll == "top" && windowTop < selectedTop) {
+                      scroll = "normal"
+                  // If the bottom of the item was out of the screen when selected
+                  // and is now in the screen...
+                  } else if (scroll == "bottom" && $(window).scrollTop() + window.innerHeight > selectedBottom) {
+                      scroll = "normal"
+                  }
+              }
+          }
+          
+      });
+      $("#sortable").disableSelection();
+      $("#sortable").on('touchstart', (e) => {
+          touchDown = true
+      })
+  });
+  
+subtractTop = (selected, amt) => {
+	 var top = parseFloat(selected.style.top.slice(0, -2)) - amt
+	 return top.toString() + "px"
+}
+  */
+    
+}
+
+
+function DragBox_reveal()
+{
+	if (page.attempts==0) {tryitonce();return false;}
+	$('#sortable .remove').hide();
+	$('#sortable .undo').hide();
+	for (let i=0;i<page.items.length;i++)
+	{
+		let herring=page.items[i].category==0;
+		$('div','#item'+i).removeClass('right wrong removed').addClass('right').addClass(herring?'removed':'');
+		//$('#item'+i+' .hint.right').show();
+		if (herring)
+		{
+			$('#item'+i+' .undo').show();
+		}
+		else
+		{
+			$('#item'+i+' .remove').show();
+		}
+		$('#sortable').append($('#item'+i));
+	}
+	for (let i=0;i<page.items.length;i++)
+	{
+		let herring=page.items[i].category==0;
+		if  (herring)
+			$('#sortable').append($('#item'+i));
+	}
+	scoreAndShowFeedback(RIGHT,0,lang.GaveUpHeading,null,"#fbText",page.rightFeedback,page.rightDest);	
+	return false;
+}
+
+function DragBox_grade()
+{	//8/2018
+	let isRight=true;// all right?
+	let result = $('#sortable').sortable('toArray');
+	let nextidx=0;//for ordering.
+	for (let i=0;i<result.length;i++)
+		if (page.items[i].category==0) nextidx++;// Red herrings are listed as the first items
+	for (let i=0;i<result.length;i++)
+	{	// Ensure items are in correct order and red herrings are ignored
+		let $item=$('#'+result[i]);
+		let idx=parseInt($item.attr('itemid'));
+		let removed=$item.find('.removed').length>0;
+		let cat=page.items[idx].category;
+		let itemRight;
+		if (cat==0)
+		{	// Correct, if red herring removed
+			itemRight=(removed);
+		}
+		else
+		{
+			itemRight=(!removed) && (idx==nextidx);// Correct, if in order and not a red herring
+			nextidx++;
+		}
+		//trace("Slot "+i+" has item "+idx+"="+itemRight+" Red Herring="+(cat==0) +" Removed="+removed);
+		$('div',$item).removeClass('right wrong').addClass(itemRight?'right':'wrong');
+		if (!itemRight) isRight=false;
+	}
+	
+	var answer=isRight? lang.RIGHT : lang.WRONG; ///TODO save drag positions as an answer.
+	page.attempts ++;
+	$("#reveal").fadeIn();
+	if (isRight)
+		scoreAndShowFeedback(RIGHT,0,answer,null,"#fbText",page.rightFeedback,page.rightDest);	
+	else
+	if (page.attempts<=page.hints.length)
+		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.hints[page.attempts-1],null);
+	else
+		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.wrongFeedback,page.wrongDest);
+	
+	return false;
+}
+
+
+
+
+function DragBoxOld_layout()
+{
+	//oldPageTypeWarning();
+	zIndex=999;
+	var cats="";
+	var items="";
+	// Layout categories and items in a grid	
+	cats+='<table width=100% class="DragTable noborder"><tr>';
+	for (var c=0;c<page.categories.length;c++)
+	{
+		cats += "<th align=center width=" +( 100/page.categories.length)+"%" + ">"+  page.categories[c]+ "</th>";
+	}
+	cats += "</tr><tr>";
+	for (var c=0;c<page.categories.length;c++)
+	{
+		cats +=  '<td>' + '<ul id=sortable'+c+' class="sortable droptrue">' + "</ul>" + '</td>';
+	}
+	cats+="</tr><table>";
+	
+	for (var i=0;i<page.items.length;i++)
+	{
+		items+='<li id=item'+i+' itemid='+i+' class="ui-state-default dragItem dragCollapse"><a href="#" class="dragExpander">[+]</a><span class=dragItemText>'+page.items[i].text+'</span></li>';
+	}
+	pageInteractionDIV.append(cats).append('<br clear="both" />');
+	$("#sortable0").append(items);
+	if (page.shuffle) $("#sortable0").shuffle();
+	$('.dragItemText').each(function(){
+		//TODO hide the expand option if not needed? 
+		if ($(this).height()<=$(this).parent().height())
+			$(this).parent().find('.dragExpander').hide();
+	 });
+	$("ul.droptrue").sortable({
+		connectWith: 'ul',
+		xforcePlaceholderSize: true
+	});
+	$("#sortable0, #sortable1, #sortable2, #sortable3").disableSelection();
+	var maxheight=$('#sortable0').height();
+	$('.sortable').css('min-height',maxheight);
+	
+	$('a.dragExpander').bind('click', function( )
+	{
+		var targetContent = $(this).parent();
+		if ($(this).text()=="[-]" )
+		{	// normal size
+			targetContent.removeClass('dragCollapse dragExpanded').addClass('dragCollapse');
+			$(this).html('[+]');
+		} else
+		{	// expanded for full reading
+			targetContent.removeClass('dragCollapse dragExpanded').addClass('dragExpanded').css('z-index',++zIndex);
+			$(this).html('[-]');
+		}
+		return false;
+	})
+	$("ul.droptrue li").addTouch();
+
+	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()  + helpButton() +  '<div id=fbText></div>');
+	doGrade=DragBoxOld_grade;
+	doReveal = DragBoxOld_reveal;
+	doHelp = DragBoxOld_help;
+}
+
+function DragBoxOld_grade()
+{
+	var isRight=true;
+	for (var c=0;c<page.categories.length;c++)
+	{
+		var result = $('#sortable'+c).sortable('toArray');
+		var lastidx=-1;//for ordering.
+		for (var i=0;i<result.length;i++)
+		{
+			var idx=parseInt($('#'+result[i]).attr('itemid'));
+			var itemRight;
+			if (page.items[idx].category==c)
+				if (page.ordered && c>0)
+				{
+					if (idx>lastidx)
+						itemRight=true;
+					else
+						itemRight=false;
+					lastidx=idx;
+				}
+				else
+					itemRight = true
+			else
+				itemRight=false;
+			//trace("category "+c+", slot "+i+" has item "+idx+"="+itemRight);
+			$('#item'+idx).removeClass('dragRIGHT dragWRONG').addClass('drag'+ (itemRight?RIGHT:WRONG));
+			if (!itemRight) isRight=false;
+		}
+	}
+	
+	var answer="";//TODO save drag positions as an answer.
+	page.attempts ++;
+	$("#reveal").fadeIn();
+	if (isRight)
+		scoreAndShowFeedback(RIGHT,0,answer,null,"#fbText",page.rightFeedback,page.rightDest);	
+	else
+	if (page.attempts<=page.hints.length)
+		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.hints[page.attempts-1],null);
+	else
+		scoreAndShowFeedback(WRONG,0,answer,null,"#fbText", page.wrongFeedback,page.wrongDest);
+	
+	return false;
+}
+function DragBoxOld_reveal()
+{
+	if (page.attempts==0) {tryitonce();return false;}
+	for (var i=0;i<page.items.length;i++)
+	{
+		$('#item'+i).removeClass('dragRIGHT dragWRONG').addClass('dragRIGHT');
+		$('#sortable'+page.items[i].category).append($('#item'+i));
+	}
+	scoreAndShowFeedback(RIGHT,0,lang.GaveUpHeading,null,"#fbText",page.rightFeedback,page.rightDest);	
+	return false;
+}
+
+
+
+
+
+
+
+
+

@@ -1,8 +1,8 @@
 // Copyright 1999-2014 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved.
 // CALI Viewer 5, Version: 03/21/2012
 
-var MAX_ROWS=7;//9/29/11
-var MAX_COLUMNS=4;
+var MAX_ROWS=12 // Was 7; //Checkbox rows  (increaed to handle drag/drop conversion.)
+var MAX_COLUMNS=7 // Was 4; //Checkbox columns (increaed to handle drag/drop conversion.)
 var STYLE_TEXT="Text"
 var STYLE_NUMBER="Number"
 var STYLE_DOLLAR="Dollar"
@@ -10,6 +10,39 @@ var STYLE_PERCENT="Percent"
 
 var pid=100;
 var lessonPath;//Folder where book data and media files reside. // ="TestBookXML/"+  StartBook + "_jQueryBookData.xml";
+
+function mapTOCUL2Viewer(ul,depth)
+{	// 7/26/18 Map CA's simple ul/li outline into viewer's expandable TOC.
+	let txt='';
+	ul.children().each(function( )
+	{
+		if ($(this).is('UL'))
+		{
+			txt+='<li><label class="nav-toggle nav-header toggle-icon" for="cl-hamburger"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus" aria-label="Button to open and close sub menus."><p class="toc-title">'+text+'</p></a></label><ul class="nav nav-list slider-left" style="display: none;">'+mapTOCUL2Viewer($(this),depth+1)+'</ul></li>\n';
+		}
+		else
+		if (!$(this).next().is('UL'))
+		{
+			text=$(this).text();
+			let href=$('A',this).attr('HREF');
+			if (depth>0)
+				txt+='<li><a href="'+href+'" class="toc-link visited" title="link to lesson">'+text+'</a></li>\n';
+			else
+				txt+='<li><label class="nav-toggle-no-sub level-indent-no-sub"><a class="toc-link visited" href="'+escape(href)+'"><p class="toc-title no-sub">'+text+'</p></a></label></li>\n';
+		}
+		else
+		{
+			text=$(this).text();
+		}
+
+	});
+	if (depth==0)
+	{	// Add special pages.
+		txt='<li><label class="nav-toggle-no-sub level-indent-no-sub"><a class="toc-link visited" href="'+pageABOUT+'"><p class="toc-title no-sub">About this Lesson</p></a></label></li>\n'+txt
+			+'<li><label class="nav-toggle-no-sub level-indent-no-sub"><a class="toc-link visited" href="'+pageLessonCompleted+'"><p class="toc-title no-sub">Complete the lesson</p></a></label></li>\n';
+	}
+	return txt;
+}
 
 function parsePageXML(pageXML)
 {	// Decode page XML into TPage object.
@@ -34,8 +67,9 @@ function parsePageXML(pageXML)
 	}
 	if (page.type=="Topics")
 	{
-		page.text = pageXML.find("TOC").xml();
-		page.text = page.text.replace(/HREF="/g,'HREF="jump://');
+		//trace(pageXML.find("TOC").xml());
+		page.text=mapTOCUL2Viewer(pageXML.find("TOC").find("UL:first"),0);
+		page.text = page.text.replace(/href="/gi,'href="jump://');
 		page.nextPageDisabled=true;
 		book.lastPage=pageXML.find("LASTPAGE").xml();
 	}
@@ -62,7 +96,7 @@ function parsePageXML(pageXML)
 	{
 		page.details.push({});
 		page.details[d].text =jQuery.trim($(this).xml());
-		page.details[d].letter = "ABCDEFG".charAt(d)+".";
+		page.details[d].letter = nthLetter(d);//"ABCDEFG".charAt(d)+".";
 	});
 
 	page.rightFeedback=pageXML.find("RIGHT").xml(); 	page.rightDest=pageXML.find("RIGHT").attr("NEXTPAGE");
@@ -126,7 +160,9 @@ function parsePageXML(pageXML)
 	
 	page.shuffle = pageXML.find('SHUFFLE').text().toLowerCase() != 'false';//default to shuffle unless explicitly turned off.
 	page.ordered = pageXML.find('ORDERED').text().toLowerCase() == 'true';
-	page.categories=["Items"];
+	let herring=pageXML.find('ITEMS').text();
+	if (herring=="Items") herring=lang.NA;
+	page.categories=[herring];//Column 0 is red herring.
 	pageXML.find('CATEGORY').each(function()
 	{	// XML: <CATEGORY>Correct</CATEGORY>
 		page.categories.push(jQuery.trim($(this).xml()));
@@ -267,19 +303,24 @@ function parsePageXML(pageXML)
 	
 	return page;
 }
-
+function emptyMatrix(numRows,numCols)
+{
+	let map=[];
+	for (let row=0;row<numRows;row++)
+	{
+		map[row]=[];
+		for (let col=0;col<numCols;col++)
+			map[row][col]=0;
+	}
+	return map;
+}
 function checkMatrix(checklist )  
 {	// Convert list of correct checkbox/radio button items into matrix.
 	// Sample Checklist "1-1,3-1,4-1"
 	// Checklist is 1-based. but we'll work with 0-based.
 	var row;
 	var col;
-	var map=[];
-	for (row=0;row<MAX_ROWS;row++){
-		map[row]=[];
-		for (col=0;col<MAX_COLUMNS;col++)
-			map[row][col]=0;
-	}
+	var map=emptyMatrix(MAX_ROWS,MAX_COLUMNS);
 	if (checklist!="")
 	{
 		var parts=checklist.split(",");
@@ -300,6 +341,7 @@ function parseBookXML(bookXML)
 	book.description = bookXML.find('INFO > DESCRIPTION').xml();
 	book.lesson=bookXML.find('INFO > LESSON').text();
 	book.version=bookXML.find('INFO > VERSION').text();
+	book.qw='QW'==bookXML.find('INFO > GENERATOR').text();
 	
 	
 	book.CALIdescription = bookXML.find('INFO > CALIDESCRIPTION').xml();

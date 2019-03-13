@@ -7,10 +7,10 @@ var pageTextDIV;//ref to navigation DIV
 var pageInteractionDIV;//ref to viewer DIV
 var bookXML;
 var bookInfoXML;
-var PopupsList=[];//list of sorted popup pages
-var PagesList=[];//list of sorted normal pages
-var vertMinWidth=500; // window narrower than this switches to vertical layout.
-var vertical=false;// vertical layout (for narrow display)
+var PopupsList = [];//list of sorted popup pages
+var PagesList = [];//list of sorted normal pages
+var vertMinWidth = 500; // window narrower than this switches to vertical layout.
+var vertical = false;// vertical layout (for narrow display)
 //var pageHistory=[];//array of bookmark history - names of pages visited for use with Back/Next navigation.
 /**
  * The message hex ID.
@@ -18,20 +18,19 @@ var vertical=false;// vertical layout (for narrow display)
  */
 var page = null;//pointer to current TPage();
 var textBuffer = "";//any text we'd like to have appear at the top of the next page such as errors or feedbacks.
-var ScorePossible=0;// questions answered
-var ScoreCorrect=0;//questions got correct 
-var ScorePercent="";//correct/total
-var ScoreTotalQuestions=0;// count of all scored questions
-var ScoreTotalPages=0;//count of all score pages
-var ScoreDetails="";
-var doGrade=null;
-var doReveal=null;
-var globalToolbarLinks=[];// array of author defined toolbar links. form:  {text:'caption',url:'page name'}
-var inCA=false;
-var MCREVEAL=false;
+var ScorePossible = 0;// questions answered
+var ScoreCorrect = 0;//questions got correct 
+var ScorePercent = "";//correct/total
+var ScoreTotalQuestions = 0;// count of all scored questions
+var ScoreTotalPages = 0;//count of all score pages
+var ScoreDetails = "";
+var doGrade = null;
+var doReveal = null;
+var globalToolbarLinks = [];// array of author defined toolbar links. form:  {text:'caption',url:'page name'}
+var inCA = false;
 
-var StartBook="";
-var StartPage="";
+var StartBook = "";
+var StartPage = "";
 var jqPath;//
 var bookMark;//hash tag on lesson load
 
@@ -41,10 +40,10 @@ var bookMark;//hash tag on lesson load
 //###############################################
 // CAV1.js 8/2010 CALI Author Viewer - Function set 1
 
-var embed=1;
+var embed = 1;
 
 function getHash(url)
-{	// return hash suitable as a page name
+{	// Return hash suitable as a page name
 	var hash=url.hash.substr(1);
 	if (hash==null) hash="";
 	return unescape(hash);
@@ -60,7 +59,7 @@ function getPath(url)
 	url = url.substr(0,p+1);
 	//p=url.indexOf('://');
 	//if (p>=0){ url=url.substr(p+3);url=url.substr(url.indexOf('/'));}
-	return url
+	return url;
 }
 function getHostname(url) 
 {	// return only the hostname.
@@ -72,11 +71,11 @@ function getHostname(url)
 }
 function isLocalFile()
 {
-	return location.href.match(/^file:\/\//)
+	return false;//true;//location.href.match(/^[file|localhost]:\/\//)
 }
 function isLocalFF()
 {	// local firefox security prevents use of parent.location.
-	return $.browser.mozilla && isLocalFile();
+	return false;//5/29/18 //$.browser.mozilla && isLocalFile();
 }
 function locationForHash()
 {	// return location that we can SET (hack for FF)
@@ -93,6 +92,19 @@ function setHash(name)
 function sortPageBySortName(a,b)
 {
 	return icaseCompare(a.sortName,b.sortName);
+}
+function showTOC(show)
+{	// Required to allow programmatic toggling of TOC (such as going to page 'Contents')
+	let collapsed=!$('#cl-hamburger').prop('checked');
+	let shouldCollapse = (show===undefined) ? !collapsed : !show;
+	//console.log({fnc:showTOC,show:show,collapsed:collapsed,shouldCollapse:shouldCollapse});
+	$('#cl-hamburger').prop('checked',shouldCollapse);
+	if (!shouldCollapse)
+		$('#SliderControl').fadeIn(300);
+	else
+		$('#SliderControl').fadeOut(300);
+	$('.toc-view').toggleClass("toc-view-close",shouldCollapse);
+	$('.lesson-view').toggleClass("lesson-view-close",shouldCollapse);
 }
 function processBook()
 {
@@ -114,6 +126,33 @@ function processBook()
 		if (StartPage=='') StartPage=pageABOUT;
 		gotoPage(StartPage);
 		downloadScore();
+		if (book.qw)
+		{
+			$('img.CL-logo').attr('src','img/QuizWrightLogo.png').removeClass('CL-logo');
+		}
+			
+		// 5/2018 TOC revised.
+		let page=book.pages[pageCONTENTS];
+		$('#SliderControl ul:first').replaceWith('<ul class="nav nav-list-main">'+page.text+'</ul>');
+		$('label.nav-toggle a').click(function () {
+			$(this).parent().parent().children('ul.slider-left').toggle(300);
+		});
+		$('.toggle-icon').click(function(){// Expand/collapse sub level
+			$(this).find('a').toggleClass('glyphicon-plus glyphicon-minus');
+			return false;
+		});
+		$('.visited').click(function(){	//Flag TOC link as visited
+			$(this).addClass('toc-visited');
+		});
+		$('.CL-hamburger').click(function () {//slider menu
+			showTOC();
+		});
+		$('.toc-link').click(function () {// Jump to page, close TOC.
+			showTOC(false);
+			navHREF($(this).attr('href'));
+			return false;
+		});
+		showTOC(StartPage==pageCONTENTS);
 	}
 }
 
@@ -125,7 +164,9 @@ function updatePageLists()
 	{	// while p is now the page name, might be the ID instead, so should use page.name for certain.
 		var page=book.pages[p];
 		if (page.name==pageCONTENTS)
+		{
 			$("#TOCList").html(page.text);
+		}
 		else
 		{
 			if (page.type==kPOPUP)
@@ -145,9 +186,8 @@ function updatePageLists()
 	for (var p in PopupsList)
 		txt+='<li class="NavPage">'+pageLink(PopupsList[p].name,true);
 	$("#PopupsList").html(txt);
-
+	
 }
-
 function addError(msg)
 {
 	textBuffer += msg;
@@ -167,8 +207,8 @@ function trace()
 
 function iefix(url)
 {
-	if ($.browser.msie && url.substr(url.length-1)=='/')
-		url=url.substr(0,url.length-1);
+	//5/29/18 if ($.browser.msie && url.substr(url.length-1)=='/')
+	//	url=url.substr(0,url.length-1);
 	return url;
 }
 
@@ -207,11 +247,9 @@ function decodeHTML(html)
 	return  html.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 //#######################################################
-// CAV_lang.js
+// Language file loaded from lang variable in CAV_lang.js.
 // 02/2011 CALI Author Viewer - Language traanslation.
-
-var lang = {CALI:'CALI'};
-
+lang.CALI='CALI';
 function t(msg)
 {	// e.g, alert(t("Do not mix {1} with {2}","apples","oranges") );
 	for(var a=1;a<arguments.length;a++)
@@ -229,19 +267,13 @@ function thtml(msg)
 
 function patchLink()
 {	// todo jquery .live() handler instead
-	$('#Lesson a[href^="jump"]').unbind('click').click(navClick);
+	$('#LessonControl a[href^="jump"]').unbind('click').click(navClick);
+	//$('#SliderControl a[href^="jump"]').unbind('click');//Bitovi 
 	$('#Lesson a[href^="popup"]').unbind('click').click(navClick);
 	$('#Lesson a[href^="choice"]').unbind('click').click(navClick);
 	$('#Lesson a[href^="lesson"]').unbind('click').click(navClick);
-	
-	$('#Lesson .hotspots .hotspot').unbind('click').click(navClickSpot);
-	
+	$('#Lesson .hotspots .hotspot,#zoomin .hotspots .hotspot').unbind('click').click(navClickSpot);
 	$('#Lesson .zoomin, div.PageText * .picture #picture').unbind('click').click(function(){return lightbox($(this).attr('href'))});
-	
-	//$('#Lesson area[href^="jump"]').unbind('click').click(navClickSpot);
-	//$('#Lesson area[href^="popup"]').unbind('click').click(navClickSpot);
-
-	
 	$('#Lesson a[href^="lesson"], #Lesson a[href^="http"], #Lesson a[href^="https"]').each(function()
 	{
 		if (!$(this).attr("target")) $(this).attr("target","_blank");
@@ -277,7 +309,6 @@ function patchLink()
 function gotoPage(pageName, skipCA)
 {	// Load page with given id. 
 	// null does nothing. blank, topic page, or missing page, always points to table of contents.
-	//trace("gotoPage",pageName);
 	if (pageName==null) return;
 	if (pageName=="null") return;
 	if (pageName=='')
@@ -298,21 +329,25 @@ function gotoPage(pageName, skipCA)
 	
 	
 	
-	$('#zoomin').remove();
-	$('.PageBorder').show();
-	
 	//set hash below instead //top.location.hash=pageName;
 	page = book.pages[pageName];
 	
+	$('#zoomin').remove();
+	$('.PageBorder').show();
 	if (page==null )
 	{	//didn't find! 
-		trace('Page not found:'+pageName);
+		//trace('Page not found:'+pageName);
 		addError(t(lang.PageMissingReturnTOC,pageName));
 		page=book.pages[pageCONTENTS];
 	}
 	else
-	if (page.type=="Topics")//possible with nested menus, so default TOC.
+	if (page.type=="Topics")
+	{
+		// Possible with nested menus, so default TOC.
+		// Bitovi - Slide TOC into view, use blank page.
+		showTOC(true);
 		page=book.pages[pageCONTENTS];
+	}
 
 	setHash(page.name);// Change hash to match this page. this allows browser navigation.
 	
@@ -326,30 +361,29 @@ function gotoPage(pageName, skipCA)
 	 _paq.push(['trackPageView']); 
   }
 	
-	var commentEmail=("mailto:" + escape(emailContact) + "?" +
-		"cc=" + escape(emailTechSupportContact)  +
-		"&subject=" + escape(t(lang.EmailSubject,book.lesson +
-		"/" + page.name + " (" + book.version + ")-CALI5")));
-	$('a.PageComment').attr('href',commentEmail);
-
 		
 	page.startSeconds = curSeconds();// remember when we've seen this page.
-	page.destPage=null;//clear setting to allow user to choose new path if revisiting old question.
-	
+	page.destPage=null;// Clear setting to allow user to choose new feedback branch path if revisiting old question.
+
+
 	renderPage();
 	
-	if (page.mapid )
+	if (page.mapid ){
 		focusNode($('.map > .node[rel="'+page.mapid+'"]'))
+	}
+				
 	
 	scrollIntoView($('#Viewer'));
 	//if (!localFF()) parent.scrollTo(0,0);//Scroll back to top 
 	//window.scrollTo(0,0);//Scroll back to top
 	ScoreDirty();
+	updateProgressCircle();
 }
 
 
 function note(msg)
 {
+	trace('note:'+msg);
 	showFeedback(INFO,"Note","#fbText",msg);
 }
 function tryitonce()
@@ -358,19 +392,24 @@ function tryitonce()
 }
 function gradeButton()
 {
-	return '<a class=HyperButton href=# id=grade>'+t(lang.GradeAnswer)+'</a>';
+	//return '<a class=HyperButton href=# id=grade>'+t(lang.GradeAnswer)+'</a>';
+	return '<a href="#" id=grade alt="Grade my answer button" class="xHyperButton"><button type="button" class="CL-btn CL-grade-btn shine">'+t(lang.GradeAnswer)+'</button></a>';
+	//<a href="#" alt="Grade my answer button disabled"><button type="button" class="CL-btn CL-grade-btn btn-disabled">Grade my answer</button></a>
 }
 function reviewButton()
 {
-	return '<a class=HyperButton href=# id=grade>'+t(lang.ReviewAnswer)+'</a>';
+	//return '<a class=HyperButton href=# id=grade>'+t(lang.ReviewAnswer)+'</a>';
+	return '<a href="#" id=grade alt="Grade my answer button" class="xHyperButton"><button type="button" class="CL-btn CL-grade-btn shine">'+t(lang.ReviewAnswer)+'</button></a>';
 }
 function resetButton()
 {
-	return '<a class=HyperButton href=# id=reset>'+t(lang.ResetAnswer)+'</a>';
+	//Unused return '<a class=HyperButton href=# id=reset>'+t(lang.ResetAnswer)+'</a>';
+	return '<a href="#" id=reset alt="Grade my answer button" class="xHyperButton"><button type="button" class="CL-btn CL-grade-btn shine">'+t(lang.ResetAnswer)+'</button></a>';
 }
 function revealButton()
 {
-	return "<a class=HyperButton href=# id=reveal>"+t(lang.RevealAnswer)+'</a>';
+	//return "<a class=HyperButton href=# id=reveal>"+t(lang.RevealAnswer)+'</a>';
+	return '<a href="#" id=reveal alt="Grade my answer button" class="xHyperButton"><button type="button" class="CL-btn CL-grade-btn shine">'+t(lang.RevealAnswer)+'</button></a>';
 }
 function helpButton()
 {
@@ -381,10 +420,13 @@ function hyperButton(caption,url)
 {	// hyperlink styled as button
 	return '<a class="HyperButton" href="' +  url + '">' + caption + '</a>';
 }
-function iButton(caption,id)
-{	// choice option hyperlink styled as button
-	return '<a class="HyperButton" href="choice://'+id + '" id='+id+'><span class='+id+'>' + caption + '</span></a>';
+
+function iButtonIcon(caption,id,icon)
+{
+	return '<a href="choice://'+id + '"><button class="CL-btn CL-next-btn shine icon-arrow-right">'+caption+'<span class="next-arrow"></span></button></a>';
 }
+
+
 function iNavPage(linkText,cmd,dest,tab,key,title)
 {
 	return '<A CLASS="choose" HREF="'+cmd+'://'+dest+'" >'+linkText+'</A> ';
@@ -425,7 +467,7 @@ function embedPopupHTML(alink,pageName)
 	var grade
 	if (page==null)
 	{ 	// Didn't find! possible with nested menus, so default TOC.
-		trace('Page not found:'+pageName);
+		//trace('Page not found:'+pageName);
 		txt  = t(lang.PageMissing,pageName);
 		popupID="popup_err";
 		grade=INFO;
@@ -446,13 +488,17 @@ function embedPopupHTML(alink,pageName)
 		page.timeSpent++;
 	}
 	$('#'+popupID).hide('fast').remove();
-	txt='<div id='+popupID+'  class="Feedback ' + grade + '">'
+	/*txt='<div id='+popupID+'  class="Feedback ' + grade + '">'
 			+'<div class="Icon '+grade+'">&nbsp;</div>'
 			+'<div class="Close"><a href="#">&nbsp;</a></div>'
 			+'<div class="Title">'+pageName+'</div><br clear=all>'
 			+'<div class="Text ReadText">'+txt + '</div>'	
 			+'<div class="FeedbackButton">'+hyperButton(t(lang.ClosePopup),'#')+'</div>'
 		+ '</div>';
+	*/
+	txt=popupAlertHTML(grade,popupID,pageName,txt);
+	
+		
 	if ($(alink).hasClass('hotspot')){//add hotspots below media
 		//$('.MediaPanel').
 		$(alink).parent().parent().parent().after(txt).next().animate({},1,function(){
@@ -461,9 +507,23 @@ function embedPopupHTML(alink,pageName)
 	}else{
 		$(alink).after(txt).next().hide().animate({},1,function(){scrollIntoView($('#'+popupID).prev(),0);}).fadeIn(500,function(){});
 	}
-	$('#'+popupID+' .FeedbackButton a, #'+popupID+' .Close a').unbind('click').click(function(){
-		$(this).parent().parent().animate({},1,function(){scrollIntoView($(this).prev(),0)}).fadeOut(500,function(){$(this).remove()});return false;});
+	//$('#'+popupID+' .FeedbackButton a, #'+popupID+' .Close a').unbind('click').click(function(){$(this).parent().parent().animate({},1,function(){scrollIntoView($(this).prev(),0)}).fadeOut(500,function(){$(this).remove()});return false;});
+	$('#'+popupID+' button').unbind('click').click(function(){$(this).parent().parent().animate({},1,function(){scrollIntoView($(this).prev(),0)}).fadeOut(500,function(){$(this).remove()});return false;});
 	patchLink();
+}
+function popupAlertHTML(grade,popupID,popupName,popupText)
+{
+	let bsClass={'RIGHT':'success','WRONG':'error','INFO':'description','MAYBE':'maybe'}[grade];
+	return '<div class="panel panel-default" id="'+popupID+'">\
+			<div class="panel-heading alert-'+bsClass+'-heading"><h4>'+popupName+'</h4>\
+			  <button type="button" class="close" data-target="#'+popupID+'" data-dismiss="alert">\
+			  <span aria-hidden="true" class="alert-'+bsClass+'-x">&times;</span><span class="sr-only">'+t(lang.ClosePopup)+'</span>\
+				</button>\
+			</div>\
+			<div class="panel-body alert-'+bsClass+'-body Text ReadText">\
+				'+popupText+'\
+			</div>\
+		  </div>';	
 }
 
 function embedHelpHTML(alink,txt)
@@ -486,7 +546,7 @@ function embedHelpHTML(alink,txt)
 	$('#'+popupID+' .FeedbackButton a, #'+popupID+' .Close a').unbind('click').click(function(){
 		$(this).parent().parent().animate({},1,function(){scrollIntoView($(this).prev())}).fadeOut(500,function(){$(this).remove()});return false;});
 }
-function showFeedback(grade,title,fbID, feedbackText,branch)
+function showFeedback(grade,title,fbID, feedbackText,branch,branchChoice)
 {	// show feedback with grade= right,wrong,maybe,info
 	// fbID is the ID where we write feedback
 	// feedbackText is the text to write
@@ -502,9 +562,13 @@ function showFeedback(grade,title,fbID, feedbackText,branch)
 	if (feedbackText != "")
 	{
 		if (branch && page.destPage==null)
-			page.destPage=branch; // Change destination page to branch.
-		$(fbID).empty().append(
-			'<div class="Feedback ' + grade + '">'
+		{	// Change destination page to first branching feedback user selects for this page.
+			page.destPage=branch;
+			//trace(branchChoice+'>'+branch);
+			$('.next-caption').text(lang.ContinuePage);
+		}
+
+		/*let txt='<div class="Feedback ' + grade + '">'
 			+'<div class="Icon '+grade+'">&nbsp;</div>'
 			+(
 				(branch && page.destPage)? 
@@ -514,11 +578,14 @@ function showFeedback(grade,title,fbID, feedbackText,branch)
 			+'<div class="Title">'+title+'</div><br clear=all>'
 			+'<div class="Text ReadText">'+feedbackText + '</div>'
 			+'<div class="FeedbackButton">'+hyperButton(  (branch && page.destPage)? t(lang.NextPage):t(lang.ClosePopup),'#')+'</div>'
-			+'</div>').children('.Feedback').hide().animate({},1,function(){scrollIntoView($(this).parent())}).delay(100).fadeIn(500,function(){});
+			+'</div>';
+		*/
+		let txt=popupAlertHTML(grade,fbID+'_alert',title,feedbackText);
+		$(fbID).empty().append(txt).children('.Feedback').hide().animate({},1,function(){scrollIntoView($(this).parent())}).delay(100).fadeIn(500,function(){});
 		patchLink();
 		if (branch && page.destPage)
 		{	//  If there's a branch, show a Next button.
-			$(".Feedback .FeedbackButton a, .Feedback .Next a").unbind('click').click(function(){$(this).parent().parent().slideToggle("fast",function(){navHREF('jump://'+page.destPage);});return false;});
+			// Obsolete: $(".Feedback .FeedbackButton a, .Feedback .Next a").unbind('click').click(function(){$(this).parent().parent().slideToggle("fast",function(){navHREF('jump://'+page.destPage);});return false;});
 		}
 		else
 		{
@@ -575,7 +642,9 @@ function navClickDelayFire()
 	else{	linkcmd=linkHREF.substr(0,i);	linkurl=linkHREF.substr(i+3);}
 	
 	if (linkcmd=="popup")
+	{
 		embedPopupHTML(linkAnchor,linkurl);
+	}
 	else
 	{
 		if (linkcmd=="" && linkurl.substr(0,1)=='#')
@@ -592,11 +661,18 @@ function navClickDelayFire()
 				break;
 			case "jump"://hyperlink jump to page
 				//historySave(page.name);
-				gotoPage(pageName);
+				
+				let page = book.pages[pageName];
+				if (page!=null && page.type==kPOPUP)
+				{
+					//trace("Warning! Jump to a popup, treat as embed popup instead.");
+					embedPopupHTML(linkAnchor,linkurl);
+				}
+				else
+					gotoPage(pageName);
 				break;
 			case "popup"://hyperlink popup
 				//gotoPage(pageName);
-				//trace();
 				break;
 			case "lesson":
 				window.open(CALILessonJump(linkurl),'');
@@ -669,7 +745,7 @@ function processHostData(xml)
 		lessonPath =  bookXML.find('INFO > CBKLOCATION').text();
 		var p=lessonPath.lastIndexOf("\\");
 		lessonPath=lessonPath.substring(0,p+1);
-		trace(lessonPath);
+		//trace(lessonPath);
 		requestHostData("PAGE");
 		return;
 	}
@@ -709,15 +785,17 @@ function initialize()
 	if (!isLocalFile())
 	{
 		win.onbeforeunload=function(){return t(lang.LeaveLesson,book.title);};
-		if (!$.browser.mozilla)
-			window.onbeforeunload=function(){return t(lang.LeaveLesson,book.title);};
+		//if (!$.browser.mozilla)
+		//	window.onbeforeunload=function(){return t(lang.LeaveLesson,book.title);};
 	}
 	
-		
-	if (embed && isLocalFF())
-	{	// firefox running locally can't access lesson folder (parent.location) or cookies without privileges
-		netscape.security.PrivilegeManager.enablePrivilege( "UniversalBrowserRead");
-	}
+	
+	
+	
+	//5/29/18 if (embed && isLocalFF())
+	//{	// firefox running locally can't access lesson folder (parent.location) or cookies without privileges
+	//	netscape.security.PrivilegeManager.enablePrivilege( "UniversalBrowserRead");
+	//}
 	var bookFile="";
 	lessonPath= getPath( (embed ? parent.location : location) +"");// retreive parent's location to extract hash
 	jqPath = getPath($('#CAVjs').attr('src'));
@@ -727,7 +805,7 @@ function initialize()
 		bookFile=lessonPath + "jqBookData.xml";
 	}
 	bookMark=getHash(locationForHash());
-	trace('bookMark',bookMark);
+	//trace('bookMark',bookMark);
 	
 	
 	// if hash tag (representing current page) changes, we're likely going Back.
@@ -753,19 +831,10 @@ function initialize()
 		// Every time the hash changes!
 	})
 	*/
-	$.isMobile=(screen.width < 500 || navigator.userAgent.match(/(iPhone|iPod|iPad)/i));
-	trace (navigator.userAgent);
-	styleSheetSwitch($.isMobile ? 'cavmobile' : 'cavscreen');
-	$('.styleswitch').bind('click',function(e){
-		var sheet=$(this).attr('rel');
-		styleSheetSwitch(sheet);
-		renderPage();
-		return false;
-	});
+	$.isMobile=true;//(screen.width < 500 || navigator.userAgent.match(/(iPhone|iPod|iPad)/i));
 	
 	pageTextDIV= $(".PageText");
 	pageInteractionDIV= $(".PageInteraction");
-	//$("#bookdata").hide();//hide book data
 	$("#Options").hide();//hide Options
 	
 	$('a#Options-toggle').click(function() {
@@ -813,11 +882,11 @@ function initialize()
   }
   
   $('.OrgName').text(orgName);
-  $('#LessonNavigation').removeClass('hidestart').hide();
-   if (amode==1){
-		$('#HeaderLessonBook').append(' | <a id="facoptions" class="NavClick" href="#">Faculty Options</a>');
-		$('#facoptions').click(function(){$('#LessonNavigation').toggle()});
-	}
+  //$('#LessonNavigation').removeClass('hidestart').hide();
+   //if (amode==1){// Activate author options
+		//OLD $('#HeaderLessonBook').append(' | <a id="facoptions" class="NavClick" href="#">Faculty Options</a>');
+		//OLD $('#facoptions').click(function(){$('#LessonNavigation').toggle()});
+	//}
 	$(window).resize(function()
 	{ 
 		updateHotSpots();
@@ -833,31 +902,6 @@ function initialize()
 	
 
 	$('.ScoringButton').click(ScoreScreenToggle);
-
-	
-	$("a.textchanger").click(function(){
-		//Handy text sizer
-		// http://www.gowestwebdesign.com/demos/jQuery-text-resizer/#
-		//set the div with class mainText as a var called $mainText 
-		var $mainText = $('#Lesson');
-		// set the current font size of .mainText as a var called currentSize
-		var currentSize = $mainText.css('font-size');
-		// parse the number value out of the font size value, set as a var called 'num'
-		var num = parseFloat(currentSize, 10);
-		// make sure current size is 2 digit number, save as var called 'unit'
-		var unit = currentSize.slice(-2);
-		// javascript lets us choose which link was clicked, by ID
-		if (this.id == 'linkLarge'){
-		num = num +2;//* 1.4;
-		} else if (this.id == 'linkSmall'){
-		num = num -2;/// 1.4;
-		}
-		// jQuery lets us set the font Size value of the mainText div
-		$mainText.css('font-size', num + unit);
-			return false;
-	});
-
-	
 	
 	$(".toggler").click(function(){$(this).next().slideToggle("fast");return false;}).next().hide();
 	$(".togglerfade").click(function(){$(this).next().toggle();return false;}).next().hide();
@@ -872,23 +916,23 @@ function initialize()
 
 	if (!inCA)
 	{
-		trace('Loading '+bookFile);
+		//trace('Loading '+bookFile);
 		$.ajax({
 			url: bookFile,
-			dataType: ($.browser.msie) ? "text" : "xml", // IE will only load XML file from local disk as text, not xml.
+			dataType: "xml", //5/29/18 ($.browser.msie) ? "text" : "xml", // IE will only load XML file from local disk as text, not xml.
 			timeout: 45000,
 			error: function(data,textStatus,thrownError){
 			  alert('Error occurred loading the XML from '+this.url+"\n"+textStatus);
 			 },
 			success: function(data){
 				var bookDataXML;
-				if ($.browser.msie)
-				{	// convert text to XML. 
-					bookDataXML = new ActiveXObject('Microsoft.XMLDOM');
-					bookDataXML.async = false;
-					bookDataXML.loadXML(data);
-				}
-				else
+				//5/29/18 if ($.browser.msie)
+				//{	// convert text to XML. 
+				//	bookDataXML = new ActiveXObject('Microsoft.XMLDOM');
+				//	bookDataXML.async = false;
+				//	bookDataXML.loadXML(data);
+				//}
+				//else
 				{
 					bookDataXML = data;
 				}
@@ -907,6 +951,34 @@ function initialize()
 	}
 	
 	$('span.t').each(function(){$(this).html(lang[$(this).attr('ref')]);});
+	
+	// Bitovi
+	$('#open-feedback').on('click',function () {
+      $('#feedbackModal').modal('show');
+    });
+	$('#submitFeedback').click(function(){
+		//submit feedback
+		let feedback = $('#feedbackComment').val();
+		/*
+		https://docs.google.com/forms/d/e/1FAIpQLSe_SDPlzoxjfthI-zJG-k_kvvHQYM4mlBZjKDU1sNVlFTqcdg/viewform?usp=pp_url
+		&entry.1035788757=a&entry.337593368=b&entry.1796155339=c&entry.1297563432=uuuu&entry.632516465=ssss&entry.201134289=o
+		&entry.2023326105=lv&entry.998620373=ri&entry.1164044685=ll
+		*/		
+		window.open('https://docs.google.com/forms/d/e/1FAIpQLSe_SDPlzoxjfthI-zJG-k_kvvHQYM4mlBZjKDU1sNVlFTqcdg/viewform?usp=pp_url'
+			+'&entry.1035788757='+encodeURI(feedback)
+			+'&entry.337593368='+encodeURI(book.lesson)
+			+'&entry.1796155339='+encodeURI(page.name)
+			+'&entry.1297563432='+encodeURI(userName)
+			+'&entry.632516465='+encodeURI(dispName)
+			+'&entry.201134289='+encodeURI(orgName)
+			+'&entry.2023326105='+encodeURI(book.version)
+			+'&entry.998620373='+encodeURI(runid)
+			+'&entry.1164044685='+encodeURI(llMode)
+			
+		);
+		$('#feedbackModal').modal('hide');
+	});
+	
 }//end of load after document
 
 /*
@@ -952,7 +1024,7 @@ function scrollIntoView(target,vertoffset)
 function styleSheetSwitch(sheet)
 {
 	//<link href="cavmobile.css" title="cavmobile" media="screen" rel="stylesheet" type="text/css" />
-	trace('styleSheetSwitch='+sheet);
+	//trace('styleSheetSwitch='+sheet);
 	vertical = sheet == 'cavmobile';
 	$('link[title=style]').attr('href',sheet+".css");
 }

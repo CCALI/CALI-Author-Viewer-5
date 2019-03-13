@@ -30,7 +30,8 @@ function buildScoreSaveXML()
 			+qtag("RUNID",runid)
 			//+qtag("USERNAME", username)
 			//+qtag("RUNDATE",new Date()) Warning! Adding date will cause it to CHANGE everytime and do constant uploading!
-			+qtag("VIEWER","07/25/2011")
+			// +qtag("VIEWER","07/25/2011") Original version
+			+qtag("VIEWER","07/25/2018") // 2018 Refresh version
 			+qtag("COMPLETE",scoreComplete ? "1":"0")
 			//+(scoreComplete ? qtag("COMPLETE","1"):"")
 			+qtag("VIEWERTYPE","JQ")
@@ -76,23 +77,14 @@ function downloadScore()
 	//trace("Resuming scoresave ",resumeScoreURL);
 	$.ajax({
 		url: resumeScoreURL,
-		dataType: ($.browser.msie) ? "text" : "xml",
+		dataType: "xml",	
 		timeout: 60000,
 		error: function(data,textStatus,thrownError){
 		  alert('Error occurred loading the XML from '+this.url+"\n"+textStatus);
 		 },
 		success: function(data){
 			var scoreDataXML;
-			if ($.browser.msie)
-			{	// convert text to XML. 
-				scoreDataXML = new ActiveXObject('Microsoft.XMLDOM');
-				scoreDataXML.async = false;
-				scoreDataXML.loadXML(data);
-			}
-			else
-			{
-				scoreDataXML = data;
-			}
+			scoreDataXML = data;
 			scoreDataXML=$(scoreDataXML);
 			var resumePageName=scoreDataXML.find("PAGECURRENT").xml();
 			//trace("Resume page ",resumePageName);
@@ -195,7 +187,7 @@ function uploadScore()
 			{
 				uploadScoreDone(true,t(lang.ScoreSaveSaved));
 				
-				win.onbeforeunload=null;if (!$.browser.mozilla)window.onbeforeunload=null;
+				win.onbeforeunload=null;//if (!$.browser.mozilla)window.onbeforeunload=null;
 				
 				if (urlSurvey()==null){
 					parent.location=url;
@@ -250,10 +242,10 @@ function uploadScoreSilent()
 			uploadScoreSilentInterval=setInterval("uploadScoreSilent()", 30000);
 			
 			scoreSaveWarningCount++;
-			trace(scoreSaveWarningCount);
+			//trace(scoreSaveWarningCount);
 			if (scoreSaveWarningCount>5)
 			{	// After 5 failed attempts to save score data, exit lesson. 
-				win.onbeforeunload=null;if (!$.browser.mozilla)window.onbeforeunload=null;
+				win.onbeforeunload=null;//if (!$.browser.mozilla)window.onbeforeunload=null;
 				parent.location = 'https://www.cali.org/mylessonruns';
 			}
 			
@@ -292,6 +284,9 @@ function ScoreScreenUpdate()
 	$('.ScoreDate').text(ScoreDate.toDateString());
 	$('.ScoreTime').text(ScoreDate.toTimeString());
 	$('.ScoreURL').text(lessonPath);
+	$('.ScoreCorrect').text(ScoreCorrect);
+	$('.ScoreTotal').text(ScorePossible);
+	$('.ScorePercent').text(ScorePercent);
 	
 	makeScoreDetails();
 	$('#ScoreReportDetails TR:gt(0)').remove();
@@ -308,13 +303,25 @@ function ScoreScreenToggle()
 	$("#ScoreReport").slideToggle("slow");
 }
 
+function updateProgressCircle()
+{	// Bitovi Tally visited pages for progress circle
+	let visited=0;
+	for (var p in PagesList)//book.pages)
+	{
+		if (PagesList[p].timeSpent>0) visited++
+	}
+	let progressNum = 1+ Math.floor(visited / PagesList.length*99);// Progress from 1 to 100.
+	$('#progress-circle').removeClass().addClass('score-circle progress-'+progressNum);
+	//trace(progressNum);
+}
+
+
 function tallyScores()
 {
 	ScoreCorrect=0;
 	ScorePossible=0;
 	ScoreTotalQuestions=0;
 	ScoreTotalPages=0;
-	ScorePercent="";
 	ScoreDetails = "";
 	for (var p in PagesList)//book.pages)
 	{
@@ -335,24 +342,21 @@ function tallyScores()
 			ScoreTotalPages++;
 		}
 	}
-	var badgeID;
+	
 	if (ScorePossible>0)
 	{
 		ScorePercent=Math.floor(ScoreCorrect*100/ScorePossible);
-		if (ScorePercent>99) badgeID='1';
-		else if (ScorePercent>=75) badgeID='2';
-		else if (ScorePercent>=60)  badgeID='3';
-		else badgeID='4';
 		ScorePercent=ScorePercent+"%"
 	}
 	else
-	{	// no score, default to lower badge
-		badgeID='4';
+	{	// no score, no percent
 		ScorePercent="-";
 	}
-	$('.ScorePercent').text(ScorePercent);
-	$('.ScoreTotal').text(ScorePossible);
-	$('.ScoreCorrect').text(ScoreCorrect);
+	
+	// Update score display: right, wrong and progress.	
+	$('.right-txt').text(ScoreCorrect);
+	$('.wrong-txt').text(ScorePossible-ScoreCorrect);
+	updateProgressCircle();	
 	$(".UploadScore3").hide();
 }
 
@@ -412,10 +416,10 @@ function makeScoreDetails()
 	ScoreDetails = pagetypes[0]+pagetypes[1];
 }
 
-function scoreAndShowFeedback(grade,answerid,answertext,partid, fbID, feedbackText,branch)
+function scoreAndShowFeedback(grade,answerid,answerText,partid, fbID, feedbackText,branch)
 {	// save score, display feedback at specified location with Jump button activated, if applicable. 
-	saveScore(grade,answerid,answertext,partid);
-	showFeedback(grade,(answertext.length<30 ? answertext : answertext.substr(0,30)+"..."),fbID,feedbackText,branch);
+	saveScore(grade,answerid,answerText,partid);
+	showFeedback(grade,answerText,fbID,feedbackText,branch,answerText); //(answertext.length<30 ? answertext : answertext.substr(0,30)+"...")
 }
 
 
@@ -474,9 +478,9 @@ function TextEssay_report()
 function Sliders_ShowText(val)//Return caption for slider
 {
 	var txt
-	if (page.style==STYLE_NUMBER) 	  txt= " " +val
-	else if (page.style==STYLE_DOLLAR) txt= "$ " +val
-	else if (page.style==STYLE_PERCENT) txt= val+" %"
+	if (page.style==STYLE_NUMBER) 	  txt= "&nbsp;" +val
+	else if (page.style==STYLE_DOLLAR) txt= "$&nbsp;" +val
+	else if (page.style==STYLE_PERCENT) txt= val+"&nbsp;%"
 	else
 	{
 		if (val<0 || val>=page.phrases.length) val=0;

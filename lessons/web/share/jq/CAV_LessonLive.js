@@ -173,7 +173,7 @@ function attachLessonLiveReportToPage( )
 		else
 		{
 			if (pageTypeTracksData && !lessonLive.revealScores) {
-				LessonLivePageInfo+='<P><a class="HyperButton">Reveal Student Responses</a></P>';
+				LessonLivePageInfo+='<P><a class="btn btn-default toolbar-button HyperButton" type="button">Reveal Student Responses</a></P>';
 			}
 		}
 	}
@@ -314,12 +314,13 @@ function lessonLiveBar(grade,numSlots,total)
 
 function lessonLiveDownloadSilent()
 {	// Download score save xml summary data from website
-	var scoreSaveSummaryURL=LessonLiveDownload() + '?runid='+runid;// formerly "/lessons/web/share/jq/LessonLiveSample.php?";
+	var scoreSaveSummaryURL=LessonLiveDownload() + '?runid='+runid;
+	//var scoreSaveSummaryURL="LessonLiveSample.php?";trace("LessonLive Testing Sample Data "+scoreSaveSummaryURL);
 	if (lessonLive.Summary.lesson) {
 		// Request report only if data newer that the LastUpdate.
 		scoreSaveSummaryURL += '&lastupdate='+lessonLive.Summary.lesson.LastUpdate;
 	}
-	//trace('Loading data from '+scoreSaveSummaryURL);
+	//('Loading data from '+scoreSaveSummaryURL);
 	$.ajax({
 		url: scoreSaveSummaryURL,
 		dataType: "json",
@@ -349,7 +350,7 @@ function lessonLiveDownloadSilent()
 	});
 	return false;
 }
-
+/*
 function llDialogRevealNames()
 {	// Confirm if student names should be displayed.
 	 $( "#dialog-revealnames" ).dialog({
@@ -373,31 +374,40 @@ function llDialogRevealNames()
 			}
 		}); 
 }
-
+*/
 $(document).ready(function()
 {	// Check if this is a LessonLive presentation.
+	//trace("llMode="+llMode);
 	if (llMode=='own')
 	{	// Activate Teacher's LessonLive UI
 		lessonLive.isTeacher=true;
 		$('#llHeaderPage').removeClass('hidestart'); 
 		$('#llLiveLogo').removeClass('hidestart'); 
 		$('#llPanel').removeClass('hidestart');
+		$('#llLessonPast').hide();
 		$('#llRevealNamesCB').change(function(){
-			if ($(this).is(':checked'))
+			if ( $(this).is(':checked'))
 			{
-				llDialogRevealNames();
+				//llDialogRevealNames();
+					lessonLive.revealUsers=true;
+					lessonLive.revealResponses=true;
+					attachLessonLiveReportToPage();
+					//$('#llRevealNamesCB').prop('checked',true);
+					$('#llLessonPast').show().attr('href','/lessons/web/share/jq/LessonLinkPast.php?runid='+runid);
 			}
 			else
 			{
 				lessonLive.revealUsers=false;
 				lessonLive.revealResponses=false;
-				attachLessonLiveReportToPage( )
+				attachLessonLiveReportToPage( );
+				$('#llLessonPast').hide();
 			}
 		 });
-		$('#llRevealResponsesCB').change(function(){
+		/*$('#llRevealResponsesCB').change(function(){
 			lessonLive.revealResponses= ($(this).is(':checked'));
 			attachLessonLiveReportToPage( )
 		 });
+		 */
 		lessonLiveDownloadSilent();
 	}
 	else
