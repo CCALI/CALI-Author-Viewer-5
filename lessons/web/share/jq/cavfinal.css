@@ -45,3 +45,8 @@ p {
 .CLAccordion li a {
 	font-size: 14px!important;
 }
+.img-close {
+	z-index: 1;
+	background-color: rgb(20,20,20);
+}
+
