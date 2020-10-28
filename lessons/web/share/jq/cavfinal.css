@@ -43,10 +43,12 @@ p {
 	width: 20em;
 }
 .CLAccordion li a {
-	font-size: 14px!important;
+	font-size: 14px !important;
 }
 .img-close {
 	z-index: 1;
 	background-color: rgb(20,20,20);
 }
-
+.toc-visited {
+	background: linear-gradient(90deg,#eee,#fff);
+}

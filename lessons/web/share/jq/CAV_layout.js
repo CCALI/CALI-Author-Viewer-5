@@ -41,7 +41,7 @@ function clickButton(id)
 		{	// Find next incomplete topic.
 			page.destPage=null;
 			var firstPage=null;
-			$('.PageText a[href^="jump"]').each(function()
+			$('#SliderControl ul:first a[href^="jump"]').each(function()
 			{
 			   var pagename = iefix( ($(this).attr('href').split('://')[1]));
 			   if (pagename != pageTOC)
@@ -350,8 +350,9 @@ function renderPage()
 	// Page type specific layout
 	if (page.type=="Topics")
 	{
-		//TODO: slide out the TOC. //pageTextDIV.append('<div class="ReadText">'+page.text+'</div>');
 		$(".PageName").text('');
+		//pageTextDIV.append('<p>Proceed to the next section of the lesson.</p>');
+		//addNextButton('choice://gonext',false);
 	}
 	else
 	if (page.name==pageABOUT)
