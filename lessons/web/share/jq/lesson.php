@@ -45,6 +45,7 @@
 	  $resumescore="/lesson/scoreload/".dechex($runid*47);
   else
 	  $resumescore="";
+	unset($_SESSION['runid']);  
 }
 
   $dispname= $firstname." ".$lastname;
@@ -67,14 +68,15 @@
   else{
 	 $llMode="";
   }
-
+	$coursename=$orgname; if (isset($_SESSION['coursename'])) {$coursename=$_SESSION['coursename'];unset($_SESSION['coursename']);}
+	$teachername=$dispname;if (isset($_SESSION['teachername'])) {$teachername=$_SESSION['teachername'];unset($_SESSION['teachername']);}
 //	if ($betamode!=1)
 //	{	// If not in beta mode, deactivate any beta features like LessonLive for Teacher.
 //		if ($llMode=="own")
 //			$llMode='';
 //	}
 
-  $custom="<script>var llMode=\"$llMode\"; var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
+  $custom="<script>var _paq=false; var llMode=\"$llMode\"; var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var courseName=\"$coursename\"; var teacherName=\"$teachername\";var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
 
   
   // 07/20/2016 SJG Add Piwik tracking including user id ($user->uid), organization name ($orgname) and user's full name ($dispname).
