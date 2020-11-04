@@ -49,6 +49,33 @@ p {
 	z-index: 1;
 	background-color: rgb(20,20,20);
 }
+.toc-hilite{
+	background: linear-gradient(90deg,#ddf,#fff);
+}
+.toc-hilite::before {
+	background-image: url('img/toc-next.png');
+	background-size: 1.5em 1.5em;
+	display: inline-block;
+	width: 1.5em;
+	height: 1.5em;
+	content:"";
+}
 .toc-visited {
 	background: linear-gradient(90deg,#eee,#fff);
 }
+.toc-visited::before {
+	background-image: url('img/toc-visited.png');
+	background-size: 1.5em 1.5em;
+	display: inline-block;
+	width: 1.5em;
+	height: 1.5em;
+	content:"";
+}
+ /*
+.toc-visited::before {
+	content:url('img/toc-visited.png');
+	display: inline-flex;
+	width: 1.5em;
+	height: auto;
+}
+*/

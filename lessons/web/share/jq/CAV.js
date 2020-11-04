@@ -125,6 +125,7 @@ function processBook()
 	{	
 		if (StartPage=='') StartPage=pageCONTENTS;//pageABOUT;
 		gotoPage(StartPage);
+		doAutoNextTOC();
 		downloadScore();
 		if (book.qw)
 		{
@@ -1039,19 +1040,21 @@ function styleSheetSwitch(sheet)
 // 
 var AutoNextTOCTimer;
 function doAutoNextTOC()
-{	// 10/2020 Upon return to TOC, automatically click the next unvisited topic.
+{	// 10/2020 Upon return to TOC, automatically HILITE the next unvisited topic.
 	AutoNextTOCTimer=setTimeout(function()
 	{	
-		var autoNextTOC;
+		var $autoNextTOC;
+		$('#SliderControl ul:first a').removeClass('toc-hilite');
 		$('#SliderControl ul:first a[href^="jump"]').each(function()
 		{
-			if (!autoNextTOC)
+			if (!$autoNextTOC)
 				if (!$(this).hasClass('toc-visited'))
-					autoNextTOC=$(this);
+					$autoNextTOC=$(this);
 		});
-		if (autoNextTOC)
+		if ($autoNextTOC)
 		{
-			autoNextTOC.click();
+			//autoNextTOC.click();
+			$autoNextTOC.addClass('toc-hilite');
 		}
 	},1000);
 }
