@@ -71,6 +71,26 @@ p {
 	height: 1.5em;
 	content:"";
 }
+#llLinkLogo, #llCourseName {
+	cursor: pointer;
+}
+#llCourseName {
+	text-align: center;
+	margin-top: 5px;
+	color: #fff;
+	max-width: 66%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	background-color: rgb(0, 51, 102);
+}
+@media (max-width:768px)
+{
+	#llCourseName {
+		max-width: 90%;
+		min-width: 20em;
+		margin-left: 1em;
+	}
+}
  /*
 .toc-visited::before {
 	content:url('img/toc-visited.png');

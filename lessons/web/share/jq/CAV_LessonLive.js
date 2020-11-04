@@ -378,6 +378,10 @@ function llDialogRevealNames()
 $(document).ready(function()
 {	// Check if this is a LessonLive presentation.
 	//trace("llMode="+llMode);
+	if (llMode!='')
+	{
+		$('#llCourseName').html(courseName+'<br />'+teacherName);
+	}
 	if (llMode=='own')
 	{	// Activate Teacher's LessonLive UI
 		lessonLive.isTeacher=true;
