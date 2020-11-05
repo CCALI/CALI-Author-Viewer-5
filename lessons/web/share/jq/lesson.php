@@ -68,15 +68,21 @@
   else{
 	 $llMode="";
   }
-	$coursename=$orgname; if (isset($_SESSION['coursename'])) {$coursename=$_SESSION['coursename'];unset($_SESSION['coursename']);}
-	$teachername=$dispname;if (isset($_SESSION['teachername'])) {$teachername=$_SESSION['teachername'];unset($_SESSION['teachername']);}
+
+	// Note: $orgName is student's org. $schoolname is LessonLink professor's school. Usually the same.
+	$coursename=''; if (isset($_SESSION['coursename'])) {$coursename=json_encode($_SESSION['coursename']);unset($_SESSION['coursename']);}
+	$teachername='';if (isset($_SESSION['proflastname'])) {$teachername=json_encode($_SESSION['proflastname']);unset($_SESSION['proflastname']);}
+	$semester='';if (isset($_SESSION['semester'])) {$semester=json_encode($_SESSION['semester']);unset($_SESSION['semester']);}
+	$schoolname='';if (isset($_SESSION['schoolname'])) {$schoolname=json_encode($_SESSION['schoolname']);unset($_SESSION['schoolname']);}
+
+
 //	if ($betamode!=1)
 //	{	// If not in beta mode, deactivate any beta features like LessonLive for Teacher.
 //		if ($llMode=="own")
 //			$llMode='';
 //	}
 
-  $custom="<script>var _paq=false; var llMode=\"$llMode\"; var userName=\"$username\"; var runid=\"$runid\"; var amode=$authmode;var courseName=\"$coursename\"; var teacherName=\"$teachername\";var orgName=\"$orgname\";var dispName=\"$dispname\";var resumeScoreURL=\"$resumescore\";</script>";
+  $custom="<script>var _paq=false;\n var llMode=\"$llMode\";\n var userName=\"$username\";\n var runid=\"$runid\";\n var amode=$authmode;\n var llCourseName=$coursename; var llProfName=$teachername;\n var llSemester=$semester;\n var llSchoolName=$schoolname;\n var orgName=\"$orgname\";\n var dispName=\"$dispname\";\n var resumeScoreURL=\"$resumescore\";</script>";
 
   
   // 07/20/2016 SJG Add Piwik tracking including user id ($user->uid), organization name ($orgname) and user's full name ($dispname).

@@ -380,7 +380,7 @@ $(document).ready(function()
 	//trace("llMode="+llMode);
 	if (llMode!='')
 	{
-		$('#llCourseName').html(courseName+'<br />'+teacherName);
+		$('#llCourseName').html(llCourseName+'<br />Prof. '+llProfName);
 	}
 	if (llMode=='own')
 	{	// Activate Teacher's LessonLive UI
