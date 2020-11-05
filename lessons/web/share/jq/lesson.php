@@ -70,10 +70,10 @@
   }
 
 	// Note: $orgName is student's org. $schoolname is LessonLink professor's school. Usually the same.
-	$coursename=''; if (isset($_SESSION['coursename'])) {$coursename=json_encode($_SESSION['coursename']);unset($_SESSION['coursename']);}
-	$teachername='';if (isset($_SESSION['proflastname'])) {$teachername=json_encode($_SESSION['proflastname']);unset($_SESSION['proflastname']);}
-	$semester='';if (isset($_SESSION['semester'])) {$semester=json_encode($_SESSION['semester']);unset($_SESSION['semester']);}
-	$schoolname='';if (isset($_SESSION['schoolname'])) {$schoolname=json_encode($_SESSION['schoolname']);unset($_SESSION['schoolname']);}
+	$coursename='""'; if (isset($_SESSION['coursename'])) {$coursename=json_encode($_SESSION['coursename']);unset($_SESSION['coursename']);}
+	$teachername='""';if (isset($_SESSION['proflastname'])) {$teachername=json_encode($_SESSION['proflastname']);unset($_SESSION['proflastname']);}
+	$semester='""';if (isset($_SESSION['semester'])) {$semester=json_encode($_SESSION['semester']);unset($_SESSION['semester']);}
+	$schoolname='""';if (isset($_SESSION['schoolname'])) {$schoolname=json_encode($_SESSION['schoolname']);unset($_SESSION['schoolname']);}
 
 
 //	if ($betamode!=1)
