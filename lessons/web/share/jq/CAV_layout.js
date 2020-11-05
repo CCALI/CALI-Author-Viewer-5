@@ -357,6 +357,10 @@ function renderPage()
 	else
 	if (page.name==pageABOUT)
 	{
+		if (llMode!='')
+		{
+			pageTextDIV.append('<div class="panel panel-default"><div class="panel-heading alert-description-heading"><h4>LessonLink</h4></div><div class="ReadText panel-body alert-description-body"><p >'+ 'Prof. '+llProfName+'<br />'+llCourseName+'<br /> '+llSemester+'<br />'+llSchoolName +'</p>'+'<p><b>This is a LessonLink lesson. Your score for this lesson will be visible to Prof. '+llProfName+'</b></p></div></div>');
+		 }
 		pageTextDIV.append('<div class="ReadText">'+page.text+'</div>');
 		if (runid == null)
 		{
