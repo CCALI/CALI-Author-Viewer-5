@@ -380,13 +380,13 @@ $(document).ready(function()
 	//trace("llMode="+llMode);
 	if (llMode!='')
 	{
-		$('#llCourseName, #llCourseNameLive').html('Prof. '+llProfName+'<br />'+llCourseName);
+		$('#llCourseName').html('Prof. '+llProfName+'<br />'+llCourseName);
 	}
 	if (llMode=='own')
 	{	// Activate Teacher's LessonLive UI
 		lessonLive.isTeacher=true;
 		$('#llHeaderPage').removeClass('hidestart'); 
-		$('#llLiveLogo').removeClass('hidestart'); 
+		$('#llLinkLogo').removeClass('hidestart'); 
 		$('#llPanel').removeClass('hidestart');
 		$('#llLessonPast').hide();
 		$('#llRevealNamesCB').change(function(){

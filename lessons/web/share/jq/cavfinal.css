@@ -74,7 +74,7 @@ p {
 #llLinkLogo, #llCourseName {
 	cursor: pointer;
 }
-#llCourseName, #llCourseNameLive {
+#llCourseName {
 	text-align: center;
 	margin-top: 5px;
 	color: #fff;
@@ -85,7 +85,7 @@ p {
 }
 @media (max-width:768px)
 {
-	#llCourseName, #llCourseNameLive {
+	#llCourseName {
 		max-width: 90%;
 		min-width: 20em;
 		margin-left: 1em;
