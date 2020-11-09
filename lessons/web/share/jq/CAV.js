@@ -123,8 +123,9 @@ function processBook()
 	$("#Viewer").show();
 	if (!inCA)
 	{	
-		if (StartPage=='') StartPage=pageABOUT;
+		if (StartPage=='') StartPage=pageCONTENTS;//pageABOUT;
 		gotoPage(StartPage);
+		doAutoNextTOC();
 		downloadScore();
 		if (book.qw)
 		{
@@ -347,6 +348,7 @@ function gotoPage(pageName, skipCA)
 		// Bitovi - Slide TOC into view, use blank page.
 		showTOC(true);
 		page=book.pages[pageCONTENTS];
+		doAutoNextTOC();
 	}
 
 	setHash(page.name);// Change hash to match this page. this allows browser navigation.
@@ -773,6 +775,12 @@ var win;// window frame or window's parent.
 
 function initialize()
 {
+	/*if (runid==0 || runid=="" || runid==null)
+	{	// 10/08/20 No runid, no run allowed.
+		parent.location="https://www.cali.org/error/bookmark";
+		return;
+	}*/
+	
 	inCA = parent===self;
 	
 	//inCA=false;//debug
@@ -825,7 +833,7 @@ function initialize()
 
 	if (PerformanceUpload()==null) runid=null;
  
-	
+
 	/*
 	$(top).hashchange( function(){
 		// Every time the hash changes!
@@ -1030,3 +1038,23 @@ function styleSheetSwitch(sheet)
 }
 
 // 
+var AutoNextTOCTimer;
+function doAutoNextTOC()
+{	// 10/2020 Upon return to TOC, automatically HILITE the next unvisited topic.
+	AutoNextTOCTimer=setTimeout(function()
+	{	
+		var $autoNextTOC;
+		$('#SliderControl ul:first a').removeClass('toc-hilite');
+		$('#SliderControl ul:first a[href^="jump"]').each(function()
+		{
+			if (!$autoNextTOC)
+				if (!$(this).hasClass('toc-visited'))
+					$autoNextTOC=$(this);
+		});
+		if ($autoNextTOC)
+		{
+			//autoNextTOC.click();
+			$autoNextTOC.addClass('toc-hilite');
+		}
+	},1000);
+}
