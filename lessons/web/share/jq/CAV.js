@@ -127,9 +127,9 @@ function processBook()
 		gotoPage(StartPage);
 		doAutoNextTOC();
 		downloadScore();
-		if (book.qw)
+		if ((book.qw) ||(lessonPath.indexOf('/ap/')>=0)||(lessonPath.indexOf('/publisher/')>=0))
 		{
-			$('img.CL-logo').attr('src','img/QuizWrightLogo.png').removeClass('CL-logo');
+			$('img.CL-logo').attr('src','img/APLessonLogo.gif').removeClass('CL-logo');
 		}
 			
 		// 5/2018 TOC revised.
