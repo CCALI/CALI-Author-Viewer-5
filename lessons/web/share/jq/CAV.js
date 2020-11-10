@@ -106,6 +106,7 @@ function showTOC(show)
 	$('.toc-view').toggleClass("toc-view-close",shouldCollapse);
 	$('.lesson-view').toggleClass("lesson-view-close",shouldCollapse);
 }
+
 function processBook()
 {
 	updatePageLists();
@@ -122,15 +123,17 @@ function processBook()
 	$("#Loader").hide();
 	$("#Viewer").show();
 	if (!inCA)
-	{	
+	{
+		book.SelfPublished=false;
+		if ((book.qw) ||(lessonPath.indexOf('/ap/')>=0)||(lessonPath.indexOf('/publisher/')>=0))
+		{
+			book.SelfPublished=true;
+			$('img.CL-logo').attr('src','img/APLessonLogo.gif').removeClass('CL-logo');
+		}
 		if (StartPage=='') StartPage=pageCONTENTS;//pageABOUT;
 		gotoPage(StartPage);
 		doAutoNextTOC();
 		downloadScore();
-		if (book.qw)
-		{
-			$('img.CL-logo').attr('src','img/QuizWrightLogo.png').removeClass('CL-logo');
-		}
 			
 		// 5/2018 TOC revised.
 		let page=book.pages[pageCONTENTS];
