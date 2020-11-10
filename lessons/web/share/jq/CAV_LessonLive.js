@@ -380,12 +380,15 @@ $(document).ready(function()
 	//trace("llMode="+llMode);
 	if (llMode!='')
 	{
-		$('#llCourseName').html('Prof. '+llProfName+'<br />'+llCourseName);
+		if (llProfName!='')
+		{
+			$('#llCourseName').html('Prof. '+llProfName+'<br />'+llCourseName);
+		}
 	}
 	if (llMode=='own')
 	{	// Activate Teacher's LessonLive UI
 		lessonLive.isTeacher=true;
-		$('#llHeaderPage').removeClass('hidestart'); 
+		if (llProfName!='') $('#llHeaderPage').removeClass('hidestart'); 
 		$('#llLinkLogo').removeClass('hidestart'); 
 		$('#llPanel').removeClass('hidestart');
 		$('#llLessonPast').hide();
@@ -418,7 +421,7 @@ $(document).ready(function()
 	if (llMode=='stu')
 	{	// Activate Student's LessonLinkLive watermark.
 		lessonLive.isStudent=true;
-		$('#llHeaderPage').removeClass('hidestart'); 
+		if (llProfName!='') $('#llHeaderPage').removeClass('hidestart'); 
 		$('#llLinkLogo').removeClass('hidestart').click(function()
 		{	// Jump to the teacher's page
 			$.ajax({
