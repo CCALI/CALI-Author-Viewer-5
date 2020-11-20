@@ -778,17 +778,18 @@ var win;// window frame or window's parent.
 
 function initialize()
 {
-	/*if (runid==0 || runid=="" || runid==null)
-	{	// 10/08/20 No runid, no run allowed.
-		parent.location="https://www.cali.org/error/bookmark";
-		return;
-	}*/
-	
 	inCA = parent===self;
-	
 	//inCA=false;//debug
 	
 	if (!isLocalFF()) win=window.parent;else win=window;
+	
+	//console.log({amode:amode,runid:runid});
+	if (amode==0 && (runid=="" || runid==0 || runid==null))
+	{	// 11/19/20 To avoid loss of score data, exit lesson if no runid.
+		win.onbeforeunload=null;
+		parent.location = '/error/refresh';
+		return;
+	}
 
 	//load language from lesson.html file
 	$('#Languages div').each(function(){lang[$(this).attr('ref')]= $(this).html();});
