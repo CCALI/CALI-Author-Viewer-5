@@ -787,7 +787,7 @@ function initialize()
 	if (amode==0 && (runid=="" || runid==0 || runid==null))
 	{	// 11/19/20 To avoid loss of score data, exit lesson if no runid.
 		win.onbeforeunload=null;
-		parent.location = '/mylessonruns';//https://www.cali.org
+		parent.location = '/error/refresh';
 		return;
 	}
 
