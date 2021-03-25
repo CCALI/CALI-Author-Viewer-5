@@ -382,7 +382,7 @@ $(document).ready(function()
 	{
 		if (llProfName!='')
 		{
-			$('#llCourseName').html('Prof. '+llProfName+'<br />'+llCourseName);
+			$('#llCourseName').html('Prof. '+llProfName+'<br />'+llCourseName+'<br />'+llSemester);
 		}
 	}
 	if (llMode=='own')

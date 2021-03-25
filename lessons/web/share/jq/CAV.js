@@ -271,6 +271,11 @@ function thtml(msg)
 
 function patchLink()
 {	// todo jquery .live() handler instead
+
+	
+	//$('#Lesson a[href^="http"], #Lesson a[href^="https"]').unbind('click');//03/16/21
+
+	
 	$('#LessonControl a[href^="jump"]').unbind('click').click(navClick);
 	//$('#SliderControl a[href^="jump"]').unbind('click');//Bitovi 
 	$('#Lesson a[href^="popup"]').unbind('click').click(navClick);
@@ -608,7 +613,7 @@ var linkAnchor;
 var linkHREF;
 function navClick()
 {	// Any click on any hyperlink calls this first. We can intercept for page links or other.
-	//trace('navClick');
+	//console.log('navClick');
 	linkAnchor=this;
 	linkHREF=null;
 	navClickDelay();
@@ -640,6 +645,7 @@ function navClickDelayFire()
 		linkHREF=$(linkAnchor).attr("href");
 	linkHREF=iefix(linkHREF);
 	linkHREF=unescape(linkHREF);
+	//console.log(linkHREF);
 	var i=linkHREF.indexOf("://");
 	var linkcmd;
 	var linkurl;
