@@ -99,3 +99,14 @@ p {
 	height: auto;
 }
 */
+p, blockquote, .alert-description-body {
+	font-size: 16px!important;
+}
+
+hr {
+	background: #000;
+	width: 50%;
+	height: 2px;
+}
+
+
