@@ -1,0 +1,587 @@
+/* CALI Author 6 - Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved. 法律指导 */
+/* CALI 4 color palette: #395775 #d4c229 #ff9072 #033ff9 */
+/*html, *, .btn, .form-control {	font-size: 18pt;}*/
+
+/*.panel-body {
+	font-family: 'Noto Serif', serif;
+}
+h1, h2, h3, h4, h5, h6, legend, .panel-heading, label {
+	font-family: 'Barlow', sans-serif;
+}
+*/
+
+.navbar-inverse {
+	background-color: #395775;/* CALI theme */
+}
+.navbar-inverse .navbar-nav>li>a {
+	/*color: #fff;*/
+}
+
+
+.navbar-static-top {
+  margin-bottom: 20px;
+}
+
+/*i {
+  font-size: 16px;
+}*/
+
+.nav > li > a {
+  color: #787878;
+}
+
+footer {
+  margin-top: 20px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #efefef;
+}
+
+/* count indicator near icons */
+.nav>li .count {
+  position: absolute;
+  bottom: 12px;
+  right: 6px;
+  font-size: 12px;
+  background: rgba(51,200,51,0.55);
+  color: rgba(255,255,255,0.9);
+  line-height: 1em;
+  padding: 2px 4px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.correct {
+  color: green;
+}
+.wrong {
+  color: red;
+}
+
+.nowrap {
+	white-space: nowrap;
+}
+.ellipsis {
+	display: block;
+	width: 25em;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+x#top-nav {
+	position: absolute;
+	width: 100%;
+}
+
+/* Book page lists and views */
+.pageLists {
+	xfont-size: smaller;
+}
+.pageLists ul {
+	padding-left: 1em;
+}
+.pageLists > ul > li {
+	padding-top: 0.5em;
+}
+.pageLists > ul {
+	padding-left: 1px;
+}
+.pageLists li   {
+	position: relative;
+	list-style: none;
+	overflow: hidden;
+}
+.pageLists li > a {
+	display: block;
+	padding: 2px 2px;
+}
+.pageLists li.page:hover, li.lessonVersion:hover {
+	background-color: #eee;
+}
+.pageLists li.page.selected {
+	background-color: #efe;
+	border: dotted thin;
+}
+.sectionLabel {
+	font-style: italic;
+	font-size: smaller;
+}
+.pageLists li.page {
+	padding: 1px;
+}
+.togleRowEdit {
+	float: right;
+}
+table tbody tr td div.rowEditControls{
+	position: relative;
+	width: 2em;
+	xmargin-left: -3em;
+	xvertical-align: bottom;
+}
+.pageedithover {
+	xbackground-color: #f00;
+	xposition: absolute;
+	xright: 0;
+	top: 0;
+	xwhite-space: nowrap;
+	xmargin: 0;
+	xpadding: 0;
+}
+x.body {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	padding: 0px;
+	margin: 0px;
+   overflow: hidden;
+}
+.app-panel {
+	position: absolute;
+	top: 50px;
+	left: 0px;
+	bottom: 0px;
+	right: 0px;
+	padding: 0px;
+	margin: 0px;
+   overflow: auto;
+}
+
+.row {
+  margin-left: 0px;/* SJG avoid horizontal scroll bar */
+  margin-right: 0px;
+}
+.book-nav .nav > li > a , .book-edit .nav > li > a{
+	padding: 5px;
+}
+.book-panel {
+	top: 5px;
+}
+.book-nav{
+	position: absolute;
+	left: 0em;
+	bottom: 0em;
+	right: 66%;
+	padding-left: 1em;
+	padding-right: 1em;
+	margin: 0px;
+   overflow: hidden;
+}
+.book-nav .tab-content {
+	position: relative;
+	padding: 0 0 3em 0;
+	margin: 0 0 0 0;
+	/*padding-top: 3px;*/
+	padding-right:20px;
+	height:100%;
+	width:100%;
+}
+
+.book-edit{
+	position: absolute;
+	left: 33%;
+	bottom: 0em;
+	right: 0em;
+	padding-left: 1em;
+	padding-right: 1em;
+   overflow: hidden;
+}
+#pages-panel {
+}
+#ckedit-top {	/* ck editor on the top */
+	padding-top:3px;
+	/*height: 50px;
+	width: 100%;*/
+}
+#ckedit-top .cke_top {
+	background: none;
+	box-shadow: none;
+	border-bottom: none;
+}
+.cke_inner {
+	background: none;
+}
+
+.book-nav.expanded {
+	right: 50%;
+}
+.book-nav-content { /* scrolling list */
+	position: absolute;
+	top: 4em;
+	bottom: 3em;
+	left: 0em;
+	right: 0em;
+	border: inset;
+	overflow: auto;
+}
+#bookPages .book-nav-content {
+	top: 1em;
+	bottom: 5em;
+}
+
+.book-mapper {
+	background-color: #fff;
+	position:absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom:0;
+}
+.book-nav-scroll {
+   overflow: auto;
+}
+.book-edit.expanded {
+	left: 50%;
+}
+#page-edit, #page-view, #page-text {/*  */
+	position: absolute;
+	left: 5px;
+	right: 5px;
+	top: 120px;
+	bottom: 5px;
+   overflow: auto;
+}
+x.page-nav {	/* tab picker for page views */
+    position: absolute;
+    left: 20px;
+    top: 0px;
+    right: 0;
+	 padding-top: 5px;
+    padding-bottom: 5px;
+    overflow: hidden;
+}
+.panel {
+	background-color:#f8f8ff;
+}
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+/*
+	 width: 75vw;
+*/
+
+/*.xpagelist-pane {
+    background-color: #eff;
+    position: absolute;
+    left: 1em;
+    top: 3em;
+    bottom: 1em;
+    width: 250px;
+	 float: left;
+    overflow: auto;
+}
+*/
+.pageedit-pane {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    overflow: auto;
+}
+
+/*.pageproperty-pane {
+    background-color: #ffe;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    left: 75%;
+    overflow: auto;
+}
+*/
+/* Lesson Page editing */
+.section {
+	padding: 5px;
+	margin: 2px;
+}
+.section .header {
+	font-size: 15px;
+	font-style: normal;
+	padding: 4px;
+	/*font-family: Arial, Helvetica, sans-serif;*/
+	font-weight: bold;
+	float: none;
+	clear: none;
+	position: relative;
+	cursor: default;
+	background-position: center;
+	display: block;
+}
+.grade-picker {
+	margin-right: 1em;
+	margin-left: 1em;
+	display: inline-block;
+}
+.grade-picker img{
+	width:20px;
+	height:21px;
+	vertical-align: middle;
+}
+
+
+/* Navigation panel */
+ul.nav li.dropdown:hover > ul.dropdown-menu {
+	display: block;    
+}
+.nav-list-indent, #scoreGroups {
+	left: 2em;
+	list-style: none;
+	display: inline;
+}
+.cke_textarea_inline, .editInPlace{
+	font-size: 16px; /*larger;*/
+	padding: 1em;
+	background-color:#fff;
+}
+.ca-cbcol {
+	width: 2em;
+	height: 1.5em;
+}
+.cbcol0{
+	background-color:#FC0;
+}
+.cbcol1{
+	background-color:#99C;
+}
+.cbcol2{
+	background-color:#9CF;
+}
+.cbcol3{
+	background-color:#F93;
+}
+#modalChangeDestination .list a:active{
+  background-color:#ffe;
+}
+
+.text-match{
+	font-family: monospace;
+	width: 100%;
+}
+
+/* CSS styling for text to match Viewer display */
+.cke_editable table {
+	border-collapse: collapse;
+	border: 1px solid black;
+}
+.cke_editable td,th {
+	border: 1px solid #ddd;
+	padding: 0.5em;
+}
+.cke_editable blockquote {
+	font-size: inherit;	/* Fix in Viewer too */
+	border: hidden;
+}
+
+.hilite {
+	font-weight: bold;
+	background-color: #ff8;
+}
+.hilite.starts {
+	font-weight: normal;
+	background-color: #FFB09A;
+}
+.hilite.ends {
+	font-weight: normal;
+	background-color: #ffc0aa;
+}
+
+
+/*  Colorful backgrounds
+.book-nav{
+	background-color: #fef;
+}
+.book-nav .tab-content {
+	background-color: #eff;
+}
+.book-edit{
+	background-color: #eef;
+}
+#pages-panel {
+	background-color: #e8fff8;
+}
+.book-nav-content {
+	background-color: #fff0e8;
+}
+.book-mapper {
+}
+#page-edit, #page-view {
+	background-color:#fff8f8;
+}
+
+*/
+.thumbnail .caption {
+	font-size: larger;
+}
+
+
+.ui-autocomplete {
+    position: absolute;
+    z-index: 1000;
+    cursor: default;
+    padding: 0;
+    margin-top: 2px;
+    list-style: none;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+       -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+.ui-autocomplete > li {
+  padding: 3px 20px;
+}
+.ui-autocomplete > li.ui-state-focus {
+  background-color: #DDD;
+}
+.ui-helper-hidden-accessible {
+  display: none;
+}
+.label-default {
+	color: #000;
+	font-weight: normal;
+	background-color: #fff;
+}
+.label-label {
+	color: #000;
+	font-weight: normal;
+	background-color: #ff8;
+}
+
+#lessonSaveStatus.readonly {
+	background-color: #ff8;
+}
+.navbar-brand>img {
+	display: inline-block;
+}
+.hidestart {
+	visibility: hidden;
+}
+th.edits {
+	width: 200px;
+}
+.label { /* disabled - effects margins */
+	font-size: 100%;
+	display: inline-block;
+}
+.lessonVersion, .panel-heading {
+	cursor: default;
+}
+
+
+span.pagename {
+	border: thin;
+	background-color: #eef;
+	border-color: black;
+	padding: 2px;
+	padding-left: 1em;
+	padding-right: 1em;
+	margin: 2px;
+}
+
+
+
+
+
+
+/* tags input */
+.bootstrap-tagsinput {
+    width: 100%;
+}
+.accordion {
+    margin-bottom:-3px;
+}
+.accordion-group {
+    border: none;
+}
+.twitter-typeahead .tt-query,
+.twitter-typeahead .tt-hint {
+    margin-bottom: 0;
+}
+.twitter-typeahead .tt-hint
+{
+    display: none;
+}
+.tt-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    display: none;
+    float: left;
+    min-width: 160px;
+    padding: 5px 0;
+    margin: 2px 0 0;
+    list-style: none;
+    font-size: 14px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+    background-clip: padding-box;
+    cursor: pointer;
+}
+
+.tt-suggestion {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: #333333;
+    white-space: nowrap;
+}
+
+.tt-suggestion:hover,
+.tt-suggestion:focus {
+  color: #ffffff;
+  text-decoration: none;
+  outline: 0;
+  background-color: #428bca;
+}
+
