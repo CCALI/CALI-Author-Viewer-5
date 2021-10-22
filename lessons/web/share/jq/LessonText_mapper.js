@@ -45,9 +45,8 @@ function addPage(page)
 	if (page.KIND == 5) return; // Declutter - don't show Popups'
 
 	var pos=bounds2xy(page.BOUNDS);
-	page.NAME=wrap1st(page.NAME);
 	var ePage= { 
-      data: { id: page.ID,name:page.NAME/*.replace(" - ","\n")*/,href:'#'+page.HREF, tip:page.TIP, shape:'rectangle',
+      data: { id: page.ID,href2:'#'+(page.NAME),name:wrap1st(page.NAME),href:'#'+page.HREF, tip:page.TIP, shape:'rectangle',
 		color: nodeColor[parseInt(page.KIND)] || nodeColor[3] //nodeColorDefault // '#fe8' // color:'#FF8020'
 		},
       position: pos
@@ -235,7 +234,8 @@ function buildMap(CAMapperXML)
 		{	// A page node : scroll lesson text, center self.
 			//console.log('Tap node '+this.data('id'));
 			if (!skipLTcenter){// avoid double-sync
-				document.getElementById("ltframe").src = HREFBase +  href;
+				document.getElementById("ltframe").src = HREFBase + encodeURI(this.data('href2'));// href;
+				//console.log('Mapper to LT: '+HREFBase + this.data('href2'));
 			}
 			cy.animate( {zoom:1, center:{ eles: this} } );
 		}
@@ -262,7 +262,7 @@ function buildMap(CAMapperXML)
 		//cy.animate( { fit:{padding:30}})		
 		
 		var ltframe= $('#ltframe').contents();
-		
+
 		ltframe.find('a').click(function(){
 			scrollMap2HREF($(this).attr('href'));
 		});
@@ -309,6 +309,7 @@ var centerHREF;
 function scrollMap2HREF(href)
 {	// Center map on node with matching href, like 'P_005'
 	if (href=='') return;
+	//console.log('LT to Mapper: '+href);
 	centerHREF=href;
 	clearTimeout(centerTimer);
 	centerTimer = setTimeout(function(){
@@ -316,6 +317,9 @@ function scrollMap2HREF(href)
 		skipLTcenter=true;
 		var node = elements.find(function(e){
 			return e.data.href == href;
+		});
+		if (!node) node = elements.find(function(e){
+			return e.data.href2== href;
 		});
 		if ( node ){
 			//console.log('mapper node='+node.data.id);
