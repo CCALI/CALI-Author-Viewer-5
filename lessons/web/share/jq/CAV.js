@@ -130,7 +130,7 @@ function processBook()
 			book.SelfPublished=true;
 			$('img.CL-logo').attr('src','img/APLessonLogo.gif').removeClass('CL-logo');
 		}
-		if (StartPage=='') StartPage=pageCONTENTS;//pageABOUT;
+		if (StartPage=='') StartPage=pageABOUT;//pageCONTENTS;//
 		gotoPage(StartPage);
 		doAutoNextTOC();
 		downloadScore();
@@ -1047,24 +1047,37 @@ function styleSheetSwitch(sheet)
 	$('link[title=style]').attr('href',sheet+".css");
 }
 
-// 
+var $nextTOC;
 var AutoNextTOCTimer;
 function doAutoNextTOC()
 {	// 10/2020 Upon return to TOC, automatically HILITE the next unvisited topic.
 	AutoNextTOCTimer=setTimeout(function()
 	{	
 		var $autoNextTOC;
+		var path=[];// Gather nesting sections for next unvisited topic.
 		$('#SliderControl ul:first a').removeClass('toc-hilite');
 		$('#SliderControl ul:first a[href^="jump"]').each(function()
 		{
 			if (!$autoNextTOC)
 				if (!$(this).hasClass('toc-visited'))
-					$autoNextTOC=$(this);
+				{
+					if ($(this).attr('href')!='jump://#')
+						$autoNextTOC=$(this);
+					path.push($(this).text());
+				}
 		});
 		if ($autoNextTOC)
 		{
-			//autoNextTOC.click();
 			$autoNextTOC.addClass('toc-hilite');
+			if (page.type=="Topics")
+			{	// 11/16/21 Set Next page button for Topic page.
+				var pagename = unescape(iefix( ($autoNextTOC.attr('href').split('://')[1])));
+				page.destPage=pagename;
+				$nextTOC=$autoNextTOC;// Allow Next to flag TOC as visited (same as if clicking in the TOC)
+				var text=path.join('<ul><li>');
+				text='<p>Press Next to proceed to the next section.</p><ul><li>'+text+'</ul>';// Level >1, bullet list.
+				pageTextDIV.append('<div class="ReadText">'+text+'</div>');
+			}
 		}
 	},1000);
 }

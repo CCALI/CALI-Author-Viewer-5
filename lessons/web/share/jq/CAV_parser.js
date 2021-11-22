@@ -18,7 +18,9 @@ function mapTOCUL2Viewer(ul,depth)
 	{
 		if ($(this).is('UL'))
 		{
-			txt+='<li><label class="nav-toggle nav-header toggle-icon" for="cl-hamburger"><a href="#" class="nav-toggle-icon glyphicon glyphicon-plus visited" title="button to open and close sub menus" aria-label="Button to open and close sub menus."><p class="toc-title">'+text+'</p></a></label><ul class="nav nav-list slider-left" style="display: none;">'+mapTOCUL2Viewer($(this),depth+1)+'</ul></li>\n';
+			// 11/16/21 Initially expand all subtopics
+			txt+='<li><label class="nav-toggle nav-header toggle-icon" for="cl-hamburger"><a href="#" class="nav-toggle-icon glyphicon glyphicon-minus visited" title="button to open and close sub menus" aria-label="Button to open and close sub menus."><p class="toc-title">'+text+'</p></a></label><ul class="nav nav-list slider-left" \
+				xstyle="display: none;">'+mapTOCUL2Viewer($(this),depth+1)+'</ul></li>\n';
 		}
 		else
 		if (!$(this).next().is('UL'))
@@ -38,7 +40,7 @@ function mapTOCUL2Viewer(ul,depth)
 	});
 	if (depth==0)
 	{	// Add special pages.
-		txt='<li><label class="nav-toggle-no-sub level-indent-no-sub"><a class="toc-link visited" href="'+pageABOUT+'"><p class="toc-title no-sub">About this Lesson</p></a></label></li>\n'+txt
+		txt='<li><label class="nav-toggle-no-sub level-indent-no-sub"><a class="toc-link visited toc-visited" href="'+pageABOUT+'"><p class="toc-title no-sub">About this Lesson</p></a></label></li>\n'+txt
 			+'<li><label class="nav-toggle-no-sub level-indent-no-sub"><a class="toc-link visited" href="'+pageLessonCompleted+'"><p class="toc-title no-sub">Complete the lesson</p></a></label></li>\n';
 	}
 	return txt;

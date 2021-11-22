@@ -39,6 +39,7 @@ function clickButton(id)
 	{
 		if (page.type=="Topics")
 		{	// Find next incomplete topic.
+			/*
 			page.destPage=null;
 			var firstPage=null;
 			$('#SliderControl ul:first a[href^="jump"]').each(function()
@@ -51,7 +52,15 @@ function clickButton(id)
 				}
 			});
 			if (!page.destPage) page.destPage=firstPage;
+			*/
+			if ($nextTOC)
+			{	
+				$nextTOC.addClass('toc-visited');
+			}
+			showTOC(false);
 		}
+				
+				
 		if (page.destPage)
 			gotoPage(page.destPage);
 		else
@@ -350,9 +359,9 @@ function renderPage()
 	// Page type specific layout
 	if (page.type=="Topics")
 	{
-		$(".PageName").text('');
-		//pageTextDIV.append('<p>Proceed to the next section of the lesson.</p>');
-		//addNextButton('choice://gonext',false);
+		$(".PageName").text('Continue lesson');
+		addNextButton('choice://gonext',false);
+		
 	}
 	else
 	if (page.name==pageABOUT)
