@@ -1051,11 +1051,37 @@ var $nextTOC;
 var AutoNextTOCTimer;
 function doAutoNextTOC()
 {	// 10/2020 Upon return to TOC, automatically HILITE the next unvisited topic.
+	clearTimeout(AutoNextTOCTimer);
 	AutoNextTOCTimer=setTimeout(function()
-	{	
+	{
+		$('#SliderControl ul:first a').removeClass('toc-hilite');
+
 		var $autoNextTOC;
 		var path=[];// Gather nesting sections for next unvisited topic.
-		$('#SliderControl ul:first a').removeClass('toc-hilite');
+		var text='<p>Please use the table of contents to review any part of the lesson.</p>';
+		function nest(index)
+		{
+			var $heading=$('a:first[href^="jump"]',this);
+			path.push($heading);
+			if (!$autoNextTOC)
+				if (!$heading.hasClass('toc-visited'))
+					if ($heading.attr('href')!='jump://#')
+					{	// Found first heading leading to a page that's not visited yet. Build our nested section message.
+						$autoNextTOC=$heading;
+						text='';
+						path.forEach(function($h,i){if(i<path.length-1)$h.addClass('toc-visited');text+='<ul><li>'+$h.text()});
+						text='<p>Press Next to proceed to the next section:</p><p>'+text+'</ul></p>';// Level >1, bullet list.
+					}
+			
+			$('ul:first',this).children('li').each(nest);
+			path.pop();
+		}
+		$('#SliderControl ul:first').children('li').each(nest);
+		
+		
+		
+		//#####################
+		/*
 		$('#SliderControl ul:first a[href^="jump"]').each(function()
 		{
 			if (!$autoNextTOC)
@@ -1066,6 +1092,7 @@ function doAutoNextTOC()
 					path.push($(this).text());
 				}
 		});
+		*/
 		if ($autoNextTOC)
 		{
 			$autoNextTOC.addClass('toc-hilite');
@@ -1074,10 +1101,14 @@ function doAutoNextTOC()
 				var pagename = unescape(iefix( ($autoNextTOC.attr('href').split('://')[1])));
 				page.destPage=pagename;
 				$nextTOC=$autoNextTOC;// Allow Next to flag TOC as visited (same as if clicking in the TOC)
-				var text=path.join('<ul><li>');
-				text='<p>Press Next to proceed to the next section.</p><ul><li>'+text+'</ul>';// Level >1, bullet list.
-				pageTextDIV.append('<div class="ReadText">'+text+'</div>');
+				//var text=path.join('<ul><li>');
+				//text='<p>Press Next to proceed to the next section:</p><p><ul><li>'+text+'</ul></p>';// Level >1, bullet list.
+				//$('.LinkNavBar').show();
 			}
+		}			// 12/13/21 What's next if all places visited?
+		if (page.type=="Topics")
+		{
+			pageTextDIV.append('<div class="ReadText"><div style="width: 50%; margin-left: 20%;margin-right: 20%"><div style="display: inline-block;">'+text+'</div></div></div>');
 		}
-	},1000);
+	},100);
 }

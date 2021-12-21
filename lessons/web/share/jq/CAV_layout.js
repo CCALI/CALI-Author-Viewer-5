@@ -356,12 +356,11 @@ function renderPage()
 		$('.faculty-view').html('<a target="LessonText" href="'+LessonTextJump(page.name)+'" class="faculty-link">'+t(lang.FacultyView)+'</a>');
 	}
 	
-	// Page type specific layout
+	// Page type specific layout	
 	if (page.type=="Topics")
 	{
-		$(".PageName").text('Continue lesson');
+		$(".PageName").text('');//Continue lesson');
 		addNextButton('choice://gonext',false);
-		
 	}
 	else
 	if (page.name==pageABOUT)
