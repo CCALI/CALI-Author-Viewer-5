@@ -328,7 +328,7 @@ function addNextButton(url,disabled)
 	disabled=false;// leave it always on for now. 
 	$(".PageSpecificNav").append('<div class="container-fluid"><div class="row"><div class="text-center">\
 		<a href="'+url+'"><button class="CL-btn CL-next-btn shine icon-arrow-right '+(disabled==true?'btn-disabled':'')+'"><span class="next-caption">'+t(lang.NextPage)+'</span><span class="next-arrow"/ ></button></a>\
-	</div></div></div>');
+		</div></div></div>');
 }
 
 function renderPage()
@@ -531,6 +531,10 @@ function LessonCompleted_layout()
 	//$(".PageSpecificNav").append(hyperButton(t(lang.TOC),'jump://'+pageTOC));
 	$(".PageText .ScoreReport .ScoreButtons").removeClass('hidestart');
 	ScoreScreenUpdate();
+	if (ScorePossible==0)
+	{
+		$(".PageText .ScoreReport .ScoreButtons").hide();
+	}
 }
 
 
