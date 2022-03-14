@@ -272,9 +272,11 @@ function thtml(msg)
 function patchLink()
 {	// todo jquery .live() handler instead
 
+	$('#LessonControl a[href^="http"], #Lesson a[href^="https"]').unbind('click').click(function(e){
+		e.preventDefault();
+		window.open($(this).attr('href'));
+	});//03/14/22 Open all question, choice and feedback links in new window.
 	
-	//$('#Lesson a[href^="http"], #Lesson a[href^="https"]').unbind('click');//03/16/21
-
 	
 	$('#LessonControl a[href^="jump"]').unbind('click').click(navClick);
 	//$('#SliderControl a[href^="jump"]').unbind('click');//Bitovi 
@@ -341,6 +343,7 @@ function gotoPage(pageName, skipCA)
 	//set hash below instead //top.location.hash=pageName;
 	page = book.pages[pageName];
 	
+	$('#open-tudor').hide();
 	$('#zoomin').remove();
 	$('.PageBorder').show();
 	if (page==null )
@@ -590,7 +593,8 @@ function showFeedback(grade,title,fbID, feedbackText,branch,branchChoice)
 			+'<div class="FeedbackButton">'+hyperButton(  (branch && page.destPage)? t(lang.NextPage):t(lang.ClosePopup),'#')+'</div>'
 			+'</div>';
 		*/
-		let txt=popupAlertHTML(grade,fbID+'_alert',title,feedbackText);
+		let fbID2=(fbID.indexOf('#')==0)?fbID.substr(1):fbID;//03/14/22 Fix bad ID
+		let txt=popupAlertHTML(grade,fbID2+'_alert',title,feedbackText);
 		$(fbID).empty().append(txt).children('.Feedback').hide().animate({},1,function(){scrollIntoView($(this).parent())}).delay(100).fadeIn(500,function(){});
 		patchLink();
 		if (branch && page.destPage)
@@ -603,6 +607,7 @@ function showFeedback(grade,title,fbID, feedbackText,branch,branchChoice)
 					scrollIntoView($(this).parent().prev());
 				}).fadeOut(500,function(){$(this).remove();});return false;});
 		}
+		addCALITudor();
 	}
 	// Change Skip to Next, if applicable
 	//$("#gonext span").text(t('Next')).attr('title',"Next page is "+((page.destPage==null)?page.nextPage:page.destPage)).parent().show();
@@ -996,7 +1001,6 @@ function initialize()
 		);
 		$('#feedbackModal').modal('hide');
 	});
-	
 }//end of load after document
 
 /*
@@ -1112,3 +1116,8 @@ function doAutoNextTOC()
 		}
 	},100);
 }
+var CALITudor;
+function addCALITudor()//01/06/22
+{
+}
+
