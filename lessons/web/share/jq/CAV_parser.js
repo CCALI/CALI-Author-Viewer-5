@@ -242,6 +242,14 @@ function parsePageXML(pageXML)
 	page.videoSrc = fixMediaPath(pageXML.find("VIDEO").attr("SRC"));
 	page.videoEmbedCode = pageXML.find("VIDEO").attr("EMBED");
 	
+	var discussion=pageXML.children("DISCUSSION");//03/29/22
+	if (discussion.attr("SRC")!=null)
+	{
+		page.discussion={src:dicussion.discussion.attr("SRC"),layout:discussion.attr("LAYOUT"),transcript:discussion.xml()};
+	}
+	
+	
+	
 	var snd=pageXML.find("SOUND");
 	page.soundSrc = fixMediaPath(snd.attr("SRC"));
 	if (page.soundSrc!=null)
