@@ -1,0 +1,427 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<script>
+
+function pageName2Anchor(name)
+{
+	return 'Page_'+encodeURI(name);
+}
+
+var grade2emo={'':'','RIGHT':'✅','WRONG':'&#x274C;'}
+/**
+ * @param {TPage} 
+ */
+function reportPage(page)
+{
+	function imgGradeIcon(grade)
+	{
+		return grade2emo[grade];
+		//return '<img src=/lessons/web/share/jq/'+gradeIcon(grade)+'>';
+	}
+	function textFeedback(id)
+	{
+		var fb=page.feedbacks[id];
+		var text=fb.text + page.feedbackShared;
+		return '<table><tr><td>'+imgGradeIcon(fb.grade)+'</td><td><div class="grade-fb grade-'+fb.grade+'">'+text+'</div></td></tr></table>';
+	}
+	// TODO : Score save data is in alpha order, not flow order. Flow order may be problem with branching and backtracking. A solution: use TOC>Mapper flow path
+	var html='';
+	var info='';
+	html+='<a id="'+pageName2Anchor(page.name)+'" />'
+	html+='<h2>'+page.name+'</h2>';
+	if (page.type==kPOPUP)
+	{
+		html+=(page.text);
+	}
+	else
+	if (page.timeSpent<2)
+	{
+		html+='Did not visit this page';
+	}
+	else
+	{
+		info+=page.type+'/'+page.style;
+		var score=null;
+		if (page.scores && page.scores.length>0 && page.scores[0])
+		{
+			score=page.scores[0];
+			info+='<div>Choice:'+score.id+' Score:'+score.grade+'</div>';
+		}
+		info+='<div>Time spent: '+page.timeSpent+' seconds.</div>';
+		if (info!='')
+		{
+			html+='<div style="background: #eee">'+info+'</div><br>';
+		}
+		html+=(page.text);
+		
+		if (page.type=="Book Page")
+		{
+			
+		}
+		else if (page.type=="Multiple Choice" && page.style=="Choose List")
+		{	// Page type: Multiple choice style A,B,C,...
+			var detailsText="";
+			var correctid=-1;
+			for (var d in page.details)
+			{
+				var fbid=fbIndex(0,d);
+				var fb=page.feedbacks[fbid];
+				fb.letter=page.details[d].letter;
+				if (fb.grade==RIGHT) correctid=d;
+				var showGrade=(d==score.id);
+				detailsText +='<tr valign=top><td>'+imgGradeIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td><td><div>'+page.details[d].text+'</div></td><tr>';
+			}
+			html+=('<table>'+detailsText +'</table>');
+			if (score.grade==RIGHT)
+			{
+				html+='<div>Your answer <b>'+page.details[score.id].letter+'</b> was correct and the response was: </div>'+textFeedback(fbIndex(0,score.id));
+			}
+			else
+			{
+				html+='<div>You answered <b>'+page.details[score.id].letter+'</b> and the response was:</div>'+textFeedback(fbIndex(0,score.id));
+				if (correctid>=0)
+					html+='<div>The correct answer was <b>'+page.details[correctid].letter+'</b> and the response was: </div>'+textFeedback(fbIndex(0,correctid));
+				else
+					html+='<div>There was no correct answer for this question. ';//https://www.cali.org/lessons/web/trt32/lessontext.php#Says%209%20of%2011
+			}
+		}
+		else if (page.type=="Multiple Choice" && page.style=="Choose MultiButtons")
+		{	// Multiple buttons for multiple items (subquestions)
+			var list='';
+			for (let d in page.details)
+			{
+				var correctid=-1;
+				score=page.scores[d];
+				let buttonList="";
+				let fbText="";
+				for (let c in page.captions)
+				{
+					let fb=page.feedbacks[fbIndex(c,d)];
+					fb.letter=page.captions[c];
+					if (fb.grade==RIGHT) correctid=c;
+					var showGrade=(c==score.id);
+					buttonList += '<td>'+imgGradeIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td>';
+				}
+				list+='<h3>Question '+(parseInt(d)+1)+'</h3><div>'+page.details[d].text +'</div><table><tr>'+buttonList+'</td></tr></table>';
+				if (score.grade==RIGHT)
+				{
+					list+='<div>Your answer <b>'+page.captions[score.id]+'</b> was correct and the response was: </div>'+textFeedback(fbIndex(score.id,d));
+				}
+				else
+				{
+					list+='<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>'+textFeedback(fbIndex(score.id,d));
+					if (correctid>=0)
+						list+='<div>The correct answer was <b>'+page.captions[correctid]+'</b> and the response was: </div>'+textFeedback(fbIndex(correctid,d));
+				}
+				
+			}
+			html+=list;
+		}
+		else if (page.type=="Multiple Choice" && page.style=="Choose Buttons")
+		{	// Page type: Just Buttons like Yes, No, Maybe.
+			var choicesText="";
+			var fbText="";
+			for (var c in page.captions)
+			{
+				let fb=page.feedbacks[fbIndex(c,0)];
+				fb.letter=page.captions[c];
+				choicesText +=  '<span>'+page.captions[c]+'</span>';
+				fbText += '<div id=fbText'+fb.id+'></div>';
+			}
+			html+=choicesText+fbText;
+		} 
+		else if (page.type=="Multiple Choice" && page.style=="Radio Buttons") 			{}
+		else if (page.type=="Multiple Choice" && page.style=="Check Boxes")				{}
+		else if (page.type=="Multiple Choice" && page.style=="Check Boxes Set")			{}
+		else if (page.type=="Text Entry" && page.style=="Text Short Answer")				{}
+		else if (page.type=="Text Entry" && page.style=="Text Select")						{}
+		else if (page.type=="Text Entry" && page.style=="Text Essay")						{}
+		else if (page.type=="Prioritize" && page.style=="PDrag")								{}
+		else if (page.type=="Prioritize" && page.style=="PMatch")							{}
+		else if (page.type=="Slider")																	{}
+		else if (page.type=="GAME" && page.style=="FLASHCARD")								{}
+		else if (page.type=="GAME" && page.style=="HANGMAN")									{}
+		else {}
+		
+	}
+	html='<div class="Page">'+fixText(html)+'</div><hr />';
+	if (page.type==kPOPUP)
+		$('#Popups').append(html);
+	else
+		$('#Pages').append(html);
+}
+
+
+</script>
+<!--Mode.BEGIN-->
+<script type="text/javascript">
+//<![CDATA[
+var userName=null;
+var runid=null;
+var amode=0;
+var dispName=null;
+var orgName=null;
+var resumeScoreURL=null;
+runid="";
+userName="1TestUser";
+dispName="1Student Tester";
+orgName="1CALI Library";
+var resumeScoreURL="";
+var llMode='';
+var lessonid=0;
+
+
+
+
+// padding
+
+
+
+
+
+
+//]]>
+</script>
+<!--Mode.END-->
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script src="jQuery/jquery-1.6.1.min.js" type="text/javascript"></script>
+<script src="jQuery/jquery.xml.min.js" type="text/javascript"></script>
+<script src="CAV_urls.js" type="text/javascript"></script>
+<script src="CAV_lang.js" type="text/javascript"></script>
+<script src="CAV_types.js" type="text/javascript"></script>
+<script src="CAV_parser.js" type="text/javascript"></script>
+<link xhref="https://www.cali.org/sites/all/themes/cali/stylesheets/style.css" rel="stylesheet" type="text/css" />
+<link href="../css/LessonText.css" rel="stylesheet" type="text/css" />
+<link href="CALILessonFont/style.css" rel="stylesheet" type="text/css" />
+
+<title>BETA Lesson Review - CALI</title>
+<script language="javascript">
+	
+var book; // =new TBook();
+//var bookXML;
+//var bookInfoXML;
+var scoreDataXML;
+var lessonPath;
+book = new TBook();
+
+// Load ScoreSave XML, load Lesson XML	
+function piwikLog(tag)
+{	// 11/09/2016 
+  if (_paq) {
+	//var piwikURL ='/lessonlink/report/lessonpast/' + usage.lesson['Course ID'] + '/' + usage.lesson['Lesson ID'];
+	var piwikTitle='Lesson - Review - ' + (usage.lesson['Course Name']) + ' - ' + usage.lesson['Lesson Code'];
+	//_paq.push(['setCustomUrl', piwikURL]);
+	_paq.push(['setDocumentTitle',piwikTitle]);
+	_paq.push(['trackPageView']); 
+  }
+}
+var pageTypeNice={
+	// Transforms internal page type/style into something teacher friendly.
+	"Multiple Choice/Choose List":"Choose from list",
+	"Multiple Choice/Choose Buttons":"Choose one",
+	"Multiple Choice/Choose MultiButtons":"Choose one, with subquestions",
+	"Prioritize/PDrag":"Drag and Drop"
+	// Needs more entries here
+}
+
+$(document).ready(function()
+{
+	// Load score data, load lesson, build report.
+	trace(resumeScoreURL);
+	//runid =  (getParameterByName('runid')); 
+	//courseid =  (getParameterByName('courseid'));
+	//lessonid =  (getParameterByName('lessonid'));
+	trace(book);
+	if (resumeScoreURL!=""){
+		scoreDataDownload();
+	}
+});
+
+function scoreDataDownload()
+{	// Download score save xml summary data from website
+	trace(resumeScoreURL);
+	$.ajax({
+		url: resumeScoreURL,
+		dataType: "xml",
+		timeout: 15000,
+		error: function(data,textStatus,thrownError){
+			$('#info').html('Unable to load your score information.'+textStatus);
+		 },
+		success: function(data)
+		{
+			scoreDataXML = data;
+			scoreDataXML=$(scoreDataXML);
+			var lessonCode=scoreDataXML.find('LESSONID').text();
+			lessonPath="/lessons/web/"+lessonCode.toLowerCase()+'/';
+			trace({code:lessonCode,path:lessonPath});
+			loadBookXML();
+		}
+	});
+	return false;
+}
+
+function loadBookXML()
+{
+	var bookFile=lessonPath+'jqBookData.xml';
+	$.ajax({
+		url: bookFile,
+		dataType: "xml", //5/29/18 ($.browser.msie) ? "text" : "xml", // IE will only load XML file from local disk as text, not xml.
+		timeout: 45000,
+		error: function(data,textStatus,thrownError){
+		  alert('Error occurred loading the XML from '+this.url+"\n"+textStatus);
+		 },
+		success: function(data){
+			var bookDataXML;
+			bookDataXML = data;
+			bookDataXML=$(bookDataXML);
+			parseBookXML(bookDataXML);
+		}
+	});
+}
+
+var pageList=[];
+function processBook()
+{
+	scoreSaveIntoBook();
+	$('#info').hide();
+	trace('ready');
+
+	pageList.forEach(function(page){
+		reportPage(page);
+	});
+	for (var p in book.pages)
+	{
+		var page=book.pages[p];
+		if (pageList.indexOf(page)<0)
+			reportPage(page);
+	}
+}
+function scoreSaveIntoBook()
+{
+	//var resumePageName=scoreDataXML.find("PAGECURRENT").xml();
+	scoreDataXML.find("Q").each(function() {
+		var scoreXML = $(this);
+		var name=scoreXML.find("NAME").xml();
+		var subq=scoreXML.find("SUBQ").xml(); 
+		if (subq=="") subq=0;else subq = parseInt(subq)-1;
+		var page=book.pages[name];
+		trace(name);
+		if (page!=null)
+		{
+			page.timeSpent=parseInt(scoreXML.find("TIME").xml());
+			var grade=scoreXML.find("GRADE").xml();
+			if (grade!="")
+			{
+				var score;
+				if (page.scores[subq]==null) page.scores[subq]= new TScore(); 
+				score=page.scores[subq];
+				score.grade=grade;
+				score.id=parseInt(scoreXML.find("ID").xml());
+				score.text=scoreXML.find("TEXT").xml();
+			}
+			if (pageList.indexOf(page)<0)
+				pageList.push(page);
+		}
+		else
+		{
+			//trace("Page "+name+" no longer exists in this lesson");
+		}
+	});
+}
+
+function trace(a)
+{
+	if (console && console.log){console.log(a);}
+}
+
+function getParameterByName(name, url)
+{	//http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript?noredirect=1
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+function gradeIcon(grade)
+{
+	if (grade==null || grade=="")
+		grade="blank";
+	return "img/grade-"+(grade).toLowerCase()+".gif";
+}
+function nthLetter(n){ return "ABCDEFG".charAt(n)+".";}
+
+function fixText(text)
+{	// Convert popup/jumps into HTML anchor tags.Ensure image paths are localized.
+	var $e=$('<div />').html(text);
+	$e.find('a').each(function()
+	{
+		var tip;
+		var href=$(this).attr('href');
+		if (href)
+		{
+			if (href.indexOf('popup://')==0)
+			{
+				tip=decodeURI(href.substr(8));
+				$(this).attr('href','#Page_'+tip);
+			}
+			else
+			if (href.indexOf('jump://')==0)
+			{
+				tip=decodeURI(href.substr(7));
+				$(this).attr('href','#Page_'+tip);
+			}
+			else
+			if (href.indexOf('#')==0)
+			{	// Section links
+			}
+			else
+			{	// Any other link (external) goes to new browser window.
+				$(this).attr('target','_blank');
+			}
+			if ($(this).html()=='§&nbsp;')
+			{	// Patch: skip section symbol links.
+			}
+		}
+		else
+		{	// Possible there's A NAME tag instead. Just ignore it.
+			//console.log({err:'Missing HREF',text:text,page:page});
+		}
+
+	});
+	$e.find('img').each(function()
+	{	// Any embedded images which are 'relative' may need path fixing.
+		var src=$(this).attr('src');
+		if (src.indexOf('/')<0)
+			$(this).attr('src',lessonPath+src);
+	});
+	text=$e.html();
+	return text;
+}
+
+
+</script>
+</head>
+
+<body>
+	<p class="logo"></p>
+<h1>Lesson Review</h1>
+<h2>Course Lesson Information</h2>
+
+<ul id=info>
+	Loading lesson and score history <img src="img/ajax-loader.gif">
+</ul>
+<div id="Report" class="Report">
+	<div id="Pages"></div>
+	<p class="vertgap"></p>
+	<h1>Popups</h1>
+	<div id="Popups"></div>
+	<p class="vertgap"> </p>
+	<p class="vertgap"> </p>
+</div>
+<footer>Copyright 1999-2022 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved.</footer>
+</body>
+</html>
