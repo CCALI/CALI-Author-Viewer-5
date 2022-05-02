@@ -12,7 +12,7 @@ $authmode=0;
 // Code copied from lesson.php.
 if ( 1 ) {
 	$runid="zz";//11812066"; // 88100188";
-	$resumescore="/lessons/scoresavetest/LessonReview scoreSaveSample2.xml";//"/lesson/scoreload/".dechex($runid*47);
+	$resumescore="LessonReview scoreSaveSample.xml";//"/lesson/scoreload/".dechex($runid*47);
 	$userid=203;
 	$username="2StudentTestAccount";	$firstname = "2Local";	$lastname = "2Student Tester";$authmode=0; // no faculty permissions.
 	$orgname ="2Center for Computer-Assisted Legal Tutorial Testers";
