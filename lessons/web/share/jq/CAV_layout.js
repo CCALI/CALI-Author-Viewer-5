@@ -218,7 +218,32 @@ function textWithMedia(pageText, page)
 		$('#picloader').attr('src','img/ajax-loader.gif').unbind('load');
 		$('#picloader').load(pictureLoaded).attr('src',src);
 	}
+
+	if (page.discussion && page.type=="Book Page")
+	{	// 4/22 Discussions on book pages are at the top, full width.
+		var vid='<div style="width: 100%; height: auto">\
+					<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>\
+					</div>';
+		$(pageText).prepend(vid);
+	}
 }
+
+function addDiscussionFeedback()
+{	// 01/06/22
+	var src=page.discussion.src;
+	if ($('#open-tudor').length==0)
+	{	// Add a Discussion button next to Next, after first feedback attempt.
+		$('.PageSpecificNav a:first').parent().prepend('<button id="open-tudor" class="CL-btn CL-next-btn shine"><span class="next-caption">Discussion</span></button>');
+		$('#open-tudor').click(function(){
+			var vid='<div style="width: 100%; height: auto">\
+				<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>\
+				</div>';
+			showFeedback(INFO,"Discussion","#fbText",vid);
+			console.log({DiscussionTranscript:page.discussion.transcript});
+			});
+	}
+}
+
 
 
 function pictureLoaded()
