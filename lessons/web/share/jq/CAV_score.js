@@ -26,7 +26,7 @@ function buildScoreSaveXML()
 	var xml="";
 	var qxml="";
 	var sxml="";
-	sxml=	qtag("FORMAT","07/25/2011")
+	sxml=	qtag("FORMAT","05/05/2022")//"07/25/2011")
 			+qtag("RUNID",runid)
 			//+qtag("USERNAME", username)
 			//+qtag("RUNDATE",new Date()) Warning! Adding date will cause it to CHANGE everytime and do constant uploading!
@@ -58,6 +58,7 @@ function buildScoreSaveXML()
 				 qtag("NAME",decodeHTML(pagep.name))
 				+qtag("TYPE",pagep.type+"/"+ (pagep.style==null ? "":pagep.style))
 				+qtag("TIME",pagep.timeSpent)
+				+qtag("TIMESTAMP",pagep.timeStamp?pagep.timeStamp:0)
 				+(pagep.scores.length>1 ? qtag("SUBQ",part+1) : "")
 				+(score==null ? "" : 
 					qtag("GRADE",score.grade)
@@ -97,6 +98,7 @@ function downloadScore()
 				if (page!=null)
 				{
 					page.timeSpent=parseInt(scoreXML.find("TIME").xml());
+					page.timeStamp=parseInt(scoreXML.find("TIMESTAMP").xml()); if (page.timeStamp==0) delete page.timeStamp;
 					var grade=scoreXML.find("GRADE").xml();
 					if (grade!="")
 					{
