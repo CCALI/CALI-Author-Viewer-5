@@ -615,6 +615,33 @@ function iButton2(caption,id,grade)
 {	// Button like 'Yes' which gets a grade icon and error message.
 	return '<div class="btn-group"><label id="'+id+'" for="grade'+id+'" class="btn btn-default CL-choose-btn-'+grade.toLowerCase()+' spacer"><input id="grade'+id+'" name="grade'+id+'" autocomplete="off" type="checkbox">'+caption+'</label><div class="hint"><span id="chooseBtnGrade'+id+'" class="'+gradeGlyphIconMap[grade]+' un-spacer" aria-live="polite" role="definition" aria-labelledby="correctAnswer'+id+'"><p id="correctAnswer'+id+'">'+lang[grade]+'</p></span></div></div>';
 }
+
+
+
+
+
+var gradeReview2emo={'':'','RIGHT':'✅','WRONG':'&#x274C;','MAYBE':'<b>?</b>','INFO':'I'};
+function imgGradeReviewIcon(grade)
+{
+	return gradeReview2emo[grade];	//return '<img src=/lessons/web/share/jq/'+gradeIcon(grade)+'>';
+}
+function textReviewFeedback(heading,id,includeShared)
+{
+	var fb=page.feedbacks[id];
+	var text=fb.text;
+	if (!(includeShared==false))
+		text+='<br />'+page.feedbackShared;
+	if (fb.next)
+	{
+		text+='<br />Branch to another page.';
+	}
+	return heading+'<table><tr><td>'+imgGradeReviewIcon(fb.grade)+'</td><td><div class="grade-fb grade-'+fb.grade+'">'+text+'</div></td></tr></table>';
+}
+function pageLessonReviewReport(html)
+{
+	pageInteractionDIV.append('<div class=Report>'+html+'</div>');
+}
+
 function Buttons_layout()
 {	// Page type: Just Buttons like Yes, No, Maybe.
 
@@ -622,6 +649,7 @@ function Buttons_layout()
 	{	// 05/05/22 Lesson Review version
 		var html='';
 		var score=page.scores[0];
+		var correctid=-1;
 		var buttonList="";
 		for (var c in page.captions)
 		{
@@ -629,20 +657,26 @@ function Buttons_layout()
 			fb.letter=page.captions[c];
 			if (fb.grade==RIGHT) correctid=c;
 			var showGrade=(c==score.id);
+			if (showGrade)
+			{	// Ensure Next button follows their answer's feedback branch.
+				page.destPage=fb.next;
+				console.log(fb);
+			}
 			buttonList += '<td>'+imgGradeReviewIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td>';
 		}	
 		html+='<table><tr>'+buttonList+'</td></tr></table>';
 		if (score.grade==RIGHT)
 		{
-			html+='<div>Your answer <b>'+page.captions[score.id]+'</b> was correct and the response was: </div>'+textReviewFeedback(fbIndex(score.id,0));
+			html+=textReviewFeedback('<div>Your answer <b>'+page.captions[score.id]+'</b> was correct and the response was: </div>',fbIndex(score.id,0));
 		}
 		else
 		{
-			html+='<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>'+textReviewFeedback(fbIndex(score.id,0));
+			html+=textReviewFeedback('<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>',fbIndex(score.id,0));
 			if (correctid>=0)
-				html+='<div>The correct answer was <b>'+page.captions[correctid]+'</b> and the response was: </div>'+textReviewFeedback(fbIndex(correctid,0));
+				html+=textReviewFeedback('<div>The correct answer was <b>'+page.captions[correctid]+'</b> and the response was: </div>',fbIndex(correctid,0),false);
 		}
 		pageLessonReviewReport(html);
+		pageInteractionDIV.append('<div id=fbText></div>');
 	}
 	else
 	{
@@ -664,6 +698,63 @@ function Buttons_layout()
 	}
 } 
 
+function ButtonList_layout()
+{	// Page type: Multiple choice style A,B,C,...
+	var detailsText="";
+	if (page.scores && page.scores.length>0 && page.scores[0])
+	{	// 05/05/22 Lesson Review version
+		var html='';
+		var score=page.scores[0];
+		var correctid=-1;
+		for (var d in page.details)
+		{
+			var fbid=fbIndex(0,d);
+			var fb=page.feedbacks[fbid];
+			fb.letter=page.details[d].letter;
+			if (fb.grade==RIGHT) correctid=d;
+			var showGrade=(d==score.id);
+			if (showGrade)
+			{	// Ensure Next button follows their answer's feedback branch.
+				page.destPage=fb.next;
+			}
+			detailsText +='<tr valign=top><td>'+imgGradeReviewIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td><td><div>'+page.details[d].text+'</div></td><tr>';
+		}
+		html+=('<table>'+detailsText +'</table>');
+		if (score.grade==RIGHT)
+		{
+			html+=textReviewFeedback('<div>Your answer <b>'+page.details[score.id].letter+'</b> was correct and the response was: </div>',fbIndex(0,score.id));
+		}
+		else
+		{
+			html+=textReviewFeedback('<div>You answered <b>'+page.details[score.id].letter+'</b> and the response was:</div>',fbIndex(0,score.id));
+			if (correctid>=0)
+				html+=textReviewFeedback('<div>The correct answer was <b>'+page.details[correctid].letter+'</b> and that response is: </div>',fbIndex(0,correctid),false);
+			else
+				html+='<div>There was no correct answer for this question. ';//https://www.cali.org/lessons/web/trt32/lessontext.php#Says%209%20of%2011
+		}
+		pageLessonReviewReport(html);
+		pageInteractionDIV.append('<div id=fbText></div>');
+	}
+	else
+	{
+		function iButton3(caption,id,grade,text)
+		{	// A button like 'A' or 'B' next to paragraph(s) of text with coloring and icon/error text appearing below the paragraph(s).
+			return '<div class="btn-group"><label id="'+id+'" for="grade'+id+'" class="btn btn-default CL-choose-btn-'+grade.toLowerCase()+'"><input id="grade'+id+'" name="grade'+id+'" autocomplete="off" type="checkbox">'+caption+'</label><div class="multi-btn-txt">'+text+'</div><div class="hint"><span id="chooseBtnGrade'+id+'" class="'+gradeGlyphIconMap[grade]+'" aria-live="polite" role="definition" aria-labelledby="correctAnswer'+id+'"><p id="correctAnswer'+id+'">'+lang[grade]+'</p></span></div></div><div class="gap"></div>';
+		}
+		for (var d in page.details)
+		{
+			var fb=page.feedbacks[fbIndex(0,d)];
+			fb.letter=page.details[d].letter;
+			detailsText +=  iButton3(fb.letter, fb.id,fb.grade,page.details[d].text)
+						//+'<p class="multi-btn-txt">'+'The highlighting means that this is linked to some other page or Pop-up page in the lesson. Creating such pages and pop-up boxes can be very useful to deliver more information to students. Such links can be created in any of your questions or feedback. How these links, pages, and pop-up boxes are created is discussed elsewhere in this lesson. Click on the highlighted word to see where this link takes you'
+						+(lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>' : '')
+						+'<div id=fbText'+fb.id+'></div>';
+		}
+		pageInteractionDIV.append('<div class="btn-group-vertical" data-toggle="buttons">'+detailsText +'</div>');
+		pageInteractionDIV.append('<div id=fbText></div>');
+		$('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
+	}
+}
 function MultiButtonList_layout()
 {	// Multiple buttons for multiple items (subquestions)
 	let nextD=0;// Find next unanswered subquestion.
@@ -689,16 +780,16 @@ function MultiButtonList_layout()
 			list+='<h3>Question '+(parseInt(d)+1)+'</h3><div>'+page.details[d].text +'</div><table><tr>'+buttonList+'</td></tr></table>';
 			if (score.grade==RIGHT)
 			{
-				list+='<div>Your answer <b>'+page.captions[score.id]+'</b> was correct and the response was: </div>'+textReviewFeedback(fbIndex(score.id,d));
+				list+=textReviewFeedback('<div>Your answer <b>'+page.captions[score.id]+'</b> was correct and the response was: </div>',fbIndex(score.id,d));
 			}
 			else
 			{
 				if (score.id<0)
 					list+='<div>You did not answer this question and receive no credit.</div>';
 				else
-					list+='<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>'+textReviewFeedback(fbIndex(score.id,d));
+					list+=textReviewFeedback('<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>',fbIndex(score.id,d));
 				if (correctid>=0)
-					list+='<div>The correct answer was <b>'+page.captions[correctid]+'</b> and the response is: </div>'+textReviewFeedback(fbIndex(correctid,d));
+					list+=textReviewFeedback('<div>The correct answer was <b>'+page.captions[correctid]+'</b> and the response is: </div>',fbIndex(correctid,d),false);
 			}
 			html+='<div class=Report>'+list+'</div>';
 		}
@@ -720,9 +811,9 @@ function MultiButtonList_layout()
 		}
 	}
 	pageInteractionDIV.append(html);
+	pageInteractionDIV.append('<div id=fbText></div>');
 	if (nextD<page.details.length)
 	{
-		pageInteractionDIV.append('<div id=fbText></div>');
 		$('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
 		// Fade in subquestions
 		page.subq=nextD;
@@ -733,75 +824,6 @@ function MultiButtonList_layout()
 
 
 
-
-var gradeReview2emo={'':'','RIGHT':'✅','WRONG':'&#x274C;','MAYBE':'<b>?</b>','INFO':'I'};
-function imgGradeReviewIcon(grade)
-{
-	return gradeReview2emo[grade];	//return '<img src=/lessons/web/share/jq/'+gradeIcon(grade)+'>';
-}
-function textReviewFeedback(id)
-{
-	var fb=page.feedbacks[id];
-	var text=fb.text + page.feedbackShared;
-	return '<table><tr><td>'+imgGradeReviewIcon(fb.grade)+'</td><td><div class="grade-fb grade-'+fb.grade+'">'+text+'</div></td></tr></table>';
-}
-function pageLessonReviewReport(html)
-{
-	pageInteractionDIV.append('<div class=Report>'+html+'</div>');
-}
-
-function ButtonList_layout()
-{	// Page type: Multiple choice style A,B,C,...
-	var detailsText="";
-	if (page.scores && page.scores.length>0 && page.scores[0])
-	{	// 05/05/22 Lesson Review version
-		var html='';
-		var score=page.scores[0];
-		var correctid=-1;
-		for (var d in page.details)
-		{
-			var fbid=fbIndex(0,d);
-			var fb=page.feedbacks[fbid];
-			fb.letter=page.details[d].letter;
-			if (fb.grade==RIGHT) correctid=d;
-			var showGrade=(d==score.id);
-			detailsText +='<tr valign=top><td>'+imgGradeReviewIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td><td><div>'+page.details[d].text+'</div></td><tr>';
-		}
-		html+=('<table>'+detailsText +'</table>');
-		if (score.grade==RIGHT)
-		{
-			html+='<div>Your answer <b>'+page.details[score.id].letter+'</b> was correct and the response was: </div>'+textReviewFeedback(fbIndex(0,score.id));
-		}
-		else
-		{
-			html+='<div>You answered <b>'+page.details[score.id].letter+'</b> and the response was:</div>'+textReviewFeedback(fbIndex(0,score.id));
-			if (correctid>=0)
-				html+='<div>The correct answer was <b>'+page.details[correctid].letter+'</b> and that response is: </div>'+textReviewFeedback(fbIndex(0,correctid));
-			else
-				html+='<div>There was no correct answer for this question. ';//https://www.cali.org/lessons/web/trt32/lessontext.php#Says%209%20of%2011
-		}
-		pageLessonReviewReport(html);
-	}
-	else
-	{
-		function iButton3(caption,id,grade,text)
-		{	// A button like 'A' or 'B' next to paragraph(s) of text with coloring and icon/error text appearing below the paragraph(s).
-			return '<div class="btn-group"><label id="'+id+'" for="grade'+id+'" class="btn btn-default CL-choose-btn-'+grade.toLowerCase()+'"><input id="grade'+id+'" name="grade'+id+'" autocomplete="off" type="checkbox">'+caption+'</label><div class="multi-btn-txt">'+text+'</div><div class="hint"><span id="chooseBtnGrade'+id+'" class="'+gradeGlyphIconMap[grade]+'" aria-live="polite" role="definition" aria-labelledby="correctAnswer'+id+'"><p id="correctAnswer'+id+'">'+lang[grade]+'</p></span></div></div><div class="gap"></div>';
-		}
-		for (var d in page.details)
-		{
-			var fb=page.feedbacks[fbIndex(0,d)];
-			fb.letter=page.details[d].letter;
-			detailsText +=  iButton3(fb.letter, fb.id,fb.grade,page.details[d].text)
-						//+'<p class="multi-btn-txt">'+'The highlighting means that this is linked to some other page or Pop-up page in the lesson. Creating such pages and pop-up boxes can be very useful to deliver more information to students. Such links can be created in any of your questions or feedback. How these links, pages, and pop-up boxes are created is discussed elsewhere in this lesson. Click on the highlighted word to see where this link takes you'
-						+(lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>' : '')
-						+'<div id=fbText'+fb.id+'></div>';
-		}
-		pageInteractionDIV.append('<div class="btn-group-vertical" data-toggle="buttons">'+detailsText +'</div>');
-		pageInteractionDIV.append('<div id=fbText></div>');
-		$('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
-	}
-}
 
 function iButton(caption,id)
 {	// choice option hyperlink styled as button
