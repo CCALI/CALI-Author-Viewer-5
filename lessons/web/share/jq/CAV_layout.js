@@ -633,7 +633,7 @@ function textReviewFeedback(heading,id,includeShared)
 		text+='<br />'+page.feedbackShared;
 	if (fb.next)
 	{
-		text+='<br />Branch to another page.';
+		text+='<br />Branch to page <i>'+fb.next+'</i>.';
 	}
 	return heading+'<table><tr><td>'+imgGradeReviewIcon(fb.grade)+'</td><td><div class="grade-fb grade-'+fb.grade+'">'+text+'</div></td></tr></table>';
 }
@@ -660,7 +660,6 @@ function Buttons_layout()
 			if (showGrade)
 			{	// Ensure Next button follows their answer's feedback branch.
 				page.destPage=fb.next;
-				console.log(fb);
 			}
 			buttonList += '<td>'+imgGradeReviewIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td>';
 		}	
@@ -671,6 +670,10 @@ function Buttons_layout()
 		}
 		else
 		{
+			if (page.nextPageDisabled && (!page.destPage) && correctid>=0)
+			{	// Next page disabled but dest page wasn't set (student's answer didn't have a branch), grab it from correct answer.
+				page.destPage=page.feedbacks[fbIndex(0,correctid)].next;
+			}
 			html+=textReviewFeedback('<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>',fbIndex(score.id,0));
 			if (correctid>=0)
 				html+=textReviewFeedback('<div>The correct answer was <b>'+page.captions[correctid]+'</b> and the response was: </div>',fbIndex(correctid,0),false);
@@ -726,6 +729,10 @@ function ButtonList_layout()
 		}
 		else
 		{
+			if (page.nextPageDisabled && (!page.destPage) && correctid>=0)
+			{	// Next page disabled but dest page wasn't set (student's answer didn't have a branch), grab it from correct answer.
+				page.destPage=page.feedbacks[fbIndex(0,correctid)].next;
+			}
 			html+=textReviewFeedback('<div>You answered <b>'+page.details[score.id].letter+'</b> and the response was:</div>',fbIndex(0,score.id));
 			if (correctid>=0)
 				html+=textReviewFeedback('<div>The correct answer was <b>'+page.details[correctid].letter+'</b> and that response is: </div>',fbIndex(0,correctid),false);
