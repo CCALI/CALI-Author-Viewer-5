@@ -117,3 +117,12 @@ p.toc-title,.CLAccordion li a  {
 	font-size: 16px !important;
 }
 
+.VideoPopup {
+	width: 25%;
+	position: fixed;
+	height: auto;
+	top: 5;
+	right: 5;
+	z-index: 99999;
+}
+
