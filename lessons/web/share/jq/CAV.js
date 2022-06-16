@@ -24,6 +24,7 @@ var ScorePercent = "";//correct/total
 var ScoreTotalQuestions = 0;// count of all scored questions
 var ScoreTotalPages = 0;//count of all score pages
 var ScoreDetails = "";
+var lessonReviewMode=false;//If true, Lesson Review mode, set true when resuming a lesson with a COMPLETE=1 in score data.
 var doGrade = null;
 var doReveal = null;
 var globalToolbarLinks = [];// array of author defined toolbar links. form:  {text:'caption',url:'page name'}
@@ -336,7 +337,9 @@ function gotoPage(pageName, skipCA)
 	
 	// Record how long we spent on the current page before switching to the next.
 	if (page)
+	{
 		if (page.startSeconds) page.timeSpent += Math.ceil(curSeconds() - page.startSeconds);
+	}
 	
 	
 	
@@ -607,7 +610,8 @@ function showFeedback(grade,title,fbID, feedbackText,branch,branchChoice)
 					scrollIntoView($(this).parent().prev());
 				}).fadeOut(500,function(){$(this).remove();});return false;});
 		}
-		addDiscussionFeedback();
+		if (page.discussion)
+			addDiscussionFeedback();
 	}
 	// Change Skip to Next, if applicable
 	//$("#gonext span").text(t('Next')).attr('title',"Next page is "+((page.destPage==null)?page.nextPage:page.destPage)).parent().show();
@@ -1115,24 +1119,3 @@ function doAutoNextTOC()
 		}
 	},100);
 }
-
-
-function addDiscussionFeedback()//01/06/22
-{
-	if (page.discussion)
-	{
-		var src=page.discussion.src;
-		if ($('#open-tudor').length==0)
-		{	// Add a Discussion button next to Next, after first feedback attempt.
-			$('.PageSpecificNav a:first').parent().prepend('<button id="open-tudor" class="CL-btn CL-next-btn shine"><span class="next-caption">Discussion</span></button>');
-			$('#open-tudor').click(function(){
-				var vid='<div style="width: 100%; height: auto">\
-					<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>\
-					</div>';
-				showFeedback(INFO,"Discussion","#fbText",vid);
-				console.log({DiscussionTranscript:discussion.transcript});
-				});
-		}
-	}
-}
-
