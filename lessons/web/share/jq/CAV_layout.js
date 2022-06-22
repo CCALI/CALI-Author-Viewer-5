@@ -576,7 +576,7 @@ function LessonCompleted_layout()
 	//$(".PageSpecificNav").append(hyperButton(t(lang.TOC),'jump://'+pageTOC));
 	$(".PageText .ScoreReport .ScoreButtons").removeClass('hidestart');
 	ScoreScreenUpdate();
-	if (ScorePossible==0)
+	if (ScorePossible==0 || lessonReviewMode)
 	{
 		$(".PageText .ScoreReport .ScoreButtons").hide();
 	}
@@ -761,7 +761,7 @@ function MultiButtonList_layout()
 	{
 		let buttonList="";
 		
-		if (page.scores[d])
+		if (lessonReviewMode && page.answered & page.scores[d])
 		{	// 05/22 Answered subquestion, show LessonReview style.
 			nextD=parseInt(d)+1;
 			var correctid=-1;

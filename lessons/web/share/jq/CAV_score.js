@@ -378,6 +378,8 @@ function answerLoad()
 
 function saveScore(grade,id,text,part)
 {	// attach score to page, but only record 1st answer.
+	if (lessonReviewMode)
+		return;
 	if (part==null) part=0;
 	part=parseInt(part)
 	if (page.scores[part]==null)
