@@ -117,11 +117,12 @@ function downloadScore()
 				}
 			});
 			tallyScores();
-			if (bookMark=="" && resumePageName!="") gotoPage(resumePageName);
 			if (lessonReviewMode)
 			{
+				resumePageName='';
 				$('.PageScore').html('<div style="text-align:center">Lesson Review Mode<br />Scoring disabled</div>');
 			}
+			if (bookMark=="" && resumePageName!="") gotoPage(resumePageName);
 		}
 	});
 }
