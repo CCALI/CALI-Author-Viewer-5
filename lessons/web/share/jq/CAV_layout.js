@@ -365,12 +365,24 @@ function renderPage()
 	doHelp=null;
 	page.answered=(page.scores && page.scores.length>0 && page.scores[0])!==null;
 	//console.log({name:page.name,timeSpent:page.timeSpent,answered:page.answered});
-	
 	pageInteractionDIV.text('');
 	pageInteractionDIV.prepend((lessonLive.isTeacher? '<div class="llPageInfo"/>':''));
 	$(".PageSpecificGrade").empty();
 	$(".PageSpecificNav").empty();
 	pageTextDIV.hide().text('');
+
+
+
+
+
+
+
+	if (0)
+	{	console.log('Auto Show Answers');
+		lessonReviewMode=true;
+		page.answered=true;
+		page.nextPageDisabled=false;
+	}
 	
 
 	if (textBuffer!="")
@@ -381,7 +393,6 @@ function renderPage()
 	$(".PageName").text(page.name);//.append('<span class="Trace">(Type='+page.type+', Style='+page.style+')</span>');
 	if (amode==1)
 	{
-		//$(".PageName").append('<a target="LessonText" href="'+LessonTextJump(page.name) + '">'+t(lang.FacultyView)+'</a>');
 		$('.faculty-view').html('<a target="LessonText" href="'+LessonTextJump(page.name)+'" class="faculty-link">'+t(lang.FacultyView)+'</a>');
 	}
 	
@@ -443,12 +454,13 @@ function renderPage()
 		}
 		else
 		{
-			/*if (lessonReviewMode && !page.answered)
+			if (lessonReviewMode && !page.answered)
 			{
+				page.nextPageDisabled=false;
 				pageLessonReviewReport('<div class="grade-fb grade-'+INFO+'"<p>You did not answer this question before reviewing. Unanswered questions cannot be answered in Lesson Review.</div>');
 			}
 			else
-			*/
+			
 			if (page.type=="Multiple Choice" && page.style=="Choose Buttons")					Buttons_layout();
 			else if (page.type=="Multiple Choice" && page.style=="Choose List") 				ButtonList_layout();
 			else if (page.type=="Multiple Choice" && page.style=="Choose MultiButtons")	MultiButtonList_layout();
@@ -649,15 +661,15 @@ function Buttons_layout()
 			let fb=page.feedbacks[fbIndex(c,0)];
 			fb.letter=page.captions[c];
 			if (fb.grade==RIGHT) correctid=c;
-			var showGrade=(c==score.id);
+			var showGrade=score && (c==score.id);
 			if (showGrade)
 			{	// Ensure Next button follows their answer's feedback branch.
 				page.destPage=fb.next;
 			}
 			buttonList += '<td>'+imgGradeReviewIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td>';
-		}	
+		}
 		html+='<table><tr>'+buttonList+'</td></tr></table>';
-		if (score.grade==RIGHT)
+		if (score && score.grade==RIGHT)
 		{
 			html+=textReviewFeedback('<div>Your answer <b>'+page.captions[score.id]+'</b> was correct and the response was: </div>',fbIndex(score.id,0));
 		}
@@ -665,9 +677,11 @@ function Buttons_layout()
 		{
 			if ((correctid>=0) && ((page.nextPageDisabled && !page.destPage)))
 			{	// Next page disabled but dest page wasn't set (student's answer didn't have a branch), grab it from correct answer.
-				page.destPage=page.feedbacks[fbIndex(0,correctid)].next;
+				//console.log({fbIndex:fbIndex(0,correctid),fb:page.feedbacks});
+				page.destPage=page.feedbacks[fbIndex(correctid,0)].next;
 			}
-			html+=textReviewFeedback('<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>',fbIndex(score.id,0));
+			if (score)
+				html+=textReviewFeedback('<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>',fbIndex(score.id,0));
 			if (correctid>=0)
 				html+=textReviewFeedback('<div>The correct answer was <b>'+page.captions[correctid]+'</b> and the response was: </div>',fbIndex(correctid,0),false);
 		}
@@ -707,7 +721,7 @@ function ButtonList_layout()
 			var fb=page.feedbacks[fbid];
 			fb.letter=page.details[d].letter;
 			if (fb.grade==RIGHT) correctid=d;
-			var showGrade=(d==score.id);
+			var showGrade=score && (d==score.id);
 			if (showGrade)
 			{	// Ensure Next button follows their answer's feedback branch.
 				page.destPage=fb.next;
@@ -715,7 +729,7 @@ function ButtonList_layout()
 			detailsText +='<tr valign=top><td>'+imgGradeReviewIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td><td><div>'+page.details[d].text+'</div></td><tr>';
 		}
 		html+=('<table>'+detailsText +'</table>');
-		if (score.grade==RIGHT)
+		if (score && score.grade==RIGHT)
 		{
 			html+=textReviewFeedback('<div>Your answer <b>'+page.details[score.id].letter+'</b> was correct and the response was: </div>',fbIndex(0,score.id));
 		}
@@ -725,7 +739,8 @@ function ButtonList_layout()
 			{	// Next page disabled but dest page wasn't set (student's answer didn't have a branch), grab it from correct answer.
 				page.destPage=page.feedbacks[fbIndex(0,correctid)].next;
 			}
-			html+=textReviewFeedback('<div>You answered <b>'+page.details[score.id].letter+'</b> and the response was:</div>',fbIndex(0,score.id));
+			if (score)
+				html+=textReviewFeedback('<div>You answered <b>'+page.details[score.id].letter+'</b> and the response was:</div>',fbIndex(0,score.id));
 			if (correctid>=0)
 				html+=textReviewFeedback('<div>The correct answer was <b>'+page.details[correctid].letter+'</b> and that response is: </div>',fbIndex(0,correctid),false);
 			else
@@ -761,28 +776,28 @@ function MultiButtonList_layout()
 	{
 		let buttonList="";
 		
-		if (lessonReviewMode && page.answered & page.scores[d])
+		if (lessonReviewMode && page.answered)// & page.scores[d])
 		{	// 05/22 Answered subquestion, show LessonReview style.
 			nextD=parseInt(d)+1;
 			var correctid=-1;
 			let list='';
-			score=page.scores[d];
+			var score=page.scores[d];
 			for (let c in page.captions)
 			{
 				let fb=page.feedbacks[fbIndex(c,d)];
 				fb.letter=page.captions[c];
 				if (fb.grade==RIGHT) correctid=c;
-				var showGrade=(c==score.id);
+				var showGrade=score && (c==score.id);
 				buttonList += '<td>'+imgGradeReviewIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td>';
 			}
-			list+='<h3>Question '+(parseInt(d)+1)+'</h3><div>'+page.details[d].text +'</div><table><tr>'+buttonList+'</td></tr></table>';
-			if (score.grade==RIGHT)
+			list+='<h3>Question '+(parseInt(d)+1)+'</h3><div>'+page.details[d].text +'</div><table><tr>'+buttonList+'</td></tr></table><hr />';
+			if (score && score.grade==RIGHT)
 			{
 				list+=textReviewFeedback('<div>Your answer <b>'+page.captions[score.id]+'</b> was correct and the response was: </div>',fbIndex(score.id,d));
 			}
 			else
 			{
-				if (score.id<0)
+				if (!score || (score && score.id<0))
 					list+='<div>You did not answer this question and receive no credit.</div>';
 				else
 					list+=textReviewFeedback('<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>',fbIndex(score.id,d));
@@ -915,28 +930,42 @@ function TextSelect_reveal()
 
 function TextEssay_layout()
 {	// Essays in 3 forms: optional Initial text for user to examine, user's editable Answer field, and optional Final text for user to compare with.
-	let lastAnswer= (page.scores[0] ? page.scores[0].text : "");// restore user's last answer
-	page.TextColumns = 1;
-	if (page.initialText != "") page.TextColumns++;
-	if (page.correctText != "") page.TextColumns++;
-	let classCol='';
-	if (page.TextColumns==1)
-		classCol='col-sm-12';
-	else if (page.TextColumns==2)
-		classCol='col-sm-6';
+	let lastAnswer= (page.scores && page.scores[0] ? page.scores[0].text : "");// restore user's last answer
+	if (lessonReviewMode && page.answered)
+	{
+		let iText='';
+		if (page.correctText!="")
+			iText+='<p>Suggested correct answer is: <div>'+page.correctText+'</div>';
+		if (page.scores[0])
+			iText+='<p>Your answer was:</p><div>'+lastAnswer+'</div>';
+		pageLessonReviewReport(iText);
+	}
 	else
-		classCol='col-sm-4';
-	let iText= '<div class=EssayTable><div class="row">';
-	if (page.initialText!="")
-		iText+=writeEssayOrSelectColumn(classCol,"INITIAL","",page.initialText);
-	iText+=writeEssayOrSelectColumn(classCol,"ANSWER","",lastAnswer);
-	if (page.correctText!="")
-		iText+=writeEssayOrSelectColumn(classCol,"CORRECT",t(lang.ModelAnswerWillAppear),"");
-	iText+="</div></div>";
-	$(".PageSpecificGrade").append(helpTextWrapper(t(lang.HelpEssay))).append(reviewButton()).append('<div id=fbText></div>');
-	pageInteractionDIV.append(iText);
-	doGrade=TextEssay_grade;
+	{
+		page.TextColumns = 1;
+		if (page.initialText != "") page.TextColumns++;
+		if (page.correctText != "") page.TextColumns++;
+		let classCol='';
+		if (page.TextColumns==1)
+			classCol='col-sm-12';
+		else if (page.TextColumns==2)
+			classCol='col-sm-6';
+		else
+			classCol='col-sm-4';
+		let iText= '<div class=EssayTable><div class="row">';
+		if (page.initialText!="")
+			iText+=writeEssayOrSelectColumn(classCol,"INITIAL","",page.initialText);
+		iText+=writeEssayOrSelectColumn(classCol,"ANSWER","",lastAnswer);
+		if (page.correctText!="")
+			iText+=writeEssayOrSelectColumn(classCol,"CORRECT",t(lang.ModelAnswerWillAppear),"");
+		iText+="</div></div>";
+		$(".PageSpecificGrade").append(helpTextWrapper(t(lang.HelpEssay))).append(reviewButton()).append('<div id=fbText></div>');
+		pageInteractionDIV.append(iText);
+		doGrade=TextEssay_grade;
+	}
 }
+
+
 var zIndex; // z-order drag items above background
 
 function DrawLines_layout()
@@ -1544,22 +1573,39 @@ function CheckBoxes_reveal()
 	return false;
 }
 
+
 function RadioButtons_layout()
 {	// vertical layout: each subquestion followed by radio button list. 
-	let subQText=CheckBoxRadioButtonColumnHeadings();
-	pageInteractionDIV.append(subQText);
-	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
-	doGrade=RadioButtons_grade;
-	doReveal=RadioButtons_reveal;
+	if (lessonReviewMode && page.answered)
+	{	// 
+		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton(),+"<p>and the response is:</p>",true);
+		pageLessonReviewReport(html);
+	}
+	else
+	{
+		let subQText=CheckBoxRadioButtonColumnHeadings();
+		pageInteractionDIV.append(subQText);
+		$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
+		doGrade=RadioButtons_grade;
+		doReveal=RadioButtons_reveal;
+	}
 }
 
 function CheckBoxes_layout()
-{	// vertical layout: each subquestion followed by radio button list. 
-	let subQText=CheckBoxRadioButtonColumnHeadings();
-	pageInteractionDIV.append(subQText);
-	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
-	doGrade=CheckBoxes_grade;
-	doReveal=CheckBoxes_reveal;
+{	// vertical layout: each subquestion followed by radio button list.
+	if (lessonReviewMode && page.answered)
+	{	// 
+		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton(),+"<p>and the response is:</p>",true);
+		pageLessonReviewReport(html);
+	}
+	else
+	{
+		let subQText=CheckBoxRadioButtonColumnHeadings();
+		pageInteractionDIV.append(subQText);
+		$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
+		doGrade=CheckBoxes_grade;
+		doReveal=CheckBoxes_reveal;
+	}
 }
 function CheckBoxesSet_layout()
 {	// vertical layout: each subquestion followed by radio button list.
@@ -2061,3 +2107,40 @@ function pageLessonReviewReport(html)
 {	// Specific Lesson Review format.
 	pageInteractionDIV.append('<div class=Report>'+html+'</div>');
 }
+
+function textReviewCheckBoxRadioButton()
+{	// LessonText
+	let radio=(page.style=="Radio Buttons");
+	let caps=page.captions.length;
+	let html='';
+	if (caps>1)
+	{
+		html+='<tr>';
+		for (let c in page.captions)
+		{
+			html+='<td>'+page.captions[c]+'</td>';
+		}
+		html+='<td>-</td>';
+		html+='</tr>';
+	}
+	for (let d in page.details)
+	{
+		html+='<tr>';
+		//<tr><td>'+imgGradeReviewIcon(fb.grade)+'</td><td><div class="grade-fb grade-'+fb.grade+'">'+text+'</div></td></tr>
+		for (let c in page.captions)
+		{
+			let cdi =fbIndex(c,d);
+			let checked=page.checks[d][c]==true;
+			//$('input[id=cb'+cdi+']').attr('checked',page.checks[d][c]==true);
+			if (radio)
+				html+='<td><input type=radio value='+d+'-'+c+' '+(checked?'checked':'')+'/></td>'
+			else
+				html+='<td><input type=checkbox '+(checked?'checked':'')+'/></td>';
+		}
+		html+='<td><div class="ChoiceText ReadText"><p>'+page.details[d].text +'</p></div></td>';
+		html+='</td></tr>';
+	}
+	return '<div class="row"><div class="col-sm-12"><table>'+html+'</table></div></div>';
+}
+
+
