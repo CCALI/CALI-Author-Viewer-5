@@ -24,6 +24,7 @@ var ScorePercent = "";//correct/total
 var ScoreTotalQuestions = 0;// count of all scored questions
 var ScoreTotalPages = 0;//count of all score pages
 var ScoreDetails = "";
+var lessonReviewMode=false;//If true, Lesson Review mode, set true when resuming a lesson with a COMPLETE=1 in score data.
 var doGrade = null;
 var doReveal = null;
 var globalToolbarLinks = [];// array of author defined toolbar links. form:  {text:'caption',url:'page name'}
@@ -336,7 +337,9 @@ function gotoPage(pageName, skipCA)
 	
 	// Record how long we spent on the current page before switching to the next.
 	if (page)
+	{
 		if (page.startSeconds) page.timeSpent += Math.ceil(curSeconds() - page.startSeconds);
+	}
 	
 	
 	

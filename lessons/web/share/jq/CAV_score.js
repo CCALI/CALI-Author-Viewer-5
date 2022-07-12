@@ -88,6 +88,7 @@ function downloadScore()
 			scoreDataXML = data;
 			scoreDataXML=$(scoreDataXML);
 			var resumePageName=scoreDataXML.find("PAGECURRENT").xml();
+			lessonReviewMode=parseInt(scoreDataXML.find("COMPLETE").xml())==1;
 			//trace("Resume page ",resumePageName);
 			scoreDataXML.find("Q").each(function() {
 				var scoreXML = $(this);
@@ -116,6 +117,11 @@ function downloadScore()
 				}
 			});
 			tallyScores();
+			if (lessonReviewMode)
+			{
+				resumePageName='';
+				$('.PageScore').html('<div style="text-align:center">Lesson Review Mode<br />Scoring disabled</div>');
+			}
 			if (bookMark=="" && resumePageName!="") gotoPage(resumePageName);
 		}
 	});
@@ -270,6 +276,7 @@ function uploadScoreSilent()
 function ScoreDirty()
 {	// Call when we need score to be saved.
 	if (runid==null) return;// do nothing if we have no runid
+	if (lessonReviewMode) return;// no saving score in Review mode.
 	newScoreData=buildScoreSaveXML();
 	if (uploadScoreSilentInterval==null)
 	{	// 03/02/2015 Upload check every 5 seconds. 
@@ -372,6 +379,8 @@ function answerLoad()
 
 function saveScore(grade,id,text,part)
 {	// attach score to page, but only record 1st answer.
+	if (lessonReviewMode)
+		return;
 	if (part==null) part=0;
 	part=parseInt(part)
 	if (page.scores[part]==null)
