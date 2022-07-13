@@ -75,7 +75,7 @@ var resumeComplete=false;
 
 function downloadScore()
 {
-	trace("downloadScore ",resumeScoreURL);
+	//trace("downloadScore ",resumeScoreURL);
 	if (resumeScoreURL=="") return;
 	$.ajax({
 		url: resumeScoreURL,
@@ -118,7 +118,7 @@ function downloadScore()
 				}
 			});
 			tallyScores();
-			trace("downloadScore lessonReviewMode="+lessonReviewMode);
+			//trace("downloadScore lessonReviewMode="+lessonReviewMode);
 			if (lessonReviewMode)
 			{
 				resumePageName='';
@@ -176,7 +176,7 @@ function uploadScore()
 	$(".UploadScore2").show();
 	$(".UploadScore3").hide();
 	var xmlDocument = newScoreData = buildScoreSaveXML();
-	trace("uploadScore "+xmlDocument.length+" bytes to "+PerformanceUpload());
+	//trace("uploadScore "+xmlDocument.length+" bytes to "+PerformanceUpload());
 	$.ajax({
 		cache: false,
 		type: "POST",
@@ -235,13 +235,13 @@ function uploadScoreSilent()
 	// Upload only if actual data changed and we're not currently uploading right now. 
 	if (runid==null || newScoreData == lastSavedData || uploadingScore) return;
 	if (resumeScoreURL!="" && !resumeComplete){
-		trace("uploadScoreSilent Wait for resume to load")
+		//trace("uploadScoreSilent Wait for resume to load")
 		return;
 	}
 	if (lessonReviewMode) return;
 	var xmlDocument = newScoreData;
 	uploadingScore=true;
-	trace("uploadScoreSilent "+xmlDocument.length+" bytes to "+PerformanceUpload()+" lessonReviewMode="+lessonReviewMode);
+	//trace("uploadScoreSilent "+xmlDocument.length+" bytes to "+PerformanceUpload()+" lessonReviewMode="+lessonReviewMode);
 	$.ajax({
 		cache: false,
 		type: "POST",
@@ -286,7 +286,7 @@ function ScoreDirty()
 {	// Call when we need score to be saved.
 	if (runid==null) return;// do nothing if we have no runid
 	if (lessonReviewMode) return;// no saving score in Review mode.
-	trace("ScoreDirty "+"lessonReviewMode="+lessonReviewMode);
+	//trace("ScoreDirty "+"lessonReviewMode="+lessonReviewMode);
 	newScoreData=buildScoreSaveXML();
 	if (uploadScoreSilentInterval==null)
 	{	// 03/02/2015 Upload check every 5 seconds. 
