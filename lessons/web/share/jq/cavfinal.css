@@ -126,11 +126,10 @@ p.toc-title,.CLAccordion li a  {
 	right: 5;
 	z-index: 99999;
 }
-
 #transcript_content {
 	font-size: 90%;
+	text-align: left;
 }
-
 #transcript_content P {
 	margin-top: 5px;
 }
