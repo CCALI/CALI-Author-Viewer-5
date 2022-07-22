@@ -71,11 +71,12 @@ function buildScoreSaveXML()
 	xml=qtag("PERFORMANCE",qtag("SUMMARY",sxml)+qtag("RESPONSES",qxml)+qtag("HISTORY",hxml));
 	return xml; 
 }
+var resumeComplete=false;
 
 function downloadScore()
 {
+	//trace("downloadScore ",resumeScoreURL);
 	if (resumeScoreURL=="") return;
-	//trace("Resuming scoresave ",resumeScoreURL);
 	$.ajax({
 		url: resumeScoreURL,
 		dataType: "xml",	
@@ -117,11 +118,13 @@ function downloadScore()
 				}
 			});
 			tallyScores();
+			//trace("downloadScore lessonReviewMode="+lessonReviewMode);
 			if (lessonReviewMode)
 			{
 				resumePageName='';
 				$('.PageScore').html('<div style="text-align:center">Lesson Review Mode<br />Scoring disabled</div>');
 			}
+			resumeComplete=true;
 			if (bookMark=="" && resumePageName!="") gotoPage(resumePageName);
 		}
 	});
@@ -173,6 +176,7 @@ function uploadScore()
 	$(".UploadScore2").show();
 	$(".UploadScore3").hide();
 	var xmlDocument = newScoreData = buildScoreSaveXML();
+	//trace("uploadScore "+xmlDocument.length+" bytes to "+PerformanceUpload());
 	$.ajax({
 		cache: false,
 		type: "POST",
@@ -230,9 +234,14 @@ function uploadScoreSilent()
 {	// Upload score data ignoring any error/success responses. 
 	// Upload only if actual data changed and we're not currently uploading right now. 
 	if (runid==null || newScoreData == lastSavedData || uploadingScore) return;
+	if (resumeScoreURL!="" && !resumeComplete){
+		//trace("uploadScoreSilent Wait for resume to load")
+		return;
+	}
+	if (lessonReviewMode) return;
 	var xmlDocument = newScoreData;
 	uploadingScore=true;
-	//trace("uploadScoreSilent "+xmlDocument.length+" bytes to "+PerformanceUpload());
+	//trace("uploadScoreSilent "+xmlDocument.length+" bytes to "+PerformanceUpload()+" lessonReviewMode="+lessonReviewMode);
 	$.ajax({
 		cache: false,
 		type: "POST",
@@ -277,6 +286,7 @@ function ScoreDirty()
 {	// Call when we need score to be saved.
 	if (runid==null) return;// do nothing if we have no runid
 	if (lessonReviewMode) return;// no saving score in Review mode.
+	//trace("ScoreDirty "+"lessonReviewMode="+lessonReviewMode);
 	newScoreData=buildScoreSaveXML();
 	if (uploadScoreSilentInterval==null)
 	{	// 03/02/2015 Upload check every 5 seconds. 

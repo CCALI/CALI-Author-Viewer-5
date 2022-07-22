@@ -221,11 +221,16 @@ function textWithMedia(pageText, page)
 
 	if (page.discussion && page.type=="Book Page")
 	{	// 4/22 Discussions on book pages are at the top, 75% width.
-		var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;">\
-					<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>\
-					</div></div>';
+		var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
 		$(pageText).prepend(vid);
 	}
+}
+function discussionVideoTranscriptHTML(discussion)
+{	// 7/22 If discussion has trranscript, provide link to expand text.
+	if (discussion && discussion.transcript && discussion.transcript!="")
+		return '<details><summary aria-controls="transcript_content" tabindex="0" aria-expanded="false" id="show-hide-transcript" > Transcript </summary><div style="max-height:300px;overflow: scroll;" id="transcript_content" aria-live="off" aria-atomic="true" aria-relevant="all" tabindex="0" aria-expanded="false" role="article">'+discussion.transcript+'</div></details>';
+	else
+		return '';
 }
 
 function addDiscussionFeedback()
@@ -237,11 +242,9 @@ function addDiscussionFeedback()
 		$('.PageSpecificNav a:first').parent().prepend('<button id="open-tudor" class="CL-btn CL-next-btn shine"><span class="next-caption">Discussion</span></button>');
 		$('#open-tudor').click(function(){
 			var vid='<div style="width: 100%; height: auto">\
-				<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>\
-				</div>';
+				<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>'+discussionVideoTranscriptHTML(page.discussion)+'</div>';
 			showFeedback(INFO,"Discussion","#fbTextDiscussion",vid);
 			$('#fbTextDiscussion').addClass('VideoPopup')
-			console.log({DiscussionTranscript:page.discussion.transcript});
 			});
 	}
 }
