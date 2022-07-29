@@ -221,11 +221,16 @@ function textWithMedia(pageText, page)
 
 	if (page.discussion && page.type=="Book Page")
 	{	// 4/22 Discussions on book pages are at the top, 75% width.
-		var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;">\
-					<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>\
-					</div></div>';
+		var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
 		$(pageText).prepend(vid);
 	}
+}
+function discussionVideoTranscriptHTML(discussion)
+{	// 7/22 If discussion has trranscript, provide link to expand text.
+	if (discussion && discussion.transcript && discussion.transcript!="")
+		return '<details><summary aria-controls="transcript_content" tabindex="0" aria-expanded="false" id="show-hide-transcript" > Transcript </summary><div style="max-height:300px;overflow: scroll;" id="transcript_content" aria-live="off" aria-atomic="true" aria-relevant="all" tabindex="0" aria-expanded="false" role="article">'+discussion.transcript+'</div></details>';
+	else
+		return '';
 }
 
 function addDiscussionFeedback()
@@ -237,11 +242,9 @@ function addDiscussionFeedback()
 		$('.PageSpecificNav a:first').parent().prepend('<button id="open-tudor" class="CL-btn CL-next-btn shine"><span class="next-caption">Discussion</span></button>');
 		$('#open-tudor').click(function(){
 			var vid='<div style="width: 100%; height: auto">\
-				<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>\
-				</div>';
+				<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>'+discussionVideoTranscriptHTML(page.discussion)+'</div>';
 			showFeedback(INFO,"Discussion","#fbTextDiscussion",vid);
 			$('#fbTextDiscussion').addClass('VideoPopup')
-			console.log({DiscussionTranscript:page.discussion.transcript});
 			});
 	}
 }
@@ -375,8 +378,6 @@ function renderPage()
 
 
 
-
-
 	if (0)
 	{	console.log('Auto Show Answers');
 		lessonReviewMode=true;
@@ -431,6 +432,9 @@ function renderPage()
 		{
 			pageTextDIV.append('<div class="Feedback INFO"><div class="Text ReadText">'+thtml(lang.ScoreSaveOffNote)+'</div></div>');
 		}
+		pageTextDIV.append('<div class="Feedback INFO"><div class="Text ReadText">'+
+			 '<P>Proceed through the lesson using the “Next” button at the bottom, reading the material and answering any questions along the way. At the end of the lesson, on the “Complete the lesson” page, select “Finalize this score” to end this lesson run. From there you will be taken to a summary of your answer choices where you can print or save a copy of a certificate with your score. </P><P>If you exit the lesson before finalizing your score, you may resume this lesson run by selecting “Resume” on your “My Lesson Runs” page. Access your “My Lesson Runs” page through your CALI Dashboard. Your responses to questions are saved automatically. </P><P>Note that resuming a lesson run will NOT allow you to change your score for questions already answered in that run; previously answered questions are immediately recorded and cannot be changed. </P><P>However, at any time you can start a new lesson run, and in doing so, get a separate, entirely new score. (This does not replace your old score.) You can run a lesson as many times as you’d like. Simply restart the lesson via the CALI website or the LessonLink* provided by your professor.</P><P>You also have the option of seeing a “Review” version of any lesson run on your “My Lesson Runs” page which shows you your responses to questions in that lesson run. </P><P>*If you are running this lesson as a LessonLink provided by your professor, your professor has access to every lesson run score as well as lesson analytics. Lesson analytics take into account only a student’s first attempt at a question, regardless of the number of runs. </P>'
+			+'</div></div>');
 		//$(".PageSpecificNav").append(hyperButton(t(lang.TOC),'jump://'+pageTOC));
 		addNextButton('jump://Table of Contents');
 	}
@@ -447,6 +451,11 @@ function renderPage()
 	}
 	else
 	{
+		if (page.answered)
+		{
+			pageTextDIV.append('<div class="Text ReadText grade-fb grade-'+INFO+'"><p><i>Your response has already been recorded for this run.</i></p></div>');
+		}
+
 		textWithMedia(pageTextDIV,page);
 		if (page.type == "Book Page")
 		{
@@ -457,10 +466,10 @@ function renderPage()
 			if (lessonReviewMode && !page.answered)
 			{
 				page.nextPageDisabled=false;
-				pageLessonReviewReport('<div class="grade-fb grade-'+INFO+'"<p>You did not answer this question before reviewing. Unanswered questions cannot be answered in Lesson Review.</div>');
+				pageLessonReviewReport('<div class="grade-fb grade-'+INFO+'"><p>You did not answer this question before reviewing. Unanswered questions cannot be answered in Lesson Review.</p></div>');
 			}
 			else
-			
+
 			if (page.type=="Multiple Choice" && page.style=="Choose Buttons")					Buttons_layout();
 			else if (page.type=="Multiple Choice" && page.style=="Choose List") 				ButtonList_layout();
 			else if (page.type=="Multiple Choice" && page.style=="Choose MultiButtons")	MultiButtonList_layout();
@@ -1578,7 +1587,7 @@ function RadioButtons_layout()
 {	// vertical layout: each subquestion followed by radio button list. 
 	if (lessonReviewMode && page.answered)
 	{	// 
-		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton(),+"<p>and the response is:</p>",true);
+		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton()+"<p>and the response is:</p>",true);
 		pageLessonReviewReport(html);
 	}
 	else
@@ -1595,7 +1604,7 @@ function CheckBoxes_layout()
 {	// vertical layout: each subquestion followed by radio button list.
 	if (lessonReviewMode && page.answered)
 	{	// 
-		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton(),+"<p>and the response is:</p>",true);
+		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton()+"<p>and the response is:</p>",true);
 		pageLessonReviewReport(html);
 	}
 	else
@@ -1609,12 +1618,27 @@ function CheckBoxes_layout()
 }
 function CheckBoxesSet_layout()
 {	// vertical layout: each subquestion followed by radio button list.
-	page.captions=[""];//fake column
-	let subQText=CheckBoxRadioButtonColumnHeadings();
-	pageInteractionDIV.append(subQText);
-	$(".PageSpecificGrade").append(gradeButton() +  resetButton()  + revealButton()).append('<div id=fbText></div>');
-	doGrade=CheckBoxesSet_grade;
-	doReveal=CheckBoxesSet_reveal;
+	if (lessonReviewMode && page.answered)
+	{
+		let html='';
+		for (let d in page.details)
+		{
+			let shouldCheck  = page.feedbacks[fbIndex(0,d)].grade==RIGHT;
+			html+='<tr valign=top><td>'+'<input type=checkbox '+(shouldCheck?'checked':'')+'/></td><td>'+(parseInt(d)+1)+'.</td><td>'+page.details[d].text+'</td></tr>';
+			html+='<tr valign=top><td colspan=2></td><td><div>'+page.feedbacks[fbIndex(shouldCheck ? 0 : 1,d)].text+'</div>'+'</td></tr>';
+		}
+		html='<p>The correct answers are:</p>'+'<table>'+html+'</table>';
+		pageLessonReviewReport(html);
+	}
+	else
+	{
+		page.captions=[""];//fake column
+		let subQText=CheckBoxRadioButtonColumnHeadings();
+		pageInteractionDIV.append(subQText);
+		$(".PageSpecificGrade").append(gradeButton() +  resetButton()  + revealButton()).append('<div id=fbText></div>');
+		doGrade=CheckBoxesSet_grade;
+		doReveal=CheckBoxesSet_reveal;
+	}
 }
 
 
@@ -1725,164 +1749,6 @@ function DragBoxOld_help()
 {
 	embedHelpHTML(this,lang.HelpStudentDragDrop + (page.ordered ? lang.HelpStudentDragDropSort : ''));
 }
-function DragBox_layout()
-{
-	if (page.categories.length>2 && page.ordered)
-	{	// Deprecated! Multiple categories with ordering uses the old format.
-		DragBoxOld_layout();
-		return;
-	}
-	if (!page.ordered)
-	{	// Convert 1 or more categories drag/drop into a radio button style, the new replacement.
-		convertDragBox2RB();
-		return;
-	}
-	// We now have one drag box column to sort so use the new Ordering interaction.
-	// Stuff items into boxes that are both sortable and deletable.
-	let items='';
-	
-	page.herrings=0;// if herrings exists, allow the 'remove' option.
-	for (let i=0;i<page.items.length;i++)
-	{
-		if (page.items[i].category==0) page.herrings++;
-	}
-	for (let i=0;i<page.items.length;i++)
-	{
-		items+='<li id=item'+i+' itemid='+i+' class="ui-sortable-handle"><div class="horizontal" aria-label="draggable box"><div class="vertical"><div class="dots-blue" aria-label="blue texture dots that show that this box is draggable"></div></div><div class="row drag-body"><div><p>'
-	//	+('<b>Cheat'+(page.items[i].category==0?"H":(i+1))+"</b> ")
-		+page.items[i].text+'</p></div>'
-		+(page.herrings?'<div class="row remove"><span class="remove-icon"></span><p class="remove-txt">Remove from list</p></div><div class="row undo"><span class="undo-icon"></span><p class="undo-txt">Undo remove</p></div></div>':'')+'</div></li>';
-//	TODO add right/wrong icons and change grip color
-// <div class="hint right"><span class="glyphicon glyphicon-ok drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Right"><p>Right</p></span></div>\
-//	<iv class="hint wrong"><span class="glyphicon glyphicon-remove drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Wrong"><p>Wrong</p><p></p></span>\
-	}
-	pageInteractionDIV.append('<div class="row"><div class="col-sm-12 drag-content well"><ul id="sortable" class="list-unstyled ui-sortable">'+items+'</ul></div></div>');
-	$('#sortable .undo').hide();
-	$("#sortable").shuffle();
-	
-	$('#sortable .remove p').click(function(){
-		$(this).parent().hide();
-		$(this).parent().parent().find('.undo').show();
-		$(this).parent().parent().parent().addClass('removed')});
-	$('#sortable .undo p').click(function(){
-		$(this).parent().hide();
-		$(this).parent().parent().find('.remove').show();
-		$(this).parent().parent().parent().removeClass('removed')});
-	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()  +  '<div id=fbText></div>');
-	$("#sortable").shuffle();
-	doGrade=DragBox_grade;
-	doReveal = DragBox_reveal;
-	//doHelp = DragBoxOld_help;
-	
-	$("#sortable").sortable({
-		//xforcePlaceholderSize: true
-		forcePlaceholderSize: true
-	});
-	
-/*
-	// 8/2018 To correct drag drop problems on mobile jquery.ui.touch-punch.min.js is required.
-  //Drag and Drop
-  $(function () {
-      // Used to signal when a user has began dragging an item
-      var touchDown = false
-      // Used to prevent automatic scrolling when a user selects an item
-      // which is partially above or below the screen
-      var scroll = "normal"
-      $("#sortable").sortable({
-          forcePlaceholderSize: true,
-          tolerance: "pointer",
-          axis: "y",
-          cursor: "move",
-          scroll: true,
-          sort: function(e) {
-
-              // The selected item
-              const selected = $(e.target).children('.ui-sortable-helper')[0]
-              // The top of the selected item
-              selectedTop = parseFloat(selected.style.top.slice(0, -2))
-              // The bottom of the selected item
-              selectedBottom = selectedTop + $(selected).height()
-              // The height of the selected item
-              const selectedHeight = $(selected).height()
-
-              // The top of the sortable list
-              const sortableTop = $(e.target).offset().top
-              // The bottom of the sortable list
-              const sortableBottom = sortableTop + $(e.target).height()
-
-              // The top of the window
-              const windowTop = $(window).scrollTop()
-              // The bottom of the window
-              const windowBottom = windowTop + window.innerHeight
-
-              // If the top of the selected item is less than that
-              // of the list, and the top of the screen is less than
-              // that of the list do not let the user scroll any higher
-              if (selectedTop < sortableTop && windowTop < sortableTop) {
-                  $(selected).offset({top: sortableTop})
-                  return
-              // If the bottom of the selected item is greater than that
-              // of the list, and the bottom of the screen is greater than
-              // that of the list do not let the user scroll any lower
-              } else if (selectedBottom > sortableBottom && (windowBottom > sortableBottom)) {
-                  $(selected).offset({top: (sortableBottom - selectedHeight)})
-              }
-
-              // If the user has just touched down...
-              if (touchDown) {
-                  // If the top of the window is greater than that of the selected item
-                  if (windowTop > selectedTop) {
-                      console.log("Top")
-                      scroll = "top"
-                  // If the bottom of the window is less than that of the selected bottom
-                  } else if (windowBottom < selectedBottom) {
-                      scroll = "bottom"
-                  } else {
-                      scroll = "normal"
-                  }
-                  touchDown = false
-              }
-
-              // If the item has not just been selected with the top out of the screen
-              // and the top of the window is greater than that of the item...
-              if (scroll != "top" && windowTop > selectedTop) {
-                  // Scroll up
-                  $(window).scrollTop(selectedTop)
-              // If the item has not just been selected with the bottom out of the screen
-              // and the bottom of hte window is less than that of the itemm...
-              } else if (scroll != "bottom" && windowBottom < selectedBottom) {
-                  // Scroll down
-                  $(window).scrollTop(selectedBottom - window.innerHeight)
-              }
-
-              if (scroll != "normal") {
-                  // If the top of the item was out of the screen when selected
-                  // and is now in the screen...
-                  if (scroll == "top" && windowTop < selectedTop) {
-                      scroll = "normal"
-                  // If the bottom of the item was out of the screen when selected
-                  // and is now in the screen...
-                  } else if (scroll == "bottom" && $(window).scrollTop() + window.innerHeight > selectedBottom) {
-                      scroll = "normal"
-                  }
-              }
-          }
-          
-      });
-      $("#sortable").disableSelection();
-      $("#sortable").on('touchstart', (e) => {
-          touchDown = true
-      })
-  });
-  
-subtractTop = (selected, amt) => {
-	 var top = parseFloat(selected.style.top.slice(0, -2)) - amt
-	 return top.toString() + "px"
-}
-  */
-    
-}
-
 
 function DragBox_reveal()
 {
@@ -2107,7 +1973,6 @@ function pageLessonReviewReport(html)
 {	// Specific Lesson Review format.
 	pageInteractionDIV.append('<div class=Report>'+html+'</div>');
 }
-
 function textReviewCheckBoxRadioButton()
 {	// LessonText
 	let radio=(page.style=="Radio Buttons");
@@ -2144,3 +2009,58 @@ function textReviewCheckBoxRadioButton()
 }
 
 
+
+function DragBox_layout()
+{
+	if (page.categories.length>2 && page.ordered)
+	{	// Deprecated! Multiple categories with ordering uses the old format.
+		DragBoxOld_layout();
+		return;
+	}
+	if (!page.ordered)
+	{	// Convert 1 or more categories drag/drop into a radio button style, the new replacement.
+		convertDragBox2RB();
+		return;
+	}
+	// We now have one drag box column to sort so use the new Ordering interaction.
+	// Stuff items into boxes that are both sortable and deletable.
+	let items='';
+	
+	page.herrings=0;// if herrings exists, allow the 'remove' option.
+	for (let i=0;i<page.items.length;i++)
+	{
+		if (page.items[i].category==0) page.herrings++;
+	}
+	for (let i=0;i<page.items.length;i++)
+	{
+		items+='<li id=item'+i+' itemid='+i+' class="ui-sortable-handle"><div class="horizontal" aria-label="draggable box"><div class="vertical"><div class="dots-blue" aria-label="blue texture dots that show that this box is draggable"></div></div><div class="row drag-body"><div><p>'
+	//	+('<b>Cheat'+(page.items[i].category==0?"H":(i+1))+"</b> ")
+		+page.items[i].text+'</p></div>'
+		+(page.herrings?'<div class="row remove"><span class="remove-icon"></span><p class="remove-txt">Remove from list</p></div><div class="row undo"><span class="undo-icon"></span><p class="undo-txt">Undo remove</p></div></div>':'')+'</div></li>';
+//	TODO add right/wrong icons and change grip color
+// <div class="hint right"><span class="glyphicon glyphicon-ok drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Right"><p>Right</p></span></div>\
+//	<iv class="hint wrong"><span class="glyphicon glyphicon-remove drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Wrong"><p>Wrong</p><p></p></span>\
+	}
+	pageInteractionDIV.append('<div class="row"><div class="col-sm-12 drag-content well"><ul id="sortable" class="list-unstyled ui-sortable">'+items+'</ul></div></div>');
+	$('#sortable .undo').hide();
+	$("#sortable").shuffle();
+	
+	$('#sortable .remove p').click(function(){
+		$(this).parent().hide();
+		$(this).parent().parent().find('.undo').show();
+		$(this).parent().parent().parent().addClass('removed')});
+	$('#sortable .undo p').click(function(){
+		$(this).parent().hide();
+		$(this).parent().parent().find('.remove').show();
+		$(this).parent().parent().parent().removeClass('removed')});
+	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()  +  '<div id=fbText></div>');
+	$("#sortable").shuffle();
+	doGrade=DragBox_grade;
+	doReveal = DragBox_reveal;
+	//doHelp = DragBoxOld_help;
+	
+	$("#sortable").sortable({
+		//xforcePlaceholderSize: true
+		forcePlaceholderSize: true
+	});
+}
