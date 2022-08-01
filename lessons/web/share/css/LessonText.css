@@ -44,7 +44,7 @@ a:active {
 }
 
 
-.Report h1,.Report h2,.Report h3, label {
+.Report h1,.Report h2,.Report h3, .Report label {
 	color: maroon;
 }
 .Report h1 {
