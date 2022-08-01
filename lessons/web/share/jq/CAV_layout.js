@@ -2064,47 +2064,66 @@ function DragBox_layout()
 		convertDragBox2RB();
 		return;
 	}
-	// We now have one drag box column to sort so use the new Ordering interaction.
-	// Stuff items into boxes that are both sortable and deletable.
-	let items='';
 	
-	page.herrings=0;// if herrings exists, allow the 'remove' option.
-	for (let i=0;i<page.items.length;i++)
+	if ( lessonReviewMode && page.answered)
 	{
-		if (page.items[i].category==0) page.herrings++;
+		let html='';
+		for (let i=0;i<page.items.length;i++)
+		{
+			let herring=page.items[i].category==0;
+			if (!herring)
+			{
+				html+='<tr><td>#'+(i+1)+'</td><td><div>'+page.items[i].text+'</div></td></tr>';
+			}
+		}
+		html='<p>The correct order is:</p>'+'<table>'+html+'</table>';
+		html+=textReviewFeedbackRW('Response',false);
+		pageLessonReviewReport(html);
 	}
-	for (let i=0;i<page.items.length;i++)
+	else
 	{
-		items+='<li id=item'+i+' itemid='+i+' class="ui-sortable-handle"><div class="horizontal" aria-label="draggable box"><div class="vertical"><div class="dots-blue" aria-label="blue texture dots that show that this box is draggable"></div></div><div class="row drag-body"><div><p>'
-	//	+('<b>Cheat'+(page.items[i].category==0?"H":(i+1))+"</b> ")
-		+page.items[i].text+'</p></div>'
-		+(page.herrings?'<div class="row remove"><span class="remove-icon"></span><p class="remove-txt">Remove from list</p></div><div class="row undo"><span class="undo-icon"></span><p class="undo-txt">Undo remove</p></div></div>':'')+'</div></li>';
-//	TODO add right/wrong icons and change grip color
-// <div class="hint right"><span class="glyphicon glyphicon-ok drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Right"><p>Right</p></span></div>\
-//	<iv class="hint wrong"><span class="glyphicon glyphicon-remove drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Wrong"><p>Wrong</p><p></p></span>\
+		// We now have one drag box column to sort so use the new Ordering interaction.
+		// Stuff items into boxes that are both sortable and deletable.
+		let items='';
+		
+		page.herrings=0;// if herrings exists, allow the 'remove' option.
+		for (let i=0;i<page.items.length;i++)
+		{
+			if (page.items[i].category==0) page.herrings++;
+		}
+		for (let i=0;i<page.items.length;i++)
+		{
+			items+='<li id=item'+i+' itemid='+i+' class="ui-sortable-handle"><div class="horizontal" aria-label="draggable box"><div class="vertical"><div class="dots-blue" aria-label="blue texture dots that show that this box is draggable"></div></div><div class="row drag-body"><div><p>'
+		//	+('<b>Cheat'+(page.items[i].category==0?"H":(i+1))+"</b> ")
+			+page.items[i].text+'</p></div>'
+			+(page.herrings?'<div class="row remove"><span class="remove-icon"></span><p class="remove-txt">Remove from list</p></div><div class="row undo"><span class="undo-icon"></span><p class="undo-txt">Undo remove</p></div></div>':'')+'</div></li>';
+	//	TODO add right/wrong icons and change grip color
+	// <div class="hint right"><span class="glyphicon glyphicon-ok drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Right"><p>Right</p></span></div>\
+	//	<iv class="hint wrong"><span class="glyphicon glyphicon-remove drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Wrong"><p>Wrong</p><p></p></span>\
+		}
+		pageInteractionDIV.append('<div class="row"><div class="col-sm-12 drag-content well"><ul id="sortable" class="list-unstyled ui-sortable">'+items+'</ul></div></div>');
+		$('#sortable .undo').hide();
+		$("#sortable").shuffle();
+		
+		$('#sortable .remove p').click(function(){
+			$(this).parent().hide();
+			$(this).parent().parent().find('.undo').show();
+			$(this).parent().parent().parent().addClass('removed')});
+		$('#sortable .undo p').click(function(){
+			$(this).parent().hide();
+			$(this).parent().parent().find('.remove').show();
+			$(this).parent().parent().parent().removeClass('removed')});
+		$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()  +  '<div id=fbText></div>');
+		$("#sortable").shuffle();
+		doGrade=DragBox_grade;
+		doReveal = DragBox_reveal;
+		//doHelp = DragBoxOld_help;
+		
+		$("#sortable").sortable({
+			//xforcePlaceholderSize: true
+			forcePlaceholderSize: true
+		});
 	}
-	pageInteractionDIV.append('<div class="row"><div class="col-sm-12 drag-content well"><ul id="sortable" class="list-unstyled ui-sortable">'+items+'</ul></div></div>');
-	$('#sortable .undo').hide();
-	$("#sortable").shuffle();
-	
-	$('#sortable .remove p').click(function(){
-		$(this).parent().hide();
-		$(this).parent().parent().find('.undo').show();
-		$(this).parent().parent().parent().addClass('removed')});
-	$('#sortable .undo p').click(function(){
-		$(this).parent().hide();
-		$(this).parent().parent().find('.remove').show();
-		$(this).parent().parent().parent().removeClass('removed')});
-	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()  +  '<div id=fbText></div>');
-	$("#sortable").shuffle();
-	doGrade=DragBox_grade;
-	doReveal = DragBox_reveal;
-	//doHelp = DragBoxOld_help;
-	
-	$("#sortable").sortable({
-		//xforcePlaceholderSize: true
-		forcePlaceholderSize: true
-	});
 }
 
 function updateInstructions()
