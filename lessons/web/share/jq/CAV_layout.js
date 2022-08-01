@@ -858,16 +858,58 @@ function oldPageTypeWarning()
 }
 function ShortAnswer_layout()
 {
-	doGrade=ShortAnswer_grade;
-	$(".PageSpecificGrade").append('<div style="vertical-align: middle">'
-		+"<input type=text id=textResponse name=textResponse rows=2 size=60><BR><BR>"
-		+gradeButton()
-		+revealButton()
-		+'</div>'
-		+'<div id=fbText></div><BR>'
-		);
-	doReveal=ShortAnswer_reveal;
-	$('#textResponse').keypress(function(e){if(e.keyCode == 13) { doGrade()}});
+	if ( lessonReviewMode && page.answered)
+	{	// Just display correct answer.
+		var html="";
+		for (var r=0;r<page.textMatches.length;r++)
+		{
+			var match = page.textMatches[r];
+			if (match.grade==RIGHT)
+			{
+				var matches=match.matchlist.split(DEL.toUpperCase());
+				var mtext="";
+				switch (match.matchstyle)
+				{
+					case "MatchContainsAny": //Answer must contain one of the matches.
+						//mtext="Contains one of these";
+						mtext="contains "+ joinQuotes(matches," or ");
+						break;
+					case "MatchContainsAll": //Answer must contain each of the matches.
+						//mtext="Contains all of these";
+						mtext="contains "+ joinQuotes(matches," and ");
+						break;
+					case "MatchContainsAllInOrder"://Answer must contain each of the matches in order
+						//mtext="Contains all of these in order";
+						mtext="contains "+ joinQuotes(matches," followed by ");
+						break;
+					case "MatchContainsNone"://Answer contains none of these
+						//mtext="Contains none of these";
+						mtext="does not contain "+ joinQuotes(matches," or ");
+						break;
+					default: // or =
+						//mtext="Matches this exactly";
+						mtext="is "+ joinQuotes(matches," or ");
+				}
+				html += '<tr><td><p>If your answer ' + mtext + '</td><td>'+imgGradeReviewIcon(match.grade)+'<td><div class="grade-fb grade-'+match.grade+'">'+match.feedback+'</div></td></tr>';
+			}			
+		}
+		html='<p>The correct answer(s) are:</p>'+'<table>'+html+'</table>';
+		pageLessonReviewReport(html);
+
+	}
+	else
+	{
+		doGrade=ShortAnswer_grade;
+		$(".PageSpecificGrade").append('<div style="vertical-align: middle">'
+			+"<input type=text id=textResponse name=textResponse rows=2 size=60><BR><BR>"
+			+gradeButton()
+			+revealButton()
+			+'</div>'
+			+'<div id=fbText></div><BR>'
+			);
+		doReveal=ShortAnswer_reveal;
+		$('#textResponse').keypress(function(e){if(e.keyCode == 13) { doGrade()}});
+	}
 }
 
 

@@ -119,10 +119,21 @@ p.toc-title,.CLAccordion li a  {
 
 .VideoPopup {
 	width: 25%;
+	min-width: 250px;
 	position: fixed;
 	height: auto;
 	top: 5;
 	right: 5;
 	z-index: 99999;
+}
+#transcript_content {
+	font-size: 90%;
+	text-align: left;
+}
+#transcript_content P {
+	margin-top: 5px;
+}
+#show-hide-transcript {
+	cursor: pointer;
 }
 
