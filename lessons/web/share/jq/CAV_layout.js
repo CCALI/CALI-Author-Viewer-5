@@ -701,6 +701,8 @@ function Buttons_layout()
 			if (correctid>=0)
 				html+=textReviewFeedback('<div>The correct answer was <b>'+page.captions[correctid]+'</b> and the response was: </div>',fbIndex(correctid,0),false);
 		}
+		if (page.visits>1)
+			html=lessonReviewBranchNotice()+html;
 		pageLessonReviewReport(html);
 	}
 	else
@@ -722,6 +724,7 @@ function Buttons_layout()
 		 $('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
 	}
 } 
+
 
 function ButtonList_layout()
 {	// Page type: Multiple choice style A,B,C,...
@@ -762,6 +765,8 @@ function ButtonList_layout()
 			else
 				html+='<div>There was no correct answer for this question. ';//https://www.cali.org/lessons/web/trt32/lessontext.php#Says%209%20of%2011
 		}
+		if (page.visits>1)
+			html=lessonReviewBranchNotice()+html;
 		pageLessonReviewReport(html);
 	}
 	else
@@ -2142,9 +2147,21 @@ function updateInstructions()
 		'<p>This is a Lesson Review copy of your lesson run. It shows you your previous answers to questions in this lesson run. This lesson run has already been finalized, and the answers recorded. Question functionality has been disabled. </p>\
 		<p>To start a new run of this lesson, visit the lesson through the CALI website or through the LessonLink if one was provided by your professor. Starting a new lesson run will not replace previous run scores. Starting a new run will result in a separate, entirely new score. </p>'
 		:
-		'<P>Proceed through the lesson using the “Next” button at the bottom, reading the material and answering any questions along the way. At the end of the lesson, on the “Complete the lesson” page, select “Finalize this score” to end this lesson run. From there you will be taken to a summary of your answer choices where you can print or save a copy of a certificate with your score. </P><P>If you exit the lesson before finalizing your score, you may resume this lesson run by selecting “Resume” on your “My Lesson Runs” page. Access your “My Lesson Runs” page through your CALI Dashboard. Your responses to questions are saved automatically. </P>\
+		'<P>Proceed through the lesson using the “Next” button at the bottom, reading the material and answering any questions along the way. At the end of the lesson, on the “Complete the lesson” page, select “Finalize this score” to end this lesson run. From there you will be taken to a summary of your answer choices where you can print or save a copy of a certificate with your score. </P>\
+		<P>If you exit the lesson before finalizing your score, you will have the option to “Resume” this lesson run. Access your “My Lesson Runs” page through your CALI Dashboard. Your responses to questions are saved automatically. </P>\
 		<P>Note that resuming a lesson run will NOT allow you to change your score for questions already answered in that run; previously answered questions are immediately recorded and cannot be changed. </P>\
 		<P>However, at any time you can start a new lesson run, and in doing so, get a separate, entirely new score. (This does not replace your old score.) You can run a lesson as many times as you’d like. Simply restart the lesson via the CALI website or the LessonLink* provided by your professor.</P><P>You also have the option of seeing a “Review” version of any lesson run on your “My Lesson Runs” page which shows you your responses to questions in that lesson run. </P>\
 		<P>*If you are running this lesson as a LessonLink provided by your professor, your professor has access to every lesson run score as well as lesson analytics. Lesson analytics take into account only a student’s first attempt at a question, regardless of the number of runs. </P>'
 		);
 }
+
+
+function lessonReviewBranchNotice()
+{
+	return '<div class="grade-fb grade-INFO">\
+			  <p>You have returned to the start of a branch in the lesson. What you just saw was your path in this lesson run based on your first response to this question. (Subsequent attempts were not recorded and are therefore not included in this Review.) </p>\
+<p>Upon clicking “Next” you will be taken down the path that results from a correct answer to this question. This might not mirror your experience and therefore you may see certain questions for the first time.</p>\
+			  </div>';
+}
+
+
