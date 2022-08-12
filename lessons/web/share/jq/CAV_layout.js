@@ -900,7 +900,7 @@ function ShortAnswer_layout()
 				html += '<tr><td><p>If your answer ' + mtext + '</td><td>'+imgGradeReviewIcon(match.grade)+'<td><div class="grade-fb grade-'+match.grade+'">'+match.feedback+'</div></td></tr>';
 			}			
 		}
-		html='<p>The correct answer(s) are:</p>'+'<table>'+html+'</table>';
+		html='<p>Your answer was: '+page.scores[0].text+'</p>'+'<p>The correct answer(s) are:</p>'+'<table>'+html+'</table>';
 		pageLessonReviewReport(html);
 
 	}
@@ -992,10 +992,10 @@ function TextEssay_layout()
 	if (lessonReviewMode && page.answered)
 	{
 		let iText='';
-		if (page.correctText!="")
-			iText+='<p>Suggested correct answer is: <div>'+page.correctText+'</div>';
 		if (page.scores[0])
 			iText+='<p>Your answer was:</p><div>'+lastAnswer+'</div>';
+		if (page.correctText!="")
+			iText+='<p>Suggested correct answer is: <div>'+page.correctText+'</div>';
 		pageLessonReviewReport(iText);
 	}
 	else
@@ -2075,12 +2075,14 @@ function DragBox_layout()
 	if ( lessonReviewMode && page.answered)
 	{
 		let html='';
+		let j=0;
 		for (let i=0;i<page.items.length;i++)
 		{
 			let herring=page.items[i].category==0;
 			if (!herring)
 			{
-				html+='<tr><td>#'+(i+1)+'</td><td><div>'+page.items[i].text+'</div></td></tr>';
+				j+=1;
+				html+='<tr><td>#'+(j)+'</td><td><div>'+page.items[i].text+'</div></td></tr>';
 			}
 		}
 		html='<p>The correct order is:</p>'+'<table>'+html+'</table>';
