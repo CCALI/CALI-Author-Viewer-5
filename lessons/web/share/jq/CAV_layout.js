@@ -463,6 +463,13 @@ function renderPage()
 		}
 		else
 		{
+			if (lessonReviewMode)
+			{
+				if (!page.visits)
+					page.visits=1;
+				else
+					page.visits+=1;
+			}
 			if (lessonReviewMode && !page.answered)
 			{
 				page.nextPageDisabled=false;
@@ -684,7 +691,7 @@ function Buttons_layout()
 		}
 		else
 		{
-			if ((correctid>=0) && ((page.nextPageDisabled && !page.destPage)))
+			if ((correctid>=0) && ((page.nextPageDisabled && !page.destPage)) || page.visits>1)
 			{	// Next page disabled but dest page wasn't set (student's answer didn't have a branch), grab it from correct answer.
 				//console.log({fbIndex:fbIndex(0,correctid),fb:page.feedbacks});
 				page.destPage=page.feedbacks[fbIndex(correctid,0)].next;
@@ -744,7 +751,7 @@ function ButtonList_layout()
 		}
 		else
 		{
-			if ((correctid>=0) && ((page.nextPageDisabled && !page.destPage)))
+			if ((correctid>=0) && ((page.nextPageDisabled && !page.destPage)) || page.visits>1)
 			{	// Next page disabled but dest page wasn't set (student's answer didn't have a branch), grab it from correct answer.
 				page.destPage=page.feedbacks[fbIndex(0,correctid)].next;
 			}
