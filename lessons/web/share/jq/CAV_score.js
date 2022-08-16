@@ -123,6 +123,7 @@ function downloadScore()
 			{
 				resumePageName='';
 				$('.PageScore').html('<div style="text-align:center">Lesson Review Mode<br />Scoring disabled</div>');
+				updateInstructions();
 			}
 			resumeComplete=true;
 			if (bookMark=="" && resumePageName!="") gotoPage(resumePageName);

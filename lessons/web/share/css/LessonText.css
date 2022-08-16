@@ -1,0 +1,197 @@
+/*
+	CALI Author Lesson Text/Faculty View
+	2014-03-06 Revised
+*/
+/*
+.revised {
+	background-color: #faa;
+	padding: 5px;
+	margin: 1em;
+	font-weight:bold;
+	
+}
+.footer {
+	padding-top: 100px;
+	padding-bottom: 300px;
+}
+b {
+	font-weight:bold;
+}
+a	{
+	text-decoration: underline;
+	color: #00f
+}
+a:hover {
+	text-decoration: underline
+}
+a:active {
+	text-decoration: underline;
+	color: #0000ff;
+}
+
+*/
+.Report{
+	color: #000;
+	background-color: #FFF;
+}
+
+.Report, .Report p, .Report ul, .Report li, .Report ol, .Report table, .Report td, .Report th, .Report div, .Report h1, .Report h2, .Report h3,
+	.Report .edit , .Report .edit blockquote,  input
+{
+	font-size: 12pt;
+	/*font-family: 'Comic Sans MS';*/
+	/*'Noto Serif', serif;*/
+}
+
+
+.Report h1,.Report h2,.Report h3, .Report label {
+	color: maroon;
+}
+.Report h1 {
+	padding-top: 1em;
+	padding-bottom: 0.5em;
+	font-size: 150%;
+}
+.Report h2 {
+	padding-top: 1em;
+	padding-bottom: 0.5em;
+	font-size: 125%;
+	margin: 0px;
+}
+.Report h3 {
+	padding-top: 1em;
+	padding-bottom: 0.5em;
+	font-size: 110%;
+	color: #800;
+}
+.Report div.image {
+	text-align: center;
+}
+.Report .image img{
+	height: auto; 
+	width: auto; 
+	max-width: 700px; 
+	max-height: 700px;
+}
+.Report .thumbnail img{
+	height: auto; 
+	width: auto; 
+	max-width: 300px; 
+	max-height: 300px;
+}
+.Report p {
+  margin-bottom: 5pt;
+}
+.Report div {
+	margin-left: 2em;
+}
+.Report div.page {
+	margin: 15pt;
+}
+.Report div.notes >p  {
+	font-size: 80%;
+	color: #444;
+}
+.Report div.comment,div.comment >p  {
+	color: #444;
+	font-style: italic;
+}
+.Report tr {
+	vertical-align: top;
+}
+.Report td {
+  padding-left: 7px;
+  padding-right: 7px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+.Report td.wrap {
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}
+.Report td.nowrap {
+	white-space: nowrap;
+}
+.Report a[href^="http"], .Report a[href^="https"] {
+   padding-right: 18px;
+   background: transparent url(/lessons/web/share/link_icon_external.gif) no-repeat center right;
+}
+.Report .pageheader {
+	background-color: #C4E1FF;
+}
+.Report .pageheader tr {
+	vertical-align: baseline;
+}
+.external_links * tr:nth-child(even){ 	background-color: #eee; }
+.external_links * tr:nth-child(odd){ 	background-color: #fff; }
+.external_links td {overflow-wrap: anywhere;};
+
+/* 01/2019 Additional markup for LessonText for new CALI Author */
+#Report, .Report {
+	margin-left: 0px;
+}
+.Report .linktip {
+	color: maroon;
+	font-style: italic;
+}
+.Report .vertgap {
+	padding-bottom: 5em;
+}
+.Report div.grade-fb {
+	padding: 1em;
+	margin-left: inherit;
+}
+.Report div.grade-right {
+	background-color: #efe;
+}
+.Report div.grade-wrong {
+	background-color: #fee;
+}
+.Report div.grade-info {
+	background-color: #eef;
+}
+.Report div.grade-maybe {
+	background-color: #ffe;
+}
+.Report div.essayBox {
+	border: double;
+	min-height: 8em;
+	min-width: 25em;
+	padding: 0.5em;
+}
+.Report a.button {
+	border: thin;
+	background-color: #eef;
+	border-color: black;
+	padding: 2px;
+	padding-left: 1em;
+	padding-right: 1em;
+	margin: 2px;
+}
+.Report a:hover {
+	background-color: #dde;
+	color: black;
+}
+.Report div.thumbnail {
+	display: inline-block;
+	padding: 10px;
+}
+.Report div.edit {
+	margin-left: 0em;
+}
+.Report hr.hr {
+	background-color: #444;
+	width: 50%;
+	height: 1px;
+	margin-left: 0;
+}
+.Report div.order {
+	background-color: #eef;
+	padding: 2px;
+}
+.Report blockquote{
+	border-left-width: 0px;
+	padding-bottom: 4px;
+	margin-bottom: 4px;
+}
+
