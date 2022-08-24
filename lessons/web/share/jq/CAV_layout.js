@@ -396,7 +396,7 @@ function renderPage()
 	{
 		$('.faculty-view').html('<a target="LessonText" href="'+LessonTextJump(page.name)+'" class="faculty-link">'+t(lang.FacultyView)+'</a>');
 	}
-	
+
 	if (!page.timeStamp)
 	{	// 05/22 Record first visit to a page.
 		page.timeStamp=Date.now();

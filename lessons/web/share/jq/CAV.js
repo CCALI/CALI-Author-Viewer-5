@@ -135,7 +135,7 @@ function processBook()
 		gotoPage(StartPage);
 		doAutoNextTOC();
 		downloadScore();
-			
+	
 		// 5/2018 TOC revised.
 		let page=book.pages[pageCONTENTS];
 		$('#SliderControl ul:first').replaceWith('<ul class="nav nav-list-main">'+page.text+'</ul>');
@@ -366,7 +366,7 @@ function gotoPage(pageName, skipCA)
 	}
 
 	setHash(page.name);// Change hash to match this page. this allows browser navigation.
-	
+
 	
 	// 8/31/2016 SJG Record lesson page visit to Piwik
   if (_paq) {
