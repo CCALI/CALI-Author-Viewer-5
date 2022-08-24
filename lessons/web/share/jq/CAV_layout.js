@@ -39,6 +39,7 @@ function clickButton(id)
 	{
 		if (page.type=="Topics")
 		{	// Find next incomplete topic.
+			/*
 			page.destPage=null;
 			var firstPage=null;
 			$('#SliderControl ul:first a[href^="jump"]').each(function()
@@ -51,7 +52,15 @@ function clickButton(id)
 				}
 			});
 			if (!page.destPage) page.destPage=firstPage;
+			*/
+			if ($nextTOC)
+			{	
+				$nextTOC.addClass('toc-visited');
+			}
+			showTOC(false);
 		}
+				
+				
 		if (page.destPage)
 			gotoPage(page.destPage);
 		else
@@ -209,7 +218,37 @@ function textWithMedia(pageText, page)
 		$('#picloader').attr('src','img/ajax-loader.gif').unbind('load');
 		$('#picloader').load(pictureLoaded).attr('src',src);
 	}
+
+	if (page.discussion && page.type=="Book Page")
+	{	// 4/22 Discussions on book pages are at the top, 75% width.
+		var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
+		$(pageText).prepend(vid);
+	}
 }
+function discussionVideoTranscriptHTML(discussion)
+{	// 7/22 If discussion has trranscript, provide link to expand text.
+	if (discussion && discussion.transcript && discussion.transcript!="")
+		return '<details><summary aria-controls="transcript_content" tabindex="0" aria-expanded="false" id="show-hide-transcript" > Transcript </summary><div style="max-height:300px;overflow: scroll;" id="transcript_content" aria-live="off" aria-atomic="true" aria-relevant="all" tabindex="0" aria-expanded="false" role="article">'+discussion.transcript+'</div></details>';
+	else
+		return '';
+}
+
+function addDiscussionFeedback()
+{	// 01/06/22
+	var src=page.discussion.src;
+	if ($('#open-tudor').length==0)
+	{	// Add a Discussion button next to Next, after first feedback attempt.
+		pageInteractionDIV.append('<div id=fbTextDiscussion></div>');
+		$('.PageSpecificNav a:first').parent().prepend('<button id="open-tudor" class="CL-btn CL-next-btn shine"><span class="next-caption">Discussion</span></button>');
+		$('#open-tudor').click(function(){
+			var vid='<div style="width: 100%; height: auto">\
+				<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>'+discussionVideoTranscriptHTML(page.discussion)+'</div>';
+			showFeedback(INFO,"Discussion","#fbTextDiscussion",vid);
+			$('#fbTextDiscussion').addClass('VideoPopup')
+			});
+	}
+}
+
 
 
 function pictureLoaded()
@@ -319,7 +358,7 @@ function addNextButton(url,disabled)
 	disabled=false;// leave it always on for now. 
 	$(".PageSpecificNav").append('<div class="container-fluid"><div class="row"><div class="text-center">\
 		<a href="'+url+'"><button class="CL-btn CL-next-btn shine icon-arrow-right '+(disabled==true?'btn-disabled':'')+'"><span class="next-caption">'+t(lang.NextPage)+'</span><span class="next-arrow"/ ></button></a>\
-	</div></div></div>');
+		</div></div></div>');
 }
 
 function renderPage()
@@ -327,12 +366,24 @@ function renderPage()
 	doGrade=null;
 	doReveal=null;
 	doHelp=null;
-	
+	page.answered=(page.scores && page.scores.length>0 && page.scores[0])!==null;
+	//console.log({name:page.name,timeSpent:page.timeSpent,answered:page.answered});
 	pageInteractionDIV.text('');
 	pageInteractionDIV.prepend((lessonLive.isTeacher? '<div class="llPageInfo"/>':''));
 	$(".PageSpecificGrade").empty();
 	$(".PageSpecificNav").empty();
 	pageTextDIV.hide().text('');
+
+
+
+
+
+	if (0)
+	{	console.log('Auto Show Answers');
+		lessonReviewMode=true;
+		page.answered=true;
+		page.nextPageDisabled=false;
+	}
 	
 
 	if (textBuffer!="")
@@ -343,16 +394,19 @@ function renderPage()
 	$(".PageName").text(page.name);//.append('<span class="Trace">(Type='+page.type+', Style='+page.style+')</span>');
 	if (amode==1)
 	{
-		//$(".PageName").append('<a target="LessonText" href="'+LessonTextJump(page.name) + '">'+t(lang.FacultyView)+'</a>');
 		$('.faculty-view').html('<a target="LessonText" href="'+LessonTextJump(page.name)+'" class="faculty-link">'+t(lang.FacultyView)+'</a>');
 	}
-	
-	// Page type specific layout
+
+	if (!page.timeStamp)
+	{	// 05/22 Record first visit to a page.
+		page.timeStamp=Date.now();
+	}
+		
+	// Page type specific layout	
 	if (page.type=="Topics")
 	{
-		$(".PageName").text('');
-		//pageTextDIV.append('<p>Proceed to the next section of the lesson.</p>');
-		//addNextButton('choice://gonext',false);
+		$(".PageName").text('');//Continue lesson');
+		addNextButton('choice://gonext',false);
 	}
 	else
 	if (page.name==pageABOUT)
@@ -378,7 +432,10 @@ function renderPage()
 		{
 			pageTextDIV.append('<div class="Feedback INFO"><div class="Text ReadText">'+thtml(lang.ScoreSaveOffNote)+'</div></div>');
 		}
+
+		pageTextDIV.append('<div class="panel panel-default"><div class="panel-heading alert-description-heading"><h4>Instructions</h4></div><div class="panel-body alert-description-body Text ReadText" id="aboutInstructions"></div></div>');
 		//$(".PageSpecificNav").append(hyperButton(t(lang.TOC),'jump://'+pageTOC));
+		updateInstructions()
 		addNextButton('jump://Table of Contents');
 	}
 	else
@@ -394,6 +451,11 @@ function renderPage()
 	}
 	else
 	{
+		if (page.answered)
+		{
+			pageTextDIV.append('<div class="Text ReadText grade-fb grade-'+INFO+'"><p><i>Your response has already been recorded for this run.</i></p></div>');
+		}
+
 		textWithMedia(pageTextDIV,page);
 		if (page.type == "Book Page")
 		{
@@ -401,6 +463,20 @@ function renderPage()
 		}
 		else
 		{
+			if (lessonReviewMode)
+			{
+				if (!page.visits)
+					page.visits=1;
+				else
+					page.visits+=1;
+			}
+			if (lessonReviewMode && !page.answered)
+			{
+				page.nextPageDisabled=false;
+				pageLessonReviewReport('<div class="grade-fb grade-'+INFO+'"><p>You did not answer this question before reviewing. Unanswered questions cannot be answered in Lesson Review.</p></div>');
+			}
+			else
+
 			if (page.type=="Multiple Choice" && page.style=="Choose Buttons")					Buttons_layout();
 			else if (page.type=="Multiple Choice" && page.style=="Choose List") 				ButtonList_layout();
 			else if (page.type=="Multiple Choice" && page.style=="Choose MultiButtons")	MultiButtonList_layout();
@@ -504,6 +580,11 @@ function renderPage()
 		}
 		$('.LinkNavBar:first:not(:has(a))').hide();
 	}
+	
+
+	if (page.discussion && lessonReviewMode && page.answered)
+		addDiscussionFeedback();
+		
 	patchLink();
 	stickyHeader();//bitovi
 	attachLessonLiveReportToPage();
@@ -523,6 +604,10 @@ function LessonCompleted_layout()
 	//$(".PageSpecificNav").append(hyperButton(t(lang.TOC),'jump://'+pageTOC));
 	$(".PageText .ScoreReport .ScoreButtons").removeClass('hidestart');
 	ScoreScreenUpdate();
+	if (ScorePossible==0 || lessonReviewMode)
+	{
+		$(".PageText .ScoreReport .ScoreButtons").hide();
+	}
 }
 
 
@@ -573,77 +658,206 @@ function iButton2(caption,id,grade)
 {	// Button like 'Yes' which gets a grade icon and error message.
 	return '<div class="btn-group"><label id="'+id+'" for="grade'+id+'" class="btn btn-default CL-choose-btn-'+grade.toLowerCase()+' spacer"><input id="grade'+id+'" name="grade'+id+'" autocomplete="off" type="checkbox">'+caption+'</label><div class="hint"><span id="chooseBtnGrade'+id+'" class="'+gradeGlyphIconMap[grade]+' un-spacer" aria-live="polite" role="definition" aria-labelledby="correctAnswer'+id+'"><p id="correctAnswer'+id+'">'+lang[grade]+'</p></span></div></div>';
 }
+
+
+
+
+
 function Buttons_layout()
 {	// Page type: Just Buttons like Yes, No, Maybe.
-	let choicesText="";
-	let ll='';
-	let fbText="";
-	for (let c in page.captions)
-	{
-		let fb=page.feedbacks[fbIndex(c,0)];
-		fb.letter=page.captions[c];
-		choicesText +=  iButton2(fb.letter, fb.id,fb.grade);
-		ll+= (lessonLive.isTeacher? '<div class=llButton>':'' )+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>': '')+(lessonLive.isTeacher? '</div>':'' )+' ';
-		fbText += '<div id=fbText'+fb.id+'></div>';
-	}
-	pageInteractionDIV.append('<div class="btn-group" data-toggle="buttons">' + choicesText+ '</div>\
-		<div class="gap"></div><div class="gap"></div><div class="gap">\
-		</div><div class=llButton>'+ll+'</div><div id=fbText>'+fbText+'</div>');
-	 $('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
-} 
 
-function MultiButtonList_layout()
-{	// Multiple buttons for multiple items (subquestions)
-	let html="";
-	for (let d in page.details)
+	if (lessonReviewMode && page.answered)
+	{	// 05/05/22 Lesson Review version
+		var html='';
+		var score=page.scores[0];
+		var correctid=-1;
+		var buttonList="";
+		for (var c in page.captions)
+		{
+			let fb=page.feedbacks[fbIndex(c,0)];
+			fb.letter=page.captions[c];
+			if (fb.grade==RIGHT) correctid=c;
+			var showGrade=score && (c==score.id);
+			if (showGrade)
+			{	// Ensure Next button follows their answer's feedback branch.
+				page.destPage=fb.next;
+			}
+			buttonList += '<td>'+imgGradeReviewIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td>';
+		}
+		html+='<table><tr>'+buttonList+'</td></tr></table>';
+		if (score && score.grade==RIGHT)
+		{
+			html+=textReviewFeedback('<div>Your answer <b>'+page.captions[score.id]+'</b> was correct and the response was: </div>',fbIndex(score.id,0));
+		}
+		else
+		{
+			if ((correctid>=0) && ((page.nextPageDisabled && !page.destPage)) || page.visits>1)
+			{	// Next page disabled but dest page wasn't set (student's answer didn't have a branch), grab it from correct answer.
+				//console.log({fbIndex:fbIndex(0,correctid),fb:page.feedbacks});
+				page.destPage=page.feedbacks[fbIndex(correctid,0)].next;
+			}
+			if (score)
+				html+=textReviewFeedback('<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>',fbIndex(score.id,0));
+			if (correctid>=0)
+				html+=textReviewFeedback('<div>The correct answer was <b>'+page.captions[correctid]+'</b> and the response was: </div>',fbIndex(correctid,0),false);
+		}
+		if (page.visits>1)
+			html=lessonReviewBranchNotice()+html;
+		pageLessonReviewReport(html);
+	}
+	else
 	{
-		let buttonList="";
+		let choicesText="";
+		let ll='';
 		let fbText="";
-		html += '<div class="subq" id="subq'+d+'">';
-		html += '<table width=100%><tr><td>';
-		//if (page.details.length>1) html += '<span class="BigLetter">'+(parseInt(d)+1)+"."+'</span>';
-		html += '</td><td>';
-		html += '<div class="ChoiceText ReadText">' + page.details[d].text +"</div>";
 		for (let c in page.captions)
 		{
-			let fb=page.feedbacks[fbIndex(c,d)];
+			let fb=page.feedbacks[fbIndex(c,0)];
 			fb.letter=page.captions[c];
-			buttonList += iButton2(fb.letter, fb.id,fb.grade)+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>':'');
-			fbText  += '<div id="fbText'+fb.id+'"></div>';
+			choicesText +=  iButton2(fb.letter, fb.id,fb.grade);
+			ll+= (lessonLive.isTeacher? '<div class=llButton>':'' )+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>': '')+(lessonLive.isTeacher? '</div>':'' )+' ';
+			fbText += '<div id=fbText'+fb.id+'></div>';
 		}
-		html+= '<div class="btn-group" data-toggle="buttons">'+buttonList+'</div>'+'<br clear=all><div class="gap"></div>'+ fbText+'</div></td></tr></table>';
+		pageInteractionDIV.append('<div class="btn-group" data-toggle="buttons">' + choicesText+ '</div>\
+			<div class="gap"></div><div class="gap"></div><div class="gap">\
+			</div><div class=llButton>'+ll+'</div><div id=fbText>'+fbText+'</div>');
+		 $('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
 	}
-	pageInteractionDIV.append(html);
-	pageInteractionDIV.append('<div id=fbText></div>');
-	$('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
+} 
 
-	// Fade in subquestions
-	page.subq=0;
-	$('.subq').hide();
-	$('#subq0').fadeIn('slow');
-}
 
 function ButtonList_layout()
 {	// Page type: Multiple choice style A,B,C,...
 	var detailsText="";
-
-	function iButton3(caption,id,grade,text)
-	{	// A button like 'A' or 'B' next to paragraph(s) of text with coloring and icon/error text appearing below the paragraph(s).
-		return '<div class="btn-group"><label id="'+id+'" for="grade'+id+'" class="btn btn-default CL-choose-btn-'+grade.toLowerCase()+'"><input id="grade'+id+'" name="grade'+id+'" autocomplete="off" type="checkbox">'+caption+'</label><div class="multi-btn-txt">'+text+'</div><div class="hint"><span id="chooseBtnGrade'+id+'" class="'+gradeGlyphIconMap[grade]+'" aria-live="polite" role="definition" aria-labelledby="correctAnswer'+id+'"><p id="correctAnswer'+id+'">'+lang[grade]+'</p></span></div></div><div class="gap"></div>';
+	if (lessonReviewMode && page.answered)
+	{	// 05/05/22 Lesson Review version
+		var html='';
+		var score=page.scores[0];
+		var correctid=-1;
+		for (var d in page.details)
+		{
+			var fbid=fbIndex(0,d);
+			var fb=page.feedbacks[fbid];
+			fb.letter=page.details[d].letter;
+			if (fb.grade==RIGHT) correctid=d;
+			var showGrade=score && (d==score.id);
+			if (showGrade)
+			{	// Ensure Next button follows their answer's feedback branch.
+				page.destPage=fb.next;
+			}
+			detailsText +='<tr valign=top><td>'+imgGradeReviewIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td><td><div>'+page.details[d].text+'</div></td><tr>';
+		}
+		html+=('<table>'+detailsText +'</table>');
+		if (score && score.grade==RIGHT)
+		{
+			html+=textReviewFeedback('<div>Your answer <b>'+page.details[score.id].letter+'</b> was correct and the response was: </div>',fbIndex(0,score.id));
+		}
+		else
+		{
+			if ((correctid>=0) && ((page.nextPageDisabled && !page.destPage)) || page.visits>1)
+			{	// Next page disabled but dest page wasn't set (student's answer didn't have a branch), grab it from correct answer.
+				page.destPage=page.feedbacks[fbIndex(0,correctid)].next;
+			}
+			if (score)
+				html+=textReviewFeedback('<div>You answered <b>'+page.details[score.id].letter+'</b> and the response was:</div>',fbIndex(0,score.id));
+			if (correctid>=0)
+				html+=textReviewFeedback('<div>The correct answer was <b>'+page.details[correctid].letter+'</b> and that response is: </div>',fbIndex(0,correctid),false);
+			else
+				html+='<div>There was no correct answer for this question. ';//https://www.cali.org/lessons/web/trt32/lessontext.php#Says%209%20of%2011
+		}
+		if (page.visits>1)
+			html=lessonReviewBranchNotice()+html;
+		pageLessonReviewReport(html);
 	}
-	for (var d in page.details)
+	else
 	{
-		var fb=page.feedbacks[fbIndex(0,d)];
-		fb.letter=page.details[d].letter;
-		detailsText +=  iButton3(fb.letter, fb.id,fb.grade,page.details[d].text)
-					//+'<p class="multi-btn-txt">'+'The highlighting means that this is linked to some other page or Pop-up page in the lesson. Creating such pages and pop-up boxes can be very useful to deliver more information to students. Such links can be created in any of your questions or feedback. How these links, pages, and pop-up boxes are created is discussed elsewhere in this lesson. Click on the highlighted word to see where this link takes you'
-					+(lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>' : '')
-					+'<div id=fbText'+fb.id+'></div>';
+		function iButton3(caption,id,grade,text)
+		{	// A button like 'A' or 'B' next to paragraph(s) of text with coloring and icon/error text appearing below the paragraph(s).
+			return '<div class="btn-group"><label id="'+id+'" for="grade'+id+'" class="btn btn-default CL-choose-btn-'+grade.toLowerCase()+'"><input id="grade'+id+'" name="grade'+id+'" autocomplete="off" type="checkbox">'+caption+'</label><div class="multi-btn-txt">'+text+'</div><div class="hint"><span id="chooseBtnGrade'+id+'" class="'+gradeGlyphIconMap[grade]+'" aria-live="polite" role="definition" aria-labelledby="correctAnswer'+id+'"><p id="correctAnswer'+id+'">'+lang[grade]+'</p></span></div></div><div class="gap"></div>';
+		}
+		for (var d in page.details)
+		{
+			var fb=page.feedbacks[fbIndex(0,d)];
+			fb.letter=page.details[d].letter;
+			detailsText +=  iButton3(fb.letter, fb.id,fb.grade,page.details[d].text)
+						//+'<p class="multi-btn-txt">'+'The highlighting means that this is linked to some other page or Pop-up page in the lesson. Creating such pages and pop-up boxes can be very useful to deliver more information to students. Such links can be created in any of your questions or feedback. How these links, pages, and pop-up boxes are created is discussed elsewhere in this lesson. Click on the highlighted word to see where this link takes you'
+						+(lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>' : '')
+						+'<div id=fbText'+fb.id+'></div>';
+		}
+		pageInteractionDIV.append('<div class="btn-group-vertical" data-toggle="buttons">'+detailsText +'</div>');
+		pageInteractionDIV.append('<div id=fbText></div>');
+		$('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
 	}
-	pageInteractionDIV.append('<div class="btn-group-vertical" data-toggle="buttons">'+detailsText +'</div>');
-	pageInteractionDIV.append('<div id=fbText></div>');
-	 $('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
 }
+function MultiButtonList_layout()
+{	// Multiple buttons for multiple items (subquestions)
+	let nextD=0;// Find next unanswered subquestion.
+	let html='';
+	for (let d in page.details)
+	{
+		let buttonList="";
+		
+		if (lessonReviewMode && page.answered)// & page.scores[d])
+		{	// 05/22 Answered subquestion, show LessonReview style.
+			nextD=parseInt(d)+1;
+			var correctid=-1;
+			let list='';
+			var score=page.scores[d];
+			for (let c in page.captions)
+			{
+				let fb=page.feedbacks[fbIndex(c,d)];
+				fb.letter=page.captions[c];
+				if (fb.grade==RIGHT) correctid=c;
+				var showGrade=score && (c==score.id);
+				buttonList += '<td>'+imgGradeReviewIcon(showGrade?fb.grade:'')+'</td><td><p>'+  fb.letter+'</p></td>';
+			}
+			list+='<h3>Question '+(parseInt(d)+1)+'</h3><div>'+page.details[d].text +'</div><table><tr>'+buttonList+'</td></tr></table><hr />';
+			if (score && score.grade==RIGHT)
+			{
+				list+=textReviewFeedback('<div>Your answer <b>'+page.captions[score.id]+'</b> was correct and the response was: </div>',fbIndex(score.id,d));
+			}
+			else
+			{
+				if (!score || (score && score.id<0))
+					list+='<div>You did not answer this question and receive no credit.</div>';
+				else
+					list+=textReviewFeedback('<div>You answered <b>'+page.captions[score.id]+'</b> and the response was:</div>',fbIndex(score.id,d));
+				if (correctid>=0)
+					list+=textReviewFeedback('<div>The correct answer was <b>'+page.captions[correctid]+'</b> and the response is: </div>',fbIndex(correctid,d),false);
+			}
+			html+='<div class=Report>'+list+'</div>';
+		}
+		else
+		{	// Unanswered subquestion, allow interaction.
+			let fbText="";
+			html += '<div class="subq" id="subq'+d+'">';
+			html += '<table width=100%><tr><td>';
+			html += '</td><td>';
+			html += '<div class="ChoiceText ReadText">' + page.details[d].text +"</div>";
+			for (let c in page.captions)
+			{
+				let fb=page.feedbacks[fbIndex(c,d)];
+				fb.letter=page.captions[c];
+				buttonList += iButton2(fb.letter, fb.id,fb.grade)+ (lessonLive.isTeacher ? '<div class="llChoice" id="llChoice'+fb.id+'"></div>':'');
+				fbText  += '<div id="fbText'+fb.id+'"></div>';
+			}
+			html+= '<div class="btn-group" data-toggle="buttons">'+buttonList+'</div>'+'<br clear=all><div class="gap"></div>'+ fbText+'</div></td></tr></table>';
+		}
+	}
+	pageInteractionDIV.append(html);
+	pageInteractionDIV.append('<div id=fbText></div>');
+	if (nextD<page.details.length)
+	{
+		$('label',pageInteractionDIV).click(function(){MulipleChoice_grade($(this).attr('id'))});
+		// Fade in subquestions
+		page.subq=nextD;
+		$('.subq').hide();
+		$('#subq'+nextD).fadeIn('slow');
+	}
+}
+
+
+
 
 function iButton(caption,id)
 {	// choice option hyperlink styled as button
@@ -656,16 +870,58 @@ function oldPageTypeWarning()
 }
 function ShortAnswer_layout()
 {
-	doGrade=ShortAnswer_grade;
-	$(".PageSpecificGrade").append('<div style="vertical-align: middle">'
-		+"<input type=text id=textResponse name=textResponse rows=2 size=60><BR><BR>"
-		+gradeButton()
-		+revealButton()
-		+'</div>'
-		+'<div id=fbText></div><BR>'
-		);
-	doReveal=ShortAnswer_reveal;
-	$('#textResponse').keypress(function(e){if(e.keyCode == 13) { doGrade()}});
+	if ( lessonReviewMode && page.answered)
+	{	// Just display correct answer.
+		var html="";
+		for (var r=0;r<page.textMatches.length;r++)
+		{
+			var match = page.textMatches[r];
+			if (match.grade==RIGHT)
+			{
+				var matches=match.matchlist.split(DEL.toUpperCase());
+				var mtext="";
+				switch (match.matchstyle)
+				{
+					case "MatchContainsAny": //Answer must contain one of the matches.
+						//mtext="Contains one of these";
+						mtext="contains "+ joinQuotes(matches," or ");
+						break;
+					case "MatchContainsAll": //Answer must contain each of the matches.
+						//mtext="Contains all of these";
+						mtext="contains "+ joinQuotes(matches," and ");
+						break;
+					case "MatchContainsAllInOrder"://Answer must contain each of the matches in order
+						//mtext="Contains all of these in order";
+						mtext="contains "+ joinQuotes(matches," followed by ");
+						break;
+					case "MatchContainsNone"://Answer contains none of these
+						//mtext="Contains none of these";
+						mtext="does not contain "+ joinQuotes(matches," or ");
+						break;
+					default: // or =
+						//mtext="Matches this exactly";
+						mtext="is "+ joinQuotes(matches," or ");
+				}
+				html += '<tr><td><p>If your answer ' + mtext + '</td><td>'+imgGradeReviewIcon(match.grade)+'<td><div class="grade-fb grade-'+match.grade+'">'+match.feedback+'</div></td></tr>';
+			}			
+		}
+		html='<p>Your answer was: '+page.scores[0].text+'</p>'+'<p>The correct answer(s) are:</p>'+'<table>'+html+'</table>';
+		pageLessonReviewReport(html);
+
+	}
+	else
+	{
+		doGrade=ShortAnswer_grade;
+		$(".PageSpecificGrade").append('<div style="vertical-align: middle">'
+			+"<input type=text id=textResponse name=textResponse rows=2 size=60><BR><BR>"
+			+gradeButton()
+			+revealButton()
+			+'</div>'
+			+'<div id=fbText></div><BR>'
+			);
+		doReveal=ShortAnswer_reveal;
+		$('#textResponse').keypress(function(e){if(e.keyCode == 13) { doGrade()}});
+	}
 }
 
 
@@ -674,41 +930,105 @@ function writeEssayOrSelectColumn(classCol,name,title,text)
 	return ' <div class="'+classCol+' col-xs-12"><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></div>';
 }
 
+
 function TextSelect_layout()
 {
-	let iText= '<div class=EssayTable><div class="row">'
-		+writeEssayOrSelectColumn('col-sm-12',"ANSWER","",page.initialText)
-		+"</div></div>";
-	pageInteractionDIV.append(iText);
-	$(".PageSpecificGrade").append(gradeButton()+revealButton()).append('<div id=fbText></div>');
-	doGrade=TextSelect_grade;
-	doReveal=TextSelect_reveal;
+	let iText= '<div class=EssayTable><div class="row">'+writeEssayOrSelectColumn('col-sm-12',"ANSWER","",page.initialText)+"</div></div>";
+	if (lessonReviewMode && page.answered)
+	{	// 06/08 Lesson Review - just show text with correct answer hilited.
+		//page.scores[0].text user's answer
+		let html=iText+textReviewFeedbackRW("<p>The correct selection is:</p>"+"<div class=hilite>"+page.correctText +"</div>"+"<p>and the response is:</p>",true);
+		pageLessonReviewReport(html);
+	}
+	else
+	{
+		pageInteractionDIV.append(iText);
+		$(".PageSpecificGrade").append(gradeButton()+revealButton()).append('<div id=fbText></div>');
+		doGrade=TextSelect_grade;
+		doReveal=TextSelect_reveal;
+	}
 }
+
+function TextSelect_grade()
+{
+	// Grab user answer, trim leading/trailing spaces
+	var originalAnswer = $('#ANSWER').getSelection().text;
+	var answer=cleanString(originalAnswer);
+	//if it's blank, tell user to try
+	if (answer=="") {note(t(lang.MakeSelection));return false;}
+	$(".PageSpecificGrade #reveal").fadeIn();
+	answer=answer.toLowerCase();
+	var ok=false
+	var correct=cleanString(page.correctText.toLowerCase());
+	var p=answer.indexOf(correct); //if p>=0 the correct answer exists within our selection
+	if (p>=0)
+	{
+		var before=answer.substring(0,p).split(" ")
+		var after=answer.substring(p+correct.length,answer.length).split(" ")
+		// Count the number of spaces in the before and after
+		ok=(before.length-1<=page.slackWordsBefore && after.length-1<=page.slackWordsAfter)
+	}
+	
+	page.attempts ++;
+	if (ok)
+		scoreAndShowFeedback(RIGHT,0,originalAnswer,null,"#fbText", page.rightFeedback,page.rightDest);
+	else
+	if (page.attempts<=page.hints.length)
+		scoreAndShowFeedback(WRONG,0,originalAnswer,null,"#fbText", page.hints[page.attempts-1],null);
+	else
+		scoreAndShowFeedback(WRONG,0,originalAnswer,null,"#fbText", page.wrongFeedback,page.wrongDest);
+	return false;
+}
+
+function TextSelect_reveal()
+{
+	if (page.attempts==0) {tryitonce();return false;}
+	var originalAnswer="";
+	originalAnswer=page.correctText;
+	//showFeedback(INFO,lang.GaveUpHeading,"#fbText",txt);
+	scoreAndShowFeedback(RIGHT,0,lang.GaveUpHeading,null,"#fbText","<div class=hilite>"+originalAnswer +"</div>" + page.rightFeedback,page.rightDest);
+	return false;
+}
+
 
 function TextEssay_layout()
 {	// Essays in 3 forms: optional Initial text for user to examine, user's editable Answer field, and optional Final text for user to compare with.
-	let lastAnswer= (page.scores[0] ? page.scores[0].text : "");// restore user's last answer
-	page.TextColumns = 1;
-	if (page.initialText != "") page.TextColumns++;
-	if (page.correctText != "") page.TextColumns++;
-	let classCol='';
-	if (page.TextColumns==1)
-		classCol='col-sm-12';
-	else if (page.TextColumns==2)
-		classCol='col-sm-6';
+	let lastAnswer= (page.scores && page.scores[0] ? page.scores[0].text : "");// restore user's last answer
+	if (lessonReviewMode && page.answered)
+	{
+		let iText='';
+		if (page.scores[0])
+			iText+='<p>Your answer was:</p><div>'+lastAnswer+'</div>';
+		if (page.correctText!="")
+			iText+='<p>Suggested correct answer is: <div>'+page.correctText+'</div>';
+		pageLessonReviewReport(iText);
+	}
 	else
-		classCol='col-sm-4';
-	let iText= '<div class=EssayTable><div class="row">';
-	if (page.initialText!="")
-		iText+=writeEssayOrSelectColumn(classCol,"INITIAL","",page.initialText);
-	iText+=writeEssayOrSelectColumn(classCol,"ANSWER","",lastAnswer);
-	if (page.correctText!="")
-		iText+=writeEssayOrSelectColumn(classCol,"CORRECT",t(lang.ModelAnswerWillAppear),"");
-	iText+="</div></div>";
-	$(".PageSpecificGrade").append(helpTextWrapper(t(lang.HelpEssay))).append(reviewButton()).append('<div id=fbText></div>');
-	pageInteractionDIV.append(iText);
-	doGrade=TextEssay_grade;
+	{
+		page.TextColumns = 1;
+		if (page.initialText != "") page.TextColumns++;
+		if (page.correctText != "") page.TextColumns++;
+		let classCol='';
+		if (page.TextColumns==1)
+			classCol='col-sm-12';
+		else if (page.TextColumns==2)
+			classCol='col-sm-6';
+		else
+			classCol='col-sm-4';
+		let iText= '<div class=EssayTable><div class="row">';
+		if (page.initialText!="")
+			iText+=writeEssayOrSelectColumn(classCol,"INITIAL","",page.initialText);
+		iText+=writeEssayOrSelectColumn(classCol,"ANSWER","",lastAnswer);
+		if (page.correctText!="")
+			iText+=writeEssayOrSelectColumn(classCol,"CORRECT",t(lang.ModelAnswerWillAppear),"");
+		iText+="</div></div>";
+		$(".PageSpecificGrade").append(helpTextWrapper(t(lang.HelpEssay))).append(reviewButton()).append('<div id=fbText></div>');
+		pageInteractionDIV.append(iText);
+		doGrade=TextEssay_grade;
+	}
 }
+
+
 var zIndex; // z-order drag items above background
 
 function DrawLines_layout()
@@ -1108,46 +1428,6 @@ function TextEssay_grade()
 }
 
 
-function TextSelect_grade()
-{
-	// Grab user answer, trim leading/trailing spaces
-	var originalAnswer = $('#ANSWER').getSelection().text;
-	var answer=cleanString(originalAnswer);
-	//if it's blank, tell user to try
-	if (answer=="") {note(t(lang.MakeSelection));return false;}
-	$(".PageSpecificGrade #reveal").fadeIn();
-	answer=answer.toLowerCase();
-	var ok=false
-	var correct=cleanString(page.correctText.toLowerCase());
-	var p=answer.indexOf(correct); //if p>=0 the correct answer exists within our selection
-	if (p>=0)
-	{
-		var before=answer.substring(0,p).split(" ")
-		var after=answer.substring(p+correct.length,answer.length).split(" ")
-		// Count the number of spaces in the before and after
-		ok=(before.length-1<=page.slackWordsBefore && after.length-1<=page.slackWordsAfter)
-	}
-	
-	page.attempts ++;
-	if (ok)
-		scoreAndShowFeedback(RIGHT,0,originalAnswer,null,"#fbText", page.rightFeedback,page.rightDest);
-	else
-	if (page.attempts<=page.hints.length)
-		scoreAndShowFeedback(WRONG,0,originalAnswer,null,"#fbText", page.hints[page.attempts-1],null);
-	else
-		scoreAndShowFeedback(WRONG,0,originalAnswer,null,"#fbText", page.wrongFeedback,page.wrongDest);
-	return false;
-}
-
-function TextSelect_reveal()
-{
-	if (page.attempts==0) {tryitonce();return false;}
-	var originalAnswer="";
-	originalAnswer=page.correctText;
-	//showFeedback(INFO,lang.GaveUpHeading,"#fbText",txt);
-	scoreAndShowFeedback(RIGHT,0,lang.GaveUpHeading,null,"#fbText","<div class=hilite>"+originalAnswer +"</div>" + page.rightFeedback,page.rightDest);
-	return false;
-}
 
 
 
@@ -1356,31 +1636,63 @@ function CheckBoxes_reveal()
 	return false;
 }
 
+
 function RadioButtons_layout()
 {	// vertical layout: each subquestion followed by radio button list. 
-	let subQText=CheckBoxRadioButtonColumnHeadings();
-	pageInteractionDIV.append(subQText);
-	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
-	doGrade=RadioButtons_grade;
-	doReveal=RadioButtons_reveal;
+	if (lessonReviewMode && page.answered)
+	{	// 
+		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton()+"<p>and the response is:</p>",true);
+		pageLessonReviewReport(html);
+	}
+	else
+	{
+		let subQText=CheckBoxRadioButtonColumnHeadings();
+		pageInteractionDIV.append(subQText);
+		$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
+		doGrade=RadioButtons_grade;
+		doReveal=RadioButtons_reveal;
+	}
 }
 
 function CheckBoxes_layout()
-{	// vertical layout: each subquestion followed by radio button list. 
-	let subQText=CheckBoxRadioButtonColumnHeadings();
-	pageInteractionDIV.append(subQText);
-	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
-	doGrade=CheckBoxes_grade;
-	doReveal=CheckBoxes_reveal;
+{	// vertical layout: each subquestion followed by radio button list.
+	if (lessonReviewMode && page.answered)
+	{	// 
+		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton()+"<p>and the response is:</p>",true);
+		pageLessonReviewReport(html);
+	}
+	else
+	{
+		let subQText=CheckBoxRadioButtonColumnHeadings();
+		pageInteractionDIV.append(subQText);
+		$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()).append('<div id=fbText></div>');
+		doGrade=CheckBoxes_grade;
+		doReveal=CheckBoxes_reveal;
+	}
 }
 function CheckBoxesSet_layout()
 {	// vertical layout: each subquestion followed by radio button list.
-	page.captions=[""];//fake column
-	let subQText=CheckBoxRadioButtonColumnHeadings();
-	pageInteractionDIV.append(subQText);
-	$(".PageSpecificGrade").append(gradeButton() +  resetButton()  + revealButton()).append('<div id=fbText></div>');
-	doGrade=CheckBoxesSet_grade;
-	doReveal=CheckBoxesSet_reveal;
+	if (lessonReviewMode && page.answered)
+	{
+		let html='';
+		for (let d in page.details)
+		{
+			let shouldCheck  = page.feedbacks[fbIndex(0,d)].grade==RIGHT;
+			html+='<tr valign=top><td>'+'<input type=checkbox '+(shouldCheck?'checked':'')+'/></td><td>'+(parseInt(d)+1)+'.</td><td>'+page.details[d].text+'</td></tr>';
+			html+='<tr valign=top><td colspan=2></td><td><div>'+page.feedbacks[fbIndex(shouldCheck ? 0 : 1,d)].text+'</div>'+'</td></tr>';
+		}
+		html='<p>The correct answers are:</p>'+'<table>'+html+'</table>';
+		pageLessonReviewReport(html);
+	}
+	else
+	{
+		page.captions=[""];//fake column
+		let subQText=CheckBoxRadioButtonColumnHeadings();
+		pageInteractionDIV.append(subQText);
+		$(".PageSpecificGrade").append(gradeButton() +  resetButton()  + revealButton()).append('<div id=fbText></div>');
+		doGrade=CheckBoxesSet_grade;
+		doReveal=CheckBoxesSet_reveal;
+	}
 }
 
 
@@ -1491,164 +1803,6 @@ function DragBoxOld_help()
 {
 	embedHelpHTML(this,lang.HelpStudentDragDrop + (page.ordered ? lang.HelpStudentDragDropSort : ''));
 }
-function DragBox_layout()
-{
-	if (page.categories.length>2 && page.ordered)
-	{	// Deprecated! Multiple categories with ordering uses the old format.
-		DragBoxOld_layout();
-		return;
-	}
-	if (!page.ordered)
-	{	// Convert 1 or more categories drag/drop into a radio button style, the new replacement.
-		convertDragBox2RB();
-		return;
-	}
-	// We now have one drag box column to sort so use the new Ordering interaction.
-	// Stuff items into boxes that are both sortable and deletable.
-	let items='';
-	
-	page.herrings=0;// if herrings exists, allow the 'remove' option.
-	for (let i=0;i<page.items.length;i++)
-	{
-		if (page.items[i].category==0) page.herrings++;
-	}
-	for (let i=0;i<page.items.length;i++)
-	{
-		items+='<li id=item'+i+' itemid='+i+' class="ui-sortable-handle"><div class="horizontal" aria-label="draggable box"><div class="vertical"><div class="dots-blue" aria-label="blue texture dots that show that this box is draggable"></div></div><div class="row drag-body"><div><p>'
-	//	+('<b>Cheat'+(page.items[i].category==0?"H":(i+1))+"</b> ")
-		+page.items[i].text+'</p></div>'
-		+(page.herrings?'<div class="row remove"><span class="remove-icon"></span><p class="remove-txt">Remove from list</p></div><div class="row undo"><span class="undo-icon"></span><p class="undo-txt">Undo remove</p></div></div>':'')+'</div></li>';
-//	TODO add right/wrong icons and change grip color
-// <div class="hint right"><span class="glyphicon glyphicon-ok drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Right"><p>Right</p></span></div>\
-//	<iv class="hint wrong"><span class="glyphicon glyphicon-remove drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Wrong"><p>Wrong</p><p></p></span>\
-	}
-	pageInteractionDIV.append('<div class="row"><div class="col-sm-12 drag-content well"><ul id="sortable" class="list-unstyled ui-sortable">'+items+'</ul></div></div>');
-	$('#sortable .undo').hide();
-	$("#sortable").shuffle();
-	
-	$('#sortable .remove p').click(function(){
-		$(this).parent().hide();
-		$(this).parent().parent().find('.undo').show();
-		$(this).parent().parent().parent().addClass('removed')});
-	$('#sortable .undo p').click(function(){
-		$(this).parent().hide();
-		$(this).parent().parent().find('.remove').show();
-		$(this).parent().parent().parent().removeClass('removed')});
-	$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()  +  '<div id=fbText></div>');
-	$("#sortable").shuffle();
-	doGrade=DragBox_grade;
-	doReveal = DragBox_reveal;
-	//doHelp = DragBoxOld_help;
-	
-	$("#sortable").sortable({
-		//xforcePlaceholderSize: true
-		forcePlaceholderSize: true
-	});
-	
-/*
-	// 8/2018 To correct drag drop problems on mobile jquery.ui.touch-punch.min.js is required.
-  //Drag and Drop
-  $(function () {
-      // Used to signal when a user has began dragging an item
-      var touchDown = false
-      // Used to prevent automatic scrolling when a user selects an item
-      // which is partially above or below the screen
-      var scroll = "normal"
-      $("#sortable").sortable({
-          forcePlaceholderSize: true,
-          tolerance: "pointer",
-          axis: "y",
-          cursor: "move",
-          scroll: true,
-          sort: function(e) {
-
-              // The selected item
-              const selected = $(e.target).children('.ui-sortable-helper')[0]
-              // The top of the selected item
-              selectedTop = parseFloat(selected.style.top.slice(0, -2))
-              // The bottom of the selected item
-              selectedBottom = selectedTop + $(selected).height()
-              // The height of the selected item
-              const selectedHeight = $(selected).height()
-
-              // The top of the sortable list
-              const sortableTop = $(e.target).offset().top
-              // The bottom of the sortable list
-              const sortableBottom = sortableTop + $(e.target).height()
-
-              // The top of the window
-              const windowTop = $(window).scrollTop()
-              // The bottom of the window
-              const windowBottom = windowTop + window.innerHeight
-
-              // If the top of the selected item is less than that
-              // of the list, and the top of the screen is less than
-              // that of the list do not let the user scroll any higher
-              if (selectedTop < sortableTop && windowTop < sortableTop) {
-                  $(selected).offset({top: sortableTop})
-                  return
-              // If the bottom of the selected item is greater than that
-              // of the list, and the bottom of the screen is greater than
-              // that of the list do not let the user scroll any lower
-              } else if (selectedBottom > sortableBottom && (windowBottom > sortableBottom)) {
-                  $(selected).offset({top: (sortableBottom - selectedHeight)})
-              }
-
-              // If the user has just touched down...
-              if (touchDown) {
-                  // If the top of the window is greater than that of the selected item
-                  if (windowTop > selectedTop) {
-                      console.log("Top")
-                      scroll = "top"
-                  // If the bottom of the window is less than that of the selected bottom
-                  } else if (windowBottom < selectedBottom) {
-                      scroll = "bottom"
-                  } else {
-                      scroll = "normal"
-                  }
-                  touchDown = false
-              }
-
-              // If the item has not just been selected with the top out of the screen
-              // and the top of the window is greater than that of the item...
-              if (scroll != "top" && windowTop > selectedTop) {
-                  // Scroll up
-                  $(window).scrollTop(selectedTop)
-              // If the item has not just been selected with the bottom out of the screen
-              // and the bottom of hte window is less than that of the itemm...
-              } else if (scroll != "bottom" && windowBottom < selectedBottom) {
-                  // Scroll down
-                  $(window).scrollTop(selectedBottom - window.innerHeight)
-              }
-
-              if (scroll != "normal") {
-                  // If the top of the item was out of the screen when selected
-                  // and is now in the screen...
-                  if (scroll == "top" && windowTop < selectedTop) {
-                      scroll = "normal"
-                  // If the bottom of the item was out of the screen when selected
-                  // and is now in the screen...
-                  } else if (scroll == "bottom" && $(window).scrollTop() + window.innerHeight > selectedBottom) {
-                      scroll = "normal"
-                  }
-              }
-          }
-          
-      });
-      $("#sortable").disableSelection();
-      $("#sortable").on('touchstart', (e) => {
-          touchDown = true
-      })
-  });
-  
-subtractTop = (selected, amt) => {
-	 var top = parseFloat(selected.style.top.slice(0, -2)) - amt
-	 return top.toString() + "px"
-}
-  */
-    
-}
-
 
 function DragBox_reveal()
 {
@@ -1844,8 +1998,173 @@ function DragBoxOld_reveal()
 
 
 
+var gradeReview2emo={'':'','RIGHT':'✅','WRONG':'&#x274C;','MAYBE':'<b>?</b>','INFO':'I'};
+function imgGradeReviewIcon(grade)
+{
+	return gradeReview2emo[grade];	//return '<img src=/lessons/web/share/jq/'+gradeIcon(grade)+'>';
+}
+function textReviewFeedback_(heading,fb,includeShared)
+{
+	var text=fb.text;
+	if (!(includeShared==false))
+		text+='<br />'+page.feedbackShared;
+	if (fb.next && fb.next!=page.nextPage)
+	{
+		text+='<br />This response then branches to page <i>'+fb.next+'</i>.';
+	}
+	return heading+'<table><tr><td>'+imgGradeReviewIcon(fb.grade)+'</td><td><div class="grade-fb grade-'+fb.grade+'">'+text+'</div></td></tr></table>';
+}
+function textReviewFeedback(heading,id,includeShared)
+{
+	return textReviewFeedback_(heading,page.feedbacks[id],includeShared);
+}
+function textReviewFeedbackRW(heading,includeShared)//Feedback for right/wrong types, always show/branch for right answer.
+{
+	page.destPage=page.rightDest;
+	return textReviewFeedback_(heading,{grade:RIGHT,text:page.rightFeedback,next:page.rightDest},includeShared);
+}
+function pageLessonReviewReport(html)
+{	// Specific Lesson Review format.
+	pageInteractionDIV.append('<div class=Report>'+html+'</div>');
+}
+function textReviewCheckBoxRadioButton()
+{	// LessonText
+	let radio=(page.style=="Radio Buttons");
+	let caps=page.captions.length;
+	let html='';
+	if (caps>1)
+	{
+		html+='<tr>';
+		for (let c in page.captions)
+		{
+			html+='<td>'+page.captions[c]+'</td>';
+		}
+		html+='<td>-</td>';
+		html+='</tr>';
+	}
+	for (let d in page.details)
+	{
+		html+='<tr>';
+		//<tr><td>'+imgGradeReviewIcon(fb.grade)+'</td><td><div class="grade-fb grade-'+fb.grade+'">'+text+'</div></td></tr>
+		for (let c in page.captions)
+		{
+			let cdi =fbIndex(c,d);
+			let checked=page.checks[d][c]==true;
+			//$('input[id=cb'+cdi+']').attr('checked',page.checks[d][c]==true);
+			if (radio)
+				html+='<td><input type=radio value='+d+'-'+c+' '+(checked?'checked':'')+'/></td>'
+			else
+				html+='<td><input type=checkbox '+(checked?'checked':'')+'/></td>';
+		}
+		html+='<td><div class="ChoiceText ReadText"><p>'+page.details[d].text +'</p></div></td>';
+		html+='</td></tr>';
+	}
+	return '<div class="row"><div class="col-sm-12"><table>'+html+'</table></div></div>';
+}
 
 
 
+function DragBox_layout()
+{
+	if (page.categories.length>2 && page.ordered)
+	{	// Deprecated! Multiple categories with ordering uses the old format.
+		DragBoxOld_layout();
+		return;
+	}
+	if (!page.ordered)
+	{	// Convert 1 or more categories drag/drop into a radio button style, the new replacement.
+		convertDragBox2RB();
+		return;
+	}
+	
+	if ( lessonReviewMode && page.answered)
+	{
+		let html='';
+		let j=0;
+		for (let i=0;i<page.items.length;i++)
+		{
+			let herring=page.items[i].category==0;
+			if (!herring)
+			{
+				j+=1;
+				html+='<tr><td>#'+(j)+'</td><td><div>'+page.items[i].text+'</div></td></tr>';
+			}
+		}
+		html='<p>The correct order is:</p>'+'<table>'+html+'</table>';
+		html+=textReviewFeedbackRW('Response',false);
+		pageLessonReviewReport(html);
+	}
+	else
+	{
+		// We now have one drag box column to sort so use the new Ordering interaction.
+		// Stuff items into boxes that are both sortable and deletable.
+		let items='';
+		
+		page.herrings=0;// if herrings exists, allow the 'remove' option.
+		for (let i=0;i<page.items.length;i++)
+		{
+			if (page.items[i].category==0) page.herrings++;
+		}
+		for (let i=0;i<page.items.length;i++)
+		{
+			items+='<li id=item'+i+' itemid='+i+' class="ui-sortable-handle"><div class="horizontal" aria-label="draggable box"><div class="vertical"><div class="dots-blue" aria-label="blue texture dots that show that this box is draggable"></div></div><div class="row drag-body"><div><p>'
+		//	+('<b>Cheat'+(page.items[i].category==0?"H":(i+1))+"</b> ")
+			+page.items[i].text+'</p></div>'
+			+(page.herrings?'<div class="row remove"><span class="remove-icon"></span><p class="remove-txt">Remove from list</p></div><div class="row undo"><span class="undo-icon"></span><p class="undo-txt">Undo remove</p></div></div>':'')+'</div></li>';
+	//	TODO add right/wrong icons and change grip color
+	// <div class="hint right"><span class="glyphicon glyphicon-ok drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Right"><p>Right</p></span></div>\
+	//	<iv class="hint wrong"><span class="glyphicon glyphicon-remove drag-drop-alert " aria-live="polite" role="definition" aria-labelledby="Wrong"><p>Wrong</p><p></p></span>\
+		}
+		pageInteractionDIV.append('<div class="row"><div class="col-sm-12 drag-content well"><ul id="sortable" class="list-unstyled ui-sortable">'+items+'</ul></div></div>');
+		$('#sortable .undo').hide();
+		$("#sortable").shuffle();
+		
+		$('#sortable .remove p').click(function(){
+			$(this).parent().hide();
+			$(this).parent().parent().find('.undo').show();
+			$(this).parent().parent().parent().addClass('removed')});
+		$('#sortable .undo p').click(function(){
+			$(this).parent().hide();
+			$(this).parent().parent().find('.remove').show();
+			$(this).parent().parent().parent().removeClass('removed')});
+		$(".PageSpecificGrade").append(gradeButton() + resetButton() + revealButton()  +  '<div id=fbText></div>');
+		$("#sortable").shuffle();
+		doGrade=DragBox_grade;
+		doReveal = DragBox_reveal;
+		//doHelp = DragBoxOld_help;
+		
+		$("#sortable").sortable({
+			//xforcePlaceholderSize: true
+			forcePlaceholderSize: true
+		});
+	}
+}
+
+function updateInstructions()
+{
+	$('#aboutInstructions').html(
+		lessonReviewMode?
+		'<p>This is a Lesson Review copy of your lesson run. It shows you your previous answers to questions in this lesson run. This lesson run has already been finalized, and the answers recorded. Question functionality has been disabled. </p>\
+		<p>To start a new run of this lesson, visit the lesson through the CALI website or through the LessonLink if one was provided by your professor. Starting a new lesson run will not replace previous run scores. Starting a new run will result in a separate, entirely new score. </p>'
+		:
+		'<p>Proceed through the lesson using the “Next” button at the bottom, reading the material and answering any questions along the way. Your responses to questions are saved automatically and immediately recorded.</p>\
+<p>Once you complete the lesson, you’ll have the option to “Finalize this score” to end this lesson run. Upon doing so, you will not be able to resume this lesson run.</p>\
+<p>If you exit the lesson before finalizing your score, you will have the option to “Resume” this lesson run. Note that resuming a lesson run will NOT allow you to change your score for questions already answered in that run; previously answered questions are immediately recorded and cannot be changed. </p>\
+<p>However, at any time you can start a new lesson run, and in doing so, get a separate, entirely new score. This does not replace your old score(s). You can run a lesson as many times as you’d like. Simply restart the lesson via the CALI website or the LessonLink* provided by your professor.</p>\
+<p>After finalizing a lesson run, you will be taken to a summary of your answer choices where you can print a copy of a certificate with your score. </p>\
+<p>You also have the option to open a “Review” copy of any finalized runs that shows you your answers to questions in that run. </p>\
+<p>Go to “My Lesson Runs” in your CALI Dashboard to see a full list of your lesson runs, resume a lesson run, or review a lesson run.</p>\
+<p>*If you are running this lesson as a LessonLink provided by your professor, your professor has access to every lesson run score as well as lesson analytics. Lesson analytics take into account only a student’s first attempt at a question, regardless of the number of runs.</p>'
+		);
+}
+
+
+function lessonReviewBranchNotice()
+{
+	return '<div class="grade-fb grade-INFO">\
+			  <p>You have returned to the start of a branch in the lesson. What you just saw was your path in this lesson run based on your first response to this question. (Subsequent attempts were not recorded and are therefore not included in this Review.) </p>\
+<p>Upon clicking “Next” you will be taken down the path that results from a correct answer to this question. This might not mirror your experience and therefore you may see certain questions for the first time.</p>\
+			  </div>';
+}
 
 

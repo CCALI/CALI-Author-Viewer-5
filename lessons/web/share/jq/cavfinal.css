@@ -25,11 +25,11 @@ p {
 	width:400px;
 	height:300px;
 }
-#slideshow ul, li{
+/*#slideshow ul, li{
 	padding:0;
 	margin:0;
 	border:0;
-}
+}*/
 #slideshow img{
 	width: 100%;
 	height: 100%;
@@ -41,9 +41,6 @@ p {
 }
 .UploadScore1 {
 	width: 20em;
-}
-.CLAccordion li a {
-	font-size: 14px !important;
 }
 .img-close {
 	z-index: 1;
@@ -70,6 +67,7 @@ p {
 	width: 1.5em;
 	height: 1.5em;
 	content:"";
+	margin-right: 0.5em;
 }
 #llLinkLogo, #llCourseName {
 	cursor: pointer;
@@ -100,13 +98,42 @@ p {
 }
 */
 p, blockquote, .alert-description-body {
-	font-size: 16px!important;
+	font-size: 16px !important;
 }
-
 hr {
 	background: #000;
 	width: 50%;
 	height: 2px;
 }
 
+/* 11/16/21 TOC smaller font */
+p.toc-title,.CLAccordion li a  {
+	font-size: 12px !important;
+}
+.CLAccordion li { /*,.CLAccordion ul ul{*/
+	margin-left: 1em;
+}
+.PageText * li {
+	font-size: 16px !important;
+}
+
+.VideoPopup {
+	width: 25%;
+	min-width: 250px;
+	position: fixed;
+	height: auto;
+	top: 5;
+	right: 5;
+	z-index: 99999;
+}
+#transcript_content {
+	font-size: 90%;
+	text-align: left;
+}
+#transcript_content P {
+	margin-top: 5px;
+}
+#show-hide-transcript {
+	cursor: pointer;
+}
 

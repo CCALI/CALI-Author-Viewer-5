@@ -24,6 +24,7 @@ var ScorePercent = "";//correct/total
 var ScoreTotalQuestions = 0;// count of all scored questions
 var ScoreTotalPages = 0;//count of all score pages
 var ScoreDetails = "";
+var lessonReviewMode=false;//If true, Lesson Review mode, set true when resuming a lesson with a COMPLETE=1 in score data.
 var doGrade = null;
 var doReveal = null;
 var globalToolbarLinks = [];// array of author defined toolbar links. form:  {text:'caption',url:'page name'}
@@ -130,11 +131,11 @@ function processBook()
 			book.SelfPublished=true;
 			$('img.CL-logo').attr('src','img/APLessonLogo.gif').removeClass('CL-logo');
 		}
-		if (StartPage=='') StartPage=pageCONTENTS;//pageABOUT;
+		if (StartPage=='') StartPage=pageABOUT;//pageCONTENTS;//
 		gotoPage(StartPage);
 		doAutoNextTOC();
 		downloadScore();
-			
+	
 		// 5/2018 TOC revised.
 		let page=book.pages[pageCONTENTS];
 		$('#SliderControl ul:first').replaceWith('<ul class="nav nav-list-main">'+page.text+'</ul>');
@@ -272,9 +273,11 @@ function thtml(msg)
 function patchLink()
 {	// todo jquery .live() handler instead
 
+	$('#LessonControl a[href^="http"], #Lesson a[href^="https"]').unbind('click').click(function(e){
+		e.preventDefault();
+		window.open($(this).attr('href'));
+	});//03/14/22 Open all question, choice and feedback links in new window.
 	
-	//$('#Lesson a[href^="http"], #Lesson a[href^="https"]').unbind('click');//03/16/21
-
 	
 	$('#LessonControl a[href^="jump"]').unbind('click').click(navClick);
 	//$('#SliderControl a[href^="jump"]').unbind('click');//Bitovi 
@@ -334,13 +337,16 @@ function gotoPage(pageName, skipCA)
 	
 	// Record how long we spent on the current page before switching to the next.
 	if (page)
+	{
 		if (page.startSeconds) page.timeSpent += Math.ceil(curSeconds() - page.startSeconds);
+	}
 	
 	
 	
 	//set hash below instead //top.location.hash=pageName;
 	page = book.pages[pageName];
 	
+	$('#open-tudor').hide();
 	$('#zoomin').remove();
 	$('.PageBorder').show();
 	if (page==null )
@@ -360,7 +366,7 @@ function gotoPage(pageName, skipCA)
 	}
 
 	setHash(page.name);// Change hash to match this page. this allows browser navigation.
-	
+
 	
 	// 8/31/2016 SJG Record lesson page visit to Piwik
   if (_paq) {
@@ -590,7 +596,8 @@ function showFeedback(grade,title,fbID, feedbackText,branch,branchChoice)
 			+'<div class="FeedbackButton">'+hyperButton(  (branch && page.destPage)? t(lang.NextPage):t(lang.ClosePopup),'#')+'</div>'
 			+'</div>';
 		*/
-		let txt=popupAlertHTML(grade,fbID+'_alert',title,feedbackText);
+		let fbID2=(fbID.indexOf('#')==0)?fbID.substr(1):fbID;//03/14/22 Fix bad ID
+		let txt=popupAlertHTML(grade,fbID2+'_alert',title,feedbackText);
 		$(fbID).empty().append(txt).children('.Feedback').hide().animate({},1,function(){scrollIntoView($(this).parent())}).delay(100).fadeIn(500,function(){});
 		patchLink();
 		if (branch && page.destPage)
@@ -603,6 +610,8 @@ function showFeedback(grade,title,fbID, feedbackText,branch,branchChoice)
 					scrollIntoView($(this).parent().prev());
 				}).fadeOut(500,function(){$(this).remove();});return false;});
 		}
+		if (page.discussion)
+			addDiscussionFeedback();
 	}
 	// Change Skip to Next, if applicable
 	//$("#gonext span").text(t('Next')).attr('title',"Next page is "+((page.destPage==null)?page.nextPage:page.destPage)).parent().show();
@@ -867,7 +876,6 @@ function initialize()
   $('.Copyright').append(' '+ViewerVersion);
   
   
-  
 	if (runid==null)
 		$('.Exit').remove();
 	else
@@ -996,7 +1004,6 @@ function initialize()
 		);
 		$('#feedbackModal').modal('hide');
 	});
-	
 }//end of load after document
 
 /*
@@ -1047,24 +1054,68 @@ function styleSheetSwitch(sheet)
 	$('link[title=style]').attr('href',sheet+".css");
 }
 
-// 
+var $nextTOC;
 var AutoNextTOCTimer;
 function doAutoNextTOC()
 {	// 10/2020 Upon return to TOC, automatically HILITE the next unvisited topic.
+	clearTimeout(AutoNextTOCTimer);
 	AutoNextTOCTimer=setTimeout(function()
-	{	
-		var $autoNextTOC;
+	{
 		$('#SliderControl ul:first a').removeClass('toc-hilite');
+
+		var $autoNextTOC;
+		var path=[];// Gather nesting sections for next unvisited topic.
+		var text='<p>Please use the table of contents to review any part of the lesson.</p>';
+		function nest(index)
+		{
+			var $heading=$('a:first[href^="jump"]',this);
+			path.push($heading);
+			if (!$autoNextTOC)
+				if (!$heading.hasClass('toc-visited'))
+					if ($heading.attr('href')!='jump://#')
+					{	// Found first heading leading to a page that's not visited yet. Build our nested section message.
+						$autoNextTOC=$heading;
+						text='';
+						path.forEach(function($h,i){if(i<path.length-1)$h.addClass('toc-visited');text+='<ul><li>'+$h.text()});
+						text='<p>Press Next to proceed to the next section:</p><p>'+text+'</ul></p>';// Level >1, bullet list.
+					}
+			
+			$('ul:first',this).children('li').each(nest);
+			path.pop();
+		}
+		$('#SliderControl ul:first').children('li').each(nest);
+		
+		
+		
+		//#####################
+		/*
 		$('#SliderControl ul:first a[href^="jump"]').each(function()
 		{
 			if (!$autoNextTOC)
 				if (!$(this).hasClass('toc-visited'))
-					$autoNextTOC=$(this);
+				{
+					if ($(this).attr('href')!='jump://#')
+						$autoNextTOC=$(this);
+					path.push($(this).text());
+				}
 		});
+		*/
 		if ($autoNextTOC)
 		{
-			//autoNextTOC.click();
 			$autoNextTOC.addClass('toc-hilite');
+			if (page.type=="Topics")
+			{	// 11/16/21 Set Next page button for Topic page.
+				var pagename = unescape(iefix( ($autoNextTOC.attr('href').split('://')[1])));
+				page.destPage=pagename;
+				$nextTOC=$autoNextTOC;// Allow Next to flag TOC as visited (same as if clicking in the TOC)
+				//var text=path.join('<ul><li>');
+				//text='<p>Press Next to proceed to the next section:</p><p><ul><li>'+text+'</ul></p>';// Level >1, bullet list.
+				//$('.LinkNavBar').show();
+			}
+		}			// 12/13/21 What's next if all places visited?
+		if (page.type=="Topics")
+		{
+			pageTextDIV.append('<div class="ReadText"><div style="width: 50%; margin-left: 20%;margin-right: 20%"><div style="display: inline-block;">'+text+'</div></div></div>');
 		}
-	},1000);
+	},100);
 }

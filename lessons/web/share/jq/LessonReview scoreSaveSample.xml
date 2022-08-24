@@ -1,0 +1,301 @@
+<PERFORMANCE>
+	<SUMMARY>
+		<FORMAT>07/25/2011</FORMAT>
+		<RUNID>0</RUNID>
+		<VIEWER>07/25/2018</VIEWER>
+		<COMPLETE>1</COMPLETE>
+		<VIEWERTYPE>JQ</VIEWERTYPE>
+		<LESSON>TRT32</LESSON>
+		<LESSONID>TRT32</LESSONID>
+		<LID></LID>
+		<LESSONVERSION>02/27/2019</LESSONVERSION>
+		<QCORRECT>7</QCORRECT>
+		<QANSWERED>20</QANSWERED>
+		<QTOTAL>21</QTOTAL>
+		<SCOREPERCENT>35%</SCOREPERCENT>
+		<PAGECOUNT>13</PAGECOUNT>
+		<PAGECURRENT>Lesson Completed</PAGECURRENT>
+	</SUMMARY>
+	<RESPONSES>
+		<Q>
+			<NAME>Folks 1 of 1</NAME>
+			<TYPE>Book Page/</TYPE>
+			<TIME>2</TIME>
+		</Q>
+		<Q>
+			<NAME>Hears 1 of 3</NAME>
+			<TYPE>Multiple Choice/Choose List</TYPE>
+			<TIME>21</TIME>
+			<GRADE>RIGHT</GRADE>
+			<ID>0</ID>
+			<TEXT>A.</TEXT>
+		</Q>
+		<Q>
+			<NAME>Hears 2 of 3</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>72</TIME>
+			<SUBQ>1</SUBQ>
+			<GRADE>WRONG</GRADE>
+			<ID>0</ID>
+			<TEXT>True</TEXT>
+		</Q>
+		<Q>
+			<NAME>Hears 2 of 3</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>72</TIME>
+			<SUBQ>2</SUBQ>
+			<GRADE>RIGHT</GRADE>
+			<ID>0</ID>
+			<TEXT>True</TEXT>
+		</Q>
+		<Q>
+			<NAME>Hears 2 of 3</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>72</TIME>
+			<SUBQ>3</SUBQ>
+			<GRADE>WRONG</GRADE>
+			<ID>1</ID>
+			<TEXT>False</TEXT>
+		</Q>
+		<Q>
+			<NAME>Hears 2 of 3</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>72</TIME>
+			<SUBQ>4</SUBQ>
+			<GRADE>RIGHT</GRADE>
+			<ID>1</ID>
+			<TEXT>False</TEXT>
+		</Q>
+		<Q>
+			<NAME>Hears 2 of 3</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>72</TIME>
+			<SUBQ>5</SUBQ>
+			<GRADE>WRONG</GRADE>
+			<ID>0</ID>
+			<TEXT>True</TEXT>
+		</Q>
+		<Q>
+			<NAME>Hears 3 of 3</NAME>
+			<TYPE>Book Page/</TYPE>
+			<TIME>5</TIME>
+		</Q>
+		<Q>
+			<NAME>Says 1 of 11</NAME>
+			<TYPE>Multiple Choice/Check Boxes</TYPE>
+			<TIME>93</TIME>
+			<GRADE>RIGHT</GRADE>
+			<ID>1</ID>
+			<TEXT>Right</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 2 of 11</NAME>
+			<TYPE>Book Page/</TYPE>
+			<TIME>35</TIME>
+		</Q>
+		<Q>
+			<NAME>Says 3 of 11</NAME>
+			<TYPE>Multiple Choice/Check Boxes Set</TYPE>
+			<TIME>75</TIME>
+			<GRADE>WRONG</GRADE>
+			<ID>0</ID>
+			<TEXT>Wrong</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 4 of 11</NAME>
+			<TYPE>Multiple Choice/Radio Buttons</TYPE>
+			<TIME>66</TIME>
+			<GRADE>WRONG</GRADE>
+			<ID>0</ID>
+			<TEXT>Hint</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 5 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>125</TIME>
+			<SUBQ>1</SUBQ>
+			<GRADE>RIGHT</GRADE>
+			<ID>0</ID>
+			<TEXT>Res Ipsa Loquitur</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 5 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>125</TIME>
+			<SUBQ>2</SUBQ>
+			<GRADE>WRONG</GRADE>
+			<ID>2</ID>
+			<TEXT>Maybe</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 5 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>125</TIME>
+			<SUBQ>3</SUBQ>
+			<GRADE>RIGHT</GRADE>
+			<ID>0</ID>
+			<TEXT>Res Ipsa Loquitur</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 5 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>125</TIME>
+			<SUBQ>4</SUBQ>
+			<GRADE>MAYBE</GRADE>
+			<ID>2</ID>
+			<TEXT>Maybe</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 5 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>125</TIME>
+			<SUBQ>5</SUBQ>
+			<GRADE>WRONG</GRADE>
+			<ID>0</ID>
+			<TEXT>Res Ipsa Loquitur</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 5 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>125</TIME>
+			<SUBQ>6</SUBQ>
+			<GRADE>RIGHT</GRADE>
+			<ID>0</ID>
+			<TEXT>Res Ipsa Loquitur</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 6 of 11</NAME>
+			<TYPE>Multiple Choice/Radio Buttons</TYPE>
+			<TIME>51</TIME>
+			<GRADE>WRONG</GRADE>
+			<ID>0</ID>
+			<TEXT>Wrong</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 7 of 11</NAME>
+			<TYPE>Text Entry/Text Essay</TYPE>
+			<TIME>5</TIME>
+			<GRADE>INFO</GRADE>
+			<ID>0</ID>
+			<TEXT>.</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 8 of 11</NAME>
+			<TYPE>Multiple Choice/Radio Buttons</TYPE>
+			<TIME>27</TIME>
+			<GRADE>WRONG</GRADE>
+			<ID>0</ID>
+			<TEXT>Hint</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 9 of 11</NAME>
+			<TYPE>Multiple Choice/Choose List</TYPE>
+			<TIME>5</TIME>
+			<GRADE>WRONG</GRADE>
+			<ID>2</ID>
+			<TEXT>C.</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 9.1 of 11</NAME>
+			<TYPE>Multiple Choice/Choose List</TYPE>
+			<TIME>76</TIME>
+			<GRADE>WRONG</GRADE>
+			<ID>0</ID>
+			<TEXT>A.</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 9.2 of 11</NAME>
+			<TYPE>Multiple Choice/Choose List</TYPE>
+			<TIME>0</TIME>
+		</Q>
+		<Q>
+			<NAME>Says 10 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>53</TIME>
+			<SUBQ>1</SUBQ>
+			<GRADE>WRONG</GRADE>
+			<ID>0</ID>
+			<TEXT>RIL--D in Control</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 10 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>53</TIME>
+			<SUBQ>2</SUBQ>
+			<GRADE>WRONG</GRADE>
+			<ID>1</ID>
+			<TEXT>No RIL--No Control</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 10 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>53</TIME>
+			<SUBQ>3</SUBQ>
+			<GRADE>WRONG</GRADE>
+			<ID>1</ID>
+			<TEXT>No RIL--No Control</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 10 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>53</TIME>
+			<SUBQ>4</SUBQ>
+			<GRADE>WRONG</GRADE>
+			<ID>1</ID>
+			<TEXT>No RIL--No Control</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 10 of 11</NAME>
+			<TYPE>Multiple Choice/Choose MultiButtons</TYPE>
+			<TIME>53</TIME>
+			<SUBQ>5</SUBQ>
+			<GRADE>WRONG</GRADE>
+			<ID>1</ID>
+			<TEXT>No RIL--No Control</TEXT>
+		</Q>
+		<Q>
+			<NAME>Says 11 of 11</NAME>
+			<TYPE>Book Page/</TYPE>
+			<TIME>2</TIME>
+		</Q>
+		<Q>
+			<NAME>Speaks 1 of 6</NAME>
+			<TYPE>Book Page/</TYPE>
+			<TIME>12</TIME>
+		</Q>
+		<Q>
+			<NAME>Speaks 2 of 6</NAME>
+			<TYPE>Book Page/</TYPE>
+			<TIME>3</TIME>
+		</Q>
+		<Q>
+			<NAME>Speaks 3 of 6</NAME>
+			<TYPE>Multiple Choice/Choose Buttons</TYPE>
+			<TIME>387</TIME>
+			<GRADE>RIGHT</GRADE>
+			<ID>1</ID>
+			<TEXT>No</TEXT>
+		</Q>
+		<Q>
+			<NAME>Speaks 4 of 6</NAME>
+			<TYPE>Multiple Choice/Choose List</TYPE>
+			<TIME>25</TIME>
+			<GRADE>RIGHT</GRADE>
+			<ID>1</ID>
+			<TEXT>B.</TEXT>
+		</Q>
+		<Q>
+			<NAME>Speaks 5 of 6</NAME>
+			<TYPE>Text Entry/Text Short Answer</TYPE>
+			<TIME>54</TIME>
+			<GRADE>RIGHT</GRADE>
+			<ID>1</ID>
+			<TEXT>the thing speaks for itself</TEXT>
+		</Q>
+		<Q>
+			<NAME>Speaks 6 of 6</NAME>
+			<TYPE>Book Page/</TYPE>
+			<TIME>3</TIME>
+		</Q>
+	</RESPONSES>
+</PERFORMANCE>

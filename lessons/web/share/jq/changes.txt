@@ -1,5 +1,17 @@
 Change log for CALI Author Viewer 5
 
+08/16/2022
+Added. Lesson Review feature.
+Added. Video discussions.
+
+07/25/2018
+Changed. New viewer (Bitovi refresh)
+
+11/02/2017
+Changed. LessonPast is now Analytics
+
+10/23/2017
+Fixed. Short answer wrong answer display.
 10/24/2016
 Added. LessonLive.
 Added. Score value indicator.

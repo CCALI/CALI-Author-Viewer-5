@@ -26,7 +26,7 @@ function buildScoreSaveXML()
 	var xml="";
 	var qxml="";
 	var sxml="";
-	sxml=	qtag("FORMAT","07/25/2011")
+	sxml=	qtag("FORMAT","05/05/2022")//"07/25/2011")
 			+qtag("RUNID",runid)
 			//+qtag("USERNAME", username)
 			//+qtag("RUNDATE",new Date()) Warning! Adding date will cause it to CHANGE everytime and do constant uploading!
@@ -58,6 +58,7 @@ function buildScoreSaveXML()
 				 qtag("NAME",decodeHTML(pagep.name))
 				+qtag("TYPE",pagep.type+"/"+ (pagep.style==null ? "":pagep.style))
 				+qtag("TIME",pagep.timeSpent)
+				+qtag("TIMESTAMP",pagep.timeStamp?pagep.timeStamp:0)
 				+(pagep.scores.length>1 ? qtag("SUBQ",part+1) : "")
 				+(score==null ? "" : 
 					qtag("GRADE",score.grade)
@@ -70,11 +71,12 @@ function buildScoreSaveXML()
 	xml=qtag("PERFORMANCE",qtag("SUMMARY",sxml)+qtag("RESPONSES",qxml)+qtag("HISTORY",hxml));
 	return xml; 
 }
+var resumeComplete=false;
 
 function downloadScore()
 {
+	//trace("downloadScore ",resumeScoreURL);
 	if (resumeScoreURL=="") return;
-	//trace("Resuming scoresave ",resumeScoreURL);
 	$.ajax({
 		url: resumeScoreURL,
 		dataType: "xml",	
@@ -87,6 +89,7 @@ function downloadScore()
 			scoreDataXML = data;
 			scoreDataXML=$(scoreDataXML);
 			var resumePageName=scoreDataXML.find("PAGECURRENT").xml();
+			lessonReviewMode=parseInt(scoreDataXML.find("COMPLETE").xml())==1;
 			//trace("Resume page ",resumePageName);
 			scoreDataXML.find("Q").each(function() {
 				var scoreXML = $(this);
@@ -97,6 +100,7 @@ function downloadScore()
 				if (page!=null)
 				{
 					page.timeSpent=parseInt(scoreXML.find("TIME").xml());
+					page.timeStamp=parseInt(scoreXML.find("TIMESTAMP").xml()); if (page.timeStamp==0) delete page.timeStamp;
 					var grade=scoreXML.find("GRADE").xml();
 					if (grade!="")
 					{
@@ -114,6 +118,14 @@ function downloadScore()
 				}
 			});
 			tallyScores();
+			//trace("downloadScore lessonReviewMode="+lessonReviewMode);
+			if (lessonReviewMode)
+			{
+				resumePageName='';
+				$('.PageScore').html('<div style="text-align:center">Lesson Review Mode<br />Scoring disabled</div>');
+				updateInstructions();
+			}
+			resumeComplete=true;
 			if (bookMark=="" && resumePageName!="") gotoPage(resumePageName);
 		}
 	});
@@ -165,6 +177,7 @@ function uploadScore()
 	$(".UploadScore2").show();
 	$(".UploadScore3").hide();
 	var xmlDocument = newScoreData = buildScoreSaveXML();
+	//trace("uploadScore "+xmlDocument.length+" bytes to "+PerformanceUpload());
 	$.ajax({
 		cache: false,
 		type: "POST",
@@ -222,9 +235,14 @@ function uploadScoreSilent()
 {	// Upload score data ignoring any error/success responses. 
 	// Upload only if actual data changed and we're not currently uploading right now. 
 	if (runid==null || newScoreData == lastSavedData || uploadingScore) return;
+	if (resumeScoreURL!="" && !resumeComplete){
+		//trace("uploadScoreSilent Wait for resume to load")
+		return;
+	}
+	if (lessonReviewMode) return;
 	var xmlDocument = newScoreData;
 	uploadingScore=true;
-	//trace("uploadScoreSilent "+xmlDocument.length+" bytes to "+PerformanceUpload());
+	//trace("uploadScoreSilent "+xmlDocument.length+" bytes to "+PerformanceUpload()+" lessonReviewMode="+lessonReviewMode);
 	$.ajax({
 		cache: false,
 		type: "POST",
@@ -268,6 +286,8 @@ function uploadScoreSilent()
 function ScoreDirty()
 {	// Call when we need score to be saved.
 	if (runid==null) return;// do nothing if we have no runid
+	if (lessonReviewMode) return;// no saving score in Review mode.
+	//trace("ScoreDirty "+"lessonReviewMode="+lessonReviewMode);
 	newScoreData=buildScoreSaveXML();
 	if (uploadScoreSilentInterval==null)
 	{	// 03/02/2015 Upload check every 5 seconds. 
@@ -370,6 +390,8 @@ function answerLoad()
 
 function saveScore(grade,id,text,part)
 {	// attach score to page, but only record 1st answer.
+	if (lessonReviewMode)
+		return;
 	if (part==null) part=0;
 	part=parseInt(part)
 	if (page.scores[part]==null)
