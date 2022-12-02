@@ -925,12 +925,6 @@ function ShortAnswer_layout()
 }
 
 
-function writeEssayOrSelectColumn(classCol,name,title,text)
-{
-	return ' <div class="'+classCol+' col-xs-12"><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></div>';
-}
-
-
 function TextSelect_layout()
 {
 	let iText= '<div class=EssayTable><div class="row">'+writeEssayOrSelectColumn('col-sm-12',"ANSWER","",page.initialText)+"</div></div>";
@@ -991,42 +985,6 @@ function TextSelect_reveal()
 }
 
 
-function TextEssay_layout()
-{	// Essays in 3 forms: optional Initial text for user to examine, user's editable Answer field, and optional Final text for user to compare with.
-	let lastAnswer= (page.scores && page.scores[0] ? page.scores[0].text : "");// restore user's last answer
-	if (lessonReviewMode && page.answered)
-	{
-		let iText='';
-		if (page.scores[0])
-			iText+='<p>Your answer was:</p><div>'+lastAnswer+'</div>';
-		if (page.correctText!="")
-			iText+='<p>Suggested correct answer is: <div>'+page.correctText+'</div>';
-		pageLessonReviewReport(iText);
-	}
-	else
-	{
-		page.TextColumns = 1;
-		if (page.initialText != "") page.TextColumns++;
-		if (page.correctText != "") page.TextColumns++;
-		let classCol='';
-		if (page.TextColumns==1)
-			classCol='col-sm-12';
-		else if (page.TextColumns==2)
-			classCol='col-sm-6';
-		else
-			classCol='col-sm-4';
-		let iText= '<div class=EssayTable><div class="row">';
-		if (page.initialText!="")
-			iText+=writeEssayOrSelectColumn(classCol,"INITIAL","",page.initialText);
-		iText+=writeEssayOrSelectColumn(classCol,"ANSWER","",lastAnswer);
-		if (page.correctText!="")
-			iText+=writeEssayOrSelectColumn(classCol,"CORRECT",t(lang.ModelAnswerWillAppear),"");
-		iText+="</div></div>";
-		$(".PageSpecificGrade").append(helpTextWrapper(t(lang.HelpEssay))).append(reviewButton()).append('<div id=fbText></div>');
-		pageInteractionDIV.append(iText);
-		doGrade=TextEssay_grade;
-	}
-}
 
 
 var zIndex; // z-order drag items above background
@@ -1408,24 +1366,6 @@ function Sliders_reveal()
 
 
 
-function TextEssay_grade()
-{
-	/* for 1 box, show feedback
-		for 2 boxes, show feedback and if the first box is the user's answer display Correct answer in second box
-		for 3 boxes, show feedback and display correct answer in last box
-	*/
-	page.attempts ++;
-	
-	var answer=$("#ANSWER").val();
-	// Make sure user types something.
-	if (answer=="") {note(t(lang.TypeSomething));return false;}
-	if ((page.TextColumns==3) || (page.TextColumns==2 && page.initialText=="")) 
-		$("#CORRECT").val(page.correctText);
-	// We don't care which attempt. We always save user's last essay response. 
-	page.scores[0]=null;//clear so we always save user's new answer
-	scoreAndShowFeedback(INFO,0,answer,null,"#fbText", page.feedbackShared,null);
-	return false;
-}
 
 
 
@@ -2167,4 +2107,93 @@ function lessonReviewBranchNotice()
 			  </div>';
 }
 
+
+
+
+
+function TextEssay_layout()
+{	// Essays in 3 forms: optional Initial text for user to examine, user's editable Answer field, and optional Final text for user to compare with.
+	let lastAnswer= (page.scores && page.scores[0] ? page.scores[0].text : "");// restore user's last answer
+	if (lessonReviewMode && page.answered)
+	{
+		let iText='';
+		if (page.scores[0])
+			iText+='<p>Your answer was:</p><div>'+lastAnswer+'</div>';
+		if (page.correctText!="")
+			iText+='<p>Suggested correct answer is: <div>'+page.correctText+'</div>';
+		pageLessonReviewReport(iText);
+	}
+	else
+	{
+		let iText='';// '<div class=EssayTable><div class="row">';
+		if (lastAnswer=="")// 12/02/22
+			lastAnswer=page.initialText;
+		let label='';
+		if (page.initialText=='')
+			label='Write your answer below'
+		else
+			label='Revise the text below as needed';
+		iText+=writeEssayOrSelectColumn2(label,'col-sm-12',"ANSWER","",lastAnswer);
+		/*
+		page.TextColumns = 1;
+		if (page.initialText != "") page.TextColumns++;
+		if (page.correctText != "") page.TextColumns++;
+		let classCol='';
+		if (page.TextColumns==1)
+			classCol='col-sm-12';
+		else if (page.TextColumns==2)
+			classCol='col-sm-6';
+		else
+			classCol='col-sm-4';
+		if (page.initialText!="")
+			iText+=writeEssayOrSelectColumn(classCol,"INITIAL","",page.initialText);
+		iText+=writeEssayOrSelectColumn(classCol,"ANSWER","",lastAnswer);
+		if (page.correctText!="")
+			iText+=writeEssayOrSelectColumn(classCol,"CORRECT",t(lang.ModelAnswerWillAppear),"");
+		iText+="</div></div>";
+		*/
+
+		$(".PageSpecificGrade").append(helpTextWrapper(t(lang.HelpEssay))).append(reviewButton()).append('<div id=fbText></div>');
+		pageInteractionDIV.append(iText);
+		doGrade=TextEssay_grade;
+	}
+}
+
+function TextEssay_grade()
+{
+	/* for 1 box, show feedback
+		for 2 boxes, show feedback and if the first box is the user's answer display Correct answer in second box
+		for 3 boxes, show feedback and display correct answer in last box
+	*/
+	page.attempts ++;
+	
+	var answer=$("#ANSWER").val();
+	// Make sure user types something.
+	if (answer=="") {note(t(lang.TypeSomething));return false;}
+	
+	let iText='';
+	if (page.correctText!="")	// 12/02/22
+	{
+		iText+=writeEssayOrSelectColumn2('Example model answer','col-sm-12',"CORRECT",page.correctText,"");
+		//iText+='<div class=EssayTable><h2>Example model answer:</h2><div class="row">'+page.correctText+'</div></div>';
+	}
+	/*if ((page.TextColumns==3) || (page.TextColumns==2 && page.initialText==""))
+		$("#CORRECT").val(page.correctText);
+	*/
+	// We don't care which attempt. We always save user's last essay response. 
+	page.scores[0]=null;//clear so we always save user's new answer
+	//scoreAndShowFeedback(INFO,0,answer,null,"#fbText", page.feedbackShared,null);
+	//scoreAndShowFeedback(INFO,0,answer,null,"#fbText", page.feedbackShared+iText,null);
+	saveScore(INFO,0,answer,null);
+	showFeedback(INFO,'Response','#fbText',page.feedbackShared+iText,null,answer);
+	
+	return false;
+}
+
+
+
+function writeEssayOrSelectColumn2(label,classCol,name,title,text)
+{
+	return '<div class=EssayTable><h2>'+label+':</h2><div class="row"> <div class="'+classCol+' col-xs-12"><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></div></div></div>';
+}
 
