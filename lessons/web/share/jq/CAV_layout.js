@@ -2130,29 +2130,10 @@ function TextEssay_layout()
 			lastAnswer=page.initialText;
 		let label='';
 		if (page.initialText=='')
-			label='Write your answer below'
+			label='Write your answer below';
 		else
-			label='Revise the text below as needed';
+			label='Write your answer below (edit as needed)';
 		iText+=writeEssayOrSelectColumn2(label,'col-sm-12',"ANSWER","",lastAnswer);
-		/*
-		page.TextColumns = 1;
-		if (page.initialText != "") page.TextColumns++;
-		if (page.correctText != "") page.TextColumns++;
-		let classCol='';
-		if (page.TextColumns==1)
-			classCol='col-sm-12';
-		else if (page.TextColumns==2)
-			classCol='col-sm-6';
-		else
-			classCol='col-sm-4';
-		if (page.initialText!="")
-			iText+=writeEssayOrSelectColumn(classCol,"INITIAL","",page.initialText);
-		iText+=writeEssayOrSelectColumn(classCol,"ANSWER","",lastAnswer);
-		if (page.correctText!="")
-			iText+=writeEssayOrSelectColumn(classCol,"CORRECT",t(lang.ModelAnswerWillAppear),"");
-		iText+="</div></div>";
-		*/
-
 		$(".PageSpecificGrade").append(helpTextWrapper(t(lang.HelpEssay))).append(reviewButton()).append('<div id=fbText></div>');
 		pageInteractionDIV.append(iText);
 		doGrade=TextEssay_grade;
@@ -2169,24 +2150,16 @@ function TextEssay_grade()
 	
 	var answer=$("#ANSWER").val();
 	// Make sure user types something.
-	if (answer=="") {note(t(lang.TypeSomething));return false;}
-	
+	if ((answer=="") || (answer==page.initialText)) {note(t(lang.TypeSomething));return false;}
 	let iText='';
 	if (page.correctText!="")	// 12/02/22
 	{
-		iText+=writeEssayOrSelectColumn2('Example model answer','col-sm-12',"CORRECT",page.correctText,"");
-		//iText+='<div class=EssayTable><h2>Example model answer:</h2><div class="row">'+page.correctText+'</div></div>';
+		iText+='<div class=EssayTable><h2>'+'Model answer'+':</h2><div class="row"> <div class="EssayCorrectBox">'+(page.correctText.replaceAll("\n","<br />"))+'</div></div></div>';
 	}
-	/*if ((page.TextColumns==3) || (page.TextColumns==2 && page.initialText==""))
-		$("#CORRECT").val(page.correctText);
-	*/
 	// We don't care which attempt. We always save user's last essay response. 
 	page.scores[0]=null;//clear so we always save user's new answer
-	//scoreAndShowFeedback(INFO,0,answer,null,"#fbText", page.feedbackShared,null);
-	//scoreAndShowFeedback(INFO,0,answer,null,"#fbText", page.feedbackShared+iText,null);
 	saveScore(INFO,0,answer,null);
-	showFeedback(INFO,'Response','#fbText',page.feedbackShared+iText,null,answer);
-	
+	showFeedback(INFO,'Response','#fbText',iText+page.feedbackShared,null,answer);
 	return false;
 }
 

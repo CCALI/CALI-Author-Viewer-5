@@ -137,3 +137,10 @@ p.toc-title,.CLAccordion li a  {
 	cursor: pointer;
 }
 
+.EssayCorrectBox {
+	border-style: solid;
+	border-width: 1px;
+	margin: 1em;
+	padding: 1em;
+}
+
