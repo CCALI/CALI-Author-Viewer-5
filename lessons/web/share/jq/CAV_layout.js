@@ -2170,3 +2170,9 @@ function writeEssayOrSelectColumn2(label,classCol,name,title,text)
 	return '<div class=EssayTable><h2>'+label+':</h2><div class="row"> <div class="'+classCol+' col-xs-12"><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></div></div></div>';
 }
 
+
+function writeEssayOrSelectColumn(classCol,name,title,text)
+{
+	return ' <div class="'+classCol+' col-xs-12"><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></div>';
+}
+
