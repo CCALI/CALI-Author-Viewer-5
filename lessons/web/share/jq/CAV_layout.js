@@ -1152,7 +1152,7 @@ function ShortAnswer_grade()
 	//Answers compared in lowercase.
 
 	// Get user's answer.
-	var originalanswer=$("#textResponse").val();
+	var originalanswer=$("#textResponse").val().trim();
 	// Convert to lowercase for comparisons.
 	var answer=originalanswer.toLowerCase()
 	
