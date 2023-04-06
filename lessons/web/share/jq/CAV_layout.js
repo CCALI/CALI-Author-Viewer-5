@@ -220,9 +220,12 @@ function textWithMedia(pageText, page)
 	}
 
 	if (page.discussion && page.type=="Book Page")
-	{	// 4/22 Discussions on book pages are at the top, 75% width.
-		var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
-		$(pageText).prepend(vid);
+	{
+		if (page.discussion.layout && page.discussion.layout=='INTRO') // 04/23 Only INTRO style discussion go to top. Others behind Discussion button.
+		{	// 4/22 Discussions on book pages are at the top, 75% width.
+			var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
+			$(pageText).prepend(vid);
+		}
 	}
 }
 function discussionVideoTranscriptHTML(discussion)
@@ -582,8 +585,11 @@ function renderPage()
 	}
 	
 
-	if (page.discussion && lessonReviewMode && page.answered)
+	if (page.discussion && ((lessonReviewMode && page.answered)))
 		addDiscussionFeedback();
+	if (page.discussion && page.type=="Book Page" && (!(page.discussion.layout && page.discussion.layout=='INTRO')))
+		addDiscussionFeedback();
+	
 		
 	patchLink();
 	stickyHeader();//bitovi
