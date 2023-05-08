@@ -879,11 +879,13 @@ function ShortAnswer_layout()
 	if ( lessonReviewMode && page.answered)
 	{	// Just display correct answer.
 		var html="";
+		var correctid=-1;
 		for (var r=0;r<page.textMatches.length;r++)
 		{
 			var match = page.textMatches[r];
 			if (match.grade==RIGHT)
 			{
+				correctid=r;
 				var matches=match.matchlist.split(DEL.toUpperCase());
 				var mtext="";
 				switch (match.matchstyle)
@@ -912,6 +914,10 @@ function ShortAnswer_layout()
 			}			
 		}
 		html='<p>Your answer was: '+page.scores[0].text+'</p>'+'<p>The correct answer(s) are:</p>'+'<table>'+html+'</table>';
+		if ((correctid>=0) && ((page.nextPageDisabled && !page.destPage)) || page.visits>1)
+		{
+			page.destPage=page.textMatches[correctid].dest;
+		}
 		pageLessonReviewReport(html);
 
 	}
