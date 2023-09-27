@@ -989,7 +989,8 @@ function initialize()
 		https://docs.google.com/forms/d/e/1FAIpQLSe_SDPlzoxjfthI-zJG-k_kvvHQYM4mlBZjKDU1sNVlFTqcdg/viewform?usp=pp_url
 		&entry.1035788757=a&entry.337593368=b&entry.1796155339=c&entry.1297563432=uuuu&entry.632516465=ssss&entry.201134289=o
 		&entry.2023326105=lv&entry.998620373=ri&entry.1164044685=ll
-		*/		
+		*/
+		// 4/4/23 include faculty flag: amode==1
 		window.open('https://docs.google.com/forms/d/e/1FAIpQLSe_SDPlzoxjfthI-zJG-k_kvvHQYM4mlBZjKDU1sNVlFTqcdg/viewform?usp=pp_url'
 			+'&entry.1035788757='+encodeURI(feedback)
 			+'&entry.337593368='+encodeURI(book.lesson)
