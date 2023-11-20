@@ -81,6 +81,7 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
 	<script src="CAV_layout.js?ver=2208"		type="text/javascript"></script>
 	<script src="CAV_parser.js?ver=2208"		type="text/javascript"></script>
 	<script src="CAV_score.js?ver=2208"			type="text/javascript"></script>
+	<script src="CAV_logic.js?ver=2309"	type="text/javascript"></script>
 	<script src="CAV_urls.js"			type="text/javascript"></script>
 	<script src="CAV_LessonLive.js"	type="text/javascript"></script>
 
@@ -497,27 +498,29 @@ Copyright 1999-2018 CALI, The Center for Computer-Assisted Legal Instruction. Al
 		 </footer>
 			<div>
   <div id="#open-feedback" data-toggle="modal" data-target="#feedbackModal">
-    <p class="feedback-bubble">Feedback</p>
-  </div> 
+    <p class="feedback-bubble">&nbsp; ? &nbsp;</p>
+  </div>
 </div>
 <div id="feedbackModal" class="modal fade">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="close feedback modal">×</button>
-                <h4 class="modal-title">Let us know what you think!</h4>
+                <h4 class="modal-title">Would you like to...</h4>
             </div>
             <div class="modal-body">
-                
-              <div class="form-group">
+              <div class="form-group" style="display: none">
                 <label for="comment">Comment:</label>
                 <textarea class="form-control" rows="5" id="feedbackComment" placeholder="Enter you comment here." aria-label="Text box to enter your comment." aria-multiline="true"></textarea>
               </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" id="submitFeedback" class="btn btn-primary">Send</button>
+                <a target="_blank" href="https://www.cali.org/faq-page/295" type="button" class="btn btn-info" >Get Help</a> &nbsp;
+					 <button type="submit" id="submitFeedback" class="btn btn-primary">Send Feedback</button>
             </div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
         </div>
     </div>
 </div>
