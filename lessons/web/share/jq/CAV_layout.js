@@ -2099,14 +2099,16 @@ function updateInstructions()
 		'<p>This is a Lesson Review copy of your lesson run. It shows you your previous answers to questions in this lesson run. This lesson run has already been finalized, and the answers recorded. Question functionality has been disabled. </p>\
 		<p>To start a new run of this lesson, visit the lesson through the CALI website or through the LessonLink if one was provided by your professor. Starting a new lesson run will not replace previous run scores. Starting a new run will result in a separate, entirely new score. </p>'
 		:
-		'<p>Proceed through the lesson using the “Next” button at the bottom, reading the material and answering any questions along the way. Your responses to questions are saved automatically and immediately recorded.</p>\
-<p>Once you complete the lesson, you’ll have the option to “Finalize this score” to end this lesson run. Upon doing so, you will not be able to resume this lesson run.</p>\
-<p>If you exit the lesson before finalizing your score, you will have the option to “Resume” this lesson run. Note that resuming a lesson run will NOT allow you to change your score for questions already answered in that run; previously answered questions are immediately recorded and cannot be changed. </p>\
-<p>However, at any time you can start a new lesson run, and in doing so, get a separate, entirely new score. This does not replace your old score(s). You can run a lesson as many times as you’d like. Simply restart the lesson via the CALI website or the LessonLink* provided by your professor.</p>\
-<p>After finalizing a lesson run, you will be taken to a summary of your answer choices where you can print a copy of a certificate with your score. </p>\
-<p>You also have the option to open a “Review” copy of any finalized runs that shows you your answers to questions in that run. </p>\
-<p>Go to “My Lesson Runs” in your CALI Dashboard to see a full list of your lesson runs, resume a lesson run, or review a lesson run.</p>\
-<p>*If you are running this lesson as a LessonLink provided by your professor, your professor has access to every lesson run score as well as lesson analytics. Lesson analytics take into account only a student’s first attempt at a question, regardless of the number of runs.</p>'
+		'<ul>\
+	<li><strong>Get started:</strong> Proceed through the lesson using the “Next” button at the bottom, reading the material and answering any questions along the way.</li>\
+	<li><strong>Saving your answers:</strong> Your responses to questions are saved automatically and immediately recorded.</li>\
+	<li><strong>Completing the lesson:</strong> At the end of the lesson, select “Finalize this score” to end this lesson run. Upon doing so, you will not be able to resume this lesson run. After finalizing a lesson run, you will be taken to a summary of your answer choices where you can print a copy of a certificate with your score.</li>\
+	<li><strong>View your lesson runs:</strong> Go to “My Lesson Runs” in your CALI Dashboard to see a full list of your lesson runs, and to resume or review a lesson.</li>\
+	<li><strong>Resume a lesson in progress:</strong> If you exit the lesson before finalizing your score, you will have the option to “Resume” this lesson run. Resuming a lesson run will NOT allow you to change your score for questions already answered in that run; previously answered questions are immediately recorded and cannot be changed.</li>\
+	<li><strong>Start a new lesson run:</strong> At any time, you can start a new lesson run of the same lesson. In doing so, you will get a separate, entirely new score. This does not replace your old score(s). You can run a lesson as many times as you’d like. Simply restart the lesson via the CALI website or the LessonLink* provided by your professor.</li>\
+	<li><strong>Review your responses:</strong> You also have the option to open a “Review” copy of any finalized runs that shows you your answers to questions in that run.</li>\
+	<li><strong>*Lessons assigned by your professor:</strong> Your professor may have provided a link to run an assigned lesson – this is called a LessonLink. LessonLinks give your professor access to your lesson scores. If you believe you should be running a lesson through a LessonLink, look for LessonLink information on this page including the LessonLink logo in the upper left corner along with your professor’s name. If you do not see this information, it is not a LessonLink.</li>\
+	</ul>'
 		);
 }
 
