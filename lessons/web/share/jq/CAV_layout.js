@@ -369,6 +369,7 @@ function renderPage()
 	doGrade=null;
 	doReveal=null;
 	doHelp=null;
+	pageInstructions="";//03/2024
 	page.answered=(page.scores && page.scores.length>0 && page.scores[0])!==null;
 	//console.log({name:page.name,timeSpent:page.timeSpent,answered:page.answered});
 	pageInteractionDIV.text('');
@@ -508,7 +509,9 @@ function renderPage()
 		}
 		addNextButton('choice://gonext',page.nextPageDisabled);
 	}
-	
+
+	$('#pageInstructions').html(pageInstructions);
+
 	var unscored=(page.scorePoints == 0);
 	var pageScoreTitle="";
 	if (page.scorePoints==="")
@@ -672,6 +675,8 @@ function iButton2(caption,id,grade)
 function Buttons_layout()
 {	// Page type: Just Buttons like Yes, No, Maybe.
 
+	pageInstructions="<p>Choose the best answer for the question.</p><p>Only your first response is scored. </p>";// Multiple Choice Short
+
 	if (lessonReviewMode && page.answered)
 	{	// 05/05/22 Lesson Review version
 		var html='';
@@ -734,6 +739,7 @@ function Buttons_layout()
 
 function ButtonList_layout()
 {	// Page type: Multiple choice style A,B,C,...
+	pageInstructions="<p>Choose the best answer for the question.</p><p>Only your first response is scored. </p>";//Multiple Choice
 	var detailsText="";
 	if (lessonReviewMode && page.answered)
 	{	// 05/05/22 Lesson Review version
@@ -797,6 +803,9 @@ function ButtonList_layout()
 }
 function MultiButtonList_layout()
 {	// Multiple buttons for multiple items (subquestions)
+	pageInstructions="<p>Choose the best answer for the question.</p><p>After completing the first question, a new question will appear below it. Continue to answer any questions as they appear.</p><p>Only your first response to each question is scored. Individual questions are scored separately.</p>";//Multiple Choice Sequence
+
+
 	let nextD=0;// Find next unanswered subquestion.
 	let html='';
 	for (let d in page.details)
@@ -876,6 +885,8 @@ function oldPageTypeWarning()
 }
 function ShortAnswer_layout()
 {
+	pageInstructions="<p>Enter your answer into the empty box.</p><p>Once you’ve entered your answer, select “Grade my answer.”</p>";
+	
 	if ( lessonReviewMode && page.answered)
 	{	// Just display correct answer.
 		var html="";
@@ -939,6 +950,9 @@ function ShortAnswer_layout()
 
 function TextSelect_layout()
 {
+	pageInstructions="<p>Within the text inside the box, use your cursor to highlight the most appropriate text for the question, similar to the action of selecting text to copy.</p><p>Once you’ve made your selection, select “Grade my answer.”</p>";
+	//https://cali-lesson-video.us-southeast-1.linodeobjects.com/help/Highlight Text Instructions.mp4
+	
 	let iText= '<div class=EssayTable><div class="row">'+writeEssayOrSelectColumn('col-sm-12',"ANSWER","",page.initialText)+"</div></div>";
 	if (lessonReviewMode && page.answered)
 	{	// 06/08 Lesson Review - just show text with correct answer hilited.
@@ -1590,7 +1604,9 @@ function CheckBoxes_reveal()
 
 
 function RadioButtons_layout()
-{	// vertical layout: each subquestion followed by radio button list. 
+{	// vertical layout: each subquestion followed by radio button list.
+	pageInstructions="<p>Choose the best answer for each question or item.</p><p>Once your choices are marked, select “Grade my answer.”</p><p>All selections must be correct to score the point. </p>";//Categorize Single
+
 	if (lessonReviewMode && page.answered)
 	{	// 
 		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton()+"<p>and the response is:</p>",true);
@@ -1608,6 +1624,12 @@ function RadioButtons_layout()
 
 function CheckBoxes_layout()
 {	// vertical layout: each subquestion followed by radio button list.
+	
+	if (page.captions.length == CMIN)
+		pageInstructions="<p>Choose all that apply.</p><p>Once your choices are marked, select “Grade my answer.”</p><p>All selections must be correct to score the point.</p>";//Choose all that apply - 1 checkbox
+	else
+		pageInstructions="<p>Choose all that apply for each question or item.</p><p>Once your choices are marked, select “Grade my answer.”</p><p>All selections must be correct to score the point.</p>";//Choose all that apply - >1 box
+	
 	if (lessonReviewMode && page.answered)
 	{	// 
 		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton()+"<p>and the response is:</p>",true);
@@ -1624,6 +1646,7 @@ function CheckBoxes_layout()
 }
 function CheckBoxesSet_layout()
 {	// vertical layout: each subquestion followed by radio button list.
+	pageInstructions="<p>Choose the best answer(s) for the question.</p><p>Choose all that apply.</p><p>Once your choices are marked, select “Grade my answer.”</p><p>All selections must be correct to score the point. </p>";//Categorize Set
 	if (lessonReviewMode && page.answered)
 	{
 		let html='';
@@ -2028,6 +2051,17 @@ function DragBox_layout()
 		convertDragBox2RB();
 		return;
 	}
+
+	page.herrings=0;// if herrings exists, allow the 'remove' option.
+	for (let i=0;i<page.items.length;i++)
+	{
+		if (page.items[i].category==0) page.herrings++;
+	}
+
+	if (page.herrings>0)
+		pageInstructions="<p>Drag and drop items into the correct order.</p><p>Some items maybe need to be removed. Choose “Remove from list” where appropriate.</p><p>Once you’ve placed/removed all the items, select “Grade my answer.”</p><p>All items must be placed correctly to score the point.</p>";
+	else
+		pageInstructions="<p>Drag and drop items into the correct order.</p><p>Once you’ve placed all the items, select “Grade my answer.”</p><p>All items must be placed correctly to score the point.</p>";
 	
 	if ( lessonReviewMode && page.answered)
 	{
@@ -2052,11 +2086,6 @@ function DragBox_layout()
 		// Stuff items into boxes that are both sortable and deletable.
 		let items='';
 		
-		page.herrings=0;// if herrings exists, allow the 'remove' option.
-		for (let i=0;i<page.items.length;i++)
-		{
-			if (page.items[i].category==0) page.herrings++;
-		}
 		for (let i=0;i<page.items.length;i++)
 		{
 			items+='<li id=item'+i+' itemid='+i+' class="ui-sortable-handle"><div class="horizontal" aria-label="draggable box"><div class="vertical"><div class="dots-blue" aria-label="blue texture dots that show that this box is draggable"></div></div><div class="row drag-body"><div><p>'
@@ -2128,6 +2157,21 @@ function lessonReviewBranchNotice()
 function TextEssay_layout()
 {	// Essays in 3 forms: optional Initial text for user to examine, user's editable Answer field, and optional Final text for user to compare with.
 	let lastAnswer= (page.scores && page.scores[0] ? page.scores[0].text : "");// restore user's last answer
+	
+	// 03/24 4 variations of essays
+	if (page.initialText=='' && page.correctText=='')
+		pageInstructions="<p>Enter your answer into the empty box where it says “Write your answer below.”</p><p>Once you’ve entered your answer, select “Review my answer.”</p><p>Essay questions are not assigned points. This question will not count for or against your score. </p>";
+	else
+	if (page.initialText=='' && page.correctText!='')
+		pageInstructions="<p>Enter your answer into the empty box where it says “Write your answer below.”</p><p>Once you’ve entered your answer, select “Review my answer.” A model answer will be provided for self-evaluation. </p><p>Essay questions are not assigned points. This question will not count for or against your score. </p>";
+	else
+	if (page.initialText!='' && page.correctText=='')
+		pageInstructions="<p>Enter your answer into the box where it says “Write your answer below (edit as needed).” This box contains sample text or prompts that you can use in your answer. </p><p>Once you’ve entered your answer, select “Review my answer.” </p><p>Essay questions are not assigned points. This question will not count for or against your score. </p>";
+	else
+		pageInstructions="<p>Enter your answer into the box where it says “Write your answer below (edit as needed).” This box contains sample text or prompts that you can use in your answer. </p><p>Once you’ve entered your answer, select “Review my answer.” A model answer will be provided for self-evaluation. </p><p>Essay questions are not assigned points. This question will not count for or against your score. </p>";
+
+
+	
 	if (lessonReviewMode && page.answered)
 	{
 		let iText='';
@@ -2148,7 +2192,7 @@ function TextEssay_layout()
 		else
 			label='Write your answer below (edit as needed)';
 		iText+=writeEssayOrSelectColumn2(label,'col-sm-12',"ANSWER","",lastAnswer);
-		$(".PageSpecificGrade").append(helpTextWrapper(t(lang.HelpEssay))).append(reviewButton()).append('<div id=fbText></div>');
+		$(".PageSpecificGrade").append(reviewButton()).append('<div id=fbText></div>');//append(helpTextWrapper(t(lang.HelpEssay))).
 		pageInteractionDIV.append(iText);
 		doGrade=TextEssay_grade;
 	}
@@ -2189,4 +2233,3 @@ function writeEssayOrSelectColumn(classCol,name,title,text)
 {
 	return ' <div class="'+classCol+' col-xs-12"><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></div>';
 }
-

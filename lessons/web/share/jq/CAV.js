@@ -27,6 +27,7 @@ var ScoreDetails = "";
 var lessonReviewMode=false;//If true, Lesson Review mode, set true when resuming a lesson with a COMPLETE=1 in score data.
 var doGrade = null;
 var doReveal = null;
+var pageInstructions="";//03/24
 var globalToolbarLinks = [];// array of author defined toolbar links. form:  {text:'caption',url:'page name'}
 var inCA = false;
 
@@ -979,9 +980,7 @@ function initialize()
 	$('span.t').each(function(){$(this).html(lang[$(this).attr('ref')]);});
 	
 	// Bitovi
-	$('#open-feedback').on('click',function () {
-      $('#feedbackModal').modal('show');
-    });
+	
 	$('#submitFeedback').click(function(){
 		//submit feedback
 		let feedback = $('#feedbackComment').val();
