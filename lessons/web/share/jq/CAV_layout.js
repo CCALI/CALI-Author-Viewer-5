@@ -1646,7 +1646,7 @@ function CheckBoxes_layout()
 }
 function CheckBoxesSet_layout()
 {	// vertical layout: each subquestion followed by radio button list.
-	pageInstructions="<p>Choose the best answer(s) for the question.</p><p>Choose all that apply.</p><p>Once your choices are marked, select “Grade my answer.”</p><p>All selections must be correct to score the point. </p>";//Categorize Set
+	pageInstructions="<p>Choose all that apply.</p><p>Once your choices are marked, select “Grade my answer.”</p><p>All selections must be correct to score the point. </p>";//Categorize Set
 	if (lessonReviewMode && page.answered)
 	{
 		let html='';
