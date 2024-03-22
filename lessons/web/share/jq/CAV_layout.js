@@ -465,7 +465,7 @@ function renderPage()
 		textWithMedia(pageTextDIV,page);
 		if (page.type == "Book Page")
 		{
-			pageInstructions="<p>Review the material and use Next to continue. </p>";
+			pageInstructions="<p>Review the material and use the Next button to continue. </p>";
 			//$(".PageSpecificNav").append(iButton(t(lang.NextPage),'gonext'));
 		}
 		else
