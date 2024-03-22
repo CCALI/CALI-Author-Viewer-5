@@ -409,12 +409,14 @@ function renderPage()
 	// Page type specific layout	
 	if (page.type=="Topics")
 	{
+		pageInstructions="<p>You can use the Table of Contents to go to any section of the lesson. <p>You can also just use the Next button which will automatically guide you through all the sections.</p>";
 		$(".PageName").text('');//Continue lesson');
 		addNextButton('choice://gonext',false);
 	}
 	else
 	if (page.name==pageABOUT)
 	{
+		pageInstructions="<p>This help bubble will provide instructions on how to answer different question types as you encounter them. </p>";
 		if (llMode!='' || book.SelfPublished)
 		{
 			var llPrompt='';
@@ -463,6 +465,7 @@ function renderPage()
 		textWithMedia(pageTextDIV,page);
 		if (page.type == "Book Page")
 		{
+			pageInstructions="<p>Review the material and use Next to continue. </p>";
 			//$(".PageSpecificNav").append(iButton(t(lang.NextPage),'gonext'));
 		}
 		else
@@ -615,7 +618,12 @@ function LessonCompleted_layout()
 	ScoreScreenUpdate();
 	if (ScorePossible==0 || lessonReviewMode)
 	{
+		pageInstructions="<p>You cannot finalize your score until you answer at least one question. </p><p>If you are in Review mode your score cannot be changed.</p>";
 		$(".PageText .ScoreReport .ScoreButtons").hide();
+	}
+	else
+	{
+		pageInstructions="<p>Follow the instructions provided about finalizing your score. </p>";
 	}
 }
 
@@ -2130,6 +2138,7 @@ function updateInstructions()
 		:
 		'<ul>\
 	<li><strong>Get started:</strong> Proceed through the lesson using the “Next” button at the bottom, reading the material and answering any questions along the way.</li>\
+	<li><strong>Getting help:</strong> Use the &nbsp;?&nbsp; button (always on the bottom, right of your screen) for instructions on how to answer different question types.</li>\
 	<li><strong>Saving your answers:</strong> Your responses to questions are saved automatically and immediately recorded.</li>\
 	<li><strong>Completing the lesson:</strong> At the end of the lesson, select “Finalize this score” to end this lesson run. Upon doing so, you will not be able to resume this lesson run. After finalizing a lesson run, you will be taken to a summary of your answer choices where you can print a copy of a certificate with your score.</li>\
 	<li><strong>View your lesson runs:</strong> Go to “My Lesson Runs” in your CALI Dashboard to see a full list of your lesson runs, and to resume or review a lesson.</li>\
