@@ -69,7 +69,10 @@ function parsePageXML(pageXML)
 	}
 	if (page.type=="Topics")
 	{
-		//trace(pageXML.find("TOC").xml());
+		//trace(pageXML.find("TOC").find("UL:first").xml());
+		//trace($('<div />').html(pageXML.find("TOC").find("UL:first").xml()).xml());
+		
+		
 		page.text=mapTOCUL2Viewer(pageXML.find("TOC").find("UL:first"),0);
 		page.text = page.text.replace(/href="/gi,'href="jump://');
 		page.nextPageDisabled=true;

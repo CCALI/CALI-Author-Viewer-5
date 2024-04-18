@@ -220,9 +220,12 @@ function textWithMedia(pageText, page)
 	}
 
 	if (page.discussion && page.type=="Book Page")
-	{	// 4/22 Discussions on book pages are at the top, 75% width.
-		var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
-		$(pageText).prepend(vid);
+	{
+		if (page.discussion.layout && page.discussion.layout=='INTRO') // 04/23 Only INTRO style discussion go to top. Others behind Discussion button.
+		{	// 4/22 Discussions on book pages are at the top, 75% width.
+			var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
+			$(pageText).prepend(vid);
+		}
 	}
 }
 function discussionVideoTranscriptHTML(discussion)
@@ -366,6 +369,7 @@ function renderPage()
 	doGrade=null;
 	doReveal=null;
 	doHelp=null;
+	pageInstructions="";//03/2024
 	page.answered=(page.scores && page.scores.length>0 && page.scores[0])!==null;
 	//console.log({name:page.name,timeSpent:page.timeSpent,answered:page.answered});
 	pageInteractionDIV.text('');
@@ -405,12 +409,14 @@ function renderPage()
 	// Page type specific layout	
 	if (page.type=="Topics")
 	{
+		pageInstructions="<p>You can use the Table of Contents to go to any section of the lesson. <p>You can also just use the Next button which will automatically guide you through all the sections.</p>";
 		$(".PageName").text('');//Continue lesson');
 		addNextButton('choice://gonext',false);
 	}
 	else
 	if (page.name==pageABOUT)
 	{
+		pageInstructions="<p>This help bubble will provide instructions on how to answer different question types as you encounter them. </p>";
 		if (llMode!='' || book.SelfPublished)
 		{
 			var llPrompt='';
@@ -459,6 +465,7 @@ function renderPage()
 		textWithMedia(pageTextDIV,page);
 		if (page.type == "Book Page")
 		{
+			pageInstructions="<p>Review the material and use the Next button to continue. </p>";
 			//$(".PageSpecificNav").append(iButton(t(lang.NextPage),'gonext'));
 		}
 		else
@@ -505,7 +512,9 @@ function renderPage()
 		}
 		addNextButton('choice://gonext',page.nextPageDisabled);
 	}
-	
+
+	$('#pageInstructions').html(pageInstructions);
+
 	var unscored=(page.scorePoints == 0);
 	var pageScoreTitle="";
 	if (page.scorePoints==="")
@@ -582,8 +591,11 @@ function renderPage()
 	}
 	
 
-	if (page.discussion && lessonReviewMode && page.answered)
+	if (page.discussion && ((lessonReviewMode && page.answered)))
 		addDiscussionFeedback();
+	if (page.discussion && page.type=="Book Page" && (!(page.discussion.layout && page.discussion.layout=='INTRO')))
+		addDiscussionFeedback();
+	
 		
 	patchLink();
 	stickyHeader();//bitovi
@@ -606,7 +618,12 @@ function LessonCompleted_layout()
 	ScoreScreenUpdate();
 	if (ScorePossible==0 || lessonReviewMode)
 	{
+		pageInstructions="<p>You cannot finalize your score until you answer at least one question. </p><p>If you are in Review mode your score cannot be changed.</p>";
 		$(".PageText .ScoreReport .ScoreButtons").hide();
+	}
+	else
+	{
+		pageInstructions="<p>Follow the instructions provided about finalizing your score. </p>";
 	}
 }
 
@@ -665,6 +682,8 @@ function iButton2(caption,id,grade)
 
 function Buttons_layout()
 {	// Page type: Just Buttons like Yes, No, Maybe.
+
+	pageInstructions="<p>Choose the best answer for the question.</p><p>Only your first response is scored. </p>";// Multiple Choice Short
 
 	if (lessonReviewMode && page.answered)
 	{	// 05/05/22 Lesson Review version
@@ -728,6 +747,7 @@ function Buttons_layout()
 
 function ButtonList_layout()
 {	// Page type: Multiple choice style A,B,C,...
+	pageInstructions="<p>Choose the best answer for the question.</p><p>Only your first response is scored. </p>";//Multiple Choice
 	var detailsText="";
 	if (lessonReviewMode && page.answered)
 	{	// 05/05/22 Lesson Review version
@@ -791,6 +811,9 @@ function ButtonList_layout()
 }
 function MultiButtonList_layout()
 {	// Multiple buttons for multiple items (subquestions)
+	pageInstructions="<p>Choose the best answer for the question.</p><p>After completing the first question, a new question will appear below it. Continue to answer any questions as they appear.</p><p>Only your first response to each question is scored. Individual questions are scored separately.</p>";//Multiple Choice Sequence
+
+
 	let nextD=0;// Find next unanswered subquestion.
 	let html='';
 	for (let d in page.details)
@@ -870,14 +893,18 @@ function oldPageTypeWarning()
 }
 function ShortAnswer_layout()
 {
+	pageInstructions="<p>Enter your answer into the empty box.</p><p>Once you’ve entered your answer, select “Grade my answer.”</p>";
+	
 	if ( lessonReviewMode && page.answered)
 	{	// Just display correct answer.
 		var html="";
+		var correctid=-1;
 		for (var r=0;r<page.textMatches.length;r++)
 		{
 			var match = page.textMatches[r];
 			if (match.grade==RIGHT)
 			{
+				correctid=r;
 				var matches=match.matchlist.split(DEL.toUpperCase());
 				var mtext="";
 				switch (match.matchstyle)
@@ -906,6 +933,10 @@ function ShortAnswer_layout()
 			}			
 		}
 		html='<p>Your answer was: '+page.scores[0].text+'</p>'+'<p>The correct answer(s) are:</p>'+'<table>'+html+'</table>';
+		if ((correctid>=0) && ((page.nextPageDisabled && !page.destPage)) || page.visits>1)
+		{
+			page.destPage=page.textMatches[correctid].dest;
+		}
 		pageLessonReviewReport(html);
 
 	}
@@ -925,14 +956,11 @@ function ShortAnswer_layout()
 }
 
 
-function writeEssayOrSelectColumn(classCol,name,title,text)
-{
-	return ' <div class="'+classCol+' col-xs-12"><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></div>';
-}
-
-
 function TextSelect_layout()
 {
+	pageInstructions="<p>Within the text inside the box, use your cursor to highlight the most appropriate text for the question, similar to the action of selecting text to copy.</p><p>Once you’ve made your selection, select “Grade my answer.”</p>";
+	//https://cali-lesson-video.us-southeast-1.linodeobjects.com/help/Highlight Text Instructions.mp4
+	
 	let iText= '<div class=EssayTable><div class="row">'+writeEssayOrSelectColumn('col-sm-12',"ANSWER","",page.initialText)+"</div></div>";
 	if (lessonReviewMode && page.answered)
 	{	// 06/08 Lesson Review - just show text with correct answer hilited.
@@ -991,42 +1019,6 @@ function TextSelect_reveal()
 }
 
 
-function TextEssay_layout()
-{	// Essays in 3 forms: optional Initial text for user to examine, user's editable Answer field, and optional Final text for user to compare with.
-	let lastAnswer= (page.scores && page.scores[0] ? page.scores[0].text : "");// restore user's last answer
-	if (lessonReviewMode && page.answered)
-	{
-		let iText='';
-		if (page.scores[0])
-			iText+='<p>Your answer was:</p><div>'+lastAnswer+'</div>';
-		if (page.correctText!="")
-			iText+='<p>Suggested correct answer is: <div>'+page.correctText+'</div>';
-		pageLessonReviewReport(iText);
-	}
-	else
-	{
-		page.TextColumns = 1;
-		if (page.initialText != "") page.TextColumns++;
-		if (page.correctText != "") page.TextColumns++;
-		let classCol='';
-		if (page.TextColumns==1)
-			classCol='col-sm-12';
-		else if (page.TextColumns==2)
-			classCol='col-sm-6';
-		else
-			classCol='col-sm-4';
-		let iText= '<div class=EssayTable><div class="row">';
-		if (page.initialText!="")
-			iText+=writeEssayOrSelectColumn(classCol,"INITIAL","",page.initialText);
-		iText+=writeEssayOrSelectColumn(classCol,"ANSWER","",lastAnswer);
-		if (page.correctText!="")
-			iText+=writeEssayOrSelectColumn(classCol,"CORRECT",t(lang.ModelAnswerWillAppear),"");
-		iText+="</div></div>";
-		$(".PageSpecificGrade").append(helpTextWrapper(t(lang.HelpEssay))).append(reviewButton()).append('<div id=fbText></div>');
-		pageInteractionDIV.append(iText);
-		doGrade=TextEssay_grade;
-	}
-}
 
 
 var zIndex; // z-order drag items above background
@@ -1194,7 +1186,7 @@ function ShortAnswer_grade()
 	//Answers compared in lowercase.
 
 	// Get user's answer.
-	var originalanswer=$("#textResponse").val();
+	var originalanswer=$("#textResponse").val().trim();
 	// Convert to lowercase for comparisons.
 	var answer=originalanswer.toLowerCase()
 	
@@ -1408,24 +1400,6 @@ function Sliders_reveal()
 
 
 
-function TextEssay_grade()
-{
-	/* for 1 box, show feedback
-		for 2 boxes, show feedback and if the first box is the user's answer display Correct answer in second box
-		for 3 boxes, show feedback and display correct answer in last box
-	*/
-	page.attempts ++;
-	
-	var answer=$("#ANSWER").val();
-	// Make sure user types something.
-	if (answer=="") {note(t(lang.TypeSomething));return false;}
-	if ((page.TextColumns==3) || (page.TextColumns==2 && page.initialText=="")) 
-		$("#CORRECT").val(page.correctText);
-	// We don't care which attempt. We always save user's last essay response. 
-	page.scores[0]=null;//clear so we always save user's new answer
-	scoreAndShowFeedback(INFO,0,answer,null,"#fbText", page.feedbackShared,null);
-	return false;
-}
 
 
 
@@ -1638,7 +1612,9 @@ function CheckBoxes_reveal()
 
 
 function RadioButtons_layout()
-{	// vertical layout: each subquestion followed by radio button list. 
+{	// vertical layout: each subquestion followed by radio button list.
+	pageInstructions="<p>Choose the best answer for each question or item.</p><p>Once your choices are marked, select “Grade my answer.”</p><p>All selections must be correct to score the point. </p>";//Categorize Single
+
 	if (lessonReviewMode && page.answered)
 	{	// 
 		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton()+"<p>and the response is:</p>",true);
@@ -1656,6 +1632,12 @@ function RadioButtons_layout()
 
 function CheckBoxes_layout()
 {	// vertical layout: each subquestion followed by radio button list.
+	
+	if (page.captions.length == CMIN)
+		pageInstructions="<p>Choose all that apply.</p><p>Once your choices are marked, select “Grade my answer.”</p><p>All selections must be correct to score the point.</p>";//Choose all that apply - 1 checkbox
+	else
+		pageInstructions="<p>Choose all that apply for each question or item.</p><p>Once your choices are marked, select “Grade my answer.”</p><p>All selections must be correct to score the point.</p>";//Choose all that apply - >1 box
+	
 	if (lessonReviewMode && page.answered)
 	{	// 
 		let html=textReviewFeedbackRW("<p>The correct answer is:</p>"+textReviewCheckBoxRadioButton()+"<p>and the response is:</p>",true);
@@ -1672,6 +1654,7 @@ function CheckBoxes_layout()
 }
 function CheckBoxesSet_layout()
 {	// vertical layout: each subquestion followed by radio button list.
+	pageInstructions="<p>Choose all that apply.</p><p>Once your choices are marked, select “Grade my answer.”</p><p>All selections must be correct to score the point. </p>";//Categorize Set
 	if (lessonReviewMode && page.answered)
 	{
 		let html='';
@@ -2076,6 +2059,17 @@ function DragBox_layout()
 		convertDragBox2RB();
 		return;
 	}
+
+	page.herrings=0;// if herrings exists, allow the 'remove' option.
+	for (let i=0;i<page.items.length;i++)
+	{
+		if (page.items[i].category==0) page.herrings++;
+	}
+
+	if (page.herrings>0)
+		pageInstructions="<p>Drag and drop items into the correct order.</p><p>Some items maybe need to be removed. Choose “Remove from list” where appropriate.</p><p>Once you’ve placed/removed all the items, select “Grade my answer.”</p><p>All items must be placed correctly to score the point.</p>";
+	else
+		pageInstructions="<p>Drag and drop items into the correct order.</p><p>Once you’ve placed all the items, select “Grade my answer.”</p><p>All items must be placed correctly to score the point.</p>";
 	
 	if ( lessonReviewMode && page.answered)
 	{
@@ -2100,11 +2094,6 @@ function DragBox_layout()
 		// Stuff items into boxes that are both sortable and deletable.
 		let items='';
 		
-		page.herrings=0;// if herrings exists, allow the 'remove' option.
-		for (let i=0;i<page.items.length;i++)
-		{
-			if (page.items[i].category==0) page.herrings++;
-		}
 		for (let i=0;i<page.items.length;i++)
 		{
 			items+='<li id=item'+i+' itemid='+i+' class="ui-sortable-handle"><div class="horizontal" aria-label="draggable box"><div class="vertical"><div class="dots-blue" aria-label="blue texture dots that show that this box is draggable"></div></div><div class="row drag-body"><div><p>'
@@ -2147,14 +2136,17 @@ function updateInstructions()
 		'<p>This is a Lesson Review copy of your lesson run. It shows you your previous answers to questions in this lesson run. This lesson run has already been finalized, and the answers recorded. Question functionality has been disabled. </p>\
 		<p>To start a new run of this lesson, visit the lesson through the CALI website or through the LessonLink if one was provided by your professor. Starting a new lesson run will not replace previous run scores. Starting a new run will result in a separate, entirely new score. </p>'
 		:
-		'<p>Proceed through the lesson using the “Next” button at the bottom, reading the material and answering any questions along the way. Your responses to questions are saved automatically and immediately recorded.</p>\
-<p>Once you complete the lesson, you’ll have the option to “Finalize this score” to end this lesson run. Upon doing so, you will not be able to resume this lesson run.</p>\
-<p>If you exit the lesson before finalizing your score, you will have the option to “Resume” this lesson run. Note that resuming a lesson run will NOT allow you to change your score for questions already answered in that run; previously answered questions are immediately recorded and cannot be changed. </p>\
-<p>However, at any time you can start a new lesson run, and in doing so, get a separate, entirely new score. This does not replace your old score(s). You can run a lesson as many times as you’d like. Simply restart the lesson via the CALI website or the LessonLink* provided by your professor.</p>\
-<p>After finalizing a lesson run, you will be taken to a summary of your answer choices where you can print a copy of a certificate with your score. </p>\
-<p>You also have the option to open a “Review” copy of any finalized runs that shows you your answers to questions in that run. </p>\
-<p>Go to “My Lesson Runs” in your CALI Dashboard to see a full list of your lesson runs, resume a lesson run, or review a lesson run.</p>\
-<p>*If you are running this lesson as a LessonLink provided by your professor, your professor has access to every lesson run score as well as lesson analytics. Lesson analytics take into account only a student’s first attempt at a question, regardless of the number of runs.</p>'
+		'<ul>\
+	<li><strong>Get started:</strong> Proceed through the lesson using the “Next” button at the bottom, reading the material and answering any questions along the way.</li>\
+	<li><strong>Getting help:</strong> Use the &nbsp;?&nbsp; button (always on the bottom, right of your screen) for instructions on how to answer different question types.</li>\
+	<li><strong>Saving your answers:</strong> Your responses to questions are saved automatically and immediately recorded.</li>\
+	<li><strong>Completing the lesson:</strong> At the end of the lesson, select “Finalize this score” to end this lesson run. Upon doing so, you will not be able to resume this lesson run. After finalizing a lesson run, you will be taken to a summary of your answer choices where you can print a copy of a certificate with your score.</li>\
+	<li><strong>View your lesson runs:</strong> Go to “My Lesson Runs” in your CALI Dashboard to see a full list of your lesson runs, and to resume or review a lesson.</li>\
+	<li><strong>Resume a lesson in progress:</strong> If you exit the lesson before finalizing your score, you will have the option to “Resume” this lesson run. Resuming a lesson run will NOT allow you to change your score for questions already answered in that run; previously answered questions are immediately recorded and cannot be changed.</li>\
+	<li><strong>Start a new lesson run:</strong> At any time, you can start a new lesson run of the same lesson. In doing so, you will get a separate, entirely new score. This does not replace your old score(s). You can run a lesson as many times as you’d like. Simply restart the lesson via the CALI website or the LessonLink* provided by your professor.</li>\
+	<li><strong>Review your responses:</strong> You also have the option to open a “Review” copy of any finalized runs that shows you your answers to questions in that run.</li>\
+	<li><strong>*Lessons assigned by your professor:</strong> Your professor may have provided a link to run an assigned lesson – this is called a LessonLink. LessonLinks give your professor access to your lesson scores. If you believe you should be running a lesson through a LessonLink, look for LessonLink information on this page including the LessonLink logo in the upper left corner along with your professor’s name. If you do not see this information, it is not a LessonLink.</li>\
+	</ul>'
 		);
 }
 
@@ -2168,3 +2160,85 @@ function lessonReviewBranchNotice()
 }
 
 
+
+
+
+function TextEssay_layout()
+{	// Essays in 3 forms: optional Initial text for user to examine, user's editable Answer field, and optional Final text for user to compare with.
+	let lastAnswer= (page.scores && page.scores[0] ? page.scores[0].text : "");// restore user's last answer
+	
+	// 03/24 4 variations of essays
+	if (page.initialText=='' && page.correctText=='')
+		pageInstructions="<p>Enter your answer into the empty box where it says “Write your answer below.”</p><p>Once you’ve entered your answer, select “Review my answer.”</p><p>Essay questions are not assigned points. This question will not count for or against your score. </p>";
+	else
+	if (page.initialText=='' && page.correctText!='')
+		pageInstructions="<p>Enter your answer into the empty box where it says “Write your answer below.”</p><p>Once you’ve entered your answer, select “Review my answer.” A model answer will be provided for self-evaluation. </p><p>Essay questions are not assigned points. This question will not count for or against your score. </p>";
+	else
+	if (page.initialText!='' && page.correctText=='')
+		pageInstructions="<p>Enter your answer into the box where it says “Write your answer below (edit as needed).” This box contains sample text or prompts that you can use in your answer. </p><p>Once you’ve entered your answer, select “Review my answer.” </p><p>Essay questions are not assigned points. This question will not count for or against your score. </p>";
+	else
+		pageInstructions="<p>Enter your answer into the box where it says “Write your answer below (edit as needed).” This box contains sample text or prompts that you can use in your answer. </p><p>Once you’ve entered your answer, select “Review my answer.” A model answer will be provided for self-evaluation. </p><p>Essay questions are not assigned points. This question will not count for or against your score. </p>";
+
+
+	
+	if (lessonReviewMode && page.answered)
+	{
+		let iText='';
+		if (page.scores[0])
+			iText+='<p>Your answer was:</p><div>'+lastAnswer+'</div>';
+		if (page.correctText!="")
+			iText+='<p>Suggested correct answer is: <div>'+page.correctText+'</div>';
+		pageLessonReviewReport(iText);
+	}
+	else
+	{
+		let iText='';// '<div class=EssayTable><div class="row">';
+		if (lastAnswer=="")// 12/02/22
+			lastAnswer=page.initialText;
+		let label='';
+		if (page.initialText=='')
+			label='Write your answer below';
+		else
+			label='Write your answer below (edit as needed)';
+		iText+=writeEssayOrSelectColumn2(label,'col-sm-12',"ANSWER","",lastAnswer);
+		$(".PageSpecificGrade").append(reviewButton()).append('<div id=fbText></div>');//append(helpTextWrapper(t(lang.HelpEssay))).
+		pageInteractionDIV.append(iText);
+		doGrade=TextEssay_grade;
+	}
+}
+
+function TextEssay_grade()
+{
+	/* for 1 box, show feedback
+		for 2 boxes, show feedback and if the first box is the user's answer display Correct answer in second box
+		for 3 boxes, show feedback and display correct answer in last box
+	*/
+	page.attempts ++;
+	
+	var answer=$("#ANSWER").val();
+	// Make sure user types something.
+	if ((answer=="") || (answer==page.initialText)) {note(t(lang.TypeSomething));return false;}
+	let iText='';
+	if (page.correctText!="")	// 12/02/22
+	{
+		iText+='<div class=EssayTable><h2>'+'Model answer'+':</h2><div class="row"> <div class="EssayCorrectBox">'+(page.correctText.replaceAll("\n","<br />"))+'</div></div></div>';
+	}
+	// We don't care which attempt. We always save user's last essay response. 
+	page.scores[0]=null;//clear so we always save user's new answer
+	saveScore(INFO,0,answer,null);
+	showFeedback(INFO,'Response','#fbText',iText+page.feedbackShared,null,answer);
+	return false;
+}
+
+
+
+function writeEssayOrSelectColumn2(label,classCol,name,title,text)
+{
+	return '<div class=EssayTable><h2>'+label+':</h2><div class="row"> <div class="'+classCol+' col-xs-12"><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></div></div></div>';
+}
+
+
+function writeEssayOrSelectColumn(classCol,name,title,text)
+{
+	return ' <div class="'+classCol+' col-xs-12"><textarea class=EssayBox wrap=soft id='+name+' name='+name+' rows=12>'+title+text+'</textarea></div>';
+}

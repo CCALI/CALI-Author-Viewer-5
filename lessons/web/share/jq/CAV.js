@@ -27,6 +27,7 @@ var ScoreDetails = "";
 var lessonReviewMode=false;//If true, Lesson Review mode, set true when resuming a lesson with a COMPLETE=1 in score data.
 var doGrade = null;
 var doReveal = null;
+var pageInstructions="";//03/24
 var globalToolbarLinks = [];// array of author defined toolbar links. form:  {text:'caption',url:'page name'}
 var inCA = false;
 
@@ -979,9 +980,7 @@ function initialize()
 	$('span.t').each(function(){$(this).html(lang[$(this).attr('ref')]);});
 	
 	// Bitovi
-	$('#open-feedback').on('click',function () {
-      $('#feedbackModal').modal('show');
-    });
+	
 	$('#submitFeedback').click(function(){
 		//submit feedback
 		let feedback = $('#feedbackComment').val();
@@ -989,7 +988,8 @@ function initialize()
 		https://docs.google.com/forms/d/e/1FAIpQLSe_SDPlzoxjfthI-zJG-k_kvvHQYM4mlBZjKDU1sNVlFTqcdg/viewform?usp=pp_url
 		&entry.1035788757=a&entry.337593368=b&entry.1796155339=c&entry.1297563432=uuuu&entry.632516465=ssss&entry.201134289=o
 		&entry.2023326105=lv&entry.998620373=ri&entry.1164044685=ll
-		*/		
+		*/
+		// 4/4/23 include faculty flag: amode==1
 		window.open('https://docs.google.com/forms/d/e/1FAIpQLSe_SDPlzoxjfthI-zJG-k_kvvHQYM4mlBZjKDU1sNVlFTqcdg/viewform?usp=pp_url'
 			+'&entry.1035788757='+encodeURI(feedback)
 			+'&entry.337593368='+encodeURI(book.lesson)
