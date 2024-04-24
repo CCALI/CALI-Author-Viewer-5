@@ -112,6 +112,7 @@ function showTOC(show)
 function processBook()
 {
 	updatePageLists();
+	logicInit();
 	tallyScores();
 	
 	$('#Assets').empty();
