@@ -112,7 +112,6 @@ function showTOC(show)
 function processBook()
 {
 	updatePageLists();
-	logicInit();
 	tallyScores();
 	
 	$('#Assets').empty();
@@ -125,6 +124,7 @@ function processBook()
 	
 	$("#Loader").hide();
 	$("#Viewer").show();
+	logicInit();
 	if (!inCA)
 	{
 		book.SelfPublished=false;
@@ -344,7 +344,7 @@ function gotoPage(pageName, skipCA)
 	}
 	
 	
-	
+	logicPageBegin();
 	//set hash below instead //top.location.hash=pageName;
 	page = book.pages[pageName];
 	
@@ -488,7 +488,7 @@ function embedPopupHTML(alink,pageName)
 	}
 	else
 	{
-		txt= HTMLReplaceMacros(page.text);
+		txt= logicExecuteReplace(page.text);
 		if (page.pictureSrc!=null)
 		{
 			var imgtxt='<p><img class="fit" src="'+page.pictureSrc+'"/></p>';
@@ -566,7 +566,7 @@ function showFeedback(grade,title,fbID, feedbackText,branch,branchChoice)
 	// feedbackText is the text to write
 	// jumpdest, if specified, replaces Close with a Continue.	
 	
-	feedbackText = HTMLReplaceMacros(feedbackText);
+	feedbackText = logicExecuteReplace(feedbackText);
 	
 	if (branch && feedbackText=="") 
 	{	// Branch with no feedback, is immediate jump.

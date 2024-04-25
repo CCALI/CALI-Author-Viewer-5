@@ -86,7 +86,7 @@ function textWithMedia(pageText, page)
 {	// Added default question text and any applicable media elements like picture, hotspots, sound, video, animation/slides. 
 
 	var media="";
-	var text=HTMLReplaceMacros(page.text);
+	var text=logicExecuteReplace(page.text);
 		
 	// Build any media widgets
 	if (page.animationSlideSrcs.length>0)
