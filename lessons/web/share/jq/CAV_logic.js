@@ -23,9 +23,20 @@
 //console.log(vars);
 var logicBlock={
 	vars:{},
-	buffer:"",
-	PRINT:function(str){logicBlock.buffer+=str;}
+	htmlBuffer:"",
+	PRINT:function(str){logicBlock.htmlBuffer+=str;}
 };
+function logicHTMLBuffer()
+{
+	var text=logicBlock.htmlBuffer.replaceAll('<p></p>','');
+	logicBlock.htmlBuffer='';
+	return text;
+}
+
+function HTMLReplaceMacros(html)
+{	// replace macros in lesson's HTML text.
+	return html;
+}
 
 function logicInit()
 {	// See if variables page exists
@@ -38,7 +49,7 @@ function logicInit()
 		var parts=page.text.split('%%');
 		if (parts.length>1)
 		{	// Got some code
-			logicBlock.buffer='';
+			//caller should clera the buffer once added to a page's text dispaly // logicBlock.printBuffer='';
 			parts.forEach((part,i)=>
 			{
 				if ( i%2==1)
@@ -62,7 +73,7 @@ function logicInit()
 									js='logicBlock.vars["'+name+'"]='+exp+';';
 								}
 								else
-									js='????????';
+									js='';
 							}
 							else
 							if (lineU.indexOf('IF')==0)
@@ -84,20 +95,20 @@ function logicInit()
 					jsBlock+='PRINT("'+part+'");\n';
 				}
 			});
-			console.log(jsBlock);
-			
-			js=new Function('with (logicBlock)with (logicBlock.vars){'+jsBlock+'}');
-			console.log(js);
-			console.log(js.toString());
-			console.log(logicBlock);
+			//console.log(jsBlock);
+			var js;
 			try {
+				js=new Function('with (logicBlock)with (logicBlock.vars){'+jsBlock+'}');
 				js();
 			} catch (error){
+				console.log(error);
 				logicBlock.PRINT("<h1>Error "+error+"</h1>");
 			}
-			console.log(logicBlock);
-			var text=logicBlock.buffer.replaceAll('<p></p>','');
-			console.log(text);
+			//console.log(js);
+			//console.log(js.toString());
+			//console.log(logicBlock);
+			//console.log(logicBlock);
+			//console.log(text);
 		}
 	}
 }

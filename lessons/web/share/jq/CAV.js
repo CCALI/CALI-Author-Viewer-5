@@ -473,10 +473,6 @@ function convertToNumber(val)
 }
 */
 
-function HTMLReplaceMacros(html)
-{	// replace macros in lesson's HTML text.
-	return html;
-}
 function embedPopupHTML(alink,pageName)
 {	// Embed after a popup hyperlink.
 	var page = book.pages[pageName];
