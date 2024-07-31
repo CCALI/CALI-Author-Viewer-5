@@ -4,8 +4,8 @@
 	$referer = $_SERVER['HTTP_REFERER']??'';
 	$referer_host = parse_url($referer, PHP_URL_HOST);
 	if (($referer_host != $_SERVER['HTTP_HOST']) || (!isset($referer_host))) {
-		$sess=$_REQUEST;
-		$runid=$sess['runid']??0;
+		require "getdrupalinfo.php";
+		$runid=$_SESSION['runid']??0;
 		if ($runid==0)
 			header("Location: https://www.cali.org/error/bookmark");
     }

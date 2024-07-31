@@ -1,12 +1,16 @@
 <?php
-// 07/16/2024 This is called by authorizefaculty and the lesson viewer, and lesson link aggregator.
+// 07/16/2024 This is called by authorizefaculty, the lesson viewer, and lesson link aggregator.
 // It will set userid, email, username and fac/staff permission flag (or all blank if not logged in.)
 require "config.php";
 
 $userid=0;
-$useremail='';
 $username='';
+$orgname='';
+$firstname='';
+$lastname='';
+$dispname='';
 $userisfacstaff=0;
+$userisstaff=0;
 //error_reporting(E_ALL);
 
 // Find Drupal's session cookie.
@@ -20,28 +24,22 @@ foreach ($_COOKIE as $key => $value)
 	}
 }
 if ($sid!='')
-{	// Get Drupal session id from cookie, lookup user id and roles from Drupal db.
+{	// Get Drupal session id from cookie, load Drupal's session data which contains everything we need.
 	$umysqli = new mysqli ( UDB_HOST,UDB_USER,UDB_PASSWORD,UDB_NAME,3306);
-   $query = "SELECT uid FROM `sessions` WHERE sid = '$sid'";
+   $query = "SELECT uid,session FROM `sessions` WHERE sid = '$sid'";
 	$result = $umysqli->query($query);
    $row = mysqli_fetch_assoc($result);
    $userid = $row['uid'];
-   $query = "SELECT * FROM `users` WHERE uid=$userid";
-	$result = $umysqli->query($query);
-	$count = mysqli_num_rows($result);
-	if ($count == 1)
-	{
-		$account = $result->fetch_object();	
-		$username=$account->name;
-		$useremail=$account->mail;
-		$query = "SELECT rid FROM `users_roles` WHERE uid = $userid and rid in (5,6)";
-		$result = $umysqli->query($query);
-		$count = mysqli_num_rows($result);
-		if ($count>=1)
-		{
-			$userisfacstaff=1;
-		}
-	}
+	session_start();
+	session_decode($row['session']);
+	$username=$_SESSION['username'];
+	$orgname=$_SESSION['orgname'];
+	$firstname=$_SESSION['firstname'];
+	$lastname=$_SESSION['lastname'];
+	$roles=$_SESSION['roles']??[];
+	$dispname= $firstname." ".$lastname;
+	$userisfacstaff=array_key_exists(5,$roles) || array_key_exists(6,$roles);
+	$userisstaff=array_key_exists(5,$roles);
 }
 
 ?>
