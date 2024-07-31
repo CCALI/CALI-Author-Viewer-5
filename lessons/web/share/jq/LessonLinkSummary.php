@@ -13,31 +13,28 @@
 	Optional:  lastupdate=#
 
 	05/17/2018 Updated to mysqli
+	07/2024 Rely on LessonLinkConfig to setup database names and user info.
 */
-	require "LessonLinkConfig.php";
-	require_once "LessonLinkAggregator.php";
-	
+
 //	### Full debugging.
 //	ini_set('display_errors', 1);
 //	ini_set('display_startup_errors', 1);
 //	error_reporting(E_ALL);
 
-
-	// ### Security check should be done to assure user getting this data is course teacher.
-	if (!isset($user))
-	{
-		$userID=0;
-		global $user;
-		// Set the working directory to your Drupal root
-		chdir(DRUPAL_ROOT_DIR);
-		define('DRUPAL_ROOT', getcwd());
-		require_once("./includes/bootstrap.inc");
-		drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
+	header('Content-Type: application/json; charset=utf-8');
+	require "LessonLinkConfig.php";
+	$userID = $userid;
+	require_once "LessonLinkAggregator.php";
+	if ($userID>0)
+	{	// ### Security check should be done to assure user getting this data is course teacher OR CALI staff.
+		$query = "SELECT * FROM `users_roles` WHERE uid = $userid and rid in (5)";
+		$result = $umysqli->query($query);
+		$count = mysqli_num_rows($result);
+		$userisstaff=($count>=1);
 	}
-	$userID = $user->uid; 
 	
 	//### Connect to Drupal www.cali.org clone database (read only)
-	$connect_CALISQL=mysqli_connect($dbhost,$dbuser,$dbpass);//mysql_connect($dbhost,$dbuser,$dbpass);
+	$connect_CALISQL=mysqli_connect($dbhost,$dbuser,$dbpass);
 	traceSQL('mysqli');
 	traceSQL();
 	$Database=mysqli_select_db($connect_CALISQL,$dbdatabase);
@@ -69,6 +66,7 @@
 		$ownerID=$row['uid'];
 	}
 	
+	/* 7/24 AP obsolete
 	if ($lessonID>0 && $courseID==0)
 	{	// 12/08/2016 If lesson but no course see if it's creator is this user (assume owner is AP)
 		$node = node_load($lessonID);
@@ -77,6 +75,7 @@
         $ownerID = $userID;
 		}
 	}
+	*/
 	
 	//var_dump(array($node->uid,$lessonID,$courseID,$userID,$user->uid,$ownerID));
 	
@@ -86,8 +85,8 @@
 		echo json_error("Unknown course");
 	}
 	else
-	if (($userID==0 /* anonymous user */) || (!in_array($userID,array($ownerID, 1, 138, 140, 147, 203)))) // hack CALI Staff as viable users.
-	{
+	if (($userID==0) || (($userID!=$ownerID)&&(!$userisstaff)))
+	{	// Anonymous user or not owner or staff.
 		echo json_error(
 			"Only LessonLink owner of this course may access this data"
 			//"Only LessonLink owner of course $courseID may access this data: $userID<>$ownerID"

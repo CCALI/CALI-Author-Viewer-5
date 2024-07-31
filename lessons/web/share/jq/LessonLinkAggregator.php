@@ -145,7 +145,11 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 
 	$lesson['Lesson Runs']=$query->getNumRecords();
 	array_push($comment,"1. Only a student's first answer to any question is tallied. ","2. Discarding Text Essays and Text Selects.");
-	
+	if ($userisstaff)
+	{
+		array_push($comment,"CALI Staff User");
+	}
+
 	$pages=array();
 	$users=array();
 	$scores=array();
@@ -452,6 +456,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	echo'<hr>';echo json_encode($pagesFinal);
 	echo'<hr>';
 	*/
+	$trace='';// optional clear out the sql trace.
 	$ar =array(
 			"_comment"=>$comment,
 			"lesson"=>$lesson,
