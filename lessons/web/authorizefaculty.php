@@ -4,7 +4,7 @@
 	require "getdrupalinfo.php";
 	if ($userisfacstaff!=1)
 	{
-		header("Location: http://".$_SERVER['HTTP_HOST']);
+		header("Location: https://".$_SERVER['HTTP_HOST']);
 		return;
 	}
 	echo "<!-- Faculty lesson authorization. -->";
