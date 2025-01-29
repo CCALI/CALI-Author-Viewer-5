@@ -20,7 +20,7 @@ function PerformanceUpload()
 }
 function urlLessonRuns()
 {
-	return (isLocalFile() ? "http://www.cali.org" :"") + "/mylessonruns";
+	return (isLocalFile() ? "https://www.cali.org" :"") + "/mylessonruns";
 }
 function urlSurvey()
 {
@@ -29,6 +29,6 @@ function urlSurvey()
 }
 function LessonLiveDownload()
 {	// 08/25/2016 Download lesson scores to viewer: /lessonlink/live/runid/lastupdate
-	return isLocalFile() ? null  :  "/lessonlink/live/";
+	return isLocalFile() ? null  : "LessonLinkSummary.php"; // "LessonLiveSample.php" // "LessonLinkSummary.php"  
 }
 //
