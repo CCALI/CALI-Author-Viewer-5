@@ -1,28 +1,24 @@
-<?php header("Content-Type: text/html; charset=Windows-1252"); ?>
 <?php
-//06/01/2009 SJG Insert our Faculty/lesson access authentication code here.
-//01/14/2010 SJG Hacked to return Windows-1252 charset override server's UTF-8 setting, for now.
-//10/24/2013 SJG This checks with Drupal to make sure user is Faculty or Staff or CALI Staff. 
-// Anyone else gets bounced to home page.
-
-	chdir("/vol/data/drupal7-cali/");
-	define('DRUPAL_ROOT_DIR','/vol/data/drupal7-cali');
-	// Set the working directory to your Drupal root
-	chdir(DRUPAL_ROOT_DIR);
-	define('DRUPAL_ROOT', getcwd());
-	require_once("./includes/bootstrap.inc");
-	drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-	global $user;
-	$roles = $user->roles;
-	//print_r($roles);
-	$maySeeLessonText = in_array('CALI Staff', $roles) || in_array('Facstaff', $roles) || $user->uid == 1;
-	//print_r($maySeeLessonText);
-	if ($maySeeLessonText == FALSE)
+	//	06/01/2009 SJG Insert our Faculty/lesson access authentication code here.
+	// 07/17/2024 SJG If Drupal user is not staff/faculty, eject.
+	require "getdrupalinfo.php";
+	
+	// 02/18/24 SJG Confirm user has perms to see.
+	$userisfacstaff=0;
+	if ($userid>0)
 	{
-		// Bounce to home page. 
-		header("Location: http://".$_SERVER['HTTP_HOST']);
+		$query = "SELECT rid FROM users_roles where uid=$userid and rid in (5,6)";
+		$result = $umysqli->query($query);
+		if ($result->num_rows>0)
+			$userisfacstaff=1;
+		//	var_dump($query);
+		//	var_dump($result);
+	}
+	//	var_dump($userisfacstaff);
+	if ($userisfacstaff!=1)
+	{
+		header("Location: https://".$_SERVER['HTTP_HOST']);
 		return;
 	}
-	
-echo "<!-- Faculty lesson authorization. -->";
+	echo "<!-- Faculty lesson authorization. -->";
 ?>
