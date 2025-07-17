@@ -86,7 +86,7 @@ function textWithMedia(pageText, page)
 {	// Added default question text and any applicable media elements like picture, hotspots, sound, video, animation/slides. 
 
 	var media="";
-	var text=HTMLReplaceMacros(page.text);
+	var text=logicExecuteReplace(page.text);
 		
 	// Build any media widgets
 	if (page.animationSlideSrcs.length>0)
@@ -223,7 +223,11 @@ function textWithMedia(pageText, page)
 	{
 		if (page.discussion.layout && page.discussion.layout=='INTRO') // 04/23 Only INTRO style discussion go to top. Others behind Discussion button.
 		{	// 4/22 Discussions on book pages are at the top, 75% width.
-			var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
+			var vid;
+			if (page.discussion.src.indexOf('cali-lesson-video')>=0) // CALI hosted
+				vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
+			else
+				vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <iframe width="100%" height="100%" src="'+page.discussion.src+'" frameborder="0" allowfullscreen></iframe></div>';
 			$(pageText).prepend(vid);
 		}
 	}
@@ -244,8 +248,11 @@ function addDiscussionFeedback()
 		pageInteractionDIV.append('<div id=fbTextDiscussion></div>');
 		$('.PageSpecificNav a:first').parent().prepend('<button id="open-tudor" class="CL-btn CL-next-btn shine"><span class="next-caption">Discussion</span></button>');
 		$('#open-tudor').click(function(){
-			var vid='<div style="width: 100%; height: auto">\
-				<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>'+discussionVideoTranscriptHTML(page.discussion)+'</div>';
+			var vid;
+			if (page.discussion.src.indexOf('cali-lesson-video')>=0) // CALI hosted
+				vid='<div style="width: 100%; height: auto"><video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>'+discussionVideoTranscriptHTML(page.discussion)+'</div>';
+			else
+				vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <iframe width="100%" height="100%" src="'+page.discussion.src+'" frameborder="0" allowfullscreen></iframe></div>';
 			showFeedback(INFO,"Discussion","#fbTextDiscussion",vid);
 			$('#fbTextDiscussion').addClass('VideoPopup')
 			});
