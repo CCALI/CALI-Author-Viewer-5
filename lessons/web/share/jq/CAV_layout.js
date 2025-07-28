@@ -1,6 +1,6 @@
 // Copyright 1999-2014 CALI, The Center for Computer-Assisted Legal Instruction. All Rights Reserved.
 // CALI Viewer 5, Version: 09/11/2014
-
+// 7/25 Added Discussion from Youtube
 
 function stickyHeader()
 {	// Bitovi
@@ -223,11 +223,14 @@ function textWithMedia(pageText, page)
 	{
 		if (page.discussion.layout && page.discussion.layout=='INTRO') // 04/23 Only INTRO style discussion go to top. Others behind Discussion button.
 		{	// 4/22 Discussions on book pages are at the top, 75% width.
-			var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
+			var vid='<div ><div style="padding: 10px; width: 75%; height: auto;margin-left: auto;margin-right: auto;"> <video id="videotutor" autoplay controls width="100%"><source src="'+page.discussion.src+'" type="video/mp4"/ >\
+		  <track label="English" kind="subtitles" srclang="en" src="'+fixMediaPath(page.discussion.src.split("/").pop().split(".")[0]+".vtt")+'" default />\
+				</video> '+discussionVideoTranscriptHTML(page.discussion)+'</div></div>';
 			$(pageText).prepend(vid);
 		}
 	}
 }
+
 function discussionVideoTranscriptHTML(discussion)
 {	// 7/22 If discussion has trranscript, provide link to expand text.
 	if (discussion && discussion.transcript && discussion.transcript!="")
@@ -244,11 +247,12 @@ function addDiscussionFeedback()
 		pageInteractionDIV.append('<div id=fbTextDiscussion></div>');
 		$('.PageSpecificNav a:first').parent().prepend('<button id="open-tudor" class="CL-btn CL-next-btn shine"><span class="next-caption">Discussion</span></button>');
 		$('#open-tudor').click(function(){
-			var vid='<div style="width: 100%; height: auto">\
-				<video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ ></video>'+discussionVideoTranscriptHTML(page.discussion)+'</div>';
+			var vid='<div style="width: 100%; height: auto"><video id="videotutor" autoplay controls width="100%"  xwidth="640" xheight="480"><source src="'+page.discussion.src+'" type="video/mp4"/ >\
+				<track label="English" kind="subtitles" srclang="en" src="'+fixMediaPath(page.discussion.src.split("/").pop().split(".")[0]+".vtt")+'" default />\
+				</video>'+discussionVideoTranscriptHTML(page.discussion)+'</div>';
 			showFeedback(INFO,"Discussion","#fbTextDiscussion",vid);
 			$('#fbTextDiscussion').addClass('VideoPopup')
-			});
+		});
 	}
 }
 
