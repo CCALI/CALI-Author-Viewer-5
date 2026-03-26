@@ -1,5 +1,7 @@
 <?php
-/*	09/27/2016 A shell for the LessonLive aggregator.
+/*	3/26/26 D10 Fixes 
+
+	09/27/2016 A shell for the LessonLive aggregator.
 
 	Called by JavaScript in LessonLive Viewer or LessonPast reporter.
 	
@@ -16,30 +18,35 @@
 	07/2024 Rely on LessonLinkConfig to setup database names and user info.
 */
 
-//	### Full debugging.
-//	ini_set('display_errors', 1);
-//	ini_set('display_startup_errors', 1);
-//	error_reporting(E_ALL);
+	if (0){//	### Full debugging.
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+		//echo json_error("TESTING");exit();
+		echo "TESTING<br>1;";
+	}//### End Full Debugging
 
 	header('Content-Type: application/json; charset=utf-8');
 	require "LessonLinkConfig.php";
+
 	$userID = $userid;
 	require_once "LessonLinkAggregator.php";
-	if ($userID>0)
+	
+	$userisstaff=1;//TODO D10 Production must be 0 or get ROLE info
+
+	/* 3/26 Outdated
+	 if ($userID>0)
 	{	// ### Security check should be done to assure user getting this data is course teacher OR CALI staff.
 		$query = "SELECT * FROM `users_roles` WHERE uid = $userid and rid in (5)";
 		$result = $umysqli->query($query);
 		$count = mysqli_num_rows($result);
 		$userisstaff=($count>=1);
-	}
+	}*/
 	
 	//### Connect to Drupal www.cali.org clone database (read only)
 	$connect_CALISQL=mysqli_connect($dbhost,$dbuser,$dbpass);
-	traceSQL('mysqli');
-	traceSQL();
 	$Database=mysqli_select_db($connect_CALISQL,$dbdatabase);
 	traceSQL();
-	
 	
 	//### Gather query string parameters
 	$runID= isset($_GET['runid']) ? intval($_GET['runid']) : 0;
