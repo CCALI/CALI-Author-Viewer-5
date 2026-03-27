@@ -69,12 +69,22 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$lesson['Semester']=$row['semester'];
 		$lesson['Created Date']=$row['createdate'];
 		$lesson['orgid']=$row['orgid'];
-		$lesson['ownerid']=$ownerid=$row['uid'];
-		$row=quickLookup("select * from node_field_data where nid=".$lesson['orgid']);
-		$lesson['Organization']=$lesson['orgid'];//TODO name of school $row['title'];
-		$row=quickLookup("select * from users_field_data  where uid=".$lesson['ownerid']);		
-		$lesson['Teacher Name']=$row['name'];
+		$ownerid=$row['uid'];
+		$lesson['ownerid']=$ownerid;
+
+		//not working $row=quickLookup("select * from node_field_data where nid=".$lesson['orgid']);
+		//$lesson['Organization']=$lesson['orgid'];//TODO name of school $row['title'];
+		$lesson['Organization']='';
+
+		
+		$row=quickLookup("select * from users_field_data  where uid=".$lesson['ownerid']);
+		$lesson['Teacher UserName']=$row['name'];
 		$lesson['Teacher ID']=$row['uid'];
+		$row=quickLookup("select users.uid,field_first_name_value as firstname,field_last_name_value as lastname
+				from users,user__field_first_name,user__field_last_name 
+				where (user__field_first_name.entity_id = uid and user__field_last_name.entity_id=uid) and 
+				users.uid = $ownerid");
+		$lesson['Teacher Name']=$row['firstname'].' '.$row['lastname'];
 		$row=quickLookup("select * from node_field_data  where nid=$nid");	
 		$lesson['Lesson Name']=$row['title'];
 		$lesson['Lesson Type']=$row['type'];

@@ -49,10 +49,10 @@
 	traceSQL();
 	
 	//### Gather query string parameters
-	$runID= isset($_GET['runid']) ? intval($_GET['runid']) : 0;
-	$courseID= isset($_GET['courseid']) ? intval($_GET['courseid']) : 0; // debugging only
-	$lessonID= isset($_GET['lessonid']) ? intval($_GET['lessonid']) : 0; // debugging only
-	$lastUpdate= isset($_GET['lastupdate']) ?  ($_GET['lastupdate']) : ''; // Fix GIT#50
+	$runID= intval($_GET['runid'] ?? 0);
+	$courseID= intval($_GET['courseid'] ?? 0); // debugging only
+	$lessonID= intval($_GET['lessonid'] ?? 0); // debugging only
+	$lastUpdate= $_GET['lastupdate'] ??  ''; // Fix GIT#50
 	
 	$ownerID=0;
 	if ($runID>0)
