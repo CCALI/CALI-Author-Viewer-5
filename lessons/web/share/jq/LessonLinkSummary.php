@@ -18,12 +18,12 @@
 	07/2024 Rely on LessonLinkConfig to setup database names and user info.
 */
 
-	if (0){//	### Full debugging.
+	if (	0	){//	### Full debugging.
 		ini_set('display_errors', 1);
 		ini_set('display_startup_errors', 1);
 		error_reporting(E_ALL);
 		//echo json_error("TESTING");exit();
-		echo "TESTING<br>1;";
+		//echo "TESTING<br>1;";
 	}//### End Full Debugging
 
 	header('Content-Type: application/json; charset=utf-8');
@@ -32,22 +32,21 @@
 	$userID = $userid;
 	require_once "LessonLinkAggregator.php";
 	
-	$userisstaff=1;//TODO D10 Production must be 0 or get ROLE info
 
-	/* 3/26 Outdated
-	 if ($userID>0)
-	{	// ### Security check should be done to assure user getting this data is course teacher OR CALI staff.
-		$query = "SELECT * FROM `users_roles` WHERE uid = $userid and rid in (5)";
-		$result = $umysqli->query($query);
-		$count = mysqli_num_rows($result);
-		$userisstaff=($count>=1);
-	}*/
 	
 	//### Connect to Drupal www.cali.org clone database (read only)
 	$connect_CALISQL=mysqli_connect($dbhost,$dbuser,$dbpass);
 	$Database=mysqli_select_db($connect_CALISQL,$dbdatabase);
-	traceSQL();
 	
+	//### Security check: only owner of course (userID=ownerID) or CALI staff can see data.
+	$userisstaff=0;// If 1, is CALI Staff
+	if ($userID>0)
+	{	// See if user is CALI Staff and let them see report.
+		$SQL = "SELECT * FROM `user__roles` WHERE entity_id = $userID and roles_target_id ='cali_staff'";
+		$q=new QueryMySQLSimple ($SQL);
+		$count = $q->getNumRecords();
+		$userisstaff=($count>=1)?1:0;
+	}
 	//### Gather query string parameters
 	$runID= intval($_GET['runid'] ?? 0);
 	$courseID= intval($_GET['courseid'] ?? 0); // debugging only
@@ -93,7 +92,7 @@
 	}
 	else
 	if (($userID==0) || (($userID!=$ownerID)&&(!$userisstaff)))
-	{	// Anonymous user or not owner or staff.
+	{	// Anonymous user or not owner or CALI staff.
 		echo json_error(
 			"Only LessonLink owner of this course may access this data"
 			//"Only LessonLink owner of course $courseID may access this data: $userID<>$ownerID"

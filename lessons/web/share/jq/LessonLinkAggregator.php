@@ -55,10 +55,10 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	
 	function quickLookup($SQL)// helper function to make code easier for humans.
 	{
+		//echo '<b>'.$SQL.'</b>';
 		$q=new QueryMySQLSimple ($SQL);
 		traceSQL($SQL);
 		$row=$q->fetchRow();
-		//echo '<b>'.$SQL.'</b>';print_r($row);
 		return $row;
 	}
 	if ($courseid>0)
@@ -72,10 +72,9 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$ownerid=$row['uid'];
 		$lesson['ownerid']=$ownerid;
 
-		//not working $row=quickLookup("select * from node_field_data where nid=".$lesson['orgid']);
+		//TODO not working $row=quickLookup("select * from node_field_data where nid=".$lesson['orgid']);
 		//$lesson['Organization']=$lesson['orgid'];//TODO name of school $row['title'];
 		$lesson['Organization']='';
-
 		
 		$row=quickLookup("select * from users_field_data  where uid=".$lesson['ownerid']);
 		$lesson['Teacher UserName']=$row['name'];
@@ -85,7 +84,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 				where (user__field_first_name.entity_id = uid and user__field_last_name.entity_id=uid) and 
 				users.uid = $ownerid");
 		$lesson['Teacher Name']=$row['firstname'].' '.$row['lastname'];
-		$row=quickLookup("select * from node_field_data  where nid=$nid");	
+		$row=quickLookup("select * from node_field_data  where nid=$nid");
 		$lesson['Lesson Name']=$row['title'];
 		$lesson['Lesson Type']=$row['type'];
 		$lesson['Lesson ID']=$row['nid'];
