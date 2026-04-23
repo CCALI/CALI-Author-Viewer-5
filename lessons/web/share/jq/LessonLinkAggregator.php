@@ -1,5 +1,7 @@
 <?php
-/*	D10 Fixes ATTEMPT
+/*	4/22/26 SPL Support
+	3/26/26 D10 Fixes 
+
 	09/23/2016 Generate summary report for specific course/lesson.
 
 	This is a Helper .php which is called by another .php.
@@ -72,7 +74,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$ownerid=$row['uid'];
 		$lesson['ownerid']=$ownerid;
 
-		//TODO not working $row=quickLookup("select * from node_field_data where nid=".$lesson['orgid']);
+		//TODO not working to get ORG NAME: $row=quickLookup("select * from node_field_data where nid=".$lesson['orgid']);
 		//$lesson['Organization']=$lesson['orgid'];//TODO name of school $row['title'];
 		$lesson['Organization']='';
 		
@@ -89,7 +91,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$lesson['Lesson Type']=$row['type'];
 		$lesson['Lesson ID']=$row['nid'];
 
-		if(0){ // original d7 join (not sure how to do this in D10, replaced with above queries. 
+		/*if(0){ // original d7 join (not sure how to do this in D10, replaced with above queries. 
 			$SQL3="select nodeorg.title as orgname,orgid,users_field_data.name,users.uid,semester,createdate,course.courseid,coursename,node.type,node.nid, nodelsn.title as title
 				from course,users , course_node, node, node_field_data as nodeorg, 
 				node_field_data as nodelsn, users_field_data
@@ -104,17 +106,37 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			$q=new QueryMySQLSimple ($SQL3);
 			traceSQL($SQL3);
 			$row=$q->fetchRow();
-		}
+		}*/
 		// Extract CALI lesson code for lesson, e.g., EVD04.
-		//$SQL3="select field_lesson_id_value as code from field_data_field_lesson_id where entity_id = $nid"; 
 		$row=quickLookup("select field_lesson_id_value as code from node__field_lesson_id where entity_id =".$lesson['Lesson ID']);
 		//row=quickLookup("select field_lesson_id_value as code from node__field_lesson_id limit 1");
 		$lesson['Lesson Code']=$row['code'] ?? $lesson['Lesson ID'];
-		$courseFilter = " and courseid=$courseid"; // If course specified, we filter on it.
-		//var_dump($lesson);
+		$courseFilter = " and courseid=$courseid "; // If course specified, we filter on it.
 	}
 	else
-	{	//## TODO
+	{	//## Lesson-only, no course. Used with Self-published lessons. 
+
+		$lesson['Course Name']='n/a';
+		$lesson['Course ID']='n/a';
+		$lesson['Semester']='n/a';
+		$lesson['Organization']='';// TODO Get actual name.
+		$row=quickLookup("select u.name,n.uid,n.nid,n.title ,n.type from users_field_data as u, node_field_data as n where n.nid=$nid and n.uid=u.uid");
+		$lesson['Teacher UserName']=$row['name'];
+		$lesson['Teacher ID']=$row['uid'];
+		$lesson['Lesson Name']=$row['title'];
+		$lesson['Lesson Type']=$row['type'];
+		$lesson['Lesson ID']=$row['nid'];
+		$lesson['orgid']='';
+		$ownerid=$row['uid'];
+		$lesson['ownerid']=$ownerid;
+		$row=quickLookup("select field_lesson_id_value as code from node__field_lesson_id where entity_id =".$lesson['Lesson ID']);
+		$lesson['Lesson Code']=$row['code'] ?? $lesson['Lesson ID'];
+		$row=quickLookup("select users.uid,field_first_name_value as firstname,field_last_name_value as lastname
+				from users,user__field_first_name,user__field_last_name 
+				where (user__field_first_name.entity_id = uid and user__field_last_name.entity_id=uid) and 
+				users.uid = $ownerid");
+		$lesson['Teacher Name']=$row['firstname'].' '.$row['lastname'];
+		/* Original D7 join, not sure how to do in D10, replaced with above queries.
 		$SQL3="select  lsn.type, lsn.title as title, lsn.uid, lsn.nid, lsn.created, u.name as name, u.mail
 			from node as lsn , users as u where  
 			lsn.nid = $nid and lsn.uid = u.uid ;";
@@ -132,17 +154,28 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$lesson['Lesson Type']=$row['type'];
 		$lesson['Lesson ID']=$row['nid'];
 		$lesson['Lesson Code']=$row['nid'];
+		*/
 		$courseFilter="";  // assumption is with no course, must be an AutoPublish, so include all runs.
 	}
-	
 	
 	if ($lastupdate!='')
 	{	// If last update filter, see if there are new/updated records after that date. If none, return no-op or {};
 		// 12/08/2016 Include course filter if defined.
-		$SQL="select count(*) as updated from LessonRun where nid=$nid $courseFilter and scoredate > \"$lastupdate\" ";
+		
+		$SQL="select count(*) as updated from LessonRun where scoredate > \"$lastupdate\" and nid=$nid $courseFilter ";
 		$query=new QueryMySQLSimple($SQL);
 		traceSQL($SQL);
 		$row=$query->fetchRow();
+		/*
+		$SQL="select count(*) as updated from LessonRun where nid=? $courseFilter and scoredate > \"?\"";
+		echo $SQL;
+		$stmt = $connect_CALISQL->prepare($SQL);
+		$stmt->bind_param("is", $nid,$lastupdate);// is=integer,string
+		$stmt->execute();
+		var_dump($stmt);
+		$row=$stmt->get_result()->fetch_assoc();
+		var_dump($row);
+		*/
 		$updatedCount = $row['updated'];
 		if ($row['updated'] ==0)
 		{
@@ -200,7 +233,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			}
 			
 			$xml = $row['responses']; 
-			$bytes += strlen($xml);// just info gathering
+			$bytes += strlen($xml??'');// just info gathering
 			
 			// Map drupal user id to simpler user id.
 			if (!isset($users[$uid]))
@@ -326,7 +359,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 										}
 										
 										
-										if (!isset($pages[$qname][$qsub][$qanswer]))
+										if (!isset($pages[$qname][$qsub][$qanswer]) || !is_array($pages[$qname][$qsub][$qanswer]))
 										{	// add this answer
 											$pages[$qname][$qsub][$qanswer] = array('grade'=>$qgrade,'users'=> array(),'text'=>array()); 
 										}
