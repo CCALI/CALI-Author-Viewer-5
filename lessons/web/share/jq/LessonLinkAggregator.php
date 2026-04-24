@@ -161,21 +161,19 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	if ($lastupdate!='')
 	{	// If last update filter, see if there are new/updated records after that date. If none, return no-op or {};
 		// 12/08/2016 Include course filter if defined.
-		
+		/*
 		$SQL="select count(*) as updated from LessonRun where scoredate > \"$lastupdate\" and nid=$nid $courseFilter ";
 		$query=new QueryMySQLSimple($SQL);
 		traceSQL($SQL);
 		$row=$query->fetchRow();
-		/*
-		$SQL="select count(*) as updated from LessonRun where nid=? $courseFilter and scoredate > \"?\"";
-		echo $SQL;
+		*/
+		
+		$SQL="select count(*) as updated from LessonRun where nid=? $courseFilter and scoredate > ?";
 		$stmt = $connect_CALISQL->prepare($SQL);
 		$stmt->bind_param("is", $nid,$lastupdate);// is=integer,string
 		$stmt->execute();
-		var_dump($stmt);
 		$row=$stmt->get_result()->fetch_assoc();
-		var_dump($row);
-		*/
+		
 		$updatedCount = $row['updated'];
 		if ($row['updated'] ==0)
 		{
