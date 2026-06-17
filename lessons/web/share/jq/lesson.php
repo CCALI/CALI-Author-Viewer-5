@@ -13,67 +13,55 @@
  * 09/27/2016 SJG add LessonLive link info
  * 10/07/2016 SJG add betatester role
  * 10/26/2016 SJG on production site
+ * 10/20/2020 ERM unset($_SESSION['runid'] to foil browser bookmark
+ * 11/12/2020 SJG course info
+ * 06/27/2024 SJG replace drupal bootstrap calls with query cookie.
 */
-  $template=file_get_contents("lesson.html");
-  global $user;
-  
+	require('../../getdrupalinfo.php');
+	$template=file_get_contents("lesson.html");
 
-{  
-  define('DRUPAL_ROOT_DIR','/vol/data/drupal7-cali');
-  // Set the working directory to your Drupal root
-  chdir(DRUPAL_ROOT_DIR);
-  define('DRUPAL_ROOT', getcwd());
-  require_once("./includes/bootstrap.inc");
-  drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
-  $account = user_load($user->uid); 
-  $roles = $user->roles;
-  $org_title = get_organization_name($account); 
-  $orgname = render($org_title);
-  $runid=$_SESSION['runid'];
-  
-  $username= $user->name;
-  $firstname_item = field_get_items('user', $account, 'field_first_name' );
-  $lastname_item = field_get_items('user', $account, 'field_last_name' );
-  $lastname_value = field_view_value('user', $account, 'field_last_name', $lastname_item[0]);
-  $lastname = render($lastname_value);
-  $firstname_value = field_view_value('user', $account, 'field_first_name', $firstname_item[0]);
-  $firstname = render($firstname_value);
+	$runid=$_SESSION['runid']??0;
+	$runnid=$_SESSION['runnid']??0;
+	$llMode=$_SESSION['llmode']??'';
+	$resume=$_SESSION['resume']??0;
+	$coursename=$_SESSION['coursename']??'';
+	$teachername=$_SESSION['proflastname']??'';
+	$schoolname=$_SESSION['schoolname']??'';
+	$semester=$_SESSION['semester']??'';
+	$authmode=$userisfacstaff ? 1 : 0;
+	
+  /*
+	$sess=[];
+	// Since we're in a frameset lesson.php has no querystring. We rely on the Referrer string to get it.
+	parse_str($_SERVER["HTTP_REFERER"],$sess); // this will eventually be decrypting something instead of raw. 
+
+	// Grab info we need  
+	$starttime=$sess['starttime']??0;// TODO add the 10 second ejection.
+	$runid=$sess['runid']??0;
+	$runnid=$sess['runnid']??0;
+	$username=$sess['username']??'';
+	$firstname=$sess['firstname']??'';
+	$lastname=$sess['lastname']??'';
+	$orgname=$sess['orgname']??'';
+	$roles=$sess['roles']??[];
+	$llMode=$sess['llmode']??'';
+	$resume=$sess['resume']??0;
+	$coursename=$sess['coursename']??'';
+	$teachername=$sess['profname']??'';
+	$schoolname=$sess['schoolname']??'';
+	$semester=$sess['semester']??'';
+	 $dispname= $firstname." ".$lastname;
   // 09/12/2016 Show Faculty options for Facstaff or CALI Staff
   $authmode=(in_array('Facstaff', $roles) || in_array('CALI Staff', $roles)) ? 1 : 0;
-  $betamode=(in_array('betatester', $roles)) ? 1 : 0;
-  if (isset($_SESSION['resume']) && $_SESSION['resume']==1)
+  */
+  
+  //$betamode=(in_array('betatester', $roles)) ? 1 : 0;
+  if ($resume==1)  
 	  $resumescore="/lesson/scoreload/".dechex($runid*47);
   else
 	  $resumescore="";
-	unset($_SESSION['runid']);  
-}
-
-  $dispname= $firstname." ".$lastname;
-  if (!isset($orgname)) {
-	  $orgname = '';
-  }
-  
-  // Grab llMode from the querystring string on referrer:
-  //	/lessons/web/trt10/jq.php?own   Teacher owner of this LessonLink-show usage data
-  //	/lessons/web/trt10/jq.php?stu   Student user of this LessonLink-show watermark
-  //	/lessons/web/trt10/jq.php?go    Any user of a non-LessonLink-show no LessonLink/Live info at all.
-  $referrer=$_SERVER["HTTP_REFERER"];
-  if (strrpos($referrer,"?own")>0){
-	 $llMode="own";
-  }
-  else
-  if (strrpos($referrer,"?stu")>0){
-	 $llMode="stu";
-  }
-  else{
-	 $llMode="";
-  }
-
-	// Note: $orgName is student's org. $schoolname is LessonLink professor's school. Usually the same.
-	$coursename='""'; if (isset($_SESSION['coursename'])) {$coursename=json_encode($_SESSION['coursename']);unset($_SESSION['coursename']);}
-	$teachername='""';if (isset($_SESSION['proflastname'])) {$teachername=json_encode($_SESSION['proflastname']);unset($_SESSION['proflastname']);}
-	$semester='""';if (isset($_SESSION['semester'])) {$semester=json_encode($_SESSION['semester']);unset($_SESSION['semester']);}
-	$schoolname='""';if (isset($_SESSION['schoolname'])) {$schoolname=json_encode($_SESSION['schoolname']);unset($_SESSION['schoolname']);}
+	if ($llMode=='go')
+		$llMode='';
 
 
 //	if ($betamode!=1)
@@ -82,7 +70,7 @@
 //			$llMode='';
 //	}
 
-  $custom="<script>var _paq=false;\n var llMode=\"$llMode\";\n var userName=\"$username\";\n var runid=\"$runid\";\n var amode=$authmode;\n var llCourseName=$coursename; var llProfName=$teachername;\n var llSemester=$semester;\n var llSchoolName=$schoolname;\n var orgName=\"$orgname\";\n var dispName=\"$dispname\";\n var resumeScoreURL=\"$resumescore\";</script>";
+  $custom="<script>var _paq=false;\n var llMode=\"$llMode\";\n var userName=\"$username\";\n var runid=\"$runid\";\n var amode=$authmode;\n var llCourseName=\"$coursename\";\n var llProfName=\"$teachername\";\n var llSemester=\"$semester\";\n var llSchoolName=\"$schoolname\";\n var orgName=\"$orgname\";\n var dispName=\"$dispname\";\n var resumeScoreURL=\"$resumescore\";</script>";
 
   
   // 07/20/2016 SJG Add Piwik tracking including user id ($user->uid), organization name ($orgname) and user's full name ($dispname).
@@ -108,24 +96,6 @@
 <noscript><p><img src="//analytics.cali.org/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 ';
-  
   echo preg_replace('#\<!--Mode.BEGIN--\>(.+?)\<!--Mode.END--\>#s',$custom,$template);
-/**
- * get og ids that $account belongs to;
- * then gets first with a type of "organization"
- * uses that title for the $orgname
- */
-function get_organization_name($account){
-  $user_orgs = og_get_groups_by_user($account);
-  if (!empty($user_orgs['node'])){
-	foreach($user_orgs['node'] as $value){
-	  $node = node_load($value);
-	  if ($node->type == "organization"){
-		$title = $node->title;
-		//echo $title;
-		return($title);
-	  }
-	}
-  }
-}
+
 ?>

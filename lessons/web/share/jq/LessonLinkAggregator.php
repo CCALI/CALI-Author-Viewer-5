@@ -1,5 +1,7 @@
 <?php
-/*
+/*	4/22/26 SPL Support
+	3/26/26 D10 Fixes 
+
 	09/23/2016 Generate summary report for specific course/lesson.
 
 	This is a Helper .php which is called by another .php.
@@ -45,7 +47,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	// lastupdate is optional.
 	//		if blank, returns all JSON.
 	//    if not blank, returns an empty JSON if NO new data has appeared since then.
-	global $trace,$connect_CALISQL;
+	global $trace,$connect_CALISQL,$userisstaff;
 
 	$courseid=intval($courseID); // Lesson link Course ID
 	$nid=intval($lessonID); // Which lesson in the course
@@ -53,41 +55,88 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	$lesson=array();
 	$comment=array();
 	
+	function quickLookup($SQL)// helper function to make code easier for humans.
+	{
+		//echo '<b>'.$SQL.'</b>';
+		$q=new QueryMySQLSimple ($SQL);
+		traceSQL($SQL);
+		$row=$q->fetchRow();
+		return $row;
+	}
 	if ($courseid>0)
 	{	// Grab and display course info like org name, faculty username, course name, semester.
-		$SQL3="select nodeorg.title as orgname,orgid,name,users.uid,semester,createdate,course.courseid,coursename,node.title,node.type,node.nid
-			from course,users , course_node, node, node as nodeorg
-			where course.courseid =  $courseid  and node.nid = $nid
-			and course.uid = users.uid 
-			and course.courseid = course_node.courseid
-			and course_node.nid = node.nid
-			and course.orgid = nodeorg.nid";
-			
-		$q=new QueryMySQLSimple ($SQL3);
-		traceSQL($SQL3);
-		$row=$q->fetchRow();
-
-		$lesson['Organization']=$row['orgname'];
-		$lesson['Semester']=$row['semester'];
-		$lesson['Teacher Name']=$row['name'];
-		$lesson['Teacher ID']= $ownerid = $row['uid'];
-		$lesson['Course Name']=utf8_encode($row['coursename']);
+		$row=quickLookup("select * from course where course.courseid=$courseid");
+		$lesson['Course Name']=($row['coursename']);//utf8_encode
 		$lesson['Course ID']=$row['courseid'];
+		$lesson['Semester']=$row['semester'];
 		$lesson['Created Date']=$row['createdate'];
+		$lesson['orgid']=$row['orgid'];
+		$ownerid=$row['uid'];
+		$lesson['ownerid']=$ownerid;
+
+		//TODO not working to get ORG NAME: $row=quickLookup("select * from node_field_data where nid=".$lesson['orgid']);
+		//$lesson['Organization']=$lesson['orgid'];//TODO name of school $row['title'];
+		$lesson['Organization']='';
+		
+		$row=quickLookup("select * from users_field_data  where uid=".$lesson['ownerid']);
+		$lesson['Teacher UserName']=$row['name'];
+		$lesson['Teacher ID']=$row['uid'];
+		$row=quickLookup("select users.uid,field_first_name_value as firstname,field_last_name_value as lastname
+				from users,user__field_first_name,user__field_last_name 
+				where (user__field_first_name.entity_id = uid and user__field_last_name.entity_id=uid) and 
+				users.uid = $ownerid");
+		$lesson['Teacher Name']=$row['firstname'].' '.$row['lastname'];
+		$row=quickLookup("select * from node_field_data  where nid=$nid");
 		$lesson['Lesson Name']=$row['title'];
 		$lesson['Lesson Type']=$row['type'];
 		$lesson['Lesson ID']=$row['nid'];
-		
+
+		/*if(0){ // original d7 join (not sure how to do this in D10, replaced with above queries. 
+			$SQL3="select nodeorg.title as orgname,orgid,users_field_data.name,users.uid,semester,createdate,course.courseid,coursename,node.type,node.nid, nodelsn.title as title
+				from course,users , course_node, node, node_field_data as nodeorg, 
+				node_field_data as nodelsn, users_field_data
+				where course.courseid =  $courseid  and node.nid = $nid
+				and course.uid = users_field_data.uid
+				and course.uid = users.uid 
+				and node.nid = nodelsn.nid
+				and course.courseid = course_node.courseid
+				and course_node.nid = node.nid
+				and course.orgid = nodeorg.nid";
+				
+			$q=new QueryMySQLSimple ($SQL3);
+			traceSQL($SQL3);
+			$row=$q->fetchRow();
+		}*/
 		// Extract CALI lesson code for lesson, e.g., EVD04.
-		$SQL3="select field_lesson_id_value as code from field_data_field_lesson_id where entity_id = $nid"; 
-		$q=new QueryMySQLSimple ($SQL3);
-		traceSQL($SQL3);
-		$row=$q->fetchRow();
-		$lesson['Lesson Code']=isset($row['code']) ? $row['code'] : $lesson['Lesson ID'];
-		$courseFilter = " and courseid=$courseid"; // If course specified, we filter on it.
+		$row=quickLookup("select field_lesson_id_value as code from node__field_lesson_id where entity_id =".$lesson['Lesson ID']);
+		//row=quickLookup("select field_lesson_id_value as code from node__field_lesson_id limit 1");
+		$lesson['Lesson Code']=$row['code'] ?? $lesson['Lesson ID'];
+		$courseFilter = " and courseid=$courseid "; // If course specified, we filter on it.
 	}
 	else
-	{
+	{	//## Lesson-only, no course. Used with Self-published lessons. 
+
+		$lesson['Course Name']='n/a';
+		$lesson['Course ID']='n/a';
+		$lesson['Semester']='n/a';
+		$lesson['Organization']='';// TODO Get actual name.
+		$row=quickLookup("select u.name,n.uid,n.nid,n.title ,n.type from users_field_data as u, node_field_data as n where n.nid=$nid and n.uid=u.uid");
+		$lesson['Teacher UserName']=$row['name'];
+		$lesson['Teacher ID']=$row['uid'];
+		$lesson['Lesson Name']=$row['title'];
+		$lesson['Lesson Type']=$row['type'];
+		$lesson['Lesson ID']=$row['nid'];
+		$lesson['orgid']='';
+		$ownerid=$row['uid'];
+		$lesson['ownerid']=$ownerid;
+		$row=quickLookup("select field_lesson_id_value as code from node__field_lesson_id where entity_id =".$lesson['Lesson ID']);
+		$lesson['Lesson Code']=$row['code'] ?? $lesson['Lesson ID'];
+		$row=quickLookup("select users.uid,field_first_name_value as firstname,field_last_name_value as lastname
+				from users,user__field_first_name,user__field_last_name 
+				where (user__field_first_name.entity_id = uid and user__field_last_name.entity_id=uid) and 
+				users.uid = $ownerid");
+		$lesson['Teacher Name']=$row['firstname'].' '.$row['lastname'];
+		/* Original D7 join, not sure how to do in D10, replaced with above queries.
 		$SQL3="select  lsn.type, lsn.title as title, lsn.uid, lsn.nid, lsn.created, u.name as name, u.mail
 			from node as lsn , users as u where  
 			lsn.nid = $nid and lsn.uid = u.uid ;";
@@ -105,17 +154,26 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 		$lesson['Lesson Type']=$row['type'];
 		$lesson['Lesson ID']=$row['nid'];
 		$lesson['Lesson Code']=$row['nid'];
+		*/
 		$courseFilter="";  // assumption is with no course, must be an AutoPublish, so include all runs.
 	}
-	
 	
 	if ($lastupdate!='')
 	{	// If last update filter, see if there are new/updated records after that date. If none, return no-op or {};
 		// 12/08/2016 Include course filter if defined.
-		$SQL="select count(*) as updated from LessonRun where nid=$nid $courseFilter and scoredate > \"$lastupdate\" ";
+		/*
+		$SQL="select count(*) as updated from LessonRun where scoredate > \"$lastupdate\" and nid=$nid $courseFilter ";
 		$query=new QueryMySQLSimple($SQL);
 		traceSQL($SQL);
 		$row=$query->fetchRow();
+		*/
+		
+		$SQL="select count(*) as updated from LessonRun where nid=? $courseFilter and scoredate > ?";
+		$stmt = $connect_CALISQL->prepare($SQL);
+		$stmt->bind_param("is", $nid,$lastupdate);// is=integer,string
+		$stmt->execute();
+		$row=$stmt->get_result()->fetch_assoc();
+		
 		$updatedCount = $row['updated'];
 		if ($row['updated'] ==0)
 		{
@@ -145,7 +203,11 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 
 	$lesson['Lesson Runs']=$query->getNumRecords();
 	array_push($comment,"1. Only a student's first answer to any question is tallied. ","2. Discarding Text Essays and Text Selects.");
-	
+	if ($userisstaff)
+	{
+		array_push($comment,"CALI Staff User");
+	}
+
 	$pages=array();
 	$users=array();
 	$scores=array();
@@ -169,7 +231,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 			}
 			
 			$xml = $row['responses']; 
-			$bytes += strlen($xml);// just info gathering
+			$bytes += strlen($xml??'');// just info gathering
 			
 			// Map drupal user id to simpler user id.
 			if (!isset($users[$uid]))
@@ -295,7 +357,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 										}
 										
 										
-										if (!isset($pages[$qname][$qsub][$qanswer]))
+										if (!isset($pages[$qname][$qsub][$qanswer]) || !is_array($pages[$qname][$qsub][$qanswer]))
 										{	// add this answer
 											$pages[$qname][$qsub][$qanswer] = array('grade'=>$qgrade,'users'=> array(),'text'=>array()); 
 										}
@@ -341,8 +403,8 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	if (count($users)>0)
 	{	
 		$SQL = 'select uid,field_first_name_value as firstname,field_last_name_value as lastname
-				from users,field_data_field_first_name,field_data_field_last_name 
-				where (field_data_field_first_name.entity_id = uid and field_data_field_last_name.entity_id=uid) and 
+				from users,user__field_first_name,user__field_last_name 
+				where (user__field_first_name.entity_id = uid and user__field_last_name.entity_id=uid) and 
 				users.uid in ('.implode(",",array_keys($users)).')';
 		$query=new QueryMySQLSimple($SQL);
 		traceSQL($SQL);
@@ -452,6 +514,7 @@ function LessonLiveAggregateJSON($courseID,$lessonID,$lastUpdate)
 	echo'<hr>';echo json_encode($pagesFinal);
 	echo'<hr>';
 	*/
+	$trace='';// optional clear out the sql trace.
 	$ar =array(
 			"_comment"=>$comment,
 			"lesson"=>$lesson,
@@ -483,21 +546,21 @@ function traceSQL($SQL='')
 
 class QueryMySQLSimple
 {	// The MySQL SELECT version of Query (used by Oink but simplified to work in Drupal OR the oink test site. )
-	function QueryMySQLSimple($SQL)
+	public $queryresult;//D10
+	public function __construct($SQL)
 	{
 		global $connect_CALISQL;
 		$result=mysqli_query($connect_CALISQL,$SQL);
-		//echo '<hr>'.$SQL.'<hr>';
-		if (!$result){
-			//abort(json_encode(array("error"=>array("SQL"=>$SQL,"message"=>mysql_error()))));
+		if ($result=== false){
+			abort(json_encode(array("error"=>array("SQL"=>$SQL,"message"=>mysqli_error($connect_CALISQL)))));
 		}
 		$this->queryresult=$result;
 	}
-	function fetchRow()
+	public function fetchRow()
 	{
 		return mysqli_fetch_array($this->queryresult);
 	}
-	function getNumRecords()
+	public function getNumRecords()
 	{
 		return mysqli_num_rows($this->queryresult);
 	}

@@ -30,6 +30,16 @@
 	//### 11/08/2016 Piwik collection: Get user/organization information for piwik
 	// Code copied from lesson.php.
 	require "LessonLinkConfig.php";
+	
+if (0){	
+	$firstname='Dev';
+	$lastname='Test';
+	$dispname= $firstname." ".$lastname;
+	if (!isset($orgname)) {
+		$orgname = 'Dev Test';
+	}
+
+	/* 7/24 TODO - needt to replace this drupal boostrap to get teacher full name and org name for Matomo.
 	if ( 1 ) {
 	global $user;
 	// Set the working directory to your Drupal root
@@ -54,9 +64,11 @@
 		$orgname = '';
 	}
 	}
+	*/
 
   // 11/09/2016 07/20/2016 SJG Add Piwik tracking organization name ($orgname) and user's full name ($dispname).
   // Group membership needs to be added as custom variable 1.
+  // 7/24 TODO - for Piwik/Matomo we need to know org name and user name.
   echo '
 <!-- Piwik -->
 <script type="text/javascript">
@@ -77,12 +89,14 @@
 <noscript><p><img src="//analytics.cali.org/piwik.php?idsite=3" style="border:0;" alt="" /></p></noscript>
 <!-- End Piwik Code -->
 ';
+}
 
 /**
  * get og ids that $account belongs to;
  * then gets first with a type of "organization"
  * uses that title for the $orgname
  */
+/* 7/24 TODO drupal bootstrap needs replacement.
 function get_organization_name($account){
   $user_orgs = og_get_groups_by_user($account);
   if (!empty($user_orgs['node'])){
@@ -96,7 +110,7 @@ function get_organization_name($account){
 	}
   }
 }
-
+*/
 ?>
 
 <script language="javascript">
