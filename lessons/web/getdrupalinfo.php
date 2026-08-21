@@ -27,7 +27,7 @@ $umysqli = new mysqli(UDB_HOST, UDB_USER, UDB_PASSWORD, UDB_NAME, 3306);
 // Find Drupal's session cookie.
 $sid = '';
 foreach ($_COOKIE as $key => $value) {
-  if (strpos($key, 'SESS') === 0) {
+  if (strpos($key, 'SSESS') === 0) {
     $hash = base64_encode(hash('sha256', $value, TRUE));
     // Modify the hash so it's safe to use in URLs.
     $sid = str_replace(['+', '/', '='], ['-', '_', ''], $hash);
@@ -41,10 +41,10 @@ foreach ($_COOKIE as $key => $value) {
         $userid = $row['uid'];
         session_start();
         session_decode($row['session']);
-        $username = $_SESSION['username'];
-        $orgname = $_SESSION['orgname'];
-        $firstname = $_SESSION['firstname'];
-        $lastname = $_SESSION['lastname'];
+        $username = $_SESSION['username']??"";
+        $orgname = $_SESSION['orgname']??"";
+        $firstname = $_SESSION['firstname']??"";
+        $lastname = $_SESSION['lastname']??"";
         $roles = $_SESSION['roles'] ?? [];
         $dispname = $firstname . " " . $lastname;
         $userisfacstaff = in_array('facstaff', $roles) || in_array('cali_staff', $roles);
