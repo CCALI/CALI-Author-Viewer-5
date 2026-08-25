@@ -40,6 +40,7 @@ foreach ($_COOKIE as $key => $value) {
         $row = mysqli_fetch_assoc($result);
         $userid = $row['uid'];
         session_start();
+        $_SESSION = []; 
         session_decode($row['session']);
         $username = $_SESSION['username']??"";
         $orgname = $_SESSION['orgname']??"";
